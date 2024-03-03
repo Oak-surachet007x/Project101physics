@@ -1,14 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Keysight.Visa;
-
 
 
 namespace CodingLabpro
@@ -21,13 +12,13 @@ namespace CodingLabpro
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
             Ivi.Visa.Interop.FormattedIO488 MyDMM = new Ivi.Visa.Interop.FormattedIO488();
 
-            txtDMMAddress.Text = "GPIB0::26::INSTR";
-            //txtMMC2Address.Text = Properties.Settings.Default.MMC2Address;
+            string addr = "GPIB0::26::INSTR";
+            MyDMM.IO = (Ivi.Visa.Interop.IMessage)rm.Open(addr);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-             
+
 
         }
     }
