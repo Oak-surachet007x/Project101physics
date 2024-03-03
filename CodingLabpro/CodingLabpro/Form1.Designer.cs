@@ -28,19 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtDMMAddress = new System.Windows.Forms.Button();
+            this.Connect = new System.Windows.Forms.Button();
             this.txtMMC2Address = new System.Windows.Forms.Button();
+            this.txtDMMAddress = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // txtDMMAddress
+            // Connect
             // 
-            this.txtDMMAddress.Location = new System.Drawing.Point(88, 55);
-            this.txtDMMAddress.Name = "txtDMMAddress";
-            this.txtDMMAddress.Size = new System.Drawing.Size(75, 23);
-            this.txtDMMAddress.TabIndex = 0;
-            this.txtDMMAddress.Text = "Connect";
-            this.txtDMMAddress.UseVisualStyleBackColor = true;
-            this.txtDMMAddress.Click += new System.EventHandler(this.button1_Click);
+            this.Connect.Location = new System.Drawing.Point(88, 55);
+            this.Connect.Name = "Connect";
+            this.Connect.Size = new System.Drawing.Size(75, 23);
+            this.Connect.TabIndex = 0;
+            this.Connect.Text = "Connect";
+            this.Connect.UseVisualStyleBackColor = true;
+            this.Connect.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtMMC2Address
             // 
@@ -51,23 +52,33 @@
             this.txtMMC2Address.Text = "Diconnect";
             this.txtMMC2Address.UseVisualStyleBackColor = true;
             // 
+            // txtDMMAddress
+            // 
+            this.txtDMMAddress.Location = new System.Drawing.Point(220, 55);
+            this.txtDMMAddress.Name = "txtDMMAddress";
+            this.txtDMMAddress.Size = new System.Drawing.Size(100, 20);
+            this.txtDMMAddress.TabIndex = 2;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(673, 350);
-            this.Controls.Add(this.txtMMC2Address);
             this.Controls.Add(this.txtDMMAddress);
+            this.Controls.Add(this.txtMMC2Address);
+            this.Controls.Add(this.Connect);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button txtDMMAddress;
+        private System.Windows.Forms.Button Connect;
         private System.Windows.Forms.Button txtMMC2Address;
+        private System.Windows.Forms.TextBox txtDMMAddress;
     }
 }
 
