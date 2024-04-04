@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Keysight.Visa;
+using Ivi.Visa.Interop;
 
 
 
@@ -22,7 +23,8 @@ namespace CodingLabpro
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
             MyDMM = new Ivi.Visa.Interop.FormattedIO488();
 
-            txtDMMAddress.Text = "GPIB0::26::INSTR";
+            string addr = "GPIB0::26::INSTR";
+            MyDMM.IO = (Ivi.Visa.Interop.IMessage)rm.Open(addr);
             //txtMMC2Address.Text = Properties.Settings.Default.MMC2Address;
         }
 
@@ -32,12 +34,12 @@ namespace CodingLabpro
             Ivi.Visa.Interop.ResourceManager mgr1;
             mgr1 = new Ivi.Visa.Interop.ResourceManager();
           
-            DMM.IO() = mgr1.Open(DMMAddress);
-            DMM.IO.Timeout = 7000;
+            //MyDMM.IO = mgr1.Open(addr);
+            //MyDMM.IO.Timeout = 7000;
 
             if (MyDMM != null)
             {
-                MyDMM.IO = mgr1.Open(txtDMMAddress.Text);
+                MyDMM.IO = mgr1.Open();
                 string command = "*IDN?";
                 MyDMM.WriteString(command);
 
