@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Keysight.Visa;
 using Ivi.Visa.Interop;
+using Ivi.Visa.FormattedIO;
 
 
 
@@ -33,13 +34,14 @@ namespace CodingLabpro
             //CONNECT DMM
             Ivi.Visa.Interop.ResourceManager mgr1;
             mgr1 = new Ivi.Visa.Interop.ResourceManager();
+            
           
             //MyDMM.IO = mgr1.Open(addr);
             //MyDMM.IO.Timeout = 7000;
 
             if (MyDMM != null)
             {
-                MyDMM.IO = mgr1.Open();
+                MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 2000, null);
                 string command = "*IDN?";
                 MyDMM.WriteString(command);
 
