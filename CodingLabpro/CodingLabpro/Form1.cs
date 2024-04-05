@@ -75,7 +75,6 @@ namespace CodingLabpro
                 //Show is connect DMM 
                 MessageBox.Show("Device is connect", "Connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-               
             }
             else
             {
@@ -89,6 +88,83 @@ namespace CodingLabpro
             MyDMM.IO.Close();
             MyMMC.IO.Close();
             MessageBox.Show("Device session is diconnect", "Diconnect", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnMovestep_Click(object sender, EventArgs e)
+        {
+            string MSG1 = "M:XP10";
+            MyMMC.WriteString(MSG1);
+            string MStep = "G:";
+            MyMMC.WriteString(MStep);
+
+        }
+
+        private void Btn_movestep500_Click(object sender, EventArgs e)
+        {
+            string MSG2 = "M:XP500";
+            MyMMC.WriteString(MSG2);
+            string MStep = "G:";
+            MyMMC.WriteString(MStep);
+        }
+
+        private void Btn_movestep1000_Click(object sender, EventArgs e)
+        {
+            string MSG3 = "M:XP1000";
+            MyMMC.WriteString(MSG3);
+            string MStep = "G:";
+            MyMMC.WriteString(MStep);
+        }
+
+        private void Btn_ResetXY_Click(object sender, EventArgs e)
+        {
+            string RSG = "H:W";
+            MyMMC.WriteString(RSG);
+  
+        }
+        private void Btn_stepY10_Click(object sender, EventArgs e)
+        {
+            string MSGY1 = "M:YP10";
+            MyMMC.WriteString(MSGY1);
+            string MStep = "G:";
+            MyMMC.WriteString(MStep);
+        }
+
+        private void Btn_stepY500_Click(object sender, EventArgs e)
+        {
+            string MSGY2 = "M:YP500";
+            MyMMC.WriteString(MSGY2);
+            string MStep = "G:";
+            MyMMC.WriteString(MStep);
+        }
+
+        private void Btn_stepY1000_Click(object sender, EventArgs e)
+        {
+            string MSGY3 = "M:YP1000";
+            MyMMC.WriteString(MSGY3);
+            string MStep = "G:";
+            MyMMC.WriteString(MStep);
+        }
+
+        private void Btn_Cleardmm_Click(object sender, EventArgs e)
+        {
+            string command2 = "*CLS";
+            MyDMM.WriteString(command2);    
+        }
+
+        private void Btn_SetDc_Click(object sender, EventArgs e)
+        {
+            //MyDMM.WriteString("CONF:VOLT:DC 10,0.001");
+            MyDMM.WriteString("MEAS:VOLT:DC? 1,1E-6");
         }
     }
 }
