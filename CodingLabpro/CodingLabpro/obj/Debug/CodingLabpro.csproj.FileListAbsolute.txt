@@ -14,3 +14,4 @@ C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\
 C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLa.AE193A8B.Up2Date
 C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.exe
 C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.pdb
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\Interop.BASICFORMATTEDIOLib.dll

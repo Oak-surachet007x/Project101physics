@@ -18,15 +18,22 @@ namespace CodingLabpro
     public partial class Form1 : Form
     {
         Ivi.Visa.Interop.FormattedIO488 MyDMM;
+        string addr = $"GPIB0::26::INSTR";
         public Form1()
         {
             InitializeComponent();
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
             MyDMM = new Ivi.Visa.Interop.FormattedIO488();
+            Ivi.Visa.Interop.ResourceManager mgr1;
+            mgr1 = new Ivi.Visa.Interop.ResourceManager();
 
-            string addr = "GPIB0::26::INSTR";
-            MyDMM.IO = (Ivi.Visa.Interop.IMessage)rm.Open(addr);
+           
             //txtMMC2Address.Text = Properties.Settings.Default.MMC2Address;
+        }
+
+        public class COMException : System.Runtime.InteropServices.ExternalException
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -34,14 +41,15 @@ namespace CodingLabpro
             //CONNECT DMM
             Ivi.Visa.Interop.ResourceManager mgr1;
             mgr1 = new Ivi.Visa.Interop.ResourceManager();
-            
-          
+
+
             //MyDMM.IO = mgr1.Open(addr);
             //MyDMM.IO.Timeout = 7000;
 
             if (MyDMM != null)
             {
-                MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 2000, null);
+                string addr = "GPIB0::26::INSTR";
+                MyDMM.IO = (IMessage)mgr1.Open(addr);
                 string command = "*IDN?";
                 MyDMM.WriteString(command);
 
@@ -57,6 +65,8 @@ namespace CodingLabpro
             {
                 MessageBox.Show("Device session is not connect", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
 
         }
     }
