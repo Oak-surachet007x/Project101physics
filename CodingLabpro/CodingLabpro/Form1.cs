@@ -18,16 +18,23 @@ namespace CodingLabpro
     public partial class Form1 : Form
     {
         Ivi.Visa.Interop.FormattedIO488 MyDMM;
+        Ivi.Visa.Interop.FormattedIO488 MyMMC;
         string addr = $"GPIB0::26::INSTR";
+        string MMCaddr = $"GPIB0::7::INSTR";
         public Form1()
         {
             InitializeComponent();
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
             MyDMM = new Ivi.Visa.Interop.FormattedIO488();
+            MyMMC = new Ivi.Visa.Interop.FormattedIO488();
+
             Ivi.Visa.Interop.ResourceManager mgr1;
             mgr1 = new Ivi.Visa.Interop.ResourceManager();
+            Ivi.Visa.Interop.ResourceManager mgr2;
+            mgr2 = new Ivi.Visa.Interop.ResourceManager();
 
-           
+
+
             //txtMMC2Address.Text = Properties.Settings.Default.MMC2Address;
         }
 
@@ -42,32 +49,46 @@ namespace CodingLabpro
             Ivi.Visa.Interop.ResourceManager mgr1;
             mgr1 = new Ivi.Visa.Interop.ResourceManager();
 
+            //CONNECT MMC
+            Ivi.Visa.Interop.ResourceManager mgr2;
+            mgr2 = new Ivi.Visa.Interop.ResourceManager();
 
-            //MyDMM.IO = mgr1.Open(addr);
-            //MyDMM.IO.Timeout = 7000;
 
-            if (MyDMM != null)
+            if (MyMMC != null && MyDMM != null)
             {
+                //Connect driver DMM
                 string addr = "GPIB0::26::INSTR";
                 MyDMM.IO = (IMessage)mgr1.Open(addr);
                 string command = "*IDN?";
                 MyDMM.WriteString(command);
 
+                //Connect driver MMC
+                string MMCaddr = "GPIB0::7::INSTR";
+                MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
+                string MSG = "H:W";
+                MyMMC.WriteString(MSG);
+
                 // Read response
                 string response = MyDMM.ReadString();
                 //txtResponse.Text = response;
 
-                //Show is connect DMM
-                MessageBox.Show("Device is connect", "Connect", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //Show is connect DMM 
+                MessageBox.Show("Device is connect", "Connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+               
             }
             else
             {
                 MessageBox.Show("Device session is not connect", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
 
-
+        private void Button2_Click_Click(object sender, EventArgs e)
+        {
+            MyDMM.IO.Close();
+            MyMMC.IO.Close();
+            MessageBox.Show("Device session is diconnect", "Diconnect", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
