@@ -21,6 +21,7 @@ namespace CodingLabpro
         Ivi.Visa.Interop.FormattedIO488 MyMMC;
         string addr = $"GPIB0::26::INSTR";
         string MMCaddr = $"GPIB0::7::INSTR";
+
         public Form1()
         {
             InitializeComponent();
@@ -91,11 +92,6 @@ namespace CodingLabpro
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
         {
 
         }
