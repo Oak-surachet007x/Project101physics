@@ -66,7 +66,7 @@
             // 
             // BtnMovestep
             // 
-            this.BtnMovestep.Location = new System.Drawing.Point(149, 98);
+            this.BtnMovestep.Location = new System.Drawing.Point(11, 164);
             this.BtnMovestep.Name = "BtnMovestep";
             this.BtnMovestep.Size = new System.Drawing.Size(75, 23);
             this.BtnMovestep.TabIndex = 3;
@@ -76,7 +76,7 @@
             // 
             // Btn_stepY10
             // 
-            this.Btn_stepY10.Location = new System.Drawing.Point(230, 98);
+            this.Btn_stepY10.Location = new System.Drawing.Point(92, 164);
             this.Btn_stepY10.Name = "Btn_stepY10";
             this.Btn_stepY10.Size = new System.Drawing.Size(75, 23);
             this.Btn_stepY10.TabIndex = 4;
@@ -86,7 +86,7 @@
             // 
             // Btn_stepY500
             // 
-            this.Btn_stepY500.Location = new System.Drawing.Point(231, 127);
+            this.Btn_stepY500.Location = new System.Drawing.Point(93, 193);
             this.Btn_stepY500.Name = "Btn_stepY500";
             this.Btn_stepY500.Size = new System.Drawing.Size(75, 23);
             this.Btn_stepY500.TabIndex = 7;
@@ -96,7 +96,7 @@
             // 
             // Btn_stepY1000
             // 
-            this.Btn_stepY1000.Location = new System.Drawing.Point(231, 155);
+            this.Btn_stepY1000.Location = new System.Drawing.Point(93, 221);
             this.Btn_stepY1000.Name = "Btn_stepY1000";
             this.Btn_stepY1000.Size = new System.Drawing.Size(75, 23);
             this.Btn_stepY1000.TabIndex = 8;
@@ -107,7 +107,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(181, 72);
+            this.label1.Location = new System.Drawing.Point(43, 138);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(12, 13);
             this.label1.TabIndex = 10;
@@ -116,7 +116,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(257, 72);
+            this.label2.Location = new System.Drawing.Point(119, 138);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(12, 13);
             this.label2.TabIndex = 11;
@@ -124,7 +124,7 @@
             // 
             // Btn_movestep500
             // 
-            this.Btn_movestep500.Location = new System.Drawing.Point(149, 127);
+            this.Btn_movestep500.Location = new System.Drawing.Point(11, 193);
             this.Btn_movestep500.Name = "Btn_movestep500";
             this.Btn_movestep500.Size = new System.Drawing.Size(75, 23);
             this.Btn_movestep500.TabIndex = 12;
@@ -134,7 +134,7 @@
             // 
             // Btn_movestep1000
             // 
-            this.Btn_movestep1000.Location = new System.Drawing.Point(149, 157);
+            this.Btn_movestep1000.Location = new System.Drawing.Point(11, 223);
             this.Btn_movestep1000.Name = "Btn_movestep1000";
             this.Btn_movestep1000.Size = new System.Drawing.Size(75, 23);
             this.Btn_movestep1000.TabIndex = 13;
@@ -155,7 +155,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(37, 226);
+            this.label3.Location = new System.Drawing.Point(12, 283);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(25, 13);
             this.label3.TabIndex = 16;
@@ -173,7 +173,7 @@
             // 
             // Btn_SetDc
             // 
-            this.Btn_SetDc.Location = new System.Drawing.Point(68, 221);
+            this.Btn_SetDc.Location = new System.Drawing.Point(40, 278);
             this.Btn_SetDc.Name = "Btn_SetDc";
             this.Btn_SetDc.Size = new System.Drawing.Size(75, 23);
             this.Btn_SetDc.TabIndex = 18;
