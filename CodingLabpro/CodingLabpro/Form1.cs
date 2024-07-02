@@ -153,7 +153,7 @@ namespace CodingLabpro
 
         private void Btn_Cleardmm_Click(object sender, EventArgs e)
         {
-            string command2 = "*CLS";
+            string command2 = "*RST";
             MyDMM.WriteString(command2);    
         }
 
@@ -161,6 +161,21 @@ namespace CodingLabpro
         {
             //MyDMM.WriteString("CONF:VOLT:DC 10,0.001");
             MyDMM.WriteString("MEAS:VOLT:DC? 1,1E-6");
+        }
+
+        private void BtnError_Click(object sender, EventArgs e)
+        {
+            MyDMM.WriteString("SYSTem:ERRor?");
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

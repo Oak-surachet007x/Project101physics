@@ -42,6 +42,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.Btn_Cleardmm = new System.Windows.Forms.Button();
             this.Btn_SetDc = new System.Windows.Forms.Button();
+            this.BtnError = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // Connect
@@ -163,7 +165,7 @@
             // 
             // Btn_Cleardmm
             // 
-            this.Btn_Cleardmm.Location = new System.Drawing.Point(13, 98);
+            this.Btn_Cleardmm.Location = new System.Drawing.Point(266, 12);
             this.Btn_Cleardmm.Name = "Btn_Cleardmm";
             this.Btn_Cleardmm.Size = new System.Drawing.Size(75, 23);
             this.Btn_Cleardmm.TabIndex = 17;
@@ -181,11 +183,32 @@
             this.Btn_SetDc.UseVisualStyleBackColor = true;
             this.Btn_SetDc.Click += new System.EventHandler(this.Btn_SetDc_Click);
             // 
+            // BtnError
+            // 
+            this.BtnError.Location = new System.Drawing.Point(185, 12);
+            this.BtnError.Name = "BtnError";
+            this.BtnError.Size = new System.Drawing.Size(75, 23);
+            this.BtnError.TabIndex = 19;
+            this.BtnError.Text = "Read Error";
+            this.BtnError.UseVisualStyleBackColor = true;
+            this.BtnError.Click += new System.EventHandler(this.BtnError_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(185, 59);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 20;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(673, 350);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.BtnError);
             this.Controls.Add(this.Btn_SetDc);
             this.Controls.Add(this.Btn_Cleardmm);
             this.Controls.Add(this.label3);
@@ -226,6 +249,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button Btn_Cleardmm;
         private System.Windows.Forms.Button Btn_SetDc;
+        private System.Windows.Forms.Button BtnError;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
