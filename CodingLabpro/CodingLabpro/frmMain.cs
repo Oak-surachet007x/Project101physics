@@ -15,14 +15,16 @@ using Ivi.Visa.FormattedIO;
 
 namespace CodingLabpro
 {
-    public partial class Form1 : Form
+    public partial class frmMain : Form
     {
         Ivi.Visa.Interop.FormattedIO488 MyDMM;
         Ivi.Visa.Interop.FormattedIO488 MyMMC;
         string addr = $"GPIB0::26::INSTR";
         string MMCaddr = $"GPIB0::7::INSTR";
 
-        public Form1()
+        public object BERT { get; private set; }
+
+        public frmMain()
         {
             InitializeComponent();
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
@@ -55,13 +57,14 @@ namespace CodingLabpro
             mgr2 = new Ivi.Visa.Interop.ResourceManager();
 
 
-            if (MyMMC != null && MyDMM != null)
+            if (MyMMC == null && MyDMM == null)
             {
                 //Connect driver DMM
                 string addr = "GPIB0::26::INSTR";
                 MyDMM.IO = (IMessage)mgr1.Open(addr);
-                string command = "*IDN?";
+                string command = "SYST:REM\n";
                 MyDMM.WriteString(command);
+                MyDMM.WriteString("SYST:BEEP;:DISP:TEXT '34401A'");
 
                 //Connect driver MMC
                 string MMCaddr = "GPIB0::7::INSTR";
@@ -70,29 +73,22 @@ namespace CodingLabpro
                 MyMMC.WriteString(MSG);
 
                 // Read response
-                string response = MyDMM.ReadString();
+                //string response = MyDMM.ReadString();
                 //txtResponse.Text = response;
 
                 //Show is connect DMM 
                 MessageBox.Show("Device is connect", "Connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Connect.Text = "Remote";
+                Connect.BackColor = Color.LightGreen;
 
             }
             else
             {
+                Connect.BackColor = Color.Red;
+                Connect.Text = "Unconnect";
+                Connect.ForeColor = Color.White;
                 MessageBox.Show("Device session is not connect", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-        }
-
-        private void Button2_Click_Click(object sender, EventArgs e)
-        {
-            MyDMM.IO.Close();
-            MyMMC.IO.Close();
-            MessageBox.Show("Device session is diconnect", "Diconnect", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
         }
 
@@ -155,6 +151,7 @@ namespace CodingLabpro
         {
             string command2 = "*RST";
             MyDMM.WriteString(command2);    
+
         }
 
         private void Btn_SetDc_Click(object sender, EventArgs e)
@@ -166,16 +163,30 @@ namespace CodingLabpro
         private void BtnError_Click(object sender, EventArgs e)
         {
             MyDMM.WriteString("SYSTem:ERRor?");
+            string response1 = MyDMM.ReadString();
+            MessageBox.Show("Error: " + response1);
+
+            //MessageBox.Show("Hello C#", "กดเพื่อไร?");
+
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void BtnDiconnect_Click(object sender, EventArgs e)
         {
+            MyDMM.IO.Close();
+            MyMMC.IO.Close();
+            MessageBox.Show("Device session is diconnect", "Diconnect", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            BtnDiconnect.BackColor = Color.Red;
+            BtnDiconnect.ForeColor = Color.White;
+            Connect.BackColor = Color.Red;
+            Connect.Text = "Unconnect";
+            Connect.ForeColor = Color.White;
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-
+            
         }
+
     }
 }

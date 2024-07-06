@@ -1,6 +1,6 @@
 ﻿namespace CodingLabpro
 {
-    partial class Form1
+    partial class frmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Connect = new System.Windows.Forms.Button();
-            this.Button2_Click = new System.Windows.Forms.Button();
+            this.BtnDiconnect = new System.Windows.Forms.Button();
             this.BtnMovestep = new System.Windows.Forms.Button();
             this.Btn_stepY10 = new System.Windows.Forms.Button();
             this.Btn_stepY500 = new System.Windows.Forms.Button();
@@ -43,7 +44,8 @@
             this.Btn_Cleardmm = new System.Windows.Forms.Button();
             this.Btn_SetDc = new System.Windows.Forms.Button();
             this.BtnError = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.txtread = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // Connect
@@ -56,15 +58,15 @@
             this.Connect.UseVisualStyleBackColor = true;
             this.Connect.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Button2_Click
+            // BtnDiconnect
             // 
-            this.Button2_Click.Location = new System.Drawing.Point(93, 12);
-            this.Button2_Click.Name = "Button2_Click";
-            this.Button2_Click.Size = new System.Drawing.Size(75, 23);
-            this.Button2_Click.TabIndex = 1;
-            this.Button2_Click.Text = "Diconnect";
-            this.Button2_Click.UseVisualStyleBackColor = true;
-            this.Button2_Click.Click += new System.EventHandler(this.Button2_Click_Click);
+            this.BtnDiconnect.Location = new System.Drawing.Point(93, 12);
+            this.BtnDiconnect.Name = "BtnDiconnect";
+            this.BtnDiconnect.Size = new System.Drawing.Size(75, 23);
+            this.BtnDiconnect.TabIndex = 1;
+            this.BtnDiconnect.Text = "Diconnect";
+            this.BtnDiconnect.UseVisualStyleBackColor = true;
+            this.BtnDiconnect.Click += new System.EventHandler(this.BtnDiconnect_Click);
             // 
             // BtnMovestep
             // 
@@ -179,7 +181,7 @@
             this.Btn_SetDc.Name = "Btn_SetDc";
             this.Btn_SetDc.Size = new System.Drawing.Size(75, 23);
             this.Btn_SetDc.TabIndex = 18;
-            this.Btn_SetDc.Text = "SetDC";
+            this.Btn_SetDc.Text = "MEAS DC";
             this.Btn_SetDc.UseVisualStyleBackColor = true;
             this.Btn_SetDc.Click += new System.EventHandler(this.Btn_SetDc_Click);
             // 
@@ -193,21 +195,26 @@
             this.BtnError.UseVisualStyleBackColor = true;
             this.BtnError.Click += new System.EventHandler(this.BtnError_Click);
             // 
-            // textBox1
+            // serialPort1
             // 
-            this.textBox1.Location = new System.Drawing.Point(185, 59);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 20;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.serialPort1.DtrEnable = true;
+            this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
             // 
-            // Form1
+            // txtread
+            // 
+            this.txtread.Location = new System.Drawing.Point(185, 56);
+            this.txtread.Multiline = true;
+            this.txtread.Name = "txtread";
+            this.txtread.Size = new System.Drawing.Size(100, 20);
+            this.txtread.TabIndex = 20;
+            // 
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(673, 350);
-            this.Controls.Add(this.textBox1);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(584, 311);
+            this.Controls.Add(this.txtread);
             this.Controls.Add(this.BtnError);
             this.Controls.Add(this.Btn_SetDc);
             this.Controls.Add(this.Btn_Cleardmm);
@@ -221,11 +228,11 @@
             this.Controls.Add(this.Btn_stepY500);
             this.Controls.Add(this.Btn_stepY10);
             this.Controls.Add(this.BtnMovestep);
-            this.Controls.Add(this.Button2_Click);
+            this.Controls.Add(this.BtnDiconnect);
             this.Controls.Add(this.Connect);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Physics101";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,7 +241,7 @@
         #endregion
 
         private System.Windows.Forms.Button Connect;
-        private System.Windows.Forms.Button Button2_Click;
+        private System.Windows.Forms.Button BtnDiconnect;
         private System.Windows.Forms.Button BtnMovestep;
         private System.Windows.Forms.Button Btn_stepY10;
         private System.Windows.Forms.Button BtnMovestep1000_Click;
@@ -250,7 +257,8 @@
         private System.Windows.Forms.Button Btn_Cleardmm;
         private System.Windows.Forms.Button Btn_SetDc;
         private System.Windows.Forms.Button BtnError;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.TextBox txtread;
     }
 }
 
