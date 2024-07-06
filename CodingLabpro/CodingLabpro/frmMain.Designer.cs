@@ -205,7 +205,7 @@
             this.txtread.Location = new System.Drawing.Point(185, 56);
             this.txtread.Multiline = true;
             this.txtread.Name = "txtread";
-            this.txtread.Size = new System.Drawing.Size(100, 20);
+            this.txtread.Size = new System.Drawing.Size(163, 58);
             this.txtread.TabIndex = 20;
             // 
             // frmMain
