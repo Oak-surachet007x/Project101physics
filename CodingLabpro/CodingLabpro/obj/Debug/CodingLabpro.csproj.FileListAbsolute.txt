@@ -1,0 +1,17 @@
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\bin\Debug\CodingLabpro.exe.config
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\bin\Debug\CodingLabpro.exe
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\bin\Debug\CodingLabpro.pdb
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\bin\Debug\Ivi.Visa.dll
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\bin\Debug\Keysight.Visa.dll
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\bin\Debug\Ivi.Visa.xml
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\bin\Debug\Keysight.Visa.xml
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.csproj.AssemblyReference.cache
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\Interop.BASICFORMATTEDIOLib.dll
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.csproj.ResolveComReference.cache
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.frmMain.resources
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.Properties.Resources.resources
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.csproj.GenerateResource.cache
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.csproj.CoreCompileInputs.cache
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLa.AE193A8B.Up2Date
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.exe
+C:\Users\Sci-Neon\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.pdb

@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Sci-Neon\\Desktop\\Project101physics\\CodingLabpro\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|c:\\users\\sci-neon\\desktop\\project101physics\\codinglabpro\\codinglabpro\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Sci-Neon\\Desktop\\Project101physics\\CodingLabpro\\codinglabpro\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|c:\\users\\sci-neon\\desktop\\project101physics\\codinglabpro\\codinglabpro\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Sci-Neon\\Desktop\\Project101physics\\CodingLabpro\\codinglabpro\\frmmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Sci-Neon\\Desktop\\Project101physics\\CodingLabpro\\codinglabpro\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,11 +18,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "frmMain.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Sci-Neon\\Desktop\\Project101physics\\CodingLabpro\\CodingLabpro\\frmMain.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\frmMain.cs",
@@ -36,6 +32,20 @@
               "WhenOpened": "2024-07-05T15:07:32.255Z",
               "IsPinned": true,
               "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "frmMain.cs",
+              "DocumentMoniker": "C:\\Users\\Sci-Neon\\Desktop\\Project101physics\\CodingLabpro\\CodingLabpro\\frmMain.cs",
+              "RelativeDocumentMoniker": "CodingLabpro\\frmMain.cs",
+              "ToolTip": "C:\\Users\\Sci-Neon\\Desktop\\Project101physics\\CodingLabpro\\CodingLabpro\\frmMain.cs",
+              "RelativeToolTip": "CodingLabpro\\frmMain.cs",
+              "ViewState": "AQIAALgAAAAAAAAAAAAYwL0AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-05T15:08:51.752Z",
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -68,31 +78,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "frmMain.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\Sci-Neon\\Desktop\\Project101physics\\CodingLabpro\\CodingLabpro\\frmMain.Designer.cs",
-              "RelativeDocumentMoniker": "CodingLabpro\\frmMain.Designer.cs",
-              "ToolTip": "C:\\Users\\Sci-Neon\\Desktop\\Project101physics\\CodingLabpro\\CodingLabpro\\frmMain.Designer.cs",
-              "RelativeToolTip": "CodingLabpro\\frmMain.Designer.cs",
-              "ViewState": "AQIAALwAAAAAAAAAAAAiwMcAAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-06T08:58:36.156Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmMain.cs",
-              "DocumentMoniker": "C:\\Users\\Sci-Neon\\Desktop\\Project101physics\\CodingLabpro\\CodingLabpro\\frmMain.cs",
-              "RelativeDocumentMoniker": "CodingLabpro\\frmMain.cs",
-              "ToolTip": "C:\\Users\\Sci-Neon\\Desktop\\Project101physics\\CodingLabpro\\CodingLabpro\\frmMain.cs",
-              "RelativeToolTip": "CodingLabpro\\frmMain.cs",
-              "ViewState": "AQIAAJsAAAAAAAAAAAAmwKYAAAAxAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T15:08:51.752Z",
-              "EditorCaption": ""
             }
           ]
         }

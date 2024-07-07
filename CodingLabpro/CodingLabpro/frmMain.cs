@@ -80,6 +80,9 @@ namespace CodingLabpro
                 MessageBox.Show("Device is connect", "Connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Connect.Text = "Remote";
                 Connect.BackColor = Color.LightGreen;
+                string rectify1 = "Remote Agilent HP34401A and MMC Step motor!";
+                DateTime r = DateTime.Now; // notification Time Cilck Button here!!
+                txtread.AppendText(r.ToString("r") + " <Notification!> " + rectify1 + Environment.NewLine);
 
             }
             else
@@ -88,6 +91,9 @@ namespace CodingLabpro
                 Connect.Text = "Unconnect";
                 Connect.ForeColor = Color.White;
                 MessageBox.Show("Device session is not connect", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string incorrectness1 = "Cannot Find driver Agilent Muitimeter and MMC Step motor!";
+                DateTime r = DateTime.Now; // notification Time Cilck Button here!!
+                txtread.AppendText(r.ToString("r") + " <Notification!> " + incorrectness1 + Environment.NewLine);
             }
 
         }
@@ -150,24 +156,19 @@ namespace CodingLabpro
         private void Btn_Cleardmm_Click(object sender, EventArgs e)
         {
             string command2 = "*RST";
-            MyDMM.WriteString(command2);    
+            MyDMM.WriteString(command2);
+            DateTime r = DateTime.Now; // notification Time Cilck Button here!!
+            txtread.AppendText(r.ToString("r") + " <Notification!> " + command2 + Environment.NewLine);
 
-        }
-
-        private void Btn_SetDc_Click(object sender, EventArgs e)
-        {
-            //MyDMM.WriteString("CONF:VOLT:DC 10,0.001");
-            MyDMM.WriteString("MEAS:VOLT:DC? 1,1E-6");
         }
 
         private void BtnError_Click(object sender, EventArgs e)
         {
             MyDMM.WriteString("SYSTem:ERRor?");
             string response1 = MyDMM.ReadString();
-            MessageBox.Show("Error: " + response1);
-
-            //MessageBox.Show("Hello C#", "กดเพื่อไร?");
-
+            //string response1 = "Hello World";
+            DateTime r = DateTime.Now;
+            txtread.AppendText(r.ToString("r") + " <ERROR!!!> " + response1 + Environment.NewLine);
         }
 
         private void BtnDiconnect_Click(object sender, EventArgs e)
@@ -175,7 +176,7 @@ namespace CodingLabpro
             MyDMM.IO.Close();
             MyMMC.IO.Close();
             MessageBox.Show("Device session is diconnect", "Diconnect", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            BtnDiconnect.BackColor = Color.Red;
+            BtnDiconnect.BackColor = Color.LightBlue;
             BtnDiconnect.ForeColor = Color.White;
             Connect.BackColor = Color.Red;
             Connect.Text = "Unconnect";
@@ -188,5 +189,15 @@ namespace CodingLabpro
             
         }
 
+        private void Btn_SetAC_Click(object sender, EventArgs e)
+        {
+            MyDMM.WriteString("MEAS:VOLT:AC? 1,1E-6");
+        }
+
+        private void Btn_SetDC_Click(object sender, EventArgs e)
+        {
+            //MyDMM.WriteString("CONF:VOLT:DC 10,0.001");
+            MyDMM.WriteString("MEAS:VOLT:DC? 1,1E-6");
+        }
     }
 }
