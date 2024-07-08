@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using Keysight.Visa;
 using Ivi.Visa.Interop;
 using Ivi.Visa.FormattedIO;
+using System.Reflection;
+using static System.Net.Mime.MediaTypeNames;
 
 
 
@@ -19,7 +21,7 @@ namespace CodingLabpro
     {
         Ivi.Visa.Interop.FormattedIO488 MyDMM;
         Ivi.Visa.Interop.FormattedIO488 MyMMC;
-        string addr = $"GPIB0::26::INSTR";
+        string addr = $"GPIB2::26::INSTR";
         string MMCaddr = $"GPIB0::7::INSTR";
 
         public object BERT { get; private set; }
@@ -41,6 +43,19 @@ namespace CodingLabpro
             //txtMMC2Address.Text = Properties.Settings.Default.MMC2Address;
         }
 
+        public delegate void AddDataDelegate(String HP34401A_Date);
+        public AddDataDelegate myDelegate;
+    
+        // Create a method for a delegate.
+        public static void AddDataMethod(String Data)
+        {
+            // new Obj frmMain
+            frmMain frmMain = new frmMain();
+            
+            frmMain.txtread.AppendText(Data);
+
+        }
+
         public class COMException : System.Runtime.InteropServices.ExternalException
         {
 
@@ -57,20 +72,27 @@ namespace CodingLabpro
             mgr2 = new Ivi.Visa.Interop.ResourceManager();
 
 
-            if (MyMMC == null && MyDMM == null)
+            if (MyMMC != null && MyDMM != null)
             {
                 //Connect driver DMM
-                string addr = "GPIB0::26::INSTR";
+                string addr = "GPIB2::26::INSTR";
                 MyDMM.IO = (IMessage)mgr1.Open(addr);
-                string command = "SYST:REM\n";
+                string command = "*IDN?";
                 MyDMM.WriteString(command);
-                MyDMM.WriteString("SYST:BEEP;:DISP:TEXT '34401A'");
+               
+                MyDMM.WriteString("SYST:BEEP");
+                //MyDMM.WriteString("*CLS");
+                Task.Delay(3000);
+                MyDMM.WriteString("DISP:TEXT 'HELLO'");
+                Task.Delay(6000).Wait();
+                MyDMM.WriteString("*RST");
+
 
                 //Connect driver MMC
-                string MMCaddr = "GPIB0::7::INSTR";
-                MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
-                string MSG = "H:W";
-                MyMMC.WriteString(MSG);
+                //string MMCaddr = "GPIB0::7::INSTR";
+                //MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
+                //string MSG = "H:W";
+                //MyMMC.WriteString(MSG);
 
                 // Read response
                 //string response = MyDMM.ReadString();
@@ -85,7 +107,7 @@ namespace CodingLabpro
                 txtread.AppendText(r.ToString("r") + " <Notification!> " + rectify1 + Environment.NewLine);
 
             }
-            else
+            else 
             {
                 Connect.BackColor = Color.Red;
                 Connect.Text = "Unconnect";
@@ -174,13 +196,18 @@ namespace CodingLabpro
         private void BtnDiconnect_Click(object sender, EventArgs e)
         {
             MyDMM.IO.Close();
-            MyMMC.IO.Close();
+            //MyMMC.IO.Close();
+            Task.Delay(3000).Wait();
             MessageBox.Show("Device session is diconnect", "Diconnect", MessageBoxButtons.OK, MessageBoxIcon.Information);
             BtnDiconnect.BackColor = Color.LightBlue;
             BtnDiconnect.ForeColor = Color.White;
             Connect.BackColor = Color.Red;
             Connect.Text = "Unconnect";
             Connect.ForeColor = Color.White;
+            
+            string rectify2 = "Diconnect Agilent HP34401A and MMC Step motor!";
+            DateTime r = DateTime.Now; // notification Time Cilck Button here!!
+            txtread.AppendText(r.ToString("r") + " <Notification!> " + rectify2 + Environment.NewLine);
 
         }
 
