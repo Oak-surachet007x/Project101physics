@@ -22,7 +22,7 @@ namespace CodingLabpro
         Ivi.Visa.Interop.FormattedIO488 MyDMM;
         Ivi.Visa.Interop.FormattedIO488 MyMMC;
         string addr = $"GPIB2::26::INSTR";
-        string MMCaddr = $"GPIB0::7::INSTR";
+        string MMCaddr = $"GPIB2::7:24::INSTR";
 
         public object BERT { get; private set; }
 
@@ -79,20 +79,26 @@ namespace CodingLabpro
                 MyDMM.IO = (IMessage)mgr1.Open(addr);
                 string command = "*IDN?";
                 MyDMM.WriteString(command);
-               
-                MyDMM.WriteString("SYST:BEEP");
+                string Aread = MyDMM.ReadString();
+                MyDMM.WriteString(Aread);
+                MyDMM.WriteString("*CLS");
+                //Task.Delay(20000);
+
+                ////MyDMM.WriteString("SYSTem:BEEPer");
+                //Task.Delay(100);
+                //MyDMM.WriteString("SYST:BEEP");
                 //MyDMM.WriteString("*CLS");
-                Task.Delay(3000);
-                MyDMM.WriteString("DISP:TEXT 'HELLO'");
-                Task.Delay(6000).Wait();
-                MyDMM.WriteString("*RST");
+                
+                //MyDMM.WriteString("DISP:TEXT 'HELLO'");  //errorr
+                //Task.Delay(6000).Wait();
+                //MyDMM.WriteString("*RST");
 
 
                 //Connect driver MMC
-                //string MMCaddr = "GPIB0::7::INSTR";
-                //MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
-                //string MSG = "H:W";
-                //MyMMC.WriteString(MSG);
+                string MMCaddr = "GPIB2::7::INSTR";
+                MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
+                string MSG = "H:W";
+                MyMMC.WriteString(MSG);
 
                 // Read response
                 //string response = MyDMM.ReadString();
@@ -225,6 +231,8 @@ namespace CodingLabpro
         {
             //MyDMM.WriteString("CONF:VOLT:DC 10,0.001");
             MyDMM.WriteString("MEAS:VOLT:DC? 1,1E-6");
+            string dataDC = MyDMM.ReadString();
+            txtread.AppendText(dataDC + Environment.NewLine);
         }
     }
 }

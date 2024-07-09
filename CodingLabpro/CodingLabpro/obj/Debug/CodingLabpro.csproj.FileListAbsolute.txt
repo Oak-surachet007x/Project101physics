@@ -20,7 +20,6 @@ C:\Users\stipa\Documents\GitHub\Project101physics\CodingLabpro\CodingLabpro\bin\
 C:\Users\stipa\Documents\GitHub\Project101physics\CodingLabpro\CodingLabpro\bin\Debug\CodingLabpro.pdb
 C:\Users\stipa\Documents\GitHub\Project101physics\CodingLabpro\CodingLabpro\bin\Debug\Ivi.Visa.dll
 C:\Users\stipa\Documents\GitHub\Project101physics\CodingLabpro\CodingLabpro\bin\Debug\Ivi.Visa.xml
-C:\Users\stipa\Documents\GitHub\Project101physics\CodingLabpro\CodingLabpro\bin\Debug\Keysight.Visa.xml
 C:\Users\stipa\Documents\GitHub\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.csproj.AssemblyReference.cache
 C:\Users\stipa\Documents\GitHub\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\Interop.BASICFORMATTEDIOLib.dll
 C:\Users\stipa\Documents\GitHub\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.csproj.ResolveComReference.cache
