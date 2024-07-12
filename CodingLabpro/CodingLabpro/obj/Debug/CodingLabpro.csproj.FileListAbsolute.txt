@@ -30,3 +30,11 @@ C:\Users\stipa\Documents\GitHub\Project101physics\CodingLabpro\CodingLabpro\obj\
 C:\Users\stipa\Documents\GitHub\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.csproj.CopyComplete
 C:\Users\stipa\Documents\GitHub\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.exe
 C:\Users\stipa\Documents\GitHub\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.pdb
+C:\Users\User\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\Interop.BASICFORMATTEDIOLib.dll
+C:\Users\User\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.exe
+C:\Users\User\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.pdb
+C:\Users\User\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.frmMain.resources
+C:\Users\User\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.Properties.Resources.resources
+C:\Users\User\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.csproj.GenerateResource.cache
+C:\Users\User\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.csproj.CoreCompileInputs.cache
