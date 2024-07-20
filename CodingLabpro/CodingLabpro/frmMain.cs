@@ -244,6 +244,7 @@ namespace CodingLabpro
                 {
                     DateTime r = DateTime.Now;
                     txtread.AppendText(r.ToString("r") + " <ERROR!!!> " + ex.Message + Environment.NewLine);
+                    Task.Delay(5000).Wait();
                 }
                 while (true);
             
