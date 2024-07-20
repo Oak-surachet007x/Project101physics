@@ -10,19 +10,23 @@ using System.Windows.Forms;
 using Keysight.Visa;
 using Ivi.Visa.Interop;
 using Ivi.Visa.FormattedIO;
+using System.Reflection;
+using static System.Net.Mime.MediaTypeNames;
 
 
 
 namespace CodingLabpro
 {
-    public partial class Form1 : Form
+    public partial class frmMain : Form
     {
         Ivi.Visa.Interop.FormattedIO488 MyDMM;
         Ivi.Visa.Interop.FormattedIO488 MyMMC;
-        string addr = $"GPIB0::26::INSTR";
-        string MMCaddr = $"GPIB0::7::INSTR";
+        string addr = $"GPIB2::26::INSTR";
+        string MMCaddr = $"GPIB2::7:24::INSTR";
 
-        public Form1()
+        public object BERT { get; private set; }
+
+        public frmMain()
         {
             InitializeComponent();
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
@@ -37,6 +41,19 @@ namespace CodingLabpro
 
 
             //txtMMC2Address.Text = Properties.Settings.Default.MMC2Address;
+        }
+
+        public delegate void AddDataDelegate(String HP34401A_Date);
+        public AddDataDelegate myDelegate;
+    
+        // Create a method for a delegate.
+        public static void AddDataMethod(String Data)
+        {
+            // new Obj frmMain
+            frmMain frmMain = new frmMain();
+            
+            frmMain.txtread.AppendText(Data);
+
         }
 
         public class COMException : System.Runtime.InteropServices.ExternalException
@@ -58,41 +75,54 @@ namespace CodingLabpro
             if (MyMMC != null && MyDMM != null)
             {
                 //Connect driver DMM
-                string addr = "GPIB0::26::INSTR";
+                string addr = "GPIB2::26::INSTR";
                 MyDMM.IO = (IMessage)mgr1.Open(addr);
                 string command = "*IDN?";
                 MyDMM.WriteString(command);
+                string Aread = MyDMM.ReadString();
+                MyDMM.WriteString(Aread);
+                MyDMM.WriteString("*CLS");
+                //Task.Delay(20000);
+
+                ////MyDMM.WriteString("SYSTem:BEEPer");
+                //Task.Delay(100);
+                //MyDMM.WriteString("SYST:BEEP");
+                //MyDMM.WriteString("*CLS");
+                
+                //MyDMM.WriteString("DISP:TEXT 'HELLO'");  //errorr
+                //Task.Delay(6000).Wait();
+                //MyDMM.WriteString("*RST");
+
 
                 //Connect driver MMC
-                string MMCaddr = "GPIB0::7::INSTR";
+                string MMCaddr = "GPIB2::7::INSTR";
                 MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
                 string MSG = "H:W";
                 MyMMC.WriteString(MSG);
 
                 // Read response
-                string response = MyDMM.ReadString();
+                //string response = MyDMM.ReadString();
                 //txtResponse.Text = response;
 
                 //Show is connect DMM 
                 MessageBox.Show("Device is connect", "Connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Connect.Text = "Remote";
+                Connect.BackColor = Color.LightGreen;
+                string rectify1 = "Remote Agilent HP34401A and MMC Step motor!";
+                DateTime r = DateTime.Now; // notification Time Cilck Button here!!
+                txtread.AppendText(r.ToString("r") + " <Notification!> " + rectify1 + Environment.NewLine);
 
             }
-            else
+            else 
             {
+                Connect.BackColor = Color.Red;
+                Connect.Text = "Unconnect";
+                Connect.ForeColor = Color.White;
                 MessageBox.Show("Device session is not connect", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string incorrectness1 = "Cannot Find driver Agilent Muitimeter and MMC Step motor!";
+                DateTime r = DateTime.Now; // notification Time Cilck Button here!!
+                txtread.AppendText(r.ToString("r") + " <Notification!> " + incorrectness1 + Environment.NewLine);
             }
-
-        }
-
-        private void Button2_Click_Click(object sender, EventArgs e)
-        {
-            MyDMM.IO.Close();
-            MyMMC.IO.Close();
-            MessageBox.Show("Device session is diconnect", "Diconnect", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
         }
 
@@ -154,28 +184,55 @@ namespace CodingLabpro
         private void Btn_Cleardmm_Click(object sender, EventArgs e)
         {
             string command2 = "*RST";
-            MyDMM.WriteString(command2);    
-        }
+            MyDMM.WriteString(command2);
+            DateTime r = DateTime.Now; // notification Time Cilck Button here!!
+            txtread.AppendText(r.ToString("r") + " <Notification!> " + command2 + Environment.NewLine);
 
-        private void Btn_SetDc_Click(object sender, EventArgs e)
-        {
-            //MyDMM.WriteString("CONF:VOLT:DC 10,0.001");
-            MyDMM.WriteString("MEAS:VOLT:DC? 1,1E-6");
         }
 
         private void BtnError_Click(object sender, EventArgs e)
         {
             MyDMM.WriteString("SYSTem:ERRor?");
+            string response1 = MyDMM.ReadString();
+            //string response1 = "Hello World";
+            DateTime r = DateTime.Now;
+            txtread.AppendText(r.ToString("r") + " <ERROR!!!> " + response1 + Environment.NewLine);
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void BtnDiconnect_Click(object sender, EventArgs e)
         {
+            MyDMM.IO.Close();
+            //MyMMC.IO.Close();
+            Task.Delay(3000).Wait();
+            MessageBox.Show("Device session is diconnect", "Diconnect", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            BtnDiconnect.BackColor = Color.LightBlue;
+            BtnDiconnect.ForeColor = Color.White;
+            Connect.BackColor = Color.Red;
+            Connect.Text = "Unconnect";
+            Connect.ForeColor = Color.White;
+            
+            string rectify2 = "Diconnect Agilent HP34401A and MMC Step motor!";
+            DateTime r = DateTime.Now; // notification Time Cilck Button here!!
+            txtread.AppendText(r.ToString("r") + " <Notification!> " + rectify2 + Environment.NewLine);
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
+            
+        }
 
+        private void Btn_SetAC_Click(object sender, EventArgs e)
+        {
+            MyDMM.WriteString("MEAS:VOLT:AC? 1,1E-6");
+        }
+
+        private void Btn_SetDC_Click(object sender, EventArgs e)
+        {
+            //MyDMM.WriteString("CONF:VOLT:DC 10,0.001");
+            MyDMM.WriteString("MEAS:VOLT:DC? 1,1E-6");
+            string dataDC = MyDMM.ReadString();
+            txtread.AppendText(dataDC + Environment.NewLine);
         }
     }
 }
