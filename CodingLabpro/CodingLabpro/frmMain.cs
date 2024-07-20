@@ -12,6 +12,7 @@ using Ivi.Visa.Interop;
 using Ivi.Visa.FormattedIO;
 using System.Reflection;
 using static System.Net.Mime.MediaTypeNames;
+using System.Runtime.InteropServices.ComTypes;
 
 
 
@@ -230,9 +231,24 @@ namespace CodingLabpro
         private void Btn_SetDC_Click(object sender, EventArgs e)
         {
             //MyDMM.WriteString("CONF:VOLT:DC 10,0.001");
-            MyDMM.WriteString("MEAS:VOLT:DC? 1,1E-6");
-            string dataDC = MyDMM.ReadString();
-            txtread.AppendText(dataDC + Environment.NewLine);
+
+            try
+            {
+                MyDMM.WriteString("MEAS:VOLT:DC? 1,1E-6");
+                string dataDC = MyDMM.ReadString();
+                txtread.AppendText(dataDC + Environment.NewLine);
+            }
+            catch (Exception ex) 
+            {
+                do
+                {
+                    DateTime r = DateTime.Now;
+                    txtread.AppendText(r.ToString("r") + " <ERROR!!!> " + ex.Message + Environment.NewLine);
+                }
+                while (true);
+            
+            }
+           
         }
     }
 }
