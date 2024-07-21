@@ -44,18 +44,6 @@ namespace CodingLabpro
             //txtMMC2Address.Text = Properties.Settings.Default.MMC2Address;
         }
 
-        public delegate void AddDataDelegate(String HP34401A_Date);
-        public AddDataDelegate myDelegate;
-    
-        // Create a method for a delegate.
-        public static void AddDataMethod(String Data)
-        {
-            // new Obj frmMain
-            frmMain frmMain = new frmMain();
-            
-            frmMain.txtread.AppendText(Data);
-
-        }
 
         public class COMException : System.Runtime.InteropServices.ExternalException
         {
@@ -203,7 +191,7 @@ namespace CodingLabpro
         private void BtnDiconnect_Click(object sender, EventArgs e)
         {
             MyDMM.IO.Close();
-            //MyMMC.IO.Close();
+            MyMMC.IO.Close();
             Task.Delay(3000).Wait();
             MessageBox.Show("Device session is diconnect", "Diconnect", MessageBoxButtons.OK, MessageBoxIcon.Information);
             BtnDiconnect.BackColor = Color.LightBlue;
@@ -244,7 +232,7 @@ namespace CodingLabpro
                 {
                     DateTime r = DateTime.Now;
                     txtread.AppendText(r.ToString("r") + " <ERROR!!!> " + ex.Message + Environment.NewLine);
-                    Task.Delay(5000).Wait();
+                    Task.Delay(2000).Wait();
                 }
                 while (true);
             
