@@ -206,10 +206,6 @@ namespace CodingLabpro
 
         }
 
-        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
-        {
-            
-        }
 
         private void Btn_SetAC_Click(object sender, EventArgs e)
         {
@@ -239,5 +235,9 @@ namespace CodingLabpro
             }
            
         }
+
+       
+
+        
     }
 }
