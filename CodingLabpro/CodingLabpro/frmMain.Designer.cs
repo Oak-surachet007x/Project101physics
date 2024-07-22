@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Connect = new System.Windows.Forms.Button();
             this.BtnDiconnect = new System.Windows.Forms.Button();
             this.BtnMovestep = new System.Windows.Forms.Button();
@@ -46,7 +49,8 @@
             this.txtread = new System.Windows.Forms.TextBox();
             this.Btn_SetAC = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.colorfullButton4 = new CodingLabpro.Models.ColorfullButton();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // Connect
@@ -243,24 +247,22 @@
             this.label4.TabIndex = 22;
             this.label4.Text = "AC";
             // 
-            // colorfullButton4
+            // chart1
             // 
-            this.colorfullButton4.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.colorfullButton4.BackgroundColor = System.Drawing.Color.LightSteelBlue;
-            this.colorfullButton4.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.colorfullButton4.BorderRadius = 40;
-            this.colorfullButton4.BorderSize = 2;
-            this.colorfullButton4.FlatAppearance.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.colorfullButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.colorfullButton4.ForeColor = System.Drawing.Color.Black;
-            this.colorfullButton4.Location = new System.Drawing.Point(874, 70);
-            this.colorfullButton4.Name = "colorfullButton4";
-            this.colorfullButton4.Size = new System.Drawing.Size(150, 40);
-            this.colorfullButton4.TabIndex = 26;
-            this.colorfullButton4.Text = "colorfullButton4";
-            this.colorfullButton4.TextColor = System.Drawing.Color.Black;
-            this.colorfullButton4.UseVisualStyleBackColor = false;
-           
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(137, 82);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(763, 300);
+            this.chart1.TabIndex = 23;
+            this.chart1.Text = "chart1";
+            
             // 
             // frmMain
             // 
@@ -268,7 +270,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1045, 567);
-            this.Controls.Add(this.colorfullButton4);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Btn_SetAC);
             this.Controls.Add(this.txtread);
@@ -291,6 +293,7 @@
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Physics101";
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -318,7 +321,7 @@
         private System.Windows.Forms.TextBox txtread;
         private System.Windows.Forms.Button Btn_SetAC;
         private System.Windows.Forms.Label label4;
-        private Models.ColorfullButton colorfullButton4;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
 

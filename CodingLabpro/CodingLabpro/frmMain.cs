@@ -25,7 +25,6 @@ namespace CodingLabpro
         string addr = $"GPIB2::26::INSTR";
         string MMCaddr = $"GPIB2::7:24::INSTR";
 
-        public object BERT { get; private set; }
 
         public frmMain()
         {
@@ -39,12 +38,10 @@ namespace CodingLabpro
             Ivi.Visa.Interop.ResourceManager mgr2;
             mgr2 = new Ivi.Visa.Interop.ResourceManager();
 
-
-
             //txtMMC2Address.Text = Properties.Settings.Default.MMC2Address;
         }
 
-
+       
         public class COMException : System.Runtime.InteropServices.ExternalException
         {
 
@@ -61,8 +58,9 @@ namespace CodingLabpro
             mgr2 = new Ivi.Visa.Interop.ResourceManager();
 
 
-            if (MyMMC != null && MyDMM != null)
+            try
             {
+                
                 //Connect driver DMM
                 string addr = "GPIB2::26::INSTR";
                 MyDMM.IO = (IMessage)mgr1.Open(addr);
@@ -70,28 +68,15 @@ namespace CodingLabpro
                 MyDMM.WriteString(command);
                 string Aread = MyDMM.ReadString();
                 MyDMM.WriteString(Aread);
+                txtread.AppendText(Aread +Environment.NewLine);
                 MyDMM.WriteString("*CLS");
-                //Task.Delay(20000);
-
-                ////MyDMM.WriteString("SYSTem:BEEPer");
-                //Task.Delay(100);
-                //MyDMM.WriteString("SYST:BEEP");
-                //MyDMM.WriteString("*CLS");
-                
-                //MyDMM.WriteString("DISP:TEXT 'HELLO'");  //errorr
-                //Task.Delay(6000).Wait();
-                //MyDMM.WriteString("*RST");
-
+               
 
                 //Connect driver MMC
                 string MMCaddr = "GPIB2::7::INSTR";
                 MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
                 string MSG = "H:W";
                 MyMMC.WriteString(MSG);
-
-                // Read response
-                //string response = MyDMM.ReadString();
-                //txtResponse.Text = response;
 
                 //Show is connect DMM 
                 MessageBox.Show("Device is connect", "Connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -102,7 +87,7 @@ namespace CodingLabpro
                 txtread.AppendText(r.ToString("r") + " <Notification!> " + rectify1 + Environment.NewLine);
 
             }
-            else 
+            catch
             {
                 Connect.BackColor = Color.Red;
                 Connect.Text = "Unconnect";
@@ -138,6 +123,9 @@ namespace CodingLabpro
             MyMMC.WriteString(MSG3);
             string MStep = "G:";
             MyMMC.WriteString(MStep);
+            MyMMC.WriteString("Q:");
+            
+            
         }
 
         private void Btn_ResetXY_Click(object sender, EventArgs e)
@@ -190,8 +178,16 @@ namespace CodingLabpro
 
         private void BtnDiconnect_Click(object sender, EventArgs e)
         {
-            MyDMM.IO.Close();
-            MyMMC.IO.Close();
+            try
+            {
+                MyDMM.IO.Close();
+                MyMMC.IO.Close();
+            }
+            catch (Exception ex) 
+            {
+                txtread.AppendText(ex.Message +Environment.NewLine);
+            }
+            
             Task.Delay(3000).Wait();
             MessageBox.Show("Device session is diconnect", "Diconnect", MessageBoxButtons.OK, MessageBoxIcon.Information);
             BtnDiconnect.BackColor = Color.LightBlue;
@@ -212,17 +208,36 @@ namespace CodingLabpro
             MyDMM.WriteString("MEAS:VOLT:AC? 1,1E-6");
         }
 
+        private int Clickcount = 0;
+
         private void Btn_SetDC_Click(object sender, EventArgs e)
         {
-            //MyDMM.WriteString("CONF:VOLT:DC 10,0.001");
 
             try
             {
-                MyDMM.WriteString("MEAS:VOLT:DC? 1,1E-6");
-                string dataDC = MyDMM.ReadString();
-                txtread.AppendText(dataDC + Environment.NewLine);
+
+                Clickcount++;
+
+                switch (Clickcount % 2)
+                {
+                    case 1:
+                        //MyDMM.WriteString("MEAS:VOLT:DC? 1,1E-6");
+                        //string dataDC = MyDMM.ReadString();
+                        //txtread.AppendText(dataDC + Environment.NewLine);
+                        Btn_SetDC.BackColor = Color.LightGreen;
+                        Btn_SetDC.ForeColor = Color.Black;
+                        Btn_SetDC.Text = "Runing";
+                        break;
+                    case 0:
+                        Btn_SetDC.BackColor = Color.Pink;
+                        Btn_SetDC.ForeColor = Color.Black;
+                        Btn_SetDC.Text = "Stop";
+                        break;
+                }
+                Btn_SetDC.Invalidate();
             }
-            catch (Exception ex) 
+
+            catch (Exception ex)
             {
                 do
                 {
@@ -231,13 +246,11 @@ namespace CodingLabpro
                     Task.Delay(2000).Wait();
                 }
                 while (true);
-            
+
+
+
             }
            
-        }
-
-       
-
-        
+        }      
     }
 }
