@@ -251,6 +251,32 @@ namespace CodingLabpro
 
             }
            
-        }      
+        }
+
+   
+        private void Btnmotorloop_Click(object sender, EventArgs e)
+        {
+            string Sloop = txtinput.Text;
+            MessageBox.Show("จำนวนรอบที่วน มอเตอร์ X = " + Sloop);
+            txtinput.Clear();
+
+            int numberOfLoops;
+
+            if (int.TryParse(Sloop, out numberOfLoops))
+            {
+                for (int i = 1; i < numberOfLoops; i++)
+                {
+                    // Your motor control logic here
+
+                    //MyMMC.WriteString("M:XP100");
+                    //Task.Delay(1000);
+                    //MyMMC.WriteString("G:");
+                    txtread.AppendText(i.ToString() + " " + Environment.NewLine);
+                    
+                }
+            }
+
+
+        }
     }
 }
