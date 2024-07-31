@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Connect = new System.Windows.Forms.Button();
             this.BtnDiconnect = new System.Windows.Forms.Button();
             this.BtnMovestep = new System.Windows.Forms.Button();
@@ -49,8 +46,12 @@
             this.txtread = new System.Windows.Forms.TextBox();
             this.Btn_SetAC = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.Btnposition = new System.Windows.Forms.Button();
+            this.optAxis_y = new System.Windows.Forms.RadioButton();
+            this.optAxis_x = new System.Windows.Forms.RadioButton();
+            this.Btnenter = new System.Windows.Forms.Button();
+            this.lbmotor = new System.Windows.Forms.Label();
+            this.txt_IPloop = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // Connect
@@ -219,11 +220,16 @@
             // 
             // txtread
             // 
-            this.txtread.Location = new System.Drawing.Point(15, 437);
+            this.txtread.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.txtread.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtread.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtread.Location = new System.Drawing.Point(15, 352);
             this.txtread.Margin = new System.Windows.Forms.Padding(4);
             this.txtread.Multiline = true;
             this.txtread.Name = "txtread";
-            this.txtread.Size = new System.Drawing.Size(1013, 115);
+            this.txtread.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtread.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtread.Size = new System.Drawing.Size(1013, 200);
             this.txtread.TabIndex = 20;
             // 
             // Btn_SetAC
@@ -247,22 +253,67 @@
             this.label4.TabIndex = 22;
             this.label4.Text = "AC";
             // 
-            // chart1
+            // Btnposition
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(137, 82);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(763, 300);
-            this.chart1.TabIndex = 23;
-            this.chart1.Text = "chart1";
-            
+            this.Btnposition.Location = new System.Drawing.Point(570, 15);
+            this.Btnposition.Margin = new System.Windows.Forms.Padding(4);
+            this.Btnposition.Name = "Btnposition";
+            this.Btnposition.Size = new System.Drawing.Size(109, 28);
+            this.Btnposition.TabIndex = 23;
+            this.Btnposition.Text = "Position x,y";
+            this.Btnposition.UseVisualStyleBackColor = true;
+            this.Btnposition.Click += new System.EventHandler(this.Btnposition_Click);
+            // 
+            // optAxis_y
+            // 
+            this.optAxis_y.AutoSize = true;
+            this.optAxis_y.Location = new System.Drawing.Point(222, 79);
+            this.optAxis_y.Name = "optAxis_y";
+            this.optAxis_y.Size = new System.Drawing.Size(65, 20);
+            this.optAxis_y.TabIndex = 24;
+            this.optAxis_y.TabStop = true;
+            this.optAxis_y.Text = "Axis Y";
+            this.optAxis_y.UseVisualStyleBackColor = true;
+            // 
+            // optAxis_x
+            // 
+            this.optAxis_x.AutoSize = true;
+            this.optAxis_x.Location = new System.Drawing.Point(143, 79);
+            this.optAxis_x.Name = "optAxis_x";
+            this.optAxis_x.Size = new System.Drawing.Size(64, 20);
+            this.optAxis_x.TabIndex = 25;
+            this.optAxis_x.TabStop = true;
+            this.optAxis_x.Text = "Axis X";
+            this.optAxis_x.UseVisualStyleBackColor = true;
+            // 
+            // Btnenter
+            // 
+            this.Btnenter.Location = new System.Drawing.Point(143, 152);
+            this.Btnenter.Name = "Btnenter";
+            this.Btnenter.Size = new System.Drawing.Size(144, 32);
+            this.Btnenter.TabIndex = 26;
+            this.Btnenter.Text = "Enter";
+            this.Btnenter.UseVisualStyleBackColor = true;
+            this.Btnenter.Click += new System.EventHandler(this.Btnenter_Click);
+            // 
+            // lbmotor
+            // 
+            this.lbmotor.AutoSize = true;
+            this.lbmotor.Location = new System.Drawing.Point(143, 57);
+            this.lbmotor.Name = "lbmotor";
+            this.lbmotor.Size = new System.Drawing.Size(122, 16);
+            this.lbmotor.TabIndex = 27;
+            this.lbmotor.Text = "Set loop Stepmotor";
+            // 
+            // txt_IPloop
+            // 
+            this.txt_IPloop.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txt_IPloop.Location = new System.Drawing.Point(143, 105);
+            this.txt_IPloop.MaxLength = 3;
+            this.txt_IPloop.Multiline = true;
+            this.txt_IPloop.Name = "txt_IPloop";
+            this.txt_IPloop.Size = new System.Drawing.Size(144, 41);
+            this.txt_IPloop.TabIndex = 28;
             // 
             // frmMain
             // 
@@ -270,7 +321,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1045, 567);
-            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.txt_IPloop);
+            this.Controls.Add(this.lbmotor);
+            this.Controls.Add(this.Btnenter);
+            this.Controls.Add(this.optAxis_x);
+            this.Controls.Add(this.optAxis_y);
+            this.Controls.Add(this.Btnposition);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Btn_SetAC);
             this.Controls.Add(this.txtread);
@@ -293,7 +349,6 @@
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Physics101";
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -305,12 +360,12 @@
         private System.Windows.Forms.Button BtnDiconnect;
         private System.Windows.Forms.Button BtnMovestep;
         private System.Windows.Forms.Button Btn_stepY10;
-        private System.Windows.Forms.Button BtnMovestep1000_Click;
+     
         private System.Windows.Forms.Button Btn_stepY500;
         private System.Windows.Forms.Button Btn_stepY1000;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btn_Reset;
+
         private System.Windows.Forms.Button Btn_movestep500;
         private System.Windows.Forms.Button Btn_movestep1000;
         private System.Windows.Forms.Button Btn_ResetXY;
@@ -321,7 +376,12 @@
         private System.Windows.Forms.TextBox txtread;
         private System.Windows.Forms.Button Btn_SetAC;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Button Btnposition;
+        private System.Windows.Forms.RadioButton optAxis_y;
+        private System.Windows.Forms.RadioButton optAxis_x;
+        private System.Windows.Forms.Button Btnenter;
+        private System.Windows.Forms.Label lbmotor;
+        private System.Windows.Forms.TextBox txt_IPloop;
     }
 }
 

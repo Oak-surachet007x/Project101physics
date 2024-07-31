@@ -13,6 +13,8 @@ using Ivi.Visa.FormattedIO;
 using System.Reflection;
 using static System.Net.Mime.MediaTypeNames;
 using System.Runtime.InteropServices.ComTypes;
+using System.Diagnostics.Eventing.Reader;
+using System.Threading;
 
 
 
@@ -22,8 +24,8 @@ namespace CodingLabpro
     {
         Ivi.Visa.Interop.FormattedIO488 MyDMM;
         Ivi.Visa.Interop.FormattedIO488 MyMMC;
-        string addr = $"GPIB2::26::INSTR";
-        string MMCaddr = $"GPIB2::7:24::INSTR";
+        string addr = $"GPIB0::26::INSTR";
+        string MMCaddr = $"GPIB0::7:24::INSTR";
 
 
         public frmMain()
@@ -62,8 +64,9 @@ namespace CodingLabpro
             {
                 
                 //Connect driver DMM
-                string addr = "GPIB2::26::INSTR";
-                MyDMM.IO = (IMessage)mgr1.Open(addr);
+                string addr = "GPIB0::26::INSTR";
+                MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 2000, null);
+                MyDMM.IO.Timeout = 2000;
                 string command = "*IDN?";
                 MyDMM.WriteString(command);
                 string Aread = MyDMM.ReadString();
@@ -73,7 +76,7 @@ namespace CodingLabpro
                
 
                 //Connect driver MMC
-                string MMCaddr = "GPIB2::7::INSTR";
+                string MMCaddr = "GPIB0::7::INSTR";
                 MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
                 string MSG = "H:W";
                 MyMMC.WriteString(MSG);
@@ -122,10 +125,7 @@ namespace CodingLabpro
             string MSG3 = "M:XP1000";
             MyMMC.WriteString(MSG3);
             string MStep = "G:";
-            MyMMC.WriteString(MStep);
-            MyMMC.WriteString("Q:");
-            
-            
+            MyMMC.WriteString(MStep);  
         }
 
         private void Btn_ResetXY_Click(object sender, EventArgs e)
@@ -182,24 +182,21 @@ namespace CodingLabpro
             {
                 MyDMM.IO.Close();
                 MyMMC.IO.Close();
+                Task.Delay(3000).Wait();
+                MessageBox.Show("Device session is diconnect", "Diconnect", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                BtnDiconnect.BackColor = Color.LightBlue;
+                BtnDiconnect.ForeColor = Color.White;
+                Connect.BackColor = Color.Red;
+                Connect.Text = "Unconnect";
+                Connect.ForeColor = Color.White;
+                string rectify2 = "Diconnect Agilent HP34401A and MMC Step motor!";
+                DateTime r = DateTime.Now; // notification Time Cilck Button here!!
+                txtread.AppendText(r.ToString("r") + " <Notification!> " + rectify2 + Environment.NewLine);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                txtread.AppendText(ex.Message +Environment.NewLine);
+                txtread.AppendText(ex.Message + Environment.NewLine);
             }
-            
-            Task.Delay(3000).Wait();
-            MessageBox.Show("Device session is diconnect", "Diconnect", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            BtnDiconnect.BackColor = Color.LightBlue;
-            BtnDiconnect.ForeColor = Color.White;
-            Connect.BackColor = Color.Red;
-            Connect.Text = "Unconnect";
-            Connect.ForeColor = Color.White;
-            
-            string rectify2 = "Diconnect Agilent HP34401A and MMC Step motor!";
-            DateTime r = DateTime.Now; // notification Time Cilck Button here!!
-            txtread.AppendText(r.ToString("r") + " <Notification!> " + rectify2 + Environment.NewLine);
-
         }
 
 
@@ -208,6 +205,7 @@ namespace CodingLabpro
             MyDMM.WriteString("MEAS:VOLT:AC? 1,1E-6");
         }
 
+        private bool isRunning = false;
         private int Clickcount = 0;
 
         private void Btn_SetDC_Click(object sender, EventArgs e)
@@ -220,37 +218,149 @@ namespace CodingLabpro
 
                 switch (Clickcount % 2)
                 {
-                    case 1:
-                        //MyDMM.WriteString("MEAS:VOLT:DC? 1,1E-6");
-                        //string dataDC = MyDMM.ReadString();
-                        //txtread.AppendText(dataDC + Environment.NewLine);
-                        Btn_SetDC.BackColor = Color.LightGreen;
-                        Btn_SetDC.ForeColor = Color.Black;
-                        Btn_SetDC.Text = "Runing";
+                    case 1:      
+                        if (Clickcount %2 == 1 && !isRunning) 
+                        {
+                            isRunning = true;
+                            Btn_SetDC.BackColor = Color.LightGreen;
+                            Btn_SetDC.ForeColor = Color.Black;
+                            Btn_SetDC.Text = "Runing";
+                            Task.Run(() =>
+                            {
+                            try
+                            {
+                                while (isRunning)
+                                {
+                                    MyDMM.WriteString("MEAS:VOLT:DC? ");
+                                    string dataDC = MyDMM.ReadString();
+                                    Invoke(new Action(() => txtread.AppendText(dataDC + Environment.NewLine)));
+                                    Task.Delay(500).Wait();
+
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                    MessageBox.Show(ex.Message);
+                                    Invoke(new Action(() => txtread.AppendText(ex.Message + Environment.NewLine)));
+                            }
+                                
+                            });
+                        }
+
                         break;
+                       
                     case 0:
-                        Btn_SetDC.BackColor = Color.Pink;
-                        Btn_SetDC.ForeColor = Color.Black;
-                        Btn_SetDC.Text = "Stop";
+                        if (Clickcount %2 == 0 && isRunning) 
+                        {
+                            isRunning = false;
+                            Btn_SetDC.BackColor = Color.Pink;
+                            Btn_SetDC.ForeColor = Color.Black;
+                            Btn_SetDC.Text = "Stop";
+                            MyDMM.IO.Clear();
+                        }
+                        
                         break;
                 }
-                Btn_SetDC.Invalidate();
             }
 
             catch (Exception ex)
             {
-                do
+                DateTime r = DateTime.Now;
+                txtread.AppendText(r.ToString("r") + " <ERROR!!!> " + ex.Message + Environment.NewLine);
+                
+            }  
+        }
+
+        private void Btnposition_Click(object sender, EventArgs e)
+        {
+            try
+            {
+               
+
+                
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors that occur during communication
+                MessageBox.Show($"Error reading position: {ex.Message}");
+            }
+        }
+
+        
+
+        private void Btnenter_Click(object sender, EventArgs e)
+        {
+        
+
+            if (!optAxis_x.Checked && !optAxis_y.Checked)
+            {
+                txtread.AppendText("กรุณาเลือกแกนก่อนดำเนินการ" + Environment.NewLine);
+                Btnenter.BackColor = Color.Red;
+                Btnenter.ForeColor = Color.White;
+            }
+            else
+            {
+                Btnenter.BackColor = Color.CadetBlue;
+                string Sloop = txt_IPloop.Text;
+                
+
+                try
                 {
-                    DateTime r = DateTime.Now;
-                    txtread.AppendText(r.ToString("r") + " <ERROR!!!> " + ex.Message + Environment.NewLine);
-                    Task.Delay(2000).Wait();
+                    if (optAxis_x.Checked)
+                    {
+                        txtread.AppendText("คุณกำลังเลือกแกน X" + Environment.NewLine);
+                        int num1 = int.Parse(Sloop);
+                        string str = "";
+                        string MStep = "G:";
+                        MyMMC.WriteString("M:XP100"); // คำสั่งเริ่มต้นมอเตอร์
+                        
+                        for (int i = 1; i <= num1; i++)
+                        {
+                            str = str + i.ToString() + Environment.NewLine;
+                               
+                            MyMMC.WriteString(MStep);
+                            Thread.Sleep(100); // หน่วงเวลาให้มอเตอร์ทำงาน
+                        }                        
+                        txtread.AppendText(str + "ผลลัพธ์วน");
+
+                        //Char data2;
+                        //MyMMC.WriteString("Q:X");
+                        int data3 = MyMMC.ReadList();
+                        //txtread.AppendText(data2.ToString());
+
+
+                        //MyMMC.WriteString("M:XP-10");//
+                        //for (int i = 1; i <= num1; i--)
+                        //{
+                        //    MyMMC.WriteString(MStep);
+                        //}
+
+                    }
+
+                    if (optAxis_y.Checked)
+                    {
+                        txtread.AppendText("คุณกำลังเลือกแกน Y" + Environment.NewLine);
+                    }
                 }
-                while (true);
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"issues = {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
+                if (Sloop == "")
+                {
+                    txtread.AppendText("จำนวนรอบที่หมุนมอเตอร์ = 0 " + Environment.NewLine);
+                }
+                else
+                {
+                    txtread.AppendText("จำนวนรอบที่หมุนมอเตอร์ = " + Sloop + Environment.NewLine);
+                }
 
+                
+                txt_IPloop.Clear();
 
             }
-           
-        }      
+
+        } 
     }
 }
