@@ -52,6 +52,7 @@
             this.Btnenter = new System.Windows.Forms.Button();
             this.lbmotor = new System.Windows.Forms.Label();
             this.txt_IPloop = new System.Windows.Forms.TextBox();
+            this.graphBox1 = new System.Windows.Forms.GroupBox();
             this.SuspendLayout();
             // 
             // Connect
@@ -255,7 +256,7 @@
             // 
             // Btnposition
             // 
-            this.Btnposition.Location = new System.Drawing.Point(570, 15);
+            this.Btnposition.Location = new System.Drawing.Point(571, 15);
             this.Btnposition.Margin = new System.Windows.Forms.Padding(4);
             this.Btnposition.Name = "Btnposition";
             this.Btnposition.Size = new System.Drawing.Size(109, 28);
@@ -288,7 +289,7 @@
             // 
             // Btnenter
             // 
-            this.Btnenter.Location = new System.Drawing.Point(143, 152);
+            this.Btnenter.Location = new System.Drawing.Point(143, 155);
             this.Btnenter.Name = "Btnenter";
             this.Btnenter.Size = new System.Drawing.Size(144, 32);
             this.Btnenter.TabIndex = 26;
@@ -315,18 +316,34 @@
             this.txt_IPloop.Size = new System.Drawing.Size(144, 41);
             this.txt_IPloop.TabIndex = 28;
             // 
+            // graphBox1
+            // 
+            this.graphBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.graphBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.graphBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.graphBox1.ForeColor = System.Drawing.Color.Coral;
+            this.graphBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.graphBox1.Location = new System.Drawing.Point(463, 57);
+            this.graphBox1.Name = "graphBox1";
+            this.graphBox1.Size = new System.Drawing.Size(565, 269);
+            this.graphBox1.TabIndex = 29;
+            this.graphBox1.TabStop = false;
+            this.graphBox1.Text = "graph Data DC";
+           
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1045, 567);
+            this.Controls.Add(this.Btnenter);
+            this.Controls.Add(this.Btnposition);
+            this.Controls.Add(this.graphBox1);
             this.Controls.Add(this.txt_IPloop);
             this.Controls.Add(this.lbmotor);
-            this.Controls.Add(this.Btnenter);
             this.Controls.Add(this.optAxis_x);
             this.Controls.Add(this.optAxis_y);
-            this.Controls.Add(this.Btnposition);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Btn_SetAC);
             this.Controls.Add(this.txtread);
@@ -382,6 +399,7 @@
         private System.Windows.Forms.Button Btnenter;
         private System.Windows.Forms.Label lbmotor;
         private System.Windows.Forms.TextBox txt_IPloop;
+        private System.Windows.Forms.GroupBox graphBox1;
     }
 }
 
