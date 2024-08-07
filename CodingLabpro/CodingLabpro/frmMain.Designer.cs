@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.Connect = new System.Windows.Forms.Button();
             this.BtnDiconnect = new System.Windows.Forms.Button();
             this.BtnMovestep = new System.Windows.Forms.Button();
@@ -44,10 +43,12 @@
             this.Btn_Cleardmm = new System.Windows.Forms.Button();
             this.Btn_SetDC = new System.Windows.Forms.Button();
             this.BtnError = new System.Windows.Forms.Button();
-            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.txtread = new System.Windows.Forms.TextBox();
             this.Btn_SetAC = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtinput = new System.Windows.Forms.TextBox();
+            this.Btnmotorloop = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Connect
@@ -199,11 +200,6 @@
             this.BtnError.UseVisualStyleBackColor = true;
             this.BtnError.Click += new System.EventHandler(this.BtnError_Click);
             // 
-            // serialPort1
-            // 
-            this.serialPort1.DtrEnable = true;
-            this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
-            // 
             // txtread
             // 
             this.txtread.Location = new System.Drawing.Point(11, 355);
@@ -231,12 +227,45 @@
             this.label4.TabIndex = 22;
             this.label4.Text = "AC";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(228, 175);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 13);
+            this.label5.TabIndex = 25;
+            this.label5.Text = "INPUT LOOP X";
+            // 
+            // txtinput
+            // 
+            this.txtinput.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtinput.Location = new System.Drawing.Point(126, 67);
+            this.txtinput.Multiline = true;
+            this.txtinput.Name = "txtinput";
+            this.txtinput.Size = new System.Drawing.Size(242, 36);
+            this.txtinput.TabIndex = 26;
+            this.txtinput.Tag = "i";
+            this.txtinput.Text = "\r\n";
+            // 
+            // Btnmotorloop
+            // 
+            this.Btnmotorloop.Location = new System.Drawing.Point(126, 126);
+            this.Btnmotorloop.Name = "Btnmotorloop";
+            this.Btnmotorloop.Size = new System.Drawing.Size(75, 23);
+            this.Btnmotorloop.TabIndex = 24;
+            this.Btnmotorloop.Text = "Set LOOP";
+            this.Btnmotorloop.UseVisualStyleBackColor = true;
+            this.Btnmotorloop.Click += new System.EventHandler(this.Btnmotorloop_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(784, 461);
+            this.Controls.Add(this.txtinput);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.Btnmotorloop);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Btn_SetAC);
             this.Controls.Add(this.txtread);
@@ -282,10 +311,12 @@
         private System.Windows.Forms.Button Btn_Cleardmm;
         private System.Windows.Forms.Button Btn_SetDC;
         private System.Windows.Forms.Button BtnError;
-        private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.TextBox txtread;
         private System.Windows.Forms.Button Btn_SetAC;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtinput;
+        private System.Windows.Forms.Button Btnmotorloop;
     }
 }
 

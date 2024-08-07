@@ -7,8 +7,16 @@
       "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|c:\\users\\user\\desktop\\project101physics\\codinglabpro\\codinglabpro\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\User\\Desktop\\Project101physics\\CodingLabpro\\codinglabpro\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\User\\Desktop\\Project101physics\\CodingLabpro\\codinglabpro\\frmmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\User\\Desktop\\Project101physics\\CodingLabpro\\codinglabpro\\models\\colorfullbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\models\\colorfullbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Document",
@@ -63,13 +71,38 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "frmMain.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Project101physics\\CodingLabpro\\CodingLabpro\\frmMain.Designer.cs",
+              "RelativeDocumentMoniker": "CodingLabpro\\frmMain.Designer.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\Project101physics\\CodingLabpro\\CodingLabpro\\frmMain.Designer.cs",
+              "RelativeToolTip": "CodingLabpro\\frmMain.Designer.cs",
+              "ViewState": "AQIAAPsAAAAAAAAAAAAWwAgBAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-21T14:26:21.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ColorfullButton.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Project101physics\\CodingLabpro\\CodingLabpro\\Models\\ColorfullButton.cs",
+              "RelativeDocumentMoniker": "CodingLabpro\\Models\\ColorfullButton.cs",
+              "ToolTip": "C:\\Users\\User\\Desktop\\Project101physics\\CodingLabpro\\CodingLabpro\\Models\\ColorfullButton.cs",
+              "RelativeToolTip": "CodingLabpro\\Models\\ColorfullButton.cs",
+              "ViewState": "AQIAAKAAAAAAAAAAAAAAAMMAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-21T10:51:42.122Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "frmMain.cs",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\Project101physics\\CodingLabpro\\CodingLabpro\\frmMain.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\frmMain.cs",
               "ToolTip": "C:\\Users\\User\\Desktop\\Project101physics\\CodingLabpro\\CodingLabpro\\frmMain.cs",
               "RelativeToolTip": "CodingLabpro\\frmMain.cs",
-              "ViewState": "AQIAAOUAAAAAAAAAAAAuwPUAAABKAAAA",
+              "ViewState": "AQIAAEMAAAAAAAAAAAAYwEgAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-20T11:43:59.703Z",
               "EditorCaption": ""
