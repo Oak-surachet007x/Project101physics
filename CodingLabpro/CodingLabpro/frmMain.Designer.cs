@@ -52,11 +52,14 @@
             this.Btnenter = new System.Windows.Forms.Button();
             this.lbmotor = new System.Windows.Forms.Label();
             this.txt_IPloop = new System.Windows.Forms.TextBox();
+<<<<<<< HEAD
             this.graphBox1 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.Btn_stepZ10 = new System.Windows.Forms.Button();
+=======
+>>>>>>> parent of 27f1fed (start make graph Dc)
             this.SuspendLayout();
             // 
             // Connect
@@ -242,7 +245,12 @@
             // 
             // Btnposition
             // 
+<<<<<<< HEAD
             this.Btnposition.Location = new System.Drawing.Point(428, 12);
+=======
+            this.Btnposition.Location = new System.Drawing.Point(570, 15);
+            this.Btnposition.Margin = new System.Windows.Forms.Padding(4);
+>>>>>>> parent of 27f1fed (start make graph Dc)
             this.Btnposition.Name = "Btnposition";
             this.Btnposition.Size = new System.Drawing.Size(82, 23);
             this.Btnposition.TabIndex = 23;
@@ -276,8 +284,12 @@
             // 
             // Btnenter
             // 
+<<<<<<< HEAD
             this.Btnenter.Location = new System.Drawing.Point(107, 126);
             this.Btnenter.Margin = new System.Windows.Forms.Padding(2);
+=======
+            this.Btnenter.Location = new System.Drawing.Point(143, 152);
+>>>>>>> parent of 27f1fed (start make graph Dc)
             this.Btnenter.Name = "Btnenter";
             this.Btnenter.Size = new System.Drawing.Size(108, 26);
             this.Btnenter.TabIndex = 26;
@@ -306,6 +318,7 @@
             this.txt_IPloop.Size = new System.Drawing.Size(109, 34);
             this.txt_IPloop.TabIndex = 28;
             // 
+<<<<<<< HEAD
             // graphBox1
             // 
             this.graphBox1.BackColor = System.Drawing.SystemColors.Control;
@@ -359,11 +372,14 @@
             this.Btn_stepZ10.UseVisualStyleBackColor = true;
             this.Btn_stepZ10.Click += new System.EventHandler(this.Btn_stepZ10_Click);
             // 
+=======
+>>>>>>> parent of 27f1fed (start make graph Dc)
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(784, 461);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button1);
@@ -372,10 +388,15 @@
             this.Controls.Add(this.Btnenter);
             this.Controls.Add(this.Btnposition);
             this.Controls.Add(this.graphBox1);
+=======
+            this.ClientSize = new System.Drawing.Size(1045, 567);
+>>>>>>> parent of 27f1fed (start make graph Dc)
             this.Controls.Add(this.txt_IPloop);
             this.Controls.Add(this.lbmotor);
+            this.Controls.Add(this.Btnenter);
             this.Controls.Add(this.optAxis_x);
             this.Controls.Add(this.optAxis_y);
+            this.Controls.Add(this.Btnposition);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Btn_SetAC);
             this.Controls.Add(this.txtread);
@@ -430,11 +451,14 @@
         private System.Windows.Forms.Button Btnenter;
         private System.Windows.Forms.Label lbmotor;
         private System.Windows.Forms.TextBox txt_IPloop;
+<<<<<<< HEAD
         private System.Windows.Forms.GroupBox graphBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button Btn_stepZ10;
+=======
+>>>>>>> parent of 27f1fed (start make graph Dc)
     }
 }
 

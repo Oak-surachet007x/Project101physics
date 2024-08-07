@@ -388,10 +388,25 @@ namespace CodingLabpro
                             Thread.Sleep(100); // หน่วงเวลาให้มอเตอร์ทำงาน
                         }                        
                         txtread.AppendText(str + "ผลลัพธ์วน");
+<<<<<<< HEAD
                         Thread.Sleep(700);
                         //MyMMC.WriteString("H:X");
                         //MyMMC.WriteList("Q:");
                         //double redata = MyMMC.ReadList(IEEEASCIIType.ASCIIType_R4.ToString);
+=======
+
+                        //Char data2;
+                        //MyMMC.WriteString("Q:X");
+                        int data3 = MyMMC.ReadList();
+                        //txtread.AppendText(data2.ToString());
+
+
+                        //MyMMC.WriteString("M:XP-10");//
+                        //for (int i = 1; i <= num1; i--)
+                        //{
+                        //    MyMMC.WriteString(MStep);
+                        //}
+>>>>>>> parent of 27f1fed (start make graph Dc)
 
                     }
 
@@ -419,6 +434,7 @@ namespace CodingLabpro
 
             }
 
+<<<<<<< HEAD
         }
 
         private void Btn_stepZ10_Click(object sender, EventArgs e)
@@ -426,6 +442,8 @@ namespace CodingLabpro
             MyMMC.WriteString("M:ZP100");
             MyMMC.WriteString("G:");
         }
+=======
+        } 
+>>>>>>> parent of 27f1fed (start make graph Dc)
     }
-
 }
