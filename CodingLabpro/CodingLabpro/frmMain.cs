@@ -15,6 +15,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Runtime.InteropServices.ComTypes;
 using System.Diagnostics.Eventing.Reader;
 using System.Threading;
+using ScottPlot.ArrowShapes;
 
 
 
@@ -24,8 +25,8 @@ namespace CodingLabpro
     {
         Ivi.Visa.Interop.FormattedIO488 MyDMM;
         Ivi.Visa.Interop.FormattedIO488 MyMMC;
-        string addr = $"GPIB0::26::INSTR";
-        string MMCaddr = $"GPIB0::7:24::INSTR";
+        string addr = $"GPIB2::26::INSTR";
+        string MMCaddr = $"GPIB2::7::INSTR";
 
 
         public frmMain()
@@ -64,7 +65,7 @@ namespace CodingLabpro
             {
                 
                 //Connect driver DMM
-                string addr = "GPIB0::26::INSTR";
+                string addr = "GPIB2::26::INSTR";
                 MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 2000, null);
                 MyDMM.IO.Timeout = 2000;
                 string command = "*IDN?";
@@ -76,7 +77,7 @@ namespace CodingLabpro
                
 
                 //Connect driver MMC
-                string MMCaddr = "GPIB0::7::INSTR";
+                string MMCaddr = "GPIB2::7::INSTR";
                 MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
                 string MSG = "H:W";
                 MyMMC.WriteString(MSG);
@@ -200,13 +201,73 @@ namespace CodingLabpro
         }
 
 
+        private int Click1count = 0;
         private void Btn_SetAC_Click(object sender, EventArgs e)
         {
-            MyDMM.WriteString("MEAS:VOLT:AC? 1,1E-6");
+            try
+            {
+
+                Click1count++;
+
+                switch (Click1count % 2)
+                {
+                    case 1:
+                        if (Click1count % 2 == 1 && !isRunning)
+                        {
+                            isRunning = true;
+                            Btn_SetAC.BackColor = Color.LightGreen;
+                            Btn_SetAC.ForeColor = Color.Black;
+                            Btn_SetAC.Text = "Runing";
+                            Task.Run(() =>
+                            {
+                                try
+                                {
+                                    while (isRunning)
+                                    {
+                                        MyDMM.WriteString("MEAS:VOLT:AC? 1,1E-6");
+                                        string dataAC = MyDMM.ReadString();
+                                        Invoke(new Action(() => txtread.AppendText(dataAC + Environment.NewLine)));
+                                        Task.Delay(500).Wait();
+
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show(ex.Message);
+                                    Invoke(new Action(() => txtread.AppendText(ex.Message + Environment.NewLine)));
+                                }
+
+                            });
+                        }
+
+                        break;
+
+                    case 0:
+                        if (Click1count % 2 == 0 && isRunning)
+                        {
+                            isRunning = false;
+                            Btn_SetAC.BackColor = Color.Pink;
+                            Btn_SetAC.ForeColor = Color.Black;
+                            Btn_SetAC.Text = "Stop";
+                            MyDMM.IO.Clear();
+                        }
+
+                        break;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                DateTime r = DateTime.Now;
+                txtread.AppendText(r.ToString("r") + " <ERROR!!!> " + ex.Message + Environment.NewLine);
+
+            }
         }
 
         private bool isRunning = false;
         private int Clickcount = 0;
+
+        public object ioDmm { get; private set; }
 
         private void Btn_SetDC_Click(object sender, EventArgs e)
         {
@@ -275,9 +336,14 @@ namespace CodingLabpro
         {
             try
             {
-               
-
                 
+
+
+
+
+
+
+
             }
             catch (Exception ex)
             {
@@ -312,7 +378,7 @@ namespace CodingLabpro
                         int num1 = int.Parse(Sloop);
                         string str = "";
                         string MStep = "G:";
-                        MyMMC.WriteString("M:XP100"); // คำสั่งเริ่มต้นมอเตอร์
+                        MyMMC.WriteString("M:XP50");
                         
                         for (int i = 1; i <= num1; i++)
                         {
@@ -322,8 +388,25 @@ namespace CodingLabpro
                             Thread.Sleep(100); // หน่วงเวลาให้มอเตอร์ทำงาน
                         }                        
                         txtread.AppendText(str + "ผลลัพธ์วน");
-                        MyMMC.WriteList("Q:");
+<<<<<<< HEAD
+                        Thread.Sleep(700);
+                        //MyMMC.WriteString("H:X");
+                        //MyMMC.WriteList("Q:");
                         //double redata = MyMMC.ReadList(IEEEASCIIType.ASCIIType_R4.ToString);
+=======
+
+                        //Char data2;
+                        //MyMMC.WriteString("Q:X");
+                        int data3 = MyMMC.ReadList();
+                        //txtread.AppendText(data2.ToString());
+
+
+                        //MyMMC.WriteString("M:XP-10");//
+                        //for (int i = 1; i <= num1; i--)
+                        //{
+                        //    MyMMC.WriteString(MStep);
+                        //}
+>>>>>>> parent of 27f1fed (start make graph Dc)
 
                     }
 
@@ -351,10 +434,16 @@ namespace CodingLabpro
 
             }
 
+<<<<<<< HEAD
         }
 
-        
-        
+        private void Btn_stepZ10_Click(object sender, EventArgs e)
+        {
+            MyMMC.WriteString("M:ZP100");
+            MyMMC.WriteString("G:");
+        }
+=======
+        } 
+>>>>>>> parent of 27f1fed (start make graph Dc)
     }
-
 }
