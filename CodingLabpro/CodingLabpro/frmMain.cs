@@ -316,7 +316,7 @@ namespace CodingLabpro
                         
                         for (int i = 1; i <= num1; i++)
                         {
-                            str = str + i.ToString() + Environment.NewLine;
+                            str = str + i.ToString() + Environment.NewLine;///
                                
                             MyMMC.WriteString(MStep);
                             Thread.Sleep(100); // หน่วงเวลาให้มอเตอร์ทำงาน
