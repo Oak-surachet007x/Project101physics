@@ -322,8 +322,18 @@ namespace CodingLabpro
                             Thread.Sleep(100); // หน่วงเวลาให้มอเตอร์ทำงาน
                         }                        
                         txtread.AppendText(str + "ผลลัพธ์วน");
-                        MyMMC.WriteList("Q:");
-                        //double redata = MyMMC.ReadList(IEEEASCIIType.ASCIIType_R4.ToString);
+
+                        //Char data2;
+                        //MyMMC.WriteString("Q:X");
+                        int data3 = MyMMC.ReadList();
+                        //txtread.AppendText(data2.ToString());
+
+
+                        //MyMMC.WriteString("M:XP-10");//
+                        //for (int i = 1; i <= num1; i--)
+                        //{
+                        //    MyMMC.WriteString(MStep);
+                        //}
 
                     }
 
@@ -351,10 +361,6 @@ namespace CodingLabpro
 
             }
 
-        }
-
-        
-        
+        } 
     }
-
 }
