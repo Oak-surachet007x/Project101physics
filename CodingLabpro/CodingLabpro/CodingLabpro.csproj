@@ -62,7 +62,6 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Messaging" />
-    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />

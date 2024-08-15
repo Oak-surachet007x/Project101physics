@@ -34,8 +34,6 @@
             this.Btn_stepY10 = new System.Windows.Forms.Button();
             this.Btn_stepY500 = new System.Windows.Forms.Button();
             this.Btn_stepY1000 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.Btn_movestep500 = new System.Windows.Forms.Button();
             this.Btn_movestep1000 = new System.Windows.Forms.Button();
             this.Btn_ResetXY = new System.Windows.Forms.Button();
@@ -43,28 +41,32 @@
             this.Btn_Cleardmm = new System.Windows.Forms.Button();
             this.Btn_SetDC = new System.Windows.Forms.Button();
             this.BtnError = new System.Windows.Forms.Button();
-            this.txtread = new System.Windows.Forms.TextBox();
             this.Btn_SetAC = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.Btnposition = new System.Windows.Forms.Button();
-            this.optAxis_y = new System.Windows.Forms.RadioButton();
             this.optAxis_x = new System.Windows.Forms.RadioButton();
             this.Btnenter = new System.Windows.Forms.Button();
-            this.lbmotor = new System.Windows.Forms.Label();
             this.txt_IPloop = new System.Windows.Forms.TextBox();
             this.graphBox1 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.Btn_stepZ10 = new System.Windows.Forms.Button();
+            this.optAxis_y = new System.Windows.Forms.RadioButton();
+            this.txtread = new System.Windows.Forms.TextBox();
+            this.Boxread = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Ptgpib = new System.Windows.Forms.RadioButton();
+            this.Ptrs232 = new System.Windows.Forms.RadioButton();
+            this.Boxloopmotor = new System.Windows.Forms.GroupBox();
+            this.Boxposition = new System.Windows.Forms.GroupBox();
+            this.Boxread.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.Boxloopmotor.SuspendLayout();
+            this.Boxposition.SuspendLayout();
             this.SuspendLayout();
             // 
             // Connect
             // 
-            this.Connect.Location = new System.Drawing.Point(16, 15);
-            this.Connect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Connect.Location = new System.Drawing.Point(118, 22);
+            this.Connect.Margin = new System.Windows.Forms.Padding(4);
             this.Connect.Name = "Connect";
-            this.Connect.Size = new System.Drawing.Size(100, 28);
+            this.Connect.Size = new System.Drawing.Size(100, 64);
             this.Connect.TabIndex = 0;
             this.Connect.Text = "Connect";
             this.Connect.UseVisualStyleBackColor = true;
@@ -73,10 +75,10 @@
             // BtnDiconnect
             // 
             this.BtnDiconnect.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BtnDiconnect.Location = new System.Drawing.Point(124, 15);
-            this.BtnDiconnect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnDiconnect.Location = new System.Drawing.Point(226, 22);
+            this.BtnDiconnect.Margin = new System.Windows.Forms.Padding(4);
             this.BtnDiconnect.Name = "BtnDiconnect";
-            this.BtnDiconnect.Size = new System.Drawing.Size(100, 28);
+            this.BtnDiconnect.Size = new System.Drawing.Size(100, 64);
             this.BtnDiconnect.TabIndex = 1;
             this.BtnDiconnect.Text = "Diconnect";
             this.BtnDiconnect.UseVisualStyleBackColor = true;
@@ -84,8 +86,8 @@
             // 
             // BtnMovestep
             // 
-            this.BtnMovestep.Location = new System.Drawing.Point(15, 82);
-            this.BtnMovestep.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnMovestep.Location = new System.Drawing.Point(8, 22);
+            this.BtnMovestep.Margin = new System.Windows.Forms.Padding(4);
             this.BtnMovestep.Name = "BtnMovestep";
             this.BtnMovestep.Size = new System.Drawing.Size(100, 28);
             this.BtnMovestep.TabIndex = 3;
@@ -95,8 +97,8 @@
             // 
             // Btn_stepY10
             // 
-            this.Btn_stepY10.Location = new System.Drawing.Point(15, 228);
-            this.Btn_stepY10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_stepY10.Location = new System.Drawing.Point(118, 22);
+            this.Btn_stepY10.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_stepY10.Name = "Btn_stepY10";
             this.Btn_stepY10.Size = new System.Drawing.Size(100, 28);
             this.Btn_stepY10.TabIndex = 4;
@@ -106,8 +108,8 @@
             // 
             // Btn_stepY500
             // 
-            this.Btn_stepY500.Location = new System.Drawing.Point(16, 263);
-            this.Btn_stepY500.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_stepY500.Location = new System.Drawing.Point(118, 54);
+            this.Btn_stepY500.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_stepY500.Name = "Btn_stepY500";
             this.Btn_stepY500.Size = new System.Drawing.Size(100, 28);
             this.Btn_stepY500.TabIndex = 7;
@@ -117,8 +119,8 @@
             // 
             // Btn_stepY1000
             // 
-            this.Btn_stepY1000.Location = new System.Drawing.Point(16, 298);
-            this.Btn_stepY1000.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_stepY1000.Location = new System.Drawing.Point(118, 88);
+            this.Btn_stepY1000.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_stepY1000.Name = "Btn_stepY1000";
             this.Btn_stepY1000.Size = new System.Drawing.Size(100, 28);
             this.Btn_stepY1000.TabIndex = 8;
@@ -126,30 +128,10 @@
             this.Btn_stepY1000.UseVisualStyleBackColor = true;
             this.Btn_stepY1000.Click += new System.EventHandler(this.Btn_stepY1000_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(57, 50);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(13, 16);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "x";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(51, 196);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(14, 16);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "y";
-            // 
             // Btn_movestep500
             // 
-            this.Btn_movestep500.Location = new System.Drawing.Point(15, 118);
-            this.Btn_movestep500.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_movestep500.Location = new System.Drawing.Point(8, 54);
+            this.Btn_movestep500.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_movestep500.Name = "Btn_movestep500";
             this.Btn_movestep500.Size = new System.Drawing.Size(100, 28);
             this.Btn_movestep500.TabIndex = 12;
@@ -159,8 +141,8 @@
             // 
             // Btn_movestep1000
             // 
-            this.Btn_movestep1000.Location = new System.Drawing.Point(15, 155);
-            this.Btn_movestep1000.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_movestep1000.Location = new System.Drawing.Point(8, 88);
+            this.Btn_movestep1000.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_movestep1000.Name = "Btn_movestep1000";
             this.Btn_movestep1000.Size = new System.Drawing.Size(100, 28);
             this.Btn_movestep1000.TabIndex = 13;
@@ -170,10 +152,10 @@
             // 
             // Btn_ResetXY
             // 
-            this.Btn_ResetXY.Location = new System.Drawing.Point(463, 15);
-            this.Btn_ResetXY.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_ResetXY.Location = new System.Drawing.Point(474, 15);
+            this.Btn_ResetXY.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_ResetXY.Name = "Btn_ResetXY";
-            this.Btn_ResetXY.Size = new System.Drawing.Size(100, 28);
+            this.Btn_ResetXY.Size = new System.Drawing.Size(111, 28);
             this.Btn_ResetXY.TabIndex = 14;
             this.Btn_ResetXY.Text = "Reset(0,0)";
             this.Btn_ResetXY.UseVisualStyleBackColor = true;
@@ -193,9 +175,9 @@
             // 
             this.Btn_Cleardmm.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.Btn_Cleardmm.Location = new System.Drawing.Point(355, 15);
-            this.Btn_Cleardmm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_Cleardmm.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Cleardmm.Name = "Btn_Cleardmm";
-            this.Btn_Cleardmm.Size = new System.Drawing.Size(100, 28);
+            this.Btn_Cleardmm.Size = new System.Drawing.Size(111, 28);
             this.Btn_Cleardmm.TabIndex = 17;
             this.Btn_Cleardmm.Text = "Clear(DMM)";
             this.Btn_Cleardmm.UseVisualStyleBackColor = true;
@@ -204,7 +186,7 @@
             // Btn_SetDC
             // 
             this.Btn_SetDC.Location = new System.Drawing.Point(912, 15);
-            this.Btn_SetDC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_SetDC.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_SetDC.Name = "Btn_SetDC";
             this.Btn_SetDC.Size = new System.Drawing.Size(117, 28);
             this.Btn_SetDC.TabIndex = 18;
@@ -214,33 +196,19 @@
             // 
             // BtnError
             // 
-            this.BtnError.Location = new System.Drawing.Point(247, 15);
-            this.BtnError.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnError.Location = new System.Drawing.Point(589, 15);
+            this.BtnError.Margin = new System.Windows.Forms.Padding(4);
             this.BtnError.Name = "BtnError";
-            this.BtnError.Size = new System.Drawing.Size(100, 28);
+            this.BtnError.Size = new System.Drawing.Size(111, 28);
             this.BtnError.TabIndex = 19;
             this.BtnError.Text = "Read Error";
             this.BtnError.UseVisualStyleBackColor = true;
             this.BtnError.Click += new System.EventHandler(this.BtnError_Click);
             // 
-            // txtread
-            // 
-            this.txtread.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.txtread.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtread.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtread.Location = new System.Drawing.Point(15, 352);
-            this.txtread.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtread.Multiline = true;
-            this.txtread.Name = "txtread";
-            this.txtread.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtread.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtread.Size = new System.Drawing.Size(1013, 200);
-            this.txtread.TabIndex = 20;
-            // 
             // Btn_SetAC
             // 
             this.Btn_SetAC.Location = new System.Drawing.Point(745, 15);
-            this.Btn_SetAC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Btn_SetAC.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_SetAC.Name = "Btn_SetAC";
             this.Btn_SetAC.Size = new System.Drawing.Size(117, 28);
             this.Btn_SetAC.TabIndex = 21;
@@ -258,65 +226,32 @@
             this.label4.TabIndex = 22;
             this.label4.Text = "AC";
             // 
-            // Btnposition
-            // 
-            this.Btnposition.Location = new System.Drawing.Point(572, 15);
-            this.Btnposition.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.Btnposition.Name = "Btnposition";
-            this.Btnposition.Size = new System.Drawing.Size(109, 28);
-            this.Btnposition.TabIndex = 23;
-            this.Btnposition.Text = "Position x,y";
-            this.Btnposition.UseVisualStyleBackColor = true;
-            this.Btnposition.Click += new System.EventHandler(this.Btnposition_Click);
-            // 
-            // optAxis_y
-            // 
-            this.optAxis_y.AutoSize = true;
-            this.optAxis_y.Location = new System.Drawing.Point(221, 79);
-            this.optAxis_y.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.optAxis_y.Name = "optAxis_y";
-            this.optAxis_y.Size = new System.Drawing.Size(65, 20);
-            this.optAxis_y.TabIndex = 24;
-            this.optAxis_y.TabStop = true;
-            this.optAxis_y.Text = "Axis Y";
-            this.optAxis_y.UseVisualStyleBackColor = true;
-            // 
             // optAxis_x
             // 
             this.optAxis_x.AutoSize = true;
-            this.optAxis_x.Location = new System.Drawing.Point(143, 79);
+            this.optAxis_x.Location = new System.Drawing.Point(15, 26);
             this.optAxis_x.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.optAxis_x.Name = "optAxis_x";
             this.optAxis_x.Size = new System.Drawing.Size(64, 20);
             this.optAxis_x.TabIndex = 25;
-            this.optAxis_x.TabStop = true;
             this.optAxis_x.Text = "Axis X";
             this.optAxis_x.UseVisualStyleBackColor = true;
             // 
             // Btnenter
             // 
-            this.Btnenter.Location = new System.Drawing.Point(143, 155);
+            this.Btnenter.Location = new System.Drawing.Point(236, 26);
             this.Btnenter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Btnenter.Name = "Btnenter";
-            this.Btnenter.Size = new System.Drawing.Size(144, 32);
+            this.Btnenter.Size = new System.Drawing.Size(90, 45);
             this.Btnenter.TabIndex = 26;
             this.Btnenter.Text = "Enter";
             this.Btnenter.UseVisualStyleBackColor = true;
             this.Btnenter.Click += new System.EventHandler(this.Btnenter_Click);
             // 
-            // lbmotor
-            // 
-            this.lbmotor.AutoSize = true;
-            this.lbmotor.Location = new System.Drawing.Point(143, 57);
-            this.lbmotor.Name = "lbmotor";
-            this.lbmotor.Size = new System.Drawing.Size(122, 16);
-            this.lbmotor.TabIndex = 27;
-            this.lbmotor.Text = "Set loop Stepmotor";
-            // 
             // txt_IPloop
             // 
             this.txt_IPloop.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txt_IPloop.Location = new System.Drawing.Point(143, 105);
+            this.txt_IPloop.Location = new System.Drawing.Point(86, 26);
             this.txt_IPloop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txt_IPloop.MaxLength = 3;
             this.txt_IPloop.Multiline = true;
@@ -326,6 +261,10 @@
             // 
             // graphBox1
             // 
+            this.graphBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.graphBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.graphBox1.BackColor = System.Drawing.SystemColors.Control;
             this.graphBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.graphBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -333,53 +272,119 @@
             this.graphBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.graphBox1.Location = new System.Drawing.Point(463, 57);
             this.graphBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.graphBox1.MaximumSize = new System.Drawing.Size(1600, 630);
+            this.graphBox1.MinimumSize = new System.Drawing.Size(565, 0);
             this.graphBox1.Name = "graphBox1";
             this.graphBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.graphBox1.Size = new System.Drawing.Size(565, 270);
+            this.graphBox1.Size = new System.Drawing.Size(565, 271);
             this.graphBox1.TabIndex = 29;
             this.graphBox1.TabStop = false;
             this.graphBox1.Text = "graph Data DC";
             // 
-            // label5
+            // optAxis_y
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(177, 196);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(15, 16);
-            this.label5.TabIndex = 33;
-            this.label5.Text = "Z";
+            this.optAxis_y.AutoSize = true;
+            this.optAxis_y.Location = new System.Drawing.Point(15, 51);
+            this.optAxis_y.Name = "optAxis_y";
+            this.optAxis_y.Size = new System.Drawing.Size(65, 20);
+            this.optAxis_y.TabIndex = 35;
+            this.optAxis_y.TabStop = true;
+            this.optAxis_y.Text = "Axis Y";
+            this.optAxis_y.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // txtread
             // 
-            this.button1.Location = new System.Drawing.Point(143, 298);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 28);
-            this.button1.TabIndex = 32;
-            this.button1.Text = "Z step 1000";
-            this.button1.UseVisualStyleBackColor = true;
+            this.txtread.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtread.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.txtread.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtread.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtread.Location = new System.Drawing.Point(17, 33);
+            this.txtread.Margin = new System.Windows.Forms.Padding(4);
+            this.txtread.Multiline = true;
+            this.txtread.Name = "txtread";
+            this.txtread.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtread.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtread.Size = new System.Drawing.Size(1007, 181);
+            this.txtread.TabIndex = 20;
             // 
-            // button2
+            // Boxread
             // 
-            this.button2.Location = new System.Drawing.Point(143, 263);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 28);
-            this.button2.TabIndex = 31;
-            this.button2.Text = "Z step 500";
-            this.button2.UseVisualStyleBackColor = true;
+            this.Boxread.Controls.Add(this.txtread);
+            this.Boxread.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.Boxread.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.Boxread.Location = new System.Drawing.Point(0, 333);
+            this.Boxread.Name = "Boxread";
+            this.Boxread.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Boxread.Size = new System.Drawing.Size(1037, 227);
+            this.Boxread.TabIndex = 34;
+            this.Boxread.TabStop = false;
+            this.Boxread.Text = "Output";
             // 
-            // Btn_stepZ10
+            // groupBox2
             // 
-            this.Btn_stepZ10.Location = new System.Drawing.Point(141, 228);
-            this.Btn_stepZ10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Btn_stepZ10.Name = "Btn_stepZ10";
-            this.Btn_stepZ10.Size = new System.Drawing.Size(100, 28);
-            this.Btn_stepZ10.TabIndex = 30;
-            this.Btn_stepZ10.Text = "Z step 10";
-            this.Btn_stepZ10.UseVisualStyleBackColor = true;
-            this.Btn_stepZ10.Click += new System.EventHandler(this.Btn_stepZ10_Click);
+            this.groupBox2.Controls.Add(this.Ptgpib);
+            this.groupBox2.Controls.Add(this.Ptrs232);
+            this.groupBox2.Controls.Add(this.Connect);
+            this.groupBox2.Controls.Add(this.BtnDiconnect);
+            this.groupBox2.Location = new System.Drawing.Point(15, 11);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(333, 100);
+            this.groupBox2.TabIndex = 36;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "section connect";
+            // 
+            // Ptgpib
+            // 
+            this.Ptgpib.AutoSize = true;
+            this.Ptgpib.Location = new System.Drawing.Point(8, 57);
+            this.Ptgpib.Name = "Ptgpib";
+            this.Ptgpib.Size = new System.Drawing.Size(86, 20);
+            this.Ptgpib.TabIndex = 3;
+            this.Ptgpib.TabStop = true;
+            this.Ptgpib.Text = "GPIB Port";
+            this.Ptgpib.UseVisualStyleBackColor = true;
+            // 
+            // Ptrs232
+            // 
+            this.Ptrs232.AutoSize = true;
+            this.Ptrs232.Location = new System.Drawing.Point(8, 31);
+            this.Ptrs232.Name = "Ptrs232";
+            this.Ptrs232.Size = new System.Drawing.Size(97, 20);
+            this.Ptrs232.TabIndex = 2;
+            this.Ptrs232.TabStop = true;
+            this.Ptrs232.Text = "Rs-232 Port";
+            this.Ptrs232.UseVisualStyleBackColor = true;
+            // 
+            // Boxloopmotor
+            // 
+            this.Boxloopmotor.Controls.Add(this.txt_IPloop);
+            this.Boxloopmotor.Controls.Add(this.optAxis_y);
+            this.Boxloopmotor.Controls.Add(this.optAxis_x);
+            this.Boxloopmotor.Controls.Add(this.Btnenter);
+            this.Boxloopmotor.Location = new System.Drawing.Point(15, 117);
+            this.Boxloopmotor.Name = "Boxloopmotor";
+            this.Boxloopmotor.Size = new System.Drawing.Size(333, 80);
+            this.Boxloopmotor.TabIndex = 37;
+            this.Boxloopmotor.TabStop = false;
+            this.Boxloopmotor.Text = "Set loop Stepmotor";
+            // 
+            // Boxposition
+            // 
+            this.Boxposition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Boxposition.Controls.Add(this.Btn_stepY500);
+            this.Boxposition.Controls.Add(this.Btn_stepY10);
+            this.Boxposition.Controls.Add(this.Btn_stepY1000);
+            this.Boxposition.Controls.Add(this.Btn_movestep1000);
+            this.Boxposition.Controls.Add(this.Btn_movestep500);
+            this.Boxposition.Controls.Add(this.BtnMovestep);
+            this.Boxposition.ForeColor = System.Drawing.Color.DarkBlue;
+            this.Boxposition.Location = new System.Drawing.Point(15, 204);
+            this.Boxposition.Name = "Boxposition";
+            this.Boxposition.Size = new System.Drawing.Size(230, 124);
+            this.Boxposition.TabIndex = 38;
+            this.Boxposition.TabStop = false;
+            this.Boxposition.Text = "MStep position";
             // 
             // frmMain
             // 
@@ -387,39 +392,30 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1037, 560);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.Btn_stepZ10);
+            this.Controls.Add(this.Boxposition);
+            this.Controls.Add(this.Boxloopmotor);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.BtnError);
+            this.Controls.Add(this.Boxread);
             this.Controls.Add(this.graphBox1);
-            this.Controls.Add(this.txt_IPloop);
-            this.Controls.Add(this.lbmotor);
-            this.Controls.Add(this.Btnenter);
-            this.Controls.Add(this.optAxis_x);
-            this.Controls.Add(this.optAxis_y);
-            this.Controls.Add(this.Btnposition);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Btn_SetAC);
-            this.Controls.Add(this.txtread);
-            this.Controls.Add(this.BtnError);
             this.Controls.Add(this.Btn_SetDC);
             this.Controls.Add(this.Btn_Cleardmm);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Btn_ResetXY);
-            this.Controls.Add(this.Btn_movestep1000);
-            this.Controls.Add(this.Btn_movestep500);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.Btn_stepY1000);
-            this.Controls.Add(this.Btn_stepY500);
-            this.Controls.Add(this.Btn_stepY10);
-            this.Controls.Add(this.BtnMovestep);
-            this.Controls.Add(this.BtnDiconnect);
-            this.Controls.Add(this.Connect);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmMain";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Physics101";
+            this.Boxread.ResumeLayout(false);
+            this.Boxread.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.Boxloopmotor.ResumeLayout(false);
+            this.Boxloopmotor.PerformLayout();
+            this.Boxposition.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -434,8 +430,6 @@
      
         private System.Windows.Forms.Button Btn_stepY500;
         private System.Windows.Forms.Button Btn_stepY1000;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
 
         private System.Windows.Forms.Button Btn_movestep500;
         private System.Windows.Forms.Button Btn_movestep1000;
@@ -444,22 +438,20 @@
         private System.Windows.Forms.Button Btn_Cleardmm;
         private System.Windows.Forms.Button Btn_SetDC;
         private System.Windows.Forms.Button BtnError;
-        private System.Windows.Forms.TextBox txtread;
         private System.Windows.Forms.Button Btn_SetAC;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button Btnposition;
-        private System.Windows.Forms.RadioButton optAxis_y;
         private System.Windows.Forms.RadioButton optAxis_x;
         private System.Windows.Forms.Button Btnenter;
-        private System.Windows.Forms.Label lbmotor;
         private System.Windows.Forms.TextBox txt_IPloop;
-
         private System.Windows.Forms.GroupBox graphBox1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button Btn_stepZ10;
-
+        private System.Windows.Forms.RadioButton optAxis_y;
+        private System.Windows.Forms.TextBox txtread;
+        private System.Windows.Forms.GroupBox Boxread;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton Ptgpib;
+        private System.Windows.Forms.RadioButton Ptrs232;
+        private System.Windows.Forms.GroupBox Boxloopmotor;
+        private System.Windows.Forms.GroupBox Boxposition;
     }
 }
 

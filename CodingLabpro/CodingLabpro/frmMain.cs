@@ -25,8 +25,9 @@ namespace CodingLabpro
     {
         Ivi.Visa.Interop.FormattedIO488 MyDMM;
         Ivi.Visa.Interop.FormattedIO488 MyMMC;
-        string addr = $"GPIB2::26::INSTR";
-        string MMCaddr = $"GPIB2::7::INSTR";
+        string addr = $"GPIB0::26::INSTR";
+        string MMCaddr = $"GPIB0::7::INSTR";
+        //string MMCaddr1 = $"GPIB0::2::INSTR";
 
 
         public frmMain()
@@ -35,11 +36,13 @@ namespace CodingLabpro
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
             MyDMM = new Ivi.Visa.Interop.FormattedIO488();
             MyMMC = new Ivi.Visa.Interop.FormattedIO488();
+            
 
             Ivi.Visa.Interop.ResourceManager mgr1;
             mgr1 = new Ivi.Visa.Interop.ResourceManager();
             Ivi.Visa.Interop.ResourceManager mgr2;
             mgr2 = new Ivi.Visa.Interop.ResourceManager();
+            
 
             //txtMMC2Address.Text = Properties.Settings.Default.MMC2Address;
         }
@@ -61,47 +64,74 @@ namespace CodingLabpro
             mgr2 = new Ivi.Visa.Interop.ResourceManager();
 
 
-            try
-            {
-                
-                //Connect driver DMM
-                string addr = "GPIB2::26::INSTR";
-                MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 2000, null);
-                MyDMM.IO.Timeout = 2000;
-                string command = "*IDN?";
-                MyDMM.WriteString(command);
-                string Aread = MyDMM.ReadString();
-                MyDMM.WriteString(Aread);
-                txtread.AppendText(Aread +Environment.NewLine);
-                MyDMM.WriteString("*CLS");
-               
-
-                //Connect driver MMC
-                string MMCaddr = "GPIB2::7::INSTR";
-                MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
-                string MSG = "H:W";
-                MyMMC.WriteString(MSG);
-
-                //Show is connect DMM 
-                MessageBox.Show("Device is connect", "Connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Connect.Text = "Remote";
-                Connect.BackColor = Color.LightGreen;
-                string rectify1 = "Remote Agilent HP34401A and MMC Step motor!";
-                DateTime r = DateTime.Now; // notification Time Cilck Button here!!
-                txtread.AppendText(r.ToString("r") + " <Notification!> " + rectify1 + Environment.NewLine);
-
-            }
-            catch
+            if (!Ptgpib.Checked && !Ptrs232.Checked)
             {
                 Connect.BackColor = Color.Red;
                 Connect.Text = "Unconnect";
                 Connect.ForeColor = Color.White;
                 MessageBox.Show("Device session is not connect", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                string incorrectness1 = "Cannot Find driver Agilent Muitimeter and MMC Step motor!";
+                
                 DateTime r = DateTime.Now; // notification Time Cilck Button here!!
-                txtread.AppendText(r.ToString("r") + " <Notification!> " + incorrectness1 + Environment.NewLine);
+                txtread.AppendText(r.ToString("r") + " <Notification!> " + "กรุณาเลือกพอร์ตเชื่อมต่อก่อนดำเนินการ" + Environment.NewLine);
             }
+            else
+            {
+                if (Ptgpib.Checked)
+                {
+                    try
+                    {
+                        //Connect driver DMM
+                        string addr = "GPIB0::26::INSTR";
+                        MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 2000, null);
+                        MyDMM.IO.Timeout = 2000;
+                        string command = "*IDN?";
+                        MyDMM.WriteString(command);
+                        string Aread = MyDMM.ReadString();
+                        MyDMM.WriteString(Aread);
+                        txtread.AppendText(Aread + Environment.NewLine);
+                        MyDMM.WriteString("*CLS");
 
+
+                        //Connect driver MMC
+                        string MMCaddr = "GPIB0::7::INSTR";
+                        MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
+                        string MSG = "H:W";
+                        MyMMC.WriteString(MSG);
+
+
+                        //Show is connect DMM 
+                        MessageBox.Show("Device is connect", "Connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Connect.Text = "Remote";
+                        Connect.BackColor = Color.LightGreen;
+                        string rectify1 = "Remote Agilent HP34401A and MMC Step motor! By Port GPIB";
+                        DateTime r = DateTime.Now; // notification Time Cilck Button here!!
+                        txtread.AppendText(r.ToString("r") + " <Notification!> " + rectify1 + Environment.NewLine);
+
+                    }
+                    catch
+                    {
+                        Connect.BackColor = Color.Red;
+                        Connect.Text = "Unconnect";
+                        Connect.ForeColor = Color.White;
+                        MessageBox.Show("Device session is not connect", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        string incorrectness1 = "Cannot Find driver Agilent Muitimeter and MMC Step motor!";
+                        DateTime r = DateTime.Now; // notification Time Cilck Button here!!
+                        txtread.AppendText(r.ToString("r") + " <Notification!> " + incorrectness1 + Environment.NewLine);
+                    }
+                }
+
+                if (Ptrs232.Checked)
+                {
+                    MessageBox.Show("Device is connect", "Connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Connect.Text = "Remote";
+                    Connect.BackColor = Color.LightGreen;
+                    string rectify3 = "Remote Agilent HP34401A and MMC Step motor! By Port RS-232";
+                    DateTime r = DateTime.Now; // notification Time Cilck Button here!!
+                    txtread.AppendText(r.ToString("r") + " <Notification!> " + rectify3 + Environment.NewLine);
+
+                }
+                
+            }
         }
 
         private void BtnMovestep_Click(object sender, EventArgs e)
@@ -182,7 +212,7 @@ namespace CodingLabpro
             try
             {
                 MyDMM.IO.Close();
-                MyMMC.IO.Close();
+                //MyMMC.IO.Close();
                 Task.Delay(3000).Wait();
                 MessageBox.Show("Device session is diconnect", "Diconnect", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 BtnDiconnect.BackColor = Color.LightBlue;
@@ -267,7 +297,6 @@ namespace CodingLabpro
         private bool isRunning = false;
         private int Clickcount = 0;
 
-        public object ioDmm { get; private set; }
 
         private void Btn_SetDC_Click(object sender, EventArgs e)
         {
@@ -332,21 +361,7 @@ namespace CodingLabpro
             }  
         }
 
-        private void Btnposition_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                
-
-
-
-            }
-            catch (Exception ex)
-            {
-                // Handle any errors that occur during communication
-                MessageBox.Show($"Error reading position: {ex.Message}");
-            }
-        }
+        
 
         
 
@@ -416,11 +431,8 @@ namespace CodingLabpro
 
         }
 
-        private void Btn_stepZ10_Click(object sender, EventArgs e)
-        {
-            MyMMC.WriteString("M:ZP100");
-            MyMMC.WriteString("G:");
-        }
+       
+       
 
     } 
 
