@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Connect = new System.Windows.Forms.Button();
             this.BtnDiconnect = new System.Windows.Forms.Button();
             this.BtnMovestep = new System.Windows.Forms.Button();
@@ -47,6 +51,7 @@
             this.Btnenter = new System.Windows.Forms.Button();
             this.txt_IPloop = new System.Windows.Forms.TextBox();
             this.graphBox1 = new System.Windows.Forms.GroupBox();
+            this.chartDC = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.optAxis_y = new System.Windows.Forms.RadioButton();
             this.txtread = new System.Windows.Forms.TextBox();
             this.Boxread = new System.Windows.Forms.GroupBox();
@@ -55,6 +60,9 @@
             this.Ptrs232 = new System.Windows.Forms.RadioButton();
             this.Boxloopmotor = new System.Windows.Forms.GroupBox();
             this.Boxposition = new System.Windows.Forms.GroupBox();
+            this.serialPort = new System.IO.Ports.SerialPort(this.components);
+            this.graphBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartDC)).BeginInit();
             this.Boxread.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.Boxloopmotor.SuspendLayout();
@@ -267,19 +275,37 @@
             this.graphBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.graphBox1.BackColor = System.Drawing.SystemColors.Control;
             this.graphBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.graphBox1.Controls.Add(this.chartDC);
             this.graphBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.graphBox1.ForeColor = System.Drawing.Color.Coral;
             this.graphBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.graphBox1.Location = new System.Drawing.Point(463, 57);
+            this.graphBox1.Location = new System.Drawing.Point(463, 49);
             this.graphBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.graphBox1.MaximumSize = new System.Drawing.Size(1600, 630);
             this.graphBox1.MinimumSize = new System.Drawing.Size(565, 0);
             this.graphBox1.Name = "graphBox1";
             this.graphBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.graphBox1.Size = new System.Drawing.Size(565, 271);
+            this.graphBox1.Size = new System.Drawing.Size(565, 279);
             this.graphBox1.TabIndex = 29;
             this.graphBox1.TabStop = false;
             this.graphBox1.Text = "graph Data DC";
+            // 
+            // chartDC
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.chartDC.ChartAreas.Add(chartArea3);
+            this.chartDC.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend3.Name = "Legend1";
+            this.chartDC.Legends.Add(legend3);
+            this.chartDC.Location = new System.Drawing.Point(3, 17);
+            this.chartDC.Name = "chartDC";
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartDC.Series.Add(series3);
+            this.chartDC.Size = new System.Drawing.Size(559, 260);
+            this.chartDC.TabIndex = 0;
+            this.chartDC.Text = "chart1";
             // 
             // optAxis_y
             // 
@@ -358,10 +384,10 @@
             // 
             // Boxloopmotor
             // 
+            this.Boxloopmotor.Controls.Add(this.Btnenter);
             this.Boxloopmotor.Controls.Add(this.txt_IPloop);
             this.Boxloopmotor.Controls.Add(this.optAxis_y);
             this.Boxloopmotor.Controls.Add(this.optAxis_x);
-            this.Boxloopmotor.Controls.Add(this.Btnenter);
             this.Boxloopmotor.Location = new System.Drawing.Point(15, 117);
             this.Boxloopmotor.Name = "Boxloopmotor";
             this.Boxloopmotor.Size = new System.Drawing.Size(333, 80);
@@ -386,6 +412,11 @@
             this.Boxposition.TabStop = false;
             this.Boxposition.Text = "MStep position";
             // 
+            // serialPort
+            // 
+            this.serialPort.BaudRate = 4800;
+            this.serialPort.PortName = "COM5";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -409,6 +440,8 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Physics101";
+            this.graphBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartDC)).EndInit();
             this.Boxread.ResumeLayout(false);
             this.Boxread.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -452,6 +485,8 @@
         private System.Windows.Forms.RadioButton Ptrs232;
         private System.Windows.Forms.GroupBox Boxloopmotor;
         private System.Windows.Forms.GroupBox Boxposition;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartDC;
+        private System.IO.Ports.SerialPort serialPort;
     }
 }
 

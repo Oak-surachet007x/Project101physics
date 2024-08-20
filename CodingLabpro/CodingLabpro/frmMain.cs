@@ -13,8 +13,10 @@ using Ivi.Visa.FormattedIO;
 using System.Reflection;
 using static System.Net.Mime.MediaTypeNames;
 using System.Runtime.InteropServices.ComTypes;
-using System.Diagnostics.Eventing.Reader;
 using System.Threading;
+using Ivi.Visa;
+using System.IO;
+using System.IO.Ports;
 
 
 
@@ -27,7 +29,6 @@ namespace CodingLabpro
         Ivi.Visa.Interop.FormattedIO488 MyMMC;
         string addr = $"GPIB0::26::INSTR";
         string MMCaddr = $"GPIB0::7::INSTR";
-        //string MMCaddr1 = $"GPIB0::2::INSTR";
 
 
         public frmMain()
@@ -37,21 +38,24 @@ namespace CodingLabpro
             MyDMM = new Ivi.Visa.Interop.FormattedIO488();
             MyMMC = new Ivi.Visa.Interop.FormattedIO488();
             
-
+            //Port GPIB
             Ivi.Visa.Interop.ResourceManager mgr1;
             mgr1 = new Ivi.Visa.Interop.ResourceManager();
             Ivi.Visa.Interop.ResourceManager mgr2;
             mgr2 = new Ivi.Visa.Interop.ResourceManager();
-            
 
-            //txtMMC2Address.Text = Properties.Settings.Default.MMC2Address;
+            // Port RS-232
+            SerialPort serialPort = new SerialPort("COM5", 4800, Parity.None, 8, StopBits.One);
+
         }
 
-       
+
         public class COMException : System.Runtime.InteropServices.ExternalException
         {
 
         }
+
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -66,10 +70,9 @@ namespace CodingLabpro
 
             if (!Ptgpib.Checked && !Ptrs232.Checked)
             {
-                Connect.BackColor = Color.Red;
-                Connect.Text = "Unconnect";
+                Connect.BackColor = Color.Orange;
+                Connect.Text = "Warning";
                 Connect.ForeColor = Color.White;
-                MessageBox.Show("Device session is not connect", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 
                 DateTime r = DateTime.Now; // notification Time Cilck Button here!!
                 txtread.AppendText(r.ToString("r") + " <Notification!> " + "กรุณาเลือกพอร์ตเชื่อมต่อก่อนดำเนินการ" + Environment.NewLine);
@@ -120,14 +123,55 @@ namespace CodingLabpro
                     }
                 }
 
+               
                 if (Ptrs232.Checked)
                 {
-                    MessageBox.Show("Device is connect", "Connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Connect.Text = "Remote";
-                    Connect.BackColor = Color.LightGreen;
-                    string rectify3 = "Remote Agilent HP34401A and MMC Step motor! By Port RS-232";
-                    DateTime r = DateTime.Now; // notification Time Cilck Button here!!
-                    txtread.AppendText(r.ToString("r") + " <Notification!> " + rectify3 + Environment.NewLine);
+                    try
+                    {
+                        //section Rs232
+                        //string VISA_ADDRESS = "ASRL5::INSTR";
+
+                        //MyDMM.IO = (mgr1.Open(VISA_ADDRESS) as IMessage);
+                        //MyDMM.IO.Timeout = 2000;
+
+                        //MyDMM.WriteString("SYSTem:REMote");
+
+                        //MyDMM.WriteString("Read?");
+                        //string Bread = MyDMM.ReadString();
+                        ////txtread.AppendText(Bread + Environment.NewLine);
+                        
+
+                        //section MMC-2 axis z
+                        try
+                        {
+
+                            // เปิดพอร์ต
+                            serialPort.Open();
+
+                            // ส่งข้อมูลผ่านพอร์ต
+                            serialPort.WriteLine("P:4P0"); // กำหนดตัวกำหนด CR+LF
+                            serialPort.WriteLine("P:5P2"); // ตั้งค่า baud rate เป็น 4800
+                            serialPort.WriteLine("P:7P2"); // ตั้งค่า stop bits เป็น 2 บิต
+                            serialPort.WriteLine("H:W");
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Error: " + ex.Message);
+                        }
+
+                        //Show Rs-232 is connect completed
+                        MessageBox.Show("Device is connect", "Connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Connect.Text = "Remote";
+                        Connect.BackColor = Color.LightGreen;
+                        string rectify3 = "Remote Agilent HP34401A and MMC Step motor! By Port RS-232";
+                        DateTime r = DateTime.Now; // notification Time Cilck Button here
+                        txtread.AppendText(r.ToString("r") + " <Notification!> " + rectify3 + Environment.NewLine);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
 
                 }
                 
@@ -153,17 +197,38 @@ namespace CodingLabpro
 
         private void Btn_movestep1000_Click(object sender, EventArgs e)
         {
-            string MSG3 = "M:XP1000";
-            MyMMC.WriteString(MSG3);
-            string MStep = "G:";
-            MyMMC.WriteString(MStep);  
+            if (Ptrs232.Checked)
+            {
+             
+                serialPort.WriteLine("M:XP1000");
+                serialPort.WriteLine("G:");
+                txtread.AppendText("--> Motor step go 1000 step RS-232" + Environment.NewLine);
+            }
+
+            if (Ptgpib.Checked)
+            {
+                string MSG3 = "M:XP1000";
+                MyMMC.WriteString(MSG3);
+                string MStep = "G:";
+                MyMMC.WriteString(MStep);
+                txtread.AppendText("--> Motor step go 1000 step GPIB" + Environment.NewLine);
+            }
+            
         }
 
         private void Btn_ResetXY_Click(object sender, EventArgs e)
         {
-            string RSG = "H:W";
-            MyMMC.WriteString(RSG);
-  
+            if (Ptrs232.Checked)
+            {
+                serialPort.WriteLine("H:W");
+            }
+
+            if (Ptgpib.Checked)
+            {
+                string RSG = "H:W";
+                MyMMC.WriteString(RSG);
+            }
+            
         }
         private void Btn_stepY10_Click(object sender, EventArgs e)
         {
@@ -211,8 +276,17 @@ namespace CodingLabpro
         {
             try
             {
-                MyDMM.IO.Close();
-                //MyMMC.IO.Close();
+                if (Ptrs232.Checked)
+                {
+                    serialPort.Close(); 
+                }
+
+                if (Ptgpib.Checked)
+                {
+                    MyDMM.IO.Close();
+                    MyMMC.IO.Close();
+                }
+
                 Task.Delay(3000).Wait();
                 MessageBox.Show("Device session is diconnect", "Diconnect", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 BtnDiconnect.BackColor = Color.LightBlue;
@@ -431,9 +505,7 @@ namespace CodingLabpro
 
         }
 
-       
-       
-
+        
     } 
 
 }
