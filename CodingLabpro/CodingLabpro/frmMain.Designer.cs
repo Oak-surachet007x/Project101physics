@@ -61,6 +61,8 @@
             this.Boxloopmotor = new System.Windows.Forms.GroupBox();
             this.Boxposition = new System.Windows.Forms.GroupBox();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
+            this.BtnExcel = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.graphBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartDC)).BeginInit();
             this.Boxread.SuspendLayout();
@@ -417,12 +419,27 @@
             this.serialPort.BaudRate = 4800;
             this.serialPort.PortName = "COM5";
             // 
+            // BtnExcel
+            // 
+            this.BtnExcel.Location = new System.Drawing.Point(251, 210);
+            this.BtnExcel.Name = "BtnExcel";
+            this.BtnExcel.Size = new System.Drawing.Size(97, 61);
+            this.BtnExcel.TabIndex = 39;
+            this.BtnExcel.Text = "Export Excel";
+            this.BtnExcel.UseVisualStyleBackColor = true;
+            this.BtnExcel.Click += new System.EventHandler(this.BtnExcel_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1037, 560);
+            this.Controls.Add(this.BtnExcel);
             this.Controls.Add(this.Boxposition);
             this.Controls.Add(this.Boxloopmotor);
             this.Controls.Add(this.groupBox2);
@@ -435,11 +452,13 @@
             this.Controls.Add(this.Btn_Cleardmm);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Btn_ResetXY);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmMain";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Physics101";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.graphBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chartDC)).EndInit();
             this.Boxread.ResumeLayout(false);
@@ -487,6 +506,8 @@
         private System.Windows.Forms.GroupBox Boxposition;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartDC;
         private System.IO.Ports.SerialPort serialPort;
+        private System.Windows.Forms.Button BtnExcel;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
