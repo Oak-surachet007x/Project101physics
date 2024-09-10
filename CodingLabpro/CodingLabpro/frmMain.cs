@@ -388,7 +388,7 @@ namespace CodingLabpro
         private bool isRunning = false;
         private int Clickcount = 0;
         private DateTime startTime;
-
+        private string DataDC;
 
         private void Btn_SetDC_Click(object sender, EventArgs e)
         {
@@ -418,12 +418,12 @@ namespace CodingLabpro
                             {
                                 while (isRunning)
                                 {
-                                        //MyDMM.WriteString("MEAS:VOLT:DC? ");
-                                        //string dataDC = MyDMM.ReadString();
-                                        //Invoke(new Action(() => txtread.AppendText(dataDC + Environment.NewLine)));
-                                        //Task.Delay(500).Wait();
+                                        MyDMM.WriteString("MEAS:VOLT:DC? ");
+                                        string dataDC = MyDMM.ReadString();
+                                        Invoke(new Action(() => txtread.AppendText(dataDC + Environment.NewLine)));
+                                        Task.Delay(500).Wait();
+                                    }
                                 }
-                            }
                             catch (Exception ex)
                             {
                                 MessageBox.Show(ex.Message);
@@ -530,7 +530,7 @@ namespace CodingLabpro
 
         //int cnt = 0;
         private TimeSpan span;
-        private int saveCount = 0;
+        //private int saveCount = 0;
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -541,11 +541,11 @@ namespace CodingLabpro
             DataRow rowi = dt.NewRow();
 
             //give data in Table 
-            rowi["DCvolt"] = saveCount; //ตัวอย่างการบันทึกข้อมูล
+            rowi["DCvolt"] = DataDC; //ตัวอย่างการบันทึกข้อมูล
             rowi["Time"] = span.ToString(@"mm\:ss");
             dt.Rows.Add(rowi);
 
-            saveCount++; //เพิ่มตัวนับทุกครั้งที่บันทึกข้อมูล
+            //saveCount++; //เพิ่มตัวนับทุกครั้งที่บันทึกข้อมูล
 
         }
 
