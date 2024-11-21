@@ -23,9 +23,9 @@ namespace CodingLabpro
     {
         //กำหนด
         private int borderRadius = 15;
-        private int borderSize = 2;
-        private Color borderColor = Color.FromArgb(153, 56, 255);
-        private FormAnimator animator;
+        private int borderSize = 3;
+        private Color borderColor = Color.FromArgb(81, 34, 100);
+     
 
         public frmarduino()
         {
@@ -33,10 +33,9 @@ namespace CodingLabpro
             this.FormBorderStyle = FormBorderStyle.None;
             this.Padding = new Padding(borderSize);
             this.panelTitleBar.BackColor =borderColor;
-            this.BackColor = borderColor;
+            //this.BackColor = borderColor;
 
-            //effect
-            animator = new FormAnimator(this);
+    
 
         }
 
@@ -210,5 +209,12 @@ namespace CodingLabpro
         {
             
         }
+
+        private void BtnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+      
     }
 }

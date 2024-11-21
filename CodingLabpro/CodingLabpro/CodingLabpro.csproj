@@ -130,6 +130,7 @@
     <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
     </Reference>
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Text.Encoding.CodePages, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encoding.CodePages.5.0.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
     </Reference>
@@ -144,6 +145,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandDevice\FindDevices.cs" />
     <Compile Include="frmarduino.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,10 +158,27 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMain01.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain01.Designer.cs">
+      <DependentUpon>frmMain01.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ColorfullButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Models\FormAnimator.cs" />
+    <Compile Include="Models\GradientPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Models\GradientPanel.Designer.cs">
+      <DependentUpon>GradientPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TextboxTS.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Models\TextboxTS.Designer.cs">
+      <DependentUpon>TextboxTS.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmarduino.resx">
@@ -167,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain01.resx">
+      <DependentUpon>frmMain01.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
