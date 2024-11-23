@@ -48,6 +48,7 @@
             this.labelTop = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.MainStatus = new System.Windows.Forms.StatusStrip();
             this.tableLayoutPanel1.SuspendLayout();
             this.GBconnect.SuspendLayout();
             this.buttonLayoutPanel2.SuspendLayout();
@@ -65,7 +66,7 @@
             this.tableLayoutPanel1.Controls.Add(this.GBconnect, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.GBoutput, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 520);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 498);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -260,6 +261,14 @@
             this.labelName.TabIndex = 3;
             this.labelName.Text = "Aglient 34401A And MMC-2 Axis Controller";
             // 
+            // MainStatus
+            // 
+            this.MainStatus.Location = new System.Drawing.Point(0, 739);
+            this.MainStatus.Name = "MainStatus";
+            this.MainStatus.Size = new System.Drawing.Size(1484, 22);
+            this.MainStatus.TabIndex = 4;
+            this.MainStatus.Text = "statusStrip1";
+            // 
             // frmMain01
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -269,6 +278,7 @@
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.labelTop);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.MainStatus);
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmMain01";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -306,5 +316,6 @@
         private System.Windows.Forms.TableLayoutPanel buttonLayoutPanel2;
         private System.Windows.Forms.TextBox textread;
         private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.StatusStrip MainStatus;
     }
 }
