@@ -43,7 +43,8 @@ namespace CodingLabpro.CommandDevice
 
                 foreach (string device1 in Rsdevices)
                 {
-                    OnDeviceFound1?.Invoke(GlobalResourceManager.Parse(device1).AliasIfExists);
+                    //OnDeviceFound1?.Invoke(GlobalResourceManager.Parse(device1).AliasIfExists);
+                    OnDeviceFound1?.Invoke(device1);
                 }
             }
             catch (VisaException ex)

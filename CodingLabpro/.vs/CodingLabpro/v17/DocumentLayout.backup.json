@@ -3,44 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|c:\\users\\surac\\desktop\\phy101\\codinglabpro\\codinglabpro\\commanddevice\\finddevices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\commanddevice\\finddevices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmarduino.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmarduino.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain01.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain01.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|c:\\users\\surac\\desktop\\phy101\\codinglabpro\\codinglabpro\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmarduino.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmarduino.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain01.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain01.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\models\\colorfullbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\models\\colorfullbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\commanddevice\\finddevices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\commanddevice\\finddevices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmarduino.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmarduino.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\models\\gradientpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\models\\gradientpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\models\\colorfullbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\models\\colorfullbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -49,18 +53,18 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 358,
-          "SelectedChildIndex": 11,
+          "DockedWidth": 458,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "frmMain01.Designer.cs",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain01.Designer.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\frmMain01.Designer.cs",
               "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain01.Designer.cs",
               "RelativeToolTip": "CodingLabpro\\frmMain01.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-20T15:35:33.158Z",
               "IsPinned": true,
@@ -69,63 +73,33 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "frmMain.cs",
+              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain.cs",
+              "RelativeDocumentMoniker": "CodingLabpro\\frmMain.cs",
+              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain.cs",
+              "RelativeToolTip": "CodingLabpro\\frmMain.cs",
+              "ViewState": "AgIAAA8BAAAAAAAAAAAzwMQAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T05:35:33.547Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "frmMain01.cs",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain01.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\frmMain01.cs",
               "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain01.cs",
               "RelativeToolTip": "CodingLabpro\\frmMain01.cs",
-              "ViewState": "AgIAAHoAAAAAAAAAAADwv6UAAABIAAAAAAAAAA==",
+              "ViewState": "AgIAACMAAAAAAAAAAAAkwIkAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-20T13:48:54.27Z",
-              "IsPinned": true,
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "frmarduino.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmarduino.cs",
-              "RelativeDocumentMoniker": "CodingLabpro\\frmarduino.cs",
-              "ToolTip": "C:\\Users\\Surac\\Desktop\\Physics101\\CodingLabpro\\CodingLabpro\\frmarduino.cs [Design]",
-              "RelativeToolTip": "..\\..\\Physics101\\CodingLabpro\\CodingLabpro\\frmarduino.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-21T11:58:09.451Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "frmMain01.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain01.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\frmMain01.cs",
@@ -137,7 +111,54 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "FindDevices.cs",
+              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\CommandDevice\\FindDevices.cs",
+              "RelativeDocumentMoniker": "CodingLabpro\\CommandDevice\\FindDevices.cs",
+              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\CommandDevice\\FindDevices.cs",
+              "RelativeToolTip": "CodingLabpro\\CommandDevice\\FindDevices.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAcwC4AAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-12T10:22:14.452Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "frmMain.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain.cs",
+              "RelativeDocumentMoniker": "CodingLabpro\\frmMain.cs",
+              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain.cs [Design]",
+              "RelativeToolTip": "CodingLabpro\\frmMain.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-25T09:31:46.956Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "frmarduino.cs",
+              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmarduino.cs",
+              "RelativeDocumentMoniker": "CodingLabpro\\frmarduino.cs",
+              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmarduino.cs",
+              "RelativeToolTip": "CodingLabpro\\frmarduino.cs",
+              "ViewState": "AgIAAIwAAAAAAAAAAADwv08AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-25T08:30:10.023Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "GradientPanel.cs",
+              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\Models\\GradientPanel.cs",
+              "RelativeDocumentMoniker": "CodingLabpro\\Models\\GradientPanel.cs",
+              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\Models\\GradientPanel.cs",
+              "RelativeToolTip": "CodingLabpro\\Models\\GradientPanel.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAADwvy8AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-23T14:51:10.403Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\Program.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\Program.cs",
@@ -149,7 +170,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "ColorfullButton.cs",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\Models\\ColorfullButton.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\Models\\ColorfullButton.cs",
@@ -161,60 +182,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FindDevices.cs",
-              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\CommandDevice\\FindDevices.cs",
-              "RelativeDocumentMoniker": "CodingLabpro\\CommandDevice\\FindDevices.cs",
-              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\CommandDevice\\FindDevices.cs",
-              "RelativeToolTip": "CodingLabpro\\CommandDevice\\FindDevices.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T11:18:22.197Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 7,
               "Title": "frmMain.Designer.cs",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain.Designer.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\frmMain.Designer.cs",
               "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain.Designer.cs",
               "RelativeToolTip": "CodingLabpro\\frmMain.Designer.cs",
-              "ViewState": "AgIAAMIBAAAAAAAAAAAYwBYAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-07T09:29:01.45Z"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 42,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "frmMain.cs",
-              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain.cs",
-              "RelativeDocumentMoniker": "CodingLabpro\\frmMain.cs",
-              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain.cs",
-              "RelativeToolTip": "CodingLabpro\\frmMain.cs",
-              "ViewState": "AgIAAF4AAAAAAAAAAAAYwHoAAABzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-07T09:26:07.514Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "frmarduino.cs",
-              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmarduino.cs",
-              "RelativeDocumentMoniker": "CodingLabpro\\frmarduino.cs",
-              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmarduino.cs",
-              "RelativeToolTip": "CodingLabpro\\frmarduino.cs",
-              "ViewState": "AgIAAFAAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-21T11:58:44.886Z"
             }
           ]
         }

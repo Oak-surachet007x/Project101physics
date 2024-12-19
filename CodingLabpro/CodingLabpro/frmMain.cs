@@ -96,7 +96,7 @@ namespace CodingLabpro
                     try
                     {
                         //Connect driver DMM
-                        string addr = "GPIB0::26::INSTR";
+                        string addr = "GPIB1::26::INSTR";
                         MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 2000, null);
                         MyDMM.IO.Timeout = 2000;
                         string command = "*IDN?";
@@ -108,7 +108,7 @@ namespace CodingLabpro
 
 
                         //Connect driver MMC
-                        string MMCaddr = "GPIB0::7::INSTR";
+                        string MMCaddr = "GPIB1::7::INSTR";
                         MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
                         string MSG = "H:W";
                         MyMMC.WriteString(MSG);
@@ -156,13 +156,16 @@ namespace CodingLabpro
                         //section MMC-2 axis z
                         try
                         {
-                            serialPort.PortName = "COM5";
+                            serialPort.PortName = "COM7";
+                            serialPort.BaudRate = 4800;
                             // เปิดพอร์ต
-                            serialPort.Open();
-
+                            if (!serialPort.IsOpen)
+                            { 
+                                serialPort.Open();
+                            }
                             // ส่งข้อมูลผ่านพอร์ต
                             serialPort.WriteLine("P:4P0"); // กำหนดตัวกำหนด CR+LF
-                            serialPort.WriteLine("P:5P2"); // ตั้งค่า baud rate เป็น 4800
+                            serialPort.WriteLine("P:5P3"); // ตั้งค่า baud rate เป็น 4800
                             serialPort.WriteLine("P:7P2"); // ตั้งค่า stop bits เป็น 2 บิต
                             serialPort.WriteLine("H:W");
 

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Connect = new System.Windows.Forms.Button();
             this.BtnDiconnect = new System.Windows.Forms.Button();
             this.BtnMovestep = new System.Windows.Forms.Button();
@@ -226,7 +226,7 @@
             // 
             this.optAxis_x.AutoSize = true;
             this.optAxis_x.Location = new System.Drawing.Point(11, 21);
-            this.optAxis_x.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.optAxis_x.Margin = new System.Windows.Forms.Padding(2);
             this.optAxis_x.Name = "optAxis_x";
             this.optAxis_x.Size = new System.Drawing.Size(54, 17);
             this.optAxis_x.TabIndex = 25;
@@ -236,7 +236,7 @@
             // Btnenter
             // 
             this.Btnenter.Location = new System.Drawing.Point(177, 21);
-            this.Btnenter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Btnenter.Margin = new System.Windows.Forms.Padding(2);
             this.Btnenter.Name = "Btnenter";
             this.Btnenter.Size = new System.Drawing.Size(68, 37);
             this.Btnenter.TabIndex = 26;
@@ -248,7 +248,7 @@
             // 
             this.txt_IPloop.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.txt_IPloop.Location = new System.Drawing.Point(64, 21);
-            this.txt_IPloop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_IPloop.Margin = new System.Windows.Forms.Padding(2);
             this.txt_IPloop.MaxLength = 3;
             this.txt_IPloop.Multiline = true;
             this.txt_IPloop.Name = "txt_IPloop";
@@ -268,11 +268,11 @@
             this.graphBox1.ForeColor = System.Drawing.Color.Coral;
             this.graphBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.graphBox1.Location = new System.Drawing.Point(347, 40);
-            this.graphBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.graphBox1.Margin = new System.Windows.Forms.Padding(2);
             this.graphBox1.MaximumSize = new System.Drawing.Size(1200, 512);
             this.graphBox1.MinimumSize = new System.Drawing.Size(424, 0);
             this.graphBox1.Name = "graphBox1";
-            this.graphBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.graphBox1.Padding = new System.Windows.Forms.Padding(2);
             this.graphBox1.Size = new System.Drawing.Size(424, 227);
             this.graphBox1.TabIndex = 29;
             this.graphBox1.TabStop = false;
@@ -280,18 +280,18 @@
             // 
             // chartDC
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartDC.ChartAreas.Add(chartArea4);
+            chartArea2.Name = "ChartArea1";
+            this.chartDC.ChartAreas.Add(chartArea2);
             this.chartDC.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend4.Name = "Legend1";
-            this.chartDC.Legends.Add(legend4);
+            legend2.Name = "Legend1";
+            this.chartDC.Legends.Add(legend2);
             this.chartDC.Location = new System.Drawing.Point(2, 14);
-            this.chartDC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chartDC.Margin = new System.Windows.Forms.Padding(2);
             this.chartDC.Name = "chartDC";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chartDC.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartDC.Series.Add(series2);
             this.chartDC.Size = new System.Drawing.Size(420, 211);
             this.chartDC.TabIndex = 0;
             this.chartDC.Text = "chart1";
@@ -300,7 +300,7 @@
             // 
             this.optAxis_y.AutoSize = true;
             this.optAxis_y.Location = new System.Drawing.Point(11, 41);
-            this.optAxis_y.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.optAxis_y.Margin = new System.Windows.Forms.Padding(2);
             this.optAxis_y.Name = "optAxis_y";
             this.optAxis_y.Size = new System.Drawing.Size(54, 17);
             this.optAxis_y.TabIndex = 35;
@@ -329,9 +329,9 @@
             this.Boxread.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.Boxread.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.Boxread.Location = new System.Drawing.Point(0, 271);
-            this.Boxread.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Boxread.Margin = new System.Windows.Forms.Padding(2);
             this.Boxread.Name = "Boxread";
-            this.Boxread.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Boxread.Padding = new System.Windows.Forms.Padding(2);
             this.Boxread.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Boxread.Size = new System.Drawing.Size(778, 184);
             this.Boxread.TabIndex = 34;
@@ -345,9 +345,9 @@
             this.groupBox2.Controls.Add(this.Connect);
             this.groupBox2.Controls.Add(this.BtnDiconnect);
             this.groupBox2.Location = new System.Drawing.Point(11, 9);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(250, 81);
             this.groupBox2.TabIndex = 36;
             this.groupBox2.TabStop = false;
@@ -357,7 +357,7 @@
             // 
             this.Ptgpib.AutoSize = true;
             this.Ptgpib.Location = new System.Drawing.Point(6, 46);
-            this.Ptgpib.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Ptgpib.Margin = new System.Windows.Forms.Padding(2);
             this.Ptgpib.Name = "Ptgpib";
             this.Ptgpib.Size = new System.Drawing.Size(72, 17);
             this.Ptgpib.TabIndex = 3;
@@ -369,7 +369,7 @@
             // 
             this.Ptrs232.AutoSize = true;
             this.Ptrs232.Location = new System.Drawing.Point(6, 25);
-            this.Ptrs232.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Ptrs232.Margin = new System.Windows.Forms.Padding(2);
             this.Ptrs232.Name = "Ptrs232";
             this.Ptrs232.Size = new System.Drawing.Size(81, 17);
             this.Ptrs232.TabIndex = 2;
@@ -384,9 +384,9 @@
             this.Boxloopmotor.Controls.Add(this.optAxis_y);
             this.Boxloopmotor.Controls.Add(this.optAxis_x);
             this.Boxloopmotor.Location = new System.Drawing.Point(11, 95);
-            this.Boxloopmotor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Boxloopmotor.Margin = new System.Windows.Forms.Padding(2);
             this.Boxloopmotor.Name = "Boxloopmotor";
-            this.Boxloopmotor.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Boxloopmotor.Padding = new System.Windows.Forms.Padding(2);
             this.Boxloopmotor.Size = new System.Drawing.Size(250, 65);
             this.Boxloopmotor.TabIndex = 37;
             this.Boxloopmotor.TabStop = false;
@@ -403,9 +403,9 @@
             this.Boxposition.Controls.Add(this.BtnMovestep);
             this.Boxposition.ForeColor = System.Drawing.Color.DarkBlue;
             this.Boxposition.Location = new System.Drawing.Point(11, 166);
-            this.Boxposition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Boxposition.Margin = new System.Windows.Forms.Padding(2);
             this.Boxposition.Name = "Boxposition";
-            this.Boxposition.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Boxposition.Padding = new System.Windows.Forms.Padding(2);
             this.Boxposition.Size = new System.Drawing.Size(172, 101);
             this.Boxposition.TabIndex = 38;
             this.Boxposition.TabStop = false;
@@ -419,7 +419,7 @@
             // BtnExcel
             // 
             this.BtnExcel.Location = new System.Drawing.Point(188, 171);
-            this.BtnExcel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnExcel.Margin = new System.Windows.Forms.Padding(2);
             this.BtnExcel.Name = "BtnExcel";
             this.BtnExcel.Size = new System.Drawing.Size(73, 50);
             this.BtnExcel.TabIndex = 39;
