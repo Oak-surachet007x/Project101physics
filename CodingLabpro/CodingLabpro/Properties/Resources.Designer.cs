@@ -59,5 +59,15 @@ namespace CodingLabpro.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap photo_camera_16dp_FFFFFF_FILL1_wght100_GRAD0_opsz20 {
+            get {
+                object obj = ResourceManager.GetObject("photo_camera_16dp_FFFFFF_FILL1_wght100_GRAD0_opsz20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

@@ -179,6 +179,12 @@
     <Compile Include="Models\TextboxTS.Designer.cs">
       <DependentUpon>TextboxTS.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ucMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Models\ucMenu.Designer.cs">
+      <DependentUpon>ucMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmarduino.resx">
@@ -189,6 +195,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain01.resx">
       <DependentUpon>frmMain01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\ucMenu.resx">
+      <DependentUpon>ucMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -234,7 +243,9 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\photo_camera_16dp_FFFFFF_FILL1_wght100_GRAD0_opsz20.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

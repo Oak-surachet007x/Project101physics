@@ -35,7 +35,7 @@ namespace CodingLabpro
         private bool StatusPort;
         private int Clickcount = 0;
 
-
+      
         public frmMain01()
         {
             InitializeComponent();
@@ -49,7 +49,7 @@ namespace CodingLabpro
             BtnDiconnect.Enabled = false;
             BtnConnect.Enabled = true;
             timer1.Enabled = false;
-          
+
 
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
             MyDMM = new Ivi.Visa.Interop.FormattedIO488();
@@ -62,7 +62,6 @@ namespace CodingLabpro
             Ivi.Visa.Interop.ResourceManager mgr2;
             mgr2 = new Ivi.Visa.Interop.ResourceManager();
 
-           
 
 
             //Find Device
@@ -84,12 +83,15 @@ namespace CodingLabpro
 
         }
 
+        private void frmMain01_Load(object sender, EventArgs e)
+        {
+          
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             //timer1.Tick += new EventHandler();
             timer1.Interval = 1000;
         }
-
         public void Chartmeasure()
         {
             chart1.Series["Series1"].Points.AddXY(10, 2);
@@ -116,12 +118,10 @@ namespace CodingLabpro
 
 
         }
-
         public void ChartUpdateValue()
         {
            
         }
-
         private void BtnClear_Click(object sender, EventArgs e)
         {
             chart1.Series.Clear();
@@ -130,17 +130,17 @@ namespace CodingLabpro
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(e);
-
             // วาดพื้นหลังแบบ Gradient
             Rectangle rect = this.ClientRectangle;
             using (var brush = new LinearGradientBrush(rect,
                                                        Color.FromArgb(81, 34, 90), // สีบน
                                                        Color.FromArgb(43, 50, 87),  // สีล่าง
-                                                       LinearGradientMode.Vertical))
+                                                       LinearGradientMode.BackwardDiagonal))
             {
                 e.Graphics.FillRectangle(brush, rect);
             }
+
+            base.OnPaint(e);
         }
 
         public class COMException : System.Runtime.InteropServices.ExternalException
@@ -154,14 +154,14 @@ namespace CodingLabpro
             if (this.WindowState == FormWindowState.Normal)
             {
                 labelName.Font = new Font(labelName.Font.FontFamily, 12);
-                Cblistaddress.Size = new Size(280, 29);
-                Cblistaddress2.Size = new Size(280, 29);
-                Cblistaddress3.Size = new Size(280, 29);
+                Cblistaddress.Size = new Size(300, 29);
+                Cblistaddress2.Size = new Size(300, 29);
+                Cblistaddress3.Size = new Size(300, 29);
 
             }
             else if (this.WindowState == FormWindowState.Maximized)
             {
-                labelName.Font = new Font(labelName.Font.FontFamily, 18);
+             
                 Cblistaddress.Size = new Size(380, 29);
                 Cblistaddress2.Size = new Size(380, 29);
                 Cblistaddress3.Size = new Size(380, 29);
@@ -206,7 +206,6 @@ namespace CodingLabpro
          
         }
 
-    
         private void BtnConnect_Click(object sender, EventArgs e)
         {
             //CONNECT DMM
@@ -321,69 +320,9 @@ namespace CodingLabpro
             System.Windows.Forms.Cursor.Current = Cursors.Default;
         }
 
-        private void BtnStart_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Clickcount++;
-
-                switch (Clickcount % 2)
-                {
-                    case 1:
-                        if (Clickcount % 2 == 1 && !isRunning)
-                        {
-                            isRunning = true;
-                            BtnStart.BackColor = Color.LightGreen;
-                            BtnStart.ForeColor = Color.White;
-                            BtnStart.Text = "run Measurement";
-
-                            timer1.Enabled = true;                   
-                            timer1.Start();
-
      
 
-                        }
-                        break;
 
-                    case 0:
-                        if (Clickcount % 2 == 0 && isRunning)
-                        {
-                            isRunning = false;
-                            BtnStart.BackColor = Color.Pink;
-                            BtnStart.ForeColor = Color.White;
-                            BtnStart.Text = "Stop Measurement";
-                            //MyDMM.IO.Clear();
-
-                            timer1.Stop();
-                            timer1.Enabled = false;
-                        }
-                        break;
-
-                }
-            }
-            catch (Exception ex) 
-            { 
-                textread.AppendText(r.ToString("r") + "<ERROR>" + ex.Message + Environment.NewLine);
-            }
-        }
-
-        private void Btn500Step_Click(object sender, EventArgs e)
-        {
-            MyMMC.WriteString("M:XP500");
-            MyMMC.WriteString("G:");
-        }
-
-        private void Btnread_motor_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void Btn1000Step_Click(object sender, EventArgs e)
-        {
-            mySerialPort.WriteLine("M:XP1000");
-            mySerialPort.WriteLine("G:");
-
-            
-        }
+        
     }
 }
