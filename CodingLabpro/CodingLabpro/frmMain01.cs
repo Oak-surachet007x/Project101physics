@@ -20,6 +20,8 @@ using System.Runtime.InteropServices;
 using NPOI.SS.Formula.Eval;
 using CodingLabpro.CommandDevice;
 using System.Windows.Forms.DataVisualization.Charting;
+using CodingLabpro.Models;
+using System.Security.Cryptography.X509Certificates;
 
 
 namespace CodingLabpro
@@ -35,7 +37,34 @@ namespace CodingLabpro
         private bool StatusPort;
         private int Clickcount = 0;
 
-      
+
+        public class DwmApi
+        {
+            // ค่า DWM_WINDOW_ATTRIBUTE ที่เราสนใจ
+            public const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20; // เปิดใช้งาน Dark Mode
+            public const int DWMWA_WINDOW_CORNER_PREFERENCE = 33; // ตั้งค่ามุมหน้าต่าง
+            public const int DWMWA_CAPTION_COLOR = 34; // เปลี่ยนสี Title Bar
+
+            // การประกาศ DwmSetWindowAttribute
+            [DllImport("dwmapi.dll")]
+            public static extern int DwmSetWindowAttribute(IntPtr hwnd, int dwAttribute, ref uint pvAttribute, int cbAttribute);
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            uint isDarkMode = 1; // เปิดใช้งาน (0 = ปิด)
+            int result = DwmApi.DwmSetWindowAttribute(this.Handle, DwmApi.DWMWA_USE_IMMERSIVE_DARK_MODE, ref isDarkMode, sizeof(int));
+
+
+            if (result != 0)
+            {
+                MessageBox.Show($"DwmSetWindowAttribute failed with error code {result}");
+            }
+        }
+
+        List<ucMenu> menuButton;
         public frmMain01()
         {
             InitializeComponent();
@@ -49,6 +78,10 @@ namespace CodingLabpro
             BtnDiconnect.Enabled = false;
             BtnConnect.Enabled = true;
             timer1.Enabled = false;
+
+            //Menu Button
+            menuButton = new List<ucMenu>() { ucMenu1, ucMenu2 };
+            ClickMenu(menuButton);
 
 
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
@@ -82,7 +115,49 @@ namespace CodingLabpro
 
 
         }
+      
+        public void ClickMenu(List<ucMenu> _menu)
+        {
+            foreach (var menu in _menu)
+            {
+                menu.Text_Clicked += Menu_textClick;
+            }
+        }
+        private void Menu_textClick (object sender, EventArgs e)
+        {
+            ucMenu _menuButtton = (ucMenu)sender;
 
+            switch (_menuButtton.Name)
+            {
+                case "ucMenu1":
+                    activateMenu(ucMenu1, ucMenu2);
+                    break;
+
+                case "ucMenu2":
+                    activateMenu(ucMenu2, ucMenu1);
+                    Form form = new frmMain();
+                    form.Show();
+                    break;
+            }
+        }
+
+       
+        private async void activateMenu(ucMenu _active, params ucMenu[] _inactive)
+        {
+           
+            _active.BorderColor = Color.Purple;
+
+            foreach (ucMenu inactive in _inactive)
+            {
+                inactive.BorderColor = Color.Transparent;
+            }
+
+            await Task.Delay(1000);
+
+            _active.BorderColor = Color.Transparent;
+
+
+        }
         private void frmMain01_Load(object sender, EventArgs e)
         {
           
@@ -118,6 +193,8 @@ namespace CodingLabpro
 
 
         }
+
+
         public void ChartUpdateValue()
         {
            
@@ -319,9 +396,6 @@ namespace CodingLabpro
 
             System.Windows.Forms.Cursor.Current = Cursors.Default;
         }
-
-     
-
 
         
     }

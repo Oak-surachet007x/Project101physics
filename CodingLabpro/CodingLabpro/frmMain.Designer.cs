@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Connect = new System.Windows.Forms.Button();
             this.BtnDiconnect = new System.Windows.Forms.Button();
             this.BtnMovestep = new System.Windows.Forms.Button();
@@ -280,18 +280,18 @@
             // 
             // chartDC
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartDC.ChartAreas.Add(chartArea2);
+            chartArea5.Name = "ChartArea1";
+            this.chartDC.ChartAreas.Add(chartArea5);
             this.chartDC.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.chartDC.Legends.Add(legend2);
+            legend5.Name = "Legend1";
+            this.chartDC.Legends.Add(legend5);
             this.chartDC.Location = new System.Drawing.Point(2, 14);
             this.chartDC.Margin = new System.Windows.Forms.Padding(2);
             this.chartDC.Name = "chartDC";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartDC.Series.Add(series2);
+            series5.ChartArea = "ChartArea1";
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chartDC.Series.Add(series5);
             this.chartDC.Size = new System.Drawing.Size(420, 211);
             this.chartDC.TabIndex = 0;
             this.chartDC.Text = "chart1";

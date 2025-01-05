@@ -63,6 +63,16 @@ namespace CodingLabpro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap dynamic_form_16dp_E8EAED {
+            get {
+                object obj = ResourceManager.GetObject("dynamic_form_16dp_E8EAED", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap photo_camera_16dp_FFFFFF_FILL1_wght100_GRAD0_opsz20 {
             get {
                 object obj = ResourceManager.GetObject("photo_camera_16dp_FFFFFF_FILL1_wght100_GRAD0_opsz20", resourceCulture);

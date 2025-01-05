@@ -16,6 +16,8 @@ namespace CodingLabpro.Models
         Image icon;
         Color _borderColor  = Color.Transparent;
 
+        public event EventHandler Text_Clicked;
+
         public string textlabel
         {
             get
@@ -66,5 +68,12 @@ namespace CodingLabpro.Models
             borderPanel.BackColor = _borderColor;
 
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Text_Clicked?.Invoke(this, e);
+        }
+
+       
     }
 }
