@@ -22,6 +22,7 @@ using CodingLabpro.CommandDevice;
 using System.Windows.Forms.DataVisualization.Charting;
 using CodingLabpro.Models;
 using System.Security.Cryptography.X509Certificates;
+using CodingLabpro.frmChild;
 
 
 namespace CodingLabpro
@@ -65,6 +66,7 @@ namespace CodingLabpro
         }
 
         List<ucMenu> menuButton;
+        List<barMenu> barButton;
         public frmMain01()
         {
             InitializeComponent();
@@ -79,10 +81,15 @@ namespace CodingLabpro
             BtnConnect.Enabled = true;
             timer1.Enabled = false;
 
-            //Menu Button
+            //MenuButton
             menuButton = new List<ucMenu>() { ucMenu1, ucMenu2 };
             ClickMenu(menuButton);
 
+            //BarMenuButton
+            barButton = new List<barMenu>() { barMenu1, barMenu2 };
+            ClickBar(barButton);         
+
+        
 
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
             MyDMM = new Ivi.Visa.Interop.FormattedIO488();
@@ -115,7 +122,64 @@ namespace CodingLabpro
 
 
         }
-      
+        //--------------------------------------------------------------------------------------------------------------//
+
+        //barMenu event Click
+        public void ClickBar(List<barMenu> _barmenu)
+        {
+            foreach (var menu1 in _barmenu)
+            {
+                menu1.Bar_Click += Menu1_Bar_Click;
+            }
+        }
+
+        private void addUserControl(UserControl userControl)
+        {
+            userControl.Dock = DockStyle.Fill;
+            FormChildpanel.Controls.Clear();
+            FormChildpanel.Controls.Add(userControl);
+            userControl.BringToFront();
+        }
+
+        private void Menu1_Bar_Click(object sender, EventArgs e)
+        {
+            barMenu _barButton = (barMenu)sender;
+
+            switch (_barButton.Name) 
+            {
+                case "barMenu1":
+                    activateMenu1(barMenu1 , barMenu2);
+                    AxisControl frmChlid1 = new AxisControl();
+                    addUserControl(frmChlid1);
+                 
+                    break;
+
+                case "barMenu2":
+                    activateMenu1(barMenu2, barMenu1);
+                    DMMmeasure frmChlid2 = new DMMmeasure();
+                    addUserControl(frmChlid2);
+
+                    break;
+
+            }
+        }
+
+        private async void activateMenu1(barMenu _active, params barMenu[] _inactive)
+        {
+            _active.BarColor = Color.Purple;
+
+            foreach (barMenu inactive in _inactive)
+            {
+                inactive.BarColor = Color.White;
+            }
+
+            await Task.Delay(1000);
+
+            _active.BarColor = Color.White;
+        }
+        //--------------------------------------------------------------------------------------------------------------//
+
+        //ucMenu event Click
         public void ClickMenu(List<ucMenu> _menu)
         {
             foreach (var menu in _menu)
@@ -125,9 +189,9 @@ namespace CodingLabpro
         }
         private void Menu_textClick (object sender, EventArgs e)
         {
-            ucMenu _menuButtton = (ucMenu)sender;
+            ucMenu _menuButton = (ucMenu)sender;
 
-            switch (_menuButtton.Name)
+            switch (_menuButton.Name)
             {
                 case "ucMenu1":
                     activateMenu(ucMenu1, ucMenu2);
@@ -141,8 +205,8 @@ namespace CodingLabpro
             }
         }
 
-       
-        private async void activateMenu(ucMenu _active, params ucMenu[] _inactive)
+   
+        private async void activateMenu(ucMenu _active ,params ucMenu[] _inactive)
         {
            
             _active.BorderColor = Color.Purple;
@@ -158,6 +222,8 @@ namespace CodingLabpro
 
 
         }
+        //--------------------------------------------------------------------------------------------------------------//
+
         private void frmMain01_Load(object sender, EventArgs e)
         {
           
@@ -188,10 +254,6 @@ namespace CodingLabpro
             //chart1.ChartAreas["ChartArea1"].AxisX.IntervalType = DateTimeIntervalType.Minutes;
             //chart1.ChartAreas["ChartArea1"].AxisX.LabelStyle.Format = "mm:ss";
 
-
-
-
-
         }
 
 
@@ -207,6 +269,8 @@ namespace CodingLabpro
 
         protected override void OnPaint(PaintEventArgs e)
         {
+
+            base.OnPaint(e);
             // วาดพื้นหลังแบบ Gradient
             Rectangle rect = this.ClientRectangle;
             using (var brush = new LinearGradientBrush(rect,
@@ -217,7 +281,6 @@ namespace CodingLabpro
                 e.Graphics.FillRectangle(brush, rect);
             }
 
-            base.OnPaint(e);
         }
 
         public class COMException : System.Runtime.InteropServices.ExternalException
@@ -296,7 +359,7 @@ namespace CodingLabpro
             System.Windows.Forms.Cursor.Current = Cursors.WaitCursor;
 
             // ตรวจสอบการเลือกพอร์ตการเชื่อมว่าครบไหม ทั้ง 3 อุปกรณ์
-            if ( Cblistaddress3.SelectedIndex == -1)
+            if ( Cblistaddress.SelectedIndex == -1)
             {
                 MessageBox.Show("you Should Select Port Device");
                 BtnConnect.BackColor = Color.Orange;
@@ -315,7 +378,7 @@ namespace CodingLabpro
                     string command = "*IDN?";
                     MyDMM.WriteString(command);
                     string Aread = MyDMM.ReadString();
-                    MyDMM.WriteString(Aread);
+              
                     textread.AppendText(Aread + Environment.NewLine);
                     MyDMM.WriteString("*CLS");
 
@@ -325,18 +388,18 @@ namespace CodingLabpro
                     string MSG = "H:W";
                     MyMMC.WriteString(MSG);
 
-                    //Port RS232 Setting
-                    mySerialPort.PortName = "COM7";
-                    mySerialPort.BaudRate = 9600; // ตั้งค่า Baud Rate
-                    mySerialPort.Parity = Parity.None; // ตั้งค่า Parity
-                    mySerialPort.StopBits = StopBits.One; // ตั้งค่า Stop Bits
-                    mySerialPort.DataBits = 8; // ตั้งค่าจำนวน Data Bits
-                    mySerialPort.Handshake = Handshake.None; // ตั้งค่า Handshake
+                    ////Port RS232 Setting
+                    //mySerialPort.PortName = "COM7";
+                    //mySerialPort.BaudRate = 9600; // ตั้งค่า Baud Rate
+                    //mySerialPort.Parity = Parity.None; // ตั้งค่า Parity
+                    //mySerialPort.StopBits = StopBits.One; // ตั้งค่า Stop Bits
+                    //mySerialPort.DataBits = 8; // ตั้งค่าจำนวน Data Bits
+                    //mySerialPort.Handshake = Handshake.None; // ตั้งค่า Handshake
 
 
-                    //CONNET driver MMC Port RS-232
-                    mySerialPort.Open();
-                    mySerialPort.WriteLine("H:X");
+                    ////CONNET driver MMC Port RS-232
+                    //mySerialPort.Open();
+                    //mySerialPort.WriteLine("H:X");
 
                     //Show is connect DMM 
                     MessageBox.Show("Device is connect", "Connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -397,6 +460,6 @@ namespace CodingLabpro
             System.Windows.Forms.Cursor.Current = Cursors.Default;
         }
 
-        
+      
     }
 }

@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CodingLabpro.Models
 {
     public partial class ucMenu : UserControl
     {
-        string menuTile = "";
+        string menuTile = "No label";
         Image icon;
-        Color _borderColor  = Color.Transparent;
+        Color _borderColor = Color.Transparent;
 
         public event EventHandler Text_Clicked;
 
@@ -39,7 +33,7 @@ namespace CodingLabpro.Models
             }
 
             set
-            { 
+            {
                 _borderColor = value;
                 this.Invalidate();
             }
@@ -53,18 +47,21 @@ namespace CodingLabpro.Models
             set
             {
                 icon = value;
+                pictureBox1.Image = icon;
                 this.Invalidate();
             }
         }
         public ucMenu()
         {
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            this.UpdateStyles();
             InitializeComponent();
         }
 
         private void ucMenu_Paint(object sender, PaintEventArgs e)
         {
             label1.Text = menuTile;
-            pictureBox1.Image = icon;
+        
             borderPanel.BackColor = _borderColor;
 
         }
@@ -73,7 +70,5 @@ namespace CodingLabpro.Models
         {
             Text_Clicked?.Invoke(this, e);
         }
-
-       
     }
 }

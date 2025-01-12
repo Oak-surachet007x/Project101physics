@@ -178,6 +178,7 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\CodingLabp
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\CodingLabpro.exe
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\CodingLabpro.pdb
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\BouncyCastle.Cryptography.dll
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\ConponentOdj.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Enums.NET.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\ExtendedNumerics.BigDecimal.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\ICSharpCode.SharpZipLib.dll
@@ -201,6 +202,7 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Sec
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Text.Encoding.CodePages.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Threading.Tasks.Extensions.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.ValueTuple.dll
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\ConponentOdj.pdb
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\BouncyCastle.Cryptography.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Enums.NET.pdb
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Enums.NET.xml
@@ -244,3 +246,6 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabp
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLa.AE193A8B.Up2Date
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.exe
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.pdb
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.Models.barMenu.resources
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.frmChild.AxisControl.resources
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.frmChild.DMMmeasure.resources

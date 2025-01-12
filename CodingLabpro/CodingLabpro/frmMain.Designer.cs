@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Connect = new System.Windows.Forms.Button();
             this.BtnDiconnect = new System.Windows.Forms.Button();
             this.BtnMovestep = new System.Windows.Forms.Button();
@@ -64,6 +64,9 @@
             this.BtnExcel = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnselectcon = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.graphBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartDC)).BeginInit();
             this.Boxread.SuspendLayout();
@@ -99,7 +102,7 @@
             this.BtnMovestep.Name = "BtnMovestep";
             this.BtnMovestep.Size = new System.Drawing.Size(75, 23);
             this.BtnMovestep.TabIndex = 3;
-            this.BtnMovestep.Text = "x step 10";
+            this.BtnMovestep.Text = "x step 100";
             this.BtnMovestep.UseVisualStyleBackColor = true;
             this.BtnMovestep.Click += new System.EventHandler(this.BtnMovestep_Click);
             // 
@@ -109,7 +112,7 @@
             this.Btn_stepY10.Name = "Btn_stepY10";
             this.Btn_stepY10.Size = new System.Drawing.Size(75, 23);
             this.Btn_stepY10.TabIndex = 4;
-            this.Btn_stepY10.Text = "y step 10";
+            this.Btn_stepY10.Text = "y step 100";
             this.Btn_stepY10.UseVisualStyleBackColor = true;
             this.Btn_stepY10.Click += new System.EventHandler(this.Btn_stepY10_Click);
             // 
@@ -280,18 +283,18 @@
             // 
             // chartDC
             // 
-            chartArea5.Name = "ChartArea1";
-            this.chartDC.ChartAreas.Add(chartArea5);
+            chartArea1.Name = "ChartArea1";
+            this.chartDC.ChartAreas.Add(chartArea1);
             this.chartDC.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend5.Name = "Legend1";
-            this.chartDC.Legends.Add(legend5);
+            legend1.Name = "Legend1";
+            this.chartDC.Legends.Add(legend1);
             this.chartDC.Location = new System.Drawing.Point(2, 14);
             this.chartDC.Margin = new System.Windows.Forms.Padding(2);
             this.chartDC.Name = "chartDC";
-            series5.ChartArea = "ChartArea1";
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.chartDC.Series.Add(series5);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartDC.Series.Add(series1);
             this.chartDC.Size = new System.Drawing.Size(420, 211);
             this.chartDC.TabIndex = 0;
             this.chartDC.Text = "chart1";
@@ -441,12 +444,45 @@
             this.btnselectcon.UseVisualStyleBackColor = true;
             this.btnselectcon.Click += new System.EventHandler(this.btnselectcon_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(269, 116);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 64);
+            this.button1.TabIndex = 41;
+            this.button1.Text = "X= 0 in motor";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(267, 197);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 51);
+            this.button2.TabIndex = 42;
+            this.button2.Text = "1 cm >> 0 cm";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(269, 55);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 55);
+            this.button3.TabIndex = 43;
+            this.button3.Text = "x = 1 cm";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(778, 455);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnselectcon);
             this.Controls.Add(this.BtnExcel);
             this.Controls.Add(this.Boxposition);
@@ -517,6 +553,9 @@
         private System.Windows.Forms.Button BtnExcel;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnselectcon;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 

@@ -79,5 +79,15 @@ namespace CodingLabpro.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap settings_applications_16dp_E8EAED_FILL0_wght400_GRAD0_opsz20 {
+            get {
+                object obj = ResourceManager.GetObject("settings_applications_16dp_E8EAED_FILL0_wght400_GRAD0_opsz20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

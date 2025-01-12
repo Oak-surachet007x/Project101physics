@@ -232,11 +232,9 @@ namespace CodingLabpro
 
 
         private void BtnMovestep_Click(object sender, EventArgs e)
-        {
-            string MSG1 = "M:XP10";
-            MyMMC.WriteString(MSG1);
-            string MStep = "G:";
-            MyMMC.WriteString(MStep);
+        { 
+            MyMMC.WriteString("M:XP100");
+            MyMMC.WriteString("G");
 
         }
 
@@ -269,6 +267,7 @@ namespace CodingLabpro
             
         }
 
+        private int i = 0;
         private void Btn_ResetXY_Click(object sender, EventArgs e)
         {
             if (Ptrs232.Checked)
@@ -278,8 +277,16 @@ namespace CodingLabpro
 
             if (Ptgpib.Checked)
             {
-                string RSG = "H:W";
-                MyMMC.WriteString(RSG);
+               
+                MyMMC.WriteString("M:XP-100");
+                MyMMC.WriteString("G:");
+
+                i++;
+                
+                string Dataconut = "" +i.ToString() + Environment.NewLine;
+                txtread.AppendText(Dataconut);
+                
+                
             }
             
         }
@@ -601,6 +608,24 @@ namespace CodingLabpro
         {
             frmarduino Formarduino = new frmarduino();  
             Formarduino.Show();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            MyMMC.WriteString("M:XP-5700");
+            MyMMC.WriteString("G:");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MyMMC.WriteString("M:XP-5000");
+            MyMMC.WriteString("G:");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MyMMC.WriteString("M:XP5000");
+            MyMMC.WriteString("G:");
         }
     } 
 
