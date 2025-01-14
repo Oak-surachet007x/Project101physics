@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Connect = new System.Windows.Forms.Button();
             this.BtnDiconnect = new System.Windows.Forms.Button();
             this.BtnMovestep = new System.Windows.Forms.Button();
@@ -50,8 +47,6 @@
             this.optAxis_x = new System.Windows.Forms.RadioButton();
             this.Btnenter = new System.Windows.Forms.Button();
             this.txt_IPloop = new System.Windows.Forms.TextBox();
-            this.graphBox1 = new System.Windows.Forms.GroupBox();
-            this.chartDC = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.optAxis_y = new System.Windows.Forms.RadioButton();
             this.txtread = new System.Windows.Forms.TextBox();
             this.Boxread = new System.Windows.Forms.GroupBox();
@@ -67,8 +62,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.graphBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartDC)).BeginInit();
+            this.btnstep4000 = new System.Windows.Forms.Button();
+            this.btn1000step4 = new System.Windows.Forms.Button();
             this.Boxread.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.Boxloopmotor.SuspendLayout();
@@ -258,47 +253,6 @@
             this.txt_IPloop.Size = new System.Drawing.Size(109, 34);
             this.txt_IPloop.TabIndex = 28;
             // 
-            // graphBox1
-            // 
-            this.graphBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.graphBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.graphBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.graphBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.graphBox1.Controls.Add(this.chartDC);
-            this.graphBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.graphBox1.ForeColor = System.Drawing.Color.Coral;
-            this.graphBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.graphBox1.Location = new System.Drawing.Point(347, 40);
-            this.graphBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.graphBox1.MaximumSize = new System.Drawing.Size(1200, 512);
-            this.graphBox1.MinimumSize = new System.Drawing.Size(424, 0);
-            this.graphBox1.Name = "graphBox1";
-            this.graphBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.graphBox1.Size = new System.Drawing.Size(424, 227);
-            this.graphBox1.TabIndex = 29;
-            this.graphBox1.TabStop = false;
-            this.graphBox1.Text = "graph Data DC";
-            // 
-            // chartDC
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chartDC.ChartAreas.Add(chartArea1);
-            this.chartDC.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chartDC.Legends.Add(legend1);
-            this.chartDC.Location = new System.Drawing.Point(2, 14);
-            this.chartDC.Margin = new System.Windows.Forms.Padding(2);
-            this.chartDC.Name = "chartDC";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartDC.Series.Add(series1);
-            this.chartDC.Size = new System.Drawing.Size(420, 211);
-            this.chartDC.TabIndex = 0;
-            this.chartDC.Text = "chart1";
-            // 
             // optAxis_y
             // 
             this.optAxis_y.AutoSize = true;
@@ -462,7 +416,6 @@
             this.button2.TabIndex = 42;
             this.button2.Text = "1 cm >> 0 cm";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -474,12 +427,34 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // btnstep4000
+            // 
+            this.btnstep4000.Location = new System.Drawing.Point(457, 82);
+            this.btnstep4000.Name = "btnstep4000";
+            this.btnstep4000.Size = new System.Drawing.Size(75, 23);
+            this.btnstep4000.TabIndex = 44;
+            this.btnstep4000.Text = "4000step";
+            this.btnstep4000.UseVisualStyleBackColor = true;
+            this.btnstep4000.Click += new System.EventHandler(this.btnstep4000_Click);
+            // 
+            // btn1000step4
+            // 
+            this.btn1000step4.Location = new System.Drawing.Point(457, 116);
+            this.btn1000step4.Name = "btn1000step4";
+            this.btn1000step4.Size = new System.Drawing.Size(75, 23);
+            this.btn1000step4.TabIndex = 45;
+            this.btn1000step4.Text = "-1000";
+            this.btn1000step4.UseVisualStyleBackColor = true;
+            this.btn1000step4.Click += new System.EventHandler(this.btn1000step4_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(778, 455);
+            this.Controls.Add(this.btn1000step4);
+            this.Controls.Add(this.btnstep4000);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -490,7 +465,6 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.BtnError);
             this.Controls.Add(this.Boxread);
-            this.Controls.Add(this.graphBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Btn_SetAC);
             this.Controls.Add(this.Btn_SetDC);
@@ -503,8 +477,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Physics101";
             this.Load += new System.EventHandler(this.frmMain_Load);
-            this.graphBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chartDC)).EndInit();
             this.Boxread.ResumeLayout(false);
             this.Boxread.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -539,7 +511,6 @@
         private System.Windows.Forms.RadioButton optAxis_x;
         private System.Windows.Forms.Button Btnenter;
         private System.Windows.Forms.TextBox txt_IPloop;
-        private System.Windows.Forms.GroupBox graphBox1;
         private System.Windows.Forms.RadioButton optAxis_y;
         private System.Windows.Forms.TextBox txtread;
         private System.Windows.Forms.GroupBox Boxread;
@@ -548,7 +519,6 @@
         private System.Windows.Forms.RadioButton Ptrs232;
         private System.Windows.Forms.GroupBox Boxloopmotor;
         private System.Windows.Forms.GroupBox Boxposition;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartDC;
         private System.IO.Ports.SerialPort serialPort;
         private System.Windows.Forms.Button BtnExcel;
         private System.Windows.Forms.Timer timer1;
@@ -556,6 +526,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnstep4000;
+        private System.Windows.Forms.Button btn1000step4;
     }
 }
 

@@ -14,8 +14,6 @@ using Ivi.Visa.FormattedIO;
 using Ivi.Visa;
 using System.IO;
 using System.IO.Ports;
-using System.Runtime.Remoting.Contexts;
-using System.Threading;
 using System.Runtime.InteropServices;
 using NPOI.SS.Formula.Eval;
 using CodingLabpro.CommandDevice;
@@ -23,6 +21,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 using CodingLabpro.Models;
 using System.Security.Cryptography.X509Certificates;
 using CodingLabpro.frmChild;
+
 
 
 namespace CodingLabpro
@@ -37,6 +36,8 @@ namespace CodingLabpro
         private bool isRunning = false;
         private bool StatusPort;
         private int Clickcount = 0;
+        private UserControl frmChild1 = new AxisControl();
+        private UserControl frmChild2 = new DMMmeasure();
 
 
         public class DwmApi
@@ -87,9 +88,22 @@ namespace CodingLabpro
 
             //BarMenuButton
             barButton = new List<barMenu>() { barMenu1, barMenu2 };
-            ClickBar(barButton);         
+            ClickBar(barButton);
+         
+            //First show Panel frmChild
+            addUserControl(frmChild1);
+            if (this.FormChildpanel.Controls.Contains(frmChild1))
+            {
+                activateMenu1(barMenu1, barMenu2 );
+                Console.WriteLine("UserControl is add Panel Control ");
+            }
+            else
+            {
+                Console.WriteLine("UserControl is not add Panel Control");
+            }
+         
+         
 
-        
 
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
             MyDMM = new Ivi.Visa.Interop.FormattedIO488();
@@ -122,6 +136,8 @@ namespace CodingLabpro
 
 
         }
+
+      
         //--------------------------------------------------------------------------------------------------------------//
 
         //barMenu event Click
@@ -149,22 +165,20 @@ namespace CodingLabpro
             {
                 case "barMenu1":
                     activateMenu1(barMenu1 , barMenu2);
-                    AxisControl frmChlid1 = new AxisControl();
-                    addUserControl(frmChlid1);
-                 
+                    addUserControl(frmChild1);
+
                     break;
 
                 case "barMenu2":
                     activateMenu1(barMenu2, barMenu1);
-                    DMMmeasure frmChlid2 = new DMMmeasure();
-                    addUserControl(frmChlid2);
+                    addUserControl(frmChild2);
 
                     break;
 
             }
         }
 
-        private async void activateMenu1(barMenu _active, params barMenu[] _inactive)
+        private void activateMenu1(barMenu _active, params barMenu[] _inactive)
         {
             _active.BarColor = Color.Purple;
 
@@ -173,9 +187,6 @@ namespace CodingLabpro
                 inactive.BarColor = Color.White;
             }
 
-            await Task.Delay(1000);
-
-            _active.BarColor = Color.White;
         }
         //--------------------------------------------------------------------------------------------------------------//
 
@@ -264,7 +275,6 @@ namespace CodingLabpro
         private void BtnClear_Click(object sender, EventArgs e)
         {
             chart1.Series.Clear();
-
         }
 
         protected override void OnPaint(PaintEventArgs e)

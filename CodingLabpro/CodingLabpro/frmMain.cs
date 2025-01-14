@@ -277,8 +277,9 @@ namespace CodingLabpro
 
             if (Ptgpib.Checked)
             {
-               
-                MyMMC.WriteString("M:XP-100");
+
+
+                MyMMC.WriteString("M:XP-500");
                 MyMMC.WriteString("G:");
 
                 i++;
@@ -612,19 +613,27 @@ namespace CodingLabpro
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            MyMMC.WriteString("M:XP-5700");
-            MyMMC.WriteString("G:");
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
             MyMMC.WriteString("M:XP-5000");
             MyMMC.WriteString("G:");
         }
 
+       
+
         private void button3_Click(object sender, EventArgs e)
         {
             MyMMC.WriteString("M:XP5000");
+            MyMMC.WriteString("G:");
+        }
+
+        private void btnstep4000_Click(object sender, EventArgs e)
+        {
+            MyMMC.WriteString("M:XP-4000");
+            MyMMC.WriteString("G:");
+        }
+
+        private void btn1000step4_Click(object sender, EventArgs e)
+        {
+            MyMMC.WriteString("M:XP-1000");
             MyMMC.WriteString("G:");
         }
     } 
