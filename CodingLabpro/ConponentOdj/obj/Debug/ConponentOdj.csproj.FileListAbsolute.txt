@@ -1,0 +1,6 @@
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\ConponentOdj\bin\Debug\ConponentOdj.dll
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\ConponentOdj\bin\Debug\ConponentOdj.pdb
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\ConponentOdj\obj\Debug\ConponentOdj.csproj.AssemblyReference.cache
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\ConponentOdj\obj\Debug\ConponentOdj.csproj.CoreCompileInputs.cache
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\ConponentOdj\obj\Debug\ConponentOdj.dll
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\ConponentOdj\obj\Debug\ConponentOdj.pdb

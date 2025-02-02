@@ -96,7 +96,7 @@ namespace CodingLabpro
                     try
                     {
                         //Connect driver DMM
-                        string addr = "GPIB0::26::INSTR";
+                        string addr = "GPIB1::26::INSTR";
                         MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 2000, null);
                         MyDMM.IO.Timeout = 2000;
                         string command = "*IDN?";
@@ -108,7 +108,7 @@ namespace CodingLabpro
 
 
                         //Connect driver MMC
-                        string MMCaddr = "GPIB0::7::INSTR";
+                        string MMCaddr = "GPIB1::7::INSTR";
                         MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
                         string MSG = "H:W";
                         MyMMC.WriteString(MSG);
@@ -156,13 +156,16 @@ namespace CodingLabpro
                         //section MMC-2 axis z
                         try
                         {
-                            serialPort.PortName = "COM5";
+                            serialPort.PortName = "COM7";
+                            serialPort.BaudRate = 4800;
                             // เปิดพอร์ต
-                            serialPort.Open();
-
+                            if (!serialPort.IsOpen)
+                            { 
+                                serialPort.Open();
+                            }
                             // ส่งข้อมูลผ่านพอร์ต
                             serialPort.WriteLine("P:4P0"); // กำหนดตัวกำหนด CR+LF
-                            serialPort.WriteLine("P:5P2"); // ตั้งค่า baud rate เป็น 4800
+                            serialPort.WriteLine("P:5P3"); // ตั้งค่า baud rate เป็น 4800
                             serialPort.WriteLine("P:7P2"); // ตั้งค่า stop bits เป็น 2 บิต
                             serialPort.WriteLine("H:W");
 
@@ -229,11 +232,9 @@ namespace CodingLabpro
 
 
         private void BtnMovestep_Click(object sender, EventArgs e)
-        {
-            string MSG1 = "M:XP10";
-            MyMMC.WriteString(MSG1);
-            string MStep = "G:";
-            MyMMC.WriteString(MStep);
+        { 
+            MyMMC.WriteString("M:XP100");
+            MyMMC.WriteString("G");
 
         }
 
@@ -266,6 +267,7 @@ namespace CodingLabpro
             
         }
 
+        private int i = 0;
         private void Btn_ResetXY_Click(object sender, EventArgs e)
         {
             if (Ptrs232.Checked)
@@ -275,8 +277,17 @@ namespace CodingLabpro
 
             if (Ptgpib.Checked)
             {
-                string RSG = "H:W";
-                MyMMC.WriteString(RSG);
+
+
+                MyMMC.WriteString("M:XP-500");
+                MyMMC.WriteString("G:");
+
+                i++;
+                
+                string Dataconut = "" +i.ToString() + Environment.NewLine;
+                txtread.AppendText(Dataconut);
+                
+                
             }
             
         }
@@ -594,6 +605,37 @@ namespace CodingLabpro
 
         }
 
+        private void btnselectcon_Click(object sender, EventArgs e)
+        {
+            frmarduino Formarduino = new frmarduino();  
+            Formarduino.Show();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            MyMMC.WriteString("M:XP-5000");
+            MyMMC.WriteString("G:");
+        }
+
+       
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MyMMC.WriteString("M:XP5000");
+            MyMMC.WriteString("G:");
+        }
+
+        private void btnstep4000_Click(object sender, EventArgs e)
+        {
+            MyMMC.WriteString("M:XP-4000");
+            MyMMC.WriteString("G:");
+        }
+
+        private void btn1000step4_Click(object sender, EventArgs e)
+        {
+            MyMMC.WriteString("M:XP-1000");
+            MyMMC.WriteString("G:");
+        }
     } 
 
 }
