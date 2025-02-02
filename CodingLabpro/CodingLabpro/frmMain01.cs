@@ -21,6 +21,10 @@ using System.Windows.Forms.DataVisualization.Charting;
 using CodingLabpro.Models;
 using System.Security.Cryptography.X509Certificates;
 using CodingLabpro.frmChild;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using NPOI.POIFS.Crypt.Dsig;
+using System.Threading;
+using System.Diagnostics;
 
 
 
@@ -38,6 +42,7 @@ namespace CodingLabpro
         private int Clickcount = 0;
         private UserControl frmChild1 = new AxisControl();
         private UserControl frmChild2 = new DMMmeasure();
+        public event EventHandler ActiveComboBox;
 
 
         public class DwmApi
@@ -81,7 +86,7 @@ namespace CodingLabpro
             BtnDiconnect.Enabled = false;
             BtnConnect.Enabled = true;
             timer1.Enabled = false;
-
+      
             //MenuButton
             menuButton = new List<ucMenu>() { ucMenu1, ucMenu2 };
             ClickMenu(menuButton);
@@ -89,26 +94,26 @@ namespace CodingLabpro
             //BarMenuButton
             barButton = new List<barMenu>() { barMenu1, barMenu2 };
             ClickBar(barButton);
-         
+
             //First show Panel frmChild
             addUserControl(frmChild1);
             if (this.FormChildpanel.Controls.Contains(frmChild1))
             {
-                activateMenu1(barMenu1, barMenu2 );
+                activateMenu1(barMenu1, barMenu2);
                 Console.WriteLine("UserControl is add Panel Control ");
             }
             else
             {
                 Console.WriteLine("UserControl is not add Panel Control");
             }
-         
-         
+
+
 
 
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
             MyDMM = new Ivi.Visa.Interop.FormattedIO488();
             MyMMC = new Ivi.Visa.Interop.FormattedIO488();
-          
+
 
             //Port GPIB
             Ivi.Visa.Interop.ResourceManager mgr1;
@@ -117,6 +122,7 @@ namespace CodingLabpro
             mgr2 = new Ivi.Visa.Interop.ResourceManager();
 
 
+          
 
             //Find Device
             FindDevices finder = new FindDevices();
@@ -137,7 +143,7 @@ namespace CodingLabpro
 
         }
 
-      
+
         //--------------------------------------------------------------------------------------------------------------//
 
         //barMenu event Click
@@ -161,10 +167,10 @@ namespace CodingLabpro
         {
             barMenu _barButton = (barMenu)sender;
 
-            switch (_barButton.Name) 
+            switch (_barButton.Name)
             {
                 case "barMenu1":
-                    activateMenu1(barMenu1 , barMenu2);
+                    activateMenu1(barMenu1, barMenu2);
                     addUserControl(frmChild1);
 
                     break;
@@ -198,7 +204,7 @@ namespace CodingLabpro
                 menu.Text_Clicked += Menu_textClick;
             }
         }
-        private void Menu_textClick (object sender, EventArgs e)
+        private void Menu_textClick(object sender, EventArgs e)
         {
             ucMenu _menuButton = (ucMenu)sender;
 
@@ -215,11 +221,9 @@ namespace CodingLabpro
                     break;
             }
         }
-
-   
-        private async void activateMenu(ucMenu _active ,params ucMenu[] _inactive)
+        private async void activateMenu(ucMenu _active, params ucMenu[] _inactive)
         {
-           
+
             _active.BorderColor = Color.Purple;
 
             foreach (ucMenu inactive in _inactive)
@@ -235,10 +239,17 @@ namespace CodingLabpro
         }
         //--------------------------------------------------------------------------------------------------------------//
 
+
         private void frmMain01_Load(object sender, EventArgs e)
         {
-          
+            ActiveComboBox += ComboBoxEnabled;
         }
+
+        private void frmMain01_Shown(object sender, EventArgs e)
+        {
+
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             //timer1.Tick += new EventHandler();
@@ -248,7 +259,7 @@ namespace CodingLabpro
         {
             chart1.Series["Series1"].Points.AddXY(10, 2);
             chart1.Series["Series1"].ChartType = SeriesChartType.Line;
-        
+
             chart1.ChartAreas["ChartArea1"].AxisY.Minimum = 0;
             chart1.ChartAreas["ChartArea1"].AxisY.Maximum = 10;
             chart1.ChartAreas["ChartArea1"].AxisX.Minimum = 0;
@@ -266,17 +277,14 @@ namespace CodingLabpro
             //chart1.ChartAreas["ChartArea1"].AxisX.LabelStyle.Format = "mm:ss";
 
         }
-
-
         public void ChartUpdateValue()
         {
-           
+
         }
         private void BtnClear_Click(object sender, EventArgs e)
         {
             chart1.Series.Clear();
         }
-
         protected override void OnPaint(PaintEventArgs e)
         {
 
@@ -311,7 +319,7 @@ namespace CodingLabpro
             }
             else if (this.WindowState == FormWindowState.Maximized)
             {
-             
+
                 Cblistaddress.Size = new Size(380, 29);
                 Cblistaddress2.Size = new Size(380, 29);
                 Cblistaddress3.Size = new Size(380, 29);
@@ -320,40 +328,36 @@ namespace CodingLabpro
 
         }
 
-        public void Statusbar()
+        public void ComboBoxEnabled(Object sender, EventArgs e)
         {
-            if (StatusPort == true)
+            if (!BtnDiconnect.Enabled)
             {
-                StatusPort1.BackColor = Color.LightGreen;
-                StatusPort2.BackColor = Color.LightGreen;
-                StatusPort3.BackColor = Color.LightGreen;
-
-                StatusPort1.Text = "CONNECT";
-                StatusPort2.Text = "CONNECT";
-                StatusPort3.Text = "CONNECT";
-
-                BtnConnect.Enabled = false;
-                BtnDiconnect.Enabled = true;
-
-            }else if (StatusPort == false)
-            {
-
-                StatusPort1.BackColor = Color.Red;
-                StatusPort2.BackColor = Color.Red;
-                StatusPort3.BackColor = Color.Red;
-
-                StatusPort1.Text = "DiCONNECT";
-                StatusPort2.Text = "DiCONNECT";
-                StatusPort3.Text = "DiCONNECT";
-
-                BtnConnect.BackColor = Color.Transparent;
-                BtnConnect.Text = "CONNECT";
-                BtnConnect.ForeColor = Color.White;
-
-                BtnConnect.Enabled = true;
-                BtnDiconnect.Enabled = false;
+                Cblistaddress.Enabled = false;
+                Cblistaddress2.Enabled = false;
+                Cblistaddress3.Enabled = false;
             }
-         
+            else if (BtnDiconnect.Enabled) 
+            { 
+                Cblistaddress.Enabled = true; 
+                Cblistaddress2.Enabled = true;
+                Cblistaddress3.Enabled= true;
+            }
+        }
+        
+        public static bool checkPort(params System.Windows.Forms.ComboBox[] comboBoxes)
+        {
+
+            foreach (var CBox in comboBoxes)
+            {
+                if (CBox != null && CBox.SelectedItem != null)
+                {
+                    Debug.WriteLine("false");
+                    return false;
+                }
+            }
+            Debug.WriteLine("true");
+            return true;
+            
         }
 
         private void BtnConnect_Click(object sender, EventArgs e)
@@ -368,8 +372,8 @@ namespace CodingLabpro
 
             System.Windows.Forms.Cursor.Current = Cursors.WaitCursor;
 
-            // ตรวจสอบการเลือกพอร์ตการเชื่อมว่าครบไหม ทั้ง 3 อุปกรณ์
-            if ( Cblistaddress.SelectedIndex == -1)
+            //ตรวจสอบว่ามีการเลือกไอเทมใน ComboBox ทั้ง 3 ช่องไหม
+            if (checkPort(Cblistaddress,Cblistaddress2,Cblistaddress3))
             {
                 MessageBox.Show("you Should Select Port Device");
                 BtnConnect.BackColor = Color.Orange;
@@ -381,83 +385,125 @@ namespace CodingLabpro
             {
                 try
                 {
-                    //CONNECT driver DMM Port GP - IB
-                    string addr = Cblistaddress.SelectedItem.ToString();
-                    MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 2000, null);
-                    MyDMM.IO.Timeout = 2000;
-                    string command = "*IDN?";
-                    MyDMM.WriteString(command);
-                    string Aread = MyDMM.ReadString();
-              
-                    textread.AppendText(Aread + Environment.NewLine);
-                    MyDMM.WriteString("*CLS");
+                    ActiveComboBox?.Invoke(this, EventArgs.Empty);
 
-                    //CONNECT driver MMC Port GP-IB
-                    string MMCaddr = Cblistaddress2.SelectedItem.ToString();
-                    MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
-                    string MSG = "H:W";
-                    MyMMC.WriteString(MSG);
+                    if (Cblistaddress.SelectedIndex >= 0)
+                    {
+                        //CONNECT driver DMM Port GP - IB
+                        string addr = Cblistaddress.SelectedItem.ToString();
+                        textread.AppendText(addr);
+                        //MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 2000, null);
+                        //MyDMM.IO.Timeout = 2000;
+                        //string command = "*IDN?";
+                        //MyDMM.WriteString(command);
 
-                    ////Port RS232 Setting
-                    //mySerialPort.PortName = "COM7";
-                    //mySerialPort.BaudRate = 9600; // ตั้งค่า Baud Rate
-                    //mySerialPort.Parity = Parity.None; // ตั้งค่า Parity
-                    //mySerialPort.StopBits = StopBits.One; // ตั้งค่า Stop Bits
-                    //mySerialPort.DataBits = 8; // ตั้งค่าจำนวน Data Bits
-                    //mySerialPort.Handshake = Handshake.None; // ตั้งค่า Handshake
+                        //string Aread = MyDMM.ReadString();
+                        //textread.AppendText(Aread + Environment.NewLine);
+                        //MyDMM.WriteString("*CLS");
+
+                        StatusPort1.BackColor = Color.LightGreen;
+                        StatusPort1.Text = "CONNECT";
+
+                    }
+
+                    if (Cblistaddress2.SelectedIndex >= 0)
+                    {
+                        //CONNECT driver MMC Port GP-IB
+                        string MMCaddr = Cblistaddress2.SelectedItem.ToString();
+                        //MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
+                        //MyMMC.IO.Timeout = 5000;
+                        //string MSG = "H:W";
+                        //MyMMC.WriteString(MSG);
+
+                        StatusPort2.BackColor = Color.LightGreen;
+                        StatusPort2.Text = "CONNECT";
 
 
-                    ////CONNET driver MMC Port RS-232
-                    //mySerialPort.Open();
-                    //mySerialPort.WriteLine("H:X");
+                    }
 
-                    //Show is connect DMM 
-                    MessageBox.Show("Device is connect", "Connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
-           
+                    if (Cblistaddress3.SelectedIndex >= 0)
+                    {
+                        //Port RS232 Setting
+                        //mySerialPort.PortName = "COM7";
+                        //mySerialPort.BaudRate = 9600; // ตั้งค่า Baud Rate
+                        //mySerialPort.Parity = Parity.None; // ตั้งค่า Parity
+                        //mySerialPort.StopBits = StopBits.One; // ตั้งค่า Stop Bits
+                        //mySerialPort.DataBits = 8; // ตั้งค่าจำนวน Data Bits
+                        //mySerialPort.Handshake = Handshake.None; // ตั้งค่า Handshake
+
+
+                        ////CONNET driver MMC Port RS-232
+                        //mySerialPort.Open();
+                        //mySerialPort.WriteLine("H:X");
+
+                        StatusPort3.BackColor = Color.LightGreen;
+                        StatusPort3.Text = "CONNECT";
+
+                    }
+
+                    BtnConnect.Enabled = false;
+                    BtnDiconnect.Enabled = true;
                     BtnConnect.Text = "Remote";
                     BtnConnect.BackColor = Color.LightGreen;
-                    string rectify1 = "Remote Agilent HP34401A and MMC Step motor! By Port GPIB";
-                    textread.AppendText(r.ToString("r") + " <Notification!> " + rectify1 + Environment.NewLine);
-
-                    //return value bool statusPort
-                    StatusPort = true;
-
-                    //MainStatusBar
-                    Statusbar();
-                   
                 }
                 catch (Exception ex)
                 {
                     BtnConnect.BackColor = Color.Red;
                     BtnConnect.Text = "Unconnect";
                     BtnConnect.ForeColor = Color.White;
-                    string incorrectness1 = "Cannot Find driver Agilent Muitimeter and MMC Step motor!";
+                    //string incorrectness1 = "Cannot Find driver Agilent Muitimeter and MMC Step motor!";
                     MessageBox.Show("Device session is not connect", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    textread.AppendText(">>" + r.ToString("r") + " <Notification!> " + incorrectness1 + Environment.NewLine +
+                    textread.AppendText(">>" + r.ToString("r") + " <Notification!> " + Environment.NewLine +
                                         ex.Message + Environment.NewLine);
 
                 }
 
             }
-
+                
         }
-
+            
         private void BtnDiconnect_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Cursor.Current = Cursors.WaitCursor;
+
             try
-            {   if (mySerialPort.IsOpen)
+            {
+                ActiveComboBox?.Invoke(this, EventArgs.Empty);
+
+                if (Cblistaddress.SelectedIndex >= 0)
                 {
-                    mySerialPort.Close();
+                    //MyDMM.IO.Close();
+                    StatusPort1.BackColor = Color.Red;
+                    StatusPort1.Text = "DiCONNECT";
                 }
 
-                MyDMM.IO.Close();
-                MyMMC.IO.Close();
+                if (Cblistaddress2.SelectedIndex >= 0)
+                {
+                    //MyMMC.IO.Close();
+                    StatusPort2.BackColor = Color.Red;
+                    StatusPort2.Text = "DiCONNECT";
+                }
 
-                StatusPort = false;
+                if (Cblistaddress3.SelectedIndex >= 0)
+                {
+                    //if (mySerialPort.IsOpen)
+                    //{
+                    //    mySerialPort.Close();
+                    //}
 
-                Task.Delay(3000).Wait();
-                Statusbar();
+                    StatusPort3.BackColor = Color.Red;
+                    StatusPort3.Text = "DiCONNECT";
+                }
+
+                Thread.Sleep(1000);
+
+                BtnDiconnect.Enabled = false;
+                BtnConnect.Enabled = true;
+                BtnConnect.BackColor = Color.Transparent;
+                BtnConnect.Text = "CONNECT";
+                BtnConnect.ForeColor = Color.White;
+
+                
 
             }
             catch (VisaException ex)
@@ -465,11 +511,9 @@ namespace CodingLabpro
                 textread.AppendText(ex.Message);
             }
 
-            
-
             System.Windows.Forms.Cursor.Current = Cursors.Default;
         }
 
-      
+        
     }
 }

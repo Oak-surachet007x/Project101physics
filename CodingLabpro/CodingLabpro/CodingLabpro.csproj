@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandDevice\FindDevices.cs" />
+    <Compile Include="CommandDevice\Measurement.cs" />
     <Compile Include="frmarduino.cs">
       <SubType>Form</SubType>
     </Compile>
