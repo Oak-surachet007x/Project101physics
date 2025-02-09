@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,14 +13,19 @@ namespace CodingLabpro.frmChild
 {
     public partial class DMMmeasure : UserControl
     {
+       
         public DMMmeasure()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("IoT");
+            MessageBox.Show(FrmMain01.Aread);
+
+        
+            
+
         }
     }
 }

@@ -73,6 +73,36 @@ namespace CodingLabpro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap error_16dp_FF0000_FILL1_wght400_GRAD0_opsz48 {
+            get {
+                object obj = ResourceManager.GetObject("error_16dp_FF0000_FILL1_wght400_GRAD0_opsz48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap help_center_16dp_E8EAED {
+            get {
+                object obj = ResourceManager.GetObject("help_center_16dp_E8EAED", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap info_16dp_0000F5_FILL0_wght400_GRAD0_opsz48 {
+            get {
+                object obj = ResourceManager.GetObject("info_16dp_0000F5_FILL0_wght400_GRAD0_opsz48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap photo_camera_16dp_FFFFFF_FILL1_wght100_GRAD0_opsz20 {
             get {
                 object obj = ResourceManager.GetObject("photo_camera_16dp_FFFFFF_FILL1_wght100_GRAD0_opsz20", resourceCulture);
@@ -86,6 +116,26 @@ namespace CodingLabpro.Properties {
         internal static System.Drawing.Bitmap settings_applications_16dp_E8EAED_FILL0_wght400_GRAD0_opsz20 {
             get {
                 object obj = ResourceManager.GetObject("settings_applications_16dp_E8EAED_FILL0_wght400_GRAD0_opsz20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sync_saved_locally_100dp_16C47F_FILL1_wght400_GRAD0_opsz48 {
+            get {
+                object obj = ResourceManager.GetObject("sync_saved_locally_100dp_16C47F_FILL1_wght400_GRAD0_opsz48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap warning_16dp_FF7F00_FILL1_wght400_GRAD0_opsz48 {
+            get {
+                object obj = ResourceManager.GetObject("warning_16dp_FF7F00_FILL1_wght400_GRAD0_opsz48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
