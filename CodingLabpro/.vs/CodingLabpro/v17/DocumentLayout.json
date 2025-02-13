@@ -3,28 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmchild\\axiscontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|c:\\users\\surac\\desktop\\phy101\\codinglabpro\\codinglabpro\\frmchild\\axiscontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmchild\\axiscontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|c:\\users\\surac\\desktop\\phy101\\codinglabpro\\codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmchild\\axiscontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmchild\\axiscontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmchild\\dmmmeasure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmchild\\dmmmeasure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\commanddevice\\datagridmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\commanddevice\\datagridmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\commanddevice\\finddevices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\commanddevice\\finddevices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmchild\\dmmmeasure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmchild\\dmmmeasure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmchild\\dmmmeasure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmchild\\dmmmeasure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain01.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -46,11 +54,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "FrmMain01.Designer.cs",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\FrmMain01.Designer.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\FrmMain01.Designer.cs",
@@ -63,17 +71,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "FrmMain01.cs",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\FrmMain01.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\FrmMain01.cs",
               "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\FrmMain01.cs",
               "RelativeToolTip": "CodingLabpro\\FrmMain01.cs",
-              "ViewState": "AgIAANUAAAAAAAAAAAAqwOAAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAcwCUAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-04T09:57:01.646Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -117,44 +124,67 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FindDevices.cs",
+              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\CommandDevice\\FindDevices.cs",
+              "RelativeDocumentMoniker": "CodingLabpro\\CommandDevice\\FindDevices.cs",
+              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\CommandDevice\\FindDevices.cs",
+              "RelativeToolTip": "CodingLabpro\\CommandDevice\\FindDevices.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T07:37:56.132Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "AxisControl.cs",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmChild\\AxisControl.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\frmChild\\AxisControl.cs",
               "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmChild\\AxisControl.cs",
               "RelativeToolTip": "CodingLabpro\\frmChild\\AxisControl.cs",
-              "ViewState": "AgIAAM0AAAAAAAAAAAAkwAABAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAGwBAAAAAAAAAAAIwAQBAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-08T11:01:43.042Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
+              "Title": "DataGridManager.cs",
+              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\CommandDevice\\DataGridManager.cs",
+              "RelativeDocumentMoniker": "CodingLabpro\\CommandDevice\\DataGridManager.cs",
+              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\CommandDevice\\DataGridManager.cs",
+              "RelativeToolTip": "CodingLabpro\\CommandDevice\\DataGridManager.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAowCsAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T07:52:35.881Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "AxisControl.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmChild\\AxisControl.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\frmChild\\AxisControl.cs",
               "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmChild\\AxisControl.cs [Design]",
               "RelativeToolTip": "CodingLabpro\\frmChild\\AxisControl.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-03T14:15:43.164Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-02-03T14:15:43.164Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "DMMmeasure.cs",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmChild\\DMMmeasure.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\frmChild\\DMMmeasure.cs",
               "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmChild\\DMMmeasure.cs",
               "RelativeToolTip": "CodingLabpro\\frmChild\\DMMmeasure.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAADgvxUAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAADgvxUAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-09T04:10:53.465Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "MessageBox_Notify.cs",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmChild\\MessageBox_Notify.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\frmChild\\MessageBox_Notify.cs",
@@ -165,7 +195,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "MessageBox_Notify.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmChild\\MessageBox_Notify.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\frmChild\\MessageBox_Notify.cs",
@@ -176,7 +206,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "DMMmeasure.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmChild\\DMMmeasure.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\frmChild\\DMMmeasure.cs",

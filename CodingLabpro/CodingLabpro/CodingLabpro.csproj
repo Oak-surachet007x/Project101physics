@@ -160,6 +160,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandDevice\DataGridManager.cs" />
     <Compile Include="CommandDevice\FindDevices.cs" />
     <Compile Include="frmarduino.cs">
       <SubType>Form</SubType>

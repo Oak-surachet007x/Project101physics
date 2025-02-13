@@ -34,7 +34,8 @@ namespace CodingLabpro
     {
         public Ivi.Visa.Interop.FormattedIO488 MyDMM;
         public Ivi.Visa.Interop.FormattedIO488 MyMMC;
-        public SerialPort MySerialPort;
+        public SerialPort MySerialPort = new SerialPort();
+        public static DataGridManager dataGridManager;
 
         public DateTime r = DateTime.Now;
         public UserControl frmChild1;
@@ -44,6 +45,7 @@ namespace CodingLabpro
         public event EventHandler ActiveComboBox;
         public List<ucMenu> menuButton;
         public List<barMenu> barButton;
+        
 
 
         public class DwmApi
@@ -75,6 +77,7 @@ namespace CodingLabpro
         public FrmMain01()
         {
             InitializeComponent();
+            dataGridManager = new DataGridManager(DgvMeasurement);
             this.Text = "Aglient 34401A And MMC-2 Axis Controller";
             this.SetStyle(
                         ControlStyles.OptimizedDoubleBuffer |
@@ -110,12 +113,12 @@ namespace CodingLabpro
 
 
             //First show Panel frmChild
-            AddUserControl(frmChild1);
+            AddUserControl(frmChild2);
           
 
-            if (this.FormChildpanel.Controls.Contains(frmChild1))
+            if (this.FormChildpanel.Controls.Contains(frmChild2))
             {
-                ActivateMenu1(barMenu1, barMenu2);
+                ActivateMenu1(barMenu2, barMenu1);
                 Console.WriteLine("UserControl is add Panel Control ");
             }
             else
@@ -252,9 +255,11 @@ namespace CodingLabpro
 
         private void FrmMain01_Shown(object sender, EventArgs e)
         {
+           
 
         }
 
+ 
         public void Chartmeasure()
         {
             chart1.Series["Series1"].Points.AddXY(10, 2);
@@ -277,10 +282,7 @@ namespace CodingLabpro
             //chart1.ChartAreas["ChartArea1"].AxisX.LabelStyle.Format = "mm:ss";
 
         }
-        public void ChartUpdateValue()
-        {
-
-        }
+        
         private void BtnClear_Click(object sender, EventArgs e)
         {
             chart1.Series.Clear();

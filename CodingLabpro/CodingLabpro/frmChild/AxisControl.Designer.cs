@@ -70,13 +70,13 @@
             // labeltitle
             // 
             this.labeltitle.AutoSize = true;
-            this.labeltitle.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labeltitle.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labeltitle.ForeColor = System.Drawing.Color.White;
-            this.labeltitle.Location = new System.Drawing.Point(13, 57);
+            this.labeltitle.Location = new System.Drawing.Point(9, 53);
             this.labeltitle.Name = "labeltitle";
-            this.labeltitle.Size = new System.Drawing.Size(136, 17);
+            this.labeltitle.Size = new System.Drawing.Size(154, 21);
             this.labeltitle.TabIndex = 1;
-            this.labeltitle.Text = "Chuo seiki MMC-2";
+            this.labeltitle.Text = "Chuo Seiki MMC-2";
             // 
             // splitContainer1
             // 
