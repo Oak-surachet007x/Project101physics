@@ -35,7 +35,7 @@ namespace CodingLabpro
         public Ivi.Visa.Interop.FormattedIO488 MyDMM;
         public Ivi.Visa.Interop.FormattedIO488 MyMMC;
         public SerialPort MySerialPort = new SerialPort();
-        public static DataGridManager dataGridManager;
+       
 
         public DateTime r = DateTime.Now;
         public UserControl frmChild1;
@@ -77,7 +77,7 @@ namespace CodingLabpro
         public FrmMain01()
         {
             InitializeComponent();
-            dataGridManager = new DataGridManager(DgvMeasurement);
+
             this.Text = "Aglient 34401A And MMC-2 Axis Controller";
             this.SetStyle(
                         ControlStyles.OptimizedDoubleBuffer |

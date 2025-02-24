@@ -12,14 +12,14 @@ using System.Windows.Forms;
 using CodingLabpro.CommandDevice;
 using CodingLabpro.Models;
 using Ivi.Visa;
+using NPOI.POIFS.Crypt.Dsig;
 
 namespace CodingLabpro.frmChild
 {
     public partial class AxisControl : UserControl
     {
         private readonly Ivi.Visa.Interop.FormattedIO488 myMMC;
-        private SerialPort mySerialPort;
-        //private DataGridManager dataGridManger;
+        private readonly SerialPort mySerialPort;       
         private string StepMotor_Selected;
         private string StepMotor_ValueX;
         private string StepMotor_ValueY;
@@ -29,7 +29,10 @@ namespace CodingLabpro.frmChild
         private string ValueProcessY;
         private string ValueNegativeX;
         private string ValueTimer;
-        public static int datastep;
+        private string ValueareaX;
+        private string ValueareaY;
+        private int Countloop;
+
         public AxisControl(Ivi.Visa.Interop.FormattedIO488 myMMC, SerialPort mySerialPort)
         {
             InitializeComponent();
@@ -37,10 +40,12 @@ namespace CodingLabpro.frmChild
             this.myMMC = myMMC;
             this.mySerialPort = mySerialPort;
             //Setup Value
-            CblStepMotor.Items.AddRange(new string[] { "100", "200", "300", "400", "500", "1000" });
-            Motortype.Items.AddRange(new string[] { "cm", "mm", });
-            Motortype2.Items.AddRange(new string[] { "cm", "mm", });
+            CblStepMotor.Items.AddRange(new string[] { "100", "200", "250", "300", "400", "500", "1000" });
+            Motortype.Items.AddRange(new string[] { "cm", "mm", "μm" });
+            Motortype2.Items.AddRange(new string[] { "cm", "mm", "μm" });
             Cbltimer.Items.AddRange(new string[] {"1000", "2000", "3000" });
+            CblareaX.Items.AddRange(new string[] { "1" });
+            CblareaY.Items.AddRange(new string[] { "1" , "2"});
 
         }
 
@@ -245,178 +250,170 @@ namespace CodingLabpro.frmChild
         {
             if (Unit == "cm")
             {
-                switch (MovestepX)
-                {
-                    case "1":
-                        return "M:XP(S)";
-                    case "2":
-                        return "M:XP10000";
-                    default:
-                        throw new Exception("Limit movement = 2 cm Only");
-                }
-
+                int MathValueX = (int)(((float.Parse(MovestepX) * Math.Pow(10, -2)) * 1) / (2 * Math.Pow(10, -6)));
+                return $"M:XP{MathValueX}";
             }
             else if (Unit == "mm")
             {
-                switch (MovestepX)
+                int MathValueX = (int)(((float.Parse(MovestepX) * Math.Pow(10, -3)) * 1) / (2 * Math.Pow(10, -6)));
+                return $"M:XP{MathValueX}";
+
+            }
+            else if (Unit == "μm")
+            {
+                if ((float.Parse(MovestepX) >= 2))
                 {
-                    case "1":
-                        return "M:XP500";
-                    case "1.5":
-                        return "M:XP750";
-                    case "2":
-                        return "M:XP1000";
-                    default:
-                        throw new Exception("Limit movement = 2 cm Only");
+                    int MathValueX = (int)(((float.Parse(MovestepX) * Math.Pow(10, -6)) * 1) / (2 * Math.Pow(10, -6)));
+                    return $"M:XP{MathValueX}";
                 }
             }
 
-            return "ERROR: Invalid unit";
+            return "ERROR: Value Begin 2 μm";
         }
 
         private static string MovementPositiveY(string MovestepY, string Unit)
         {
             if (Unit == "cm")
             {
-                switch (MovestepY)
-                {
-                    case "1":
-                        return "M:YP5000";
-                    case "2":
-                        return "M:YP10000";
-                    default:
-                        throw new Exception("Limit movement = 2 cm Only");
-
-                }
+                int MathValueY = (int)(((float.Parse(MovestepY) * Math.Pow(10, -2)) * 1) / (2 * Math.Pow(10, -6))); 
+                return $"M:YP{MathValueY}";
             }
             else if (Unit == "mm")
             {
-                switch (MovestepY)
+                int MathValueY = (int)(((float.Parse(MovestepY) * Math.Pow(10, -3)) * 1) / (2 * Math.Pow(10, -6))); 
+                return $"M:YP{MathValueY}";
+                
+            }else if (Unit == "μm")
+            {
+                if ((float.Parse(MovestepY) >= 2))
                 {
-                    case "1":
-                        return "M:YP500";
-                    case "1.5":
-                        return "M:YP750";
-                    case "2":
-                        return "M:YP1000";
-                    default:
-                        throw new Exception("Limit movement = 2 cm Only");
-
+                    int MathValueY = (int)(((float.Parse(MovestepY) * Math.Pow(10, -6)) * 1) / (2 * Math.Pow(10, -6)));
+                    return $"M:YP{MathValueY}";
                 }
             }
 
-            return "ERROR: Invalid unit"; 
+            return "ERROR: Value Begin 2 μm"; 
         }
 
         private static string MovementNegativeX(string MovestepX, string Unit)
         {
             if (Unit == "cm")
             {
-                switch (MovestepX)
-                {
-                    case "1":
-                        return "M:XP-5000";
-                    case "2":
-                        return "M:XP-10000";
-                    default:
-                        throw new Exception("Limit movement = 2 cm Only");
-                }
-
+                int MathValueX = (int)(((float.Parse(MovestepX) * Math.Pow(10, -2)) * 1) / (2 * Math.Pow(10, -6)));
+                return $"M:XP-{MathValueX}";
             }
             else if (Unit == "mm")
             {
-                switch (MovestepX)
+                int MathValueX = (int)(((float.Parse(MovestepX) * Math.Pow(10, -3)) * 1) / (2 * Math.Pow(10, -6)));
+                return $"M:XP-{MathValueX}";
+
+            }
+            else if (Unit == "μm")
+            {
+                if ((float.Parse(MovestepX) >= 2))
                 {
-                    case "1":
-                        return "M:XP-500";
-                    case "1.5":
-                        return "M:XP-750";
-                    case "2":
-                        return "M:XP-1000";
-                    default:
-                        throw new Exception("Limit movement = 2 cm Only");
+                    int MathValueX = (int)(((float.Parse(MovestepX) * Math.Pow(10, -6)) * 1) / (2 * Math.Pow(10, -6)));
+                    return $"M:XP-{MathValueX}";
                 }
             }
 
-            return "ERROR: Invalid unit";
+            return "ERROR: Value Begin 2 μm";
+
         }
 
-        private void Btn_runscaning_Click(object sender, EventArgs e)
+        private static int CalareaScanning(string MoveStepX, string Unit, string AreaY, string AreaX)
+        {
+            if(int.Parse(AreaX) == int.Parse(AreaY))
+            {
+
+                if (Unit == "mm")
+                {
+                    int LoopArea = (int)(10 / float.Parse(MoveStepX));
+                    return LoopArea;
+                }
+                else if (Unit == "μm")
+                {
+                    int LoopArea = (int)(10000 / float.Parse(MoveStepX));
+                    return LoopArea;
+                }
+
+
+            }
+            
+            return 0;
+        }
+
+        private async void Btn_runscaning_Click(object sender, EventArgs e)
         {
             try
             {
+                Reportdata.Clear();
                 SteppingUnitX = Motortype.SelectedItem.ToString();
                 SteppingUnitY = Motortype2.SelectedItem.ToString();
                 StepMotor_ValueX = TxtstepX.Text;
                 StepMotor_ValueY = TxtstepY.Text;
                 ValueTimer = Cbltimer.SelectedItem.ToString();
+                ValueareaX = CblareaX.SelectedItem.ToString();
+                ValueareaY = CblareaY.SelectedItem.ToString();
 
                 //เก็บตัวแปรเรียกใช้ต่อในคลาสย่อย แล้วคืนค่าตามเงื่อนไข
                 ValueProcessX = MovementPositiveX(StepMotor_ValueX, SteppingUnitX);
                 ValueProcessY = MovementPositiveY(StepMotor_ValueY, SteppingUnitY);
                 ValueNegativeX = MovementNegativeX(StepMotor_ValueX, SteppingUnitX);
+                Countloop = CalareaScanning(StepMotor_ValueX, SteppingUnitY, ValueareaY, ValueareaX);
 
-                //Add DataTable
-                //await FrmMain01.dataGridManager.LoadDataAsync();
 
-                //Run Scaning 
+                //Run Scaning
                 myMMC.WriteString("H:W");
-                Task.Delay(5000).Wait();
+                await Task.Delay(5000);
                 myMMC.WriteString("M:YP-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y == 0 cm
                 myMMC.WriteString("G:");
-                Task.Delay(5000).Wait();
+                await Task.Delay(5000);
 
-                for (int i = 1; i <= 10; i++)
+                Reportdata.AppendText($" คำนวณผลลัพธ์ลูปที่ต้องสแกน คือ {Countloop.ToString()} ลูป" + Environment.NewLine); //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
+
+                for (int y = 0 ; y < Countloop; y++)  // Loop แกน Y (สแกนพื้นที่ 10 แถว)
                 {
-                    
-                    //turn Back Axis : X
-                    myMMC.WriteString(ValueNegativeX);
-                    myMMC.WriteString("G:");
-                    //Delay Process
-                    Task.Delay(int.Parse(ValueTimer)).Wait(); 
-                    //send data in Mainform DataGridView
-                    datastep = 1;
-
-                    if (i == 10)
+                    if (y % 2 == 0)  // ถ้าเป็นแถวคู่ (0,2,4..) เคลื่อนที่ไปทางขวา
                     {
-                        //Next to Axis: Y
-                        myMMC.WriteString(ValueProcessY);
-                        myMMC.WriteString("G:");
-                        //Delay Process
-                        Task.Delay(int.Parse(ValueTimer)).Wait();
-                        //send data in Mainform DataGridView
-                        datastep = 2;
-
-                        for (int j = 0; j <= 10; j++) 
+                        for (int x = 0; x < Countloop; x++)
                         {
-                            //turm Back Axis : X
-                            myMMC.WriteString(ValueProcessX);
+                            myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
                             myMMC.WriteString("G:");
-                            //Dalay Process
-                            Task.Delay(int.Parse(ValueTimer)).Wait();
-
-                            if (j == 10)
-                            {
-                                ////Next to Axis: Y
-                                myMMC.WriteString(ValueProcessY);
-                                myMMC.WriteString("G:");
-                                //Delay Process
-                                Task.Delay(int.Parse(ValueTimer)).Wait();
-
-                            }
+                            await Task.Delay(int.Parse(ValueTimer));
 
                         }
 
+                       
+                    }
+                    else  // ถ้าเป็นแถวคี่ (1,3,5..) เคลื่อนที่ย้อนกลับทางซ้าย
+                    {
+                        for (int x = 0; x < Countloop; x++)
+                        {
+                            myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
+                            myMMC.WriteString("G:");
+                            await Task.Delay(int.Parse(ValueTimer));
+                           
+                        }
+                    }
+                  
+                    // เคลื่อนที่ไปยังแถวถัดไปตามแนว Y
+                    myMMC.WriteString(ValueProcessY);
+                    myMMC.WriteString("G:");
+                    await Task.Delay(int.Parse(ValueTimer));
+                
+                    this.Invoke( new Action(() => Reportdata.AppendText($"{ y + 1 } loop "+ Environment.NewLine)));
+                }
+                if (Countloop % 2 != 0) {
+
+                    for (int x = 0; x < Countloop; x++)
+                    {
+                        myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
+                        myMMC.WriteString("G:");
+                        await Task.Delay(int.Parse(ValueTimer));
 
                     }
-
-                   
-
-
                 }
-
-                ////Start Axis : X Loop == 2 
-
                 ShowMessage("INFO", $"{ValueProcessX} {ValueProcessY} {ValueNegativeX}");
             }
             catch (Exception Ex)
@@ -427,5 +424,7 @@ namespace CodingLabpro.frmChild
            
             
         }
+
+      
     }
 }

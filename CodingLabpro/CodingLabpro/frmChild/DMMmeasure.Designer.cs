@@ -78,7 +78,7 @@
             this.Controls.Add(this.Button1);
             this.Controls.Add(this.LabelTop);
             this.Name = "DMMmeasure";
-            this.Size = new System.Drawing.Size(315, 833);
+            this.Size = new System.Drawing.Size(325, 833);
             this.ResumeLayout(false);
             this.PerformLayout();
 
