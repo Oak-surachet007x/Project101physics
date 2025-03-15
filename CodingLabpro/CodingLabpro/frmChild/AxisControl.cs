@@ -29,9 +29,8 @@ namespace CodingLabpro.frmChild
         private string ValueProcessY;
         private string ValueNegativeX;
         private string ValueTimer;
-        private string ValueareaX;
-        private string ValueareaY;
-        private int Countloop;
+     
+       
 
         public AxisControl(Ivi.Visa.Interop.FormattedIO488 myMMC, SerialPort mySerialPort)
         {
@@ -44,8 +43,7 @@ namespace CodingLabpro.frmChild
             Motortype.Items.AddRange(new string[] { "cm", "mm", "μm" });
             Motortype2.Items.AddRange(new string[] { "cm", "mm", "μm" });
             Cbltimer.Items.AddRange(new string[] {"1000", "2000", "3000" });
-            CblareaX.Items.AddRange(new string[] { "1" });
-            CblareaY.Items.AddRange(new string[] { "1" , "2"});
+   
 
         }
 
@@ -321,26 +319,11 @@ namespace CodingLabpro.frmChild
 
         }
 
-        private static int CalareaScanning(string MoveStepX, string Unit, string AreaY, string AreaX)
-        {
-            if(int.Parse(AreaX) == int.Parse(AreaY))
-            {
-
-                if (Unit == "mm")
-                {
-                    int LoopArea = (int)(10 / float.Parse(MoveStepX));
-                    return LoopArea;
-                }
-                else if (Unit == "μm")
-                {
-                    int LoopArea = (int)(10000 / float.Parse(MoveStepX));
-                    return LoopArea;
-                }
-
-
-            }
-            
-            return 0;
+        private static (int, int) CalareaScanning(string MoveStepX, string MoveStepY,string AreaX, string AreaY)
+        {  
+            int LoopAreaX = (int)(int.Parse(AreaX) / float.Parse(MoveStepX));
+            int LoopAreaY = (int)(int.Parse(AreaY) / float.Parse(MoveStepY));
+            return (LoopAreaX, LoopAreaY);     
         }
 
         private async void Btn_runscaning_Click(object sender, EventArgs e)
@@ -353,14 +336,13 @@ namespace CodingLabpro.frmChild
                 StepMotor_ValueX = TxtstepX.Text;
                 StepMotor_ValueY = TxtstepY.Text;
                 ValueTimer = Cbltimer.SelectedItem.ToString();
-                ValueareaX = CblareaX.SelectedItem.ToString();
-                ValueareaY = CblareaY.SelectedItem.ToString();
+                
 
                 //เก็บตัวแปรเรียกใช้ต่อในคลาสย่อย แล้วคืนค่าตามเงื่อนไข
                 ValueProcessX = MovementPositiveX(StepMotor_ValueX, SteppingUnitX);
                 ValueProcessY = MovementPositiveY(StepMotor_ValueY, SteppingUnitY);
                 ValueNegativeX = MovementNegativeX(StepMotor_ValueX, SteppingUnitX);
-                Countloop = CalareaScanning(StepMotor_ValueX, SteppingUnitY, ValueareaY, ValueareaX);
+                (int LoopAreaX, int LoopAreaY) = CalareaScanning(StepMotor_ValueX, StepMotor_ValueY, TbAreaX.Text, TbAreaY.Text);
 
 
                 //Run Scaning
@@ -370,13 +352,13 @@ namespace CodingLabpro.frmChild
                 myMMC.WriteString("G:");
                 await Task.Delay(5000);
 
-                Reportdata.AppendText($" คำนวณผลลัพธ์ลูปที่ต้องสแกน คือ {Countloop.ToString()} ลูป" + Environment.NewLine); //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
+                Reportdata.AppendText($" คำนวณผลลัพธ์ลูปที่สแกนของ X คือ {LoopAreaX.ToString()} ลูป \n คำนวณผลลัพธ์ลูปที่สแกนของ Y คือ {LoopAreaY.ToString()} ลูป" + Environment.NewLine); //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
 
-                for (int y = 0 ; y < Countloop; y++)  // Loop แกน Y (สแกนพื้นที่ 10 แถว)
+                for (int y = 0; y < LoopAreaY; y++)  // Loop แกน Y (สแกนพื้นที่ 10 แถว)
                 {
                     if (y % 2 == 0)  // ถ้าเป็นแถวคู่ (0,2,4..) เคลื่อนที่ไปทางขวา
                     {
-                        for (int x = 0; x < Countloop; x++)
+                        for (int x = 0; x < LoopAreaX; x++)
                         {
                             myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
                             myMMC.WriteString("G:");
@@ -384,29 +366,30 @@ namespace CodingLabpro.frmChild
 
                         }
 
-                       
+
                     }
                     else  // ถ้าเป็นแถวคี่ (1,3,5..) เคลื่อนที่ย้อนกลับทางซ้าย
                     {
-                        for (int x = 0; x < Countloop; x++)
+                        for (int x = 0; x < LoopAreaX; x++)
                         {
                             myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
                             myMMC.WriteString("G:");
                             await Task.Delay(int.Parse(ValueTimer));
-                           
+
                         }
                     }
-                  
+
                     // เคลื่อนที่ไปยังแถวถัดไปตามแนว Y
                     myMMC.WriteString(ValueProcessY);
                     myMMC.WriteString("G:");
                     await Task.Delay(int.Parse(ValueTimer));
-                
-                    this.Invoke( new Action(() => Reportdata.AppendText($"{ y + 1 } loop "+ Environment.NewLine)));
-                }
-                if (Countloop % 2 != 0) {
 
-                    for (int x = 0; x < Countloop; x++)
+                    this.Invoke(new Action(() => Reportdata.AppendText($"{y + 1} loop " + Environment.NewLine)));
+                }
+                if (LoopAreaY % 2 != 0)
+                {
+
+                    for (int x = 0; x < LoopAreaX; x++)
                     {
                         myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
                         myMMC.WriteString("G:");
@@ -414,6 +397,7 @@ namespace CodingLabpro.frmChild
 
                     }
                 }
+
                 ShowMessage("INFO", $"{ValueProcessX} {ValueProcessY} {ValueNegativeX}");
             }
             catch (Exception Ex)

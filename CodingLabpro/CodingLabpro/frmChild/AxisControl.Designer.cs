@@ -38,8 +38,6 @@
             this.CblStepMotor = new System.Windows.Forms.ComboBox();
             this.labelstep = new System.Windows.Forms.Label();
             this.Btn_ResetHome = new System.Windows.Forms.Button();
-            this.CblareaY = new System.Windows.Forms.ComboBox();
-            this.CblareaX = new System.Windows.Forms.ComboBox();
             this.labelUnit2 = new System.Windows.Forms.Label();
             this.labelUnit1 = new System.Windows.Forms.Label();
             this.AxisScanYlabal = new System.Windows.Forms.Label();
@@ -60,6 +58,8 @@
             this.Btn_runscaning = new System.Windows.Forms.Button();
             this.Reportdata = new System.Windows.Forms.TextBox();
             this.GBreport = new System.Windows.Forms.GroupBox();
+            this.TbAreaX = new System.Windows.Forms.TextBox();
+            this.TbAreaY = new System.Windows.Forms.TextBox();
             this.GBreport.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -178,55 +178,31 @@
             this.Btn_ResetHome.UseVisualStyleBackColor = true;
             this.Btn_ResetHome.Click += new System.EventHandler(this.Btn_ResetHome_Click);
             // 
-            // CblareaY
-            // 
-            this.CblareaY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CblareaY.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CblareaY.Font = new System.Drawing.Font("Cascadia Mono", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CblareaY.FormattingEnabled = true;
-            this.CblareaY.Location = new System.Drawing.Point(104, 426);
-            this.CblareaY.Name = "CblareaY";
-            this.CblareaY.Size = new System.Drawing.Size(132, 33);
-            this.CblareaY.TabIndex = 23;
-            // 
-            // CblareaX
-            // 
-            this.CblareaX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CblareaX.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CblareaX.Font = new System.Drawing.Font("Cascadia Mono", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CblareaX.FormattingEnabled = true;
-            this.CblareaX.Location = new System.Drawing.Point(104, 387);
-            this.CblareaX.Name = "CblareaX";
-            this.CblareaX.Size = new System.Drawing.Size(132, 33);
-            this.CblareaX.TabIndex = 22;
-            // 
             // labelUnit2
             // 
             this.labelUnit2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelUnit2.AutoSize = true;
-            this.labelUnit2.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUnit2.Font = new System.Drawing.Font("Cascadia Mono", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUnit2.ForeColor = System.Drawing.Color.White;
-            this.labelUnit2.Location = new System.Drawing.Point(242, 433);
+            this.labelUnit2.Location = new System.Drawing.Point(242, 426);
             this.labelUnit2.Name = "labelUnit2";
-            this.labelUnit2.Size = new System.Drawing.Size(28, 21);
+            this.labelUnit2.Size = new System.Drawing.Size(36, 28);
             this.labelUnit2.TabIndex = 21;
-            this.labelUnit2.Text = "cm";
+            this.labelUnit2.Text = "mm";
             // 
             // labelUnit1
             // 
             this.labelUnit1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelUnit1.AutoSize = true;
-            this.labelUnit1.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUnit1.Font = new System.Drawing.Font("Cascadia Mono", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUnit1.ForeColor = System.Drawing.Color.White;
-            this.labelUnit1.Location = new System.Drawing.Point(242, 394);
+            this.labelUnit1.Location = new System.Drawing.Point(242, 389);
             this.labelUnit1.Name = "labelUnit1";
-            this.labelUnit1.Size = new System.Drawing.Size(28, 21);
+            this.labelUnit1.Size = new System.Drawing.Size(36, 28);
             this.labelUnit1.TabIndex = 20;
-            this.labelUnit1.Text = "cm";
+            this.labelUnit1.Text = "mm";
             // 
             // AxisScanYlabal
             // 
@@ -460,24 +436,44 @@
             this.GBreport.TabStop = false;
             this.GBreport.Text = "Report loop Count ";
             // 
+            // TbAreaX
+            // 
+            this.TbAreaX.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TbAreaX.Location = new System.Drawing.Point(104, 389);
+            this.TbAreaX.Multiline = true;
+            this.TbAreaX.Name = "TbAreaX";
+            this.TbAreaX.Size = new System.Drawing.Size(132, 31);
+            this.TbAreaX.TabIndex = 27;
+            this.TbAreaX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // TbAreaY
+            // 
+            this.TbAreaY.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TbAreaY.Location = new System.Drawing.Point(104, 426);
+            this.TbAreaY.Multiline = true;
+            this.TbAreaY.Name = "TbAreaY";
+            this.TbAreaY.Size = new System.Drawing.Size(132, 28);
+            this.TbAreaY.TabIndex = 28;
+            this.TbAreaY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // AxisControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
+            this.Controls.Add(this.TbAreaY);
+            this.Controls.Add(this.TbAreaX);
             this.Controls.Add(this.GBreport);
             this.Controls.Add(this.Cbltimer);
             this.Controls.Add(this.labelDelay);
             this.Controls.Add(this.label_timerunit);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.labelUnit2);
-            this.Controls.Add(this.CblareaY);
             this.Controls.Add(this.Motortype2);
             this.Controls.Add(this.labelUnit1);
             this.Controls.Add(this.Motortype);
             this.Controls.Add(this.Sublabel2);
             this.Controls.Add(this.AxisScanYlabal);
-            this.Controls.Add(this.CblareaX);
             this.Controls.Add(this.AxisScanXlabal);
             this.Controls.Add(this.TxtstepY);
             this.Controls.Add(this.TxtstepX);
@@ -536,9 +532,9 @@
         private System.Windows.Forms.Label AxisScanXlabal;
         private System.Windows.Forms.Label labelUnit1;
         private System.Windows.Forms.Label labelUnit2;
-        private System.Windows.Forms.ComboBox CblareaY;
-        private System.Windows.Forms.ComboBox CblareaX;
         private System.Windows.Forms.TextBox Reportdata;
         private System.Windows.Forms.GroupBox GBreport;
+        private System.Windows.Forms.TextBox TbAreaX;
+        private System.Windows.Forms.TextBox TbAreaY;
     }
 }

@@ -38,3 +38,5 @@ C:\Users\User\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\Codi
 C:\Users\User\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.Properties.Resources.resources
 C:\Users\User\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.csproj.GenerateResource.cache
 C:\Users\User\Desktop\Project101physics\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.csproj.CoreCompileInputs.cache
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\Debug\CodingLabpro.csproj.AssemblyReference.cache
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\Debug\Interop.BASICFORMATTEDIOLib.dll

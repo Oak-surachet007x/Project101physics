@@ -13,18 +13,17 @@ namespace CodingLabpro.frmChild
 {
     public partial class DMMmeasure : UserControl
     {
-       
-        public DMMmeasure()
+        private readonly Ivi.Visa.Interop.FormattedIO488 myDMM;
+
+        public DMMmeasure(Ivi.Visa.Interop.FormattedIO488 myDMM)
         {
             InitializeComponent();
+            this.myDMM = myDMM;
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(FrmMain01.Aread);
-
-        
-            
 
         }
     }

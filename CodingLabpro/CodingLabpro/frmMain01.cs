@@ -109,7 +109,7 @@ namespace CodingLabpro
 
             //SetUp FormChild in UserControl
             frmChild1 = new AxisControl(MyMMC, MySerialPort);
-            frmChild2 = new DMMmeasure();
+            frmChild2 = new DMMmeasure(MyDMM);
 
 
             //First show Panel frmChild
@@ -314,9 +314,9 @@ namespace CodingLabpro
             if (this.WindowState == FormWindowState.Normal)
             {
                 labelName.Font = new Font(labelName.Font.FontFamily, 12);
-                Cblistaddress.Size = new Size(300, 29);
-                Cblistaddress2.Size = new Size(300, 29);
-                Cblistaddress3.Size = new Size(300, 29);
+                Cblistaddress.Size = new Size(290, 29);
+                Cblistaddress2.Size = new Size(290, 29);
+                Cblistaddress3.Size = new Size(290, 29);
 
             }
             else if (this.WindowState == FormWindowState.Maximized)
