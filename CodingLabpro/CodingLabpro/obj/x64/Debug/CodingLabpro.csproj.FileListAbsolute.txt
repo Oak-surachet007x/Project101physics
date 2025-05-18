@@ -181,8 +181,6 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\BouncyCast
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Enums.NET.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\ExtendedNumerics.BigDecimal.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\ICSharpCode.SharpZipLib.dll
-C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Ivi.Visa.dll
-C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Keysight.Visa.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\MathNet.Numerics.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Microsoft.IO.RecyclableMemoryStream.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NPOI.Core.dll
@@ -252,3 +250,5 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Microsoft.
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Formats.Asn1.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Microsoft.Bcl.Cryptography.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Formats.Asn1.xml
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Ivi.Visa.dll
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Keysight.Visa.dll

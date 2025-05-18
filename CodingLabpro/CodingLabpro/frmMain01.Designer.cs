@@ -74,6 +74,7 @@
             this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.barMenu2 = new CodingLabpro.Models.barMenu();
             this.FormChildpanel = new System.Windows.Forms.Panel();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.GBconnect.SuspendLayout();
             this.buttonLayoutPanel2.SuspendLayout();
@@ -248,6 +249,8 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DgvMeasurement.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DgvMeasurement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvMeasurement.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1});
             this.DgvMeasurement.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvMeasurement.Location = new System.Drawing.Point(7, 26);
             this.DgvMeasurement.Margin = new System.Windows.Forms.Padding(0);
@@ -467,7 +470,7 @@
             this.BtnClear.Name = "BtnClear";
             this.BtnClear.Size = new System.Drawing.Size(120, 30);
             this.BtnClear.TabIndex = 0;
-            this.BtnClear.Text = "Clear";
+            this.BtnClear.Text = "Clear Chart";
             this.BtnClear.UseVisualStyleBackColor = true;
             this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
@@ -545,6 +548,11 @@
             this.FormChildpanel.Name = "FormChildpanel";
             this.FormChildpanel.Size = new System.Drawing.Size(325, 815);
             this.FormChildpanel.TabIndex = 11;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Column1";
+            this.Column1.Name = "Column1";
             // 
             // FrmMain01
             // 
@@ -628,5 +636,6 @@
         private Models.barMenu barMenu2;
         private Models.ucMenu ucMenu1;
         private System.Windows.Forms.DataGridView DgvMeasurement;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }
 }

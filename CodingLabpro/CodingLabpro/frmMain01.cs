@@ -109,7 +109,7 @@ namespace CodingLabpro
 
             //SetUp FormChild in UserControl
             frmChild1 = new AxisControl(MyMMC, MySerialPort);
-            frmChild2 = new DMMmeasure(MyDMM);
+            frmChild2 = new DMMmeasure(MyDMM, this);
 
 
             //First show Panel frmChild
@@ -259,7 +259,7 @@ namespace CodingLabpro
 
         }
 
- 
+
         public void Chartmeasure()
         {
             chart1.Series["Series1"].Points.AddXY(10, 2);
