@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace CodingLabpro.CommandDevice
             try
             {
                 // Finding all devices and interfaces is straightforward
-                Rsdevices = GlobalResourceManager.Find("ASRL?*INSTR");
+                Rsdevices = SerialPort.GetPortNames();
 
                 foreach (string device1 in Rsdevices)
                 {

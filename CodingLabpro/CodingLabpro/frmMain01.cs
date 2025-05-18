@@ -30,19 +30,22 @@ using System.Diagnostics;
 
 namespace CodingLabpro
 {
-    public partial class frmMain01 : Form
+    public partial class FrmMain01 : Form
     {
-        Ivi.Visa.Interop.FormattedIO488 MyDMM;
-        Ivi.Visa.Interop.FormattedIO488 MyMMC;
-        SerialPort mySerialPort = new SerialPort();
+        public Ivi.Visa.Interop.FormattedIO488 MyDMM;
+        public Ivi.Visa.Interop.FormattedIO488 MyMMC;
+        public SerialPort MySerialPort = new SerialPort();
+       
 
-        private DateTime r = DateTime.Now;
-        private bool isRunning = false;
-        private bool StatusPort;
-        private int Clickcount = 0;
-        private UserControl frmChild1 = new AxisControl();
-        private UserControl frmChild2 = new DMMmeasure();
+        public DateTime r = DateTime.Now;
+        public UserControl frmChild1;
+        public UserControl frmChild2;
+        public static string Aread;
+        public static bool isConnect;
         public event EventHandler ActiveComboBox;
+        public List<ucMenu> menuButton;
+        public List<barMenu> barButton;
+        
 
 
         public class DwmApi
@@ -55,8 +58,7 @@ namespace CodingLabpro
             // การประกาศ DwmSetWindowAttribute
             [DllImport("dwmapi.dll")]
             public static extern int DwmSetWindowAttribute(IntPtr hwnd, int dwAttribute, ref uint pvAttribute, int cbAttribute);
-        }
-
+        } 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -71,11 +73,11 @@ namespace CodingLabpro
             }
         }
 
-        List<ucMenu> menuButton;
-        List<barMenu> barButton;
-        public frmMain01()
+       
+        public FrmMain01()
         {
             InitializeComponent();
+
             this.Text = "Aglient 34401A And MMC-2 Axis Controller";
             this.SetStyle(
                         ControlStyles.OptimizedDoubleBuffer |
@@ -95,25 +97,9 @@ namespace CodingLabpro
             barButton = new List<barMenu>() { barMenu1, barMenu2 };
             ClickBar(barButton);
 
-            //First show Panel frmChild
-            addUserControl(frmChild1);
-            if (this.FormChildpanel.Controls.Contains(frmChild1))
-            {
-                activateMenu1(barMenu1, barMenu2);
-                Console.WriteLine("UserControl is add Panel Control ");
-            }
-            else
-            {
-                Console.WriteLine("UserControl is not add Panel Control");
-            }
-
-
-
-
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
             MyDMM = new Ivi.Visa.Interop.FormattedIO488();
             MyMMC = new Ivi.Visa.Interop.FormattedIO488();
-
 
             //Port GPIB
             Ivi.Visa.Interop.ResourceManager mgr1;
@@ -121,9 +107,26 @@ namespace CodingLabpro
             Ivi.Visa.Interop.ResourceManager mgr2;
             mgr2 = new Ivi.Visa.Interop.ResourceManager();
 
+            //SetUp FormChild in UserControl
+            frmChild1 = new AxisControl(MyMMC, MySerialPort);
+            frmChild2 = new DMMmeasure(MyDMM, this);
 
+
+            //First show Panel frmChild
+            AddUserControl(frmChild2);
           
 
+            if (this.FormChildpanel.Controls.Contains(frmChild2))
+            {
+                ActivateMenu1(barMenu2, barMenu1);
+                Console.WriteLine("UserControl is add Panel Control ");
+            }
+            else
+            {
+                Console.WriteLine("UserControl is not add Panel Control");
+            }
+
+           
             //Find Device
             FindDevices finder = new FindDevices();
             finder.OnDeviceFound += (device) =>
@@ -143,6 +146,11 @@ namespace CodingLabpro
 
         }
 
+        public void ShowMessage(string type, string message)
+        {
+            Form MessageNotify = new MessageBox_Notify(type, message);
+            MessageNotify.Show();
+        }
 
         //--------------------------------------------------------------------------------------------------------------//
 
@@ -155,7 +163,7 @@ namespace CodingLabpro
             }
         }
 
-        private void addUserControl(UserControl userControl)
+        private void AddUserControl(UserControl userControl)
         {
             userControl.Dock = DockStyle.Fill;
             FormChildpanel.Controls.Clear();
@@ -170,21 +178,21 @@ namespace CodingLabpro
             switch (_barButton.Name)
             {
                 case "barMenu1":
-                    activateMenu1(barMenu1, barMenu2);
-                    addUserControl(frmChild1);
+                    ActivateMenu1(barMenu1, barMenu2);
+                    AddUserControl(frmChild1);
 
                     break;
 
                 case "barMenu2":
-                    activateMenu1(barMenu2, barMenu1);
-                    addUserControl(frmChild2);
+                    ActivateMenu1(barMenu2, barMenu1);
+                    AddUserControl(frmChild2);
 
                     break;
 
             }
         }
 
-        private void activateMenu1(barMenu _active, params barMenu[] _inactive)
+        private void ActivateMenu1(barMenu _active, params barMenu[] _inactive)
         {
             _active.BarColor = Color.Purple;
 
@@ -211,17 +219,17 @@ namespace CodingLabpro
             switch (_menuButton.Name)
             {
                 case "ucMenu1":
-                    activateMenu(ucMenu1, ucMenu2);
+                    ActivateMenu(ucMenu1, ucMenu2);
                     break;
 
                 case "ucMenu2":
-                    activateMenu(ucMenu2, ucMenu1);
+                    ActivateMenu(ucMenu2, ucMenu1);
                     Form form = new frmMain();
                     form.Show();
                     break;
             }
         }
-        private async void activateMenu(ucMenu _active, params ucMenu[] _inactive)
+        private async void ActivateMenu(ucMenu _active, params ucMenu[] _inactive)
         {
 
             _active.BorderColor = Color.Purple;
@@ -240,21 +248,18 @@ namespace CodingLabpro
         //--------------------------------------------------------------------------------------------------------------//
 
 
-        private void frmMain01_Load(object sender, EventArgs e)
+        private void FrmMain01_Load(object sender, EventArgs e)
         {
             ActiveComboBox += ComboBoxEnabled;
         }
 
-        private void frmMain01_Shown(object sender, EventArgs e)
+        private void FrmMain01_Shown(object sender, EventArgs e)
         {
+           
 
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            //timer1.Tick += new EventHandler();
-            timer1.Interval = 1000;
-        }
+
         public void Chartmeasure()
         {
             chart1.Series["Series1"].Points.AddXY(10, 2);
@@ -277,10 +282,7 @@ namespace CodingLabpro
             //chart1.ChartAreas["ChartArea1"].AxisX.LabelStyle.Format = "mm:ss";
 
         }
-        public void ChartUpdateValue()
-        {
-
-        }
+        
         private void BtnClear_Click(object sender, EventArgs e)
         {
             chart1.Series.Clear();
@@ -306,45 +308,73 @@ namespace CodingLabpro
 
         }
 
-        private void frmMain01_SizeChanged(object sender, EventArgs e)
+        private void FrmMain01_SizeChanged(object sender, EventArgs e)
         {
 
             if (this.WindowState == FormWindowState.Normal)
             {
                 labelName.Font = new Font(labelName.Font.FontFamily, 12);
-                Cblistaddress.Size = new Size(300, 29);
-                Cblistaddress2.Size = new Size(300, 29);
-                Cblistaddress3.Size = new Size(300, 29);
+                Cblistaddress.Size = new Size(290, 29);
+                Cblistaddress2.Size = new Size(290, 29);
+                Cblistaddress3.Size = new Size(290, 29);
 
             }
             else if (this.WindowState == FormWindowState.Maximized)
             {
-
-                Cblistaddress.Size = new Size(380, 29);
-                Cblistaddress2.Size = new Size(380, 29);
-                Cblistaddress3.Size = new Size(380, 29);
-
+                tableLayoutPanel1.ColumnStyles.Clear();
+                tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F)); // คอลัมน์แรกกว้าง 100%
+                tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // คอลัมน์ที่สองปรับอัตโนมัติ
             }
 
         }
 
         public void ComboBoxEnabled(Object sender, EventArgs e)
         {
-            if (!BtnDiconnect.Enabled)
+            if (!isConnect)
             {
+                BtnConnect.Enabled = false;
+                BtnDiconnect.Enabled = true;
+
                 Cblistaddress.Enabled = false;
                 Cblistaddress2.Enabled = false;
                 Cblistaddress3.Enabled = false;
+
+                if(Cblistaddress.SelectedIndex >= 0)
+                {
+                    StatusPort1.BackColor = Color.LightGreen;
+                    StatusPort1.Text = "CONNECT";
+
+                }
+
+                if (Cblistaddress2.SelectedIndex >= 0)
+                {
+                    StatusPort2.BackColor = Color.LightGreen;
+                    StatusPort2.Text = "CONNECT";
+
+                }
+
+                if (Cblistaddress3.SelectedIndex >= 0)
+                {
+                    StatusPort3.BackColor = Color.LightGreen;
+                    StatusPort3.Text = "CONNECT";
+
+                }
+
             }
-            else if (BtnDiconnect.Enabled) 
-            { 
+            else  
+            {
+                BtnConnect.Enabled = true;
+                BtnDiconnect.Enabled = false;
+
                 Cblistaddress.Enabled = true; 
                 Cblistaddress2.Enabled = true;
                 Cblistaddress3.Enabled= true;
+
+                
             }
         }
         
-        public static bool checkPort(params System.Windows.Forms.ComboBox[] comboBoxes)
+        public static bool CheckPort(params System.Windows.Forms.ComboBox[] comboBoxes)
         {
 
             foreach (var CBox in comboBoxes)
@@ -373,89 +403,78 @@ namespace CodingLabpro
             System.Windows.Forms.Cursor.Current = Cursors.WaitCursor;
 
             //ตรวจสอบว่ามีการเลือกไอเทมใน ComboBox ทั้ง 3 ช่องไหม
-            if (checkPort(Cblistaddress,Cblistaddress2,Cblistaddress3))
+            if (CheckPort(Cblistaddress,Cblistaddress2,Cblistaddress3))
             {
-                MessageBox.Show("you Should Select Port Device");
+                //MessageBox.Show("you Should Select Port Device");
                 BtnConnect.BackColor = Color.Orange;
                 BtnConnect.Text = "Warning";
                 BtnConnect.ForeColor = Color.White;
+
+                ShowMessage("WARNING","you Should Port Device");
 
             }
             else
             {
                 try
                 {
-                    ActiveComboBox?.Invoke(this, EventArgs.Empty);
-
                     if (Cblistaddress.SelectedIndex >= 0)
                     {
                         //CONNECT driver DMM Port GP - IB
                         string addr = Cblistaddress.SelectedItem.ToString();
-                        textread.AppendText(addr);
-                        //MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 2000, null);
-                        //MyDMM.IO.Timeout = 2000;
-                        //string command = "*IDN?";
-                        //MyDMM.WriteString(command);
+                        MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 2000, null);
+                        MyDMM.IO.Timeout = 2000;
+                        string command = "*IDN?";
+                        MyDMM.WriteString(command);
 
-                        //string Aread = MyDMM.ReadString();
-                        //textread.AppendText(Aread + Environment.NewLine);
+                        Aread = MyDMM.ReadString(); ;
                         //MyDMM.WriteString("*CLS");
-
-                        StatusPort1.BackColor = Color.LightGreen;
-                        StatusPort1.Text = "CONNECT";
-
                     }
 
                     if (Cblistaddress2.SelectedIndex >= 0)
                     {
                         //CONNECT driver MMC Port GP-IB
                         string MMCaddr = Cblistaddress2.SelectedItem.ToString();
-                        //MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
-                        //MyMMC.IO.Timeout = 5000;
-                        //string MSG = "H:W";
-                        //MyMMC.WriteString(MSG);
-
-                        StatusPort2.BackColor = Color.LightGreen;
-                        StatusPort2.Text = "CONNECT";
-
+                        MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
+                        MyMMC.IO.Timeout = 5000;
+                        string MSG = "H:W";
+                        MyMMC.WriteString(MSG);
 
                     }
 
                     if (Cblistaddress3.SelectedIndex >= 0)
                     {
                         //Port RS232 Setting
-                        //mySerialPort.PortName = "COM7";
-                        //mySerialPort.BaudRate = 9600; // ตั้งค่า Baud Rate
-                        //mySerialPort.Parity = Parity.None; // ตั้งค่า Parity
-                        //mySerialPort.StopBits = StopBits.One; // ตั้งค่า Stop Bits
-                        //mySerialPort.DataBits = 8; // ตั้งค่าจำนวน Data Bits
-                        //mySerialPort.Handshake = Handshake.None; // ตั้งค่า Handshake
+                        MySerialPort.PortName = Cblistaddress3.SelectedItem.ToString();
+                        MySerialPort.BaudRate = 9600; // ตั้งค่า Baud Rate
+                        MySerialPort.Parity = Parity.None; // ตั้งค่า Parity
+                        MySerialPort.StopBits = StopBits.One; // ตั้งค่า Stop Bits
+                        MySerialPort.DataBits = 8; // ตั้งค่าจำนวน Data Bits
+                        MySerialPort.Handshake = Handshake.None; // ตั้งค่า Handshake
 
 
                         ////CONNET driver MMC Port RS-232
-                        //mySerialPort.Open();
-                        //mySerialPort.WriteLine("H:X");
-
-                        StatusPort3.BackColor = Color.LightGreen;
-                        StatusPort3.Text = "CONNECT";
+                        MySerialPort.Open();
+                        MySerialPort.WriteLine("H:X");
 
                     }
 
-                    BtnConnect.Enabled = false;
-                    BtnDiconnect.Enabled = true;
+                    List<string> listDevice = new List<string>{Cblistaddress.Text, Cblistaddress2.Text, Cblistaddress3.Text };
+                    ShowMessage("OK", r.ToString("r") + $"\nPort Driver Connected\n{Aread}" + $"{string.Join("\n",listDevice)}");
+
+                    ActiveComboBox?.Invoke(this, EventArgs.Empty);
+                    isConnect = true;
                     BtnConnect.Text = "Remote";
                     BtnConnect.BackColor = Color.LightGreen;
                 }
                 catch (Exception ex)
                 {
+                    isConnect = false;
                     BtnConnect.BackColor = Color.Red;
                     BtnConnect.Text = "Unconnect";
                     BtnConnect.ForeColor = Color.White;
-                    //string incorrectness1 = "Cannot Find driver Agilent Muitimeter and MMC Step motor!";
-                    MessageBox.Show("Device session is not connect", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    textread.AppendText(">>" + r.ToString("r") + " <Notification!> " + Environment.NewLine +
-                                        ex.Message + Environment.NewLine);
-
+                   
+                    ShowMessage("ERROR", r.ToString("r") + "\nCannot Find driver Agilent Muitimeter and MMC Step motor!" + Environment.NewLine + ex.Message);
+                  
                 }
 
             }
@@ -468,37 +487,35 @@ namespace CodingLabpro
 
             try
             {
-                ActiveComboBox?.Invoke(this, EventArgs.Empty);
-
                 if (Cblistaddress.SelectedIndex >= 0)
                 {
-                    //MyDMM.IO.Close();
+                    MyDMM.IO.Close();
                     StatusPort1.BackColor = Color.Red;
                     StatusPort1.Text = "DiCONNECT";
                 }
 
                 if (Cblistaddress2.SelectedIndex >= 0)
                 {
-                    //MyMMC.IO.Close();
+                    MyMMC.IO.Close();
                     StatusPort2.BackColor = Color.Red;
                     StatusPort2.Text = "DiCONNECT";
                 }
 
                 if (Cblistaddress3.SelectedIndex >= 0)
                 {
-                    //if (mySerialPort.IsOpen)
-                    //{
-                    //    mySerialPort.Close();
-                    //}
+                    if (MySerialPort.IsOpen)
+                    {
+                        MySerialPort.Close();
+                    }
 
                     StatusPort3.BackColor = Color.Red;
                     StatusPort3.Text = "DiCONNECT";
                 }
 
-                Thread.Sleep(1000);
+                Task.Delay(5000).Wait();
 
-                BtnDiconnect.Enabled = false;
-                BtnConnect.Enabled = true;
+                ActiveComboBox?.Invoke(this, EventArgs.Empty);
+                isConnect = false;
                 BtnConnect.BackColor = Color.Transparent;
                 BtnConnect.Text = "CONNECT";
                 BtnConnect.ForeColor = Color.White;
@@ -508,7 +525,7 @@ namespace CodingLabpro
             }
             catch (VisaException ex)
             {
-                textread.AppendText(ex.Message);
+                ShowMessage("ERROR", r.ToString("r") + "\nCannot DiConnect Devices" + Environment.NewLine + ex.Message);
             }
 
             System.Windows.Forms.Cursor.Current = Cursors.Default;
