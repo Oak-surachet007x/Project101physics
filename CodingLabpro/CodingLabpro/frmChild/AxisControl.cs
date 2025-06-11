@@ -357,7 +357,7 @@ namespace CodingLabpro.frmChild
             }
         }
 
-        private static (int, int) CalareaScanning(string MoveStepX, string MoveStepY,string AreaX, string AreaY, float UnitX, float UnitY)
+        public static (int, int) CalareaScanning(string MoveStepX, string MoveStepY,string AreaX, string AreaY, float UnitX, float UnitY)
         {
             int LoopAreaX = (int)((float.Parse(AreaX) * 1E-3f) / (float.Parse(MoveStepX) * UnitX));
             Debug.WriteLine("X loop " + LoopAreaX.ToString() + "\t" + MoveStepX + "\t" + UnitX.ToString());

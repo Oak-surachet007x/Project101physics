@@ -183,11 +183,11 @@
             this.labelUnit2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelUnit2.AutoSize = true;
-            this.labelUnit2.Font = new System.Drawing.Font("Cascadia Mono", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUnit2.Font = new System.Drawing.Font("Cascadia Mono", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUnit2.ForeColor = System.Drawing.Color.White;
             this.labelUnit2.Location = new System.Drawing.Point(242, 426);
             this.labelUnit2.Name = "labelUnit2";
-            this.labelUnit2.Size = new System.Drawing.Size(36, 28);
+            this.labelUnit2.Size = new System.Drawing.Size(34, 25);
             this.labelUnit2.TabIndex = 21;
             this.labelUnit2.Text = "mm";
             // 
@@ -196,11 +196,11 @@
             this.labelUnit1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelUnit1.AutoSize = true;
-            this.labelUnit1.Font = new System.Drawing.Font("Cascadia Mono", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUnit1.Font = new System.Drawing.Font("Cascadia Mono", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUnit1.ForeColor = System.Drawing.Color.White;
             this.labelUnit1.Location = new System.Drawing.Point(242, 389);
             this.labelUnit1.Name = "labelUnit1";
-            this.labelUnit1.Size = new System.Drawing.Size(36, 28);
+            this.labelUnit1.Size = new System.Drawing.Size(34, 25);
             this.labelUnit1.TabIndex = 20;
             this.labelUnit1.Text = "mm";
             // 

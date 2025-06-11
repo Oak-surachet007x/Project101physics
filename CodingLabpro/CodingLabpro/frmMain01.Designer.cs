@@ -32,10 +32,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain01));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain01));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.GBconnect = new System.Windows.Forms.GroupBox();
             this.buttonLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -49,10 +49,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.GBdata = new System.Windows.Forms.GroupBox();
             this.DgvMeasurement = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelTop = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.MainStatus = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusicon = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusDMM = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusPort1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -64,17 +64,16 @@
             this.GBchart = new System.Windows.Forms.GroupBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.CPchart = new System.Windows.Forms.Panel();
-            this.BtnExport = new System.Windows.Forms.Button();
             this.BtnClear = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Menupanel = new System.Windows.Forms.Panel();
-            this.ucMenu2 = new CodingLabpro.Models.ucMenu();
-            this.ucMenu1 = new CodingLabpro.Models.ucMenu();
             this.flowLayoutBar = new System.Windows.Forms.FlowLayoutPanel();
+            this.FormChildpanel = new System.Windows.Forms.Panel();
+            this.toolStripStatusicon = new System.Windows.Forms.ToolStripStatusLabel();
             this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.barMenu2 = new CodingLabpro.Models.barMenu();
-            this.FormChildpanel = new System.Windows.Forms.Panel();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ucMenu2 = new CodingLabpro.Models.ucMenu();
+            this.ucMenu1 = new CodingLabpro.Models.ucMenu();
             this.tableLayoutPanel1.SuspendLayout();
             this.GBconnect.SuspendLayout();
             this.buttonLayoutPanel2.SuspendLayout();
@@ -258,6 +257,11 @@
             this.DgvMeasurement.Size = new System.Drawing.Size(712, 242);
             this.DgvMeasurement.TabIndex = 0;
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Column1";
+            this.Column1.Name = "Column1";
+            // 
             // labelTop
             // 
             this.labelTop.AutoSize = true;
@@ -303,12 +307,6 @@
             this.MainStatus.Size = new System.Drawing.Size(1455, 30);
             this.MainStatus.TabIndex = 4;
             this.MainStatus.Text = "statusStrip1";
-            // 
-            // toolStripStatusicon
-            // 
-            this.toolStripStatusicon.Image = ((System.Drawing.Image)(resources.GetObject("toolStripStatusicon.Image")));
-            this.toolStripStatusicon.Name = "toolStripStatusicon";
-            this.toolStripStatusicon.Size = new System.Drawing.Size(20, 25);
             // 
             // StatusLabel
             // 
@@ -375,6 +373,7 @@
             // 
             // GBchart
             // 
+            this.GBchart.AutoSize = true;
             this.GBchart.BackColor = System.Drawing.Color.Transparent;
             this.GBchart.Controls.Add(this.chart1);
             this.GBchart.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -382,6 +381,7 @@
             this.GBchart.Font = new System.Drawing.Font("Cascadia Mono Light", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBchart.ForeColor = System.Drawing.Color.White;
             this.GBchart.Location = new System.Drawing.Point(85, 88);
+            this.GBchart.Margin = new System.Windows.Forms.Padding(7);
             this.GBchart.Name = "GBchart";
             this.GBchart.Padding = new System.Windows.Forms.Padding(0);
             this.GBchart.Size = new System.Drawing.Size(1080, 387);
@@ -442,7 +442,6 @@
             // CPchart
             // 
             this.CPchart.BackColor = System.Drawing.Color.Transparent;
-            this.CPchart.Controls.Add(this.BtnExport);
             this.CPchart.Controls.Add(this.BtnClear);
             this.CPchart.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.CPchart.ForeColor = System.Drawing.Color.White;
@@ -452,21 +451,11 @@
             this.CPchart.Size = new System.Drawing.Size(1080, 45);
             this.CPchart.TabIndex = 9;
             // 
-            // BtnExport
-            // 
-            this.BtnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnExport.Location = new System.Drawing.Point(13, 9);
-            this.BtnExport.Name = "BtnExport";
-            this.BtnExport.Size = new System.Drawing.Size(120, 30);
-            this.BtnExport.TabIndex = 1;
-            this.BtnExport.Text = "Export .xlsx";
-            this.BtnExport.UseVisualStyleBackColor = true;
-            // 
             // BtnClear
             // 
             this.BtnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnClear.ForeColor = System.Drawing.Color.White;
-            this.BtnClear.Location = new System.Drawing.Point(139, 9);
+            this.BtnClear.Location = new System.Drawing.Point(10, 6);
             this.BtnClear.Name = "BtnClear";
             this.BtnClear.Size = new System.Drawing.Size(120, 30);
             this.BtnClear.TabIndex = 0;
@@ -485,28 +474,6 @@
             this.Menupanel.Size = new System.Drawing.Size(85, 845);
             this.Menupanel.TabIndex = 0;
             // 
-            // ucMenu2
-            // 
-            this.ucMenu2.BackColor = System.Drawing.Color.Transparent;
-            this.ucMenu2.BorderColor = System.Drawing.Color.Transparent;
-            this.ucMenu2.Icon = global::CodingLabpro.Properties.Resources.dynamic_form_16dp_E8EAED;
-            this.ucMenu2.Location = new System.Drawing.Point(-8, 272);
-            this.ucMenu2.Name = "ucMenu2";
-            this.ucMenu2.Size = new System.Drawing.Size(90, 52);
-            this.ucMenu2.TabIndex = 1;
-            this.ucMenu2.textlabel = "Old_Form";
-            // 
-            // ucMenu1
-            // 
-            this.ucMenu1.BackColor = System.Drawing.Color.Transparent;
-            this.ucMenu1.BorderColor = System.Drawing.Color.Transparent;
-            this.ucMenu1.Icon = global::CodingLabpro.Properties.Resources.help_center_16dp_E8EAED;
-            this.ucMenu1.Location = new System.Drawing.Point(-8, 202);
-            this.ucMenu1.Name = "ucMenu1";
-            this.ucMenu1.Size = new System.Drawing.Size(90, 52);
-            this.ucMenu1.TabIndex = 0;
-            this.ucMenu1.textlabel = "Help";
-            // 
             // flowLayoutBar
             // 
             this.flowLayoutBar.BackColor = System.Drawing.Color.Transparent;
@@ -517,6 +484,21 @@
             this.flowLayoutBar.Name = "flowLayoutBar";
             this.flowLayoutBar.Size = new System.Drawing.Size(50, 815);
             this.flowLayoutBar.TabIndex = 10;
+            // 
+            // FormChildpanel
+            // 
+            this.FormChildpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
+            this.FormChildpanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.FormChildpanel.Location = new System.Drawing.Point(1165, 0);
+            this.FormChildpanel.Name = "FormChildpanel";
+            this.FormChildpanel.Size = new System.Drawing.Size(325, 815);
+            this.FormChildpanel.TabIndex = 11;
+            // 
+            // toolStripStatusicon
+            // 
+            this.toolStripStatusicon.Image = ((System.Drawing.Image)(resources.GetObject("toolStripStatusicon.Image")));
+            this.toolStripStatusicon.Name = "toolStripStatusicon";
+            this.toolStripStatusicon.Size = new System.Drawing.Size(20, 25);
             // 
             // barMenu1
             // 
@@ -540,19 +522,27 @@
             this.barMenu2.TabIndex = 12;
             this.barMenu2.textbar = "Measurement";
             // 
-            // FormChildpanel
+            // ucMenu2
             // 
-            this.FormChildpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
-            this.FormChildpanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.FormChildpanel.Location = new System.Drawing.Point(1165, 0);
-            this.FormChildpanel.Name = "FormChildpanel";
-            this.FormChildpanel.Size = new System.Drawing.Size(325, 815);
-            this.FormChildpanel.TabIndex = 11;
+            this.ucMenu2.BackColor = System.Drawing.Color.Transparent;
+            this.ucMenu2.BorderColor = System.Drawing.Color.Transparent;
+            this.ucMenu2.Icon = global::CodingLabpro.Properties.Resources.dynamic_form_16dp_E8EAED;
+            this.ucMenu2.Location = new System.Drawing.Point(-8, 272);
+            this.ucMenu2.Name = "ucMenu2";
+            this.ucMenu2.Size = new System.Drawing.Size(90, 52);
+            this.ucMenu2.TabIndex = 1;
+            this.ucMenu2.textlabel = "Old_Form";
             // 
-            // Column1
+            // ucMenu1
             // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
+            this.ucMenu1.BackColor = System.Drawing.Color.Transparent;
+            this.ucMenu1.BorderColor = System.Drawing.Color.Transparent;
+            this.ucMenu1.Icon = global::CodingLabpro.Properties.Resources.help_center_16dp_E8EAED;
+            this.ucMenu1.Location = new System.Drawing.Point(-8, 202);
+            this.ucMenu1.Name = "ucMenu1";
+            this.ucMenu1.Size = new System.Drawing.Size(90, 52);
+            this.ucMenu1.TabIndex = 0;
+            this.ucMenu1.textlabel = "Help";
             // 
             // FrmMain01
             // 
@@ -592,6 +582,7 @@
             this.Menupanel.ResumeLayout(false);
             this.flowLayoutBar.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -626,7 +617,6 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Panel CPchart;
         private System.Windows.Forms.Button BtnClear;
-        private System.Windows.Forms.Button BtnExport;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel Menupanel;
         private Models.ucMenu ucMenu2;

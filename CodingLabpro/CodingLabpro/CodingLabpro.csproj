@@ -166,7 +166,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandDevice\FindDevices.cs" />
+    <Compile Include="Class\FindDevices.cs" />
     <Compile Include="frmarduino.cs">
       <SubType>Form</SubType>
     </Compile>

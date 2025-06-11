@@ -15,13 +15,12 @@ namespace CodingLabpro.frmChild
     public partial class DMMmeasure : UserControl
     {
         private readonly Ivi.Visa.Interop.FormattedIO488 myDMM;
-        private FrmMain01 mainForm;
 
-        public DMMmeasure(Ivi.Visa.Interop.FormattedIO488 myDMM, FrmMain01 form)
+        public DMMmeasure(Ivi.Visa.Interop.FormattedIO488 myDMM)
         {
             InitializeComponent();
             this.myDMM = myDMM;
-            this.mainForm = form;
+          
 
             CBrange.Items.AddRange(new string[] {"10", "20", "Auto"});
             CBdelay.Items.AddRange(new string[] {"1000", "2000", "3000", "Auto"});
@@ -85,8 +84,6 @@ namespace CodingLabpro.frmChild
         private void Btn_read_Click(object sender, EventArgs e)
         {
             DMM_Write("READ?");
-            string Datavalue = myDMM.ReadString();
-
         }
 
         private void Btn_Error_Click(object sender, EventArgs e)
@@ -148,14 +145,10 @@ namespace CodingLabpro.frmChild
         {
             string InputMeasure = MeasurementType();
             string InputSource = MeasurementSource();
-            //string TrigerSU = TriggerSource();
             string CommandMeasure = CommandMeasurement(InputMeasure, InputSource);
             DMM_Write(CommandMeasure);
             string datavalue = myDMM.ReadString();
-            //string data = DMM_Read("READ?");
-
             ShowMessage("INFO", $"{InputMeasure}, {InputSource}, {CommandMeasure}\n" + datavalue);
-            //DMM_Write(TrigerSU);
 
 
         }
