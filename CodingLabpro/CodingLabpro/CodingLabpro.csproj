@@ -166,6 +166,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandDevice\CalculateArea.cs" />
     <Compile Include="CommandDevice\FindDevices.cs" />
     <Compile Include="frmarduino.cs">
       <SubType>Form</SubType>

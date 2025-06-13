@@ -94,7 +94,7 @@ namespace CodingLabpro
             ClickMenu(menuButton);
 
             //BarMenuButton
-            barButton = new List<barMenu>() { barMenu1, barMenu2 };
+            barButton = new List<barMenu>() { barMenu1 };
             ClickBar(barButton);
 
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
@@ -113,12 +113,12 @@ namespace CodingLabpro
 
 
             //First show Panel frmChild
-            AddUserControl(frmChild2);
+            AddUserControl(frmChild1);
           
 
-            if (this.FormChildpanel.Controls.Contains(frmChild2))
+            if (this.FormChildpanel.Controls.Contains(frmChild1))
             {
-                ActivateMenu1(barMenu2, barMenu1);
+                ActivateMenu1(barMenu1);
                 Console.WriteLine("UserControl is add Panel Control ");
             }
             else
@@ -178,14 +178,8 @@ namespace CodingLabpro
             switch (_barButton.Name)
             {
                 case "barMenu1":
-                    ActivateMenu1(barMenu1, barMenu2);
+                    ActivateMenu1(barMenu1);
                     AddUserControl(frmChild1);
-
-                    break;
-
-                case "barMenu2":
-                    ActivateMenu1(barMenu2, barMenu1);
-                    AddUserControl(frmChild2);
 
                     break;
 

@@ -49,6 +49,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.GBdata = new System.Windows.Forms.GroupBox();
             this.DgvMeasurement = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelTop = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.MainStatus = new System.Windows.Forms.StatusStrip();
@@ -68,13 +69,11 @@
             this.BtnClear = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Menupanel = new System.Windows.Forms.Panel();
+            this.flowLayoutBar = new System.Windows.Forms.FlowLayoutPanel();
+            this.FormChildpanel = new System.Windows.Forms.Panel();
+            this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.ucMenu2 = new CodingLabpro.Models.ucMenu();
             this.ucMenu1 = new CodingLabpro.Models.ucMenu();
-            this.flowLayoutBar = new System.Windows.Forms.FlowLayoutPanel();
-            this.barMenu1 = new CodingLabpro.Models.barMenu();
-            this.barMenu2 = new CodingLabpro.Models.barMenu();
-            this.FormChildpanel = new System.Windows.Forms.Panel();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.GBconnect.SuspendLayout();
             this.buttonLayoutPanel2.SuspendLayout();
@@ -93,8 +92,8 @@
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.12811F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.87189F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.69596F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.30404F));
             this.tableLayoutPanel1.Controls.Add(this.GBconnect, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.GBdata, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -102,7 +101,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1080, 295);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(725, 295);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // GBconnect
@@ -117,10 +116,10 @@
             this.GBconnect.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GBconnect.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBconnect.ForeColor = System.Drawing.Color.White;
-            this.GBconnect.Location = new System.Drawing.Point(756, 10);
+            this.GBconnect.Location = new System.Drawing.Point(399, 10);
             this.GBconnect.Margin = new System.Windows.Forms.Padding(10);
             this.GBconnect.Name = "GBconnect";
-            this.GBconnect.Size = new System.Drawing.Size(314, 275);
+            this.GBconnect.Size = new System.Drawing.Size(316, 275);
             this.GBconnect.TabIndex = 2;
             this.GBconnect.TabStop = false;
             this.GBconnect.Text = "Connection";
@@ -137,7 +136,7 @@
             this.buttonLayoutPanel2.Name = "buttonLayoutPanel2";
             this.buttonLayoutPanel2.RowCount = 1;
             this.buttonLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.buttonLayoutPanel2.Size = new System.Drawing.Size(308, 36);
+            this.buttonLayoutPanel2.Size = new System.Drawing.Size(310, 36);
             this.buttonLayoutPanel2.TabIndex = 6;
             // 
             // BtnDiconnect
@@ -147,7 +146,7 @@
             this.BtnDiconnect.ForeColor = System.Drawing.Color.Red;
             this.BtnDiconnect.Location = new System.Drawing.Point(3, 3);
             this.BtnDiconnect.Name = "BtnDiconnect";
-            this.BtnDiconnect.Size = new System.Drawing.Size(148, 30);
+            this.BtnDiconnect.Size = new System.Drawing.Size(149, 30);
             this.BtnDiconnect.TabIndex = 4;
             this.BtnDiconnect.Text = "Diconnect";
             this.BtnDiconnect.UseVisualStyleBackColor = true;
@@ -159,9 +158,9 @@
             this.BtnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnConnect.ForeColor = System.Drawing.Color.White;
             this.BtnConnect.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.BtnConnect.Location = new System.Drawing.Point(157, 3);
+            this.BtnConnect.Location = new System.Drawing.Point(158, 3);
             this.BtnConnect.Name = "BtnConnect";
-            this.BtnConnect.Size = new System.Drawing.Size(148, 30);
+            this.BtnConnect.Size = new System.Drawing.Size(149, 30);
             this.BtnConnect.TabIndex = 6;
             this.BtnConnect.Text = "Connect";
             this.BtnConnect.UseVisualStyleBackColor = true;
@@ -231,7 +230,7 @@
             this.GBdata.Margin = new System.Windows.Forms.Padding(10);
             this.GBdata.Name = "GBdata";
             this.GBdata.Padding = new System.Windows.Forms.Padding(7);
-            this.GBdata.Size = new System.Drawing.Size(726, 275);
+            this.GBdata.Size = new System.Drawing.Size(369, 275);
             this.GBdata.TabIndex = 1;
             this.GBdata.TabStop = false;
             this.GBdata.Text = "Measurement";
@@ -255,8 +254,13 @@
             this.DgvMeasurement.Location = new System.Drawing.Point(7, 26);
             this.DgvMeasurement.Margin = new System.Windows.Forms.Padding(0);
             this.DgvMeasurement.Name = "DgvMeasurement";
-            this.DgvMeasurement.Size = new System.Drawing.Size(712, 242);
+            this.DgvMeasurement.Size = new System.Drawing.Size(355, 242);
             this.DgvMeasurement.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Column1";
+            this.Column1.Name = "Column1";
             // 
             // labelTop
             // 
@@ -300,7 +304,9 @@
             this.StatusPort3});
             this.MainStatus.Location = new System.Drawing.Point(85, 815);
             this.MainStatus.Name = "MainStatus";
+            this.MainStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.MainStatus.Size = new System.Drawing.Size(1455, 30);
+            this.MainStatus.SizingGrip = false;
             this.MainStatus.TabIndex = 4;
             this.MainStatus.Text = "statusStrip1";
             // 
@@ -370,7 +376,7 @@
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(85, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1080, 88);
+            this.panelTop.Size = new System.Drawing.Size(725, 88);
             this.panelTop.TabIndex = 6;
             // 
             // GBchart
@@ -384,7 +390,7 @@
             this.GBchart.Location = new System.Drawing.Point(85, 88);
             this.GBchart.Name = "GBchart";
             this.GBchart.Padding = new System.Windows.Forms.Padding(0);
-            this.GBchart.Size = new System.Drawing.Size(1080, 387);
+            this.GBchart.Size = new System.Drawing.Size(725, 387);
             this.GBchart.TabIndex = 8;
             this.GBchart.TabStop = false;
             this.GBchart.Text = "Data Measurement";
@@ -435,7 +441,7 @@
             series1.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(1080, 365);
+            this.chart1.Size = new System.Drawing.Size(725, 365);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -449,7 +455,7 @@
             this.CPchart.Location = new System.Drawing.Point(85, 475);
             this.CPchart.Margin = new System.Windows.Forms.Padding(10);
             this.CPchart.Name = "CPchart";
-            this.CPchart.Size = new System.Drawing.Size(1080, 45);
+            this.CPchart.Size = new System.Drawing.Size(725, 45);
             this.CPchart.TabIndex = 9;
             // 
             // BtnExport
@@ -485,6 +491,36 @@
             this.Menupanel.Size = new System.Drawing.Size(85, 845);
             this.Menupanel.TabIndex = 0;
             // 
+            // flowLayoutBar
+            // 
+            this.flowLayoutBar.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutBar.Controls.Add(this.barMenu1);
+            this.flowLayoutBar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutBar.Location = new System.Drawing.Point(1490, 0);
+            this.flowLayoutBar.Name = "flowLayoutBar";
+            this.flowLayoutBar.Size = new System.Drawing.Size(50, 815);
+            this.flowLayoutBar.TabIndex = 10;
+            // 
+            // FormChildpanel
+            // 
+            this.FormChildpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
+            this.FormChildpanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.FormChildpanel.Location = new System.Drawing.Point(810, 0);
+            this.FormChildpanel.Name = "FormChildpanel";
+            this.FormChildpanel.Size = new System.Drawing.Size(680, 815);
+            this.FormChildpanel.TabIndex = 11;
+            // 
+            // barMenu1
+            // 
+            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
+            this.barMenu1.BarColor = System.Drawing.Color.White;
+            this.barMenu1.Location = new System.Drawing.Point(6, 12);
+            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
+            this.barMenu1.Name = "barMenu1";
+            this.barMenu1.Size = new System.Drawing.Size(50, 222);
+            this.barMenu1.TabIndex = 11;
+            this.barMenu1.textbar = "Axis Control & Measument";
+            // 
             // ucMenu2
             // 
             this.ucMenu2.BackColor = System.Drawing.Color.Transparent;
@@ -507,53 +543,6 @@
             this.ucMenu1.TabIndex = 0;
             this.ucMenu1.textlabel = "Help";
             // 
-            // flowLayoutBar
-            // 
-            this.flowLayoutBar.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutBar.Controls.Add(this.barMenu1);
-            this.flowLayoutBar.Controls.Add(this.barMenu2);
-            this.flowLayoutBar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutBar.Location = new System.Drawing.Point(1490, 0);
-            this.flowLayoutBar.Name = "flowLayoutBar";
-            this.flowLayoutBar.Size = new System.Drawing.Size(50, 815);
-            this.flowLayoutBar.TabIndex = 10;
-            // 
-            // barMenu1
-            // 
-            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
-            this.barMenu1.BarColor = System.Drawing.Color.White;
-            this.barMenu1.Location = new System.Drawing.Point(6, 12);
-            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
-            this.barMenu1.Name = "barMenu1";
-            this.barMenu1.Size = new System.Drawing.Size(50, 132);
-            this.barMenu1.TabIndex = 11;
-            this.barMenu1.textbar = "Axis Control";
-            // 
-            // barMenu2
-            // 
-            this.barMenu2.BackColor = System.Drawing.Color.Transparent;
-            this.barMenu2.BarColor = System.Drawing.Color.White;
-            this.barMenu2.Location = new System.Drawing.Point(6, 156);
-            this.barMenu2.Margin = new System.Windows.Forms.Padding(6);
-            this.barMenu2.Name = "barMenu2";
-            this.barMenu2.Size = new System.Drawing.Size(50, 125);
-            this.barMenu2.TabIndex = 12;
-            this.barMenu2.textbar = "Measurement";
-            // 
-            // FormChildpanel
-            // 
-            this.FormChildpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
-            this.FormChildpanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.FormChildpanel.Location = new System.Drawing.Point(1165, 0);
-            this.FormChildpanel.Name = "FormChildpanel";
-            this.FormChildpanel.Size = new System.Drawing.Size(325, 815);
-            this.FormChildpanel.TabIndex = 11;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
-            // 
             // FrmMain01
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -569,6 +558,8 @@
             this.Controls.Add(this.MainStatus);
             this.Controls.Add(this.Menupanel);
             this.ForeColor = System.Drawing.Color.White;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.Name = "FrmMain01";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -633,7 +624,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutBar;
         private System.Windows.Forms.Panel FormChildpanel;
         private Models.barMenu barMenu1;
-        private Models.barMenu barMenu2;
         private Models.ucMenu ucMenu1;
         private System.Windows.Forms.DataGridView DgvMeasurement;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
