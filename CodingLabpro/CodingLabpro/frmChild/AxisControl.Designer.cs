@@ -61,8 +61,8 @@
             this.TbAreaX = new System.Windows.Forms.TextBox();
             this.TbAreaY = new System.Windows.Forms.TextBox();
             this.GBmotorport = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.RB_rs232 = new System.Windows.Forms.RadioButton();
+            this.RB_gpib = new System.Windows.Forms.RadioButton();
             this.Btn_Reset = new System.Windows.Forms.Button();
             this.Btn_clear = new System.Windows.Forms.Button();
             this.Btn_read = new System.Windows.Forms.Button();
@@ -73,9 +73,6 @@
             this.GBMeas = new System.Windows.Forms.GroupBox();
             this.RBcurrent = new System.Windows.Forms.RadioButton();
             this.RBvoltage = new System.Windows.Forms.RadioButton();
-            this.UnitTime = new System.Windows.Forms.Label();
-            this.CBdelay = new System.Windows.Forms.ComboBox();
-            this.Delaylabel = new System.Windows.Forms.Label();
             this.CBrange = new System.Windows.Forms.ComboBox();
             this.STriggerlabel = new System.Windows.Forms.Label();
             this.CBtrigger = new System.Windows.Forms.ComboBox();
@@ -486,8 +483,8 @@
             // 
             // GBmotorport
             // 
-            this.GBmotorport.Controls.Add(this.radioButton2);
-            this.GBmotorport.Controls.Add(this.radioButton1);
+            this.GBmotorport.Controls.Add(this.RB_rs232);
+            this.GBmotorport.Controls.Add(this.RB_gpib);
             this.GBmotorport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.GBmotorport.Font = new System.Drawing.Font("Cascadia Code Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBmotorport.ForeColor = System.Drawing.Color.White;
@@ -498,48 +495,48 @@
             this.GBmotorport.TabStop = false;
             this.GBmotorport.Text = "Port Controlles";
             // 
-            // radioButton2
+            // RB_rs232
             // 
-            this.radioButton2.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radioButton2.BackColor = System.Drawing.Color.DarkGray;
-            this.radioButton2.FlatAppearance.CheckedBackColor = System.Drawing.Color.DarkViolet;
-            this.radioButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radioButton2.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton2.ForeColor = System.Drawing.Color.Black;
-            this.radioButton2.Location = new System.Drawing.Point(141, 22);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(141, 36);
-            this.radioButton2.TabIndex = 31;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "RS-232";
-            this.radioButton2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioButton2.UseVisualStyleBackColor = false;
+            this.RB_rs232.Appearance = System.Windows.Forms.Appearance.Button;
+            this.RB_rs232.BackColor = System.Drawing.Color.LightGray;
+            this.RB_rs232.FlatAppearance.CheckedBackColor = System.Drawing.Color.DarkViolet;
+            this.RB_rs232.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RB_rs232.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RB_rs232.ForeColor = System.Drawing.Color.Black;
+            this.RB_rs232.Location = new System.Drawing.Point(141, 22);
+            this.RB_rs232.Name = "RB_rs232";
+            this.RB_rs232.Size = new System.Drawing.Size(141, 36);
+            this.RB_rs232.TabIndex = 31;
+            this.RB_rs232.TabStop = true;
+            this.RB_rs232.Text = "RS-232";
+            this.RB_rs232.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.RB_rs232.UseVisualStyleBackColor = false;
             // 
-            // radioButton1
+            // RB_gpib
             // 
-            this.radioButton1.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radioButton1.BackColor = System.Drawing.Color.DarkGray;
-            this.radioButton1.FlatAppearance.CheckedBackColor = System.Drawing.Color.DarkViolet;
-            this.radioButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radioButton1.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton1.ForeColor = System.Drawing.Color.Black;
-            this.radioButton1.Location = new System.Drawing.Point(6, 22);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(144, 36);
-            this.radioButton1.TabIndex = 30;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "GP-IB";
-            this.radioButton1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioButton1.UseVisualStyleBackColor = false;
+            this.RB_gpib.Appearance = System.Windows.Forms.Appearance.Button;
+            this.RB_gpib.BackColor = System.Drawing.Color.LightGray;
+            this.RB_gpib.FlatAppearance.CheckedBackColor = System.Drawing.Color.DarkViolet;
+            this.RB_gpib.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RB_gpib.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RB_gpib.ForeColor = System.Drawing.Color.Black;
+            this.RB_gpib.Location = new System.Drawing.Point(6, 22);
+            this.RB_gpib.Name = "RB_gpib";
+            this.RB_gpib.Size = new System.Drawing.Size(144, 36);
+            this.RB_gpib.TabIndex = 30;
+            this.RB_gpib.TabStop = true;
+            this.RB_gpib.Text = "GP-IB";
+            this.RB_gpib.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.RB_gpib.UseVisualStyleBackColor = false;
             // 
             // Btn_Reset
             // 
-            this.Btn_Reset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Btn_Reset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Btn_Reset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
             this.Btn_Reset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Reset.Font = new System.Drawing.Font("Cascadia Code", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Reset.ForeColor = System.Drawing.Color.White;
-            this.Btn_Reset.Location = new System.Drawing.Point(357, 431);
+            this.Btn_Reset.Location = new System.Drawing.Point(357, 632);
             this.Btn_Reset.Name = "Btn_Reset";
             this.Btn_Reset.Size = new System.Drawing.Size(142, 62);
             this.Btn_Reset.TabIndex = 47;
@@ -548,12 +545,12 @@
             // 
             // Btn_clear
             // 
-            this.Btn_clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Btn_clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Btn_clear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.Btn_clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_clear.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_clear.ForeColor = System.Drawing.Color.White;
-            this.Btn_clear.Location = new System.Drawing.Point(505, 430);
+            this.Btn_clear.Location = new System.Drawing.Point(505, 631);
             this.Btn_clear.Name = "Btn_clear";
             this.Btn_clear.Size = new System.Drawing.Size(142, 62);
             this.Btn_clear.TabIndex = 46;
@@ -562,12 +559,12 @@
             // 
             // Btn_read
             // 
-            this.Btn_read.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Btn_read.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Btn_read.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.Btn_read.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_read.Font = new System.Drawing.Font("Cascadia Code", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_read.ForeColor = System.Drawing.Color.White;
-            this.Btn_read.Location = new System.Drawing.Point(357, 499);
+            this.Btn_read.Location = new System.Drawing.Point(357, 700);
             this.Btn_read.Name = "Btn_read";
             this.Btn_read.Size = new System.Drawing.Size(142, 43);
             this.Btn_read.TabIndex = 45;
@@ -576,12 +573,12 @@
             // 
             // Btn_Error
             // 
-            this.Btn_Error.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Btn_Error.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Btn_Error.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
             this.Btn_Error.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Error.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Error.ForeColor = System.Drawing.Color.White;
-            this.Btn_Error.Location = new System.Drawing.Point(505, 501);
+            this.Btn_Error.Location = new System.Drawing.Point(505, 702);
             this.Btn_Error.Name = "Btn_Error";
             this.Btn_Error.Size = new System.Drawing.Size(142, 43);
             this.Btn_Error.TabIndex = 44;
@@ -681,38 +678,6 @@
             this.RBvoltage.Text = "Voltage";
             this.RBvoltage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RBvoltage.UseVisualStyleBackColor = false;
-            // 
-            // UnitTime
-            // 
-            this.UnitTime.AutoSize = true;
-            this.UnitTime.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UnitTime.ForeColor = System.Drawing.Color.White;
-            this.UnitTime.Location = new System.Drawing.Point(598, 384);
-            this.UnitTime.Name = "UnitTime";
-            this.UnitTime.Size = new System.Drawing.Size(28, 21);
-            this.UnitTime.TabIndex = 40;
-            this.UnitTime.Text = "ms";
-            // 
-            // CBdelay
-            // 
-            this.CBdelay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CBdelay.Font = new System.Drawing.Font("Cascadia Code", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBdelay.FormattingEnabled = true;
-            this.CBdelay.Location = new System.Drawing.Point(471, 375);
-            this.CBdelay.Name = "CBdelay";
-            this.CBdelay.Size = new System.Drawing.Size(121, 36);
-            this.CBdelay.TabIndex = 39;
-            // 
-            // Delaylabel
-            // 
-            this.Delaylabel.AutoSize = true;
-            this.Delaylabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Delaylabel.ForeColor = System.Drawing.Color.White;
-            this.Delaylabel.Location = new System.Drawing.Point(347, 384);
-            this.Delaylabel.Name = "Delaylabel";
-            this.Delaylabel.Size = new System.Drawing.Size(118, 21);
-            this.Delaylabel.TabIndex = 38;
-            this.Delaylabel.Text = "Time Delay :";
             // 
             // CBrange
             // 
@@ -814,11 +779,8 @@
             this.Controls.Add(this.labelDelay);
             this.Controls.Add(this.GBMeas);
             this.Controls.Add(this.label_timerunit);
-            this.Controls.Add(this.UnitTime);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.CBdelay);
             this.Controls.Add(this.labelUnit2);
-            this.Controls.Add(this.Delaylabel);
             this.Controls.Add(this.Motortype2);
             this.Controls.Add(this.CBrange);
             this.Controls.Add(this.STriggerlabel);
@@ -894,8 +856,8 @@
         private System.Windows.Forms.TextBox TbAreaX;
         private System.Windows.Forms.TextBox TbAreaY;
         private System.Windows.Forms.GroupBox GBmotorport;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton RB_gpib;
+        private System.Windows.Forms.RadioButton RB_rs232;
         private System.Windows.Forms.Button Btn_Reset;
         private System.Windows.Forms.Button Btn_clear;
         private System.Windows.Forms.Button Btn_read;
@@ -906,9 +868,6 @@
         private System.Windows.Forms.GroupBox GBMeas;
         private System.Windows.Forms.RadioButton RBcurrent;
         private System.Windows.Forms.RadioButton RBvoltage;
-        private System.Windows.Forms.Label UnitTime;
-        private System.Windows.Forms.ComboBox CBdelay;
-        private System.Windows.Forms.Label Delaylabel;
         private System.Windows.Forms.ComboBox CBrange;
         private System.Windows.Forms.Label STriggerlabel;
         private System.Windows.Forms.ComboBox CBtrigger;

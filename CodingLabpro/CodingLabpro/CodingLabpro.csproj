@@ -180,12 +180,6 @@
     <Compile Include="frmChild\AxisControl.Designer.cs">
       <DependentUpon>AxisControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmChild\DMMmeasure.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="frmChild\DMMmeasure.Designer.cs">
-      <DependentUpon>DMMmeasure.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,9 +223,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmChild\AxisControl.resx">
       <DependentUpon>AxisControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmChild\DMMmeasure.resx">
-      <DependentUpon>DMMmeasure.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>

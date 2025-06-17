@@ -109,7 +109,7 @@ namespace CodingLabpro
 
             //SetUp FormChild in UserControl
             frmChild1 = new AxisControl(MyMMC, MySerialPort);
-            frmChild2 = new DMMmeasure(MyDMM, this);
+      
 
 
             //First show Panel frmChild

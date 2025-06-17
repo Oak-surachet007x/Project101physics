@@ -75,8 +75,18 @@ namespace CodingLabpro.frmChild
         {
             try
             {
-                myMMC.WriteString(command);
-                myMMC.WriteString("G:");
+                if (RB_gpib.Checked)
+                {
+                    //myMMC.WriteString(command);
+                    //myMMC.WriteString("G:");
+                    Debug.WriteLine("Status== GPIB");
+                }else if (RB_rs232.Checked)
+                {
+                    //mySerialPort.WriteLine(command);
+                    //mySerialPort.WriteLine("G:");
+                    Debug.WriteLine("Status== Rs232");
+                }
+         
             }
             catch (Exception Ex){
                 ShowMessage("ERROR", "Can't Drive SteppingMotor\n " + Ex.Message);
@@ -87,8 +97,14 @@ namespace CodingLabpro.frmChild
         {
             try
             {
-                mySerialPort.WriteLine("H:W");
-                myMMC.WriteString("H:W");
+                if (RB_gpib.Checked)
+                {
+                    myMMC.WriteString("H:W");
+                }
+                else if (RB_rs232.Checked)
+                {
+                    mySerialPort.WriteLine("H:W");
+                }
             }
             catch (Exception Ex)
             {
@@ -246,6 +262,7 @@ namespace CodingLabpro.frmChild
             }
         }
 
+        #region CalculateMovement 
         private static string MovementPositiveX(string MovestepX, string Unit)
         {
             if (Unit == "cm")
@@ -358,7 +375,8 @@ namespace CodingLabpro.frmChild
             }
         }
 
-     
+        #endregion
+
         #region Methods ScaningArea
         private async void Btn_runscaning_Click(object sender, EventArgs e)
         {

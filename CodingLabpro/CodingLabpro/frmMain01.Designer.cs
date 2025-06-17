@@ -62,6 +62,7 @@
             this.StatusMMC2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusPort3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.labelTimer = new System.Windows.Forms.Label();
             this.GBchart = new System.Windows.Forms.GroupBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.CPchart = new System.Windows.Forms.Panel();
@@ -371,6 +372,7 @@
             // panelTop
             // 
             this.panelTop.BackColor = System.Drawing.Color.Transparent;
+            this.panelTop.Controls.Add(this.labelTimer);
             this.panelTop.Controls.Add(this.labelTop);
             this.panelTop.Controls.Add(this.labelName);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
@@ -378,6 +380,17 @@
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(725, 88);
             this.panelTop.TabIndex = 6;
+            // 
+            // labelTimer
+            // 
+            this.labelTimer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTimer.AutoSize = true;
+            this.labelTimer.Font = new System.Drawing.Font("Cascadia Code Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTimer.Location = new System.Drawing.Point(610, 64);
+            this.labelTimer.Name = "labelTimer";
+            this.labelTimer.Size = new System.Drawing.Size(109, 21);
+            this.labelTimer.TabIndex = 4;
+            this.labelTimer.Text = "00:00:00 PM";
             // 
             // GBchart
             // 
@@ -627,5 +640,6 @@
         private Models.ucMenu ucMenu1;
         private System.Windows.Forms.DataGridView DgvMeasurement;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.Label labelTimer;
     }
 }
