@@ -74,16 +74,20 @@
             this.RBcurrent = new System.Windows.Forms.RadioButton();
             this.RBvoltage = new System.Windows.Forms.RadioButton();
             this.CBrange = new System.Windows.Forms.ComboBox();
-            this.STriggerlabel = new System.Windows.Forms.Label();
-            this.CBtrigger = new System.Windows.Forms.ComboBox();
             this.rangelabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.CBtrigger = new System.Windows.Forms.ComboBox();
+            this.STriggerlabel = new System.Windows.Forms.Label();
+            this.GBautozero = new System.Windows.Forms.GroupBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.GBreport.SuspendLayout();
             this.GBmotorport.SuspendLayout();
             this.GBSource.SuspendLayout();
             this.GBMeas.SuspendLayout();
+            this.GBautozero.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelTop
@@ -511,6 +515,7 @@
             this.RB_rs232.Text = "RS-232";
             this.RB_rs232.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RB_rs232.UseVisualStyleBackColor = false;
+            this.RB_rs232.CheckedChanged += new System.EventHandler(this.RB_rs232_CheckedChanged);
             // 
             // RB_gpib
             // 
@@ -528,6 +533,7 @@
             this.RB_gpib.Text = "GP-IB";
             this.RB_gpib.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RB_gpib.UseVisualStyleBackColor = false;
+            this.RB_gpib.CheckedChanged += new System.EventHandler(this.RB_gpib_CheckedChanged);
             // 
             // Btn_Reset
             // 
@@ -684,38 +690,17 @@
             this.CBrange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBrange.Font = new System.Drawing.Font("Cascadia Code", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CBrange.FormattingEnabled = true;
-            this.CBrange.Location = new System.Drawing.Point(471, 286);
+            this.CBrange.Location = new System.Drawing.Point(461, 329);
             this.CBrange.Name = "CBrange";
             this.CBrange.Size = new System.Drawing.Size(155, 36);
             this.CBrange.TabIndex = 37;
-            // 
-            // STriggerlabel
-            // 
-            this.STriggerlabel.AutoSize = true;
-            this.STriggerlabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.STriggerlabel.ForeColor = System.Drawing.Color.White;
-            this.STriggerlabel.Location = new System.Drawing.Point(374, 325);
-            this.STriggerlabel.Name = "STriggerlabel";
-            this.STriggerlabel.Size = new System.Drawing.Size(91, 42);
-            this.STriggerlabel.TabIndex = 36;
-            this.STriggerlabel.Text = "Source \r\nTrigger :";
-            // 
-            // CBtrigger
-            // 
-            this.CBtrigger.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CBtrigger.Font = new System.Drawing.Font("Cascadia Code", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBtrigger.FormattingEnabled = true;
-            this.CBtrigger.Location = new System.Drawing.Point(471, 331);
-            this.CBtrigger.Name = "CBtrigger";
-            this.CBtrigger.Size = new System.Drawing.Size(155, 36);
-            this.CBtrigger.TabIndex = 35;
             // 
             // rangelabel
             // 
             this.rangelabel.AutoSize = true;
             this.rangelabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rangelabel.ForeColor = System.Drawing.Color.White;
-            this.rangelabel.Location = new System.Drawing.Point(392, 295);
+            this.rangelabel.Location = new System.Drawing.Point(382, 338);
             this.rangelabel.Name = "rangelabel";
             this.rangelabel.Size = new System.Drawing.Size(73, 21);
             this.rangelabel.TabIndex = 34;
@@ -758,11 +743,69 @@
             this.button1.Text = "Cancel";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // CBtrigger
+            // 
+            this.CBtrigger.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBtrigger.Font = new System.Drawing.Font("Cascadia Code", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CBtrigger.FormattingEnabled = true;
+            this.CBtrigger.Location = new System.Drawing.Point(461, 286);
+            this.CBtrigger.Name = "CBtrigger";
+            this.CBtrigger.Size = new System.Drawing.Size(155, 36);
+            this.CBtrigger.TabIndex = 35;
+            this.CBtrigger.SelectedIndexChanged += new System.EventHandler(this.CBtrigger_SelectedIndexChanged);
+            // 
+            // STriggerlabel
+            // 
+            this.STriggerlabel.AutoSize = true;
+            this.STriggerlabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.STriggerlabel.ForeColor = System.Drawing.Color.White;
+            this.STriggerlabel.Location = new System.Drawing.Point(364, 280);
+            this.STriggerlabel.Name = "STriggerlabel";
+            this.STriggerlabel.Size = new System.Drawing.Size(91, 42);
+            this.STriggerlabel.TabIndex = 36;
+            this.STriggerlabel.Text = "Source \r\nTrigger :";
+            // 
+            // GBautozero
+            // 
+            this.GBautozero.Controls.Add(this.radioButton2);
+            this.GBautozero.Controls.Add(this.radioButton1);
+            this.GBautozero.Font = new System.Drawing.Font("Cascadia Code Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GBautozero.ForeColor = System.Drawing.Color.White;
+            this.GBautozero.Location = new System.Drawing.Point(357, 371);
+            this.GBautozero.Name = "GBautozero";
+            this.GBautozero.Size = new System.Drawing.Size(122, 64);
+            this.GBautozero.TabIndex = 49;
+            this.GBautozero.TabStop = false;
+            this.GBautozero.Text = "Auto Zero";
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(74, 27);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(42, 21);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "ON";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(11, 27);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(50, 21);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "OFF";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
             // AxisControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
+            this.Controls.Add(this.GBautozero);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Btn_runscaning);
             this.Controls.Add(this.labeltitle);
@@ -811,11 +854,14 @@
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "AxisControl";
             this.Size = new System.Drawing.Size(680, 815);
+            this.Load += new System.EventHandler(this.AxisControl_Load);
             this.GBreport.ResumeLayout(false);
             this.GBreport.PerformLayout();
             this.GBmotorport.ResumeLayout(false);
             this.GBSource.ResumeLayout(false);
             this.GBMeas.ResumeLayout(false);
+            this.GBautozero.ResumeLayout(false);
+            this.GBautozero.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -869,11 +915,14 @@
         private System.Windows.Forms.RadioButton RBcurrent;
         private System.Windows.Forms.RadioButton RBvoltage;
         private System.Windows.Forms.ComboBox CBrange;
-        private System.Windows.Forms.Label STriggerlabel;
-        private System.Windows.Forms.ComboBox CBtrigger;
         private System.Windows.Forms.Label rangelabel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox CBtrigger;
+        private System.Windows.Forms.Label STriggerlabel;
+        private System.Windows.Forms.GroupBox GBautozero;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }

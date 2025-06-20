@@ -21,8 +21,10 @@ namespace CodingLabpro.frmChild
     public partial class AxisControl : UserControl
     {
         private readonly Ivi.Visa.Interop.FormattedIO488 myMMC;
-        private readonly SerialPort mySerialPort;       
+        private readonly SerialPort mySerialPort;
+        private readonly Ivi.Visa.Interop.FormattedIO488 myDMM;
         private string StepMotor_Selected;
+        private string Trigger_Selected;
         private string StepMotor_ValueX;
         private string StepMotor_ValueY;
         private string SteppingUnitX;
@@ -34,18 +36,39 @@ namespace CodingLabpro.frmChild
 
 
 
-        public AxisControl(Ivi.Visa.Interop.FormattedIO488 myMMC, SerialPort mySerialPort)
+        public AxisControl(Ivi.Visa.Interop.FormattedIO488 myMMC, SerialPort mySerialPort, Ivi.Visa.Interop.FormattedIO488 myDMM)
         {
             InitializeComponent();
             //send value interface from frmMain01
             this.myMMC = myMMC;
             this.mySerialPort = mySerialPort;
+            this.myDMM = myDMM;
             //Setup Value
             CblStepMotor.Items.AddRange(new string[] { "100", "200", "300", "400", "500", "1000" });
             Motortype.Items.AddRange(new string[] { "cm", "mm", "μm" });
             Motortype2.Items.AddRange(new string[] { "cm", "mm", "μm" });
             Cbltimer.Items.AddRange(new string[] {"1000", "2000", "3000" });
-   
+            CBtrigger.Items.AddRange(new string[] {"IMMediate", "BUS", "EXTernal"});
+            CBrange.Items.AddRange(new string[] { "Auto", "1mV" });
+        }
+
+        private void AxisControl_Load(object sender, EventArgs e)
+        {
+            ButtonPortEnabled();
+        }
+
+        private void RB_rs232_CheckedChanged(object sender, EventArgs e)
+        {
+            ButtonPortEnabled();
+        }
+
+        private void RB_gpib_CheckedChanged(object sender, EventArgs e)
+        {
+            ButtonPortEnabled();
+        }
+
+        private void RangeUnitmeasuremnet()
+        {
 
         }
 
@@ -63,7 +86,35 @@ namespace CodingLabpro.frmChild
             
         }
 
-        
+        private void CBtrigger_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GlobalMeasurementSettings.Instance.TriggerMode = CBtrigger.SelectedItem.ToString();
+
+            switch (GlobalMeasurementSettings.Instance.TriggerMode)
+            {
+                case "IMMediate":
+                    GlobalMeasurementSettings.Instance.TriggerMode = "TRIGger:SOURce IMMediate";
+                    Debug.WriteLine(GlobalMeasurementSettings.Instance.TriggerMode);
+                    break;
+                case "BUS":
+                    GlobalMeasurementSettings.Instance.TriggerMode = "TRIGger:SOURce BUS";
+                    Debug.WriteLine(GlobalMeasurementSettings.Instance.TriggerMode);
+                    break;
+                case "EXTernal":
+                    GlobalMeasurementSettings.Instance.TriggerMode = "TRIGger:SOURce EXTernal";
+                    Debug.WriteLine(GlobalMeasurementSettings.Instance.TriggerMode);
+                    break;
+                default:
+                    CBtrigger.SelectedIndex = -1;
+                    GlobalMeasurementSettings.Instance.TriggerMode = "";
+                    Debug.WriteLine("Not Found Trigger Measurement");
+                    break;
+
+
+            }
+        }
+
+    
 
         public void ShowMessage(string type, string message)
         {
@@ -77,19 +128,47 @@ namespace CodingLabpro.frmChild
             {
                 if (RB_gpib.Checked)
                 {
-                    //myMMC.WriteString(command);
-                    //myMMC.WriteString("G:");
+                    myMMC.WriteString(command);
+                    myMMC.WriteString("G:");
                     Debug.WriteLine("Status== GPIB");
                 }else if (RB_rs232.Checked)
                 {
-                    //mySerialPort.WriteLine(command);
-                    //mySerialPort.WriteLine("G:");
+                    mySerialPort.WriteLine(command);
+                    mySerialPort.WriteLine("G:");
                     Debug.WriteLine("Status== Rs232");
                 }
          
             }
             catch (Exception Ex){
                 ShowMessage("ERROR", "Can't Drive SteppingMotor\n " + Ex.Message);
+            }
+        }
+
+        private void ButtonPortEnabled()
+        {
+            if (RB_rs232.Checked)
+            {
+                Btn_YUp.BackColor = Color.Red;
+                Btn_YDown.BackColor = Color.Red;
+                Btn_YUp.Enabled = false;
+                Btn_YDown.Enabled = false;
+            
+
+            }
+            else if (RB_gpib.Checked)
+            {
+                Btn_YUp.BackColor = Color.White;
+                Btn_YDown.BackColor = Color.White;
+                Btn_YUp.Enabled = true;
+                Btn_YDown.Enabled = true; 
+                Btn_runscaning.Enabled = true;
+
+            }
+            else
+            {
+                Debug.WriteLine("กรุณาเลือกพอร์ตการเชื่อมต่อในการควบคุม GPIB or RS232");
+                Btn_runscaning.Enabled = false;
+      
             }
         }
 
@@ -105,6 +184,7 @@ namespace CodingLabpro.frmChild
                 {
                     mySerialPort.WriteLine("H:W");
                 }
+                ShowMessage("INFO", "Reset Process Motor");
             }
             catch (Exception Ex)
             {
@@ -117,7 +197,14 @@ namespace CodingLabpro.frmChild
         {
             try
             {
-                myMMC.WriteString("L:E");
+                if (RB_gpib.Checked)
+                {
+                    myMMC.WriteString("L:E");
+    
+                }else if (RB_rs232.Checked)
+                {
+                    mySerialPort.WriteLine("L:E");
+                }
                 ShowMessage("INFO", "Stop Process Motor");
             }
             catch (Exception Ex)
@@ -126,6 +213,7 @@ namespace CodingLabpro.frmChild
             }
         }
 
+        #region Button Control movement
         private void Btn_XLeft_Click(object sender, EventArgs e)
         {
             switch (ValueStepping()) {
@@ -262,6 +350,8 @@ namespace CodingLabpro.frmChild
             }
         }
 
+        #endregion
+
         #region CalculateMovement 
         private static string MovementPositiveX(string MovestepX, string Unit)
         {
@@ -394,25 +484,28 @@ namespace CodingLabpro.frmChild
                 ValueProcessX = MovementPositiveX(StepMotor_ValueX, SteppingUnitX);
                 ValueProcessY = MovementPositiveY(StepMotor_ValueY, SteppingUnitY);
                 ValueNegativeX = MovementNegativeX(StepMotor_ValueX, SteppingUnitX);
-              
+
 
                 // Requitment Class
-                var Calarea = new CalculateArea();
-                Calarea.TotalAreaX = TbAreaX.Text;
-                Calarea.TotalAreaY = TbAreaY.Text;
-                Calarea.UnitX = UnitXForCal(SteppingUnitX);
-                Calarea.UnitY = UnitYForCal(SteppingUnitY);
-                Calarea.MoveStepX = StepMotor_ValueX;
-                Calarea.MoveStepY = StepMotor_ValueY;
+                var Calarea = new CalculateArea()
+                {
+                    TotalAreaX = TbAreaX.Text,
+                    TotalAreaY = TbAreaY.Text,
+                    UnitX = UnitXForCal(SteppingUnitX),
+                    UnitY = UnitYForCal(SteppingUnitY),
+                    MoveStepX = StepMotor_ValueX,
+                    MoveStepY = StepMotor_ValueY,
+                };
+
                 int LoopAreaX = Calarea.CalareaScanningX();
                 int LoopAreaY = Calarea.CalareaScanningY();
 
                 //Run Scaning
-                //myMMC.WriteString("H:W");
-                //await Task.Delay(5000);
-                //myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y == 0 cm
-                //myMMC.WriteString("G:");
-                //await Task.Delay(5000);
+                myMMC.WriteString("H:W");
+                await Task.Delay(5000);
+                myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y == 0 cm
+                myMMC.WriteString("G:");
+                await Task.Delay(5000);
 
                 Reportdata.AppendText($" คำนวณผลลัพธ์ลูปที่สแกนของ X คือ {LoopAreaX} ลูป \n คำนวณผลลัพธ์ลูปที่สแกนของ Y คือ {LoopAreaY} ลูป" + Environment.NewLine); //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
 
@@ -420,26 +513,26 @@ namespace CodingLabpro.frmChild
                 {
                     if (y % 2 == 0)  // ถ้าเป็นแถวคู่ (0,2,4..) เคลื่อนที่ไปทางขวา
                     {
-                        //for (int x = 0; x < LoopAreaX; x++)
-                        //{
-                        //    myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
-                        //    myMMC.WriteString("G:");
-                        //    await Task.Delay(int.Parse(ValueTimer));
-                        //}
+                        for (int x = 0; x < LoopAreaX; x++)
+                        {
+                            myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
+                            myMMC.WriteString("G:");
+                            await Task.Delay(int.Parse(ValueTimer));
+                        }
                     }
                     else  // ถ้าเป็นแถวคี่ (1,3,5..) เคลื่อนที่ย้อนกลับทางซ้าย
                     {
-                        //for (int x = 0; x < LoopAreaX; x++)
-                        //{
-                        //    myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
-                        //    myMMC.WriteString("G:");
-                        //    await Task.Delay(int.Parse(ValueTimer));
-                        //}
+                        for (int x = 0; x < LoopAreaX; x++)
+                        {
+                            myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
+                            myMMC.WriteString("G:");
+                            await Task.Delay(int.Parse(ValueTimer));
+                        }
                     }
 
-                    // เคลื่อนที่ไปยังแถวถัดไปตามแนว Y
-                    //myMMC.WriteString(ValueProcessY);
-                    //myMMC.WriteString("G:");
+                    //เคลื่อนที่ไปยังแถวถัดไปตามแนว Y
+                    myMMC.WriteString(ValueProcessY);
+                    myMMC.WriteString("G:");
                     await Task.Delay(int.Parse(ValueTimer));
 
 
@@ -451,9 +544,9 @@ namespace CodingLabpro.frmChild
 
                     for (int x = 0; x < LoopAreaX; x++)
                     {
-                        //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
-                        //myMMC.WriteString("G:");
-                        //await Task.Delay(int.Parse(ValueTimer));
+                        myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
+                        myMMC.WriteString("G:");
+                        await Task.Delay(int.Parse(ValueTimer));
 
                     }
                 }
@@ -469,8 +562,10 @@ namespace CodingLabpro.frmChild
             
         }
 
+
+
         #endregion
 
-     
+       
     }
 }

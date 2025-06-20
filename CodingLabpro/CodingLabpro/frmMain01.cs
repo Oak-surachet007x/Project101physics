@@ -108,7 +108,7 @@ namespace CodingLabpro
             mgr2 = new Ivi.Visa.Interop.ResourceManager();
 
             //SetUp FormChild in UserControl
-            frmChild1 = new AxisControl(MyMMC, MySerialPort);
+            frmChild1 = new AxisControl(MyMMC, MySerialPort, MyDMM);
       
 
 
