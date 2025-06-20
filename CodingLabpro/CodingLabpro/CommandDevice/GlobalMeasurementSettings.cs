@@ -18,7 +18,7 @@ namespace CodingLabpro.CommandDevice
 
         private string _MeasureMode = "Voltage";
         private string _SourceMode = "DC";
-        private string _TriggerMode = "TRIGger:SOURce IMMediate";
+        private string _TriggerMode = "IMMediate";
         private string _AutozeroMode = "ON";
 
         public string MeasureMode {

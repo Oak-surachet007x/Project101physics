@@ -24,7 +24,6 @@ namespace CodingLabpro.frmChild
         private readonly SerialPort mySerialPort;
         private readonly Ivi.Visa.Interop.FormattedIO488 myDMM;
         private string StepMotor_Selected;
-        private string Trigger_Selected;
         private string StepMotor_ValueX;
         private string StepMotor_ValueY;
         private string SteppingUnitX;
@@ -49,12 +48,14 @@ namespace CodingLabpro.frmChild
             Motortype2.Items.AddRange(new string[] { "cm", "mm", "μm" });
             Cbltimer.Items.AddRange(new string[] {"1000", "2000", "3000" });
             CBtrigger.Items.AddRange(new string[] {"IMMediate", "BUS", "EXTernal"});
-            CBrange.Items.AddRange(new string[] { "Auto", "1mV" });
+       
         }
 
+        #region SettingMeasurement Agilent
         private void AxisControl_Load(object sender, EventArgs e)
         {
             ButtonPortEnabled();
+            RangeUnitmeasuremnet();
         }
 
         private void RB_rs232_CheckedChanged(object sender, EventArgs e)
@@ -65,11 +66,6 @@ namespace CodingLabpro.frmChild
         private void RB_gpib_CheckedChanged(object sender, EventArgs e)
         {
             ButtonPortEnabled();
-        }
-
-        private void RangeUnitmeasuremnet()
-        {
-
         }
 
         private string ValueStepping()
@@ -93,15 +89,15 @@ namespace CodingLabpro.frmChild
             switch (GlobalMeasurementSettings.Instance.TriggerMode)
             {
                 case "IMMediate":
-                    GlobalMeasurementSettings.Instance.TriggerMode = "TRIGger:SOURce IMMediate";
+                    GlobalMeasurementSettings.Instance.TriggerMode = "IMMediate";
                     Debug.WriteLine(GlobalMeasurementSettings.Instance.TriggerMode);
                     break;
                 case "BUS":
-                    GlobalMeasurementSettings.Instance.TriggerMode = "TRIGger:SOURce BUS";
+                    GlobalMeasurementSettings.Instance.TriggerMode = "BUS";
                     Debug.WriteLine(GlobalMeasurementSettings.Instance.TriggerMode);
                     break;
                 case "EXTernal":
-                    GlobalMeasurementSettings.Instance.TriggerMode = "TRIGger:SOURce EXTernal";
+                    GlobalMeasurementSettings.Instance.TriggerMode = "EXTernal";
                     Debug.WriteLine(GlobalMeasurementSettings.Instance.TriggerMode);
                     break;
                 default:
@@ -113,8 +109,95 @@ namespace CodingLabpro.frmChild
 
             }
         }
+        private void RBvoltage_CheckedChanged(object sender, EventArgs e)
+        {
+            RangeUnitmeasuremnet();
+            GlobalMeasurementSettings.Instance.MeasureMode = "Voltage";
+        }
 
-    
+        private void RBcurrent_CheckedChanged(object sender, EventArgs e)
+        {
+            RangeUnitmeasuremnet();
+            GlobalMeasurementSettings.Instance.MeasureMode = "Current";
+        }
+
+        private void RBsource_DC_CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalMeasurementSettings.Instance.SourceMode = "DC";
+        }
+        private void RBsource_AC_CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalMeasurementSettings.Instance.SourceMode = "AC";
+        }
+
+        private void RB_autoOFF_CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalMeasurementSettings.Instance.AutozeroMode = "OFF";
+        }
+
+        private void RB_autoON_CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalMeasurementSettings.Instance.AutozeroMode = "ON";
+        }
+
+        private void RangeUnitmeasuremnet()
+        {
+            if (RBvoltage.Checked)
+            {
+                CBrange.Items.Clear();
+                CBrange.Items.AddRange(new string[] { "Auto", "1mV", "10mV", "15mV", "20mV"});
+            }
+            else if (RBcurrent.Checked)
+            {
+                CBrange.Items.Clear();
+                CBrange.Items.AddRange(new string[] { "Auto", "1mA", "10mA" });
+
+            }
+         
+        }
+
+        private void SetupMeasurementCommand()
+        {
+            if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
+            {
+               if(GlobalMeasurementSettings.Instance.TriggerMode == "BUS")
+               {
+                    myDMM.WriteString("CONF:VOLT:DC 10, 0.003");
+                    myDMM.WriteString("TRIGger:SOURce BUS");
+                    if(GlobalMeasurementSettings.Instance.AutozeroMode == "ON")
+                    {
+                        myDMM.WriteString("ZERO:AUTO ON");
+                    }
+                    else if(GlobalMeasurementSettings.Instance.AutozeroMode == "OFF")
+                    {
+                        myDMM.WriteString("ZERO:AUTO OFF");
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Unknown AutozeroMode: " + GlobalMeasurementSettings.Instance.AutozeroMode);
+                    }
+                    myDMM.WriteString("INIT");
+                    myDMM.WriteString("*TRG"); //if Select Trigger_Source == BUS will accept command IEEE-488
+                    myDMM.WriteString("FETC?");
+
+               }
+               else if(GlobalMeasurementSettings.Instance.TriggerMode == "EXTernal")
+               {
+                    myDMM.WriteString("CON:VOLT:DC 10, 0.003");
+                    myDMM.WriteString("TRIGger:SOURce EXTernal");
+                    myDMM.WriteString("READ?");
+               }
+               else if(GlobalMeasurementSettings.Instance.TriggerMode == "")
+               {
+
+               }
+
+
+            }
+
+        }
+
+        #endregion
 
         public void ShowMessage(string type, string message)
         {
@@ -507,6 +590,8 @@ namespace CodingLabpro.frmChild
                 myMMC.WriteString("G:");
                 await Task.Delay(5000);
 
+                SetupMeasurementCommand();
+
                 Reportdata.AppendText($" คำนวณผลลัพธ์ลูปที่สแกนของ X คือ {LoopAreaX} ลูป \n คำนวณผลลัพธ์ลูปที่สแกนของ Y คือ {LoopAreaY} ลูป" + Environment.NewLine); //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
 
                 for (int y = 0; y < LoopAreaY; y++)  // Loop แกน Y (สแกนพื้นที่ 10 แถว)
@@ -555,7 +640,7 @@ namespace CodingLabpro.frmChild
             }
             catch (Exception Ex)
             { 
-                ShowMessage("ERROR", Ex.Message);
+                ShowMessage("ERROR", $"กรุณาตรวจการเชื่อมต่อ \n {Ex.Message}");
             
             }
            
@@ -564,8 +649,18 @@ namespace CodingLabpro.frmChild
 
 
 
+
         #endregion
 
-       
+        private void BtnCancel_scaning_Click(object sender, EventArgs e)
+        {
+            string TriggerMode = GlobalMeasurementSettings.Instance.TriggerMode;
+            string MeasureMode = GlobalMeasurementSettings.Instance.MeasureMode;
+            string SourceMode = GlobalMeasurementSettings.Instance.SourceMode;
+            string AutoMode = GlobalMeasurementSettings.Instance.AutozeroMode;
+            MessageBox.Show($"{TriggerMode} \n {MeasureMode} \n {SourceMode}", "สรุปผล");
+        }
+
+     
     }
 }

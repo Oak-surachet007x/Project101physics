@@ -77,12 +77,12 @@
             this.rangelabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnCancel_scaning = new System.Windows.Forms.Button();
             this.CBtrigger = new System.Windows.Forms.ComboBox();
             this.STriggerlabel = new System.Windows.Forms.Label();
             this.GBautozero = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.RB_autoON = new System.Windows.Forms.RadioButton();
+            this.RB_autoOFF = new System.Windows.Forms.RadioButton();
             this.GBreport.SuspendLayout();
             this.GBmotorport.SuspendLayout();
             this.GBSource.SuspendLayout();
@@ -620,6 +620,7 @@
             this.RBsource_AC.Text = "AC";
             this.RBsource_AC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RBsource_AC.UseVisualStyleBackColor = false;
+            this.RBsource_AC.CheckedChanged += new System.EventHandler(this.RBsource_AC_CheckedChanged);
             // 
             // RBsource_DC
             // 
@@ -637,6 +638,7 @@
             this.RBsource_DC.Text = "DC";
             this.RBsource_DC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RBsource_DC.UseVisualStyleBackColor = false;
+            this.RBsource_DC.CheckedChanged += new System.EventHandler(this.RBsource_DC_CheckedChanged);
             // 
             // GBMeas
             // 
@@ -667,6 +669,7 @@
             this.RBcurrent.Text = "Current";
             this.RBcurrent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RBcurrent.UseVisualStyleBackColor = false;
+            this.RBcurrent.CheckedChanged += new System.EventHandler(this.RBcurrent_CheckedChanged);
             // 
             // RBvoltage
             // 
@@ -684,6 +687,7 @@
             this.RBvoltage.Text = "Voltage";
             this.RBvoltage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RBvoltage.UseVisualStyleBackColor = false;
+            this.RBvoltage.CheckedChanged += new System.EventHandler(this.RBvoltage_CheckedChanged);
             // 
             // CBrange
             // 
@@ -729,19 +733,20 @@
             this.label6.TabIndex = 32;
             this.label6.Text = "Measurement";
             // 
-            // button1
+            // BtnCancel_scaning
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.FlatAppearance.BorderSize = 3;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Cascadia Code", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Red;
-            this.button1.Location = new System.Drawing.Point(544, 757);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(119, 48);
-            this.button1.TabIndex = 48;
-            this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BtnCancel_scaning.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnCancel_scaning.FlatAppearance.BorderSize = 3;
+            this.BtnCancel_scaning.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCancel_scaning.Font = new System.Drawing.Font("Cascadia Code", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCancel_scaning.ForeColor = System.Drawing.Color.Red;
+            this.BtnCancel_scaning.Location = new System.Drawing.Point(544, 757);
+            this.BtnCancel_scaning.Name = "BtnCancel_scaning";
+            this.BtnCancel_scaning.Size = new System.Drawing.Size(119, 48);
+            this.BtnCancel_scaning.TabIndex = 48;
+            this.BtnCancel_scaning.Text = "Cancel";
+            this.BtnCancel_scaning.UseVisualStyleBackColor = true;
+            this.BtnCancel_scaning.Click += new System.EventHandler(this.BtnCancel_scaning_Click);
             // 
             // CBtrigger
             // 
@@ -767,8 +772,8 @@
             // 
             // GBautozero
             // 
-            this.GBautozero.Controls.Add(this.radioButton2);
-            this.GBautozero.Controls.Add(this.radioButton1);
+            this.GBautozero.Controls.Add(this.RB_autoON);
+            this.GBautozero.Controls.Add(this.RB_autoOFF);
             this.GBautozero.Font = new System.Drawing.Font("Cascadia Code Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBautozero.ForeColor = System.Drawing.Color.White;
             this.GBautozero.Location = new System.Drawing.Point(357, 371);
@@ -778,27 +783,29 @@
             this.GBautozero.TabStop = false;
             this.GBautozero.Text = "Auto Zero";
             // 
-            // radioButton2
+            // RB_autoON
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(74, 27);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(42, 21);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "ON";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.RB_autoON.AutoSize = true;
+            this.RB_autoON.Location = new System.Drawing.Point(74, 27);
+            this.RB_autoON.Name = "RB_autoON";
+            this.RB_autoON.Size = new System.Drawing.Size(42, 21);
+            this.RB_autoON.TabIndex = 1;
+            this.RB_autoON.TabStop = true;
+            this.RB_autoON.Text = "ON";
+            this.RB_autoON.UseVisualStyleBackColor = true;
+            this.RB_autoON.CheckedChanged += new System.EventHandler(this.RB_autoON_CheckedChanged);
             // 
-            // radioButton1
+            // RB_autoOFF
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(11, 27);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(50, 21);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "OFF";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.RB_autoOFF.AutoSize = true;
+            this.RB_autoOFF.Location = new System.Drawing.Point(11, 27);
+            this.RB_autoOFF.Name = "RB_autoOFF";
+            this.RB_autoOFF.Size = new System.Drawing.Size(50, 21);
+            this.RB_autoOFF.TabIndex = 0;
+            this.RB_autoOFF.TabStop = true;
+            this.RB_autoOFF.Text = "OFF";
+            this.RB_autoOFF.UseVisualStyleBackColor = true;
+            this.RB_autoOFF.CheckedChanged += new System.EventHandler(this.RB_autoOFF_CheckedChanged);
             // 
             // AxisControl
             // 
@@ -806,7 +813,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
             this.Controls.Add(this.GBautozero);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtnCancel_scaning);
             this.Controls.Add(this.Btn_runscaning);
             this.Controls.Add(this.labeltitle);
             this.Controls.Add(this.Btn_Reset);
@@ -918,11 +925,11 @@
         private System.Windows.Forms.Label rangelabel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnCancel_scaning;
         private System.Windows.Forms.ComboBox CBtrigger;
         private System.Windows.Forms.Label STriggerlabel;
         private System.Windows.Forms.GroupBox GBautozero;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton RB_autoON;
+        private System.Windows.Forms.RadioButton RB_autoOFF;
     }
 }
