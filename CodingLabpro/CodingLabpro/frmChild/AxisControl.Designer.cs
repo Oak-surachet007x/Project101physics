@@ -28,6 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Label totalAreaXLabel;
+            System.Windows.Forms.Label totalAreaYLabel;
+            System.Windows.Forms.Label moveStepYLabel;
+            System.Windows.Forms.Label moveStepXLabel;
+            System.Windows.Forms.Label delaySteppingLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AxisControl));
             this.labelTop = new System.Windows.Forms.Label();
             this.labeltitle = new System.Windows.Forms.Label();
             this.Btn_stopmotor = new System.Windows.Forms.Button();
@@ -40,26 +47,14 @@
             this.Btn_ResetHome = new System.Windows.Forms.Button();
             this.labelUnit2 = new System.Windows.Forms.Label();
             this.labelUnit1 = new System.Windows.Forms.Label();
-            this.AxisScanYlabal = new System.Windows.Forms.Label();
-            this.AxisScanXlabal = new System.Windows.Forms.Label();
             this.Sublabel1 = new System.Windows.Forms.Label();
             this.Sublabel2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label_timerunit = new System.Windows.Forms.Label();
-            this.Cbltimer = new System.Windows.Forms.ComboBox();
-            this.labelDelay = new System.Windows.Forms.Label();
-            this.Motortype2 = new System.Windows.Forms.ComboBox();
-            this.Motortype = new System.Windows.Forms.ComboBox();
-            this.TxtstepY = new System.Windows.Forms.TextBox();
-            this.TxtstepX = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.Btn_runscaning = new System.Windows.Forms.Button();
             this.Reportdata = new System.Windows.Forms.TextBox();
             this.GBreport = new System.Windows.Forms.GroupBox();
-            this.TbAreaX = new System.Windows.Forms.TextBox();
-            this.TbAreaY = new System.Windows.Forms.TextBox();
             this.GBmotorport = new System.Windows.Forms.GroupBox();
             this.RB_rs232 = new System.Windows.Forms.RadioButton();
             this.RB_gpib = new System.Windows.Forms.RadioButton();
@@ -83,12 +78,83 @@
             this.GBautozero = new System.Windows.Forms.GroupBox();
             this.RB_autoON = new System.Windows.Forms.RadioButton();
             this.RB_autoOFF = new System.Windows.Forms.RadioButton();
+            this.totalAreaXTextBox = new System.Windows.Forms.TextBox();
+            this.totalAreaYTextBox = new System.Windows.Forms.TextBox();
+            this.moveStepYTextBox = new System.Windows.Forms.TextBox();
+            this.moveStepXTextBox = new System.Windows.Forms.TextBox();
+            this.unitXComboBox = new System.Windows.Forms.ComboBox();
+            this.unitYComboBox = new System.Windows.Forms.ComboBox();
+            this.delaySteppingComboBox = new System.Windows.Forms.ComboBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.InputValue_area = new System.Windows.Forms.BindingSource(this.components);
+            totalAreaXLabel = new System.Windows.Forms.Label();
+            totalAreaYLabel = new System.Windows.Forms.Label();
+            moveStepYLabel = new System.Windows.Forms.Label();
+            moveStepXLabel = new System.Windows.Forms.Label();
+            delaySteppingLabel = new System.Windows.Forms.Label();
             this.GBreport.SuspendLayout();
             this.GBmotorport.SuspendLayout();
             this.GBSource.SuspendLayout();
             this.GBMeas.SuspendLayout();
             this.GBautozero.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).BeginInit();
             this.SuspendLayout();
+            // 
+            // totalAreaXLabel
+            // 
+            totalAreaXLabel.AutoSize = true;
+            totalAreaXLabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            totalAreaXLabel.ForeColor = System.Drawing.Color.White;
+            totalAreaXLabel.Location = new System.Drawing.Point(21, 396);
+            totalAreaXLabel.Name = "totalAreaXLabel";
+            totalAreaXLabel.Size = new System.Drawing.Size(73, 21);
+            totalAreaXLabel.TabIndex = 49;
+            totalAreaXLabel.Text = "Area X:";
+            // 
+            // totalAreaYLabel
+            // 
+            totalAreaYLabel.AutoSize = true;
+            totalAreaYLabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            totalAreaYLabel.ForeColor = System.Drawing.Color.White;
+            totalAreaYLabel.Location = new System.Drawing.Point(21, 430);
+            totalAreaYLabel.Name = "totalAreaYLabel";
+            totalAreaYLabel.Size = new System.Drawing.Size(73, 21);
+            totalAreaYLabel.TabIndex = 50;
+            totalAreaYLabel.Text = "Area Y:";
+            // 
+            // moveStepYLabel
+            // 
+            moveStepYLabel.AutoSize = true;
+            moveStepYLabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            moveStepYLabel.ForeColor = System.Drawing.Color.White;
+            moveStepYLabel.Location = new System.Drawing.Point(21, 534);
+            moveStepYLabel.Name = "moveStepYLabel";
+            moveStepYLabel.Size = new System.Drawing.Size(73, 21);
+            moveStepYLabel.TabIndex = 51;
+            moveStepYLabel.Text = "Step Y:";
+            // 
+            // moveStepXLabel
+            // 
+            moveStepXLabel.AutoSize = true;
+            moveStepXLabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            moveStepXLabel.ForeColor = System.Drawing.Color.White;
+            moveStepXLabel.Location = new System.Drawing.Point(21, 502);
+            moveStepXLabel.Name = "moveStepXLabel";
+            moveStepXLabel.Size = new System.Drawing.Size(73, 21);
+            moveStepXLabel.TabIndex = 52;
+            moveStepXLabel.Text = "Step X:";
+            // 
+            // delaySteppingLabel
+            // 
+            delaySteppingLabel.AutoSize = true;
+            delaySteppingLabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            delaySteppingLabel.ForeColor = System.Drawing.Color.White;
+            delaySteppingLabel.Location = new System.Drawing.Point(19, 567);
+            delaySteppingLabel.Name = "delaySteppingLabel";
+            delaySteppingLabel.Size = new System.Drawing.Size(109, 21);
+            delaySteppingLabel.TabIndex = 55;
+            delaySteppingLabel.Text = "Delay Step:";
             // 
             // labelTop
             // 
@@ -207,55 +273,25 @@
             // 
             // labelUnit2
             // 
-            this.labelUnit2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelUnit2.AutoSize = true;
-            this.labelUnit2.Font = new System.Drawing.Font("Cascadia Mono", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUnit2.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUnit2.ForeColor = System.Drawing.Color.White;
-            this.labelUnit2.Location = new System.Drawing.Point(242, 431);
+            this.labelUnit2.Location = new System.Drawing.Point(242, 430);
             this.labelUnit2.Name = "labelUnit2";
-            this.labelUnit2.Size = new System.Drawing.Size(36, 28);
+            this.labelUnit2.Size = new System.Drawing.Size(28, 21);
             this.labelUnit2.TabIndex = 21;
             this.labelUnit2.Text = "mm";
             // 
             // labelUnit1
             // 
-            this.labelUnit1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelUnit1.AutoSize = true;
-            this.labelUnit1.Font = new System.Drawing.Font("Cascadia Mono", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUnit1.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUnit1.ForeColor = System.Drawing.Color.White;
-            this.labelUnit1.Location = new System.Drawing.Point(242, 394);
+            this.labelUnit1.Location = new System.Drawing.Point(242, 396);
             this.labelUnit1.Name = "labelUnit1";
-            this.labelUnit1.Size = new System.Drawing.Size(36, 28);
+            this.labelUnit1.Size = new System.Drawing.Size(28, 21);
             this.labelUnit1.TabIndex = 20;
             this.labelUnit1.Text = "mm";
-            // 
-            // AxisScanYlabal
-            // 
-            this.AxisScanYlabal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.AxisScanYlabal.AutoSize = true;
-            this.AxisScanYlabal.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AxisScanYlabal.ForeColor = System.Drawing.Color.White;
-            this.AxisScanYlabal.Location = new System.Drawing.Point(19, 431);
-            this.AxisScanYlabal.Name = "AxisScanYlabal";
-            this.AxisScanYlabal.Size = new System.Drawing.Size(82, 21);
-            this.AxisScanYlabal.TabIndex = 17;
-            this.AxisScanYlabal.Text = "Axis Y :";
-            // 
-            // AxisScanXlabal
-            // 
-            this.AxisScanXlabal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.AxisScanXlabal.AutoSize = true;
-            this.AxisScanXlabal.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AxisScanXlabal.ForeColor = System.Drawing.Color.White;
-            this.AxisScanXlabal.Location = new System.Drawing.Point(19, 398);
-            this.AxisScanXlabal.Name = "AxisScanXlabal";
-            this.AxisScanXlabal.Size = new System.Drawing.Size(82, 21);
-            this.AxisScanXlabal.TabIndex = 16;
-            this.AxisScanXlabal.Text = "Axis X :";
             // 
             // Sublabel1
             // 
@@ -272,12 +308,10 @@
             // 
             // Sublabel2
             // 
-            this.Sublabel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.Sublabel2.AutoSize = true;
             this.Sublabel2.Font = new System.Drawing.Font("Cascadia Mono Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Sublabel2.ForeColor = System.Drawing.Color.White;
-            this.Sublabel2.Location = new System.Drawing.Point(19, 475);
+            this.Sublabel2.Location = new System.Drawing.Point(19, 468);
             this.Sublabel2.Name = "Sublabel2";
             this.Sublabel2.Size = new System.Drawing.Size(226, 21);
             this.Sublabel2.TabIndex = 14;
@@ -285,12 +319,10 @@
             // 
             // label4
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(281, 494);
+            this.label4.Location = new System.Drawing.Point(281, 472);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 17);
             this.label4.TabIndex = 12;
@@ -298,115 +330,14 @@
             // 
             // label_timerunit
             // 
-            this.label_timerunit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.label_timerunit.AutoSize = true;
             this.label_timerunit.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_timerunit.ForeColor = System.Drawing.Color.White;
-            this.label_timerunit.Location = new System.Drawing.Point(255, 596);
+            this.label_timerunit.Location = new System.Drawing.Point(276, 567);
             this.label_timerunit.Name = "label_timerunit";
             this.label_timerunit.Size = new System.Drawing.Size(28, 21);
             this.label_timerunit.TabIndex = 11;
             this.label_timerunit.Text = "ms";
-            // 
-            // Cbltimer
-            // 
-            this.Cbltimer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cbltimer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Cbltimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Cbltimer.FormattingEnabled = true;
-            this.Cbltimer.Location = new System.Drawing.Point(144, 594);
-            this.Cbltimer.Name = "Cbltimer";
-            this.Cbltimer.Size = new System.Drawing.Size(101, 28);
-            this.Cbltimer.TabIndex = 10;
-            // 
-            // labelDelay
-            // 
-            this.labelDelay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelDelay.AutoSize = true;
-            this.labelDelay.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDelay.ForeColor = System.Drawing.Color.White;
-            this.labelDelay.Location = new System.Drawing.Point(19, 594);
-            this.labelDelay.Name = "labelDelay";
-            this.labelDelay.Size = new System.Drawing.Size(127, 21);
-            this.labelDelay.TabIndex = 9;
-            this.labelDelay.Text = "Delay Step : ";
-            // 
-            // Motortype2
-            // 
-            this.Motortype2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Motortype2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Motortype2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Motortype2.FormattingEnabled = true;
-            this.Motortype2.Location = new System.Drawing.Point(247, 552);
-            this.Motortype2.Name = "Motortype2";
-            this.Motortype2.Size = new System.Drawing.Size(74, 33);
-            this.Motortype2.TabIndex = 8;
-            // 
-            // Motortype
-            // 
-            this.Motortype.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Motortype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Motortype.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Motortype.FormattingEnabled = true;
-            this.Motortype.Location = new System.Drawing.Point(247, 514);
-            this.Motortype.Name = "Motortype";
-            this.Motortype.Size = new System.Drawing.Size(74, 33);
-            this.Motortype.TabIndex = 7;
-            // 
-            // TxtstepY
-            // 
-            this.TxtstepY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtstepY.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtstepY.Location = new System.Drawing.Point(104, 552);
-            this.TxtstepY.Multiline = true;
-            this.TxtstepY.Name = "TxtstepY";
-            this.TxtstepY.Size = new System.Drawing.Size(132, 33);
-            this.TxtstepY.TabIndex = 6;
-            this.TxtstepY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // TxtstepX
-            // 
-            this.TxtstepX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtstepX.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtstepX.Location = new System.Drawing.Point(104, 514);
-            this.TxtstepX.Multiline = true;
-            this.TxtstepX.Name = "TxtstepX";
-            this.TxtstepX.Size = new System.Drawing.Size(132, 32);
-            this.TxtstepX.TabIndex = 5;
-            this.TxtstepX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(19, 552);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 21);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Step Y : ";
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(19, 519);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 21);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Step X : ";
             // 
             // label1
             // 
@@ -448,7 +379,7 @@
             this.Reportdata.Multiline = true;
             this.Reportdata.Name = "Reportdata";
             this.Reportdata.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Reportdata.Size = new System.Drawing.Size(296, 147);
+            this.Reportdata.Size = new System.Drawing.Size(296, 165);
             this.Reportdata.TabIndex = 24;
             // 
             // GBreport
@@ -458,32 +389,12 @@
             this.GBreport.Controls.Add(this.Reportdata);
             this.GBreport.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBreport.ForeColor = System.Drawing.Color.White;
-            this.GBreport.Location = new System.Drawing.Point(22, 630);
+            this.GBreport.Location = new System.Drawing.Point(22, 612);
             this.GBreport.Name = "GBreport";
-            this.GBreport.Size = new System.Drawing.Size(302, 175);
+            this.GBreport.Size = new System.Drawing.Size(302, 193);
             this.GBreport.TabIndex = 26;
             this.GBreport.TabStop = false;
             this.GBreport.Text = "Report loop Count ";
-            // 
-            // TbAreaX
-            // 
-            this.TbAreaX.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TbAreaX.Location = new System.Drawing.Point(104, 394);
-            this.TbAreaX.Multiline = true;
-            this.TbAreaX.Name = "TbAreaX";
-            this.TbAreaX.Size = new System.Drawing.Size(132, 31);
-            this.TbAreaX.TabIndex = 27;
-            this.TbAreaX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // TbAreaY
-            // 
-            this.TbAreaY.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TbAreaY.Location = new System.Drawing.Point(104, 431);
-            this.TbAreaY.Multiline = true;
-            this.TbAreaY.Name = "TbAreaY";
-            this.TbAreaY.Size = new System.Drawing.Size(132, 28);
-            this.TbAreaY.TabIndex = 28;
-            this.TbAreaY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // GBmotorport
             // 
@@ -776,7 +687,7 @@
             this.GBautozero.Controls.Add(this.RB_autoOFF);
             this.GBautozero.Font = new System.Drawing.Font("Cascadia Code Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBautozero.ForeColor = System.Drawing.Color.White;
-            this.GBautozero.Location = new System.Drawing.Point(357, 371);
+            this.GBautozero.Location = new System.Drawing.Point(368, 380);
             this.GBautozero.Name = "GBautozero";
             this.GBautozero.Size = new System.Drawing.Size(122, 64);
             this.GBautozero.TabIndex = 49;
@@ -807,11 +718,105 @@
             this.RB_autoOFF.UseVisualStyleBackColor = true;
             this.RB_autoOFF.CheckedChanged += new System.EventHandler(this.RB_autoOFF_CheckedChanged);
             // 
+            // totalAreaXTextBox
+            // 
+            this.totalAreaXTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "TotalAreaX", true));
+            this.totalAreaXTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalAreaXTextBox.Location = new System.Drawing.Point(113, 397);
+            this.totalAreaXTextBox.Name = "totalAreaXTextBox";
+            this.totalAreaXTextBox.Size = new System.Drawing.Size(123, 29);
+            this.totalAreaXTextBox.TabIndex = 50;
+            this.totalAreaXTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // totalAreaYTextBox
+            // 
+            this.totalAreaYTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "TotalAreaY", true));
+            this.totalAreaYTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalAreaYTextBox.Location = new System.Drawing.Point(113, 433);
+            this.totalAreaYTextBox.Name = "totalAreaYTextBox";
+            this.totalAreaYTextBox.Size = new System.Drawing.Size(123, 29);
+            this.totalAreaYTextBox.TabIndex = 51;
+            this.totalAreaYTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // moveStepYTextBox
+            // 
+            this.moveStepYTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "MoveStepY", true));
+            this.moveStepYTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.moveStepYTextBox.Location = new System.Drawing.Point(113, 533);
+            this.moveStepYTextBox.Name = "moveStepYTextBox";
+            this.moveStepYTextBox.Size = new System.Drawing.Size(123, 26);
+            this.moveStepYTextBox.TabIndex = 52;
+            this.moveStepYTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // moveStepXTextBox
+            // 
+            this.moveStepXTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "MoveStepX", true));
+            this.moveStepXTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.moveStepXTextBox.Location = new System.Drawing.Point(113, 499);
+            this.moveStepXTextBox.Name = "moveStepXTextBox";
+            this.moveStepXTextBox.Size = new System.Drawing.Size(123, 26);
+            this.moveStepXTextBox.TabIndex = 53;
+            this.moveStepXTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // unitXComboBox
+            // 
+            this.unitXComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "UnitX", true));
+            this.unitXComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unitXComboBox.FormattingEnabled = true;
+            this.unitXComboBox.Location = new System.Drawing.Point(246, 497);
+            this.unitXComboBox.Name = "unitXComboBox";
+            this.unitXComboBox.Size = new System.Drawing.Size(75, 28);
+            this.unitXComboBox.TabIndex = 54;
+            // 
+            // unitYComboBox
+            // 
+            this.unitYComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "UnitY", true));
+            this.unitYComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unitYComboBox.FormattingEnabled = true;
+            this.unitYComboBox.Location = new System.Drawing.Point(246, 531);
+            this.unitYComboBox.Name = "unitYComboBox";
+            this.unitYComboBox.Size = new System.Drawing.Size(75, 28);
+            this.unitYComboBox.TabIndex = 55;
+            // 
+            // delaySteppingComboBox
+            // 
+            this.delaySteppingComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "DelayStepping", true));
+            this.delaySteppingComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.delaySteppingComboBox.FormattingEnabled = true;
+            this.delaySteppingComboBox.Location = new System.Drawing.Point(138, 565);
+            this.delaySteppingComboBox.Name = "delaySteppingComboBox";
+            this.delaySteppingComboBox.Size = new System.Drawing.Size(132, 28);
+            this.delaySteppingComboBox.TabIndex = 56;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.DataSource = this.InputValue_area;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            this.errorProvider1.RightToLeft = true;
+            // 
+            // InputValue_area
+            // 
+            this.InputValue_area.DataSource = typeof(CodingLabpro.CommandDevice.CalculateArea_Bind);
+            // 
             // AxisControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
+            this.Controls.Add(delaySteppingLabel);
+            this.Controls.Add(this.delaySteppingComboBox);
+            this.Controls.Add(this.unitYComboBox);
+            this.Controls.Add(this.unitXComboBox);
+            this.Controls.Add(moveStepXLabel);
+            this.Controls.Add(this.moveStepXTextBox);
+            this.Controls.Add(moveStepYLabel);
+            this.Controls.Add(this.moveStepYTextBox);
+            this.Controls.Add(totalAreaYLabel);
+            this.Controls.Add(this.totalAreaYTextBox);
+            this.Controls.Add(totalAreaXLabel);
+            this.Controls.Add(this.totalAreaXTextBox);
             this.Controls.Add(this.GBautozero);
             this.Controls.Add(this.BtnCancel_scaning);
             this.Controls.Add(this.Btn_runscaning);
@@ -819,34 +824,22 @@
             this.Controls.Add(this.Btn_Reset);
             this.Controls.Add(this.GBmotorport);
             this.Controls.Add(this.Btn_clear);
-            this.Controls.Add(this.TbAreaY);
             this.Controls.Add(this.Btn_read);
-            this.Controls.Add(this.TbAreaX);
             this.Controls.Add(this.Btn_Error);
             this.Controls.Add(this.GBreport);
-            this.Controls.Add(this.Cbltimer);
             this.Controls.Add(this.GBSource);
-            this.Controls.Add(this.labelDelay);
             this.Controls.Add(this.GBMeas);
             this.Controls.Add(this.label_timerunit);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.labelUnit2);
-            this.Controls.Add(this.Motortype2);
             this.Controls.Add(this.CBrange);
             this.Controls.Add(this.STriggerlabel);
             this.Controls.Add(this.labelUnit1);
             this.Controls.Add(this.CBtrigger);
-            this.Controls.Add(this.Motortype);
             this.Controls.Add(this.rangelabel);
             this.Controls.Add(this.Sublabel2);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.AxisScanYlabal);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.AxisScanXlabal);
-            this.Controls.Add(this.TxtstepY);
-            this.Controls.Add(this.TxtstepX);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.Sublabel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Btn_XRight);
@@ -869,6 +862,8 @@
             this.GBMeas.ResumeLayout(false);
             this.GBautozero.ResumeLayout(false);
             this.GBautozero.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -887,27 +882,15 @@
         private System.Windows.Forms.Button Btn_XLeft;
         private System.Windows.Forms.Button Btn_YDown;
         private System.Windows.Forms.Button Btn_stopmotor;
-        private System.Windows.Forms.TextBox TxtstepY;
-        private System.Windows.Forms.TextBox TxtstepX;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox Motortype2;
-        private System.Windows.Forms.ComboBox Motortype;
-        private System.Windows.Forms.ComboBox Cbltimer;
-        private System.Windows.Forms.Label labelDelay;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label_timerunit;
         private System.Windows.Forms.Button Btn_runscaning;
         private System.Windows.Forms.Label Sublabel2;
         private System.Windows.Forms.Label Sublabel1;
-        private System.Windows.Forms.Label AxisScanYlabal;
-        private System.Windows.Forms.Label AxisScanXlabal;
         private System.Windows.Forms.Label labelUnit1;
         private System.Windows.Forms.Label labelUnit2;
         private System.Windows.Forms.TextBox Reportdata;
         private System.Windows.Forms.GroupBox GBreport;
-        private System.Windows.Forms.TextBox TbAreaX;
-        private System.Windows.Forms.TextBox TbAreaY;
         private System.Windows.Forms.GroupBox GBmotorport;
         private System.Windows.Forms.RadioButton RB_gpib;
         private System.Windows.Forms.RadioButton RB_rs232;
@@ -931,5 +914,14 @@
         private System.Windows.Forms.GroupBox GBautozero;
         private System.Windows.Forms.RadioButton RB_autoON;
         private System.Windows.Forms.RadioButton RB_autoOFF;
+        private System.Windows.Forms.BindingSource InputValue_area;
+        private System.Windows.Forms.TextBox totalAreaXTextBox;
+        private System.Windows.Forms.TextBox totalAreaYTextBox;
+        private System.Windows.Forms.TextBox moveStepYTextBox;
+        private System.Windows.Forms.TextBox moveStepXTextBox;
+        private System.Windows.Forms.ComboBox unitXComboBox;
+        private System.Windows.Forms.ComboBox unitYComboBox;
+        private System.Windows.Forms.ComboBox delaySteppingComboBox;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

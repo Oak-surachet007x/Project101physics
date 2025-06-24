@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -24,14 +25,12 @@ namespace CodingLabpro.frmChild
         private readonly SerialPort mySerialPort;
         private readonly Ivi.Visa.Interop.FormattedIO488 myDMM;
         private string StepMotor_Selected;
-        private string StepMotor_ValueX;
-        private string StepMotor_ValueY;
-        private string SteppingUnitX;
-        private string SteppingUnitY;
         private string ValueProcessX;
         private string ValueProcessY;
         private string ValueNegativeX;
-        private string ValueTimer;
+        private int ValueTimer;
+        private int LoopAreaX;
+        private int LoopAreaY;
 
 
 
@@ -44,9 +43,9 @@ namespace CodingLabpro.frmChild
             this.myDMM = myDMM;
             //Setup Value
             CblStepMotor.Items.AddRange(new string[] { "100", "200", "300", "400", "500", "1000" });
-            Motortype.Items.AddRange(new string[] { "cm", "mm", "μm" });
-            Motortype2.Items.AddRange(new string[] { "cm", "mm", "μm" });
-            Cbltimer.Items.AddRange(new string[] {"1000", "2000", "3000" });
+            unitXComboBox.Items.AddRange(new string[] { "cm", "mm", "μm" });
+            unitYComboBox.Items.AddRange(new string[] { "cm", "mm", "μm" });
+            delaySteppingComboBox.Items.AddRange(new string[] {"1000", "2000", "3000" });
             CBtrigger.Items.AddRange(new string[] {"IMMediate", "BUS", "EXTernal"});
        
         }
@@ -54,6 +53,7 @@ namespace CodingLabpro.frmChild
         #region SettingMeasurement Agilent
         private void AxisControl_Load(object sender, EventArgs e)
         {
+            InputValue_area.DataSource = new CalculateArea_Bind();
             ButtonPortEnabled();
             RangeUnitmeasuremnet();
         }
@@ -195,6 +195,20 @@ namespace CodingLabpro.frmChild
 
             }
 
+        }
+
+        private void ShowValidatorError(Control parent, EntityValidator entityclass)
+        {
+            foreach (Control control in this.Controls)
+            {
+                string propName = control.DataBindings["Text"]?.BindingMemberInfo.BindingField;
+                if (!string.IsNullOrEmpty(propName))
+                {
+                    string error = entityclass[propName]; // Trigger IDataErrorInfo
+                    errorProvider1.SetError(control, error);
+                }
+
+            }
         }
 
         #endregion
@@ -511,43 +525,6 @@ namespace CodingLabpro.frmChild
 
         }
 
-        private static float UnitXForCal(string UnitX)
-        {
-            switch (UnitX)
-            {
-                case "cm":
-                    Debug.WriteLine(1E-2f + UnitX);
-                    return 1E-2f;
-                case "mm":
-                    Debug.WriteLine(1E-3f + UnitX);
-                    return 1E-3f;
-                case "μm":
-                    Debug.WriteLine(1E-6f + UnitX);
-                    return 1E-6f;
-                default:
-                    return 0;
-
-            }
-        }
-        private static float UnitYForCal(string UnitY)
-        {
-            switch (UnitY)
-            {
-                case "cm":
-                    Debug.WriteLine(1E-2f + UnitY);
-                    return 1E-2f;
-                case "mm":
-                    Debug.WriteLine(1E-3f + UnitY);
-                    return 1E-3f;
-                case "μm":
-                    Debug.WriteLine(1E-6f + UnitY);
-                    return 1E-6f;
-                default:
-                    return 0;
-
-            }
-        }
-
         #endregion
 
         #region Methods ScaningArea
@@ -555,41 +532,54 @@ namespace CodingLabpro.frmChild
         {
             try
             {
+                //clear Textbox
                 Reportdata.Clear();
-                SteppingUnitX = Motortype.SelectedItem.ToString();
-                SteppingUnitY = Motortype2.SelectedItem.ToString();
-                StepMotor_ValueX = TxtstepX.Text;
-                StepMotor_ValueY = TxtstepY.Text;
-                ValueTimer = Cbltimer.SelectedItem.ToString();
-
-
-                //เก็บตัวแปรเรียกใช้ต่อในคลาสย่อย แล้วคืนค่าตามเงื่อนไข
-                ValueProcessX = MovementPositiveX(StepMotor_ValueX, SteppingUnitX);
-                ValueProcessY = MovementPositiveY(StepMotor_ValueY, SteppingUnitY);
-                ValueNegativeX = MovementNegativeX(StepMotor_ValueX, SteppingUnitX);
-
 
                 // Requitment Class
-                var Calarea = new CalculateArea()
+                CalculateArea_Bind calculate = InputValue_area.Current as CalculateArea_Bind;
+                calculate.EnableValidation = true;
+                InputValue_area.EndEdit();
+                //ErrorProvider
+                ShowValidatorError(this, calculate);
+ 
+                if (calculate != null)
                 {
-                    TotalAreaX = TbAreaX.Text,
-                    TotalAreaY = TbAreaY.Text,
-                    UnitX = UnitXForCal(SteppingUnitX),
-                    UnitY = UnitYForCal(SteppingUnitY),
-                    MoveStepX = StepMotor_ValueX,
-                    MoveStepY = StepMotor_ValueY,
-                };
+                    if (calculate.IsValid)
+                    {
+                        //เก็บตัวแปรเรียกใช้ต่อในคลาสย่อย แล้วคืนค่าตามเงื่อนไข
+                        ValueProcessX = MovementPositiveX(calculate.MoveStepX, calculate.UnitX);
+                        ValueProcessY = MovementPositiveY(calculate.MoveStepY, calculate.UnitY);
+                        ValueNegativeX = MovementNegativeX(calculate.MoveStepX, calculate.UnitX);
+                        ValueTimer = calculate.ReturnTimer();
+                        LoopAreaX = calculate.CalareaScanningX();
+                        LoopAreaY = calculate.CalareaScanningY();
 
-                int LoopAreaX = Calarea.CalareaScanningX();
-                int LoopAreaY = Calarea.CalareaScanningY();
+                    }
+
+                    ValidationContext context = new ValidationContext(calculate, null, null);
+                    IList<ValidationResult> errors = new List<ValidationResult>();
+                    string results = "";
+                    if (!Validator.TryValidateObject(calculate, context, errors, true))
+                    {
+                        foreach (ValidationResult result in errors)
+                        {
+                            results = results + result.ErrorMessage + Environment.NewLine;
+
+                        }
+                        //MessageBox.Show(results, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowMessage("ERROR", $"{results}");
+                        return;
+                    }
+                }
 
                 //Run Scaning
-                myMMC.WriteString("H:W");
-                await Task.Delay(5000);
-                myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y == 0 cm
-                myMMC.WriteString("G:");
-                await Task.Delay(5000);
+                //myMMC.WriteString("H:W");
+                //await Task.Delay(5000);
+                //myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y == 0 cm
+                //myMMC.WriteString("G:");
+                //await Task.Delay(5000);
 
+                //Run Measurement
                 SetupMeasurementCommand();
 
                 Reportdata.AppendText($" คำนวณผลลัพธ์ลูปที่สแกนของ X คือ {LoopAreaX} ลูป \n คำนวณผลลัพธ์ลูปที่สแกนของ Y คือ {LoopAreaY} ลูป" + Environment.NewLine); //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
@@ -600,25 +590,25 @@ namespace CodingLabpro.frmChild
                     {
                         for (int x = 0; x < LoopAreaX; x++)
                         {
-                            myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
-                            myMMC.WriteString("G:");
-                            await Task.Delay(int.Parse(ValueTimer));
+                            //myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
+                            //myMMC.WriteString("G:");
+                            //await Task.Delay(ValueTimer);
                         }
                     }
                     else  // ถ้าเป็นแถวคี่ (1,3,5..) เคลื่อนที่ย้อนกลับทางซ้าย
                     {
                         for (int x = 0; x < LoopAreaX; x++)
                         {
-                            myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
-                            myMMC.WriteString("G:");
-                            await Task.Delay(int.Parse(ValueTimer));
+                            //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
+                            //myMMC.WriteString("G:");
+                            //await Task.Delay(ValueTimer);
                         }
                     }
 
                     //เคลื่อนที่ไปยังแถวถัดไปตามแนว Y
-                    myMMC.WriteString(ValueProcessY);
-                    myMMC.WriteString("G:");
-                    await Task.Delay(int.Parse(ValueTimer));
+                    //myMMC.WriteString(ValueProcessY);
+                    //myMMC.WriteString("G:");
+                    await Task.Delay(ValueTimer);
 
 
                     this.Invoke(new Action(() => Reportdata.AppendText($"{y + 1} loop " + Environment.NewLine)));
@@ -629,9 +619,9 @@ namespace CodingLabpro.frmChild
 
                     for (int x = 0; x < LoopAreaX; x++)
                     {
-                        myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
-                        myMMC.WriteString("G:");
-                        await Task.Delay(int.Parse(ValueTimer));
+                        //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
+                        //myMMC.WriteString("G:");
+                        //await Task.Delay(ValueTimer);
 
                     }
                 }
@@ -658,7 +648,7 @@ namespace CodingLabpro.frmChild
             string MeasureMode = GlobalMeasurementSettings.Instance.MeasureMode;
             string SourceMode = GlobalMeasurementSettings.Instance.SourceMode;
             string AutoMode = GlobalMeasurementSettings.Instance.AutozeroMode;
-            MessageBox.Show($"{TriggerMode} \n {MeasureMode} \n {SourceMode}", "สรุปผล");
+            MessageBox.Show($"{TriggerMode} \n {MeasureMode} \n {SourceMode} \n {AutoMode}", "สรุปผล");
         }
 
      

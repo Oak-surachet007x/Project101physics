@@ -117,4 +117,60 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="totalAreaXLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="totalAreaYLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="moveStepYLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="moveStepXLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="delaySteppingLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="InputValue_area.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>154, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="errorProvider1.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAFBQAAAEAIAC4BgAAFgAAACgAAAAUAAAAKAAAAAEAIAAAAAAAQAYAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAw
+        3xAgMO8QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAIzPqnyMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz65cAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAIDDvECMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz
+        6v8gMO8QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAw7xAjM+r/IzPq/yMz6v8jM+r/IzPq/yMz
+        6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8gMO8QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIzPq/yMz
+        6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8AAAAAAAAAAAAA
+        AAAAAAAAAAAAACIy6o8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8AAAAAAAAAACMz6v8jM+r/IzPq/yMz
+        6v8jM+r/IzPq/yQ0648AAAAAAAAAAAAAAAAAAAAAIzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yIy
+        6YAiMumAIzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/wAAAAAAAAAAAAAAAAAAAAAjM+r/IzPq/yMz
+        6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/AAAAAAAA
+        AAAAAAAAIDDfECMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8AAAAAAAAAACMz6v8jM+r/IzPq/yMz
+        6v8jM+r/IzPq/yMz6v8gMN8QAAAAAAAAAAAgIN8IIzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/wAA
+        AAAAAAAAIzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yA16hgAAAAAAAAAAAAAAAAjM+r/IzPq/yMz
+        6v8jM+r/IzPq/yMz6v8jM+r/AAAAAAAAAAAjM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/AAAAAAAA
+        AAAAAAAAAAAAACMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8AAAAAAAAAACMz6v8jM+r/IzPq/yMz
+        6v8jM+r/IzPq/yMz6v8AAAAAAAAAAAAAAAAAAAAAJDTrjyMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/wAA
+        AAAAAAAAIzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/JDTrjwAAAAAAAAAAAAAAAAAAAAAAAAAAIzPq/yMz
+        6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8AAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAgMO8QIzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz
+        6v8jM+r/IDDvEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgMO8QIzPq/yMz6v8jM+r/IzPq/yMz
+        6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yAw5yAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAIzPrlyMz6v8jM+r/IzPq/yMz6v8jM+r/IzPq/yMz65cAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgMN8QIDDvEAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA///wAP+f8AD8A/AA8ADwAOAA
+        cADgAHAAwGAwAMAAMADAADAAgGAQAIBgEADAYDAAwGAwAMBgMADgAHAA4ABwAPAA8AD8A/AA/5/wAP//
+        8AA=
+</value>
+  </data>
 </root>

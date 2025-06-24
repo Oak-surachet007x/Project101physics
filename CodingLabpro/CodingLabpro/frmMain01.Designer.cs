@@ -62,6 +62,8 @@
             this.StatusMMC2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusPort3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.LBunitmeasurement = new System.Windows.Forms.Label();
+            this.LBvaluemeasurement = new System.Windows.Forms.Label();
             this.labelTimer = new System.Windows.Forms.Label();
             this.GBchart = new System.Windows.Forms.GroupBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -69,13 +71,11 @@
             this.BtnClear = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Menupanel = new System.Windows.Forms.Panel();
-            this.flowLayoutBar = new System.Windows.Forms.FlowLayoutPanel();
-            this.FormChildpanel = new System.Windows.Forms.Panel();
-            this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.ucMenu2 = new CodingLabpro.Models.ucMenu();
             this.ucMenu1 = new CodingLabpro.Models.ucMenu();
-            this.LBvaluemeasurement = new System.Windows.Forms.Label();
-            this.LBunitmeasurement = new System.Windows.Forms.Label();
+            this.flowLayoutBar = new System.Windows.Forms.FlowLayoutPanel();
+            this.barMenu1 = new CodingLabpro.Models.barMenu();
+            this.FormChildpanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
             this.GBconnect.SuspendLayout();
             this.buttonLayoutPanel2.SuspendLayout();
@@ -384,6 +384,30 @@
             this.panelTop.Size = new System.Drawing.Size(725, 88);
             this.panelTop.TabIndex = 6;
             // 
+            // LBunitmeasurement
+            // 
+            this.LBunitmeasurement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LBunitmeasurement.AutoSize = true;
+            this.LBunitmeasurement.Font = new System.Drawing.Font("Cascadia Code SemiLight", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBunitmeasurement.Location = new System.Drawing.Point(646, 9);
+            this.LBunitmeasurement.Name = "LBunitmeasurement";
+            this.LBunitmeasurement.Size = new System.Drawing.Size(76, 43);
+            this.LBunitmeasurement.TabIndex = 6;
+            this.LBunitmeasurement.Text = "VDC";
+            this.LBunitmeasurement.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // LBvaluemeasurement
+            // 
+            this.LBvaluemeasurement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LBvaluemeasurement.AutoSize = true;
+            this.LBvaluemeasurement.Font = new System.Drawing.Font("Cascadia Code Light", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBvaluemeasurement.Location = new System.Drawing.Point(507, 9);
+            this.LBvaluemeasurement.Name = "LBvaluemeasurement";
+            this.LBvaluemeasurement.Size = new System.Drawing.Size(152, 43);
+            this.LBvaluemeasurement.TabIndex = 5;
+            this.LBvaluemeasurement.Text = "-00.000";
+            this.LBvaluemeasurement.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // labelTimer
             // 
             this.labelTimer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -496,36 +520,6 @@
             this.Menupanel.Size = new System.Drawing.Size(85, 845);
             this.Menupanel.TabIndex = 0;
             // 
-            // flowLayoutBar
-            // 
-            this.flowLayoutBar.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutBar.Controls.Add(this.barMenu1);
-            this.flowLayoutBar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutBar.Location = new System.Drawing.Point(1490, 0);
-            this.flowLayoutBar.Name = "flowLayoutBar";
-            this.flowLayoutBar.Size = new System.Drawing.Size(50, 815);
-            this.flowLayoutBar.TabIndex = 10;
-            // 
-            // FormChildpanel
-            // 
-            this.FormChildpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
-            this.FormChildpanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.FormChildpanel.Location = new System.Drawing.Point(810, 0);
-            this.FormChildpanel.Name = "FormChildpanel";
-            this.FormChildpanel.Size = new System.Drawing.Size(680, 815);
-            this.FormChildpanel.TabIndex = 11;
-            // 
-            // barMenu1
-            // 
-            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
-            this.barMenu1.BarColor = System.Drawing.Color.White;
-            this.barMenu1.Location = new System.Drawing.Point(6, 12);
-            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
-            this.barMenu1.Name = "barMenu1";
-            this.barMenu1.Size = new System.Drawing.Size(50, 222);
-            this.barMenu1.TabIndex = 11;
-            this.barMenu1.textbar = "Axis Control & Measument";
-            // 
             // ucMenu2
             // 
             this.ucMenu2.BackColor = System.Drawing.Color.Transparent;
@@ -548,28 +542,35 @@
             this.ucMenu1.TabIndex = 0;
             this.ucMenu1.textlabel = "Help";
             // 
-            // LBvaluemeasurement
+            // flowLayoutBar
             // 
-            this.LBvaluemeasurement.AutoSize = true;
-            this.LBvaluemeasurement.Font = new System.Drawing.Font("Cascadia Code Light", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBvaluemeasurement.Location = new System.Drawing.Point(507, 9);
-            this.LBvaluemeasurement.Name = "LBvaluemeasurement";
-            this.LBvaluemeasurement.Size = new System.Drawing.Size(152, 43);
-            this.LBvaluemeasurement.TabIndex = 5;
-            this.LBvaluemeasurement.Text = "-00.000";
-            this.LBvaluemeasurement.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.flowLayoutBar.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutBar.Controls.Add(this.barMenu1);
+            this.flowLayoutBar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutBar.Location = new System.Drawing.Point(1490, 0);
+            this.flowLayoutBar.Name = "flowLayoutBar";
+            this.flowLayoutBar.Size = new System.Drawing.Size(50, 815);
+            this.flowLayoutBar.TabIndex = 10;
             // 
-            // LBunitmeasurement
+            // barMenu1
             // 
-            this.LBunitmeasurement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LBunitmeasurement.AutoSize = true;
-            this.LBunitmeasurement.Font = new System.Drawing.Font("Cascadia Code", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBunitmeasurement.Location = new System.Drawing.Point(646, 9);
-            this.LBunitmeasurement.Name = "LBunitmeasurement";
-            this.LBunitmeasurement.Size = new System.Drawing.Size(76, 43);
-            this.LBunitmeasurement.TabIndex = 6;
-            this.LBunitmeasurement.Text = "VDC";
-            this.LBunitmeasurement.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
+            this.barMenu1.BarColor = System.Drawing.Color.White;
+            this.barMenu1.Location = new System.Drawing.Point(6, 12);
+            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
+            this.barMenu1.Name = "barMenu1";
+            this.barMenu1.Size = new System.Drawing.Size(50, 222);
+            this.barMenu1.TabIndex = 11;
+            this.barMenu1.textbar = "Axis Control & Measument";
+            // 
+            // FormChildpanel
+            // 
+            this.FormChildpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
+            this.FormChildpanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.FormChildpanel.Location = new System.Drawing.Point(810, 0);
+            this.FormChildpanel.Name = "FormChildpanel";
+            this.FormChildpanel.Size = new System.Drawing.Size(680, 815);
+            this.FormChildpanel.TabIndex = 11;
             // 
             // FrmMain01
             // 

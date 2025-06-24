@@ -181,7 +181,10 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\BouncyCast
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Enums.NET.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\ExtendedNumerics.BigDecimal.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Ivi.Visa.dll
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Keysight.Visa.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\MathNet.Numerics.dll
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Microsoft.Bcl.Cryptography.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Microsoft.IO.RecyclableMemoryStream.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NPOI.Core.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NPOI.OOXML.dll
@@ -189,6 +192,7 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NPOI.OpenX
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NPOI.OpenXmlFormats.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\SixLabors.Fonts.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Buffers.dll
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Formats.Asn1.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Memory.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Numerics.Vectors.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.dll
@@ -208,6 +212,7 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\ICSharpCod
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Ivi.Visa.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Keysight.Visa.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\MathNet.Numerics.xml
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Microsoft.Bcl.Cryptography.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Microsoft.IO.RecyclableMemoryStream.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NPOI.Core.pdb
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NPOI.Core.xml
@@ -219,6 +224,7 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NPOI.OpenX
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NPOI.OpenXmlFormats.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\SixLabors.Fonts.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Buffers.xml
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Formats.Asn1.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Memory.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Numerics.Vectors.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.xml
@@ -245,9 +251,3 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabp
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLa.AE193A8B.Up2Date
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.exe
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.pdb
-C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Microsoft.Bcl.Cryptography.dll
-C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Formats.Asn1.dll
-C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Microsoft.Bcl.Cryptography.xml
-C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Formats.Asn1.xml
-C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Ivi.Visa.dll
-C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Keysight.Visa.dll
