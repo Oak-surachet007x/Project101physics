@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,21 +28,25 @@ namespace CodingLabpro.Models
             {
                 case "OK":
                     MessageBorder.BackColor = Color.FromArgb(22, 196, 127);
+                    SystemSounds.Beep.Play();
                     picIcon.Image = Properties.Resources.sync_saved_locally_100dp_16C47F_FILL1_wght400_GRAD0_opsz48;
                     break;
 
                 case "ERROR":
                     MessageBorder.BackColor = Color.Red;
+                    SystemSounds.Hand.Play();
                     picIcon.Image = Properties.Resources.error_16dp_FF0000_FILL1_wght400_GRAD0_opsz48;
                     break;
 
                 case "INFO":
                     MessageBorder.BackColor = Color.Blue;
+                    SystemSounds.Asterisk.Play();
                     picIcon.Image = Properties.Resources.info_16dp_0000F5_FILL0_wght400_GRAD0_opsz48;
                     break;
 
                 case "WARNING":
                     MessageBorder.BackColor = Color.FromArgb(255, 127, 0);
+                    SystemSounds.Exclamation.Play();
                     picIcon.Image = Properties.Resources.warning_16dp_FF7F00_FILL1_wght400_GRAD0_opsz48;
                     break;
             }
@@ -81,7 +86,6 @@ namespace CodingLabpro.Models
             this.Location = new Point(ScreenWidth, TargetY); // เริ่มจากล่างสุด
             Messagetimer.Start();
         }
-
 
         private void HideTimer_Tick(object sender, EventArgs e)
         {

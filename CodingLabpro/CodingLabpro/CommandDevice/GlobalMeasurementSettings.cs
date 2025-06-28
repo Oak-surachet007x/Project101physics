@@ -21,14 +21,24 @@ namespace CodingLabpro.CommandDevice
         private string _TriggerMode = "IMMediate";
         private string _AutozeroMode = "ON";
 
+        public event EventHandler SettingsChanged;
+
         public string MeasureMode {
-            get => _MeasureMode; 
-            set => SetProperty(ref _MeasureMode, value);
+            get => _MeasureMode;
+            set
+            {
+                SetProperty(ref _MeasureMode, value);
+                SettingsChanged?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         public string SourceMode { 
-            get => _SourceMode; 
-            set => SetProperty(ref _SourceMode, value);
+            get => _SourceMode;
+            set
+            {
+                SetProperty(ref _SourceMode, value);
+                SettingsChanged?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         public string TriggerMode

@@ -79,6 +79,7 @@
             this.RB_autoON = new System.Windows.Forms.RadioButton();
             this.RB_autoOFF = new System.Windows.Forms.RadioButton();
             this.totalAreaXTextBox = new System.Windows.Forms.TextBox();
+            this.InputValue_area = new System.Windows.Forms.BindingSource(this.components);
             this.totalAreaYTextBox = new System.Windows.Forms.TextBox();
             this.moveStepYTextBox = new System.Windows.Forms.TextBox();
             this.moveStepXTextBox = new System.Windows.Forms.TextBox();
@@ -86,7 +87,6 @@
             this.unitYComboBox = new System.Windows.Forms.ComboBox();
             this.delaySteppingComboBox = new System.Windows.Forms.ComboBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.InputValue_area = new System.Windows.Forms.BindingSource(this.components);
             totalAreaXLabel = new System.Windows.Forms.Label();
             totalAreaYLabel = new System.Windows.Forms.Label();
             moveStepYLabel = new System.Windows.Forms.Label();
@@ -97,13 +97,14 @@
             this.GBSource.SuspendLayout();
             this.GBMeas.SuspendLayout();
             this.GBautozero.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // totalAreaXLabel
             // 
             totalAreaXLabel.AutoSize = true;
+            totalAreaXLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
             totalAreaXLabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             totalAreaXLabel.ForeColor = System.Drawing.Color.White;
             totalAreaXLabel.Location = new System.Drawing.Point(21, 396);
@@ -728,6 +729,10 @@
             this.totalAreaXTextBox.TabIndex = 50;
             this.totalAreaXTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // InputValue_area
+            // 
+            this.InputValue_area.DataSource = typeof(CodingLabpro.CommandDevice.CalculateArea_Bind);
+            // 
             // totalAreaYTextBox
             // 
             this.totalAreaYTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "TotalAreaY", true));
@@ -796,10 +801,6 @@
             this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
             this.errorProvider1.RightToLeft = true;
             // 
-            // InputValue_area
-            // 
-            this.InputValue_area.DataSource = typeof(CodingLabpro.CommandDevice.CalculateArea_Bind);
-            // 
             // AxisControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -862,8 +863,8 @@
             this.GBMeas.ResumeLayout(false);
             this.GBautozero.ResumeLayout(false);
             this.GBautozero.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

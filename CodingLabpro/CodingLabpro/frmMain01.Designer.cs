@@ -31,11 +31,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain01));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.GBconnect = new System.Windows.Forms.GroupBox();
             this.buttonLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -62,20 +62,22 @@
             this.StatusMMC2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusPort3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.LBdatetime = new System.Windows.Forms.Label();
             this.LBunitmeasurement = new System.Windows.Forms.Label();
             this.LBvaluemeasurement = new System.Windows.Forms.Label();
-            this.labelTimer = new System.Windows.Forms.Label();
+            this.LBtimer = new System.Windows.Forms.Label();
             this.GBchart = new System.Windows.Forms.GroupBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.CPchart = new System.Windows.Forms.Panel();
             this.BtnClear = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Menupanel = new System.Windows.Forms.Panel();
             this.ucMenu2 = new CodingLabpro.Models.ucMenu();
             this.ucMenu1 = new CodingLabpro.Models.ucMenu();
             this.flowLayoutBar = new System.Windows.Forms.FlowLayoutPanel();
             this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.FormChildpanel = new System.Windows.Forms.Panel();
+            this.Datetimenow = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.GBconnect.SuspendLayout();
             this.buttonLayoutPanel2.SuspendLayout();
@@ -241,14 +243,14 @@
             // 
             this.DgvMeasurement.BackgroundColor = System.Drawing.Color.White;
             this.DgvMeasurement.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvMeasurement.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvMeasurement.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.DgvMeasurement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvMeasurement.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1});
@@ -268,12 +270,12 @@
             // 
             this.labelTop.AutoSize = true;
             this.labelTop.BackColor = System.Drawing.Color.Transparent;
-            this.labelTop.Font = new System.Drawing.Font("Cascadia Mono", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTop.Font = new System.Drawing.Font("Cascadia Mono", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTop.ForeColor = System.Drawing.Color.White;
             this.labelTop.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.labelTop.Location = new System.Drawing.Point(15, 0);
+            this.labelTop.Location = new System.Drawing.Point(4, 1);
             this.labelTop.Name = "labelTop";
-            this.labelTop.Size = new System.Drawing.Size(264, 49);
+            this.labelTop.Size = new System.Drawing.Size(228, 43);
             this.labelTop.TabIndex = 2;
             this.labelTop.Text = "MainControl";
             // 
@@ -281,11 +283,11 @@
             // 
             this.labelName.AutoSize = true;
             this.labelName.BackColor = System.Drawing.Color.Transparent;
-            this.labelName.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelName.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelName.ForeColor = System.Drawing.Color.White;
-            this.labelName.Location = new System.Drawing.Point(20, 49);
+            this.labelName.Location = new System.Drawing.Point(10, 44);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(370, 21);
+            this.labelName.Size = new System.Drawing.Size(328, 17);
             this.labelName.TabIndex = 3;
             this.labelName.Text = "Aglient 34401A And MMC-2 Axis Controller";
             // 
@@ -373,51 +375,66 @@
             // panelTop
             // 
             this.panelTop.BackColor = System.Drawing.Color.Transparent;
+            this.panelTop.Controls.Add(this.LBdatetime);
             this.panelTop.Controls.Add(this.LBunitmeasurement);
             this.panelTop.Controls.Add(this.LBvaluemeasurement);
-            this.panelTop.Controls.Add(this.labelTimer);
             this.panelTop.Controls.Add(this.labelTop);
             this.panelTop.Controls.Add(this.labelName);
+            this.panelTop.Controls.Add(this.LBtimer);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(85, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(725, 88);
+            this.panelTop.Size = new System.Drawing.Size(725, 104);
             this.panelTop.TabIndex = 6;
+            // 
+            // LBdatetime
+            // 
+            this.LBdatetime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LBdatetime.AutoSize = true;
+            this.LBdatetime.Font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBdatetime.Location = new System.Drawing.Point(487, 84);
+            this.LBdatetime.Name = "LBdatetime";
+            this.LBdatetime.Size = new System.Drawing.Size(228, 17);
+            this.LBdatetime.TabIndex = 4;
+            this.LBdatetime.Text = "MM-dd-yyyy HH:mm:ss tt";
+            this.LBdatetime.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // LBunitmeasurement
             // 
             this.LBunitmeasurement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LBunitmeasurement.AutoSize = true;
-            this.LBunitmeasurement.Font = new System.Drawing.Font("Cascadia Code SemiLight", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBunitmeasurement.Location = new System.Drawing.Point(646, 9);
+            this.LBunitmeasurement.Font = new System.Drawing.Font("Cascadia Code SemiLight", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBunitmeasurement.Location = new System.Drawing.Point(615, 1);
             this.LBunitmeasurement.Name = "LBunitmeasurement";
-            this.LBunitmeasurement.Size = new System.Drawing.Size(76, 43);
+            this.LBunitmeasurement.Size = new System.Drawing.Size(110, 49);
             this.LBunitmeasurement.TabIndex = 6;
-            this.LBunitmeasurement.Text = "VDC";
-            this.LBunitmeasurement.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.LBunitmeasurement.Text = "Mode";
+            this.LBunitmeasurement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // LBvaluemeasurement
             // 
             this.LBvaluemeasurement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LBvaluemeasurement.AutoSize = true;
-            this.LBvaluemeasurement.Font = new System.Drawing.Font("Cascadia Code Light", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBvaluemeasurement.Location = new System.Drawing.Point(507, 9);
+            this.LBvaluemeasurement.Font = new System.Drawing.Font("OCR A Extended", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBvaluemeasurement.Location = new System.Drawing.Point(429, 9);
             this.LBvaluemeasurement.Name = "LBvaluemeasurement";
-            this.LBvaluemeasurement.Size = new System.Drawing.Size(152, 43);
+            this.LBvaluemeasurement.Size = new System.Drawing.Size(193, 39);
             this.LBvaluemeasurement.TabIndex = 5;
-            this.LBvaluemeasurement.Text = "-00.000";
+            this.LBvaluemeasurement.Text = "-00.0000";
             this.LBvaluemeasurement.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // labelTimer
+            // LBtimer
             // 
-            this.labelTimer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTimer.AutoSize = true;
-            this.labelTimer.Font = new System.Drawing.Font("Cascadia Code Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTimer.Location = new System.Drawing.Point(610, 64);
-            this.labelTimer.Name = "labelTimer";
-            this.labelTimer.Size = new System.Drawing.Size(109, 21);
-            this.labelTimer.TabIndex = 4;
-            this.labelTimer.Text = "00:00:00 PM";
+            this.LBtimer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LBtimer.AutoSize = true;
+            this.LBtimer.BackColor = System.Drawing.Color.Transparent;
+            this.LBtimer.Font = new System.Drawing.Font("OCR A Extended", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBtimer.Location = new System.Drawing.Point(563, 50);
+            this.LBtimer.Name = "LBtimer";
+            this.LBtimer.Size = new System.Drawing.Size(149, 29);
+            this.LBtimer.TabIndex = 7;
+            this.LBtimer.Text = "00:00:00";
+            this.LBtimer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // GBchart
             // 
@@ -427,10 +444,10 @@
             this.GBchart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.GBchart.Font = new System.Drawing.Font("Cascadia Mono Light", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBchart.ForeColor = System.Drawing.Color.White;
-            this.GBchart.Location = new System.Drawing.Point(85, 88);
+            this.GBchart.Location = new System.Drawing.Point(85, 104);
             this.GBchart.Name = "GBchart";
             this.GBchart.Padding = new System.Windows.Forms.Padding(0);
-            this.GBchart.Size = new System.Drawing.Size(725, 387);
+            this.GBchart.Size = new System.Drawing.Size(725, 371);
             this.GBchart.TabIndex = 8;
             this.GBchart.TabStop = false;
             this.GBchart.Text = "Data Measurement";
@@ -438,50 +455,50 @@
             // chart1
             // 
             this.chart1.BackColor = System.Drawing.Color.Transparent;
-            chartArea2.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
-            chartArea2.AxisX.LineColor = System.Drawing.Color.WhiteSmoke;
-            chartArea2.AxisX.MajorGrid.LineColor = System.Drawing.Color.White;
-            chartArea2.AxisX.MajorTickMark.LineColor = System.Drawing.Color.White;
-            chartArea2.AxisX.MajorTickMark.Size = 2F;
-            chartArea2.AxisX.Title = "NameX";
-            chartArea2.AxisX.TitleForeColor = System.Drawing.Color.White;
-            chartArea2.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
-            chartArea2.AxisY.LineColor = System.Drawing.Color.White;
-            chartArea2.AxisY.MajorGrid.LineColor = System.Drawing.Color.White;
-            chartArea2.AxisY.MajorTickMark.LineColor = System.Drawing.Color.White;
-            chartArea2.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated270;
-            chartArea2.AxisY.Title = "NameY";
-            chartArea2.AxisY.TitleForeColor = System.Drawing.Color.White;
-            chartArea2.BackColor = System.Drawing.Color.Transparent;
-            chartArea2.Name = "ChartArea1";
-            chartArea2.Position.Auto = false;
-            chartArea2.Position.Height = 84.33334F;
-            chartArea2.Position.Width = 94F;
-            chartArea2.Position.X = 1F;
-            chartArea2.Position.Y = 12.66667F;
-            this.chart1.ChartAreas.Add(chartArea2);
+            chartArea8.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea8.AxisX.LineColor = System.Drawing.Color.WhiteSmoke;
+            chartArea8.AxisX.MajorGrid.LineColor = System.Drawing.Color.White;
+            chartArea8.AxisX.MajorTickMark.LineColor = System.Drawing.Color.White;
+            chartArea8.AxisX.MajorTickMark.Size = 2F;
+            chartArea8.AxisX.Title = "NameX";
+            chartArea8.AxisX.TitleForeColor = System.Drawing.Color.White;
+            chartArea8.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea8.AxisY.LineColor = System.Drawing.Color.White;
+            chartArea8.AxisY.MajorGrid.LineColor = System.Drawing.Color.White;
+            chartArea8.AxisY.MajorTickMark.LineColor = System.Drawing.Color.White;
+            chartArea8.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated270;
+            chartArea8.AxisY.Title = "NameY";
+            chartArea8.AxisY.TitleForeColor = System.Drawing.Color.White;
+            chartArea8.BackColor = System.Drawing.Color.Transparent;
+            chartArea8.Name = "ChartArea1";
+            chartArea8.Position.Auto = false;
+            chartArea8.Position.Height = 84.33334F;
+            chartArea8.Position.Width = 94F;
+            chartArea8.Position.X = 1F;
+            chartArea8.Position.Y = 12.66667F;
+            this.chart1.ChartAreas.Add(chartArea8);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Alignment = System.Drawing.StringAlignment.Far;
-            legend2.BackColor = System.Drawing.Color.Transparent;
-            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-            legend2.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend2.ForeColor = System.Drawing.Color.White;
-            legend2.IsTextAutoFit = false;
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            legend8.Alignment = System.Drawing.StringAlignment.Far;
+            legend8.BackColor = System.Drawing.Color.Transparent;
+            legend8.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend8.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend8.ForeColor = System.Drawing.Color.White;
+            legend8.IsTextAutoFit = false;
+            legend8.Name = "Legend1";
+            this.chart1.Legends.Add(legend8);
             this.chart1.Location = new System.Drawing.Point(0, 22);
             this.chart1.Name = "chart1";
-            series2.BorderWidth = 2;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.LabelForeColor = System.Drawing.Color.White;
-            series2.Legend = "Legend1";
-            series2.MarkerColor = System.Drawing.Color.Orange;
-            series2.MarkerSize = 7;
-            series2.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(725, 365);
+            series8.BorderWidth = 2;
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series8.LabelForeColor = System.Drawing.Color.White;
+            series8.Legend = "Legend1";
+            series8.MarkerColor = System.Drawing.Color.Orange;
+            series8.MarkerSize = 7;
+            series8.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            series8.Name = "Series1";
+            this.chart1.Series.Add(series8);
+            this.chart1.Size = new System.Drawing.Size(725, 349);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -501,7 +518,7 @@
             // 
             this.BtnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnClear.ForeColor = System.Drawing.Color.White;
-            this.BtnClear.Location = new System.Drawing.Point(139, 9);
+            this.BtnClear.Location = new System.Drawing.Point(10, 6);
             this.BtnClear.Name = "BtnClear";
             this.BtnClear.Size = new System.Drawing.Size(120, 30);
             this.BtnClear.TabIndex = 0;
@@ -572,6 +589,11 @@
             this.FormChildpanel.Size = new System.Drawing.Size(680, 815);
             this.FormChildpanel.TabIndex = 11;
             // 
+            // Datetimenow
+            // 
+            this.Datetimenow.Enabled = true;
+            this.Datetimenow.Tick += new System.EventHandler(this.DataTimeNow_Tick);
+            // 
             // FrmMain01
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -594,7 +616,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMain01";
             this.Load += new System.EventHandler(this.FrmMain01_Load);
-            this.Shown += new System.EventHandler(this.FrmMain01_Shown);
             this.SizeChanged += new System.EventHandler(this.FrmMain01_SizeChanged);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.GBconnect.ResumeLayout(false);
@@ -646,7 +667,6 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Panel CPchart;
         private System.Windows.Forms.Button BtnClear;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel Menupanel;
         private Models.ucMenu ucMenu2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutBar;
@@ -655,8 +675,11 @@
         private Models.ucMenu ucMenu1;
         private System.Windows.Forms.DataGridView DgvMeasurement;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.Label labelTimer;
+        private System.Windows.Forms.Label LBdatetime;
         private System.Windows.Forms.Label LBvaluemeasurement;
         private System.Windows.Forms.Label LBunitmeasurement;
+        private System.Windows.Forms.Timer Datetimenow;
+        private System.Windows.Forms.Label LBtimer;
+        private System.Windows.Forms.Timer timer1;
     }
 }

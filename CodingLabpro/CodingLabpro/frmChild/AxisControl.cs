@@ -31,7 +31,7 @@ namespace CodingLabpro.frmChild
         private int ValueTimer;
         private int LoopAreaX;
         private int LoopAreaY;
-
+   
 
 
         public AxisControl(Ivi.Visa.Interop.FormattedIO488 myMMC, SerialPort mySerialPort, Ivi.Visa.Interop.FormattedIO488 myDMM)
@@ -113,6 +113,8 @@ namespace CodingLabpro.frmChild
         {
             RangeUnitmeasuremnet();
             GlobalMeasurementSettings.Instance.MeasureMode = "Voltage";
+   
+            
         }
 
         private void RBcurrent_CheckedChanged(object sender, EventArgs e)
@@ -145,7 +147,7 @@ namespace CodingLabpro.frmChild
             if (RBvoltage.Checked)
             {
                 CBrange.Items.Clear();
-                CBrange.Items.AddRange(new string[] { "Auto", "1mV", "10mV", "15mV", "20mV"});
+                CBrange.Items.AddRange(new string[] { "Auto", "1V", "10V", "15V", "20V"});
             }
             else if (RBcurrent.Checked)
             {
@@ -199,6 +201,11 @@ namespace CodingLabpro.frmChild
 
         private void ShowValidatorError(Control parent, EntityValidator entityclass)
         {
+            if (parent is null)
+            {
+                throw new ArgumentNullException(nameof(parent));
+            }
+
             foreach (Control control in this.Controls)
             {
                 string propName = control.DataBindings["Text"]?.BindingMemberInfo.BindingField;

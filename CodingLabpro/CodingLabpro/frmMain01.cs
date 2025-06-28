@@ -87,7 +87,6 @@ namespace CodingLabpro
             //Control Panel 
             BtnDiconnect.Enabled = false;
             BtnConnect.Enabled = true;
-            timer1.Enabled = false;
       
             //MenuButton
             menuButton = new List<ucMenu>() { ucMenu1, ucMenu2 };
@@ -143,6 +142,31 @@ namespace CodingLabpro
             //chart Data DC Measura
             Chartmeasure();
 
+
+        }
+
+        private void UpdatelabelMeasurement()
+        {
+            if(GlobalMeasurementSettings.Instance.SourceMode == "DC" && GlobalMeasurementSettings.Instance.MeasureMode == "Voltage")
+            {
+                LBunitmeasurement.Text = "VDC";
+            }
+            else if(GlobalMeasurementSettings.Instance.SourceMode == "DC" && GlobalMeasurementSettings.Instance.MeasureMode == "Current")
+            {
+                LBunitmeasurement.Text = "mADC";
+            }
+            else if (GlobalMeasurementSettings.Instance.SourceMode == "AC" && GlobalMeasurementSettings.Instance.MeasureMode == "Voltage")
+            {
+                LBunitmeasurement.Text = "VAC";
+            }
+            else if (GlobalMeasurementSettings.Instance.SourceMode == "AC" && GlobalMeasurementSettings.Instance.MeasureMode == "Current")
+            {
+                LBunitmeasurement.Text = "mAAC";
+            }
+            else
+            {
+                LBunitmeasurement.Text = "Mode";
+            }
 
         }
 
@@ -244,13 +268,21 @@ namespace CodingLabpro
 
         private void FrmMain01_Load(object sender, EventArgs e)
         {
+            Datetimenow.Start();
+            timer1.Enabled = false;
             ActiveComboBox += ComboBoxEnabled;
+            GlobalMeasurementSettings.Instance.SettingsChanged += Instance_SettingsChanged;
+ 
         }
 
-        private void FrmMain01_Shown(object sender, EventArgs e)
+        private void Instance_SettingsChanged(object sender, EventArgs e)
         {
-           
+            UpdatelabelMeasurement();
+        }
 
+        private void DataTimeNow_Tick(object sender, EventArgs e)
+        {
+            LBdatetime.Text = DateTime.Now.ToString("MM-dd-yyyy HH:mm:ss tt");
         }
 
 
@@ -307,7 +339,7 @@ namespace CodingLabpro
 
             if (this.WindowState == FormWindowState.Normal)
             {
-                labelName.Font = new Font(labelName.Font.FontFamily, 12);
+                labelName.Font = new Font(labelName.Font.FontFamily, 10);
                 Cblistaddress.Size = new Size(290, 29);
                 Cblistaddress2.Size = new Size(290, 29);
                 Cblistaddress3.Size = new Size(290, 29);
@@ -525,6 +557,6 @@ namespace CodingLabpro
             System.Windows.Forms.Cursor.Current = Cursors.Default;
         }
 
-        
+   
     }
 }
