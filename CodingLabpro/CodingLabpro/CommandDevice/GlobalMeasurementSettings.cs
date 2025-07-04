@@ -16,8 +16,8 @@ namespace CodingLabpro.CommandDevice
 
         public static GlobalMeasurementSettings Instance => _instance.Value;
 
-        private string _MeasureMode = "Voltage";
-        private string _SourceMode = "DC";
+        private string _MeasureMode;
+        private string _SourceMode;
         private string _TriggerMode = "IMMediate";
         private string _AutozeroMode = "ON";
 

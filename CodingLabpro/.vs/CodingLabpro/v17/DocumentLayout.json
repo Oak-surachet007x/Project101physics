@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\commanddevice\\globalmeasurementsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\commanddevice\\globalmeasurementsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|c:\\users\\surac\\desktop\\phy101\\codinglabpro\\codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|c:\\users\\surac\\desktop\\phy101\\codinglabpro\\codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmchild\\axiscontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmchild\\axiscontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|c:\\users\\surac\\desktop\\phy101\\codinglabpro\\codinglabpro\\commanddevice\\globalmeasurementsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\commanddevice\\globalmeasurementsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain01.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -46,17 +46,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "FrmMain01.cs",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain01.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\frmMain01.cs",
               "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain01.cs",
               "RelativeToolTip": "CodingLabpro\\frmMain01.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAwwKcAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAI8AAAAAAAAAAAAuwKcAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-04T09:57:01.646Z",
               "IsPinned": true,
@@ -92,18 +92,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CalculateArea_Bind.cs",
-              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\CommandDevice\\CalculateArea_Bind.cs",
-              "RelativeDocumentMoniker": "CodingLabpro\\CommandDevice\\CalculateArea_Bind.cs",
-              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\CommandDevice\\CalculateArea_Bind.cs",
-              "RelativeToolTip": "CodingLabpro\\CommandDevice\\CalculateArea_Bind.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAAwEcAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T15:47:50.827Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 7,
               "Title": "AxisControl.Designer.cs",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmChild\\AxisControl.Designer.cs",
@@ -112,12 +100,11 @@
               "RelativeToolTip": "CodingLabpro\\frmChild\\AxisControl.Designer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-20T17:52:17.895Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-20T17:52:17.895Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "AxisControl.cs",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmChild\\AxisControl.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\frmChild\\AxisControl.cs",
@@ -125,8 +112,7 @@
               "RelativeToolTip": "CodingLabpro\\frmChild\\AxisControl.cs",
               "ViewState": "AgIAAGwAAAAAAAAAAAAmwCEAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-08T11:01:43.042Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-08T11:01:43.042Z"
             },
             {
               "$type": "Document",
@@ -137,20 +123,18 @@
               "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmChild\\AxisControl.cs [Design]",
               "RelativeToolTip": "CodingLabpro\\frmChild\\AxisControl.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-03T14:15:43.164Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-02-03T14:15:43.164Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "FrmMain01.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain01.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\frmMain01.cs",
               "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain01.cs [Design]",
               "RelativeToolTip": "CodingLabpro\\frmMain01.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T17:42:29.505Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-06-24T17:42:29.505Z"
             },
             {
               "$type": "Document",
@@ -162,21 +146,32 @@
               "RelativeToolTip": "CodingLabpro\\frmMain01.Designer.cs",
               "ViewState": "AgIAAIgBAAAAAAAAAAAwwJwBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-25T16:45:13.576Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-25T16:45:13.576Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "GlobalMeasurementSettings.cs",
               "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\CommandDevice\\GlobalMeasurementSettings.cs",
               "RelativeDocumentMoniker": "CodingLabpro\\CommandDevice\\GlobalMeasurementSettings.cs",
               "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\CommandDevice\\GlobalMeasurementSettings.cs",
               "RelativeToolTip": "CodingLabpro\\CommandDevice\\GlobalMeasurementSettings.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCcAAAA/AAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABMAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-28T16:09:43.088Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CalculateArea_Bind.cs",
+              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\CommandDevice\\CalculateArea_Bind.cs",
+              "RelativeDocumentMoniker": "CodingLabpro\\CommandDevice\\CalculateArea_Bind.cs",
+              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\CommandDevice\\CalculateArea_Bind.cs",
+              "RelativeToolTip": "CodingLabpro\\CommandDevice\\CalculateArea_Bind.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAAwEcAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:47:50.827Z"
             },
             {
               "$type": "Document",
