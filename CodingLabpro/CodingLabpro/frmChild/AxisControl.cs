@@ -31,7 +31,8 @@ namespace CodingLabpro.frmChild
         private int ValueTimer;
         private int LoopAreaX;
         private int LoopAreaY;
-   
+        public event Action OnRunClicked;
+        public event Action OnCancelClicked;
 
 
         public AxisControl(Ivi.Visa.Interop.FormattedIO488 myMMC, SerialPort mySerialPort, Ivi.Visa.Interop.FormattedIO488 myDMM)
@@ -47,7 +48,15 @@ namespace CodingLabpro.frmChild
             unitYComboBox.Items.AddRange(new string[] { "cm", "mm", "μm" });
             delaySteppingComboBox.Items.AddRange(new string[] {"1000", "2000", "3000" });
             CBtrigger.Items.AddRange(new string[] {"IMMediate", "BUS", "EXTernal"});
-       
+
+            RB_resolution4digits.Text = "4\u00BD digits";
+            RB_resolution6digits.Text = "6\u00BD digits";
+
+            CBrange.Enabled = false;
+            Numeric_Range.Enabled = false;
+            Numeric_Resolution.Enabled = false;
+
+
         }
 
         #region SettingMeasurement Agilent
@@ -55,7 +64,8 @@ namespace CodingLabpro.frmChild
         {
             InputValue_area.DataSource = new CalculateArea_Bind();
             ButtonPortEnabled();
-            RangeUnitmeasuremnet();
+            RangeMeasurement();
+
         }
 
         private void RB_rs232_CheckedChanged(object sender, EventArgs e)
@@ -111,7 +121,7 @@ namespace CodingLabpro.frmChild
         }
         private void RBvoltage_CheckedChanged(object sender, EventArgs e)
         {
-            RangeUnitmeasuremnet();
+            RangeMeasurement();
             GlobalMeasurementSettings.Instance.MeasureMode = "Voltage";
    
             
@@ -119,7 +129,7 @@ namespace CodingLabpro.frmChild
 
         private void RBcurrent_CheckedChanged(object sender, EventArgs e)
         {
-            RangeUnitmeasuremnet();
+            RangeMeasurement();
             GlobalMeasurementSettings.Instance.MeasureMode = "Current";
         }
 
@@ -141,22 +151,58 @@ namespace CodingLabpro.frmChild
         {
             GlobalMeasurementSettings.Instance.AutozeroMode = "ON";
         }
+        private void RB_autoOnce_CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalMeasurementSettings.Instance.AutozeroMode = "ONCE";
+        }
+        private void RB_autorange_CheckedChanged(object sender, EventArgs e)
+        {
+            RangeMeasurement();
+        }
+        private void RB_Customrange_CheckedChanged(object sender, EventArgs e)
+        {
+            RangeMeasurement();
+        }
+        private void RB_resolutionAuto_CheckedChanged(object sender, EventArgs e)
+        {
+            Numeric_Resolution.Enabled = false;
+        }
+        private void RB_resolutionCustom_CheckedChanged(object sender, EventArgs e)
+        {
+            Numeric_Resolution.Enabled = true;
+        }
+        private void RangeMeasurement()
+        {
+            if (RB_autorange.Checked)
+            {
+                CBrange.Enabled = false;
+                Numeric_Range.Enabled = false;
+            }
+            else if (RB_Customrange.Checked)
+            {
+                CBrange.Enabled = true;
+                Numeric_Range.Enabled = true;
+                RangeUnitMeasurement();
+            }
+    
+        }
 
-        private void RangeUnitmeasuremnet()
+        private void RangeUnitMeasurement()
         {
             if (RBvoltage.Checked)
             {
                 CBrange.Items.Clear();
-                CBrange.Items.AddRange(new string[] { "Auto", "1V", "10V", "15V", "20V"});
+                CBrange.Text = "";
+                CBrange.Items.AddRange(new string[] { "V", "mV" });
             }
             else if (RBcurrent.Checked)
             {
                 CBrange.Items.Clear();
-                CBrange.Items.AddRange(new string[] { "Auto", "1mA", "10mA" });
-
+                CBrange.Text = "";
+                CBrange.Items.AddRange(new string[] { "A", "mA" });
             }
-         
         }
+
 
         private void SetupMeasurementCommand()
         {
@@ -174,6 +220,10 @@ namespace CodingLabpro.frmChild
                     {
                         myDMM.WriteString("ZERO:AUTO OFF");
                     }
+                    else if(GlobalMeasurementSettings.Instance.AutozeroMode == "ONCE")
+                    {
+                        myDMM.WriteString("ZERO:AUTO ONCE");
+                    }
                     else
                     {
                         throw new InvalidOperationException("Unknown AutozeroMode: " + GlobalMeasurementSettings.Instance.AutozeroMode);
@@ -189,7 +239,7 @@ namespace CodingLabpro.frmChild
                     myDMM.WriteString("TRIGger:SOURce EXTernal");
                     myDMM.WriteString("READ?");
                }
-               else if(GlobalMeasurementSettings.Instance.TriggerMode == "")
+               else if(GlobalMeasurementSettings.Instance.TriggerMode == "IMMediate")
                {
 
                }
@@ -588,7 +638,9 @@ namespace CodingLabpro.frmChild
 
                 //Run Measurement
                 SetupMeasurementCommand();
-
+                //Stopwatch
+                OnRunClicked?.Invoke();
+                //Report Area Calculate
                 Reportdata.AppendText($" คำนวณผลลัพธ์ลูปที่สแกนของ X คือ {LoopAreaX} ลูป \n คำนวณผลลัพธ์ลูปที่สแกนของ Y คือ {LoopAreaY} ลูป" + Environment.NewLine); //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
 
                 for (int y = 0; y < LoopAreaY; y++)  // Loop แกน Y (สแกนพื้นที่ 10 แถว)
@@ -634,23 +686,20 @@ namespace CodingLabpro.frmChild
                 }
 
                 ShowMessage("INFO", $"{ValueProcessX} {ValueProcessY} {ValueNegativeX}");
+                OnCancelClicked?.Invoke();
             }
             catch (Exception Ex)
             { 
                 ShowMessage("ERROR", $"กรุณาตรวจการเชื่อมต่อ \n {Ex.Message}");
             
             }
-           
-            
         }
-
-
-
 
         #endregion
 
         private void BtnCancel_scaning_Click(object sender, EventArgs e)
         {
+
             string TriggerMode = GlobalMeasurementSettings.Instance.TriggerMode;
             string MeasureMode = GlobalMeasurementSettings.Instance.MeasureMode;
             string SourceMode = GlobalMeasurementSettings.Instance.SourceMode;
@@ -658,6 +707,6 @@ namespace CodingLabpro.frmChild
             MessageBox.Show($"{TriggerMode} \n {MeasureMode} \n {SourceMode} \n {AutoMode}", "สรุปผล");
         }
 
-     
+        
     }
 }

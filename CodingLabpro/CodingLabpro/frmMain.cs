@@ -32,8 +32,12 @@ namespace CodingLabpro
         string MMCaddr = $"GPIB0::7::INSTR";
 
         private DataTable dt = new DataTable();
-        public frmMain()
+        public frmMain(Ivi.Visa.Interop.FormattedIO488 myMMC, SerialPort mySerialPort, Ivi.Visa.Interop.FormattedIO488 myDMM)
         {
+            this.MyMMC = myMMC;
+            this.serialPort = mySerialPort;
+            this.MyDMM= myDMM;
+
             InitializeComponent();
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
             MyDMM = new Ivi.Visa.Interop.FormattedIO488();

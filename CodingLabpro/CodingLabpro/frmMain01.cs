@@ -35,19 +35,17 @@ namespace CodingLabpro
         public Ivi.Visa.Interop.FormattedIO488 MyDMM;
         public Ivi.Visa.Interop.FormattedIO488 MyMMC;
         public SerialPort MySerialPort = new SerialPort();
-       
-
+        private Stopwatch watch = new Stopwatch();
+        private TimeSpan ctimeSpan;
         public DateTime r = DateTime.Now;
-        public UserControl frmChild1;
-        public UserControl frmChild2;
+        public AxisControl frmChild1;
+        private string result_time;
         public static string Aread;
         public static bool isConnect;
         public event EventHandler ActiveComboBox;
         public List<ucMenu> menuButton;
         public List<barMenu> barButton;
-        
-
-
+     
         public class DwmApi
         {
             // ค่า DWM_WINDOW_ATTRIBUTE ที่เราสนใจ
@@ -108,7 +106,13 @@ namespace CodingLabpro
 
             //SetUp FormChild in UserControl
             frmChild1 = new AxisControl(MyMMC, MySerialPort, MyDMM);
-      
+
+            //Stopwatch
+            Stoptimer1.Enabled = true;
+            Stoptimer1.Interval = 100;
+            Stoptimer1.Tick += Stoptimer1_Tick;
+            frmChild1.OnRunClicked += FrmChild1_OnRunClicked; ;
+            frmChild1.OnCancelClicked += FrmChild1_OnCancelClicked;
 
 
             //First show Panel frmChild
@@ -145,6 +149,40 @@ namespace CodingLabpro
 
         }
 
+        #region Stopwatch Control
+        public string GetTimeString(TimeSpan elapsed)
+        {
+            result_time = string.Empty;
+            ctimeSpan = elapsed;
+
+
+            result_time = string.Format("{0:00}:{1:00}:{2:00}.{3:000}",
+                ctimeSpan.Hours,
+                ctimeSpan.Minutes,
+                ctimeSpan.Seconds,
+                ctimeSpan.Milliseconds);
+
+            return result_time;
+
+        }
+
+        private void Stoptimer1_Tick(object sender, EventArgs e)
+        {
+            LBtimer.Text = GetTimeString(watch.Elapsed);
+        }
+
+        private void FrmChild1_OnRunClicked()
+        {
+            watch.Restart();
+        }
+
+        private void FrmChild1_OnCancelClicked()
+        {
+            watch.Stop();
+        }
+
+        #endregion
+
         private void UpdatelabelMeasurement()
         {
             if(GlobalMeasurementSettings.Instance.SourceMode == "DC" && GlobalMeasurementSettings.Instance.MeasureMode == "Voltage")
@@ -178,6 +216,7 @@ namespace CodingLabpro
 
         //--------------------------------------------------------------------------------------------------------------//
 
+        #region barMenu Control
         //barMenu event Click
         public void ClickBar(List<barMenu> _barmenu)
         {
@@ -204,7 +243,6 @@ namespace CodingLabpro
                 case "barMenu1":
                     ActivateMenu1(barMenu1);
                     AddUserControl(frmChild1);
-
                     break;
 
             }
@@ -220,8 +258,9 @@ namespace CodingLabpro
             }
 
         }
-        //--------------------------------------------------------------------------------------------------------------//
+        #endregion
 
+        #region ucMenu Control
         //ucMenu event Click
         public void ClickMenu(List<ucMenu> _menu)
         {
@@ -242,7 +281,7 @@ namespace CodingLabpro
 
                 case "ucMenu2":
                     ActivateMenu(ucMenu2, ucMenu1);
-                    Form form = new frmMain();
+                    Form form = new frmMain(MyMMC, MySerialPort, MyDMM);
                     form.Show();
                     break;
             }
@@ -263,13 +302,12 @@ namespace CodingLabpro
 
 
         }
-        //--------------------------------------------------------------------------------------------------------------//
+        #endregion
 
 
         private void FrmMain01_Load(object sender, EventArgs e)
         {
             Datetimenow.Start();
-            timer1.Enabled = false;
             ActiveComboBox += ComboBoxEnabled;
             GlobalMeasurementSettings.Instance.SettingsChanged += Instance_SettingsChanged;
  
@@ -278,6 +316,7 @@ namespace CodingLabpro
         private void Instance_SettingsChanged(object sender, EventArgs e)
         {
             UpdatelabelMeasurement();
+     
         }
 
         private void DataTimeNow_Tick(object sender, EventArgs e)
@@ -322,7 +361,7 @@ namespace CodingLabpro
             using (var brush = new LinearGradientBrush(rect,
                                                        Color.FromArgb(81, 34, 90), // สีบน
                                                        Color.FromArgb(43, 50, 87),  // สีล่าง
-                                                       LinearGradientMode.BackwardDiagonal))
+                                                       LinearGradientMode.Horizontal))
             {
                 e.Graphics.FillRectangle(brush, rect);
             }
@@ -452,7 +491,7 @@ namespace CodingLabpro
                         string command = "*IDN?";
                         MyDMM.WriteString(command);
 
-                        Aread = MyDMM.ReadString(); ;
+                        Aread = MyDMM.ReadString(); 
                         //MyDMM.WriteString("*CLS");
                     }
 
@@ -557,6 +596,6 @@ namespace CodingLabpro
             System.Windows.Forms.Cursor.Current = Cursors.Default;
         }
 
-   
+        
     }
 }
