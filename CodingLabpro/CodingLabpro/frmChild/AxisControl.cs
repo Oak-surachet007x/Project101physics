@@ -52,19 +52,36 @@ namespace CodingLabpro.frmChild
             RB_resolution4digits.Text = "4\u00BD digits";
             RB_resolution6digits.Text = "6\u00BD digits";
 
-            CBrange.Enabled = false;
-            Numeric_Range.Enabled = false;
-            Numeric_Resolution.Enabled = false;
+            
+          
 
 
         }
 
         #region SettingMeasurement Agilent
+        private void UIControlDisabled(bool EnabledItem)
+        {
+     
+            RB_resolution4digits.Enabled = !EnabledItem;
+            RB_resolution6digits.Enabled = !EnabledItem;
+            RB_resolutionCustom.Enabled = !EnabledItem;
+            RB_resolutionAuto.Enabled = !EnabledItem;
+            RB_autorange.Enabled = !EnabledItem;
+            RB_Customrange.Enabled = !EnabledItem;
+            RB_autoON.Enabled = !EnabledItem;
+            RB_autoOFF.Enabled = !EnabledItem;
+            RB_autoOnce.Enabled = !EnabledItem;
+    
+        }
         private void AxisControl_Load(object sender, EventArgs e)
         {
             InputValue_area.DataSource = new CalculateArea_Bind();
             ButtonPortEnabled();
-            RangeMeasurement();
+            UIControlDisabled(true);
+            CBrange.Enabled = false;
+            Numeric_Range.Enabled = false;
+            Numeric_Resolution.Enabled = false;
+            Range_Control_Measurement();
 
         }
 
@@ -121,7 +138,8 @@ namespace CodingLabpro.frmChild
         }
         private void RBvoltage_CheckedChanged(object sender, EventArgs e)
         {
-            RangeMeasurement();
+            Range_Control_Measurement();
+            UIControlDisabled(false);
             GlobalMeasurementSettings.Instance.MeasureMode = "Voltage";
    
             
@@ -129,7 +147,8 @@ namespace CodingLabpro.frmChild
 
         private void RBcurrent_CheckedChanged(object sender, EventArgs e)
         {
-            RangeMeasurement();
+            Range_Control_Measurement();
+            UIControlDisabled(false);
             GlobalMeasurementSettings.Instance.MeasureMode = "Current";
         }
 
@@ -157,11 +176,11 @@ namespace CodingLabpro.frmChild
         }
         private void RB_autorange_CheckedChanged(object sender, EventArgs e)
         {
-            RangeMeasurement();
+            Range_Control_Measurement();
         }
         private void RB_Customrange_CheckedChanged(object sender, EventArgs e)
         {
-            RangeMeasurement();
+            Range_Control_Measurement();
         }
         private void RB_resolutionAuto_CheckedChanged(object sender, EventArgs e)
         {
@@ -171,7 +190,7 @@ namespace CodingLabpro.frmChild
         {
             Numeric_Resolution.Enabled = true;
         }
-        private void RangeMeasurement()
+        private void Range_Control_Measurement()
         {
             if (RB_autorange.Checked)
             {
@@ -203,14 +222,42 @@ namespace CodingLabpro.frmChild
             }
         }
 
+        private string Range_Indicator(double value)
+        {
+            if (RB_autorange.Checked)
+            {
+
+            }
+            else if (RB_Customrange.Checked)
+            {
+                if (RBvoltage.Checked)
+                {
+                    switch (CBrange.SelectedItem.ToString())
+                    {
+                        case "V":
+                            return "";
+                          
+                        case "mV":
+                            return "0.001";
+                    }
+                }
+                else if (RBcurrent.Checked)
+                {
+
+                }
+            }
+            return "";
+        }
 
         private void SetupMeasurementCommand()
         {
+            string Range_result = Range_Indicator(0.001);
+
             if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
             {
                if(GlobalMeasurementSettings.Instance.TriggerMode == "BUS")
                {
-                    myDMM.WriteString("CONF:VOLT:DC 10, 0.003");
+                    myDMM.WriteString($"CONF:VOLT:DC , 0.003");
                     myDMM.WriteString("TRIGger:SOURce BUS");
                     if(GlobalMeasurementSettings.Instance.AutozeroMode == "ON")
                     {
@@ -326,6 +373,7 @@ namespace CodingLabpro.frmChild
             }
         }
 
+        #region Button Control movement
         private void Btn_ResetHome_Click(object sender, EventArgs e)
         {
             try
@@ -367,7 +415,7 @@ namespace CodingLabpro.frmChild
             }
         }
 
-        #region Button Control movement
+        
         private void Btn_XLeft_Click(object sender, EventArgs e)
         {
             switch (ValueStepping()) {

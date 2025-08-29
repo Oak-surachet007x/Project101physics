@@ -78,6 +78,7 @@
             this.RB_autoON = new System.Windows.Forms.RadioButton();
             this.RB_autoOFF = new System.Windows.Forms.RadioButton();
             this.totalAreaXTextBox = new System.Windows.Forms.TextBox();
+            this.InputValue_area = new System.Windows.Forms.BindingSource(this.components);
             this.totalAreaYTextBox = new System.Windows.Forms.TextBox();
             this.moveStepYTextBox = new System.Windows.Forms.TextBox();
             this.moveStepXTextBox = new System.Windows.Forms.TextBox();
@@ -92,12 +93,11 @@
             this.RB_resolutionCustom = new System.Windows.Forms.RadioButton();
             this.RB_resolution4digits = new System.Windows.Forms.RadioButton();
             this.RB_resolutionAuto = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.RB_autorange = new System.Windows.Forms.RadioButton();
-            this.RB_Customrange = new System.Windows.Forms.RadioButton();
-            this.CBrange = new System.Windows.Forms.ComboBox();
+            this.GBrange = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.InputValue_area = new System.Windows.Forms.BindingSource(this.components);
+            this.CBrange = new System.Windows.Forms.ComboBox();
+            this.RB_Customrange = new System.Windows.Forms.RadioButton();
+            this.RB_autorange = new System.Windows.Forms.RadioButton();
             totalAreaXLabel = new System.Windows.Forms.Label();
             totalAreaYLabel = new System.Windows.Forms.Label();
             moveStepYLabel = new System.Windows.Forms.Label();
@@ -108,12 +108,12 @@
             this.GBSource.SuspendLayout();
             this.GBMeas.SuspendLayout();
             this.GBautozero.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Range)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Resolution)).BeginInit();
             this.GBResolution.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).BeginInit();
+            this.GBrange.SuspendLayout();
             this.SuspendLayout();
             // 
             // totalAreaXLabel
@@ -685,7 +685,7 @@
             this.GBautozero.ForeColor = System.Drawing.Color.White;
             this.GBautozero.Location = new System.Drawing.Point(357, 531);
             this.GBautozero.Name = "GBautozero";
-            this.GBautozero.Size = new System.Drawing.Size(103, 96);
+            this.GBautozero.Size = new System.Drawing.Size(180, 48);
             this.GBautozero.TabIndex = 49;
             this.GBautozero.TabStop = false;
             this.GBautozero.Text = "Auto Zero";
@@ -693,7 +693,7 @@
             // RB_autoOnce
             // 
             this.RB_autoOnce.AutoSize = true;
-            this.RB_autoOnce.Location = new System.Drawing.Point(9, 62);
+            this.RB_autoOnce.Location = new System.Drawing.Point(113, 22);
             this.RB_autoOnce.Name = "RB_autoOnce";
             this.RB_autoOnce.Size = new System.Drawing.Size(58, 21);
             this.RB_autoOnce.TabIndex = 2;
@@ -705,7 +705,7 @@
             // RB_autoON
             // 
             this.RB_autoON.AutoSize = true;
-            this.RB_autoON.Location = new System.Drawing.Point(9, 41);
+            this.RB_autoON.Location = new System.Drawing.Point(65, 22);
             this.RB_autoON.Name = "RB_autoON";
             this.RB_autoON.Size = new System.Drawing.Size(42, 21);
             this.RB_autoON.TabIndex = 1;
@@ -717,7 +717,7 @@
             // RB_autoOFF
             // 
             this.RB_autoOFF.AutoSize = true;
-            this.RB_autoOFF.Location = new System.Drawing.Point(9, 20);
+            this.RB_autoOFF.Location = new System.Drawing.Point(9, 22);
             this.RB_autoOFF.Name = "RB_autoOFF";
             this.RB_autoOFF.Size = new System.Drawing.Size(50, 21);
             this.RB_autoOFF.TabIndex = 0;
@@ -735,6 +735,10 @@
             this.totalAreaXTextBox.Size = new System.Drawing.Size(123, 29);
             this.totalAreaXTextBox.TabIndex = 50;
             this.totalAreaXTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // InputValue_area
+            // 
+            this.InputValue_area.DataSource = typeof(CodingLabpro.CommandDevice.CalculateArea_Bind);
             // 
             // totalAreaYTextBox
             // 
@@ -892,33 +896,40 @@
             this.RB_resolutionAuto.UseVisualStyleBackColor = true;
             this.RB_resolutionAuto.CheckedChanged += new System.EventHandler(this.RB_resolutionAuto_CheckedChanged);
             // 
-            // groupBox1
+            // GBrange
             // 
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.CBrange);
-            this.groupBox1.Controls.Add(this.RB_Customrange);
-            this.groupBox1.Controls.Add(this.RB_autorange);
-            this.groupBox1.Controls.Add(this.Numeric_Range);
-            this.groupBox1.Font = new System.Drawing.Font("Cascadia Code Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(356, 281);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(297, 96);
-            this.groupBox1.TabIndex = 62;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Range";
+            this.GBrange.Controls.Add(this.label2);
+            this.GBrange.Controls.Add(this.CBrange);
+            this.GBrange.Controls.Add(this.RB_Customrange);
+            this.GBrange.Controls.Add(this.RB_autorange);
+            this.GBrange.Controls.Add(this.Numeric_Range);
+            this.GBrange.Font = new System.Drawing.Font("Cascadia Code Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GBrange.ForeColor = System.Drawing.Color.White;
+            this.GBrange.Location = new System.Drawing.Point(356, 281);
+            this.GBrange.Name = "GBrange";
+            this.GBrange.Size = new System.Drawing.Size(297, 96);
+            this.GBrange.TabIndex = 62;
+            this.GBrange.TabStop = false;
+            this.GBrange.Text = "Range";
             // 
-            // RB_autorange
+            // label2
             // 
-            this.RB_autorange.AutoSize = true;
-            this.RB_autorange.Location = new System.Drawing.Point(8, 23);
-            this.RB_autorange.Name = "RB_autorange";
-            this.RB_autorange.Size = new System.Drawing.Size(58, 21);
-            this.RB_autorange.TabIndex = 58;
-            this.RB_autorange.TabStop = true;
-            this.RB_autorange.Text = "Auto";
-            this.RB_autorange.UseVisualStyleBackColor = true;
-            this.RB_autorange.CheckedChanged += new System.EventHandler(this.RB_autorange_CheckedChanged);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(245, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(40, 17);
+            this.label2.TabIndex = 67;
+            this.label2.Text = "Unit";
+            // 
+            // CBrange
+            // 
+            this.CBrange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CBrange.FormattingEnabled = true;
+            this.CBrange.IntegralHeight = false;
+            this.CBrange.Location = new System.Drawing.Point(209, 53);
+            this.CBrange.Name = "CBrange";
+            this.CBrange.Size = new System.Drawing.Size(78, 28);
+            this.CBrange.TabIndex = 66;
             // 
             // RB_Customrange
             // 
@@ -932,35 +943,24 @@
             this.RB_Customrange.UseVisualStyleBackColor = true;
             this.RB_Customrange.CheckedChanged += new System.EventHandler(this.RB_Customrange_CheckedChanged);
             // 
-            // CBrange
+            // RB_autorange
             // 
-            this.CBrange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBrange.FormattingEnabled = true;
-            this.CBrange.IntegralHeight = false;
-            this.CBrange.Location = new System.Drawing.Point(209, 53);
-            this.CBrange.Name = "CBrange";
-            this.CBrange.Size = new System.Drawing.Size(78, 28);
-            this.CBrange.TabIndex = 66;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(245, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 17);
-            this.label2.TabIndex = 67;
-            this.label2.Text = "Unit";
-            // 
-            // InputValue_area
-            // 
-            this.InputValue_area.DataSource = typeof(CodingLabpro.CommandDevice.CalculateArea_Bind);
+            this.RB_autorange.AutoSize = true;
+            this.RB_autorange.Location = new System.Drawing.Point(8, 23);
+            this.RB_autorange.Name = "RB_autorange";
+            this.RB_autorange.Size = new System.Drawing.Size(58, 21);
+            this.RB_autorange.TabIndex = 58;
+            this.RB_autorange.TabStop = true;
+            this.RB_autorange.Text = "Auto";
+            this.RB_autorange.UseVisualStyleBackColor = true;
+            this.RB_autorange.CheckedChanged += new System.EventHandler(this.RB_autorange_CheckedChanged);
             // 
             // AxisControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.GBrange);
             this.Controls.Add(this.GBResolution);
             this.Controls.Add(delaySteppingLabel);
             this.Controls.Add(this.delaySteppingComboBox);
@@ -1017,14 +1017,14 @@
             this.GBMeas.ResumeLayout(false);
             this.GBautozero.ResumeLayout(false);
             this.GBautozero.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Range)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Resolution)).EndInit();
             this.GBResolution.ResumeLayout(false);
             this.GBResolution.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).EndInit();
+            this.GBrange.ResumeLayout(false);
+            this.GBrange.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1090,7 +1090,7 @@
         private System.Windows.Forms.RadioButton RB_resolutionCustom;
         private System.Windows.Forms.RadioButton RB_resolution4digits;
         private System.Windows.Forms.RadioButton RB_resolution6digits;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox GBrange;
         private System.Windows.Forms.RadioButton RB_autorange;
         private System.Windows.Forms.RadioButton RB_Customrange;
         private System.Windows.Forms.ComboBox CBrange;

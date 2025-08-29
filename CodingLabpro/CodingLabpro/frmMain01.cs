@@ -35,7 +35,7 @@ namespace CodingLabpro
         public Ivi.Visa.Interop.FormattedIO488 MyDMM;
         public Ivi.Visa.Interop.FormattedIO488 MyMMC;
         public SerialPort MySerialPort = new SerialPort();
-        private Stopwatch watch = new Stopwatch();
+        private readonly Stopwatch watch = new Stopwatch();
         private TimeSpan ctimeSpan;
         public DateTime r = DateTime.Now;
         public AxisControl frmChild1;
@@ -191,7 +191,7 @@ namespace CodingLabpro
             }
             else if(GlobalMeasurementSettings.Instance.SourceMode == "DC" && GlobalMeasurementSettings.Instance.MeasureMode == "Current")
             {
-                LBunitmeasurement.Text = "mADC";
+                LBunitmeasurement.Text = "ADC";
             }
             else if (GlobalMeasurementSettings.Instance.SourceMode == "AC" && GlobalMeasurementSettings.Instance.MeasureMode == "Voltage")
             {
@@ -199,7 +199,7 @@ namespace CodingLabpro
             }
             else if (GlobalMeasurementSettings.Instance.SourceMode == "AC" && GlobalMeasurementSettings.Instance.MeasureMode == "Current")
             {
-                LBunitmeasurement.Text = "mAAC";
+                LBunitmeasurement.Text = "AAC";
             }
             else
             {
@@ -217,7 +217,7 @@ namespace CodingLabpro
         //--------------------------------------------------------------------------------------------------------------//
 
         #region barMenu Control
-        //barMenu event Click
+        //barMenu event Click tabcontrol
         public void ClickBar(List<barMenu> _barmenu)
         {
             foreach (var menu1 in _barmenu)

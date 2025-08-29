@@ -70,13 +70,13 @@
             this.CPchart = new System.Windows.Forms.Panel();
             this.BtnClear = new System.Windows.Forms.Button();
             this.Menupanel = new System.Windows.Forms.Panel();
-            this.ucMenu2 = new CodingLabpro.Models.ucMenu();
-            this.ucMenu1 = new CodingLabpro.Models.ucMenu();
             this.flowLayoutBar = new System.Windows.Forms.FlowLayoutPanel();
-            this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.FormChildpanel = new System.Windows.Forms.Panel();
             this.Datetimenow = new System.Windows.Forms.Timer(this.components);
             this.Stoptimer1 = new System.Windows.Forms.Timer(this.components);
+            this.barMenu1 = new CodingLabpro.Models.barMenu();
+            this.ucMenu2 = new CodingLabpro.Models.ucMenu();
+            this.ucMenu1 = new CodingLabpro.Models.ucMenu();
             this.tableLayoutPanel1.SuspendLayout();
             this.GBconnect.SuspendLayout();
             this.buttonLayoutPanel2.SuspendLayout();
@@ -529,6 +529,45 @@
             this.Menupanel.Size = new System.Drawing.Size(85, 845);
             this.Menupanel.TabIndex = 0;
             // 
+            // flowLayoutBar
+            // 
+            this.flowLayoutBar.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutBar.Controls.Add(this.barMenu1);
+            this.flowLayoutBar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutBar.Location = new System.Drawing.Point(1490, 0);
+            this.flowLayoutBar.Name = "flowLayoutBar";
+            this.flowLayoutBar.Size = new System.Drawing.Size(50, 815);
+            this.flowLayoutBar.TabIndex = 10;
+            // 
+            // FormChildpanel
+            // 
+            this.FormChildpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
+            this.FormChildpanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.FormChildpanel.Location = new System.Drawing.Point(810, 0);
+            this.FormChildpanel.Name = "FormChildpanel";
+            this.FormChildpanel.Size = new System.Drawing.Size(680, 815);
+            this.FormChildpanel.TabIndex = 11;
+            // 
+            // Datetimenow
+            // 
+            this.Datetimenow.Enabled = true;
+            this.Datetimenow.Tick += new System.EventHandler(this.DataTimeNow_Tick);
+            // 
+            // Stoptimer1
+            // 
+            this.Stoptimer1.Tick += new System.EventHandler(this.Stoptimer1_Tick);
+            // 
+            // barMenu1
+            // 
+            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
+            this.barMenu1.BarColor = System.Drawing.Color.White;
+            this.barMenu1.Location = new System.Drawing.Point(6, 12);
+            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
+            this.barMenu1.Name = "barMenu1";
+            this.barMenu1.Size = new System.Drawing.Size(50, 222);
+            this.barMenu1.TabIndex = 11;
+            this.barMenu1.textbar = "Axis Control & Measument";
+            // 
             // ucMenu2
             // 
             this.ucMenu2.BackColor = System.Drawing.Color.Transparent;
@@ -550,45 +589,6 @@
             this.ucMenu1.Size = new System.Drawing.Size(90, 52);
             this.ucMenu1.TabIndex = 0;
             this.ucMenu1.textlabel = "Help";
-            // 
-            // flowLayoutBar
-            // 
-            this.flowLayoutBar.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutBar.Controls.Add(this.barMenu1);
-            this.flowLayoutBar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutBar.Location = new System.Drawing.Point(1490, 0);
-            this.flowLayoutBar.Name = "flowLayoutBar";
-            this.flowLayoutBar.Size = new System.Drawing.Size(50, 815);
-            this.flowLayoutBar.TabIndex = 10;
-            // 
-            // barMenu1
-            // 
-            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
-            this.barMenu1.BarColor = System.Drawing.Color.White;
-            this.barMenu1.Location = new System.Drawing.Point(6, 12);
-            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
-            this.barMenu1.Name = "barMenu1";
-            this.barMenu1.Size = new System.Drawing.Size(50, 222);
-            this.barMenu1.TabIndex = 11;
-            this.barMenu1.textbar = "Axis Control & Measument";
-            // 
-            // FormChildpanel
-            // 
-            this.FormChildpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
-            this.FormChildpanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.FormChildpanel.Location = new System.Drawing.Point(810, 0);
-            this.FormChildpanel.Name = "FormChildpanel";
-            this.FormChildpanel.Size = new System.Drawing.Size(680, 815);
-            this.FormChildpanel.TabIndex = 11;
-            // 
-            // Datetimenow
-            // 
-            this.Datetimenow.Enabled = true;
-            this.Datetimenow.Tick += new System.EventHandler(this.DataTimeNow_Tick);
-            // 
-            // Stoptimer1
-            // 
-            this.Stoptimer1.Tick += new System.EventHandler(this.Stoptimer1_Tick);
             // 
             // FrmMain01
             // 
