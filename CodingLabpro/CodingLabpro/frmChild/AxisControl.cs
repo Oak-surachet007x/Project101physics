@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -196,11 +197,13 @@ namespace CodingLabpro.frmChild
             {
                 CBrange.Enabled = false;
                 Numeric_Range.Enabled = false;
+                GlobalMeasurementSettings.Instance.RangeControl = "AUTO";
             }
             else if (RB_Customrange.Checked)
             {
                 CBrange.Enabled = true;
                 Numeric_Range.Enabled = true;
+                GlobalMeasurementSettings.Instance.RangeControl = "CUSTOM";
                 RangeUnitMeasurement();
             }
     
@@ -218,56 +221,80 @@ namespace CodingLabpro.frmChild
             {
                 CBrange.Items.Clear();
                 CBrange.Text = "";
-                CBrange.Items.AddRange(new string[] { "A", "mA" });
+                CBrange.Items.AddRange(new string[] { "A", "mA", "nA" });
             }
         }
-
-        private string Range_Indicator(double value)
+       
+        private string Range_Custom_Indicator(double Rangevalue)
         {
-            if (RB_autorange.Checked)
+            if (RB_Customrange.Checked && Rangevalue != 0)
             {
+                double CoVrange = ConvertValueOnUnit(Rangevalue, CBrange.SelectedItem.ToString());
 
-            }
-            else if (RB_Customrange.Checked)
-            {
                 if (RBvoltage.Checked)
                 {
-                    switch (CBrange.SelectedItem.ToString())
-                    {
-                        case "V":
-                            return "";
-                          
-                        case "mV":
-                            return "0.001";
-                    }
+                    string CoVcommand = CoVrange.ToString("G", CultureInfo.InvariantCulture);
+                    Debug.WriteLine(CoVcommand + "V");
+                    return CoVcommand;
                 }
                 else if (RBcurrent.Checked)
                 {
-
+                    string CoVcommand = CoVrange.ToString("G", CultureInfo.InvariantCulture);
+                    Debug.WriteLine(CoVcommand + "A");
+                    return CoVcommand;
                 }
             }
-            return "";
+
+            throw new InvalidOperationException("กรุณาป้อนค่าที่ไม่เท่ากับ 0");
+        }
+
+        private double ConvertValueOnUnit(double Value, string Unit)
+        {
+            switch (Unit)
+            {
+                case "mV":
+                    return Value * 1E-3;
+                case "V":
+                    return Value;
+                case "A":
+                    return Value;
+                case "mA":
+                    return Value * 1E-3;
+                case "nA":
+                    return Value * 1E-9;
+                default:
+                    throw new Exception("Unknown Unit");
+            }
         }
 
         private void SetupMeasurementCommand()
         {
-            string Range_result = Range_Indicator(0.001);
-
             if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
             {
-               if(GlobalMeasurementSettings.Instance.TriggerMode == "BUS")
-               {
-                    myDMM.WriteString($"CONF:VOLT:DC , 0.003");
+                if (GlobalMeasurementSettings.Instance.TriggerMode == "BUS")
+                {
+                    if (GlobalMeasurementSettings.Instance.RangeControl == "CUSTOM")
+                    {
+                        string range = Range_Custom_Indicator((double)Numeric_Range.Value);
+                        string resolution = "0.001";
+                        Debug.WriteLine($"CONF:VOLT:DC {range}, {resolution}");
+                        myDMM.WriteString($"CONF:VOLT:DC {range}, {resolution}");
+                    }
+                    else if (GlobalMeasurementSettings.Instance.RangeControl == "AUTO")
+                    {
+                        throw new Exception("คำสั่ง [CONFigure] ไม่สามารถใช้ร่วมกับ Range: Auto");
+                    }
+
                     myDMM.WriteString("TRIGger:SOURce BUS");
-                    if(GlobalMeasurementSettings.Instance.AutozeroMode == "ON")
+                    if (GlobalMeasurementSettings.Instance.AutozeroMode == "ON")
                     {
                         myDMM.WriteString("ZERO:AUTO ON");
                     }
-                    else if(GlobalMeasurementSettings.Instance.AutozeroMode == "OFF")
+                    else if (GlobalMeasurementSettings.Instance.AutozeroMode == "OFF")
                     {
                         myDMM.WriteString("ZERO:AUTO OFF");
                     }
-                    else if(GlobalMeasurementSettings.Instance.AutozeroMode == "ONCE")
+                    else if (GlobalMeasurementSettings.Instance.AutozeroMode == "ONCE")
                     {
                         myDMM.WriteString("ZERO:AUTO ONCE");
                     }
@@ -279,17 +306,17 @@ namespace CodingLabpro.frmChild
                     myDMM.WriteString("*TRG"); //if Select Trigger_Source == BUS will accept command IEEE-488
                     myDMM.WriteString("FETC?");
 
-               }
-               else if(GlobalMeasurementSettings.Instance.TriggerMode == "EXTernal")
-               {
+                }
+                else if (GlobalMeasurementSettings.Instance.TriggerMode == "EXTernal")
+                {
                     myDMM.WriteString("CON:VOLT:DC 10, 0.003");
                     myDMM.WriteString("TRIGger:SOURce EXTernal");
                     myDMM.WriteString("READ?");
-               }
-               else if(GlobalMeasurementSettings.Instance.TriggerMode == "IMMediate")
-               {
+                }
+                else if (GlobalMeasurementSettings.Instance.TriggerMode == "IMMediate")
+                {
 
-               }
+                }
 
 
             }

@@ -20,6 +20,7 @@ namespace CodingLabpro.CommandDevice
         private string _SourceMode;
         private string _TriggerMode = "IMMediate";
         private string _AutozeroMode = "ON";
+        private string _RangeControl = "AUTO";
 
         public event EventHandler SettingsChanged;
 
@@ -52,7 +53,13 @@ namespace CodingLabpro.CommandDevice
             get => _AutozeroMode;
             set => SetProperty(ref _AutozeroMode, value);
         }
-    
+
+        public string RangeControl
+        {
+            get => _RangeControl;
+            set => SetProperty(ref _RangeControl, value);
+        }
+
 
         // INotifyPropertyChanged implementation
         public event PropertyChangedEventHandler PropertyChanged;

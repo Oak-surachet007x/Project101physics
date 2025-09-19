@@ -348,10 +348,7 @@ namespace CodingLabpro
 
         }
         
-        private void BtnClear_Click(object sender, EventArgs e)
-        {
-            chart1.Series.Clear();
-        }
+      
         protected override void OnPaint(PaintEventArgs e)
         {
 

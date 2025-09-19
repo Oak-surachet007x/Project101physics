@@ -37,18 +37,18 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.GBdata = new System.Windows.Forms.GroupBox();
+            this.DgvMeasurement = new System.Windows.Forms.DataGridView();
             this.GBconnect = new System.Windows.Forms.GroupBox();
-            this.buttonLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.BtnDiconnect = new System.Windows.Forms.Button();
-            this.BtnConnect = new System.Windows.Forms.Button();
             this.Cblistaddress3 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.Cblistaddress2 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.Cblistaddress = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.GBdata = new System.Windows.Forms.GroupBox();
-            this.DgvMeasurement = new System.Windows.Forms.DataGridView();
+            this.buttonLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnDiconnect = new System.Windows.Forms.Button();
+            this.BtnConnect = new System.Windows.Forms.Button();
             this.labelTop = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.MainStatus = new System.Windows.Forms.StatusStrip();
@@ -67,112 +67,109 @@
             this.LBtimer = new System.Windows.Forms.Label();
             this.GBchart = new System.Windows.Forms.GroupBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.CPchart = new System.Windows.Forms.Panel();
-            this.BtnClear = new System.Windows.Forms.Button();
             this.Menupanel = new System.Windows.Forms.Panel();
             this.flowLayoutBar = new System.Windows.Forms.FlowLayoutPanel();
             this.FormChildpanel = new System.Windows.Forms.Panel();
             this.Datetimenow = new System.Windows.Forms.Timer(this.components);
             this.Stoptimer1 = new System.Windows.Forms.Timer(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.TabToolbar = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.TabPage_ConnectPort = new System.Windows.Forms.TabPage();
             this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.ucMenu2 = new CodingLabpro.Models.ucMenu();
             this.ucMenu1 = new CodingLabpro.Models.ucMenu();
             this.tableLayoutPanel1.SuspendLayout();
-            this.GBconnect.SuspendLayout();
-            this.buttonLayoutPanel2.SuspendLayout();
             this.GBdata.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMeasurement)).BeginInit();
+            this.GBconnect.SuspendLayout();
+            this.buttonLayoutPanel2.SuspendLayout();
             this.MainStatus.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.GBchart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            this.CPchart.SuspendLayout();
             this.Menupanel.SuspendLayout();
             this.flowLayoutBar.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.TabToolbar.SuspendLayout();
+            this.TabPage_ConnectPort.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.69596F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.30404F));
-            this.tableLayoutPanel1.Controls.Add(this.GBconnect, 1, 0);
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 92.68965F));
             this.tableLayoutPanel1.Controls.Add(this.GBdata, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(85, 520);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(85, 559);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(725, 295);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(725, 256);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // GBdata
+            // 
+            this.GBdata.Controls.Add(this.DgvMeasurement);
+            this.GBdata.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GBdata.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GBdata.ForeColor = System.Drawing.Color.White;
+            this.GBdata.Location = new System.Drawing.Point(10, 10);
+            this.GBdata.Margin = new System.Windows.Forms.Padding(10);
+            this.GBdata.Name = "GBdata";
+            this.GBdata.Padding = new System.Windows.Forms.Padding(7);
+            this.GBdata.Size = new System.Drawing.Size(705, 236);
+            this.GBdata.TabIndex = 1;
+            this.GBdata.TabStop = false;
+            this.GBdata.Text = "Measurement";
+            // 
+            // DgvMeasurement
+            // 
+            this.DgvMeasurement.BackgroundColor = System.Drawing.Color.White;
+            this.DgvMeasurement.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvMeasurement.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.DgvMeasurement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvMeasurement.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgvMeasurement.Location = new System.Drawing.Point(7, 26);
+            this.DgvMeasurement.Margin = new System.Windows.Forms.Padding(0);
+            this.DgvMeasurement.Name = "DgvMeasurement";
+            this.DgvMeasurement.Size = new System.Drawing.Size(691, 203);
+            this.DgvMeasurement.TabIndex = 0;
             // 
             // GBconnect
             // 
-            this.GBconnect.Controls.Add(this.buttonLayoutPanel2);
+            this.GBconnect.BackColor = System.Drawing.Color.Transparent;
             this.GBconnect.Controls.Add(this.Cblistaddress3);
             this.GBconnect.Controls.Add(this.label3);
             this.GBconnect.Controls.Add(this.Cblistaddress2);
             this.GBconnect.Controls.Add(this.label2);
             this.GBconnect.Controls.Add(this.Cblistaddress);
             this.GBconnect.Controls.Add(this.label1);
+            this.GBconnect.Controls.Add(this.buttonLayoutPanel2);
             this.GBconnect.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GBconnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.GBconnect.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GBconnect.ForeColor = System.Drawing.Color.White;
-            this.GBconnect.Location = new System.Drawing.Point(399, 10);
+            this.GBconnect.ForeColor = System.Drawing.Color.Black;
+            this.GBconnect.Location = new System.Drawing.Point(3, 3);
             this.GBconnect.Margin = new System.Windows.Forms.Padding(10);
             this.GBconnect.Name = "GBconnect";
-            this.GBconnect.Size = new System.Drawing.Size(316, 275);
+            this.GBconnect.Size = new System.Drawing.Size(1441, 99);
             this.GBconnect.TabIndex = 2;
             this.GBconnect.TabStop = false;
             this.GBconnect.Text = "Connection";
             // 
-            // buttonLayoutPanel2
-            // 
-            this.buttonLayoutPanel2.ColumnCount = 2;
-            this.buttonLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.buttonLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.buttonLayoutPanel2.Controls.Add(this.BtnDiconnect, 0, 0);
-            this.buttonLayoutPanel2.Controls.Add(this.BtnConnect, 1, 0);
-            this.buttonLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonLayoutPanel2.Location = new System.Drawing.Point(3, 236);
-            this.buttonLayoutPanel2.Name = "buttonLayoutPanel2";
-            this.buttonLayoutPanel2.RowCount = 1;
-            this.buttonLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.buttonLayoutPanel2.Size = new System.Drawing.Size(310, 36);
-            this.buttonLayoutPanel2.TabIndex = 6;
-            // 
-            // BtnDiconnect
-            // 
-            this.BtnDiconnect.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnDiconnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDiconnect.ForeColor = System.Drawing.Color.Red;
-            this.BtnDiconnect.Location = new System.Drawing.Point(3, 3);
-            this.BtnDiconnect.Name = "BtnDiconnect";
-            this.BtnDiconnect.Size = new System.Drawing.Size(149, 30);
-            this.BtnDiconnect.TabIndex = 4;
-            this.BtnDiconnect.Text = "Diconnect";
-            this.BtnDiconnect.UseVisualStyleBackColor = true;
-            this.BtnDiconnect.Click += new System.EventHandler(this.BtnDiconnect_Click);
-            // 
-            // BtnConnect
-            // 
-            this.BtnConnect.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnConnect.ForeColor = System.Drawing.Color.White;
-            this.BtnConnect.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.BtnConnect.Location = new System.Drawing.Point(158, 3);
-            this.BtnConnect.Name = "BtnConnect";
-            this.BtnConnect.Size = new System.Drawing.Size(149, 30);
-            this.BtnConnect.TabIndex = 6;
-            this.BtnConnect.Text = "Connect";
-            this.BtnConnect.UseVisualStyleBackColor = true;
-            this.BtnConnect.Click += new System.EventHandler(this.BtnConnect_Click);
-            // 
             // Cblistaddress3
             // 
             this.Cblistaddress3.FormattingEnabled = true;
-            this.Cblistaddress3.Location = new System.Drawing.Point(14, 147);
+            this.Cblistaddress3.Location = new System.Drawing.Point(631, 45);
             this.Cblistaddress3.Name = "Cblistaddress3";
             this.Cblistaddress3.Size = new System.Drawing.Size(290, 29);
             this.Cblistaddress3.TabIndex = 5;
@@ -181,7 +178,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Cascadia Mono", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 128);
+            this.label3.Location = new System.Drawing.Point(629, 26);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(224, 16);
             this.label3.TabIndex = 4;
@@ -190,7 +187,7 @@
             // Cblistaddress2
             // 
             this.Cblistaddress2.FormattingEnabled = true;
-            this.Cblistaddress2.Location = new System.Drawing.Point(15, 96);
+            this.Cblistaddress2.Location = new System.Drawing.Point(321, 45);
             this.Cblistaddress2.Name = "Cblistaddress2";
             this.Cblistaddress2.Size = new System.Drawing.Size(290, 29);
             this.Cblistaddress2.TabIndex = 3;
@@ -199,7 +196,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Cascadia Mono", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(11, 77);
+            this.label2.Location = new System.Drawing.Point(317, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(224, 16);
             this.label2.TabIndex = 2;
@@ -223,40 +220,47 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "GP-IB Port : Multimeter";
             // 
-            // GBdata
+            // buttonLayoutPanel2
             // 
-            this.GBdata.Controls.Add(this.DgvMeasurement);
-            this.GBdata.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GBdata.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GBdata.ForeColor = System.Drawing.Color.White;
-            this.GBdata.Location = new System.Drawing.Point(10, 10);
-            this.GBdata.Margin = new System.Windows.Forms.Padding(10);
-            this.GBdata.Name = "GBdata";
-            this.GBdata.Padding = new System.Windows.Forms.Padding(7);
-            this.GBdata.Size = new System.Drawing.Size(369, 275);
-            this.GBdata.TabIndex = 1;
-            this.GBdata.TabStop = false;
-            this.GBdata.Text = "Measurement";
+            this.buttonLayoutPanel2.ColumnCount = 2;
+            this.buttonLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.buttonLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.buttonLayoutPanel2.Controls.Add(this.BtnDiconnect, 0, 0);
+            this.buttonLayoutPanel2.Controls.Add(this.BtnConnect, 1, 0);
+            this.buttonLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonLayoutPanel2.Location = new System.Drawing.Point(1128, 22);
+            this.buttonLayoutPanel2.Name = "buttonLayoutPanel2";
+            this.buttonLayoutPanel2.RowCount = 1;
+            this.buttonLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.buttonLayoutPanel2.Size = new System.Drawing.Size(310, 74);
+            this.buttonLayoutPanel2.TabIndex = 6;
             // 
-            // DgvMeasurement
+            // BtnDiconnect
             // 
-            this.DgvMeasurement.BackgroundColor = System.Drawing.Color.White;
-            this.DgvMeasurement.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvMeasurement.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.DgvMeasurement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvMeasurement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DgvMeasurement.Location = new System.Drawing.Point(7, 26);
-            this.DgvMeasurement.Margin = new System.Windows.Forms.Padding(0);
-            this.DgvMeasurement.Name = "DgvMeasurement";
-            this.DgvMeasurement.Size = new System.Drawing.Size(355, 242);
-            this.DgvMeasurement.TabIndex = 0;
+            this.BtnDiconnect.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnDiconnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDiconnect.ForeColor = System.Drawing.Color.Red;
+            this.BtnDiconnect.Location = new System.Drawing.Point(3, 3);
+            this.BtnDiconnect.Name = "BtnDiconnect";
+            this.BtnDiconnect.Size = new System.Drawing.Size(149, 68);
+            this.BtnDiconnect.TabIndex = 4;
+            this.BtnDiconnect.Text = "Diconnect";
+            this.BtnDiconnect.UseVisualStyleBackColor = true;
+            this.BtnDiconnect.Click += new System.EventHandler(this.BtnDiconnect_Click);
+            // 
+            // BtnConnect
+            // 
+            this.BtnConnect.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnConnect.ForeColor = System.Drawing.Color.Black;
+            this.BtnConnect.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.BtnConnect.Location = new System.Drawing.Point(158, 3);
+            this.BtnConnect.Name = "BtnConnect";
+            this.BtnConnect.Size = new System.Drawing.Size(149, 68);
+            this.BtnConnect.TabIndex = 6;
+            this.BtnConnect.Text = "Connect";
+            this.BtnConnect.UseVisualStyleBackColor = true;
+            this.BtnConnect.Click += new System.EventHandler(this.BtnConnect_Click);
             // 
             // labelTop
             // 
@@ -286,7 +290,7 @@
             // MainStatus
             // 
             this.MainStatus.AutoSize = false;
-            this.MainStatus.BackColor = System.Drawing.Color.Transparent;
+            this.MainStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
             this.MainStatus.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MainStatus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.MainStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -298,10 +302,10 @@
             this.StatusPort2,
             this.StatusMMC2,
             this.StatusPort3});
-            this.MainStatus.Location = new System.Drawing.Point(85, 815);
+            this.MainStatus.Location = new System.Drawing.Point(0, 815);
             this.MainStatus.Name = "MainStatus";
             this.MainStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.MainStatus.Size = new System.Drawing.Size(1455, 30);
+            this.MainStatus.Size = new System.Drawing.Size(1540, 30);
             this.MainStatus.SizingGrip = false;
             this.MainStatus.TabIndex = 4;
             this.MainStatus.Text = "statusStrip1";
@@ -374,7 +378,7 @@
             this.panelTop.Controls.Add(this.labelName);
             this.panelTop.Controls.Add(this.LBtimer);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTop.Location = new System.Drawing.Point(85, 0);
+            this.panelTop.Location = new System.Drawing.Point(85, 144);
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(725, 104);
             this.panelTop.TabIndex = 6;
@@ -436,10 +440,10 @@
             this.GBchart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.GBchart.Font = new System.Drawing.Font("Cascadia Mono Light", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBchart.ForeColor = System.Drawing.Color.White;
-            this.GBchart.Location = new System.Drawing.Point(85, 104);
+            this.GBchart.Location = new System.Drawing.Point(85, 248);
             this.GBchart.Name = "GBchart";
             this.GBchart.Padding = new System.Windows.Forms.Padding(0);
-            this.GBchart.Size = new System.Drawing.Size(725, 371);
+            this.GBchart.Size = new System.Drawing.Size(725, 311);
             this.GBchart.TabIndex = 8;
             this.GBchart.TabStop = false;
             this.GBchart.Text = "Data Measurement";
@@ -490,33 +494,9 @@
             series1.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(725, 349);
+            this.chart1.Size = new System.Drawing.Size(725, 289);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
-            // 
-            // CPchart
-            // 
-            this.CPchart.BackColor = System.Drawing.Color.Transparent;
-            this.CPchart.Controls.Add(this.BtnClear);
-            this.CPchart.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.CPchart.ForeColor = System.Drawing.Color.White;
-            this.CPchart.Location = new System.Drawing.Point(85, 475);
-            this.CPchart.Margin = new System.Windows.Forms.Padding(10);
-            this.CPchart.Name = "CPchart";
-            this.CPchart.Size = new System.Drawing.Size(725, 45);
-            this.CPchart.TabIndex = 9;
-            // 
-            // BtnClear
-            // 
-            this.BtnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnClear.ForeColor = System.Drawing.Color.White;
-            this.BtnClear.Location = new System.Drawing.Point(10, 6);
-            this.BtnClear.Name = "BtnClear";
-            this.BtnClear.Size = new System.Drawing.Size(120, 30);
-            this.BtnClear.TabIndex = 0;
-            this.BtnClear.Text = "Clear Chart";
-            this.BtnClear.UseVisualStyleBackColor = true;
-            this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
             // Menupanel
             // 
@@ -526,7 +506,7 @@
             this.Menupanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.Menupanel.Location = new System.Drawing.Point(0, 0);
             this.Menupanel.Name = "Menupanel";
-            this.Menupanel.Size = new System.Drawing.Size(85, 845);
+            this.Menupanel.Size = new System.Drawing.Size(85, 815);
             this.Menupanel.TabIndex = 0;
             // 
             // flowLayoutBar
@@ -534,19 +514,19 @@
             this.flowLayoutBar.BackColor = System.Drawing.Color.Transparent;
             this.flowLayoutBar.Controls.Add(this.barMenu1);
             this.flowLayoutBar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutBar.Location = new System.Drawing.Point(1490, 0);
+            this.flowLayoutBar.Location = new System.Drawing.Point(1490, 144);
             this.flowLayoutBar.Name = "flowLayoutBar";
-            this.flowLayoutBar.Size = new System.Drawing.Size(50, 815);
-            this.flowLayoutBar.TabIndex = 10;
+            this.flowLayoutBar.Size = new System.Drawing.Size(50, 671);
+            this.flowLayoutBar.TabIndex = 0;
             // 
             // FormChildpanel
             // 
             this.FormChildpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
             this.FormChildpanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.FormChildpanel.Location = new System.Drawing.Point(810, 0);
+            this.FormChildpanel.Location = new System.Drawing.Point(810, 144);
             this.FormChildpanel.Name = "FormChildpanel";
-            this.FormChildpanel.Size = new System.Drawing.Size(680, 815);
-            this.FormChildpanel.TabIndex = 11;
+            this.FormChildpanel.Size = new System.Drawing.Size(680, 671);
+            this.FormChildpanel.TabIndex = 0;
             // 
             // Datetimenow
             // 
@@ -557,6 +537,54 @@
             // 
             this.Stoptimer1.Tick += new System.EventHandler(this.Stoptimer1_Tick);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.TabToolbar);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(85, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.panel1.Size = new System.Drawing.Size(1455, 144);
+            this.panel1.TabIndex = 13;
+            // 
+            // TabToolbar
+            // 
+            this.TabToolbar.Controls.Add(this.tabPage1);
+            this.TabToolbar.Controls.Add(this.TabPage_ConnectPort);
+            this.TabToolbar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TabToolbar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabToolbar.ItemSize = new System.Drawing.Size(96, 21);
+            this.TabToolbar.Location = new System.Drawing.Point(0, 10);
+            this.TabToolbar.Multiline = true;
+            this.TabToolbar.Name = "TabToolbar";
+            this.TabToolbar.SelectedIndex = 0;
+            this.TabToolbar.Size = new System.Drawing.Size(1455, 134);
+            this.TabToolbar.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.TabToolbar.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
+            this.tabPage1.ForeColor = System.Drawing.Color.Black;
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1447, 105);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "File";
+            // 
+            // TabPage_ConnectPort
+            // 
+            this.TabPage_ConnectPort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
+            this.TabPage_ConnectPort.Controls.Add(this.GBconnect);
+            this.TabPage_ConnectPort.Location = new System.Drawing.Point(4, 25);
+            this.TabPage_ConnectPort.Name = "TabPage_ConnectPort";
+            this.TabPage_ConnectPort.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage_ConnectPort.Size = new System.Drawing.Size(1447, 105);
+            this.TabPage_ConnectPort.TabIndex = 1;
+            this.TabPage_ConnectPort.Text = "Connect";
+            // 
             // barMenu1
             // 
             this.barMenu1.BackColor = System.Drawing.Color.Transparent;
@@ -565,7 +593,7 @@
             this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
             this.barMenu1.Name = "barMenu1";
             this.barMenu1.Size = new System.Drawing.Size(50, 222);
-            this.barMenu1.TabIndex = 11;
+            this.barMenu1.TabIndex = 0;
             this.barMenu1.textbar = "Axis Control & Measument";
             // 
             // ucMenu2
@@ -597,13 +625,13 @@
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(1540, 845);
             this.Controls.Add(this.GBchart);
-            this.Controls.Add(this.CPchart);
             this.Controls.Add(this.panelTop);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.FormChildpanel);
             this.Controls.Add(this.flowLayoutBar);
-            this.Controls.Add(this.MainStatus);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.Menupanel);
+            this.Controls.Add(this.MainStatus);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -614,20 +642,22 @@
             this.Load += new System.EventHandler(this.FrmMain01_Load);
             this.SizeChanged += new System.EventHandler(this.FrmMain01_SizeChanged);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.GBdata.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DgvMeasurement)).EndInit();
             this.GBconnect.ResumeLayout(false);
             this.GBconnect.PerformLayout();
             this.buttonLayoutPanel2.ResumeLayout(false);
-            this.GBdata.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DgvMeasurement)).EndInit();
             this.MainStatus.ResumeLayout(false);
             this.MainStatus.PerformLayout();
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
             this.GBchart.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            this.CPchart.ResumeLayout(false);
             this.Menupanel.ResumeLayout(false);
             this.flowLayoutBar.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.TabToolbar.ResumeLayout(false);
+            this.TabPage_ConnectPort.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -661,8 +691,6 @@
         private System.Windows.Forms.ToolStripStatusLabel StatusPort3;
         private System.Windows.Forms.GroupBox GBchart;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.Panel CPchart;
-        private System.Windows.Forms.Button BtnClear;
         private System.Windows.Forms.Panel Menupanel;
         private Models.ucMenu ucMenu2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutBar;
@@ -676,5 +704,9 @@
         private System.Windows.Forms.Timer Datetimenow;
         private System.Windows.Forms.Timer Stoptimer1;
         public System.Windows.Forms.Label LBtimer;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TabControl TabToolbar;
+        private System.Windows.Forms.TabPage TabPage_ConnectPort;
+        private System.Windows.Forms.TabPage tabPage1;
     }
 }
