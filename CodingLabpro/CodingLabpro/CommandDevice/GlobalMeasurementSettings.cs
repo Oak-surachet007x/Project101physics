@@ -21,6 +21,7 @@ namespace CodingLabpro.CommandDevice
         private string _TriggerMode = "IMMediate";
         private string _AutozeroMode = "ON";
         private string _RangeControl = "AUTO";
+        private string _ResolutionControl = "AUTO";
 
         public event EventHandler SettingsChanged;
 
@@ -58,6 +59,12 @@ namespace CodingLabpro.CommandDevice
         {
             get => _RangeControl;
             set => SetProperty(ref _RangeControl, value);
+        }
+
+        public string ResolutionControl
+        {
+            get => _ResolutionControl;
+            set => SetProperty(ref _ResolutionControl, value);
         }
 
 

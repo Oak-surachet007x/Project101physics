@@ -88,6 +88,7 @@
             this.Numeric_Range = new System.Windows.Forms.NumericUpDown();
             this.Numeric_Resolution = new System.Windows.Forms.NumericUpDown();
             this.GBResolution = new System.Windows.Forms.GroupBox();
+            this.Btn_QueryResolution = new System.Windows.Forms.Button();
             this.RB_resolution6digits = new System.Windows.Forms.RadioButton();
             this.RB_resolutionCustom = new System.Windows.Forms.RadioButton();
             this.RB_resolution4digits = new System.Windows.Forms.RadioButton();
@@ -475,6 +476,7 @@
             this.Btn_Reset.TabIndex = 47;
             this.Btn_Reset.Text = "Reset\r\nMeasurement\r\n";
             this.Btn_Reset.UseVisualStyleBackColor = true;
+            this.Btn_Reset.Click += new System.EventHandler(this.Btn_Reset_Click);
             // 
             // Btn_clear
             // 
@@ -489,6 +491,7 @@
             this.Btn_clear.TabIndex = 46;
             this.Btn_clear.Text = "Clear ERROR";
             this.Btn_clear.UseVisualStyleBackColor = true;
+            this.Btn_clear.Click += new System.EventHandler(this.Btn_clear_Click);
             // 
             // Btn_read
             // 
@@ -503,6 +506,7 @@
             this.Btn_read.TabIndex = 45;
             this.Btn_read.Text = "READ?";
             this.Btn_read.UseVisualStyleBackColor = true;
+            this.Btn_read.Click += new System.EventHandler(this.Btn_read_Click);
             // 
             // Btn_Error
             // 
@@ -517,6 +521,7 @@
             this.Btn_Error.TabIndex = 44;
             this.Btn_Error.Text = "Check ERROR";
             this.Btn_Error.UseVisualStyleBackColor = true;
+            this.Btn_Error.Click += new System.EventHandler(this.Btn_Error_Click);
             // 
             // GBSource
             // 
@@ -659,7 +664,7 @@
             this.CBtrigger.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBtrigger.Font = new System.Drawing.Font("Cascadia Code", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CBtrigger.FormattingEnabled = true;
-            this.CBtrigger.Location = new System.Drawing.Point(511, 487);
+            this.CBtrigger.Location = new System.Drawing.Point(515, 502);
             this.CBtrigger.Name = "CBtrigger";
             this.CBtrigger.Size = new System.Drawing.Size(138, 36);
             this.CBtrigger.TabIndex = 35;
@@ -670,7 +675,7 @@
             this.STriggerlabel.AutoSize = true;
             this.STriggerlabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.STriggerlabel.ForeColor = System.Drawing.Color.White;
-            this.STriggerlabel.Location = new System.Drawing.Point(352, 490);
+            this.STriggerlabel.Location = new System.Drawing.Point(356, 505);
             this.STriggerlabel.Name = "STriggerlabel";
             this.STriggerlabel.Size = new System.Drawing.Size(154, 21);
             this.STriggerlabel.TabIndex = 36;
@@ -683,7 +688,7 @@
             this.GBautozero.Controls.Add(this.RB_autoOFF);
             this.GBautozero.Font = new System.Drawing.Font("Cascadia Code Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBautozero.ForeColor = System.Drawing.Color.White;
-            this.GBautozero.Location = new System.Drawing.Point(357, 531);
+            this.GBautozero.Location = new System.Drawing.Point(361, 546);
             this.GBautozero.Name = "GBautozero";
             this.GBautozero.Size = new System.Drawing.Size(180, 48);
             this.GBautozero.TabIndex = 49;
@@ -815,7 +820,6 @@
             // 
             // Numeric_Resolution
             // 
-            this.Numeric_Resolution.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Numeric_Resolution.DecimalPlaces = 5;
             this.Numeric_Resolution.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Numeric_Resolution.Increment = new decimal(new int[] {
@@ -823,13 +827,14 @@
             0,
             0,
             196608});
-            this.Numeric_Resolution.Location = new System.Drawing.Point(157, 49);
+            this.Numeric_Resolution.Location = new System.Drawing.Point(10, 66);
             this.Numeric_Resolution.Name = "Numeric_Resolution";
-            this.Numeric_Resolution.Size = new System.Drawing.Size(128, 25);
+            this.Numeric_Resolution.Size = new System.Drawing.Size(171, 29);
             this.Numeric_Resolution.TabIndex = 59;
             // 
             // GBResolution
             // 
+            this.GBResolution.Controls.Add(this.Btn_QueryResolution);
             this.GBResolution.Controls.Add(this.RB_resolution6digits);
             this.GBResolution.Controls.Add(this.RB_resolutionCustom);
             this.GBResolution.Controls.Add(this.RB_resolution4digits);
@@ -839,57 +844,92 @@
             this.GBResolution.ForeColor = System.Drawing.Color.White;
             this.GBResolution.Location = new System.Drawing.Point(356, 383);
             this.GBResolution.Name = "GBResolution";
-            this.GBResolution.Size = new System.Drawing.Size(297, 91);
+            this.GBResolution.Size = new System.Drawing.Size(297, 106);
             this.GBResolution.TabIndex = 61;
             this.GBResolution.TabStop = false;
             this.GBResolution.Text = "Resolution";
             // 
+            // Btn_QueryResolution
+            // 
+            this.Btn_QueryResolution.Font = new System.Drawing.Font("Cascadia Code", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_QueryResolution.ForeColor = System.Drawing.Color.Black;
+            this.Btn_QueryResolution.Location = new System.Drawing.Point(182, 66);
+            this.Btn_QueryResolution.Name = "Btn_QueryResolution";
+            this.Btn_QueryResolution.Size = new System.Drawing.Size(109, 30);
+            this.Btn_QueryResolution.TabIndex = 65;
+            this.Btn_QueryResolution.Text = "Resolution?";
+            this.Btn_QueryResolution.UseVisualStyleBackColor = true;
+            // 
             // RB_resolution6digits
             // 
-            this.RB_resolution6digits.AutoSize = true;
+            this.RB_resolution6digits.Appearance = System.Windows.Forms.Appearance.Button;
+            this.RB_resolution6digits.BackColor = System.Drawing.Color.White;
+            this.RB_resolution6digits.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.RB_resolution6digits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RB_resolution6digits.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RB_resolution6digits.Location = new System.Drawing.Point(158, 26);
+            this.RB_resolution6digits.ForeColor = System.Drawing.Color.Black;
+            this.RB_resolution6digits.Location = new System.Drawing.Point(137, 26);
             this.RB_resolution6digits.Name = "RB_resolution6digits";
-            this.RB_resolution6digits.Size = new System.Drawing.Size(69, 21);
+            this.RB_resolution6digits.Size = new System.Drawing.Size(79, 33);
             this.RB_resolution6digits.TabIndex = 64;
             this.RB_resolution6digits.TabStop = true;
             this.RB_resolution6digits.Text = "6 digits";
-            this.RB_resolution6digits.UseVisualStyleBackColor = true;
+            this.RB_resolution6digits.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.RB_resolution6digits.UseVisualStyleBackColor = false;
+            this.RB_resolution6digits.CheckedChanged += new System.EventHandler(this.RB_resolution6digits_CheckedChanged);
             // 
             // RB_resolutionCustom
             // 
+            this.RB_resolutionCustom.Appearance = System.Windows.Forms.Appearance.Button;
             this.RB_resolutionCustom.AutoSize = true;
-            this.RB_resolutionCustom.Location = new System.Drawing.Point(72, 53);
+            this.RB_resolutionCustom.BackColor = System.Drawing.Color.White;
+            this.RB_resolutionCustom.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.RB_resolutionCustom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RB_resolutionCustom.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RB_resolutionCustom.ForeColor = System.Drawing.Color.Black;
+            this.RB_resolutionCustom.Location = new System.Drawing.Point(66, 26);
             this.RB_resolutionCustom.Name = "RB_resolutionCustom";
-            this.RB_resolutionCustom.Size = new System.Drawing.Size(74, 21);
+            this.RB_resolutionCustom.Size = new System.Drawing.Size(76, 33);
             this.RB_resolutionCustom.TabIndex = 63;
             this.RB_resolutionCustom.TabStop = true;
             this.RB_resolutionCustom.Text = "Custom";
-            this.RB_resolutionCustom.UseVisualStyleBackColor = true;
+            this.RB_resolutionCustom.UseVisualStyleBackColor = false;
             this.RB_resolutionCustom.CheckedChanged += new System.EventHandler(this.RB_resolutionCustom_CheckedChanged);
             // 
             // RB_resolution4digits
             // 
-            this.RB_resolution4digits.AutoSize = true;
+            this.RB_resolution4digits.Appearance = System.Windows.Forms.Appearance.Button;
+            this.RB_resolution4digits.BackColor = System.Drawing.Color.White;
+            this.RB_resolution4digits.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.RB_resolution4digits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RB_resolution4digits.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RB_resolution4digits.Location = new System.Drawing.Point(72, 26);
+            this.RB_resolution4digits.ForeColor = System.Drawing.Color.Black;
+            this.RB_resolution4digits.Location = new System.Drawing.Point(209, 26);
             this.RB_resolution4digits.Name = "RB_resolution4digits";
-            this.RB_resolution4digits.Size = new System.Drawing.Size(69, 21);
+            this.RB_resolution4digits.Size = new System.Drawing.Size(81, 33);
             this.RB_resolution4digits.TabIndex = 62;
             this.RB_resolution4digits.TabStop = true;
             this.RB_resolution4digits.Text = "4 digits";
-            this.RB_resolution4digits.UseVisualStyleBackColor = true;
+            this.RB_resolution4digits.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.RB_resolution4digits.UseVisualStyleBackColor = false;
+            this.RB_resolution4digits.CheckedChanged += new System.EventHandler(this.RB_resolution4digits_CheckedChanged);
             // 
             // RB_resolutionAuto
             // 
-            this.RB_resolutionAuto.AutoSize = true;
+            this.RB_resolutionAuto.Appearance = System.Windows.Forms.Appearance.Button;
+            this.RB_resolutionAuto.BackColor = System.Drawing.Color.White;
+            this.RB_resolutionAuto.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.RB_resolutionAuto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RB_resolutionAuto.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RB_resolutionAuto.ForeColor = System.Drawing.Color.Black;
             this.RB_resolutionAuto.Location = new System.Drawing.Point(8, 26);
             this.RB_resolutionAuto.Name = "RB_resolutionAuto";
-            this.RB_resolutionAuto.Size = new System.Drawing.Size(58, 21);
+            this.RB_resolutionAuto.Size = new System.Drawing.Size(65, 33);
             this.RB_resolutionAuto.TabIndex = 61;
             this.RB_resolutionAuto.TabStop = true;
             this.RB_resolutionAuto.Text = "Auto";
-            this.RB_resolutionAuto.UseVisualStyleBackColor = true;
+            this.RB_resolutionAuto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.RB_resolutionAuto.UseVisualStyleBackColor = false;
             this.RB_resolutionAuto.CheckedChanged += new System.EventHandler(this.RB_resolutionAuto_CheckedChanged);
             // 
             // GBrange
@@ -1095,5 +1135,6 @@
         private System.Windows.Forms.RadioButton RB_Customrange;
         private System.Windows.Forms.ComboBox CBrange;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button Btn_QueryResolution;
     }
 }

@@ -72,6 +72,7 @@ namespace CodingLabpro.frmChild
             RB_autoON.Enabled = !EnabledItem;
             RB_autoOFF.Enabled = !EnabledItem;
             RB_autoOnce.Enabled = !EnabledItem;
+            Btn_QueryResolution.Enabled = !EnabledItem;
     
         }
         private void AxisControl_Load(object sender, EventArgs e)
@@ -183,14 +184,76 @@ namespace CodingLabpro.frmChild
         {
             Range_Control_Measurement();
         }
+        private void RB_resolution4digits_CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalMeasurementSettings.Instance.ResolutionControl = "DIGITS_4";
+            Numeric_Resolution.Enabled = false; 
+        }
+        private void RB_resolution6digits_CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalMeasurementSettings.Instance.ResolutionControl = "DIGITS_6";
+            Numeric_Resolution.Enabled = false;
+        }
         private void RB_resolutionAuto_CheckedChanged(object sender, EventArgs e)
         {
+            GlobalMeasurementSettings.Instance.ResolutionControl = "AUTO";
             Numeric_Resolution.Enabled = false;
         }
         private void RB_resolutionCustom_CheckedChanged(object sender, EventArgs e)
         {
+            GlobalMeasurementSettings.Instance.ResolutionControl = "CUSTOM";
             Numeric_Resolution.Enabled = true;
         }
+       
+
+        private string Resolution_Indicator()
+        {
+            switch (GlobalMeasurementSettings.Instance.ResolutionControl)
+            {
+                case "AUTO":
+                    return Measurement_Resolution_value(0.0001);
+                case "DIGITS_4":
+                    return Measurement_Resolution_value(0.001);
+                case "DIGITS_6":
+                    return Measurement_Resolution_value(1E-6);
+                case "CUSTOM":
+                    double Value = (double)Numeric_Resolution.Value;
+                    return Measurement_Resolution_value(Value);
+            }
+
+            throw new InvalidOperationException("กรุณาเลือกชนิดความละเอียดการวัด");
+        }
+        private string Measurement_Resolution_value(double Resolution_value)
+        {
+            if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
+            {
+                Debug.WriteLine("VOLTage:DC:RESolution " + (decimal)Resolution_value);
+                return ("VOLTage:DC:RESolution " + (decimal)Resolution_value).Trim();
+               
+            }
+            else if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "AC")
+            {
+                Debug.WriteLine("VOLTage:AC:RESolution " + (decimal)Resolution_value);
+                return ("VOLTage:AC:RESolution " + (decimal)Resolution_value).Trim();
+
+            }
+            else if (GlobalMeasurementSettings.Instance.MeasureMode == "Current" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
+            {   
+                Debug.WriteLine("CURRent:DC:RESolution " + (decimal)Resolution_value);
+                return ("CURRent:DC:RESolution " + (decimal)Resolution_value).Trim();
+            }
+            else if (GlobalMeasurementSettings.Instance.MeasureMode == "Current" && GlobalMeasurementSettings.Instance.SourceMode == "AC")
+            {
+                Debug.WriteLine("CURRent:AC:RESolution " + (decimal)Resolution_value); 
+                return ("CURRent:AC:RESolution " + (decimal)Resolution_value).Trim();
+            }
+            else
+            {
+                throw new InvalidOperationException("กรุณาป้อนค่าที่ไม่เท่ากับ 0");
+            }
+
+        }
+
         private void Range_Control_Measurement()
         {
             if (RB_autorange.Checked)
@@ -206,7 +269,7 @@ namespace CodingLabpro.frmChild
                 GlobalMeasurementSettings.Instance.RangeControl = "CUSTOM";
                 RangeUnitMeasurement();
             }
-    
+
         }
 
         private void RangeUnitMeasurement()
@@ -225,11 +288,11 @@ namespace CodingLabpro.frmChild
             }
         }
        
-        private string Range_Custom_Indicator(double Rangevalue)
+        private string Range_Custom_value(double Range_value)
         {
-            if (RB_Customrange.Checked && Rangevalue != 0)
+            if (RB_Customrange.Checked && Range_value != 0)
             {
-                double CoVrange = ConvertValueOnUnit(Rangevalue, CBrange.SelectedItem.ToString());
+                double CoVrange = ConvertValueOnUnit(Range_value, CBrange.SelectedItem.ToString());
 
                 if (RBvoltage.Checked)
                 {
@@ -273,38 +336,31 @@ namespace CodingLabpro.frmChild
             {
                 if (GlobalMeasurementSettings.Instance.TriggerMode == "BUS")
                 {
-                    if (GlobalMeasurementSettings.Instance.RangeControl == "CUSTOM")
-                    {
-                        string range = Range_Custom_Indicator((double)Numeric_Range.Value);
-                        string resolution = "0.001";
-                        Debug.WriteLine($"CONF:VOLT:DC {range}, {resolution}");
-                        myDMM.WriteString($"CONF:VOLT:DC {range}, {resolution}");
-                    }
-                    else if (GlobalMeasurementSettings.Instance.RangeControl == "AUTO")
-                    {
-                        throw new Exception("คำสั่ง [CONFigure] ไม่สามารถใช้ร่วมกับ Range: Auto");
-                    }
+                    Resolution_Indicator();
+                    //Debug.WriteLine($"CONF:VOLT:DC {range}, {resolution}");
+                    //myDMM.WriteString($"CONF:VOLT:DC {range}, {resolution}");
 
-                    myDMM.WriteString("TRIGger:SOURce BUS");
-                    if (GlobalMeasurementSettings.Instance.AutozeroMode == "ON")
-                    {
-                        myDMM.WriteString("ZERO:AUTO ON");
-                    }
-                    else if (GlobalMeasurementSettings.Instance.AutozeroMode == "OFF")
-                    {
-                        myDMM.WriteString("ZERO:AUTO OFF");
-                    }
-                    else if (GlobalMeasurementSettings.Instance.AutozeroMode == "ONCE")
-                    {
-                        myDMM.WriteString("ZERO:AUTO ONCE");
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("Unknown AutozeroMode: " + GlobalMeasurementSettings.Instance.AutozeroMode);
-                    }
-                    myDMM.WriteString("INIT");
-                    myDMM.WriteString("*TRG"); //if Select Trigger_Source == BUS will accept command IEEE-488
-                    myDMM.WriteString("FETC?");
+                   
+                    //myDMM.WriteString("TRIGger:SOURce BUS");
+                    //if (GlobalMeasurementSettings.Instance.AutozeroMode == "ON")
+                    //{
+                    //    myDMM.WriteString("ZERO:AUTO ON");
+                    //}
+                    //else if (GlobalMeasurementSettings.Instance.AutozeroMode == "OFF")
+                    //{
+                    //    myDMM.WriteString("ZERO:AUTO OFF");
+                    //}
+                    //else if (GlobalMeasurementSettings.Instance.AutozeroMode == "ONCE")
+                    //{
+                    //    myDMM.WriteString("ZERO:AUTO ONCE");
+                    //}
+                    //else
+                    //{
+                    //    throw new InvalidOperationException("Unknown AutozeroMode: " + GlobalMeasurementSettings.Instance.AutozeroMode);
+                    //}
+                    //myDMM.WriteString("INIT");
+                    //myDMM.WriteString("*TRG"); //if Select Trigger_Source == BUS will accept command IEEE-488
+                    //myDMM.WriteString("FETC?");
 
                 }
                 else if (GlobalMeasurementSettings.Instance.TriggerMode == "EXTernal")
@@ -780,6 +836,26 @@ namespace CodingLabpro.frmChild
             string SourceMode = GlobalMeasurementSettings.Instance.SourceMode;
             string AutoMode = GlobalMeasurementSettings.Instance.AutozeroMode;
             MessageBox.Show($"{TriggerMode} \n {MeasureMode} \n {SourceMode} \n {AutoMode}", "สรุปผล");
+        }
+
+        private void Btn_read_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_Reset_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_clear_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_Error_Click(object sender, EventArgs e)
+        {
+
         }
 
         
