@@ -257,35 +257,45 @@ namespace CodingLabpro.frmChild
 
         private string Measurement_Resolution_value(double Resolution_value)
         {
-            if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
+           
+            if (Resolution_value <= 0)
             {
-                Debug.WriteLine("VOLTage:DC:RESolution " + (decimal)Resolution_value);
-                return ("VOLTage:DC:RESolution " + (decimal)Resolution_value).Trim();  
-
-            }
-            else if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "AC")
-            {
-                Debug.WriteLine("VOLTage:AC:RESolution " + (decimal)Resolution_value);
-                return ("VOLTage:AC:RESolution " + (decimal)Resolution_value).Trim();
-
-            }
-            else if (GlobalMeasurementSettings.Instance.MeasureMode == "Current" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
-            {   
-                Debug.WriteLine("CURRent:DC:RESolution " + (decimal)Resolution_value);
-                return ("CURRent:DC:RESolution " + (decimal)Resolution_value).Trim();
-            }
-            else if (GlobalMeasurementSettings.Instance.MeasureMode == "Current" && GlobalMeasurementSettings.Instance.SourceMode == "AC")
-            {
-                Debug.WriteLine("CURRent:AC:RESolution " + (decimal)Resolution_value); 
-                return ("CURRent:AC:RESolution " + (decimal)Resolution_value).Trim();
+                throw new InvalidOperationException("กรุณาป้อนค่าความละเอียดที่มากกว่า 0");
             }
             else
             {
-                throw new InvalidOperationException("กรุณากำหนดค่าความละเอียดให้ถูกต้อง");
+                if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
+                {
+                    Debug.WriteLine("VOLTage:DC:RESolution " + (decimal)Resolution_value);
+                    return ("VOLTage:DC:RESolution " + (decimal)Resolution_value).Trim();
+
+                }
+                else if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "AC")
+                {
+                    Debug.WriteLine("VOLTage:AC:RESolution " + (decimal)Resolution_value);
+                    return ("VOLTage:AC:RESolution " + (decimal)Resolution_value).Trim();
+
+                }
+                else if (GlobalMeasurementSettings.Instance.MeasureMode == "Current" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
+                {
+                    Debug.WriteLine("CURRent:DC:RESolution " + (decimal)Resolution_value);
+                    return ("CURRent:DC:RESolution " + (decimal)Resolution_value).Trim();
+                }
+                else if (GlobalMeasurementSettings.Instance.MeasureMode == "Current" && GlobalMeasurementSettings.Instance.SourceMode == "AC")
+                {
+                    Debug.WriteLine("CURRent:AC:RESolution " + (decimal)Resolution_value);
+                    return ("CURRent:AC:RESolution " + (decimal)Resolution_value).Trim();
+                }
+                else
+                {
+                    throw new InvalidOperationException("กรุณาตรวจสอบค่าความละเอียดให้ถูกต้อง");
+                }
             }
 
         }
         #endregion
+
+        #region Reange_Measurement
 
         private void Range_Control_Measurement()
         {
@@ -335,17 +345,78 @@ namespace CodingLabpro.frmChild
 
         }
 
+        private string Range_Indicator()
+        {
+            var map = Measurement_Range_Mode();
+            var key = (GlobalMeasurementSettings.Instance.MeasureMode, GlobalMeasurementSettings.Instance.SourceMode);
+            string Resultcommand;
+
+            if (!map.TryGetValue(key, out string command))
+            {
+                throw new InvalidOperationException("ไม่พบโหมดการวัดที่ระบุ");
+            }
+            else
+            {
+                switch (GlobalMeasurementSettings.Instance.RangeControl)
+                {
+                    case "AUTO":
+                        Resultcommand = $"{command}:AUTO ON";
+                        break;
+                    case "CUSTOM":
+                        double Range_value = (double)Numeric_Range.Value;
+                        Resultcommand = Range_Custom_value(Range_value);
+                        break;
+                    default:
+                        throw new InvalidOperationException("กรุณาเลือกชนิดขอบเขตการวัด");
+                }
+            }
+            Debug.WriteLine(Resultcommand);
+            return Resultcommand;
+        }
+
         private string Range_Custom_value(double Range_value)
         {
-            if (RB_Customrange.Checked && Range_value != 0)
+            if (Range_value <= 0)
+            {
+                throw new InvalidOperationException("กรุณาป้อนค่าขอบเขตการวัดที่มากกว่า 0");
+
+            }
+            else
             {
                 double CoVrange = ConvertValueOnUnit(Range_value, CBrange.SelectedItem.ToString());
 
-                
+                if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
+                {
+                    Debug.WriteLine("VOLTage:DC:RANGe " + (decimal)CoVrange);
+                    return ("VOLTage:DC:RANGe " + (decimal)CoVrange).Trim();
+
+                }
+                else if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "AC")
+                {
+                    Debug.WriteLine("VOLTage:AC:RANGe " + (decimal)CoVrange);
+                    return ("VOLTage:AC:RANGe" + (decimal)CoVrange).Trim();
+
+                }
+                else if (GlobalMeasurementSettings.Instance.MeasureMode == "Current" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
+                {
+                    Debug.WriteLine("CURRent:DC:RANGe " + (decimal)CoVrange);
+                    return ("CURRent:DC:RANGe " + (decimal)CoVrange).Trim();
+                }
+                else if (GlobalMeasurementSettings.Instance.MeasureMode == "Current" && GlobalMeasurementSettings.Instance.SourceMode == "AC")
+                {
+                    Debug.WriteLine("CURRent:AC:RANGe " + (decimal)CoVrange);
+                    return ("CURRent:AC:RANGe " + (decimal)CoVrange).Trim();
+                }
+                else
+                {
+                    throw new InvalidOperationException("กรุณาตรวจสอบค่าขอบเขตการวัดให้ถูกต้อง");
+                }
             }
 
-            throw new InvalidOperationException("กรุณาป้อนค่าการวัดที่ไม่เท่ากับ 0");
+            
         }
+
+        #endregion
 
         private double ConvertValueOnUnit(double Value, string Unit)
         {
@@ -920,8 +991,9 @@ namespace CodingLabpro.frmChild
 
         private void Btn_read_Click(object sender, EventArgs e)
         {
-            string Result = Resolution_Indicator();
-            MessageBox.Show(Result, "Output_Log");
+            string Resolution_select = Resolution_Indicator();
+            string Range_select  = Range_Indicator();
+            MessageBox.Show($"{Resolution_select} \n{Range_select}", "Output_Log");
         }
 
         private void Btn_Reset_Click(object sender, EventArgs e)
