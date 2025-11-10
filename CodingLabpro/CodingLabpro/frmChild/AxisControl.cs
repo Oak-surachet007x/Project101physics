@@ -59,7 +59,7 @@ namespace CodingLabpro.frmChild
 
         }
 
-        #region SettingMeasurement Agilent
+        
         private void UIControlDisabled(bool EnabledItem)
         {
      
@@ -111,6 +111,7 @@ namespace CodingLabpro.frmChild
             
         }
 
+        #region SettingMeasurement Agilent
         private void CBtrigger_SelectedIndexChanged(object sender, EventArgs e)
         {
             GlobalMeasurementSettings.Instance.TriggerMode = CBtrigger.SelectedItem.ToString();
@@ -146,14 +147,12 @@ namespace CodingLabpro.frmChild
    
             
         }
-
         private void RBcurrent_CheckedChanged(object sender, EventArgs e)
         {
             Range_Control_Measurement();
             UIControlDisabled(false);
             GlobalMeasurementSettings.Instance.MeasureMode = "Current";
         }
-
         private void RBsource_DC_CheckedChanged(object sender, EventArgs e)
         {
             GlobalMeasurementSettings.Instance.SourceMode = "DC";
@@ -162,12 +161,10 @@ namespace CodingLabpro.frmChild
         {
             GlobalMeasurementSettings.Instance.SourceMode = "AC";
         }
-
         private void RB_autoOFF_CheckedChanged(object sender, EventArgs e)
         {
             GlobalMeasurementSettings.Instance.AutozeroMode = "OFF";
         }
-
         private void RB_autoON_CheckedChanged(object sender, EventArgs e)
         {
             GlobalMeasurementSettings.Instance.AutozeroMode = "ON";
@@ -204,32 +201,67 @@ namespace CodingLabpro.frmChild
             GlobalMeasurementSettings.Instance.ResolutionControl = "CUSTOM";
             Numeric_Resolution.Enabled = true;
         }
-       
 
+        #region Resolution_Measurement
         private string Resolution_Indicator()
         {
-            switch (GlobalMeasurementSettings.Instance.ResolutionControl)
+            var map = Measurement_Resolution_Mode();
+            var key = (GlobalMeasurementSettings.Instance.MeasureMode, GlobalMeasurementSettings.Instance.SourceMode);
+            string Resultcommand;
+
+            if (!map.TryGetValue(key, out string command))
             {
-                case "AUTO":
-                    return Measurement_Resolution_value(0.0001);
-                case "DIGITS_4":
-                    return Measurement_Resolution_value(0.001);
-                case "DIGITS_6":
-                    return Measurement_Resolution_value(1E-6);
-                case "CUSTOM":
-                    double Value = (double)Numeric_Resolution.Value;
-                    return Measurement_Resolution_value(Value);
+                throw new InvalidOperationException("ไม่พบโหมดการวัดที่ระบุ");
+            }
+            else
+            {
+                switch (GlobalMeasurementSettings.Instance.ResolutionControl)
+                {
+                    case "AUTO":
+                        Resultcommand = $"{command} AUTO";
+                        break;
+                    case "DIGITS_4":
+                        Resultcommand = $"{command} 0.001";
+                        break;
+                    case "DIGITS_6":
+                        Resultcommand = $"{command} 1E-6";
+                        break;
+                    case "CUSTOM":
+                        double Value = (double)Numeric_Resolution.Value;
+                        Resultcommand = Measurement_Resolution_value(Value);
+                        break;
+                    default:
+                        throw new InvalidOperationException("กรุณาเลือกชนิดความละเอียดการวัด");
+                }
             }
 
-            throw new InvalidOperationException("กรุณาเลือกชนิดความละเอียดการวัด");
+            Debug.WriteLine(Resultcommand);
+            return Resultcommand;
+
         }
+      
+        private Dictionary<(string Measure, string Source), string> Measurement_Resolution_Mode()
+        {
+           var Measurement_Mode = new Dictionary<(string, string), string>
+           {
+                { ("Voltage", "DC"), "VOLTage:DC:RESolution" },
+                { ("Voltage", "AC"), "VOLTage:AC:RESolution" },
+                { ("Current", "DC"), "CURRent:DC:RESolution" },
+                { ("Current", "AC"), "CURRent:AC:RESolution" }
+           };
+
+           return Measurement_Mode;
+
+        }
+
+
         private string Measurement_Resolution_value(double Resolution_value)
         {
             if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
             {
                 Debug.WriteLine("VOLTage:DC:RESolution " + (decimal)Resolution_value);
-                return ("VOLTage:DC:RESolution " + (decimal)Resolution_value).Trim();
-               
+                return ("VOLTage:DC:RESolution " + (decimal)Resolution_value).Trim();  
+
             }
             else if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "AC")
             {
@@ -249,10 +281,11 @@ namespace CodingLabpro.frmChild
             }
             else
             {
-                throw new InvalidOperationException("กรุณาป้อนค่าที่ไม่เท่ากับ 0");
+                throw new InvalidOperationException("กรุณากำหนดค่าความละเอียดให้ถูกต้อง");
             }
 
         }
+        #endregion
 
         private void Range_Control_Measurement()
         {
@@ -277,38 +310,41 @@ namespace CodingLabpro.frmChild
             if (RBvoltage.Checked)
             {
                 CBrange.Items.Clear();
-                CBrange.Text = "";
+                CBrange.Text = "mV";  //กำหนดค่าขอบเขตการวัดเป็นตัวเลือกแรก
                 CBrange.Items.AddRange(new string[] { "V", "mV" });
             }
             else if (RBcurrent.Checked)
             {
                 CBrange.Items.Clear();
-                CBrange.Text = "";
+                CBrange.Text = "mA"; //กำหนดค่าขอบเขตการวัดเป็นตัวเลือกแรก
                 CBrange.Items.AddRange(new string[] { "A", "mA", "nA" });
             }
         }
-       
+
+        private Dictionary<(string Measure, string Source), string> Measurement_Range_Mode()
+        {
+            var Measurement_Mode = new Dictionary<(string, string), string>
+           {
+                { ("Voltage", "DC"), "VOLTage:DC:RANGe" },
+                { ("Voltage", "AC"), "VOLTage:AC:RANGe" },
+                { ("Current", "DC"), "CURRent:DC:RANGe" },
+                { ("Current", "AC"), "CURRent:AC:RANGe" }
+           };
+
+            return Measurement_Mode;
+
+        }
+
         private string Range_Custom_value(double Range_value)
         {
             if (RB_Customrange.Checked && Range_value != 0)
             {
                 double CoVrange = ConvertValueOnUnit(Range_value, CBrange.SelectedItem.ToString());
 
-                if (RBvoltage.Checked)
-                {
-                    string CoVcommand = CoVrange.ToString("G", CultureInfo.InvariantCulture);
-                    Debug.WriteLine(CoVcommand + "V");
-                    return CoVcommand;
-                }
-                else if (RBcurrent.Checked)
-                {
-                    string CoVcommand = CoVrange.ToString("G", CultureInfo.InvariantCulture);
-                    Debug.WriteLine(CoVcommand + "A");
-                    return CoVcommand;
-                }
+                
             }
 
-            throw new InvalidOperationException("กรุณาป้อนค่าที่ไม่เท่ากับ 0");
+            throw new InvalidOperationException("กรุณาป้อนค่าการวัดที่ไม่เท่ากับ 0");
         }
 
         private double ConvertValueOnUnit(double Value, string Unit)
@@ -341,6 +377,50 @@ namespace CodingLabpro.frmChild
                     //myDMM.WriteString($"CONF:VOLT:DC {range}, {resolution}");
 
                    
+                    //myDMM.WriteString("TRIGger:SOURce BUS");
+                    //if (GlobalMeasurementSettings.Instance.AutozeroMode == "ON")
+                    //{
+                    //    myDMM.WriteString("ZERO:AUTO ON");
+                    //}
+                    //else if (GlobalMeasurementSettings.Instance.AutozeroMode == "OFF")
+                    //{
+                    //    myDMM.WriteString("ZERO:AUTO OFF");
+                    //}
+                    //else if (GlobalMeasurementSettings.Instance.AutozeroMode == "ONCE")
+                    //{
+                    //    myDMM.WriteString("ZERO:AUTO ONCE");
+                    //}
+                    //else
+                    //{
+                    //    throw new InvalidOperationException("Unknown AutozeroMode: " + GlobalMeasurementSettings.Instance.AutozeroMode);
+                    //}
+                    //myDMM.WriteString("INIT");
+                    //myDMM.WriteString("*TRG"); //if Select Trigger_Source == BUS will accept command IEEE-488
+                    //myDMM.WriteString("FETC?");
+
+                }
+                else if (GlobalMeasurementSettings.Instance.TriggerMode == "EXTernal")
+                {
+                    myDMM.WriteString("CON:VOLT:DC 10, 0.003");
+                    myDMM.WriteString("TRIGger:SOURce EXTernal");
+                    myDMM.WriteString("READ?");
+                }
+                else if (GlobalMeasurementSettings.Instance.TriggerMode == "IMMediate")
+                {
+
+                }
+
+
+            }
+            else if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "AC")
+            {
+
+                if (GlobalMeasurementSettings.Instance.TriggerMode == "BUS")
+                {
+                    Resolution_Indicator();
+            
+
+
                     //myDMM.WriteString("TRIGger:SOURce BUS");
                     //if (GlobalMeasurementSettings.Instance.AutozeroMode == "ON")
                     //{
@@ -840,7 +920,8 @@ namespace CodingLabpro.frmChild
 
         private void Btn_read_Click(object sender, EventArgs e)
         {
-
+            string Result = Resolution_Indicator();
+            MessageBox.Show(Result, "Output_Log");
         }
 
         private void Btn_Reset_Click(object sender, EventArgs e)
