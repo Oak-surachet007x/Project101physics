@@ -32,10 +32,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain01));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain01));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.GBdata = new System.Windows.Forms.GroupBox();
             this.DgvMeasurement = new System.Windows.Forms.DataGridView();
@@ -52,7 +52,6 @@
             this.labelTop = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.MainStatus = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusicon = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusDMM = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusPort1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -76,7 +75,9 @@
             this.TabToolbar = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.TabPage_ConnectPort = new System.Windows.Forms.TabPage();
+            this.toolStripStatusicon = new System.Windows.Forms.ToolStripStatusLabel();
             this.barMenu1 = new CodingLabpro.Models.barMenu();
+            this.ucMenu3 = new CodingLabpro.Models.ucMenu();
             this.ucMenu2 = new CodingLabpro.Models.ucMenu();
             this.ucMenu1 = new CodingLabpro.Models.ucMenu();
             this.tableLayoutPanel1.SuspendLayout();
@@ -310,12 +311,6 @@
             this.MainStatus.TabIndex = 4;
             this.MainStatus.Text = "statusStrip1";
             // 
-            // toolStripStatusicon
-            // 
-            this.toolStripStatusicon.Image = ((System.Drawing.Image)(resources.GetObject("toolStripStatusicon.Image")));
-            this.toolStripStatusicon.Name = "toolStripStatusicon";
-            this.toolStripStatusicon.Size = new System.Drawing.Size(20, 25);
-            // 
             // StatusLabel
             // 
             this.StatusLabel.Font = new System.Drawing.Font("Cascadia Mono", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -501,6 +496,7 @@
             // Menupanel
             // 
             this.Menupanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
+            this.Menupanel.Controls.Add(this.ucMenu3);
             this.Menupanel.Controls.Add(this.ucMenu2);
             this.Menupanel.Controls.Add(this.ucMenu1);
             this.Menupanel.Dock = System.Windows.Forms.DockStyle.Left;
@@ -585,6 +581,12 @@
             this.TabPage_ConnectPort.TabIndex = 1;
             this.TabPage_ConnectPort.Text = "Connect";
             // 
+            // toolStripStatusicon
+            // 
+            this.toolStripStatusicon.Image = ((System.Drawing.Image)(resources.GetObject("toolStripStatusicon.Image")));
+            this.toolStripStatusicon.Name = "toolStripStatusicon";
+            this.toolStripStatusicon.Size = new System.Drawing.Size(20, 25);
+            // 
             // barMenu1
             // 
             this.barMenu1.BackColor = System.Drawing.Color.Transparent;
@@ -595,6 +597,19 @@
             this.barMenu1.Size = new System.Drawing.Size(50, 222);
             this.barMenu1.TabIndex = 0;
             this.barMenu1.textbar = "Axis Control & Measument";
+            // 
+            // ucMenu3
+            // 
+            this.ucMenu3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ucMenu3.BackColor = System.Drawing.Color.Transparent;
+            this.ucMenu3.BorderColor = System.Drawing.Color.Transparent;
+            this.ucMenu3.ForeColor = System.Drawing.Color.White;
+            this.ucMenu3.Icon = global::CodingLabpro.Properties.Resources.frame_bug_70dp_8C1AF6_FILL0_wght400_GRAD0_opsz48;
+            this.ucMenu3.Location = new System.Drawing.Point(-8, 746);
+            this.ucMenu3.Name = "ucMenu3";
+            this.ucMenu3.Size = new System.Drawing.Size(90, 52);
+            this.ucMenu3.TabIndex = 2;
+            this.ucMenu3.textlabel = "Output_Log";
             // 
             // ucMenu2
             // 
@@ -708,5 +723,6 @@
         private System.Windows.Forms.TabControl TabToolbar;
         private System.Windows.Forms.TabPage TabPage_ConnectPort;
         private System.Windows.Forms.TabPage tabPage1;
+        private Models.ucMenu ucMenu3;
     }
 }

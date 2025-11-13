@@ -87,7 +87,7 @@ namespace CodingLabpro
             BtnConnect.Enabled = true;
       
             //MenuButton
-            menuButton = new List<ucMenu>() { ucMenu1, ucMenu2 };
+            menuButton = new List<ucMenu>() { ucMenu1, ucMenu2, ucMenu3 };
             ClickMenu(menuButton);
 
             //BarMenuButton
@@ -214,7 +214,7 @@ namespace CodingLabpro
             MessageNotify.Show();
         }
 
-        //--------------------------------------------------------------------------------------------------------------//
+        //----------------------------------------------Button bar UI------------------------------------------------------------//
 
         #region barMenu Control
         //barMenu event Click tabcontrol
@@ -284,12 +284,18 @@ namespace CodingLabpro
                     Form form = new frmMain(MyMMC, MySerialPort, MyDMM);
                     form.Show();
                     break;
+
+                case "ucMenu3":
+                    ActivateMenu(ucMenu3, ucMenu2);
+                    Form frmLog = new OutputLog();
+                    frmLog.Show();
+                    break;
             }
         }
         private async void ActivateMenu(ucMenu _active, params ucMenu[] _inactive)
         {
 
-            _active.BorderColor = Color.Purple;
+            _active.BorderColor = Color.FromArgb(140, 26, 246);
 
             foreach (ucMenu inactive in _inactive)
             {
@@ -304,7 +310,7 @@ namespace CodingLabpro
         }
         #endregion
 
-
+        //----------------------------------------------FrmMain event UI------------------------------------------------------------//
         private void FrmMain01_Load(object sender, EventArgs e)
         {
             Datetimenow.Start();

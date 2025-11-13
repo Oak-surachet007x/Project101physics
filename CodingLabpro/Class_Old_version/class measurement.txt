@@ -1,0 +1,212 @@
+private string Resolution_Indicator()
+{
+    var map = Measurement_Resolution_Mode();
+    var key = (GlobalMeasurementSettings.Instance.MeasureMode, GlobalMeasurementSettings.Instance.SourceMode);
+    string Resultcommand;
+
+    if (!map.TryGetValue(key, out string command))
+    {
+        throw new InvalidOperationException("ไม่พบโหมดการวัดที่ระบุ");
+    }
+    else
+    {
+        switch (GlobalMeasurementSettings.Instance.ResolutionControl)
+        {
+            case "AUTO":
+                Resultcommand = $"{command} AUTO";
+                break;
+            case "DIGITS_4":
+                Resultcommand = $"{command} 0.001";
+                break;
+            case "DIGITS_6":
+                Resultcommand = $"{command} 1E-6";
+                break;
+            case "CUSTOM":
+                double Value = (double)Numeric_Resolution.Value;
+                Resultcommand = Measurement_Resolution_value(Value);
+                break;
+            default:
+                throw new InvalidOperationException("กรุณาเลือกชนิดความละเอียดการวัด");
+        }
+    }
+
+    Debug.WriteLine(Resultcommand);
+    return Resultcommand;
+
+}
+      
+private Dictionary<(string Measure, string Source), string> Measurement_Resolution_Mode()
+{
+   var Measurement_Mode = new Dictionary<(string, string), string>
+   {
+        { ("Voltage", "DC"), "VOLTage:DC:RESolution" },
+        { ("Voltage", "AC"), "VOLTage:AC:RESolution" },
+        { ("Current", "DC"), "CURRent:DC:RESolution" },
+        { ("Current", "AC"), "CURRent:AC:RESolution" }
+   };
+
+   return Measurement_Mode;
+
+}
+
+
+private string Measurement_Resolution_value(double Resolution_value)
+{
+   
+    if (Resolution_value <= 0)
+    {
+        throw new InvalidOperationException("กรุณาป้อนค่าความละเอียดที่มากกว่า 0");
+    }
+    else
+    {
+        if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
+        {
+            Debug.WriteLine("VOLTage:DC:RESolution " + (decimal)Resolution_value);
+            return ("VOLTage:DC:RESolution " + (decimal)Resolution_value).Trim();
+
+        }
+        else if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "AC")
+        {
+            Debug.WriteLine("VOLTage:AC:RESolution " + (decimal)Resolution_value);
+            return ("VOLTage:AC:RESolution " + (decimal)Resolution_value).Trim();
+
+        }
+        else if (GlobalMeasurementSettings.Instance.MeasureMode == "Current" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
+        {
+            Debug.WriteLine("CURRent:DC:RESolution " + (decimal)Resolution_value);
+            return ("CURRent:DC:RESolution " + (decimal)Resolution_value).Trim();
+        }
+        else if (GlobalMeasurementSettings.Instance.MeasureMode == "Current" && GlobalMeasurementSettings.Instance.SourceMode == "AC")
+        {
+            Debug.WriteLine("CURRent:AC:RESolution " + (decimal)Resolution_value);
+            return ("CURRent:AC:RESolution " + (decimal)Resolution_value).Trim();
+        }
+        else
+        {
+            throw new InvalidOperationException("กรุณาตรวจสอบค่าความละเอียดให้ถูกต้อง");
+        }
+    }
+
+}
+#endregion
+
+#region Reange_Measurement
+
+private void Range_Control_Measurement()
+{
+    if (RB_autorange.Checked)
+    {
+        CBrange.Enabled = false;
+        Numeric_Range.Enabled = false;
+        GlobalMeasurementSettings.Instance.RangeControl = "AUTO";
+    }
+    else if (RB_Customrange.Checked)
+    {
+        CBrange.Enabled = true;
+        Numeric_Range.Enabled = true;
+        GlobalMeasurementSettings.Instance.RangeControl = "CUSTOM";
+        RangeUnitMeasurement();
+    }
+
+}
+
+private void RangeUnitMeasurement()
+{
+    if (RBvoltage.Checked)
+    {
+        CBrange.Items.Clear();
+        CBrange.Text = "mV";  //กำหนดค่าขอบเขตการวัดเป็นตัวเลือกแรก
+        CBrange.Items.AddRange(new string[] { "V", "mV" });
+    }
+    else if (RBcurrent.Checked)
+    {
+        CBrange.Items.Clear();
+        CBrange.Text = "mA"; //กำหนดค่าขอบเขตการวัดเป็นตัวเลือกแรก
+        CBrange.Items.AddRange(new string[] { "A", "mA", "nA" });
+    }
+}
+
+private Dictionary<(string Measure, string Source), string> Measurement_Range_Mode()
+{
+    var Measurement_Mode = new Dictionary<(string, string), string>
+   {
+        { ("Voltage", "DC"), "VOLTage:DC:RANGe" },
+        { ("Voltage", "AC"), "VOLTage:AC:RANGe" },
+        { ("Current", "DC"), "CURRent:DC:RANGe" },
+        { ("Current", "AC"), "CURRent:AC:RANGe" }
+   };
+
+    return Measurement_Mode;
+
+}
+
+private string Range_Indicator()
+{
+    var map = Measurement_Range_Mode();
+    var key = (GlobalMeasurementSettings.Instance.MeasureMode, GlobalMeasurementSettings.Instance.SourceMode);
+    string Resultcommand;
+
+    if (!map.TryGetValue(key, out string command))
+    {
+        throw new InvalidOperationException("ไม่พบโหมดการวัดที่ระบุ");
+    }
+    else
+    {
+        switch (GlobalMeasurementSettings.Instance.RangeControl)
+        {
+            case "AUTO":
+                Resultcommand = $"{command}:AUTO ON";
+                break;
+            case "CUSTOM":
+                double Range_value = (double)Numeric_Range.Value;
+                Resultcommand = Range_Custom_value(Range_value);
+                break;
+            default:
+                throw new InvalidOperationException("กรุณาเลือกชนิดขอบเขตการวัด");
+        }
+    }
+    Debug.WriteLine(Resultcommand);
+    return Resultcommand;
+}
+
+private string Range_Custom_value(double Range_value)
+{
+    if (Range_value <= 0)
+    {
+        throw new InvalidOperationException("กรุณาป้อนค่าขอบเขตการวัดที่มากกว่า 0");
+
+    }
+    else
+    {
+        double CoVrange = ConvertValueOnUnit(Range_value, CBrange.SelectedItem.ToString());
+
+        if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
+        {
+            Debug.WriteLine("VOLTage:DC:RANGe " + (decimal)CoVrange);
+            return ("VOLTage:DC:RANGe " + (decimal)CoVrange).Trim();
+
+        }
+        else if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "AC")
+        {
+            Debug.WriteLine("VOLTage:AC:RANGe " + (decimal)CoVrange);
+            return ("VOLTage:AC:RANGe" + (decimal)CoVrange).Trim();
+
+        }
+        else if (GlobalMeasurementSettings.Instance.MeasureMode == "Current" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
+        {
+            Debug.WriteLine("CURRent:DC:RANGe " + (decimal)CoVrange);
+            return ("CURRent:DC:RANGe " + (decimal)CoVrange).Trim();
+        }
+        else if (GlobalMeasurementSettings.Instance.MeasureMode == "Current" && GlobalMeasurementSettings.Instance.SourceMode == "AC")
+        {
+            Debug.WriteLine("CURRent:AC:RANGe " + (decimal)CoVrange);
+            return ("CURRent:AC:RANGe " + (decimal)CoVrange).Trim();
+        }
+        else
+        {
+            throw new InvalidOperationException("กรุณาตรวจสอบค่าขอบเขตการวัดให้ถูกต้อง");
+        }
+    }
+
+    
+}
