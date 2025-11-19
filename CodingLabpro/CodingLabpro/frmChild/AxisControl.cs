@@ -54,7 +54,7 @@ namespace CodingLabpro.frmChild
             unitXComboBox.Items.AddRange(new string[] { "cm", "mm", "μm" });
             unitYComboBox.Items.AddRange(new string[] { "cm", "mm", "μm" });
             delaySteppingComboBox.Items.AddRange(new string[] {"1000", "2000", "3000" });
-            CBtrigger.Items.AddRange(new string[] {"IMMediate", "BUS", "EXTernal"});
+            CBtrigger.Items.AddRange(new string[] {"IMMediate", "BUS"});
 
             RB_resolution4digits.Text = "4\u00BD digits";
             RB_resolution6digits.Text = "6\u00BD digits";
@@ -79,6 +79,7 @@ namespace CodingLabpro.frmChild
             RB_autoOFF.Enabled = !EnabledItem;
             RB_autoOnce.Enabled = !EnabledItem;
             Btn_QueryResolution.Enabled = !EnabledItem;
+            CBtrigger.Enabled = !EnabledItem;
     
         }
         private void AxisControl_Load(object sender, EventArgs e)
@@ -89,6 +90,7 @@ namespace CodingLabpro.frmChild
             CBrange.Enabled = false;
             Numeric_Range.Enabled = false;
             Numeric_Resolution.Enabled = false;
+            CBtrigger.SelectedItem = GlobalMeasurementSettings.Instance.TriggerMode; //ค่าเริ่มต้น
             Range_Control_Measurement();
 
         }
@@ -132,10 +134,10 @@ namespace CodingLabpro.frmChild
                     GlobalMeasurementSettings.Instance.TriggerMode = "BUS";
                     Debug.WriteLine(GlobalMeasurementSettings.Instance.TriggerMode);
                     break;
-                case "EXTernal":
-                    GlobalMeasurementSettings.Instance.TriggerMode = "EXTernal";
-                    Debug.WriteLine(GlobalMeasurementSettings.Instance.TriggerMode);
-                    break;
+                //case "EXTernal": //ตัดออกเพราะส่งสัญญาณ Pulse จากอุปกรณ์ภายนอก
+                //    GlobalMeasurementSettings.Instance.TriggerMode = "EXTernal";
+                //    Debug.WriteLine(GlobalMeasurementSettings.Instance.TriggerMode);
+                //    break;
                 default:
                     CBtrigger.SelectedIndex = -1;
                     GlobalMeasurementSettings.Instance.TriggerMode = "";
@@ -363,9 +365,7 @@ namespace CodingLabpro.frmChild
             if (RBvoltage.Checked)
             {
                 SelectUnitMeasure = "V";
-              
                 Numeric_Range.Value = (decimal)GetDefaultRange();
-                CBrange.Text = SelectUnitMeasure;
                 CBrange.Items.Clear();
                 CBrange.Items.AddRange(new string[] { "V", "mV" });
                 CBrange.SelectedItem = SelectUnitMeasure; // Set default selection
@@ -375,7 +375,6 @@ namespace CodingLabpro.frmChild
             {
                 SelectUnitMeasure = "mA";
                 Numeric_Range.Value = (decimal)GetDefaultRange();
-                CBrange.Text = SelectUnitMeasure;
                 CBrange.Items.Clear();
                 CBrange.Items.AddRange(new string[] { "A", "mA", "nA" });
                 CBrange.SelectedItem = SelectUnitMeasure; // Set default selection
@@ -546,23 +545,43 @@ namespace CodingLabpro.frmChild
             {
                 myDMM.WriteString(Build_ConfigCommand()); //ตั้งค่าการวัดล่วงหน้า
                 myDMM.WriteString("TRIGger:SOURce BUS");
-         
-                //myDMM.WriteString("INIT");
-                //myDMM.WriteString("*TRG"); //if Select Trigger_Source == BUS will accept command IEEE-488
-                //myDMM.WriteString("FETC?");
+                myDMM.WriteString("SAMPle:COUNt 1"); //ตั้งค่าจำนวนการวัด
+                myDMM.WriteString("TRIGger:COUNt 1"); //ตั้งค่าจำนวนทริกเกอร์
+                Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
 
-            }
-            else if (GlobalMeasurementSettings.Instance.TriggerMode == "EXTernal")
-            {
-                myDMM.WriteString("CON:VOLT:DC 10, 0.003");
-                myDMM.WriteString("TRIGger:SOURce EXTernal");
-                myDMM.WriteString("READ?");
             }
             else if (GlobalMeasurementSettings.Instance.TriggerMode == "IMMediate")
             {
+                myDMM.WriteString("MEAS:VOLT:DC? 10, 0.003"); //คำสั่งวัดทันที
+                ReadMeasurementResult();
+
 
             }
 
+        }
+
+        private void Measure_Trigger()
+        {
+            myDMM.WriteString("INIT");
+            myDMM.WriteString("*TRG"); //if Select Trigger_Source == BUS will accept command IEEE-488
+            myDMM.WriteString("FETC?");
+      
+        }
+
+       
+
+
+        private void ReadMeasurementResult()
+        {
+            try
+            {
+                string result = myDMM.ReadString();
+                Reportdata.AppendText($"Measurement Result: {result.Trim()}{Environment.NewLine}");
+            }
+            catch (Exception ex)
+            {
+                ShowMessage("ERROR", "Failed to read measurement result: " + ex.Message);
+            }
         }
 
         private void ShowValidatorError(Control parent, EntityValidator entityclass)
@@ -998,7 +1017,9 @@ namespace CodingLabpro.frmChild
                         {
                             //myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
                             //myMMC.WriteString("G:");
-                            //await Task.Delay(ValueTimer);
+                            Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
+                            ReadMeasurementResult();
+                            await Task.Delay(ValueTimer);
                         }
                     }
                     else  // ถ้าเป็นแถวคี่ (1,3,5..) เคลื่อนที่ย้อนกลับทางซ้าย
@@ -1007,7 +1028,9 @@ namespace CodingLabpro.frmChild
                         {
                             //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
                             //myMMC.WriteString("G:");
-                            //await Task.Delay(ValueTimer);
+                            Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
+                            ReadMeasurementResult();
+                            await Task.Delay(ValueTimer);
                         }
                     }
 

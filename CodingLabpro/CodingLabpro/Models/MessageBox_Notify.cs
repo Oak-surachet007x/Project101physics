@@ -73,7 +73,7 @@ namespace CodingLabpro.Models
             else
             {
                 Messagetimer.Stop();
-                await Task.Delay(4000);
+                await Task.Delay(2000);
                 HideTimer.Start();
             }
         }
