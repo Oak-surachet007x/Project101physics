@@ -31,11 +31,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain01));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.GBdata = new System.Windows.Forms.GroupBox();
             this.DgvMeasurement = new System.Windows.Forms.DataGridView();
@@ -52,6 +52,7 @@
             this.labelTop = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.MainStatus = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusicon = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusDMM = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusPort1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -62,12 +63,12 @@
             this.panelTop = new System.Windows.Forms.Panel();
             this.LBdatetime = new System.Windows.Forms.Label();
             this.LBunitmeasurement = new System.Windows.Forms.Label();
-            this.LBvaluemeasurement = new System.Windows.Forms.Label();
             this.LBtimer = new System.Windows.Forms.Label();
+            this.LBvaluemeasurement = new System.Windows.Forms.Label();
             this.GBchart = new System.Windows.Forms.GroupBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.Menupanel = new System.Windows.Forms.Panel();
             this.flowLayoutBar = new System.Windows.Forms.FlowLayoutPanel();
+            this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.FormChildpanel = new System.Windows.Forms.Panel();
             this.Datetimenow = new System.Windows.Forms.Timer(this.components);
             this.Stoptimer1 = new System.Windows.Forms.Timer(this.components);
@@ -75,11 +76,6 @@
             this.TabToolbar = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.TabPage_ConnectPort = new System.Windows.Forms.TabPage();
-            this.toolStripStatusicon = new System.Windows.Forms.ToolStripStatusLabel();
-            this.barMenu1 = new CodingLabpro.Models.barMenu();
-            this.ucMenu3 = new CodingLabpro.Models.ucMenu();
-            this.ucMenu2 = new CodingLabpro.Models.ucMenu();
-            this.ucMenu1 = new CodingLabpro.Models.ucMenu();
             this.tableLayoutPanel1.SuspendLayout();
             this.GBdata.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMeasurement)).BeginInit();
@@ -89,7 +85,6 @@
             this.panelTop.SuspendLayout();
             this.GBchart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            this.Menupanel.SuspendLayout();
             this.flowLayoutBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.TabToolbar.SuspendLayout();
@@ -103,11 +98,11 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 92.68965F));
             this.tableLayoutPanel1.Controls.Add(this.GBdata, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(85, 559);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 475);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(725, 256);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(504, 256);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // GBdata
@@ -120,7 +115,7 @@
             this.GBdata.Margin = new System.Windows.Forms.Padding(10);
             this.GBdata.Name = "GBdata";
             this.GBdata.Padding = new System.Windows.Forms.Padding(7);
-            this.GBdata.Size = new System.Drawing.Size(705, 236);
+            this.GBdata.Size = new System.Drawing.Size(484, 236);
             this.GBdata.TabIndex = 1;
             this.GBdata.TabStop = false;
             this.GBdata.Text = "Measurement";
@@ -129,20 +124,20 @@
             // 
             this.DgvMeasurement.BackgroundColor = System.Drawing.Color.White;
             this.DgvMeasurement.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvMeasurement.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvMeasurement.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.DgvMeasurement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvMeasurement.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvMeasurement.Location = new System.Drawing.Point(7, 26);
             this.DgvMeasurement.Margin = new System.Windows.Forms.Padding(0);
             this.DgvMeasurement.Name = "DgvMeasurement";
-            this.DgvMeasurement.Size = new System.Drawing.Size(691, 203);
+            this.DgvMeasurement.Size = new System.Drawing.Size(470, 203);
             this.DgvMeasurement.TabIndex = 0;
             // 
             // GBconnect
@@ -162,7 +157,7 @@
             this.GBconnect.Location = new System.Drawing.Point(3, 3);
             this.GBconnect.Margin = new System.Windows.Forms.Padding(10);
             this.GBconnect.Name = "GBconnect";
-            this.GBconnect.Size = new System.Drawing.Size(1441, 99);
+            this.GBconnect.Size = new System.Drawing.Size(1220, 99);
             this.GBconnect.TabIndex = 2;
             this.GBconnect.TabStop = false;
             this.GBconnect.Text = "Connection";
@@ -172,7 +167,7 @@
             this.Cblistaddress3.FormattingEnabled = true;
             this.Cblistaddress3.Location = new System.Drawing.Point(631, 45);
             this.Cblistaddress3.Name = "Cblistaddress3";
-            this.Cblistaddress3.Size = new System.Drawing.Size(290, 29);
+            this.Cblistaddress3.Size = new System.Drawing.Size(263, 29);
             this.Cblistaddress3.TabIndex = 5;
             // 
             // label3
@@ -229,7 +224,7 @@
             this.buttonLayoutPanel2.Controls.Add(this.BtnDiconnect, 0, 0);
             this.buttonLayoutPanel2.Controls.Add(this.BtnConnect, 1, 0);
             this.buttonLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonLayoutPanel2.Location = new System.Drawing.Point(1128, 22);
+            this.buttonLayoutPanel2.Location = new System.Drawing.Point(907, 22);
             this.buttonLayoutPanel2.Name = "buttonLayoutPanel2";
             this.buttonLayoutPanel2.RowCount = 1;
             this.buttonLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -280,11 +275,11 @@
             // 
             this.labelName.AutoSize = true;
             this.labelName.BackColor = System.Drawing.Color.Transparent;
-            this.labelName.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelName.Font = new System.Drawing.Font("Cascadia Mono", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelName.ForeColor = System.Drawing.Color.White;
             this.labelName.Location = new System.Drawing.Point(10, 44);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(328, 17);
+            this.labelName.Size = new System.Drawing.Size(247, 15);
             this.labelName.TabIndex = 3;
             this.labelName.Text = "Aglient 34401A And MMC-2 Axis Controller";
             // 
@@ -303,13 +298,19 @@
             this.StatusPort2,
             this.StatusMMC2,
             this.StatusPort3});
-            this.MainStatus.Location = new System.Drawing.Point(0, 815);
+            this.MainStatus.Location = new System.Drawing.Point(0, 731);
             this.MainStatus.Name = "MainStatus";
             this.MainStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.MainStatus.Size = new System.Drawing.Size(1540, 30);
+            this.MainStatus.Size = new System.Drawing.Size(1234, 30);
             this.MainStatus.SizingGrip = false;
             this.MainStatus.TabIndex = 4;
             this.MainStatus.Text = "statusStrip1";
+            // 
+            // toolStripStatusicon
+            // 
+            this.toolStripStatusicon.Image = ((System.Drawing.Image)(resources.GetObject("toolStripStatusicon.Image")));
+            this.toolStripStatusicon.Name = "toolStripStatusicon";
+            this.toolStripStatusicon.Size = new System.Drawing.Size(20, 25);
             // 
             // StatusLabel
             // 
@@ -368,14 +369,14 @@
             this.panelTop.BackColor = System.Drawing.Color.Transparent;
             this.panelTop.Controls.Add(this.LBdatetime);
             this.panelTop.Controls.Add(this.LBunitmeasurement);
-            this.panelTop.Controls.Add(this.LBvaluemeasurement);
             this.panelTop.Controls.Add(this.labelTop);
             this.panelTop.Controls.Add(this.labelName);
             this.panelTop.Controls.Add(this.LBtimer);
+            this.panelTop.Controls.Add(this.LBvaluemeasurement);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTop.Location = new System.Drawing.Point(85, 144);
+            this.panelTop.Location = new System.Drawing.Point(0, 144);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(725, 104);
+            this.panelTop.Size = new System.Drawing.Size(504, 104);
             this.panelTop.TabIndex = 6;
             // 
             // LBdatetime
@@ -383,7 +384,7 @@
             this.LBdatetime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LBdatetime.AutoSize = true;
             this.LBdatetime.Font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBdatetime.Location = new System.Drawing.Point(487, 84);
+            this.LBdatetime.Location = new System.Drawing.Point(266, 84);
             this.LBdatetime.Name = "LBdatetime";
             this.LBdatetime.Size = new System.Drawing.Size(228, 17);
             this.LBdatetime.TabIndex = 4;
@@ -394,25 +395,13 @@
             // 
             this.LBunitmeasurement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LBunitmeasurement.AutoSize = true;
-            this.LBunitmeasurement.Font = new System.Drawing.Font("Cascadia Code SemiLight", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBunitmeasurement.Location = new System.Drawing.Point(615, 1);
+            this.LBunitmeasurement.Font = new System.Drawing.Font("Cascadia Mono SemiLight", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBunitmeasurement.Location = new System.Drawing.Point(417, 5);
             this.LBunitmeasurement.Name = "LBunitmeasurement";
-            this.LBunitmeasurement.Size = new System.Drawing.Size(110, 49);
+            this.LBunitmeasurement.Size = new System.Drawing.Size(95, 43);
             this.LBunitmeasurement.TabIndex = 6;
             this.LBunitmeasurement.Text = "Mode";
-            this.LBunitmeasurement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // LBvaluemeasurement
-            // 
-            this.LBvaluemeasurement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LBvaluemeasurement.AutoSize = true;
-            this.LBvaluemeasurement.Font = new System.Drawing.Font("OCR A Extended", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBvaluemeasurement.Location = new System.Drawing.Point(429, 9);
-            this.LBvaluemeasurement.Name = "LBvaluemeasurement";
-            this.LBvaluemeasurement.Size = new System.Drawing.Size(193, 39);
-            this.LBvaluemeasurement.TabIndex = 5;
-            this.LBvaluemeasurement.Text = "-00.0000";
-            this.LBvaluemeasurement.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LBunitmeasurement.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // LBtimer
             // 
@@ -420,12 +409,25 @@
             this.LBtimer.AutoSize = true;
             this.LBtimer.BackColor = System.Drawing.Color.Transparent;
             this.LBtimer.Font = new System.Drawing.Font("OCR A Extended", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBtimer.Location = new System.Drawing.Point(498, 50);
+            this.LBtimer.Location = new System.Drawing.Point(277, 50);
             this.LBtimer.Name = "LBtimer";
             this.LBtimer.Size = new System.Drawing.Size(217, 29);
             this.LBtimer.TabIndex = 7;
             this.LBtimer.Text = "00:00:00.000";
             this.LBtimer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // LBvaluemeasurement
+            // 
+            this.LBvaluemeasurement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LBvaluemeasurement.AutoSize = true;
+            this.LBvaluemeasurement.Font = new System.Drawing.Font("OCR A Extended", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBvaluemeasurement.Location = new System.Drawing.Point(260, 11);
+            this.LBvaluemeasurement.Margin = new System.Windows.Forms.Padding(0);
+            this.LBvaluemeasurement.Name = "LBvaluemeasurement";
+            this.LBvaluemeasurement.Size = new System.Drawing.Size(167, 35);
+            this.LBvaluemeasurement.TabIndex = 5;
+            this.LBvaluemeasurement.Text = "-00.0000";
+            this.LBvaluemeasurement.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // GBchart
             // 
@@ -435,10 +437,10 @@
             this.GBchart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.GBchart.Font = new System.Drawing.Font("Cascadia Mono Light", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBchart.ForeColor = System.Drawing.Color.White;
-            this.GBchart.Location = new System.Drawing.Point(85, 248);
+            this.GBchart.Location = new System.Drawing.Point(0, 248);
             this.GBchart.Name = "GBchart";
             this.GBchart.Padding = new System.Windows.Forms.Padding(0);
-            this.GBchart.Size = new System.Drawing.Size(725, 311);
+            this.GBchart.Size = new System.Drawing.Size(504, 227);
             this.GBchart.TabIndex = 8;
             this.GBchart.TabStop = false;
             this.GBchart.Text = "Data Measurement";
@@ -446,82 +448,81 @@
             // chart1
             // 
             this.chart1.BackColor = System.Drawing.Color.Transparent;
-            chartArea1.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
-            chartArea1.AxisX.LineColor = System.Drawing.Color.WhiteSmoke;
-            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.White;
-            chartArea1.AxisX.MajorTickMark.LineColor = System.Drawing.Color.White;
-            chartArea1.AxisX.MajorTickMark.Size = 2F;
-            chartArea1.AxisX.Title = "NameX";
-            chartArea1.AxisX.TitleForeColor = System.Drawing.Color.White;
-            chartArea1.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
-            chartArea1.AxisY.LineColor = System.Drawing.Color.White;
-            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.White;
-            chartArea1.AxisY.MajorTickMark.LineColor = System.Drawing.Color.White;
-            chartArea1.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated270;
-            chartArea1.AxisY.Title = "NameY";
-            chartArea1.AxisY.TitleForeColor = System.Drawing.Color.White;
-            chartArea1.BackColor = System.Drawing.Color.Transparent;
-            chartArea1.Name = "ChartArea1";
-            chartArea1.Position.Auto = false;
-            chartArea1.Position.Height = 84.33334F;
-            chartArea1.Position.Width = 94F;
-            chartArea1.Position.X = 1F;
-            chartArea1.Position.Y = 12.66667F;
-            this.chart1.ChartAreas.Add(chartArea1);
+            chartArea3.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea3.AxisX.LineColor = System.Drawing.Color.WhiteSmoke;
+            chartArea3.AxisX.MajorGrid.LineColor = System.Drawing.Color.White;
+            chartArea3.AxisX.MajorTickMark.LineColor = System.Drawing.Color.White;
+            chartArea3.AxisX.MajorTickMark.Size = 2F;
+            chartArea3.AxisX.Title = "NameX";
+            chartArea3.AxisX.TitleForeColor = System.Drawing.Color.White;
+            chartArea3.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea3.AxisY.LineColor = System.Drawing.Color.White;
+            chartArea3.AxisY.MajorGrid.LineColor = System.Drawing.Color.White;
+            chartArea3.AxisY.MajorTickMark.LineColor = System.Drawing.Color.White;
+            chartArea3.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Rotated270;
+            chartArea3.AxisY.Title = "NameY";
+            chartArea3.AxisY.TitleForeColor = System.Drawing.Color.White;
+            chartArea3.BackColor = System.Drawing.Color.Transparent;
+            chartArea3.Name = "ChartArea1";
+            chartArea3.Position.Auto = false;
+            chartArea3.Position.Height = 84.33334F;
+            chartArea3.Position.Width = 94F;
+            chartArea3.Position.X = 1F;
+            chartArea3.Position.Y = 12.66667F;
+            this.chart1.ChartAreas.Add(chartArea3);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Alignment = System.Drawing.StringAlignment.Far;
-            legend1.BackColor = System.Drawing.Color.Transparent;
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-            legend1.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend1.ForeColor = System.Drawing.Color.White;
-            legend1.IsTextAutoFit = false;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            legend3.Alignment = System.Drawing.StringAlignment.Far;
+            legend3.BackColor = System.Drawing.Color.Transparent;
+            legend3.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend3.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend3.ForeColor = System.Drawing.Color.White;
+            legend3.IsTextAutoFit = false;
+            legend3.Name = "Legend1";
+            this.chart1.Legends.Add(legend3);
             this.chart1.Location = new System.Drawing.Point(0, 22);
             this.chart1.Name = "chart1";
-            series1.BorderWidth = 2;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.LabelForeColor = System.Drawing.Color.White;
-            series1.Legend = "Legend1";
-            series1.MarkerColor = System.Drawing.Color.Orange;
-            series1.MarkerSize = 7;
-            series1.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(725, 289);
+            series3.BorderWidth = 2;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.LabelForeColor = System.Drawing.Color.White;
+            series3.Legend = "Legend1";
+            series3.MarkerColor = System.Drawing.Color.Orange;
+            series3.MarkerSize = 7;
+            series3.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            series3.Name = "Series1";
+            this.chart1.Series.Add(series3);
+            this.chart1.Size = new System.Drawing.Size(504, 205);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
-            // 
-            // Menupanel
-            // 
-            this.Menupanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
-            this.Menupanel.Controls.Add(this.ucMenu3);
-            this.Menupanel.Controls.Add(this.ucMenu2);
-            this.Menupanel.Controls.Add(this.ucMenu1);
-            this.Menupanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Menupanel.Location = new System.Drawing.Point(0, 0);
-            this.Menupanel.Name = "Menupanel";
-            this.Menupanel.Size = new System.Drawing.Size(85, 815);
-            this.Menupanel.TabIndex = 0;
             // 
             // flowLayoutBar
             // 
             this.flowLayoutBar.BackColor = System.Drawing.Color.Transparent;
             this.flowLayoutBar.Controls.Add(this.barMenu1);
             this.flowLayoutBar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutBar.Location = new System.Drawing.Point(1490, 144);
+            this.flowLayoutBar.Location = new System.Drawing.Point(1184, 144);
             this.flowLayoutBar.Name = "flowLayoutBar";
-            this.flowLayoutBar.Size = new System.Drawing.Size(50, 671);
+            this.flowLayoutBar.Size = new System.Drawing.Size(50, 587);
             this.flowLayoutBar.TabIndex = 0;
+            // 
+            // barMenu1
+            // 
+            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
+            this.barMenu1.BarColor = System.Drawing.Color.White;
+            this.barMenu1.Location = new System.Drawing.Point(6, 12);
+            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
+            this.barMenu1.Name = "barMenu1";
+            this.barMenu1.Size = new System.Drawing.Size(50, 222);
+            this.barMenu1.TabIndex = 0;
+            this.barMenu1.textbar = "Axis Control & Measument";
             // 
             // FormChildpanel
             // 
             this.FormChildpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
             this.FormChildpanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.FormChildpanel.Location = new System.Drawing.Point(810, 144);
+            this.FormChildpanel.Location = new System.Drawing.Point(504, 144);
             this.FormChildpanel.Name = "FormChildpanel";
-            this.FormChildpanel.Size = new System.Drawing.Size(680, 671);
+            this.FormChildpanel.Size = new System.Drawing.Size(680, 587);
             this.FormChildpanel.TabIndex = 0;
             // 
             // Datetimenow
@@ -538,10 +539,10 @@
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.Controls.Add(this.TabToolbar);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(85, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.panel1.Size = new System.Drawing.Size(1455, 144);
+            this.panel1.Size = new System.Drawing.Size(1234, 144);
             this.panel1.TabIndex = 13;
             // 
             // TabToolbar
@@ -555,7 +556,7 @@
             this.TabToolbar.Multiline = true;
             this.TabToolbar.Name = "TabToolbar";
             this.TabToolbar.SelectedIndex = 0;
-            this.TabToolbar.Size = new System.Drawing.Size(1455, 134);
+            this.TabToolbar.Size = new System.Drawing.Size(1234, 134);
             this.TabToolbar.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.TabToolbar.TabIndex = 0;
             // 
@@ -566,7 +567,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1447, 105);
+            this.tabPage1.Size = new System.Drawing.Size(1226, 105);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "File";
             // 
@@ -577,80 +578,26 @@
             this.TabPage_ConnectPort.Location = new System.Drawing.Point(4, 25);
             this.TabPage_ConnectPort.Name = "TabPage_ConnectPort";
             this.TabPage_ConnectPort.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_ConnectPort.Size = new System.Drawing.Size(1447, 105);
+            this.TabPage_ConnectPort.Size = new System.Drawing.Size(1226, 105);
             this.TabPage_ConnectPort.TabIndex = 1;
             this.TabPage_ConnectPort.Text = "Connect";
-            // 
-            // toolStripStatusicon
-            // 
-            this.toolStripStatusicon.Image = ((System.Drawing.Image)(resources.GetObject("toolStripStatusicon.Image")));
-            this.toolStripStatusicon.Name = "toolStripStatusicon";
-            this.toolStripStatusicon.Size = new System.Drawing.Size(20, 25);
-            // 
-            // barMenu1
-            // 
-            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
-            this.barMenu1.BarColor = System.Drawing.Color.White;
-            this.barMenu1.Location = new System.Drawing.Point(6, 12);
-            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
-            this.barMenu1.Name = "barMenu1";
-            this.barMenu1.Size = new System.Drawing.Size(50, 222);
-            this.barMenu1.TabIndex = 0;
-            this.barMenu1.textbar = "Axis Control & Measument";
-            // 
-            // ucMenu3
-            // 
-            this.ucMenu3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ucMenu3.BackColor = System.Drawing.Color.Transparent;
-            this.ucMenu3.BorderColor = System.Drawing.Color.Transparent;
-            this.ucMenu3.ForeColor = System.Drawing.Color.White;
-            this.ucMenu3.Icon = global::CodingLabpro.Properties.Resources.frame_bug_70dp_8C1AF6_FILL0_wght400_GRAD0_opsz48;
-            this.ucMenu3.Location = new System.Drawing.Point(-8, 746);
-            this.ucMenu3.Name = "ucMenu3";
-            this.ucMenu3.Size = new System.Drawing.Size(90, 52);
-            this.ucMenu3.TabIndex = 2;
-            this.ucMenu3.textlabel = "Output_Log";
-            // 
-            // ucMenu2
-            // 
-            this.ucMenu2.BackColor = System.Drawing.Color.Transparent;
-            this.ucMenu2.BorderColor = System.Drawing.Color.Transparent;
-            this.ucMenu2.Icon = global::CodingLabpro.Properties.Resources.dynamic_form_16dp_E8EAED;
-            this.ucMenu2.Location = new System.Drawing.Point(-8, 272);
-            this.ucMenu2.Name = "ucMenu2";
-            this.ucMenu2.Size = new System.Drawing.Size(90, 52);
-            this.ucMenu2.TabIndex = 1;
-            this.ucMenu2.textlabel = "Old_Form";
-            // 
-            // ucMenu1
-            // 
-            this.ucMenu1.BackColor = System.Drawing.Color.Transparent;
-            this.ucMenu1.BorderColor = System.Drawing.Color.Transparent;
-            this.ucMenu1.Icon = global::CodingLabpro.Properties.Resources.help_center_16dp_E8EAED;
-            this.ucMenu1.Location = new System.Drawing.Point(-8, 202);
-            this.ucMenu1.Name = "ucMenu1";
-            this.ucMenu1.Size = new System.Drawing.Size(90, 52);
-            this.ucMenu1.TabIndex = 0;
-            this.ucMenu1.textlabel = "Help";
             // 
             // FrmMain01
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(1540, 845);
+            this.ClientSize = new System.Drawing.Size(1234, 761);
             this.Controls.Add(this.GBchart);
             this.Controls.Add(this.panelTop);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.FormChildpanel);
             this.Controls.Add(this.flowLayoutBar);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.Menupanel);
             this.Controls.Add(this.MainStatus);
             this.ForeColor = System.Drawing.Color.White;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.IsMdiContainer = true;
             this.Name = "FrmMain01";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMain01";
@@ -668,7 +615,6 @@
             this.panelTop.PerformLayout();
             this.GBchart.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            this.Menupanel.ResumeLayout(false);
             this.flowLayoutBar.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.TabToolbar.ResumeLayout(false);
@@ -703,19 +649,14 @@
         private System.Windows.Forms.ToolStripStatusLabel StatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel StatusPort2;
         private System.Windows.Forms.ToolStripStatusLabel StatusMMC2;
-        private System.Windows.Forms.ToolStripStatusLabel StatusPort3;
         private System.Windows.Forms.GroupBox GBchart;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.Panel Menupanel;
-        private Models.ucMenu ucMenu2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutBar;
         private System.Windows.Forms.Panel FormChildpanel;
         private Models.barMenu barMenu1;
-        private Models.ucMenu ucMenu1;
         private System.Windows.Forms.DataGridView DgvMeasurement;
         private System.Windows.Forms.Label LBdatetime;
         private System.Windows.Forms.Label LBvaluemeasurement;
-        private System.Windows.Forms.Label LBunitmeasurement;
         private System.Windows.Forms.Timer Datetimenow;
         private System.Windows.Forms.Timer Stoptimer1;
         public System.Windows.Forms.Label LBtimer;
@@ -723,6 +664,7 @@
         private System.Windows.Forms.TabControl TabToolbar;
         private System.Windows.Forms.TabPage TabPage_ConnectPort;
         private System.Windows.Forms.TabPage tabPage1;
-        private Models.ucMenu ucMenu3;
+        private System.Windows.Forms.Label LBunitmeasurement;
+        private System.Windows.Forms.ToolStripStatusLabel StatusPort3;
     }
 }

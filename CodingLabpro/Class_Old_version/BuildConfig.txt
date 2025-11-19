@@ -1,0 +1,59 @@
+private string Build_ConfigCommand(double range, double resolution)
+{
+    try
+    {
+        var map = Measurement_SCPI_Command();
+        var key = (GlobalMeasurementSettings.Instance.MeasureMode, GlobalMeasurementSettings.Instance.SourceMode);
+
+        if (!map.TryGetValue(key, out string baseCommand))
+            throw new InvalidOperationException("ไม่พบโหมดการวัด");
+
+        string command = $"{baseCommand} {range}, {resolution}";
+
+        // ตรวจสอบค่าที่รับมาจาก UI
+        if (range <= 0)
+            throw new ArgumentException("ค่าขอบเขตการวัด (Range) ต้องมากกว่า 0");
+        //if (resolution <= 0)
+        //    throw new ArgumentException("ค่าความละเอียดการวัด (Resolution) ต้องมากกว่า 0");
+
+        switch (GlobalMeasurementSettings.Instance.ResolutionControl)
+        {
+            case "DIGITS_4":
+                resolution = 0.0001;
+                break;
+            case "DIGITS_6":
+                resolution = 1E-6;
+                break;
+            case "AUTO":
+                return $"CONF:{baseCommand} {range}"; // ไม่ต้องระบุความละเอียดการวัด
+               
+            case "CUSTOM":
+                // ใช้ค่าที่ผู้ใช้กำหนดผ่าน UI
+                break;
+            default:
+                throw new InvalidOperationException("กรุณาเลือกชนิดความละเอียดการวัด");
+        }
+
+
+        // 🔹 จัดรูปแบบค่า resolution ให้เหมาะสมกับ SCPI
+        string formattedResolution;
+        if (Math.Abs(resolution) < 0.001)              // ค่าน้อยมาก → ใช้ E-notation
+            formattedResolution = resolution.ToString("0.###E-0");
+        else if (resolution < 1)                       // ค่าน้อยกว่า 1 → ใช้ทศนิยม
+            formattedResolution = ((decimal)resolution).ToString();
+        else                                            // ค่า >= 1 → แปลงเป็น int
+            formattedResolution = ((int)resolution).ToString();
+
+        // 🔹 สร้างคำสั่ง SCPI: CONF:<function> <range>, <resolution>
+        command = $"CONF:{baseCommand} {range}, {formattedResolution}";
+        Debug.WriteLine(command);
+        return command;
+
+    }
+    catch (Exception ex)
+    {
+        Debug.WriteLine("Error in Build_ConfigCommand: " + ex.Message);
+        ShowMessage("ERROR", "Error in Build_ConfigCommand: " + ex.Message);
+        throw;
+    }
+}

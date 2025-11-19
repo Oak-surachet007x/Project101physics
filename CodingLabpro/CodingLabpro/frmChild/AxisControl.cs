@@ -235,7 +235,7 @@ namespace CodingLabpro.frmChild
             var key = (GlobalMeasurementSettings.Instance.MeasureMode, GlobalMeasurementSettings.Instance.SourceMode);
 
             if (!map.TryGetValue(key, out string baseCommand))
-                throw new InvalidOperationException("ไม่พบโหมดการวัดที่ระบุ");
+                 throw new InvalidOperationException("ไม่พบโหมดการวัดที่ระบุ");
 
             string command = $"{baseCommand}:{suffix}";
 
@@ -407,6 +407,7 @@ namespace CodingLabpro.frmChild
 
         #endregion
 
+        #region SCPI CONFigure Measurement Settings
         //สร้างคำสั่ง SCPI สำหรับการตั้งค่าการวัดล่วงหน้า CONFigure
         private string Build_ConfigCommand()
         {
@@ -417,7 +418,7 @@ namespace CodingLabpro.frmChild
 
 
                 if (!map.TryGetValue(key, out string baseCommand)) {
-                    ErrorLogger.LogError(new InvalidOperationException("ไม่พบโหมดการวัด"));
+                    throw new InvalidOperationException("ไม่พบโหมดการวัด");
                 }
                 else
                 {
@@ -475,10 +476,10 @@ namespace CodingLabpro.frmChild
             }
             catch (Exception ex)
             {
-                //Debug.WriteLine("Error in Build_ConfigCommand: " + ex.Message);
-                ErrorLogger.LogError(ex);
-                ErrorLogger.Complete();
-                ErrorLogger.ShowAllErrors();
+                Debug.WriteLine("Error in Build_ConfigCommand: " + ex.Message);
+                //ErrorLogger.LogError(ex);
+                //ErrorLogger.Complete();
+                //ErrorLogger.ShowAllErrors();
                 return string.Empty;
 
             }
@@ -521,94 +522,44 @@ namespace CodingLabpro.frmChild
             }
         }
 
+        #endregion
+
+        private string Autozero_Measurement() // คำสั่ง autozero สำหรับใช้กับ SENSE เท่านั้น
+        {
+            switch (GlobalMeasurementSettings.Instance.AutozeroMode)
+            {
+                case "ON":
+                    return "ZERO:AUTO ON";
+                case "OFF":
+                    return "ZERO:AUTO OFF";
+                case "ONCE":
+                    return "ZERO:AUTO ONCE";
+                default:
+                    throw new InvalidOperationException("Unknown AutozeroMode: " + GlobalMeasurementSettings.Instance.AutozeroMode);
+            }
+
+        }
+
         private void SetupMeasurementCommand()
         {
-            if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
+            if (GlobalMeasurementSettings.Instance.TriggerMode == "BUS")
             {
-                if (GlobalMeasurementSettings.Instance.TriggerMode == "BUS")
-                {
-                    Resolution_Indicator();
-                    //Debug.WriteLine($"CONF:VOLT:DC {range}, {resolution}");
-                    //myDMM.WriteString($"CONF:VOLT:DC {range}, {resolution}");
-
-                   
-                    //myDMM.WriteString("TRIGger:SOURce BUS");
-                    //if (GlobalMeasurementSettings.Instance.AutozeroMode == "ON")
-                    //{
-                    //    myDMM.WriteString("ZERO:AUTO ON");
-                    //}
-                    //else if (GlobalMeasurementSettings.Instance.AutozeroMode == "OFF")
-                    //{
-                    //    myDMM.WriteString("ZERO:AUTO OFF");
-                    //}
-                    //else if (GlobalMeasurementSettings.Instance.AutozeroMode == "ONCE")
-                    //{
-                    //    myDMM.WriteString("ZERO:AUTO ONCE");
-                    //}
-                    //else
-                    //{
-                    //    throw new InvalidOperationException("Unknown AutozeroMode: " + GlobalMeasurementSettings.Instance.AutozeroMode);
-                    //}
-                    //myDMM.WriteString("INIT");
-                    //myDMM.WriteString("*TRG"); //if Select Trigger_Source == BUS will accept command IEEE-488
-                    //myDMM.WriteString("FETC?");
-
-                }
-                else if (GlobalMeasurementSettings.Instance.TriggerMode == "EXTernal")
-                {
-                    myDMM.WriteString("CON:VOLT:DC 10, 0.003");
-                    myDMM.WriteString("TRIGger:SOURce EXTernal");
-                    myDMM.WriteString("READ?");
-                }
-                else if (GlobalMeasurementSettings.Instance.TriggerMode == "IMMediate")
-                {
-
-                }
-
+                myDMM.WriteString(Build_ConfigCommand()); //ตั้งค่าการวัดล่วงหน้า
+                myDMM.WriteString("TRIGger:SOURce BUS");
+         
+                //myDMM.WriteString("INIT");
+                //myDMM.WriteString("*TRG"); //if Select Trigger_Source == BUS will accept command IEEE-488
+                //myDMM.WriteString("FETC?");
 
             }
-            else if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "AC")
+            else if (GlobalMeasurementSettings.Instance.TriggerMode == "EXTernal")
             {
-
-                if (GlobalMeasurementSettings.Instance.TriggerMode == "BUS")
-                {
-                    Resolution_Indicator();
-            
-
-
-                    //myDMM.WriteString("TRIGger:SOURce BUS");
-                    //if (GlobalMeasurementSettings.Instance.AutozeroMode == "ON")
-                    //{
-                    //    myDMM.WriteString("ZERO:AUTO ON");
-                    //}
-                    //else if (GlobalMeasurementSettings.Instance.AutozeroMode == "OFF")
-                    //{
-                    //    myDMM.WriteString("ZERO:AUTO OFF");
-                    //}
-                    //else if (GlobalMeasurementSettings.Instance.AutozeroMode == "ONCE")
-                    //{
-                    //    myDMM.WriteString("ZERO:AUTO ONCE");
-                    //}
-                    //else
-                    //{
-                    //    throw new InvalidOperationException("Unknown AutozeroMode: " + GlobalMeasurementSettings.Instance.AutozeroMode);
-                    //}
-                    //myDMM.WriteString("INIT");
-                    //myDMM.WriteString("*TRG"); //if Select Trigger_Source == BUS will accept command IEEE-488
-                    //myDMM.WriteString("FETC?");
-
-                }
-                else if (GlobalMeasurementSettings.Instance.TriggerMode == "EXTernal")
-                {
-                    myDMM.WriteString("CON:VOLT:DC 10, 0.003");
-                    myDMM.WriteString("TRIGger:SOURce EXTernal");
-                    myDMM.WriteString("READ?");
-                }
-                else if (GlobalMeasurementSettings.Instance.TriggerMode == "IMMediate")
-                {
-
-                }
-
+                myDMM.WriteString("CON:VOLT:DC 10, 0.003");
+                myDMM.WriteString("TRIGger:SOURce EXTernal");
+                myDMM.WriteString("READ?");
+            }
+            else if (GlobalMeasurementSettings.Instance.TriggerMode == "IMMediate")
+            {
 
             }
 
@@ -635,40 +586,40 @@ namespace CodingLabpro.frmChild
 
         #endregion
 
-        public class ErrorLogger
-        {
-            private static BlockingCollection<string> ErrorQueue = new BlockingCollection<string>();
+        //public class ErrorLogger
+        //{
+        //    private static BlockingCollection<string> ErrorQueue = new BlockingCollection<string>();
 
-            public static void LogError(Exception ex)
-            {
-                string message = $"[{DateTime.Now:HH:mm:ss}] {ex.Message}";
-                ErrorQueue.Add(message);
-            }
+        //    public static void LogError(Exception ex)
+        //    {
+        //        string message = $"[{DateTime.Now:HH:mm:ss}] {ex.Message}";
+        //        ErrorQueue.Add(message);
+        //    }
 
-            public static void ShowAllErrors()
-            {
-                if (ErrorQueue.Count == 0)
-                {
-                    MessageBox.Show("ไม่พบข้อผิดพลาดใด ๆ", "Debug Info");
-                    return;
-                }
+        //    public static void ShowAllErrors()
+        //    {
+        //        if (ErrorQueue.Count == 0)
+        //        {
+        //            MessageBox.Show("ไม่พบข้อผิดพลาดใด ๆ", "Debug Info");
+        //            return;
+        //        }
 
-                string allErrors = string.Join(Environment.NewLine, ErrorQueue);
-                MessageBox.Show(allErrors, "Error Summary", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+        //        string allErrors = string.Join(Environment.NewLine, ErrorQueue);
+        //        MessageBox.Show(allErrors, "Error Summary", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //    }
 
-            public static void Complete()
-            {
-                ErrorQueue.CompleteAdding();
-            }
+        //    public static void Complete()
+        //    {
+        //        ErrorQueue.CompleteAdding();
+        //    }
 
-        }
+        //}
 
 
         public void ShowMessage(string type, string message)
         {
             Form MessageNotify = new MessageBox_Notify(type, message);
-            MessageNotify.Show();
+            MessageNotify.ShowDialog();
         }
 
         private void MMC_Write(string command)

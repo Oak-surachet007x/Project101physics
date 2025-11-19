@@ -43,35 +43,10 @@ namespace CodingLabpro
         public static string Aread;
         public static bool isConnect;
         public event EventHandler ActiveComboBox;
-        public List<ucMenu> menuButton;
+    
         public List<barMenu> barButton;
      
-        public class DwmApi
-        {
-            // ค่า DWM_WINDOW_ATTRIBUTE ที่เราสนใจ
-            public const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20; // เปิดใช้งาน Dark Mode
-            public const int DWMWA_WINDOW_CORNER_PREFERENCE = 33; // ตั้งค่ามุมหน้าต่าง
-            public const int DWMWA_CAPTION_COLOR = 34; // เปลี่ยนสี Title Bar
-
-            // การประกาศ DwmSetWindowAttribute
-            [DllImport("dwmapi.dll")]
-            public static extern int DwmSetWindowAttribute(IntPtr hwnd, int dwAttribute, ref uint pvAttribute, int cbAttribute);
-        } 
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-
-            uint isDarkMode = 1; // เปิดใช้งาน (0 = ปิด)
-            int result = DwmApi.DwmSetWindowAttribute(this.Handle, DwmApi.DWMWA_USE_IMMERSIVE_DARK_MODE, ref isDarkMode, sizeof(int));
-
-
-            if (result != 0)
-            {
-                MessageBox.Show($"DwmSetWindowAttribute failed with error code {result}");
-            }
-        }
-
-       
+  
         public FrmMain01()
         {
             InitializeComponent();
@@ -86,9 +61,6 @@ namespace CodingLabpro
             BtnDiconnect.Enabled = false;
             BtnConnect.Enabled = true;
       
-            //MenuButton
-            menuButton = new List<ucMenu>() { ucMenu1, ucMenu2, ucMenu3 };
-            ClickMenu(menuButton);
 
             //BarMenuButton
             barButton = new List<barMenu>() { barMenu1 };
@@ -185,7 +157,7 @@ namespace CodingLabpro
 
         private void UpdatelabelMeasurement()
         {
-            if(GlobalMeasurementSettings.Instance.SourceMode == "DC" && GlobalMeasurementSettings.Instance.MeasureMode == "Voltage")
+            if (GlobalMeasurementSettings.Instance.SourceMode == "DC" && GlobalMeasurementSettings.Instance.MeasureMode == "Voltage")
             {
                 LBunitmeasurement.Text = "VDC";
             }
@@ -260,55 +232,7 @@ namespace CodingLabpro
         }
         #endregion
 
-        #region ucMenu Control
-        //ucMenu event Click
-        public void ClickMenu(List<ucMenu> _menu)
-        {
-            foreach (var menu in _menu)
-            {
-                menu.Text_Clicked += Menu_textClick;
-            }
-        }
-        private void Menu_textClick(object sender, EventArgs e)
-        {
-            ucMenu _menuButton = (ucMenu)sender;
-
-            switch (_menuButton.Name)
-            {
-                case "ucMenu1":
-                    ActivateMenu(ucMenu1, ucMenu2);
-                    break;
-
-                case "ucMenu2":
-                    ActivateMenu(ucMenu2, ucMenu1);
-                    Form form = new frmMain(MyMMC, MySerialPort, MyDMM);
-                    form.Show();
-                    break;
-
-                case "ucMenu3":
-                    ActivateMenu(ucMenu3, ucMenu2);
-                    Form frmLog = new OutputLog();
-                    frmLog.Show();
-                    break;
-            }
-        }
-        private async void ActivateMenu(ucMenu _active, params ucMenu[] _inactive)
-        {
-
-            _active.BorderColor = Color.FromArgb(140, 26, 246);
-
-            foreach (ucMenu inactive in _inactive)
-            {
-                inactive.BorderColor = Color.Transparent;
-            }
-
-            await Task.Delay(1000);
-
-            _active.BorderColor = Color.Transparent;
-
-
-        }
-        #endregion
+        
 
         //----------------------------------------------FrmMain event UI------------------------------------------------------------//
         private void FrmMain01_Load(object sender, EventArgs e)
@@ -381,10 +305,10 @@ namespace CodingLabpro
 
             if (this.WindowState == FormWindowState.Normal)
             {
-                labelName.Font = new Font(labelName.Font.FontFamily, 10);
+                labelName.Font = new Font(labelName.Font.FontFamily, 8);
                 Cblistaddress.Size = new Size(290, 29);
                 Cblistaddress2.Size = new Size(290, 29);
-                Cblistaddress3.Size = new Size(290, 29);
+                Cblistaddress3.Size = new Size(263, 29);
 
             }
             else if (this.WindowState == FormWindowState.Maximized)
@@ -586,7 +510,7 @@ namespace CodingLabpro
                 isConnect = false;
                 BtnConnect.BackColor = Color.Transparent;
                 BtnConnect.Text = "CONNECT";
-                BtnConnect.ForeColor = Color.White;
+                BtnConnect.ForeColor = Color.Black;
 
                 
 
