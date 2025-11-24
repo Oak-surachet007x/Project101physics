@@ -45,8 +45,11 @@ namespace CodingLabpro
         public event EventHandler ActiveComboBox;
     
         public List<barMenu> barButton;
-     
-  
+
+        //dataTable
+        DataSet main_datagrid = new DataSet(); //สร้าง DataSet สำหรับเก็บตารางข้อมูล
+
+
         public FrmMain01()
         {
             InitializeComponent();
@@ -160,6 +163,7 @@ namespace CodingLabpro
             if (GlobalMeasurementSettings.Instance.SourceMode == "DC" && GlobalMeasurementSettings.Instance.MeasureMode == "Voltage")
             {
                 LBunitmeasurement.Text = "VDC";
+                
             }
             else if(GlobalMeasurementSettings.Instance.SourceMode == "DC" && GlobalMeasurementSettings.Instance.MeasureMode == "Current")
             {
@@ -240,7 +244,8 @@ namespace CodingLabpro
             Datetimenow.Start();
             ActiveComboBox += ComboBoxEnabled;
             GlobalMeasurementSettings.Instance.SettingsChanged += Instance_SettingsChanged;
- 
+            InitiallizeGridColumn();
+
         }
 
         private void Instance_SettingsChanged(object sender, EventArgs e)
@@ -254,7 +259,7 @@ namespace CodingLabpro
             LBdatetime.Text = DateTime.Now.ToString("MM-dd-yyyy HH:mm:ss tt");
         }
 
-
+        #region Chart Control //การตั้งค่า Chart และการเพิ่มข้อมูล
         public void Chartmeasure()
         {
             chart1.Series["Series1"].Points.AddXY(10, 2);
@@ -277,8 +282,32 @@ namespace CodingLabpro
             //chart1.ChartAreas["ChartArea1"].AxisX.LabelStyle.Format = "mm:ss";
 
         }
-        
-      
+
+        #endregion
+
+        #region Datagridview Measurement Control Result //จัดการตารางข้อมูล
+        private void InitiallizeGridColumn()
+        {
+            DataTable myDataTable = new DataTable("MainGrid");
+            main_datagrid.Tables.Add(myDataTable);
+            DataColumn myDataColumn;
+
+
+            myDataColumn = new DataColumn();
+            myDataColumn.DataType = System.Type.GetType("System.Int32");
+            myDataColumn.ColumnName = "Loop Counter";
+
+            myDataColumn = new DataColumn();
+            myDataColumn.DataType = System.Type.GetType("System.String");
+            myDataColumn.ColumnName = "Step";
+
+            //การเชื่อมต่อ datagridview
+            DgvMeasurement.DataSource = main_datagrid.Tables["MainGrid"];
+
+        }
+
+        #endregion
+
         protected override void OnPaint(PaintEventArgs e)
         {
 

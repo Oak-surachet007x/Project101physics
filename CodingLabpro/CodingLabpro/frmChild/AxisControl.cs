@@ -119,7 +119,7 @@ namespace CodingLabpro.frmChild
             
         }
 
-        #region SettingMeasurement Agilent
+        #region SettingMeasurement Agilent 34401A
         private void CBtrigger_SelectedIndexChanged(object sender, EventArgs e)
         {
             GlobalMeasurementSettings.Instance.TriggerMode = CBtrigger.SelectedItem.ToString();
@@ -484,6 +484,86 @@ namespace CodingLabpro.frmChild
             }
         }
 
+        #endregion
+
+        #region SCPI Measure Command Settings
+        private string Build_MeasureCommand()
+        {
+            try
+            {
+                var map = Measurement_SCPI_Command();
+                var key = (GlobalMeasurementSettings.Instance.MeasureMode, GlobalMeasurementSettings.Instance.SourceMode);
+
+
+                if (!map.TryGetValue(key, out string baseCommand))
+                {
+                    throw new InvalidOperationException("ไม่พบโหมดการวัด");
+                }
+                else
+                {
+
+                    // รองรับกรณี AUTO ทั้งคู่
+                    if (GlobalMeasurementSettings.Instance.RangeControl == "AUTO" &&
+                        GlobalMeasurementSettings.Instance.ResolutionControl == "AUTO")
+                    {
+                        return $"MEAS:{baseCommand}? DEF, DEF";
+                    }
+
+
+                    // ตั้งค่าขอบเขตการวัดตามโหมด
+                    switch (GlobalMeasurementSettings.Instance.RangeControl)
+                    {
+                        case "AUTO":
+                            return $"MEAS:{baseCommand}? DEF, {Resolution}";
+                        case "CUSTOM":
+                            // แปลงค่าขอบเขตการวัดเป็นหน่วยมาตรฐาน
+                            double Range_value = (double)Numeric_Range.Value;
+                            SelectUnitMeasure = CBrange.SelectedItem.ToString();
+                            Range = ConvertValueOnUnit(Range_value, SelectUnitMeasure);
+                            break;
+
+                    }
+
+                    // ตั้งค่าความละเอียดตามโหมด
+                    switch (GlobalMeasurementSettings.Instance.ResolutionControl)
+                    {
+                        case "DIGITS_4":
+                            Resolution = 0.0001;
+                            break;
+                        case "DIGITS_6":
+                            Resolution = 1E-6;
+                            break;
+                        case "AUTO":
+                            return $"MEAS:{baseCommand}? {Range}";
+                        case "CUSTOM":
+                            Resolution = (double)Numeric_Resolution.Value;
+                            break;
+
+                    }
+
+
+                }
+
+                // ฟอร์แมตรูปแบบตัวเลข
+                string formattedRange = FormatRange(Range);
+                string formattedResolution = FormatResolution(Resolution);
+
+                // สร้างคำสั่ง SCPI
+                string command = $"MEAS:{baseCommand}? {formattedRange}, {formattedResolution}";
+                Debug.WriteLine(command);
+                return command;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error in Build_ConfigCommand: " + ex.Message);
+                //ErrorLogger.LogError(ex);
+                //ErrorLogger.Complete();
+                //ErrorLogger.ShowAllErrors();
+                return string.Empty;
+
+            }
+        }
+
         private string FormatResolution(double resolution)
         {
             if (Math.Abs(resolution) < 0.001)
@@ -552,8 +632,8 @@ namespace CodingLabpro.frmChild
             }
             else if (GlobalMeasurementSettings.Instance.TriggerMode == "IMMediate")
             {
-                myDMM.WriteString("MEAS:VOLT:DC? 10, 0.003"); //คำสั่งวัดทันที
-                ReadMeasurementResult();
+                myDMM.WriteString(Build_MeasureCommand()); //คำสั่งวัดทันที
+                //ReadMeasurementResult();
 
 
             }
@@ -638,7 +718,7 @@ namespace CodingLabpro.frmChild
         public void ShowMessage(string type, string message)
         {
             Form MessageNotify = new MessageBox_Notify(type, message);
-            MessageNotify.ShowDialog();
+            MessageNotify.Show();
         }
 
         private void MMC_Write(string command)
@@ -996,11 +1076,11 @@ namespace CodingLabpro.frmChild
                 }
 
                 //Run Scaning
-                //myMMC.WriteString("H:W");
-                //await Task.Delay(5000);
-                //myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y == 0 cm
-                //myMMC.WriteString("G:");
-                //await Task.Delay(5000);
+                myMMC.WriteString("H:W");
+                await Task.Delay(5000);
+                myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y == 0 cm
+                myMMC.WriteString("G:");
+                await Task.Delay(5000);
 
                 //Run Measurement
                 SetupMeasurementCommand();
@@ -1015,8 +1095,8 @@ namespace CodingLabpro.frmChild
                     {
                         for (int x = 0; x < LoopAreaX; x++)
                         {
-                            //myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
-                            //myMMC.WriteString("G:");
+                            myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
+                            myMMC.WriteString("G:");
                             Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
                             ReadMeasurementResult();
                             await Task.Delay(ValueTimer);
@@ -1026,8 +1106,8 @@ namespace CodingLabpro.frmChild
                     {
                         for (int x = 0; x < LoopAreaX; x++)
                         {
-                            //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
-                            //myMMC.WriteString("G:");
+                            myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
+                            myMMC.WriteString("G:");
                             Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
                             ReadMeasurementResult();
                             await Task.Delay(ValueTimer);
@@ -1035,8 +1115,8 @@ namespace CodingLabpro.frmChild
                     }
 
                     //เคลื่อนที่ไปยังแถวถัดไปตามแนว Y
-                    //myMMC.WriteString(ValueProcessY);
-                    //myMMC.WriteString("G:");
+                    myMMC.WriteString(ValueProcessY);
+                    myMMC.WriteString("G:");
                     await Task.Delay(ValueTimer);
 
 
@@ -1048,9 +1128,9 @@ namespace CodingLabpro.frmChild
 
                     for (int x = 0; x < LoopAreaX; x++)
                     {
-                        //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
-                        //myMMC.WriteString("G:");
-                        //await Task.Delay(ValueTimer);
+                        myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
+                        myMMC.WriteString("G:");
+                        await Task.Delay(ValueTimer);
 
                     }
                 }
@@ -1082,24 +1162,26 @@ namespace CodingLabpro.frmChild
             string Resolution_select = Resolution_Indicator();
             string Range_select  = Range_Indicator();
             string ConfigCommand = Build_ConfigCommand();
-            
+            string MeasureCommand = Build_MeasureCommand();
 
-            MessageBox.Show($"{Resolution_select} \n{Range_select} \n{ConfigCommand}", "Output_Log");
+
+            MessageBox.Show($"{Resolution_select} \n{Range_select} \n{ConfigCommand} \n{MeasureCommand}", "Output_Log");
         }
 
         private void Btn_Reset_Click(object sender, EventArgs e)
         {
-
+            myDMM.WriteString("*RST");  //Reset DMM
         }
 
         private void Btn_clear_Click(object sender, EventArgs e)
         {
-
+            myDMM.WriteString("*CLS");  //Clear Status
         }
 
         private void Btn_Error_Click(object sender, EventArgs e)
         {
-
+            myDMM.WriteString("SYST:ERR?");  //Read Error
+            ShowMessage("INFO", myDMM.ReadString());
         }
 
         
