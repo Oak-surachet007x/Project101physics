@@ -40,6 +40,7 @@ namespace CodingLabpro.frmChild
         private double Resolution;
         public event Action OnRunClicked;
         public event Action OnCancelClicked;
+        public event Action <Double> ResultMeasurement;
 
 
         public AxisControl(Ivi.Visa.Interop.FormattedIO488 myMMC, SerialPort mySerialPort, Ivi.Visa.Interop.FormattedIO488 myDMM)
@@ -119,7 +120,7 @@ namespace CodingLabpro.frmChild
             
         }
 
-        #region SettingMeasurement Agilent 34401A
+        //---------------------------------------- SettingMeasurement Agilent 34401A ----------------------------------------
         private void CBtrigger_SelectedIndexChanged(object sender, EventArgs e)
         {
             GlobalMeasurementSettings.Instance.TriggerMode = CBtrigger.SelectedItem.ToString();
@@ -627,7 +628,7 @@ namespace CodingLabpro.frmChild
                 myDMM.WriteString("TRIGger:SOURce BUS");
                 myDMM.WriteString("SAMPle:COUNt 1"); //ตั้งค่าจำนวนการวัด
                 myDMM.WriteString("TRIGger:COUNt 1"); //ตั้งค่าจำนวนทริกเกอร์
-                Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
+                //Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
 
             }
             else if (GlobalMeasurementSettings.Instance.TriggerMode == "IMMediate")
@@ -648,21 +649,29 @@ namespace CodingLabpro.frmChild
       
         }
 
-       
-
-
-        private void ReadMeasurementResult()
+        //-----------------------------------------------Data Acquisition Measurement---------------------------------------------
+        public string ReadMeasurementResult() //อ่านค่าการวัด
         {
             try
             {
                 string result = myDMM.ReadString();
                 Reportdata.AppendText($"Measurement Result: {result.Trim()}{Environment.NewLine}");
+                return result;
             }
             catch (Exception ex)
             {
                 ShowMessage("ERROR", "Failed to read measurement result: " + ex.Message);
             }
+
+            return "NaN";
         }
+
+        private Double CovertMeasurementToDouble(string Measurement_value)
+        {
+            return 0;
+        }
+
+        //--------------------------------------------------Validator Error Provider------------------------------------------------
 
         private void ShowValidatorError(Control parent, EntityValidator entityclass)
         {
@@ -683,7 +692,6 @@ namespace CodingLabpro.frmChild
             }
         }
 
-        #endregion
 
         //public class ErrorLogger
         //{
@@ -1097,6 +1105,7 @@ namespace CodingLabpro.frmChild
                         {
                             myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
                             myMMC.WriteString("G:");
+                            await Task.Delay(2000); //หน่วงเวลา 2 วินาที เพื่อเก็บค่าการวัด
                             Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
                             ReadMeasurementResult();
                             await Task.Delay(ValueTimer);
@@ -1108,6 +1117,7 @@ namespace CodingLabpro.frmChild
                         {
                             myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
                             myMMC.WriteString("G:");
+                            await Task.Delay(2000); //หน่วงเวลา 2 วินาที เพื่อเก็บค่าการวัด
                             Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
                             ReadMeasurementResult();
                             await Task.Delay(ValueTimer);

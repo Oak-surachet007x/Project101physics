@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.Menupanel = new System.Windows.Forms.Panel();
+            this.LBversion = new System.Windows.Forms.Label();
+            this.ucMenu2 = new CodingLabpro.Models.ucMenu();
+            this.ucMenu1 = new CodingLabpro.Models.ucMenu();
             this.panel_Logo = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.FormLayoutpanel = new System.Windows.Forms.Panel();
-            this.ucMenu2 = new CodingLabpro.Models.ucMenu();
-            this.ucMenu1 = new CodingLabpro.Models.ucMenu();
             this.Menupanel.SuspendLayout();
             this.panel_Logo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -42,6 +43,7 @@
             // Menupanel
             // 
             this.Menupanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
+            this.Menupanel.Controls.Add(this.LBversion);
             this.Menupanel.Controls.Add(this.ucMenu2);
             this.Menupanel.Controls.Add(this.ucMenu1);
             this.Menupanel.Controls.Add(this.panel_Logo);
@@ -50,6 +52,42 @@
             this.Menupanel.Name = "Menupanel";
             this.Menupanel.Size = new System.Drawing.Size(150, 761);
             this.Menupanel.TabIndex = 0;
+            // 
+            // LBversion
+            // 
+            this.LBversion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LBversion.AutoSize = true;
+            this.LBversion.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBversion.ForeColor = System.Drawing.Color.White;
+            this.LBversion.Location = new System.Drawing.Point(40, 711);
+            this.LBversion.Name = "LBversion";
+            this.LBversion.Size = new System.Drawing.Size(64, 17);
+            this.LBversion.TabIndex = 3;
+            this.LBversion.Text = "Version";
+            this.LBversion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ucMenu2
+            // 
+            this.ucMenu2.BackColor = System.Drawing.Color.Transparent;
+            this.ucMenu2.BorderColor = System.Drawing.Color.Transparent;
+            this.ucMenu2.Icon = global::CodingLabpro.Properties.Resources.dynamic_form_16dp_E8EAED;
+            this.ucMenu2.Location = new System.Drawing.Point(0, 249);
+            this.ucMenu2.Name = "ucMenu2";
+            this.ucMenu2.Size = new System.Drawing.Size(150, 52);
+            this.ucMenu2.TabIndex = 2;
+            this.ucMenu2.textlabel = "Old Form";
+            // 
+            // ucMenu1
+            // 
+            this.ucMenu1.BackColor = System.Drawing.Color.Transparent;
+            this.ucMenu1.BorderColor = System.Drawing.Color.Transparent;
+            this.ucMenu1.Icon = global::CodingLabpro.Properties.Resources.monitor_heart_70dp_8C1AF6_FILL0_wght400_GRAD0_opsz48;
+            this.ucMenu1.Location = new System.Drawing.Point(0, 191);
+            this.ucMenu1.Name = "ucMenu1";
+            this.ucMenu1.Size = new System.Drawing.Size(150, 52);
+            this.ucMenu1.TabIndex = 1;
+            this.ucMenu1.textlabel = "MainControl";
             // 
             // panel_Logo
             // 
@@ -79,28 +117,6 @@
             this.FormLayoutpanel.Size = new System.Drawing.Size(1234, 761);
             this.FormLayoutpanel.TabIndex = 1;
             // 
-            // ucMenu2
-            // 
-            this.ucMenu2.BackColor = System.Drawing.Color.Transparent;
-            this.ucMenu2.BorderColor = System.Drawing.Color.Transparent;
-            this.ucMenu2.Icon = global::CodingLabpro.Properties.Resources.dynamic_form_16dp_E8EAED;
-            this.ucMenu2.Location = new System.Drawing.Point(0, 249);
-            this.ucMenu2.Name = "ucMenu2";
-            this.ucMenu2.Size = new System.Drawing.Size(150, 52);
-            this.ucMenu2.TabIndex = 2;
-            this.ucMenu2.textlabel = "Old Form";
-            // 
-            // ucMenu1
-            // 
-            this.ucMenu1.BackColor = System.Drawing.Color.Transparent;
-            this.ucMenu1.BorderColor = System.Drawing.Color.Transparent;
-            this.ucMenu1.Icon = global::CodingLabpro.Properties.Resources.monitor_heart_70dp_8C1AF6_FILL0_wght400_GRAD0_opsz48;
-            this.ucMenu1.Location = new System.Drawing.Point(0, 191);
-            this.ucMenu1.Name = "ucMenu1";
-            this.ucMenu1.Size = new System.Drawing.Size(150, 52);
-            this.ucMenu1.TabIndex = 1;
-            this.ucMenu1.textlabel = "MainControl";
-            // 
             // FrmLayout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -114,6 +130,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmLayout";
             this.Menupanel.ResumeLayout(false);
+            this.Menupanel.PerformLayout();
             this.panel_Logo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -128,5 +145,6 @@
         private System.Windows.Forms.Panel FormLayoutpanel;
         private Models.ucMenu ucMenu1;
         private Models.ucMenu ucMenu2;
+        private System.Windows.Forms.Label LBversion;
     }
 }

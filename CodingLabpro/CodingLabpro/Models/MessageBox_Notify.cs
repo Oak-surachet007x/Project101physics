@@ -81,7 +81,7 @@ namespace CodingLabpro.Models
         public void Position()
         {
             TargetX = ScreenWidth - this.Width - 10; // จุดที่ต้องการให้เลื่อนขึ้นไป
-            TargetY = ScreenHeight - this.Height - 850;
+            TargetY = ScreenHeight - 1000;
 
             this.Location = new Point(ScreenWidth, TargetY); // เริ่มจากล่างสุด
             Messagetimer.Start();

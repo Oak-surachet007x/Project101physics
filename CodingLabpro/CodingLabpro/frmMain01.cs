@@ -54,7 +54,6 @@ namespace CodingLabpro
         {
             InitializeComponent();
 
-            this.Text = "Aglient 34401A And MMC-2 Axis Controller";
             this.SetStyle(
                         ControlStyles.OptimizedDoubleBuffer |
                         ControlStyles.ResizeRedraw, true);
@@ -86,7 +85,7 @@ namespace CodingLabpro
             Stoptimer1.Enabled = true;
             Stoptimer1.Interval = 100;
             Stoptimer1.Tick += Stoptimer1_Tick;
-            frmChild1.OnRunClicked += FrmChild1_OnRunClicked; ;
+            frmChild1.OnRunClicked += FrmChild1_OnRunClicked; 
             frmChild1.OnCancelClicked += FrmChild1_OnCancelClicked;
 
 
@@ -120,6 +119,8 @@ namespace CodingLabpro
 
             //chart Data DC Measura
             Chartmeasure();
+
+
 
 
         }
