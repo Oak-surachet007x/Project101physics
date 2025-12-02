@@ -41,11 +41,11 @@
             this.label1.Font = new System.Drawing.Font("Cascadia Mono", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label1.Location = new System.Drawing.Point(10, 0);
+            this.label1.Location = new System.Drawing.Point(33, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 52);
+            this.label1.Size = new System.Drawing.Size(94, 52);
             this.label1.TabIndex = 1;
-            this.label1.Text = "ESPCAM";
+            this.label1.Text = "MainControl";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // borderPanel
@@ -61,7 +61,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = global::CodingLabpro.Properties.Resources.photo_camera_16dp_FFFFFF_FILL1_wght100_GRAD0_opsz20;
-            this.pictureBox1.Location = new System.Drawing.Point(13, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(41, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(77, 36);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -78,7 +78,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Name = "ucMenu";
-            this.Size = new System.Drawing.Size(90, 52);
+            this.Size = new System.Drawing.Size(150, 52);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ucMenu_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

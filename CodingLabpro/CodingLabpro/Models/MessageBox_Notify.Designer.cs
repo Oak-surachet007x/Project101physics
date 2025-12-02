@@ -44,7 +44,7 @@
             this.MessageBorder.Dock = System.Windows.Forms.DockStyle.Left;
             this.MessageBorder.Location = new System.Drawing.Point(0, 0);
             this.MessageBorder.Name = "MessageBorder";
-            this.MessageBorder.Size = new System.Drawing.Size(14, 130);
+            this.MessageBorder.Size = new System.Drawing.Size(14, 165);
             this.MessageBorder.TabIndex = 0;
             this.MessageBorder.Paint += new System.Windows.Forms.PaintEventHandler(this.LineBorder_Paint);
             // 
@@ -97,7 +97,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(549, 130);
+            this.ClientSize = new System.Drawing.Size(549, 165);
             this.Controls.Add(this.IbMessage);
             this.Controls.Add(this.labelType);
             this.Controls.Add(this.picIcon);

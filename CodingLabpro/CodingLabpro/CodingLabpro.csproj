@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\SixLabors.ImageSharp.3.1.7\build\SixLabors.ImageSharp.props" Condition="Exists('..\packages\SixLabors.ImageSharp.3.1.7\build\SixLabors.ImageSharp.props')" />
+  <Import Project="..\packages\SixLabors.ImageSharp.3.1.11\build\SixLabors.ImageSharp.props" Condition="Exists('..\packages\SixLabors.ImageSharp.3.1.11\build\SixLabors.ImageSharp.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -118,6 +118,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Formats.Asn1, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Formats.Asn1.9.0.2\lib\net462\System.Formats.Asn1.dll</HintPath>
     </Reference>
@@ -166,11 +167,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandDevice\CalculateArea.cs" />
+    <Compile Include="CommandDevice\CalculateArea_Bind.cs" />
+    <Compile Include="CommandDevice\CollectMeasurement.cs" />
+    <Compile Include="CommandDevice\EntityValidator.cs" />
     <Compile Include="CommandDevice\FindDevices.cs" />
-    <Compile Include="frmarduino.cs">
+    <Compile Include="CommandDevice\GlobalMeasurementSettings.cs" />
+    <Compile Include="frmChild\OutputLog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmarduino.Designer.cs">
+    <Compile Include="frmChild\OutputLog.Designer.cs">
+      <DependentUpon>OutputLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmLayout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLayout.Designer.cs">
+      <DependentUpon>FrmLayout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Old_version\frmarduino.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Old_version\frmarduino.Designer.cs">
       <DependentUpon>frmarduino.cs</DependentUpon>
     </Compile>
     <Compile Include="frmChild\AxisControl.cs">
@@ -179,16 +197,10 @@
     <Compile Include="frmChild\AxisControl.Designer.cs">
       <DependentUpon>AxisControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmChild\DMMmeasure.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="frmChild\DMMmeasure.Designer.cs">
-      <DependentUpon>DMMmeasure.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmMain.cs">
+    <Compile Include="Old_version\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
+    <Compile Include="Old_version\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmMain01.cs">
@@ -223,16 +235,19 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmarduino.resx">
+    <EmbeddedResource Include="frmChild\OutputLog.resx">
+      <DependentUpon>OutputLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmLayout.resx">
+      <DependentUpon>FrmLayout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Old_version\frmarduino.resx">
       <DependentUpon>frmarduino.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmChild\AxisControl.resx">
       <DependentUpon>AxisControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmChild\DMMmeasure.resx">
-      <DependentUpon>DMMmeasure.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
+    <EmbeddedResource Include="Old_version\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain01.resx">
@@ -252,6 +267,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Datasource\CodingLabpro.CommandDevice.CalculateArea_Bind.datasource" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -327,11 +343,22 @@
   <ItemGroup>
     <None Include="Resources\help_center_16dp_E8EAED.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_bug_70dp_8C1AF6_FILL0_wght400_GRAD0_opsz48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Applied Physics Logo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\monitor_heart_70dp_8C1AF6_FILL0_wght400_GRAD0_opsz48.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\SixLabors.ImageSharp.3.1.7\build\SixLabors.ImageSharp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SixLabors.ImageSharp.3.1.7\build\SixLabors.ImageSharp.props'))" />
+    <Error Condition="!Exists('..\packages\SixLabors.ImageSharp.3.1.11\build\SixLabors.ImageSharp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SixLabors.ImageSharp.3.1.11\build\SixLabors.ImageSharp.props'))" />
   </Target>
 </Project>

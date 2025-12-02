@@ -35,50 +35,25 @@ namespace CodingLabpro
         public Ivi.Visa.Interop.FormattedIO488 MyDMM;
         public Ivi.Visa.Interop.FormattedIO488 MyMMC;
         public SerialPort MySerialPort = new SerialPort();
-       
-
+        private readonly Stopwatch watch = new Stopwatch();
+        private TimeSpan ctimeSpan;
         public DateTime r = DateTime.Now;
-        public UserControl frmChild1;
-        public UserControl frmChild2;
+        public AxisControl frmChild1;
+        private string result_time;
         public static string Aread;
         public static bool isConnect;
         public event EventHandler ActiveComboBox;
-        public List<ucMenu> menuButton;
+    
         public List<barMenu> barButton;
-        
+
+        //dataTable
+        DataSet main_datagrid = new DataSet();
 
 
-        public class DwmApi
-        {
-            // ค่า DWM_WINDOW_ATTRIBUTE ที่เราสนใจ
-            public const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20; // เปิดใช้งาน Dark Mode
-            public const int DWMWA_WINDOW_CORNER_PREFERENCE = 33; // ตั้งค่ามุมหน้าต่าง
-            public const int DWMWA_CAPTION_COLOR = 34; // เปลี่ยนสี Title Bar
-
-            // การประกาศ DwmSetWindowAttribute
-            [DllImport("dwmapi.dll")]
-            public static extern int DwmSetWindowAttribute(IntPtr hwnd, int dwAttribute, ref uint pvAttribute, int cbAttribute);
-        } 
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-
-            uint isDarkMode = 1; // เปิดใช้งาน (0 = ปิด)
-            int result = DwmApi.DwmSetWindowAttribute(this.Handle, DwmApi.DWMWA_USE_IMMERSIVE_DARK_MODE, ref isDarkMode, sizeof(int));
-
-
-            if (result != 0)
-            {
-                MessageBox.Show($"DwmSetWindowAttribute failed with error code {result}");
-            }
-        }
-
-       
         public FrmMain01()
         {
             InitializeComponent();
-
-            this.Text = "Aglient 34401A And MMC-2 Axis Controller";
+          
             this.SetStyle(
                         ControlStyles.OptimizedDoubleBuffer |
                         ControlStyles.ResizeRedraw, true);
@@ -87,14 +62,10 @@ namespace CodingLabpro
             //Control Panel 
             BtnDiconnect.Enabled = false;
             BtnConnect.Enabled = true;
-            timer1.Enabled = false;
       
-            //MenuButton
-            menuButton = new List<ucMenu>() { ucMenu1, ucMenu2 };
-            ClickMenu(menuButton);
 
             //BarMenuButton
-            barButton = new List<barMenu>() { barMenu1, barMenu2 };
+            barButton = new List<barMenu>() { barMenu1 };
             ClickBar(barButton);
 
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
@@ -108,17 +79,24 @@ namespace CodingLabpro
             mgr2 = new Ivi.Visa.Interop.ResourceManager();
 
             //SetUp FormChild in UserControl
-            frmChild1 = new AxisControl(MyMMC, MySerialPort);
-            frmChild2 = new DMMmeasure(MyDMM, this);
+            frmChild1 = new AxisControl(MyMMC, MySerialPort, MyDMM);
+
+            //Stopwatch
+            Stoptimer1.Enabled = true;
+            Stoptimer1.Interval = 100;
+            Stoptimer1.Tick += Stoptimer1_Tick;
+            frmChild1.OnRunClicked += FrmChild1_OnRunClicked; 
+            frmChild1.OnCancelClicked += FrmChild1_OnCancelClicked;
+            frmChild1.OnMeasurement += Received_Data_measurement;
 
 
             //First show Panel frmChild
-            AddUserControl(frmChild2);
+            AddUserControl(frmChild1);
           
 
-            if (this.FormChildpanel.Controls.Contains(frmChild2))
+            if (this.FormChildpanel.Controls.Contains(frmChild1))
             {
-                ActivateMenu1(barMenu2, barMenu1);
+                ActivateMenu1(barMenu1);
                 Console.WriteLine("UserControl is add Panel Control ");
             }
             else
@@ -144,6 +122,70 @@ namespace CodingLabpro
             Chartmeasure();
 
 
+
+
+        }
+
+       
+
+        #region Stopwatch Control
+        public string GetTimeString(TimeSpan elapsed)
+        {
+            result_time = string.Empty;
+            ctimeSpan = elapsed;
+
+
+            result_time = string.Format("{0:00}:{1:00}:{2:00}.{3:000}",
+                ctimeSpan.Hours,
+                ctimeSpan.Minutes,
+                ctimeSpan.Seconds,
+                ctimeSpan.Milliseconds);
+
+            return result_time;
+
+        }
+
+        private void Stoptimer1_Tick(object sender, EventArgs e)
+        {
+            LBtimer.Text = GetTimeString(watch.Elapsed);
+        }
+
+        private void FrmChild1_OnRunClicked()
+        {
+            watch.Restart();
+        }
+
+        private void FrmChild1_OnCancelClicked()
+        {
+            watch.Stop();
+        }
+
+        #endregion
+
+        private void UpdatelabelMeasurement()
+        {
+            if (GlobalMeasurementSettings.Instance.SourceMode == "DC" && GlobalMeasurementSettings.Instance.MeasureMode == "Voltage")
+            {
+                LBunitmeasurement.Text = "VDC";
+                
+            }
+            else if(GlobalMeasurementSettings.Instance.SourceMode == "DC" && GlobalMeasurementSettings.Instance.MeasureMode == "Current")
+            {
+                LBunitmeasurement.Text = "ADC";
+            }
+            else if (GlobalMeasurementSettings.Instance.SourceMode == "AC" && GlobalMeasurementSettings.Instance.MeasureMode == "Voltage")
+            {
+                LBunitmeasurement.Text = "VAC";
+            }
+            else if (GlobalMeasurementSettings.Instance.SourceMode == "AC" && GlobalMeasurementSettings.Instance.MeasureMode == "Current")
+            {
+                LBunitmeasurement.Text = "AAC";
+            }
+            else
+            {
+                LBunitmeasurement.Text = "Mode";
+            }
+
         }
 
         public void ShowMessage(string type, string message)
@@ -152,9 +194,10 @@ namespace CodingLabpro
             MessageNotify.Show();
         }
 
-        //--------------------------------------------------------------------------------------------------------------//
+        //----------------------------------------------Button bar UI------------------------------------------------------------//
 
-        //barMenu event Click
+        #region barMenu Control
+        //barMenu event Click tabcontrol
         public void ClickBar(List<barMenu> _barmenu)
         {
             foreach (var menu1 in _barmenu)
@@ -178,15 +221,8 @@ namespace CodingLabpro
             switch (_barButton.Name)
             {
                 case "barMenu1":
-                    ActivateMenu1(barMenu1, barMenu2);
+                    ActivateMenu1(barMenu1);
                     AddUserControl(frmChild1);
-
-                    break;
-
-                case "barMenu2":
-                    ActivateMenu1(barMenu2, barMenu1);
-                    AddUserControl(frmChild2);
-
                     break;
 
             }
@@ -202,64 +238,32 @@ namespace CodingLabpro
             }
 
         }
-        //--------------------------------------------------------------------------------------------------------------//
+        #endregion
 
-        //ucMenu event Click
-        public void ClickMenu(List<ucMenu> _menu)
-        {
-            foreach (var menu in _menu)
-            {
-                menu.Text_Clicked += Menu_textClick;
-            }
-        }
-        private void Menu_textClick(object sender, EventArgs e)
-        {
-            ucMenu _menuButton = (ucMenu)sender;
+        
 
-            switch (_menuButton.Name)
-            {
-                case "ucMenu1":
-                    ActivateMenu(ucMenu1, ucMenu2);
-                    break;
-
-                case "ucMenu2":
-                    ActivateMenu(ucMenu2, ucMenu1);
-                    Form form = new frmMain();
-                    form.Show();
-                    break;
-            }
-        }
-        private async void ActivateMenu(ucMenu _active, params ucMenu[] _inactive)
-        {
-
-            _active.BorderColor = Color.Purple;
-
-            foreach (ucMenu inactive in _inactive)
-            {
-                inactive.BorderColor = Color.Transparent;
-            }
-
-            await Task.Delay(1000);
-
-            _active.BorderColor = Color.Transparent;
-
-
-        }
-        //--------------------------------------------------------------------------------------------------------------//
-
-
+        //----------------------------------------------FrmMain event UI------------------------------------------------------------//
         private void FrmMain01_Load(object sender, EventArgs e)
         {
+            Datetimenow.Start();
             ActiveComboBox += ComboBoxEnabled;
+            GlobalMeasurementSettings.Instance.SettingsChanged += Instance_SettingsChanged;
+            InitiallizeGridColumn();
+
         }
 
-        private void FrmMain01_Shown(object sender, EventArgs e)
+        private void Instance_SettingsChanged(object sender, EventArgs e)
         {
-           
-
+            UpdatelabelMeasurement();
+            
         }
 
+        private void DataTimeNow_Tick(object sender, EventArgs e)
+        {
+            LBdatetime.Text = DateTime.Now.ToString("MM-dd-yyyy HH:mm:ss tt");
+        }
 
+        #region Chart Control //การตั้งค่า Chart และการเพิ่มข้อมูล
         public void Chartmeasure()
         {
             chart1.Series["Series1"].Points.AddXY(10, 2);
@@ -282,11 +286,36 @@ namespace CodingLabpro
             //chart1.ChartAreas["ChartArea1"].AxisX.LabelStyle.Format = "mm:ss";
 
         }
+
+        #endregion
+
+        #region Datagridview Measurement Control Result //จัดการตารางข้อมูล
         
-        private void BtnClear_Click(object sender, EventArgs e)
+
+        public void InitiallizeGridColumn()
         {
-            chart1.Series.Clear();
+            DataTable myDataTable = new DataTable("MainGrid");
+            main_datagrid.Tables.Add(myDataTable);
+            //การเชื่อมต่อ datagridview
+            DgvMeasurement.DataSource = main_datagrid.Tables["MainGrid"];
+
+
         }
+
+        private void Received_Data_measurement(double Data_measure)
+        {
+            //DataTable myDataTable = main_datagrid.Tables["MainGrid"];
+            //string Timeclock = DateTime.Now.ToString("HH:mm:ss.fff");
+
+            //myDataTable.Rows.Add(Timeclock, Data_measure);
+
+            LBvaluemeasurement.Text = Data_measure.ToString() + GlobalMeasurementSettings.Instance.UnitPrefix;
+        }
+
+
+
+        #endregion
+
         protected override void OnPaint(PaintEventArgs e)
         {
 
@@ -296,7 +325,7 @@ namespace CodingLabpro
             using (var brush = new LinearGradientBrush(rect,
                                                        Color.FromArgb(81, 34, 90), // สีบน
                                                        Color.FromArgb(43, 50, 87),  // สีล่าง
-                                                       LinearGradientMode.BackwardDiagonal))
+                                                       LinearGradientMode.Horizontal))
             {
                 e.Graphics.FillRectangle(brush, rect);
             }
@@ -313,10 +342,10 @@ namespace CodingLabpro
 
             if (this.WindowState == FormWindowState.Normal)
             {
-                labelName.Font = new Font(labelName.Font.FontFamily, 12);
+                labelName.Font = new Font(labelName.Font.FontFamily, 8);
                 Cblistaddress.Size = new Size(290, 29);
                 Cblistaddress2.Size = new Size(290, 29);
-                Cblistaddress3.Size = new Size(290, 29);
+                Cblistaddress3.Size = new Size(263, 29);
 
             }
             else if (this.WindowState == FormWindowState.Maximized)
@@ -426,7 +455,7 @@ namespace CodingLabpro
                         string command = "*IDN?";
                         MyDMM.WriteString(command);
 
-                        Aread = MyDMM.ReadString(); ;
+                        Aread = MyDMM.ReadString(); 
                         //MyDMM.WriteString("*CLS");
                     }
 
@@ -518,7 +547,7 @@ namespace CodingLabpro
                 isConnect = false;
                 BtnConnect.BackColor = Color.Transparent;
                 BtnConnect.Text = "CONNECT";
-                BtnConnect.ForeColor = Color.White;
+                BtnConnect.ForeColor = Color.Black;
 
                 
 
