@@ -477,7 +477,7 @@ namespace CodingLabpro.frmChild
                 string formattedResolution = FormatResolution(Resolution);
 
                 // สร้างคำสั่ง SCPI
-                string command = $"CONF:{baseCommand} {formattedRange}, {formattedResolution}";
+                string command = $"CONF:{baseCommand} {formattedRange}, {Resolution}";
                 Debug.WriteLine(command);
                 return command;
             }
@@ -802,7 +802,7 @@ namespace CodingLabpro.frmChild
         public void ShowMessage(string type, string message)
         {
             Form MessageNotify = new MessageBox_Notify(type, message);
-            MessageNotify.Show();
+            MessageNotify.ShowDialog();
         }
 
         private void MMC_Write(string command)
@@ -1250,7 +1250,7 @@ namespace CodingLabpro.frmChild
             string Range_select  = Range_Indicator();
             string ConfigCommand = Build_ConfigCommand();
             string MeasureCommand = Build_MeasureCommand();
-            ReadMeasurementResult();
+            //ReadMeasurementResult();
 
 
             MessageBox.Show($"{Resolution_select} \n{Range_select} \n{ConfigCommand} \n{MeasureCommand}", "Output_Log");
@@ -1269,7 +1269,8 @@ namespace CodingLabpro.frmChild
         private void Btn_Error_Click(object sender, EventArgs e)
         {
             myDMM.WriteString("SYST:ERR?");  //Read Error
-            ShowMessage("INFO", myDMM.ReadString());
+            string ErrorDmm = myDMM.ReadString();
+            ShowMessage("INFO", ErrorDmm);
         }
 
         
