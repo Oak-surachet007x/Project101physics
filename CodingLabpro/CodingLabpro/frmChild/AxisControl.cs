@@ -38,9 +38,10 @@ namespace CodingLabpro.frmChild
         private string SelectUnitMeasure;
         private double Range;
         private double Resolution;
+        private double Result_Measures;
         public event Action OnRunClicked;
         public event Action OnCancelClicked;
-        public event Action <Double> ResultMeasurement;
+        public event Action <Double> OnMeasurement;
 
 
         public AxisControl(Ivi.Visa.Interop.FormattedIO488 myMMC, SerialPort mySerialPort, Ivi.Visa.Interop.FormattedIO488 myDMM)
@@ -50,6 +51,7 @@ namespace CodingLabpro.frmChild
             this.myMMC = myMMC;
             this.mySerialPort = mySerialPort;
             this.myDMM = myDMM;
+           
             //Setup Value
             CblStepMotor.Items.AddRange(new string[] { "100", "200", "300", "400", "500", "1000" });
             unitXComboBox.Items.AddRange(new string[] { "cm", "mm", "μm" });
@@ -81,7 +83,12 @@ namespace CodingLabpro.frmChild
             RB_autoOnce.Enabled = !EnabledItem;
             Btn_QueryResolution.Enabled = !EnabledItem;
             CBtrigger.Enabled = !EnabledItem;
-    
+            BtnCancel_scaning.Enabled = !EnabledItem;
+            Btn_Error.Enabled = !EnabledItem;
+            Btn_read.Enabled = !EnabledItem;
+            Btn_Reset.Enabled = !EnabledItem;
+            Btn_clear.Enabled = !EnabledItem;
+
         }
         private void AxisControl_Load(object sender, EventArgs e)
         {
@@ -129,11 +136,11 @@ namespace CodingLabpro.frmChild
             {
                 case "IMMediate":
                     GlobalMeasurementSettings.Instance.TriggerMode = "IMMediate";
-                    Debug.WriteLine(GlobalMeasurementSettings.Instance.TriggerMode);
+                    Debug.WriteLine("Trigger Select = " + GlobalMeasurementSettings.Instance.TriggerMode);
                     break;
                 case "BUS":
                     GlobalMeasurementSettings.Instance.TriggerMode = "BUS";
-                    Debug.WriteLine(GlobalMeasurementSettings.Instance.TriggerMode);
+                    Debug.WriteLine("Trigger Select = " + GlobalMeasurementSettings.Instance.TriggerMode);
                     break;
                 //case "EXTernal": //ตัดออกเพราะส่งสัญญาณ Pulse จากอุปกรณ์ภายนอก
                 //    GlobalMeasurementSettings.Instance.TriggerMode = "EXTernal";
@@ -650,26 +657,95 @@ namespace CodingLabpro.frmChild
         }
 
         //-----------------------------------------------Data Acquisition Measurement---------------------------------------------
-        public string ReadMeasurementResult() //อ่านค่าการวัด
+
+        private void SendDataMeasurement(Double MeasurementValue)
+        {
+            OnMeasurement?.Invoke(MeasurementValue);
+        }
+
+        private double ReadMeasurementResult() //อ่านค่าการวัด
         {
             try
             {
-                string result = myDMM.ReadString();
-                Reportdata.AppendText($"Measurement Result: {result.Trim()}{Environment.NewLine}");
-                return result;
+                string value = myDMM.ReadString().Trim();
+                //string value = "5.025350000E-03"; //ทดสอบค่า   
+                Reportdata.AppendText($"Measurement Result: {value.Trim()}{Environment.NewLine}");
+
+                Prefix_measurement(value);            // แยก prefix หรือข้อมูลหน่วย
+                Result_Measures =  Conv_Value_measurement(value); // แปลงค่าตัวเลข -> double
+
+                SendDataMeasurement(Result_Measures);
             }
             catch (Exception ex)
             {
                 ShowMessage("ERROR", "Failed to read measurement result: " + ex.Message);
+                Debug.WriteLine("Error reading measurement: " + ex.Message);
+                Result_Measures = double.NaN;
             }
 
-            return "NaN";
+            return Result_Measures;
         }
 
-        private Double CovertMeasurementToDouble(string Measurement_value)
+        private void Prefix_measurement (string measurement)
         {
-            return 0;
+            string Exponent = measurement.Substring(measurement.IndexOf("E"));
+            string SI_Prefix = "";
+            string UnitMeasure = "";
+
+            // กำหนดหน่วยการวัดตามโหมดการวัด
+            if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage")
+            {
+                UnitMeasure = "V";
+            }
+            else if (GlobalMeasurementSettings.Instance.MeasureMode == "Current")
+            {
+                UnitMeasure = "A";
+            }
+
+            // กำหนดคำนำหน้าหน่วย (Prefix) ตาม Exponent
+            switch (Exponent)
+            {
+                case "E+09":
+                    SI_Prefix = "G"; // Giga
+                    break;
+                case "E+06":
+                    SI_Prefix = "M"; // Mega
+                    break;
+                case "E+03":
+                    SI_Prefix = "k"; // kilo
+                    break;
+                case "E+00":
+                    SI_Prefix = ""; // ไม่มีคำนำหน้า
+                    break;
+                case "E-03":
+                    SI_Prefix = "m"; // milli
+                    break;
+                case "E-06":
+                    SI_Prefix = "μ"; // micro
+                    break;
+                case "E-09":
+                    SI_Prefix = "n"; // nano
+                    break;
+                default:
+                    SI_Prefix = ""; // กรณีไม่ตรงกับ Exponent ใด ๆ
+                    break;
+            }
+
+            // แสดงผลลัพธ์พร้อมหน่วยการวัด
+            GlobalMeasurementSettings.Instance.UnitPrefix = $"{SI_Prefix}{UnitMeasure}";
+            Debug.WriteLine("Formatted Measurement Unit: " + GlobalMeasurementSettings.Instance.UnitPrefix);
         }
+
+        private Double Conv_Value_measurement(string measurement)
+        {
+            double ValueOnly = double.Parse(measurement.Substring(0, measurement.IndexOf("E"))); //ดึงค่าเฉพาะตัวเลขออก
+            Debug.WriteLine($"Value Measurement: {ValueOnly}");
+            double roundedValue = Math.Round(ValueOnly, 5); //กำหนดตำแหน่งทศนิยม
+            Debug.WriteLine($"Value After Round: {roundedValue}");
+            return  roundedValue;
+       
+        }
+       
 
         //--------------------------------------------------Validator Error Provider------------------------------------------------
 
@@ -1083,17 +1159,18 @@ namespace CodingLabpro.frmChild
                     }
                 }
 
-                //Run Scaning
+                //Run Setup Scaning
                 myMMC.WriteString("H:W");
                 await Task.Delay(5000);
                 myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y == 0 cm
                 myMMC.WriteString("G:");
                 await Task.Delay(5000);
-
+                //---------------------------------Setup Measurement-------------------------------------------- -
                 //Run Measurement
                 SetupMeasurementCommand();
                 //Stopwatch
                 OnRunClicked?.Invoke();
+                //---------------------------------Loop Scaning Area---------------------------------------------
                 //Report Area Calculate
                 Reportdata.AppendText($" คำนวณผลลัพธ์ลูปที่สแกนของ X คือ {LoopAreaX} ลูป \n คำนวณผลลัพธ์ลูปที่สแกนของ Y คือ {LoopAreaY} ลูป" + Environment.NewLine); //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
 
@@ -1173,6 +1250,7 @@ namespace CodingLabpro.frmChild
             string Range_select  = Range_Indicator();
             string ConfigCommand = Build_ConfigCommand();
             string MeasureCommand = Build_MeasureCommand();
+            ReadMeasurementResult();
 
 
             MessageBox.Show($"{Resolution_select} \n{Range_select} \n{ConfigCommand} \n{MeasureCommand}", "Output_Log");

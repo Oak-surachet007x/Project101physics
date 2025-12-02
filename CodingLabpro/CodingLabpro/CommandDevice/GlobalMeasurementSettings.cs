@@ -22,6 +22,9 @@ namespace CodingLabpro.CommandDevice
         private string _AutozeroMode = "ON";
         private string _RangeControl = "AUTO";
         private string _ResolutionControl = "AUTO";
+        private string _UnitPrefix;
+        private int _CountOfRows;
+        private int _CountOfColumns;
 
         public event EventHandler SettingsChanged;
 
@@ -65,6 +68,24 @@ namespace CodingLabpro.CommandDevice
         {
             get => _ResolutionControl;
             set => SetProperty(ref _ResolutionControl, value);
+        }
+
+        public string UnitPrefix
+        {
+            get => _UnitPrefix;
+            set => SetProperty(ref _UnitPrefix, value);
+        }
+
+        public int CountOfRows
+        {
+            get => _CountOfRows;
+            set => SetProperty(ref _CountOfRows, value);
+        }
+
+        public int CountOfColumns
+        {
+            get => _CountOfColumns;
+            set => SetProperty(ref _CountOfColumns, value);
         }
 
 

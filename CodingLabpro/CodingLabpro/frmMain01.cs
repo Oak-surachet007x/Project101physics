@@ -47,13 +47,13 @@ namespace CodingLabpro
         public List<barMenu> barButton;
 
         //dataTable
-        DataSet main_datagrid = new DataSet(); //สร้าง DataSet สำหรับเก็บตารางข้อมูล
+        DataSet main_datagrid = new DataSet();
 
 
         public FrmMain01()
         {
             InitializeComponent();
-
+          
             this.SetStyle(
                         ControlStyles.OptimizedDoubleBuffer |
                         ControlStyles.ResizeRedraw, true);
@@ -87,6 +87,7 @@ namespace CodingLabpro
             Stoptimer1.Tick += Stoptimer1_Tick;
             frmChild1.OnRunClicked += FrmChild1_OnRunClicked; 
             frmChild1.OnCancelClicked += FrmChild1_OnCancelClicked;
+            frmChild1.OnMeasurement += Received_Data_measurement;
 
 
             //First show Panel frmChild
@@ -124,6 +125,8 @@ namespace CodingLabpro
 
 
         }
+
+       
 
         #region Stopwatch Control
         public string GetTimeString(TimeSpan elapsed)
@@ -252,7 +255,7 @@ namespace CodingLabpro
         private void Instance_SettingsChanged(object sender, EventArgs e)
         {
             UpdatelabelMeasurement();
-     
+            
         }
 
         private void DataTimeNow_Tick(object sender, EventArgs e)
@@ -287,25 +290,29 @@ namespace CodingLabpro
         #endregion
 
         #region Datagridview Measurement Control Result //จัดการตารางข้อมูล
-        private void InitiallizeGridColumn()
+        
+
+        public void InitiallizeGridColumn()
         {
             DataTable myDataTable = new DataTable("MainGrid");
             main_datagrid.Tables.Add(myDataTable);
-            DataColumn myDataColumn;
-
-
-            myDataColumn = new DataColumn();
-            myDataColumn.DataType = System.Type.GetType("System.Int32");
-            myDataColumn.ColumnName = "Loop Counter";
-
-            myDataColumn = new DataColumn();
-            myDataColumn.DataType = System.Type.GetType("System.String");
-            myDataColumn.ColumnName = "Step";
-
             //การเชื่อมต่อ datagridview
             DgvMeasurement.DataSource = main_datagrid.Tables["MainGrid"];
 
+
         }
+
+        private void Received_Data_measurement(double Data_measure)
+        {
+            //DataTable myDataTable = main_datagrid.Tables["MainGrid"];
+            //string Timeclock = DateTime.Now.ToString("HH:mm:ss.fff");
+
+            //myDataTable.Rows.Add(Timeclock, Data_measure);
+
+            LBvaluemeasurement.Text = Data_measure.ToString() + GlobalMeasurementSettings.Instance.UnitPrefix;
+        }
+
+
 
         #endregion
 
