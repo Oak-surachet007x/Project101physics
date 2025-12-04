@@ -334,3 +334,4 @@ C:\Users\stipa\Desktop\phy102\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabp
 C:\Users\stipa\Desktop\phy102\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.pdb
 C:\Users\stipa\Desktop\phy102\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.exe.config
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.exe.config
+C:\Users\stipa\Desktop\phy102\CodingLabpro\CodingLabpro\bin\x64\Debug\Keysight.Visa.xml

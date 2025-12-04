@@ -79,6 +79,7 @@
             this.RB_autoON = new System.Windows.Forms.RadioButton();
             this.RB_autoOFF = new System.Windows.Forms.RadioButton();
             this.totalAreaXTextBox = new System.Windows.Forms.TextBox();
+            this.InputValue_area = new System.Windows.Forms.BindingSource(this.components);
             this.totalAreaYTextBox = new System.Windows.Forms.TextBox();
             this.moveStepYTextBox = new System.Windows.Forms.TextBox();
             this.moveStepXTextBox = new System.Windows.Forms.TextBox();
@@ -99,7 +100,7 @@
             this.CBrange = new System.Windows.Forms.ComboBox();
             this.RB_Customrange = new System.Windows.Forms.RadioButton();
             this.RB_autorange = new System.Windows.Forms.RadioButton();
-            this.InputValue_area = new System.Windows.Forms.BindingSource(this.components);
+            this.Btn_SCPItest = new System.Windows.Forms.Button();
             totalAreaXLabel = new System.Windows.Forms.Label();
             totalAreaYLabel = new System.Windows.Forms.Label();
             moveStepYLabel = new System.Windows.Forms.Label();
@@ -110,12 +111,12 @@
             this.GBSource.SuspendLayout();
             this.GBMeas.SuspendLayout();
             this.GBautozero.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Range)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Resolution)).BeginInit();
             this.GBResolution.SuspendLayout();
             this.GBrange.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).BeginInit();
             this.SuspendLayout();
             // 
             // totalAreaXLabel
@@ -746,6 +747,10 @@
             this.totalAreaXTextBox.TabIndex = 50;
             this.totalAreaXTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // InputValue_area
+            // 
+            this.InputValue_area.DataSource = typeof(CodingLabpro.CommandDevice.CalculateArea_Bind);
+            // 
             // totalAreaYTextBox
             // 
             this.totalAreaYTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "TotalAreaY", true));
@@ -864,6 +869,7 @@
             this.Btn_QueryResolution.TabIndex = 65;
             this.Btn_QueryResolution.Text = "Resolution?";
             this.Btn_QueryResolution.UseVisualStyleBackColor = true;
+            this.Btn_QueryResolution.Click += new System.EventHandler(this.Btn_QueryResolution_Click);
             // 
             // RB_resolution6digits
             // 
@@ -996,9 +1002,15 @@
             this.RB_autorange.UseVisualStyleBackColor = true;
             this.RB_autorange.CheckedChanged += new System.EventHandler(this.RB_autorange_CheckedChanged);
             // 
-            // InputValue_area
+            // Btn_SCPItest
             // 
-            this.InputValue_area.DataSource = typeof(CodingLabpro.CommandDevice.CalculateArea_Bind);
+            this.Btn_SCPItest.Location = new System.Drawing.Point(515, 71);
+            this.Btn_SCPItest.Name = "Btn_SCPItest";
+            this.Btn_SCPItest.Size = new System.Drawing.Size(75, 23);
+            this.Btn_SCPItest.TabIndex = 63;
+            this.Btn_SCPItest.Text = "Test_SCPI";
+            this.Btn_SCPItest.UseVisualStyleBackColor = true;
+            this.Btn_SCPItest.Click += new System.EventHandler(this.Btn_SCPItest_Click);
             // 
             // AxisControl
             // 
@@ -1006,6 +1018,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
+            this.Controls.Add(this.Btn_SCPItest);
             this.Controls.Add(this.GBrange);
             this.Controls.Add(this.GBResolution);
             this.Controls.Add(delaySteppingLabel);
@@ -1063,6 +1076,7 @@
             this.GBMeas.ResumeLayout(false);
             this.GBautozero.ResumeLayout(false);
             this.GBautozero.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Range)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Resolution)).EndInit();
@@ -1070,7 +1084,6 @@
             this.GBResolution.PerformLayout();
             this.GBrange.ResumeLayout(false);
             this.GBrange.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1143,5 +1156,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button Btn_QueryResolution;
         private System.Windows.Forms.Label MessageWarning1;
+        private System.Windows.Forms.Button Btn_SCPItest;
     }
 }
