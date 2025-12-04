@@ -169,7 +169,6 @@
   <ItemGroup>
     <Compile Include="CommandDevice\CalculateArea.cs" />
     <Compile Include="CommandDevice\CalculateArea_Bind.cs" />
-    <Compile Include="CommandDevice\CollectMeasurement.cs" />
     <Compile Include="CommandDevice\EntityValidator.cs" />
     <Compile Include="CommandDevice\FindDevices.cs" />
     <Compile Include="CommandDevice\GlobalMeasurementSettings.cs" />

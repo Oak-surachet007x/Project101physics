@@ -477,7 +477,7 @@ namespace CodingLabpro.frmChild
                 string formattedResolution = FormatResolution(Resolution);
 
                 // สร้างคำสั่ง SCPI
-                string command = $"CONF:{baseCommand} {formattedRange}, {Resolution}";
+                string command = $"CONF:{baseCommand} {formattedRange}, {formattedResolution}";
                 Debug.WriteLine(command);
                 return command;
             }
@@ -564,9 +564,6 @@ namespace CodingLabpro.frmChild
             catch (Exception ex)
             {
                 Debug.WriteLine("Error in Build_ConfigCommand: " + ex.Message);
-                //ErrorLogger.LogError(ex);
-                //ErrorLogger.Complete();
-                //ErrorLogger.ShowAllErrors();
                 return string.Empty;
 
             }
@@ -667,8 +664,8 @@ namespace CodingLabpro.frmChild
         {
             try
             {
-                string value = myDMM.ReadString().Trim();
-                //string value = "5.025350000E-03"; //ทดสอบค่า   
+                //string value = myDMM.ReadString().Trim();
+                string value = "-100.001970E-09"; //ทดสอบค่า   
                 Reportdata.AppendText($"Measurement Result: {value.Trim()}{Environment.NewLine}");
 
                 Prefix_measurement(value);            // แยก prefix หรือข้อมูลหน่วย
@@ -739,7 +736,7 @@ namespace CodingLabpro.frmChild
         private Double Conv_Value_measurement(string measurement)
         {
             double ValueOnly = double.Parse(measurement.Substring(0, measurement.IndexOf("E"))); //ดึงค่าเฉพาะตัวเลขออก
-            Debug.WriteLine($"Value Measurement: {ValueOnly}");
+            Debug.WriteLine($"Value Measurement: {ValueOnly}"); //ค่าจริงก่อนปัดเศษ
             double roundedValue = Math.Round(ValueOnly, 5); //กำหนดตำแหน่งทศนิยม
             Debug.WriteLine($"Value After Round: {roundedValue}");
             return  roundedValue;
@@ -1160,14 +1157,16 @@ namespace CodingLabpro.frmChild
                 }
 
                 //Run Setup Scaning
-                myMMC.WriteString("H:W");
-                await Task.Delay(5000);
-                myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y == 0 cm
-                myMMC.WriteString("G:");
-                await Task.Delay(5000);
-                //---------------------------------Setup Measurement-------------------------------------------- -
+                //myMMC.WriteString("H:W");
+                //await Task.Delay(5000);
+                //myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y == 0 cm
+                //myMMC.WriteString("G:");
+                //await Task.Delay(5000);
+                //---------------------------------Setup Measurement---------------------------------------------
                 //Run Measurement
-                SetupMeasurementCommand();
+                //SetupMeasurementCommand();
+                GlobalMeasurementSettings.Instance.CountOfRows = LoopAreaY;
+                GlobalMeasurementSettings.Instance.CountOfColumns = LoopAreaX;
                 //Stopwatch
                 OnRunClicked?.Invoke();
                 //---------------------------------Loop Scaning Area---------------------------------------------
@@ -1180,10 +1179,10 @@ namespace CodingLabpro.frmChild
                     {
                         for (int x = 0; x < LoopAreaX; x++)
                         {
-                            myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
-                            myMMC.WriteString("G:");
+                            //myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
+                            //myMMC.WriteString("G:");
                             await Task.Delay(2000); //หน่วงเวลา 2 วินาที เพื่อเก็บค่าการวัด
-                            Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
+                            //Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
                             ReadMeasurementResult();
                             await Task.Delay(ValueTimer);
                         }
@@ -1192,18 +1191,18 @@ namespace CodingLabpro.frmChild
                     {
                         for (int x = 0; x < LoopAreaX; x++)
                         {
-                            myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
-                            myMMC.WriteString("G:");
+                            //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
+                            //myMMC.WriteString("G:");
                             await Task.Delay(2000); //หน่วงเวลา 2 วินาที เพื่อเก็บค่าการวัด
-                            Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
+                            //Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
                             ReadMeasurementResult();
                             await Task.Delay(ValueTimer);
                         }
                     }
 
                     //เคลื่อนที่ไปยังแถวถัดไปตามแนว Y
-                    myMMC.WriteString(ValueProcessY);
-                    myMMC.WriteString("G:");
+                    //myMMC.WriteString(ValueProcessY);
+                    //myMMC.WriteString("G:");
                     await Task.Delay(ValueTimer);
 
 
@@ -1215,8 +1214,8 @@ namespace CodingLabpro.frmChild
 
                     for (int x = 0; x < LoopAreaX; x++)
                     {
-                        myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
-                        myMMC.WriteString("G:");
+                        //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
+                        //myMMC.WriteString("G:");
                         await Task.Delay(ValueTimer);
 
                     }

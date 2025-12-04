@@ -2,29 +2,30 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Ivi.Visa.Interop;
-using Ivi.Visa.FormattedIO;
-using Ivi.Visa;
 using System.IO;
 using System.IO.Ports;
+using System.Linq;
 using System.Runtime.InteropServices;
-using NPOI.SS.Formula.Eval;
-using CodingLabpro.CommandDevice;
-using System.Windows.Forms.DataVisualization.Charting;
-using CodingLabpro.Models;
 using System.Security.Cryptography.X509Certificates;
-using CodingLabpro.frmChild;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using NPOI.POIFS.Crypt.Dsig;
+using System.Text;
 using System.Threading;
-using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+using CodingLabpro.CommandDevice;
+using CodingLabpro.frmChild;
+using CodingLabpro.Models;
+using Ivi.Visa;
+using Ivi.Visa.FormattedIO;
+using Ivi.Visa.Interop;
+using NPOI.POIFS.Crypt.Dsig;
+using NPOI.SS.Formula.Eval;
+using NPOI.SS.Formula.Functions;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 
@@ -46,10 +47,7 @@ namespace CodingLabpro
     
         public List<barMenu> barButton;
 
-        //dataTable
-        DataSet main_datagrid = new DataSet();
-
-
+      
         public FrmMain01()
         {
             InitializeComponent();
@@ -152,11 +150,18 @@ namespace CodingLabpro
 
         private void FrmChild1_OnRunClicked()
         {
+            //Initialize DataGridview Measurement
+            int Rows = GlobalMeasurementSettings.Instance.CountOfRows;
+            int Columns = GlobalMeasurementSettings.Instance.CountOfColumns;
+            BindingSource_DataMeasure.DataSource = ConvertArrayToTable(new int[Rows, Columns]);
+            DgvMeasurement.DataSource = BindingSource_DataMeasure;
+            //Start Stopwatch
             watch.Restart();
         }
 
         private void FrmChild1_OnCancelClicked()
         {
+            //Stop Stopwatch
             watch.Stop();
         }
 
@@ -290,7 +295,9 @@ namespace CodingLabpro
         #endregion
 
         #region Datagridview Measurement Control Result //จัดการตารางข้อมูล
-        
+
+        //dataTable
+        DataSet main_datagrid = new DataSet();
 
         public void InitiallizeGridColumn()
         {
@@ -302,14 +309,38 @@ namespace CodingLabpro
 
         }
 
+        private DataTable ConvertArrayToTable(int[,] arr)
+        {
+            int rows = arr.GetLength(0);
+            int cols = arr.GetLength(1);
+
+            for (int i = 0; i < cols; i++)
+            {
+                main_datagrid.Tables["MainGrid"].Columns.Add("Col" + (i + 1), typeof(int));
+            }
+
+            for (int i = 0; i < rows; i++)
+            {
+                DataRow row = main_datagrid.Tables["MainGrid"].NewRow();
+                for (int j = 0; j < cols; j++)
+                {
+                    row[j] = arr[i, j];
+                }
+                main_datagrid.Tables["MainGrid"].Rows.Add(row);
+            }
+
+
+            return main_datagrid.Tables["MainGrid"];
+
+        }
+
+        
         private void Received_Data_measurement(double Data_measure)
         {
-            //DataTable myDataTable = main_datagrid.Tables["MainGrid"];
-            //string Timeclock = DateTime.Now.ToString("HH:mm:ss.fff");
-
-            //myDataTable.Rows.Add(Timeclock, Data_measure);
-
+      
             LBvaluemeasurement.Text = Data_measure.ToString() + GlobalMeasurementSettings.Instance.UnitPrefix;
+            
+
         }
 
 

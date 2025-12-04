@@ -68,7 +68,6 @@
             this.GBchart = new System.Windows.Forms.GroupBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.flowLayoutBar = new System.Windows.Forms.FlowLayoutPanel();
-            this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.FormChildpanel = new System.Windows.Forms.Panel();
             this.Datetimenow = new System.Windows.Forms.Timer(this.components);
             this.Stoptimer1 = new System.Windows.Forms.Timer(this.components);
@@ -77,6 +76,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.TabPage_ConnectPort = new System.Windows.Forms.TabPage();
             this.BindingSource_DataMeasure = new System.Windows.Forms.BindingSource(this.components);
+            this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.tableLayoutPanel1.SuspendLayout();
             this.GBdata.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMeasurement)).BeginInit();
@@ -267,7 +267,7 @@
             this.labelTop.Font = new System.Drawing.Font("Cascadia Mono", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTop.ForeColor = System.Drawing.Color.White;
             this.labelTop.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.labelTop.Location = new System.Drawing.Point(4, 1);
+            this.labelTop.Location = new System.Drawing.Point(2, 1);
             this.labelTop.Name = "labelTop";
             this.labelTop.Size = new System.Drawing.Size(228, 43);
             this.labelTop.TabIndex = 2;
@@ -279,7 +279,7 @@
             this.labelName.BackColor = System.Drawing.Color.Transparent;
             this.labelName.Font = new System.Drawing.Font("Cascadia Mono", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelName.ForeColor = System.Drawing.Color.White;
-            this.labelName.Location = new System.Drawing.Point(10, 44);
+            this.labelName.Location = new System.Drawing.Point(9, 44);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(247, 15);
             this.labelName.TabIndex = 3;
@@ -378,7 +378,7 @@
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 144);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(504, 104);
+            this.panelTop.Size = new System.Drawing.Size(504, 115);
             this.panelTop.TabIndex = 6;
             // 
             // LBdatetime
@@ -386,7 +386,7 @@
             this.LBdatetime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LBdatetime.AutoSize = true;
             this.LBdatetime.Font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBdatetime.Location = new System.Drawing.Point(266, 84);
+            this.LBdatetime.Location = new System.Drawing.Point(261, 75);
             this.LBdatetime.Name = "LBdatetime";
             this.LBdatetime.Size = new System.Drawing.Size(228, 17);
             this.LBdatetime.TabIndex = 4;
@@ -397,13 +397,13 @@
             // 
             this.LBunitmeasurement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LBunitmeasurement.AutoSize = true;
-            this.LBunitmeasurement.Font = new System.Drawing.Font("Cascadia Mono SemiLight", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBunitmeasurement.Location = new System.Drawing.Point(417, 5);
+            this.LBunitmeasurement.Font = new System.Drawing.Font("Cascadia Mono SemiLight", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBunitmeasurement.Location = new System.Drawing.Point(429, 11);
             this.LBunitmeasurement.Name = "LBunitmeasurement";
-            this.LBunitmeasurement.Size = new System.Drawing.Size(95, 43);
+            this.LBunitmeasurement.Size = new System.Drawing.Size(79, 35);
             this.LBunitmeasurement.TabIndex = 6;
             this.LBunitmeasurement.Text = "Mode";
-            this.LBunitmeasurement.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LBunitmeasurement.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // LBtimer
             // 
@@ -411,7 +411,7 @@
             this.LBtimer.AutoSize = true;
             this.LBtimer.BackColor = System.Drawing.Color.Transparent;
             this.LBtimer.Font = new System.Drawing.Font("OCR A Extended", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBtimer.Location = new System.Drawing.Point(277, 50);
+            this.LBtimer.Location = new System.Drawing.Point(276, 46);
             this.LBtimer.Name = "LBtimer";
             this.LBtimer.Size = new System.Drawing.Size(217, 29);
             this.LBtimer.TabIndex = 7;
@@ -421,15 +421,14 @@
             // LBvaluemeasurement
             // 
             this.LBvaluemeasurement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LBvaluemeasurement.AutoSize = true;
-            this.LBvaluemeasurement.Font = new System.Drawing.Font("OCR A Extended", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBvaluemeasurement.Location = new System.Drawing.Point(260, 11);
+            this.LBvaluemeasurement.Font = new System.Drawing.Font("OCR A Extended", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBvaluemeasurement.Location = new System.Drawing.Point(152, 9);
             this.LBvaluemeasurement.Margin = new System.Windows.Forms.Padding(0);
             this.LBvaluemeasurement.Name = "LBvaluemeasurement";
-            this.LBvaluemeasurement.Size = new System.Drawing.Size(167, 35);
+            this.LBvaluemeasurement.Size = new System.Drawing.Size(280, 35);
             this.LBvaluemeasurement.TabIndex = 5;
             this.LBvaluemeasurement.Text = "-00.0000";
-            this.LBvaluemeasurement.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LBvaluemeasurement.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // GBchart
             // 
@@ -439,10 +438,10 @@
             this.GBchart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.GBchart.Font = new System.Drawing.Font("Cascadia Mono Light", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBchart.ForeColor = System.Drawing.Color.White;
-            this.GBchart.Location = new System.Drawing.Point(0, 248);
+            this.GBchart.Location = new System.Drawing.Point(0, 259);
             this.GBchart.Name = "GBchart";
             this.GBchart.Padding = new System.Windows.Forms.Padding(0);
-            this.GBchart.Size = new System.Drawing.Size(504, 227);
+            this.GBchart.Size = new System.Drawing.Size(504, 216);
             this.GBchart.TabIndex = 8;
             this.GBchart.TabStop = false;
             this.GBchart.Text = "Data Measurement";
@@ -493,7 +492,7 @@
             series1.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(504, 205);
+            this.chart1.Size = new System.Drawing.Size(504, 194);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -506,17 +505,6 @@
             this.flowLayoutBar.Name = "flowLayoutBar";
             this.flowLayoutBar.Size = new System.Drawing.Size(50, 587);
             this.flowLayoutBar.TabIndex = 0;
-            // 
-            // barMenu1
-            // 
-            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
-            this.barMenu1.BarColor = System.Drawing.Color.White;
-            this.barMenu1.Location = new System.Drawing.Point(6, 12);
-            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
-            this.barMenu1.Name = "barMenu1";
-            this.barMenu1.Size = new System.Drawing.Size(50, 222);
-            this.barMenu1.TabIndex = 0;
-            this.barMenu1.textbar = "Axis Control & Measument";
             // 
             // FormChildpanel
             // 
@@ -583,6 +571,17 @@
             this.TabPage_ConnectPort.Size = new System.Drawing.Size(1226, 105);
             this.TabPage_ConnectPort.TabIndex = 1;
             this.TabPage_ConnectPort.Text = "Connect";
+            // 
+            // barMenu1
+            // 
+            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
+            this.barMenu1.BarColor = System.Drawing.Color.White;
+            this.barMenu1.Location = new System.Drawing.Point(6, 12);
+            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
+            this.barMenu1.Name = "barMenu1";
+            this.barMenu1.Size = new System.Drawing.Size(50, 222);
+            this.barMenu1.TabIndex = 0;
+            this.barMenu1.textbar = "Axis Control & Measument";
             // 
             // FrmMain01
             // 
