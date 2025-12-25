@@ -25,7 +25,7 @@ namespace CodingLabpro.CommandDevice
         private string _UnitPrefix;
         private int _CountOfRows;
         private int _CountOfColumns;
-
+        
         public event EventHandler SettingsChanged;
 
         public string MeasureMode {

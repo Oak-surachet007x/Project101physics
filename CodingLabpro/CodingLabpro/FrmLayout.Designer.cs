@@ -30,11 +30,11 @@
         {
             this.Menupanel = new System.Windows.Forms.Panel();
             this.LBversion = new System.Windows.Forms.Label();
-            this.ucMenu2 = new CodingLabpro.Models.ucMenu();
-            this.ucMenu1 = new CodingLabpro.Models.ucMenu();
             this.panel_Logo = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.FormLayoutpanel = new System.Windows.Forms.Panel();
+            this.ucMenu2 = new CodingLabpro.Models.ucMenu();
+            this.ucMenu1 = new CodingLabpro.Models.ucMenu();
             this.Menupanel.SuspendLayout();
             this.panel_Logo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -67,6 +67,35 @@
             this.LBversion.Text = "Version";
             this.LBversion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // panel_Logo
+            // 
+            this.panel_Logo.BackColor = System.Drawing.Color.White;
+            this.panel_Logo.Controls.Add(this.pictureBox1);
+            this.panel_Logo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_Logo.Location = new System.Drawing.Point(0, 0);
+            this.panel_Logo.Name = "panel_Logo";
+            this.panel_Logo.Size = new System.Drawing.Size(150, 144);
+            this.panel_Logo.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.ErrorImage = null;
+            this.pictureBox1.Image = global::CodingLabpro.Properties.Resources.Applied_Physics_Logo;
+            this.pictureBox1.Location = new System.Drawing.Point(8, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(136, 136);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // FormLayoutpanel
+            // 
+            this.FormLayoutpanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FormLayoutpanel.Location = new System.Drawing.Point(150, 0);
+            this.FormLayoutpanel.Name = "FormLayoutpanel";
+            this.FormLayoutpanel.Size = new System.Drawing.Size(1234, 761);
+            this.FormLayoutpanel.TabIndex = 1;
+            // 
             // ucMenu2
             // 
             this.ucMenu2.BackColor = System.Drawing.Color.Transparent;
@@ -89,34 +118,6 @@
             this.ucMenu1.TabIndex = 1;
             this.ucMenu1.textlabel = "MainControl";
             // 
-            // panel_Logo
-            // 
-            this.panel_Logo.BackColor = System.Drawing.Color.White;
-            this.panel_Logo.Controls.Add(this.pictureBox1);
-            this.panel_Logo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_Logo.Location = new System.Drawing.Point(0, 0);
-            this.panel_Logo.Name = "panel_Logo";
-            this.panel_Logo.Size = new System.Drawing.Size(150, 144);
-            this.panel_Logo.TabIndex = 0;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::CodingLabpro.Properties.Resources.Applied_Physics_Logo;
-            this.pictureBox1.Location = new System.Drawing.Point(8, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(136, 136);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
-            // FormLayoutpanel
-            // 
-            this.FormLayoutpanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FormLayoutpanel.Location = new System.Drawing.Point(150, 0);
-            this.FormLayoutpanel.Name = "FormLayoutpanel";
-            this.FormLayoutpanel.Size = new System.Drawing.Size(1234, 761);
-            this.FormLayoutpanel.TabIndex = 1;
-            // 
             // FrmLayout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -129,6 +130,7 @@
             this.Name = "FrmLayout";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmLayout";
+            this.Load += new System.EventHandler(this.FrmLayout_Load);
             this.Menupanel.ResumeLayout(false);
             this.Menupanel.PerformLayout();
             this.panel_Logo.ResumeLayout(false);

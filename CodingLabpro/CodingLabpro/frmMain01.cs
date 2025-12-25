@@ -22,9 +22,12 @@ using CodingLabpro.Models;
 using Ivi.Visa;
 using Ivi.Visa.FormattedIO;
 using Ivi.Visa.Interop;
+using MathNet.Numerics.RootFinding;
+using NPOI.HSSF.UserModel;
 using NPOI.POIFS.Crypt.Dsig;
 using NPOI.SS.Formula.Eval;
 using NPOI.SS.Formula.Functions;
+using NPOI.XSSF.Streaming.Values;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
@@ -44,10 +47,13 @@ namespace CodingLabpro
         public static string Aread;
         public static bool isConnect;
         public event EventHandler ActiveComboBox;
-    
         public List<barMenu> barButton;
+        private int Rows, Columns;
+        private int IndexPostionX = 0;
+        private int IndexPostionY = 0;
+        private string fileSavePath;
 
-      
+
         public FrmMain01()
         {
             InitializeComponent();
@@ -86,6 +92,7 @@ namespace CodingLabpro
             frmChild1.OnRunClicked += FrmChild1_OnRunClicked; 
             frmChild1.OnCancelClicked += FrmChild1_OnCancelClicked;
             frmChild1.OnMeasurement += Received_Data_measurement;
+            frmChild1.OnMeasurementWithDisplay += Received_Data_Display_measurement;
 
 
             //First show Panel frmChild
@@ -124,7 +131,7 @@ namespace CodingLabpro
 
         }
 
-       
+      
 
         #region Stopwatch Control
         public string GetTimeString(TimeSpan elapsed)
@@ -151,10 +158,11 @@ namespace CodingLabpro
         private void FrmChild1_OnRunClicked()
         {
             //Initialize DataGridview Measurement
-            int Rows = GlobalMeasurementSettings.Instance.CountOfRows;
-            int Columns = GlobalMeasurementSettings.Instance.CountOfColumns;
-            BindingSource_DataMeasure.DataSource = ConvertArrayToTable(new int[Rows, Columns]);
-            DgvMeasurement.DataSource = BindingSource_DataMeasure;
+            Rows = GlobalMeasurementSettings.Instance.CountOfRows;
+            Columns = GlobalMeasurementSettings.Instance.CountOfColumns;
+            
+            ConvertArrayToTable(new int [Rows, Columns]);
+
             //Start Stopwatch
             watch.Restart();
         }
@@ -167,7 +175,7 @@ namespace CodingLabpro
 
         #endregion
 
-        private void UpdatelabelMeasurement()
+        private void UpdatelabelTypeMeasurement()
         {
             if (GlobalMeasurementSettings.Instance.SourceMode == "DC" && GlobalMeasurementSettings.Instance.MeasureMode == "Voltage")
             {
@@ -259,7 +267,7 @@ namespace CodingLabpro
 
         private void Instance_SettingsChanged(object sender, EventArgs e)
         {
-            UpdatelabelMeasurement();
+            UpdatelabelTypeMeasurement();
             
         }
 
@@ -297,53 +305,152 @@ namespace CodingLabpro
         #region Datagridview Measurement Control Result //จัดการตารางข้อมูล
 
         //dataTable
-        DataSet main_datagrid = new DataSet();
+        private readonly DataSet main_datagrid = new DataSet();
+        private DataTable dataTable_measurement = new DataTable();
+        public DataSet Main_datagrid => main_datagrid;
 
         public void InitiallizeGridColumn()
         {
-            DataTable myDataTable = new DataTable("MainGrid");
-            main_datagrid.Tables.Add(myDataTable);
-            //การเชื่อมต่อ datagridview
-            DgvMeasurement.DataSource = main_datagrid.Tables["MainGrid"];
+            //สร้าง DataTable และเชื่อมโยงกับ DataGridView
+            dataTable_measurement = new DataTable("MainGrid");
+            Main_datagrid.Tables.Add(dataTable_measurement);
+            BindingSource_DataMeasure.DataSource = dataTable_measurement;
+            DgvMeasurement.DataSource = BindingSource_DataMeasure;
+
+            //ตั้งค่ารูปแบบของ DataGridView
+            DgvMeasurement.DefaultCellStyle.ForeColor = Color.Black;
+            DgvMeasurement.DefaultCellStyle.BackColor = Color.White;
+            DgvMeasurement.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Regular);
+            DgvMeasurement.DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
+            DgvMeasurement.DefaultCellStyle.Format = "E5"; // รูปแบบวิทยาศาสตร์ (Scientific Notation
+            DgvMeasurement.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Bold);
+            DgvMeasurement.ColumnHeadersHeight = 50; // Set the desired height in pixels
+            DgvMeasurement.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            DgvMeasurement.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
 
 
         }
 
         private DataTable ConvertArrayToTable(int[,] arr)
         {
-            int rows = arr.GetLength(0);
-            int cols = arr.GetLength(1);
+            int rows = arr.GetLength(0); // จำนวนแถว
+            int cols = arr.GetLength(1); // จำนวนคอลัมน์
+ 
+            dataTable_measurement.Clear(); // ล้างข้อมูลเก่า
+          
 
             for (int i = 0; i < cols; i++)
             {
-                main_datagrid.Tables["MainGrid"].Columns.Add("Col" + (i + 1), typeof(int));
+                dataTable_measurement.Columns.Add($"Step{i + 1}" , typeof(double));
             }
 
             for (int i = 0; i < rows; i++)
             {
-                DataRow row = main_datagrid.Tables["MainGrid"].NewRow();
+                DataRow row = dataTable_measurement.NewRow();
                 for (int j = 0; j < cols; j++)
                 {
-                    row[j] = arr[i, j];
+                    row[j] = DBNull.Value;
+                    
                 }
-                main_datagrid.Tables["MainGrid"].Rows.Add(row);
+                dataTable_measurement.Rows.Add(row);
+                
+
+            }
+            return dataTable_measurement;
+
+        }
+
+      
+        public void UpdateCell(int row, int col, double value)
+        {
+            if (dataTable_measurement == null) return;
+
+            if (row < 0 || row >= dataTable_measurement.Rows.Count) return;
+            if (col < 0 || col >= dataTable_measurement.Columns.Count) return;
+
+            dataTable_measurement.Rows[row][col] = value;
+          
+
+        }
+
+        private void UpdateCellColumn()
+        {
+            for (int i = 0; i < Columns; i++)
+            {
+                dataTable_measurement.Columns[i].ColumnName = $"Step{i + 1} ({GlobalMeasurementSettings.Instance.MeasureMode})";
             }
 
-
-            return main_datagrid.Tables["MainGrid"];
-
         }
 
-        
+        private void Received_Data_Display_measurement(double Data_Display)
+        {
+            LBvaluemeasurement.Text = Data_Display.ToString("F5") + GlobalMeasurementSettings.Instance.UnitPrefix;
+        }
+
         private void Received_Data_measurement(double Data_measure)
         {
-      
-            LBvaluemeasurement.Text = Data_measure.ToString() + GlobalMeasurementSettings.Instance.UnitPrefix;
-            
+            UpdateCellColumn();
 
+            if (IndexPostionX < Columns)
+            {
+                UpdateCell(IndexPostionY, IndexPostionX, Data_measure);
+                IndexPostionX++;
+            }
+            else
+            {
+                IndexPostionX = 0;
+                IndexPostionY++;
+               
+            }
         }
 
 
+
+        #endregion
+
+        #region Export DataGridview to Excel Control
+
+        //private void DataExcelConfigure(string )
+        //{
+        //    HSSFWorkbook workbook = new HSSFWorkbook();
+        //    var sheet1 = workbook.CreateSheet("Sheet1");
+        //    var sheet2 = workbook.CreateSheet("Sheet2");
+
+        //    string filename = fileSavePath;
+        //    using (var fileData = new FileStream(filename, FileMode.Create))
+        //    {
+        //        workbook.Write(fileData);
+        //    }
+        //}
+
+        private void ToolBtnExport_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            saveFileDialog1.Title = "Save a File";
+            saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog1.OverwritePrompt = true; // Warns if the file already exists
+
+            // 3. Show the dialog and check for a valid result
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // 4. Get the full path from the FileName property
+                fileSavePath = saveFileDialog1.FileName;
+                LBExportFile.Text = $"Save to Path: {fileSavePath}";
+                
+                // 5. Use the path for your saving logic
+                // The dialog itself does not save the file; you must write the code to do so.
+                try
+                {
+                    // Example: Writing a simple string to the file path
+                    System.IO.File.WriteAllText(fileSavePath, "Hello, world!");
+                    MessageBox.Show($"File saved successfully to: {fileSavePath}");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error saving file: {ex.Message}");
+                }
+            }
+        }
 
         #endregion
 
@@ -540,7 +647,7 @@ namespace CodingLabpro
             }
                 
         }
-            
+
         private void BtnDiconnect_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Cursor.Current = Cursors.WaitCursor;

@@ -32,6 +32,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain01));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
@@ -60,6 +61,7 @@
             this.StatusPort2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusMMC2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusPort3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.LBExportFile = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelTop = new System.Windows.Forms.Panel();
             this.LBdatetime = new System.Windows.Forms.Label();
             this.LBunitmeasurement = new System.Windows.Forms.Label();
@@ -74,7 +76,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.TabToolbar = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.toolStripMenu = new System.Windows.Forms.ToolStrip();
+            this.ToolBtnExport = new System.Windows.Forms.ToolStripButton();
             this.TabPage_ConnectPort = new System.Windows.Forms.TabPage();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.BindingSource_DataMeasure = new System.Windows.Forms.BindingSource(this.components);
             this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.tableLayoutPanel1.SuspendLayout();
@@ -89,6 +94,8 @@
             this.flowLayoutBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.TabToolbar.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.toolStripMenu.SuspendLayout();
             this.TabPage_ConnectPort.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BindingSource_DataMeasure)).BeginInit();
             this.SuspendLayout();
@@ -100,11 +107,11 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 92.68965F));
             this.tableLayoutPanel1.Controls.Add(this.GBdata, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 475);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 423);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(504, 256);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(504, 308);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // GBdata
@@ -117,7 +124,7 @@
             this.GBdata.Margin = new System.Windows.Forms.Padding(10);
             this.GBdata.Name = "GBdata";
             this.GBdata.Padding = new System.Windows.Forms.Padding(7);
-            this.GBdata.Size = new System.Drawing.Size(484, 236);
+            this.GBdata.Size = new System.Drawing.Size(484, 288);
             this.GBdata.TabIndex = 1;
             this.GBdata.TabStop = false;
             this.GBdata.Text = "Measurement";
@@ -134,12 +141,19 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DgvMeasurement.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.DgvMeasurement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvMeasurement.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvMeasurement.Location = new System.Drawing.Point(7, 26);
             this.DgvMeasurement.Margin = new System.Windows.Forms.Padding(0);
             this.DgvMeasurement.Name = "DgvMeasurement";
-            this.DgvMeasurement.Size = new System.Drawing.Size(470, 203);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvMeasurement.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.DgvMeasurement.Size = new System.Drawing.Size(470, 255);
             this.DgvMeasurement.TabIndex = 0;
             // 
             // GBconnect
@@ -299,7 +313,8 @@
             this.StatusMMC1,
             this.StatusPort2,
             this.StatusMMC2,
-            this.StatusPort3});
+            this.StatusPort3,
+            this.LBExportFile});
             this.MainStatus.Location = new System.Drawing.Point(0, 731);
             this.MainStatus.Name = "MainStatus";
             this.MainStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -366,6 +381,19 @@
             this.StatusPort3.Size = new System.Drawing.Size(70, 25);
             this.StatusPort3.Text = "DICONNECT";
             // 
+            // LBExportFile
+            // 
+            this.LBExportFile.AutoSize = false;
+            this.LBExportFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBExportFile.ForeColor = System.Drawing.SystemColors.Control;
+            this.LBExportFile.Image = global::CodingLabpro.Properties.Resources.file_export_33dp_8C1AF6_FILL0_wght400_GRAD0_opsz40;
+            this.LBExportFile.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LBExportFile.Name = "LBExportFile";
+            this.LBExportFile.Size = new System.Drawing.Size(724, 25);
+            this.LBExportFile.Spring = true;
+            this.LBExportFile.Text = "FilePath:";
+            this.LBExportFile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // panelTop
             // 
             this.panelTop.BackColor = System.Drawing.Color.Transparent;
@@ -421,7 +449,7 @@
             // LBvaluemeasurement
             // 
             this.LBvaluemeasurement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LBvaluemeasurement.Font = new System.Drawing.Font("OCR A Extended", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBvaluemeasurement.Font = new System.Drawing.Font("OCR A Extended", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBvaluemeasurement.Location = new System.Drawing.Point(152, 9);
             this.LBvaluemeasurement.Margin = new System.Windows.Forms.Padding(0);
             this.LBvaluemeasurement.Name = "LBvaluemeasurement";
@@ -441,7 +469,7 @@
             this.GBchart.Location = new System.Drawing.Point(0, 259);
             this.GBchart.Name = "GBchart";
             this.GBchart.Padding = new System.Windows.Forms.Padding(0);
-            this.GBchart.Size = new System.Drawing.Size(504, 216);
+            this.GBchart.Size = new System.Drawing.Size(504, 164);
             this.GBchart.TabIndex = 8;
             this.GBchart.TabStop = false;
             this.GBchart.Text = "Data Measurement";
@@ -492,7 +520,7 @@
             series1.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(504, 194);
+            this.chart1.Size = new System.Drawing.Size(504, 142);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -553,6 +581,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
+            this.tabPage1.Controls.Add(this.toolStripMenu);
             this.tabPage1.ForeColor = System.Drawing.Color.Black;
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
@@ -560,6 +589,30 @@
             this.tabPage1.Size = new System.Drawing.Size(1226, 105);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "File";
+            // 
+            // toolStripMenu
+            // 
+            this.toolStripMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStripMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolBtnExport});
+            this.toolStripMenu.Location = new System.Drawing.Point(3, 3);
+            this.toolStripMenu.Name = "toolStripMenu";
+            this.toolStripMenu.Size = new System.Drawing.Size(1220, 99);
+            this.toolStripMenu.TabIndex = 0;
+            this.toolStripMenu.Text = "toolStrip1";
+            // 
+            // ToolBtnExport
+            // 
+            this.ToolBtnExport.AutoSize = false;
+            this.ToolBtnExport.Image = global::CodingLabpro.Properties.Resources.File_excel_xlsx_icon;
+            this.ToolBtnExport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ToolBtnExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolBtnExport.Name = "ToolBtnExport";
+            this.ToolBtnExport.Size = new System.Drawing.Size(100, 96);
+            this.ToolBtnExport.Text = "Export to .xlsx";
+            this.ToolBtnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ToolBtnExport.Click += new System.EventHandler(this.ToolBtnExport_Click);
             // 
             // TabPage_ConnectPort
             // 
@@ -619,6 +672,10 @@
             this.flowLayoutBar.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.TabToolbar.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.toolStripMenu.ResumeLayout(false);
+            this.toolStripMenu.PerformLayout();
             this.TabPage_ConnectPort.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.BindingSource_DataMeasure)).EndInit();
             this.ResumeLayout(false);
@@ -669,5 +726,9 @@
         private System.Windows.Forms.Label LBunitmeasurement;
         private System.Windows.Forms.ToolStripStatusLabel StatusPort3;
         private System.Windows.Forms.BindingSource BindingSource_DataMeasure;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStrip toolStripMenu;
+        private System.Windows.Forms.ToolStripButton ToolBtnExport;
+        private System.Windows.Forms.ToolStripStatusLabel LBExportFile;
     }
 }

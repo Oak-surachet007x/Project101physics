@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CodingLabpro.CommandDevice;
 using CodingLabpro.frmChild;
 using CodingLabpro.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
@@ -47,10 +48,10 @@ namespace CodingLabpro
         }
 
         public FrmLayout()
-        { 
+        {
             InitializeComponent();
             this.Text = "Aglient 34401A And MMC-2 Axis Controller";
-            LBversion.Text = "Version \n1.0.1"; //แสดงผลเวอร์ชันโปรแกรม
+            LBversion.Text = "Version \n1.0.3"; //แสดงผลเวอร์ชันโปรแกรม
 
             this.SetStyle(
                         ControlStyles.OptimizedDoubleBuffer |
@@ -129,8 +130,16 @@ namespace CodingLabpro
 
         }
 
+
         #endregion
 
+       
+
+        private void FrmLayout_Load(object sender, EventArgs e)
+        {
+           
+        }
+       
         
     }
 }

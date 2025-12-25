@@ -39,9 +39,11 @@ namespace CodingLabpro.frmChild
         private double Range;
         private double Resolution;
         private double Result_Measures;
+        private double Display_Measure;
         public event Action OnRunClicked;
         public event Action OnCancelClicked;
-        public event Action <Double> OnMeasurement;
+        public event Action <double> OnMeasurement;
+        public event Action<double> OnMeasurementWithDisplay;
 
 
         public AxisControl(Ivi.Visa.Interop.FormattedIO488 myMMC, SerialPort mySerialPort, Ivi.Visa.Interop.FormattedIO488 myDMM)
@@ -60,12 +62,8 @@ namespace CodingLabpro.frmChild
             CBtrigger.Items.AddRange(new string[] {"IMMediate", "BUS"});
 
             RB_resolution4digits.Text = "4\u00BD digits";
-            RB_resolution6digits.Text = "6\u00BD digits";
 
             
-          
-
-
         }
 
         
@@ -73,7 +71,7 @@ namespace CodingLabpro.frmChild
         {
      
             RB_resolution4digits.Enabled = !EnabledItem;
-            RB_resolution6digits.Enabled = !EnabledItem;
+            RB_resolutionMIN.Enabled = !EnabledItem;
             RB_resolutionCustom.Enabled = !EnabledItem;
             RB_resolutionAuto.Enabled = !EnabledItem;
             RB_autorange.Enabled = !EnabledItem;
@@ -204,9 +202,14 @@ namespace CodingLabpro.frmChild
             GlobalMeasurementSettings.Instance.ResolutionControl = "DIGITS_4";
             Numeric_Resolution.Enabled = false; 
         }
-        private void RB_resolution6digits_CheckedChanged(object sender, EventArgs e)
+        private void RB_resolutionMIN_CheckedChanged(object sender, EventArgs e)
         {
-            GlobalMeasurementSettings.Instance.ResolutionControl = "DIGITS_6";
+            GlobalMeasurementSettings.Instance.ResolutionControl = "MIN";
+            Numeric_Resolution.Enabled = false;
+        }
+        private void RB_resolutionMAX_CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalMeasurementSettings.Instance.ResolutionControl = "MAX";
             Numeric_Resolution.Enabled = false;
         }
         private void RB_resolutionAuto_CheckedChanged(object sender, EventArgs e)
@@ -331,9 +334,12 @@ namespace CodingLabpro.frmChild
                 case "DIGITS_4":
                     Debug.WriteLine(BuildCommand("RESolution", "0.0001"));
                     return BuildCommand("RESolution", "0.0001");
-                case "DIGITS_6":
-                    Debug.WriteLine(BuildCommand("RESolution", "1E-6"));
-                    return BuildCommand("RESolution", "1E-6");
+                case "MIN":
+                    Debug.WriteLine(BuildCommand("RESolution", "MIN"));
+                    return BuildCommand("RESolution", "MIN");
+                case "MAX":
+                    Debug.WriteLine(BuildCommand("RESolution", "MAX"));
+                    return BuildCommand("RESolution", "MAX");
                 case "CUSTOM":
                     double Value = (double)Numeric_Resolution.Value;
                     return BuildCommand("RESolution", Value);
@@ -458,7 +464,9 @@ namespace CodingLabpro.frmChild
                         case "DIGITS_4":
                             Resolution = 0.0001;
                             break;
-                        case "DIGITS_6":
+                        case "MIN":
+                            return $"CONF:{baseCommand} {Range}, MIN";
+                        case "MAX":
                             return $"CONF:{baseCommand} {Range}, MAX";
                         case "AUTO":
                             return $"CONF:{baseCommand} {Range}";
@@ -537,9 +545,10 @@ namespace CodingLabpro.frmChild
                         case "DIGITS_4":
                             Resolution = 0.0001;
                             break;
-                        case "DIGITS_6":
-                            Resolution = 1E-6;
-                            break;
+                        case "MIN":
+                            return $"MEAS:{baseCommand}? {Range}, MIN";
+                        case "MAX":
+                            return $"MEAS:{baseCommand}? {Range}, MAX";
                         case "AUTO":
                             return $"MEAS:{baseCommand}? {Range}";
                         case "CUSTOM":
@@ -655,23 +664,25 @@ namespace CodingLabpro.frmChild
 
         //-----------------------------------------------Data Acquisition Measurement---------------------------------------------
 
-        private void SendDataMeasurement(Double MeasurementValue)
+        private void SendDataMeasurement(double MeasurementValue, double DisplayValue)
         {
             OnMeasurement?.Invoke(MeasurementValue);
+            OnMeasurementWithDisplay?.Invoke(DisplayValue);
         }
 
-        private double ReadMeasurementResult() //อ่านค่าการวัด
+        private void ReadMeasurementResult() //อ่านค่าการวัด
         {
             try
             {
-                string value = myDMM.ReadString().Trim();
-                //string value = "-100.001970E-09"; //ทดสอบค่า   
-                Reportdata.AppendText($"Measurement Result: {value.Trim()}{Environment.NewLine}");
+                //string value = myDMM.ReadString().Trim();
+                string value = "5.00197000E-07"; //ทดสอบค่า   
+                Reportdata.AppendText($"MeasurementResult: {value.Trim()}{Environment.NewLine}");
 
-                Prefix_measurement(value);            // แยก prefix หรือข้อมูลหน่วย
-                Result_Measures =  Conv_Value_measurement(value); // แปลงค่าตัวเลข -> double
-
-                SendDataMeasurement(Result_Measures);
+               
+                Result_Measures =  double.Parse(value); // แปลงค่าตัวเลข -> double
+                Display_Measure = ConvertValueOnUnitDisplay(value); //แปลงค่าตัวเลขตามหน่วยการแสดงผล
+                //Result_Measures = Unit_Measurement(value);
+                SendDataMeasurement(Result_Measures, Display_Measure);
             }
             catch (Exception ex)
             {
@@ -680,14 +691,15 @@ namespace CodingLabpro.frmChild
                 Result_Measures = double.NaN;
             }
 
-            return Result_Measures;
         }
 
-        private void Prefix_measurement (string measurement)
+        private double ConvertValueOnUnitDisplay(string measurement)
         {
-            string Exponent = measurement.Substring(measurement.IndexOf("E"));
-            string SI_Prefix = "";
+            string Exponent = measurement.Substring(measurement.IndexOf("E")); //ดึงค่าเลขยกกำลังออก
+            double Value = double.Parse(measurement); //ค่าจริงก่อนแปลงหน่วย
             string UnitMeasure = "";
+            double Measurement_Value;
+
 
             // กำหนดหน่วยการวัดตามโหมดการวัด
             if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage")
@@ -699,49 +711,127 @@ namespace CodingLabpro.frmChild
                 UnitMeasure = "A";
             }
 
-            // กำหนดคำนำหน้าหน่วย (Prefix) ตาม Exponent
+            string SI_Prefix;
             switch (Exponent)
             {
-                case "E+09":
-                    SI_Prefix = "G"; // Giga
+                case "E-12":
+                    SI_Prefix = "p"; //pico official
+                    Measurement_Value = double.Parse(measurement.Substring(0, measurement.IndexOf("E")));
                     break;
-                case "E+06":
-                    SI_Prefix = "M"; // Mega
+                case "E-11":
+                    SI_Prefix = "n"; //nano
+                    Measurement_Value = Value * 1E9;
                     break;
-                case "E+03":
-                    SI_Prefix = "k"; // kilo
-                    break;
-                case "E+00":
-                    SI_Prefix = ""; // ไม่มีคำนำหน้า
-                    break;
-                case "E-03":
-                    SI_Prefix = "m"; // milli
-                    break;
-                case "E-06":
-                    SI_Prefix = "μ"; // micro
+                case "E-10":
+                    SI_Prefix = "n"; //nano
+                    Measurement_Value = Value * 1E9;
                     break;
                 case "E-09":
-                    SI_Prefix = "n"; // nano
+                    SI_Prefix = "n"; //nano official
+                    Measurement_Value = double.Parse(measurement.Substring(0, measurement.IndexOf("E")));
+                    break;
+                case "E-08":
+                    SI_Prefix = "μ"; //micro
+                    Measurement_Value = Value * 1E6;
+                    break;
+                case "E-07":
+                    SI_Prefix = "μ"; //micro
+                    Measurement_Value = double.Parse(measurement.Substring(0, measurement.IndexOf("E")));
+                    break;
+                case "E-06":
+                    SI_Prefix = "μ"; //micro official
+                    Measurement_Value = double.Parse(measurement.Substring(0, measurement.IndexOf("E")));
+                    break;
+                case "E-05":
+                    SI_Prefix = "m"; //milli
+                    Measurement_Value = Value * 1E3;
+                    break;
+                case "E-04":
+                    SI_Prefix = "m"; //milli
+                    Measurement_Value = Value * 1E3;
+                    break;
+                case "E-03":
+                    SI_Prefix = "m"; //milli official
+                    Measurement_Value = double.Parse(measurement.Substring(0, measurement.IndexOf("E")));
+                    break;
+                case "E-02":
+                    SI_Prefix = "m"; //milli
+                    Measurement_Value = Value * 1E3;
+                    break;
+                case "E-01":
+                    SI_Prefix = "m"; //milli
+                    Measurement_Value = Value * 1E3;
+                    break;
+                case "E+01":
+                    SI_Prefix = "K"; //kilo
+                    Measurement_Value = Value * 1E-3;
+                    break;
+                case "E+02":
+                    SI_Prefix = "K"; //kilo
+                    Measurement_Value = Value * 1E-3;
+                    break;
+                case "E+03":
+                    SI_Prefix = "K"; //kilo official
+                    Measurement_Value = double.Parse(measurement.Substring(0, measurement.IndexOf("E")));
+                    break;
+                case "E+04":
+                    SI_Prefix = "K"; //kilo
+                    Measurement_Value = Value * 1E-3;
+                    break;
+                case "E+05":
+                    SI_Prefix = "K"; //kilo
+                    Measurement_Value = Value * 1E-3;
+                    break;
+                case "E+06":
+                    SI_Prefix = "M"; //Mega official
+                    Measurement_Value = double.Parse(measurement.Substring(0, measurement.IndexOf("E")));
+                    break;
+                case "E+07":
+                    SI_Prefix = "M"; //Mega
+                    Measurement_Value = Value * 1E-6;
+                    break;
+                case "E+08":
+                    SI_Prefix = "M"; //Mega
+                    Measurement_Value = Value * 1E-6;
+                    break;
+                case "E+09":
+                    SI_Prefix = "G"; //Giga official
+                    Measurement_Value = double.Parse(measurement.Substring(0, measurement.IndexOf("E")));
+                    break;
+                case "E+10":
+                    SI_Prefix = "G"; //Giga
+                    Measurement_Value = Value * 1E-9;
+                    break;
+                case "E+11":
+                    SI_Prefix = "G"; //Giga
+                    Measurement_Value = Value * 1E-9;
+                    break;
+                case "E+12":
+                    SI_Prefix = "T"; //Tera official
+                    Measurement_Value = double.Parse(measurement.Substring(0, measurement.IndexOf("E")));
                     break;
                 default:
-                    SI_Prefix = ""; // กรณีไม่ตรงกับ Exponent ใด ๆ
+                    SI_Prefix = "";
+                    Measurement_Value = double.Parse(measurement.Substring(0, measurement.IndexOf("E")));
                     break;
             }
 
             // แสดงผลลัพธ์พร้อมหน่วยการวัด
             GlobalMeasurementSettings.Instance.UnitPrefix = $"{SI_Prefix}{UnitMeasure}";
             Debug.WriteLine("Formatted Measurement Unit: " + GlobalMeasurementSettings.Instance.UnitPrefix);
+            Debug.WriteLine(Measurement_Value);
+            return Measurement_Value; //ค่าที่แปลงหน่วยแล้ว
         }
 
-        private Double Conv_Value_measurement(string measurement)
-        {
-            double ValueOnly = double.Parse(measurement.Substring(0, measurement.IndexOf("E"))); //ดึงค่าเฉพาะตัวเลขออก
-            Debug.WriteLine($"Value Measurement: {ValueOnly}"); //ค่าจริงก่อนปัดเศษ
-            double roundedValue = Math.Round(ValueOnly, 5); //กำหนดตำแหน่งทศนิยม
-            Debug.WriteLine($"Value After Round: {roundedValue}");
-            return  roundedValue;
+        //private Double Conv_Value_measurement(string measurement)
+        //{
+        //    double ValueOnly = double.Parse(measurement.Substring(0, measurement.IndexOf("E"))); //ดึงค่าเฉพาะตัวเลขออก
+        //    Debug.WriteLine($"Value Measurement: {ValueOnly}"); //ค่าจริงก่อนปัดเศษ
+        //    double roundedValue = Math.Round(ValueOnly, 5); //กำหนดตำแหน่งทศนิยม
+        //    Debug.WriteLine($"Value After Round: {roundedValue}");
+        //    return  roundedValue;
        
-        }
+        //}
        
 
         //--------------------------------------------------Validator Error Provider------------------------------------------------
@@ -1157,21 +1247,21 @@ namespace CodingLabpro.frmChild
                 }
 
                 //Run Setup Scaning
-                myMMC.WriteString("H:W");
-                await Task.Delay(5000);
-                myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y == 0 cm
-                myMMC.WriteString("G:");
-                await Task.Delay(5000);
+                //myMMC.WriteString("H:W");
+                //await Task.Delay(5000);
+                //myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y == 0 cm
+                //myMMC.WriteString("G:");
+                //await Task.Delay(5000);
                 //---------------------------------Setup Measurement---------------------------------------------
                 //Run Measurement
-                SetupMeasurementCommand();
+                //SetupMeasurementCommand();
                 GlobalMeasurementSettings.Instance.CountOfRows = LoopAreaY;
                 GlobalMeasurementSettings.Instance.CountOfColumns = LoopAreaX;
                 //Stopwatch
                 OnRunClicked?.Invoke();
                 //---------------------------------Loop Scaning Area---------------------------------------------
                 //Report Area Calculate
-                Reportdata.AppendText($" คำนวณผลลัพธ์ลูปที่สแกนของ X คือ {LoopAreaX} ลูป \n คำนวณผลลัพธ์ลูปที่สแกนของ Y คือ {LoopAreaY} ลูป" + Environment.NewLine); //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
+                Reportdata.AppendText($"คำนวณผลลัพธ์ลูปที่สแกนของ X คือ {LoopAreaX} ลูป \n คำนวณผลลัพธ์ลูปที่สแกนของ Y คือ {LoopAreaY} ลูป" + Environment.NewLine); //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
 
                 for (int y = 0; y < LoopAreaY; y++)  // Loop แกน Y (สแกนพื้นที่ 10 แถว)
                 {
@@ -1179,10 +1269,10 @@ namespace CodingLabpro.frmChild
                     {
                         for (int x = 0; x < LoopAreaX; x++)
                         {
-                            myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
-                            myMMC.WriteString("G:");
+                            //myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
+                            //myMMC.WriteString("G:");
                             await Task.Delay(2000); //หน่วงเวลา 2 วินาที เพื่อเก็บค่าการวัด
-                            Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
+                            //Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
                             ReadMeasurementResult();
                             await Task.Delay(ValueTimer);
                         }
@@ -1191,18 +1281,18 @@ namespace CodingLabpro.frmChild
                     {
                         for (int x = 0; x < LoopAreaX; x++)
                         {
-                            myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
-                            myMMC.WriteString("G:");
+                            //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
+                            //myMMC.WriteString("G:");
                             await Task.Delay(2000); //หน่วงเวลา 2 วินาที เพื่อเก็บค่าการวัด
-                            Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
+                            //Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
                             ReadMeasurementResult();
                             await Task.Delay(ValueTimer);
                         }
                     }
 
                     //เคลื่อนที่ไปยังแถวถัดไปตามแนว Y
-                    myMMC.WriteString(ValueProcessY);
-                    myMMC.WriteString("G:");
+                    //myMMC.WriteString(ValueProcessY);
+                    //myMMC.WriteString("G:");
                     await Task.Delay(ValueTimer);
 
 
@@ -1272,7 +1362,6 @@ namespace CodingLabpro.frmChild
             ShowMessage("INFO", ErrorDmm);
         }
 
-       
         private void Btn_SCPItest_Click(object sender, EventArgs e)
         {
             SetupMeasurementCommand();
@@ -1283,6 +1372,28 @@ namespace CodingLabpro.frmChild
             myDMM.WriteString("VOLT:DC:RESolution?");
             string QueryDmm = myDMM.ReadString();
             ShowMessage("INFO", QueryDmm);
+        }
+
+        //--------------------------------Textbox KeyPress Event---------------------------------------------
+        //เมธอดตรวจสอบการกรอกข้อมูลให้เป็นตัวเลขเท่านั้น
+        private void totalAreaXTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back;
+        }
+
+        private void totalAreaYTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back;
+        }
+
+        private void moveStepXTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back;
+        }
+
+        private void moveStepYTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back;
         }
     }
 }

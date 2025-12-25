@@ -353,6 +353,12 @@
   <ItemGroup>
     <None Include="Resources\monitor_heart_70dp_8C1AF6_FILL0_wght400_GRAD0_opsz48.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file_export_33dp_8C1AF6_FILL0_wght400_GRAD0_opsz40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\File excel_xlsx icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
