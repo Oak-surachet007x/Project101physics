@@ -70,18 +70,21 @@
             this.GBchart = new System.Windows.Forms.GroupBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.flowLayoutBar = new System.Windows.Forms.FlowLayoutPanel();
+            this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.FormChildpanel = new System.Windows.Forms.Panel();
             this.Datetimenow = new System.Windows.Forms.Timer(this.components);
             this.Stoptimer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.TabToolbar = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.TabPage_Tools = new System.Windows.Forms.TabPage();
             this.toolStripMenu = new System.Windows.Forms.ToolStrip();
             this.ToolBtnExport = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolBtnError = new System.Windows.Forms.ToolStripButton();
+            this.ToolBtnClear = new System.Windows.Forms.ToolStripButton();
             this.TabPage_ConnectPort = new System.Windows.Forms.TabPage();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.BindingSource_DataMeasure = new System.Windows.Forms.BindingSource(this.components);
-            this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.tableLayoutPanel1.SuspendLayout();
             this.GBdata.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMeasurement)).BeginInit();
@@ -94,7 +97,7 @@
             this.flowLayoutBar.SuspendLayout();
             this.panel1.SuspendLayout();
             this.TabToolbar.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.TabPage_Tools.SuspendLayout();
             this.toolStripMenu.SuspendLayout();
             this.TabPage_ConnectPort.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BindingSource_DataMeasure)).BeginInit();
@@ -145,6 +148,7 @@
             this.DgvMeasurement.Location = new System.Drawing.Point(7, 26);
             this.DgvMeasurement.Margin = new System.Windows.Forms.Padding(0);
             this.DgvMeasurement.Name = "DgvMeasurement";
+            this.DgvMeasurement.ReadOnly = true;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -534,6 +538,17 @@
             this.flowLayoutBar.Size = new System.Drawing.Size(50, 587);
             this.flowLayoutBar.TabIndex = 0;
             // 
+            // barMenu1
+            // 
+            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
+            this.barMenu1.BarColor = System.Drawing.Color.White;
+            this.barMenu1.Location = new System.Drawing.Point(6, 12);
+            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
+            this.barMenu1.Name = "barMenu1";
+            this.barMenu1.Size = new System.Drawing.Size(50, 222);
+            this.barMenu1.TabIndex = 0;
+            this.barMenu1.textbar = "Axis Control & Measument";
+            // 
             // FormChildpanel
             // 
             this.FormChildpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
@@ -565,7 +580,7 @@
             // 
             // TabToolbar
             // 
-            this.TabToolbar.Controls.Add(this.tabPage1);
+            this.TabToolbar.Controls.Add(this.TabPage_Tools);
             this.TabToolbar.Controls.Add(this.TabPage_ConnectPort);
             this.TabToolbar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TabToolbar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -578,24 +593,27 @@
             this.TabToolbar.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.TabToolbar.TabIndex = 0;
             // 
-            // tabPage1
+            // TabPage_Tools
             // 
-            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
-            this.tabPage1.Controls.Add(this.toolStripMenu);
-            this.tabPage1.ForeColor = System.Drawing.Color.Black;
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1226, 105);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "File";
+            this.TabPage_Tools.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
+            this.TabPage_Tools.Controls.Add(this.toolStripMenu);
+            this.TabPage_Tools.ForeColor = System.Drawing.Color.Black;
+            this.TabPage_Tools.Location = new System.Drawing.Point(4, 25);
+            this.TabPage_Tools.Name = "TabPage_Tools";
+            this.TabPage_Tools.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage_Tools.Size = new System.Drawing.Size(1226, 105);
+            this.TabPage_Tools.TabIndex = 2;
+            this.TabPage_Tools.Text = "Tools";
             // 
             // toolStripMenu
             // 
             this.toolStripMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStripMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolBtnExport});
+            this.ToolBtnExport,
+            this.toolStripSeparator1,
+            this.ToolBtnError,
+            this.ToolBtnClear});
             this.toolStripMenu.Location = new System.Drawing.Point(3, 3);
             this.toolStripMenu.Name = "toolStripMenu";
             this.toolStripMenu.Size = new System.Drawing.Size(1220, 99);
@@ -614,6 +632,35 @@
             this.ToolBtnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ToolBtnExport.Click += new System.EventHandler(this.ToolBtnExport_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 99);
+            // 
+            // ToolBtnError
+            // 
+            this.ToolBtnError.Image = global::CodingLabpro.Properties.Resources.troubleshoot_64dp_8C1AF6_FILL0_wght400_GRAD0_opsz48;
+            this.ToolBtnError.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ToolBtnError.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolBtnError.Name = "ToolBtnError";
+            this.ToolBtnError.Size = new System.Drawing.Size(75, 96);
+            this.ToolBtnError.Text = "Check Error ";
+            this.ToolBtnError.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.ToolBtnError.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ToolBtnError.Click += new System.EventHandler(this.ToolBtnError_Click);
+            // 
+            // ToolBtnClear
+            // 
+            this.ToolBtnClear.Image = global::CodingLabpro.Properties.Resources.clean_code;
+            this.ToolBtnClear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ToolBtnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolBtnClear.Margin = new System.Windows.Forms.Padding(5, 1, 0, 2);
+            this.ToolBtnClear.Name = "ToolBtnClear";
+            this.ToolBtnClear.Size = new System.Drawing.Size(71, 96);
+            this.ToolBtnClear.Text = "Clear Errors";
+            this.ToolBtnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ToolBtnClear.Click += new System.EventHandler(this.ToolBtnClear_Click);
+            // 
             // TabPage_ConnectPort
             // 
             this.TabPage_ConnectPort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
@@ -624,17 +671,6 @@
             this.TabPage_ConnectPort.Size = new System.Drawing.Size(1226, 105);
             this.TabPage_ConnectPort.TabIndex = 1;
             this.TabPage_ConnectPort.Text = "Connect";
-            // 
-            // barMenu1
-            // 
-            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
-            this.barMenu1.BarColor = System.Drawing.Color.White;
-            this.barMenu1.Location = new System.Drawing.Point(6, 12);
-            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
-            this.barMenu1.Name = "barMenu1";
-            this.barMenu1.Size = new System.Drawing.Size(50, 222);
-            this.barMenu1.TabIndex = 0;
-            this.barMenu1.textbar = "Axis Control & Measument";
             // 
             // FrmMain01
             // 
@@ -672,8 +708,8 @@
             this.flowLayoutBar.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.TabToolbar.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.TabPage_Tools.ResumeLayout(false);
+            this.TabPage_Tools.PerformLayout();
             this.toolStripMenu.ResumeLayout(false);
             this.toolStripMenu.PerformLayout();
             this.TabPage_ConnectPort.ResumeLayout(false);
@@ -722,7 +758,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TabControl TabToolbar;
         private System.Windows.Forms.TabPage TabPage_ConnectPort;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage TabPage_Tools;
         private System.Windows.Forms.Label LBunitmeasurement;
         private System.Windows.Forms.ToolStripStatusLabel StatusPort3;
         private System.Windows.Forms.BindingSource BindingSource_DataMeasure;
@@ -730,5 +766,8 @@
         private System.Windows.Forms.ToolStrip toolStripMenu;
         private System.Windows.Forms.ToolStripButton ToolBtnExport;
         private System.Windows.Forms.ToolStripStatusLabel LBExportFile;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton ToolBtnError;
+        private System.Windows.Forms.ToolStripButton ToolBtnClear;
     }
 }

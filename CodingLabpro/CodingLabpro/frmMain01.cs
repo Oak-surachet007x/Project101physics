@@ -27,7 +27,9 @@ using NPOI.HSSF.UserModel;
 using NPOI.POIFS.Crypt.Dsig;
 using NPOI.SS.Formula.Eval;
 using NPOI.SS.Formula.Functions;
+using NPOI.SS.UserModel;
 using NPOI.XSSF.Streaming.Values;
+using NPOI.XSSF.UserModel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
@@ -51,7 +53,6 @@ namespace CodingLabpro
         private int Rows, Columns;
         private int IndexPostionX = 0;
         private int IndexPostionY = 0;
-        private string fileSavePath;
 
 
         public FrmMain01()
@@ -119,14 +120,16 @@ namespace CodingLabpro
             };
             finder.FDevice(); // Find devices from Port GPIB
 
-            finder.OnDeviceFound1 += (device1) => { Cblistaddress3.Items.Add(device1); };
+            finder.OnDeviceFound1 += (device1) => { Cblistaddress3.Items.Add(device1); }; // Add devices to ComboBox for RS232
             finder.RSdevice(); // Find devices form Port RS232
 
 
             //chart Data DC Measura
             Chartmeasure();
 
-
+            //Update Label Measurement
+            ToolBtnError.Text = "Check Error\nDMM";
+            ToolBtnClear.Text = "Clear Error\nDMM";
 
 
         }
@@ -360,19 +363,6 @@ namespace CodingLabpro
 
         }
 
-      
-        public void UpdateCell(int row, int col, double value)
-        {
-            if (dataTable_measurement == null) return;
-
-            if (row < 0 || row >= dataTable_measurement.Rows.Count) return;
-            if (col < 0 || col >= dataTable_measurement.Columns.Count) return;
-
-            dataTable_measurement.Rows[row][col] = value;
-          
-
-        }
-
         private void UpdateCellColumn()
         {
             for (int i = 0; i < Columns; i++)
@@ -391,64 +381,108 @@ namespace CodingLabpro
         {
             UpdateCellColumn();
 
-            if (IndexPostionX < Columns)
-            {
-                UpdateCell(IndexPostionY, IndexPostionX, Data_measure);
-                IndexPostionX++;
-            }
-            else
+            // ป้องกันเขียนเกินขนาดตาราง
+            if (IndexPostionY >= dataTable_measurement.Rows.Count)
+                return;
+
+            UpdateCell(IndexPostionY, IndexPostionX, Data_measure);
+
+            IndexPostionX++;
+
+            if (IndexPostionX >= Columns)
             {
                 IndexPostionX = 0;
                 IndexPostionY++;
-               
             }
         }
 
+        public void UpdateCell(int row, int col, double value)
+        {
+            if (dataTable_measurement == null) return;
 
+            if (row < 0 || row >= dataTable_measurement.Rows.Count) return;
+            if (col < 0 || col >= dataTable_measurement.Columns.Count) return;
+
+            dataTable_measurement.Rows[row][col] = value;
+            //DgvMeasurement.Rows[row].Cells[col].Value = value;
+
+
+        }
 
         #endregion
 
         #region Export DataGridview to Excel Control
 
-        //private void DataExcelConfigure(string )
-        //{
-        //    HSSFWorkbook workbook = new HSSFWorkbook();
-        //    var sheet1 = workbook.CreateSheet("Sheet1");
-        //    var sheet2 = workbook.CreateSheet("Sheet2");
+        private IWorkbook workbook { get; set; }
 
-        //    string filename = fileSavePath;
-        //    using (var fileData = new FileStream(filename, FileMode.Create))
-        //    {
-        //        workbook.Write(fileData);
-        //    }
-        //}
+        //เมธอดการสร้างชีทและส่วนหัวของตาราง
+        private ISheet createSheetAndHeader(DataTable dt, string sheetName, ICellStyle customStyle)
+        {
+            ISheet sheeti = this.workbook.CreateSheet(sheetName);
+            //--- add 1 header row
+            IRow rowSheet = sheeti.CreateRow(0);
+            for (int c = 0; c < dt.Columns.Count; c++)
+            {
+                var cellc = rowSheet.CreateCell(c);
+                cellc.SetCellValue(dt.Columns[c].ColumnName);
+                cellc.CellStyle = customStyle;
+                sheeti.AutoSizeColumn(c);
+            }
+            return sheeti;
+        }
 
+        //เมธอดการตั้งค่า Excel และบันทึกไฟล์
+        private void DataExcelConfigure(string filePath, DataTable dt)
+        {
+            //Create Excel
+            this.workbook = new XSSFWorkbook();
+
+            // Create the style object
+            ICellStyle customStyle = this.workbook.CreateCellStyle();
+            // Define a thin border for the top and bottom of the cell
+            customStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
+            customStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thin;
+            customStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
+            // Create a font object and make it bold
+            var customFont = this.workbook.CreateFont();
+            customFont.IsBold = true;
+            customFont.FontName = "Microsoft Sans Serif";
+            customFont.FontHeightInPoints = 10;
+            // Assign the font to the style
+            customStyle.SetFont(customFont);
+
+            // Create sheet and add header
+            int sheetCount = 1;
+            string sheetName = "Sheet" + sheetCount++;
+            ISheet sheeti = createSheetAndHeader(dt, sheetName, customStyle);
+
+
+            //Add file data and export excel
+            string filename = filePath;
+            using (var fileData = new FileStream(filename, FileMode.Create, FileAccess.Write))
+            {
+                this.workbook.Write(fileData);
+            }
+        }
+
+        //เมธอดปุ่ม Export ข้อมูลไปยัง Excel
         private void ToolBtnExport_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            saveFileDialog1.Filter = "Excel Files|*.xlsx;*.xls";
             saveFileDialog1.Title = "Save a File";
             saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             saveFileDialog1.OverwritePrompt = true; // Warns if the file already exists
+            saveFileDialog1.FileName = "OutfileData.xlsx";
 
-            // 3. Show the dialog and check for a valid result
+            // 1. Show the dialog and check for a valid result
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                // 4. Get the full path from the FileName property
-                fileSavePath = saveFileDialog1.FileName;
+                // 2. Get the full path from the FileName property
+                string fileSavePath = saveFileDialog1.FileName;
                 LBExportFile.Text = $"Save to Path: {fileSavePath}";
+                DataExcelConfigure(fileSavePath, dataTable_measurement);
+
                 
-                // 5. Use the path for your saving logic
-                // The dialog itself does not save the file; you must write the code to do so.
-                try
-                {
-                    // Example: Writing a simple string to the file path
-                    System.IO.File.WriteAllText(fileSavePath, "Hello, world!");
-                    MessageBox.Show($"File saved successfully to: {fileSavePath}");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error saving file: {ex.Message}");
-                }
             }
         }
 
@@ -698,6 +732,35 @@ namespace CodingLabpro
             System.Windows.Forms.Cursor.Current = Cursors.Default;
         }
 
-        
+        private void ToolBtnClear_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MyDMM.WriteString("*CLS");  //Clear Error
+                ShowMessage("OK", "Clear Error DMM Successfully");
+            }
+            catch (Exception ex) 
+            {
+                ShowMessage("ERROR", $"Please Connect Device Agilent Multimeter \n {ex.Message}");
+            }
+
+        }
+
+        private void ToolBtnError_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MyDMM.WriteString("SYST:ERR?");  //Read Error
+                string ErrorDmm = MyDMM.ReadString();
+                ShowMessage("ERROR", ErrorDmm);
+
+            }
+            catch (Exception ex)
+            {
+                ShowMessage("ERROR", $"Please Connect Device Agilent Multimeter \n {ex.Message}");
+
+            }
+               
+        }
     }
 }

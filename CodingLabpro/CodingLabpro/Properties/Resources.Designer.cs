@@ -73,6 +73,16 @@ namespace CodingLabpro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap clean_code {
+            get {
+                object obj = ResourceManager.GetObject("clean-code", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap dynamic_form_16dp_E8EAED {
             get {
                 object obj = ResourceManager.GetObject("dynamic_form_16dp_E8EAED", resourceCulture);
@@ -176,6 +186,16 @@ namespace CodingLabpro.Properties {
         internal static System.Drawing.Bitmap sync_saved_locally_100dp_16C47F_FILL1_wght400_GRAD0_opsz48 {
             get {
                 object obj = ResourceManager.GetObject("sync_saved_locally_100dp_16C47F_FILL1_wght400_GRAD0_opsz48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap troubleshoot_64dp_8C1AF6_FILL0_wght400_GRAD0_opsz48 {
+            get {
+                object obj = ResourceManager.GetObject("troubleshoot_64dp_8C1AF6_FILL0_wght400_GRAD0_opsz48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

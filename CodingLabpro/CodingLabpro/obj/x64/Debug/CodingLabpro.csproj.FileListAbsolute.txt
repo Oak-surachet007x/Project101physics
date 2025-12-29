@@ -283,7 +283,6 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Sec
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Security.Principal.Windows.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Text.Encoding.CodePages.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Threading.Tasks.Extensions.dll
-C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.ValueTuple.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\BouncyCastle.Cryptography.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Enums.NET.pdb
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Enums.NET.xml
@@ -315,7 +314,6 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Sec
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Security.Principal.Windows.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Text.Encoding.CodePages.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Threading.Tasks.Extensions.xml
-C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.ValueTuple.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.csproj.AssemblyReference.cache
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\Interop.BASICFORMATTEDIOLib.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.csproj.ResolveComReference.cache
@@ -335,3 +333,7 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLa.A
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.exe
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.pdb
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.exe.config
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NSax.dll
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\ZString.dll
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\ZString.xml
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.csproj.SuggestedBindingRedirects.cache

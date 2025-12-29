@@ -82,10 +82,8 @@ namespace CodingLabpro.frmChild
             Btn_QueryResolution.Enabled = !EnabledItem;
             CBtrigger.Enabled = !EnabledItem;
             BtnCancel_scaning.Enabled = !EnabledItem;
-            Btn_Error.Enabled = !EnabledItem;
             Btn_read.Enabled = !EnabledItem;
             Btn_Reset.Enabled = !EnabledItem;
-            Btn_clear.Enabled = !EnabledItem;
 
         }
         private void AxisControl_Load(object sender, EventArgs e)
@@ -667,7 +665,7 @@ namespace CodingLabpro.frmChild
         private void SendDataMeasurement(double MeasurementValue, double DisplayValue)
         {
             OnMeasurement?.Invoke(MeasurementValue);
-            OnMeasurementWithDisplay?.Invoke(DisplayValue);
+            OnMeasurementWithDisplay?.Invoke(MeasurementValue);
         }
 
         private void ReadMeasurementResult() //อ่านค่าการวัด
@@ -675,13 +673,14 @@ namespace CodingLabpro.frmChild
             try
             {
                 //string value = myDMM.ReadString().Trim();
-                string value = "5.00197000E-07"; //ทดสอบค่า   
-                Reportdata.AppendText($"MeasurementResult: {value.Trim()}{Environment.NewLine}");
+                //string value = "5.00197000E-07"; //ทดสอบค่า   
+                
 
-               
-                Result_Measures =  double.Parse(value); // แปลงค่าตัวเลข -> double
-                Display_Measure = ConvertValueOnUnitDisplay(value); //แปลงค่าตัวเลขตามหน่วยการแสดงผล
-                //Result_Measures = Unit_Measurement(value);
+                Random random = new Random();
+                Result_Measures = random.Next(0, 10);// แปลงค่าตัวเลข -> double
+                Reportdata.AppendText($"MeasurementResult: {Result_Measures}{Environment.NewLine}");
+                //Display_Measure = ConvertValueOnUnitDisplay(value); //แปลงค่าตัวเลขตามหน่วยการแสดงผล
+
                 SendDataMeasurement(Result_Measures, Display_Measure);
             }
             catch (Exception ex)
@@ -736,7 +735,7 @@ namespace CodingLabpro.frmChild
                     break;
                 case "E-07":
                     SI_Prefix = "μ"; //micro
-                    Measurement_Value = double.Parse(measurement.Substring(0, measurement.IndexOf("E")));
+                    Measurement_Value = Value * 1E6;
                     break;
                 case "E-06":
                     SI_Prefix = "μ"; //micro official
@@ -1304,15 +1303,16 @@ namespace CodingLabpro.frmChild
 
                     for (int x = 0; x < LoopAreaX; x++)
                     {
-                        myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
-                        myMMC.WriteString("G:");
+                        //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
+                        //myMMC.WriteString("G:");
                         await Task.Delay(ValueTimer);
 
                     }
                 }
 
-                ShowMessage("INFO", $"{ValueProcessX} {ValueProcessY} {ValueNegativeX}");
                 OnCancelClicked?.Invoke();
+                ShowMessage("INFO", $"{ValueProcessX} {ValueProcessY} {ValueNegativeX}");
+                
             }
             catch (Exception Ex)
             { 
@@ -1348,18 +1348,6 @@ namespace CodingLabpro.frmChild
         private void Btn_Reset_Click(object sender, EventArgs e)
         {
             myDMM.WriteString("*RST");  //Reset DMM
-        }
-
-        private void Btn_clear_Click(object sender, EventArgs e)
-        {
-            myDMM.WriteString("*CLS");  //Clear Status
-        }
-
-        private void Btn_Error_Click(object sender, EventArgs e)
-        {
-            myDMM.WriteString("SYST:ERR?");  //Read Error
-            string ErrorDmm = myDMM.ReadString();
-            ShowMessage("INFO", ErrorDmm);
         }
 
         private void Btn_SCPItest_Click(object sender, EventArgs e)
