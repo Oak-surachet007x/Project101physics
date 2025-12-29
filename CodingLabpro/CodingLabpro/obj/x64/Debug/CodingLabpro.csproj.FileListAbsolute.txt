@@ -271,6 +271,7 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NPOI.Core.
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NPOI.OOXML.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NPOI.OpenXml4Net.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NPOI.OpenXmlFormats.dll
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NSax.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\SixLabors.Fonts.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Buffers.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Formats.Asn1.dll
@@ -283,6 +284,7 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Sec
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Security.Principal.Windows.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Text.Encoding.CodePages.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\ZString.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\BouncyCastle.Cryptography.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Enums.NET.pdb
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\Enums.NET.xml
@@ -314,7 +316,9 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Sec
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Security.Principal.Windows.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Text.Encoding.CodePages.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\ZString.xml
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.csproj.AssemblyReference.cache
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.exe.config
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\Interop.BASICFORMATTEDIOLib.dll
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.csproj.ResolveComReference.cache
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.frmChild.OutputLog.resources
@@ -332,8 +336,5 @@ C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabp
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLa.AE193A8B.Up2Date
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.exe
 C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.pdb
-C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.exe.config
-C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\NSax.dll
-C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\ZString.dll
-C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\ZString.xml
-C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\obj\x64\Debug\CodingLabpro.csproj.SuggestedBindingRedirects.cache
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.ValueTuple.dll
+C:\Users\Surac\Desktop\Phy101\CodingLabpro\CodingLabpro\bin\x64\Debug\System.ValueTuple.xml
