@@ -83,7 +83,6 @@ namespace CodingLabpro.frmChild
             CBtrigger.Enabled = !EnabledItem;
             BtnCancel_scaning.Enabled = !EnabledItem;
             Btn_read.Enabled = !EnabledItem;
-            Btn_Reset.Enabled = !EnabledItem;
 
         }
         private void AxisControl_Load(object sender, EventArgs e)
@@ -665,7 +664,7 @@ namespace CodingLabpro.frmChild
         private void SendDataMeasurement(double MeasurementValue, double DisplayValue)
         {
             OnMeasurement?.Invoke(MeasurementValue);
-            OnMeasurementWithDisplay?.Invoke(MeasurementValue);
+            OnMeasurementWithDisplay?.Invoke(DisplayValue);
         }
 
         private void ReadMeasurementResult() //อ่านค่าการวัด
@@ -673,13 +672,14 @@ namespace CodingLabpro.frmChild
             try
             {
                 //string value = myDMM.ReadString().Trim();
-                //string value = "5.00197000E-07"; //ทดสอบค่า   
-                
+                string value = "5.00197000E-07"; //ทดสอบค่า   
 
-                Random random = new Random();
-                Result_Measures = random.Next(0, 10);// แปลงค่าตัวเลข -> double
+
+                //Random random = new Random();
+                //Result_Measures = random.Next(0, 10);// แปลงค่าตัวเลข -> double
+                Result_Measures = double.Parse(value);
                 Reportdata.AppendText($"MeasurementResult: {Result_Measures}{Environment.NewLine}");
-                //Display_Measure = ConvertValueOnUnitDisplay(value); //แปลงค่าตัวเลขตามหน่วยการแสดงผล
+                Display_Measure = ConvertValueOnUnitDisplay(value); //แปลงค่าตัวเลขตามหน่วยการแสดงผล
 
                 SendDataMeasurement(Result_Measures, Display_Measure);
             }
@@ -688,6 +688,8 @@ namespace CodingLabpro.frmChild
                 ShowMessage("ERROR", "Failed to read measurement result: " + ex.Message);
                 Debug.WriteLine("Error reading measurement: " + ex.Message);
                 Result_Measures = double.NaN;
+
+                SendDataMeasurement(Result_Measures, Result_Measures);
             }
 
         }
@@ -853,37 +855,6 @@ namespace CodingLabpro.frmChild
 
             }
         }
-
-
-        //public class ErrorLogger
-        //{
-        //    private static BlockingCollection<string> ErrorQueue = new BlockingCollection<string>();
-
-        //    public static void LogError(Exception ex)
-        //    {
-        //        string message = $"[{DateTime.Now:HH:mm:ss}] {ex.Message}";
-        //        ErrorQueue.Add(message);
-        //    }
-
-        //    public static void ShowAllErrors()
-        //    {
-        //        if (ErrorQueue.Count == 0)
-        //        {
-        //            MessageBox.Show("ไม่พบข้อผิดพลาดใด ๆ", "Debug Info");
-        //            return;
-        //        }
-
-        //        string allErrors = string.Join(Environment.NewLine, ErrorQueue);
-        //        MessageBox.Show(allErrors, "Error Summary", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //    }
-
-        //    public static void Complete()
-        //    {
-        //        ErrorQueue.CompleteAdding();
-        //    }
-
-        //}
-
 
         public void ShowMessage(string type, string message)
         {
@@ -1345,10 +1316,6 @@ namespace CodingLabpro.frmChild
             MessageBox.Show($"{Resolution_select} \n{Range_select} \n{ConfigCommand} \n{MeasureCommand}", "Output_Log");
         }
 
-        private void Btn_Reset_Click(object sender, EventArgs e)
-        {
-            myDMM.WriteString("*RST");  //Reset DMM
-        }
 
         private void Btn_SCPItest_Click(object sender, EventArgs e)
         {

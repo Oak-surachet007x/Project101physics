@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -123,9 +125,6 @@ namespace CodingLabpro
             finder.OnDeviceFound1 += (device1) => { Cblistaddress3.Items.Add(device1); }; // Add devices to ComboBox for RS232
             finder.RSdevice(); // Find devices form Port RS232
 
-
-            //chart Data DC Measura
-            Chartmeasure();
 
             //Update Label Measurement
             ToolBtnError.Text = "Check Error\nDMM";
@@ -279,32 +278,6 @@ namespace CodingLabpro
             LBdatetime.Text = DateTime.Now.ToString("MM-dd-yyyy HH:mm:ss tt");
         }
 
-        #region Chart Control //การตั้งค่า Chart และการเพิ่มข้อมูล
-        public void Chartmeasure()
-        {
-            chart1.Series["Series1"].Points.AddXY(10, 2);
-            chart1.Series["Series1"].ChartType = SeriesChartType.Line;
-
-            chart1.ChartAreas["ChartArea1"].AxisY.Minimum = 0;
-            chart1.ChartAreas["ChartArea1"].AxisY.Maximum = 10;
-            chart1.ChartAreas["ChartArea1"].AxisX.Minimum = 0;
-            chart1.ChartAreas["ChartArea1"].AxisX.Maximum = 10;
-
-            chart1.ChartAreas["ChartArea1"].AxisX.Title = "Timer";
-            chart1.ChartAreas["ChartArea1"].AxisY.Title = "Voltage";
-            chart1.ChartAreas["ChartArea1"].AxisX.TitleForeColor = Color.White;
-            chart1.ChartAreas["ChartArea1"].AxisY.TitleForeColor = Color.White;
-            chart1.ChartAreas["ChartArea1"].AxisX.TitleFont = new Font("Cascadia Mono", 10, FontStyle.Regular);
-            chart1.ChartAreas["ChartArea1"].AxisY.TitleFont = new Font("Cascadia Mono", 10, FontStyle.Regular);
-
-
-            //chart1.ChartAreas["ChartArea1"].AxisX.IntervalType = DateTimeIntervalType.Minutes;
-            //chart1.ChartAreas["ChartArea1"].AxisX.LabelStyle.Format = "mm:ss";
-
-        }
-
-        #endregion
-
         #region Datagridview Measurement Control Result //จัดการตารางข้อมูล
 
         //dataTable
@@ -420,19 +393,20 @@ namespace CodingLabpro
         {
             ISheet sheeti = this.workbook.CreateSheet(sheetName);
             //--- add 1 header row
-            IRow rowSheet = sheeti.CreateRow(0);
+            int currentRow = 0;
+            IRow rowSheet = sheeti.CreateRow(currentRow);
             for (int c = 0; c < dt.Columns.Count; c++)
             {
                 var cellc = rowSheet.CreateCell(c);
                 cellc.SetCellValue(dt.Columns[c].ColumnName);
                 cellc.CellStyle = customStyle;
-                sheeti.AutoSizeColumn(c);
+                
             }
             return sheeti;
         }
 
         //เมธอดการตั้งค่า Excel และบันทึกไฟล์
-        private void DataExcelConfigure(string filePath, DataTable dt)
+        protected void DataExcelConfigure(string filePath, DataTable dt)
         {
             //Create Excel
             this.workbook = new XSSFWorkbook();
@@ -456,6 +430,39 @@ namespace CodingLabpro
             string sheetName = "Sheet" + sheetCount++;
             ISheet sheeti = createSheetAndHeader(dt, sheetName, customStyle);
 
+            // Add data rows
+            IDataFormat dataFormat = workbook.CreateDataFormat();
+            ICellStyle sciStyle = this.workbook.CreateCellStyle();
+            sciStyle.DataFormat = dataFormat.GetFormat("0.00000E+00");
+
+            for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
+            {
+                IRow dataRow = sheeti.CreateRow(rowIndex + 1);
+                for (int columnIndex = 0; columnIndex < dt.Columns.Count; columnIndex++)
+                {
+
+                    var cell = dataRow.CreateCell(columnIndex);
+                    object value = dt.Rows[rowIndex][columnIndex]; // สร้างตัวแปรชนิด object เพื่อเก็บค่า 
+
+                    if (value != DBNull.Value)
+                    {
+                        if (double.TryParse(value.ToString(), out double numericValue))
+                        {
+                            cell.SetCellValue(numericValue);
+                            cell.CellStyle = sciStyle;
+                        }
+                    }
+                    else
+                    {
+                        cell.SetCellValue(string.Empty); // กรณีค่าเป็น DBNull ให้ใส่ค่าว่าง
+                    }
+
+                    //Auto Size Column
+                    sheeti.AutoSizeColumn(columnIndex);
+
+                }
+            }
+
 
             //Add file data and export excel
             string filename = filePath;
@@ -472,19 +479,49 @@ namespace CodingLabpro
             saveFileDialog1.Title = "Save a File";
             saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             saveFileDialog1.OverwritePrompt = true; // Warns if the file already exists
-            saveFileDialog1.FileName = "OutfileData.xlsx";
+            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            saveFileDialog1.FileName = $"MeasurementData_{timestamp}.xlsx";
 
-            // 1. Show the dialog and check for a valid result
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                // 2. Get the full path from the FileName property
                 string fileSavePath = saveFileDialog1.FileName;
-                LBExportFile.Text = $"Save to Path: {fileSavePath}";
-                DataExcelConfigure(fileSavePath, dataTable_measurement);
+                LBExportFile.Text = $"Preparing to save to: {fileSavePath}";
 
-                
+                if (!backgroundWorker.IsBusy)
+                {
+                    // เริ่ม BackgroundWorker พร้อมส่งข้อมูลที่จำเป็น
+                    backgroundWorker.RunWorkerAsync(new { FilePath = fileSavePath, DataTable = dataTable_measurement });
+                }
             }
         }
+
+        // BackgroundWorker: ทำงานในเธรดเบื้องหลัง
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            dynamic args = e.Argument;
+            string filePath = args.FilePath;
+            DataTable dataTable = args.DataTable;
+
+            // เรียกใช้เมธอด DataExcelConfigure ในเธรดเบื้องหลัง
+            DataExcelConfigure(filePath, dataTable);
+        }
+
+        // BackgroundWorker: อัปเดต UI เมื่อเสร็จสิ้น
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                // แสดงข้อความเมื่อเกิดข้อผิดพลาด
+                ShowMessage("ERROR", $"Failed to export Excel file: {e.Error.Message}");
+            }
+            else
+            {
+                // แสดงข้อความเมื่อสำเร็จ
+                ShowMessage("OK", "Excel file exported successfully!");
+                LBExportFile.Text = "Export completed.";
+            }
+        }
+
 
         #endregion
 

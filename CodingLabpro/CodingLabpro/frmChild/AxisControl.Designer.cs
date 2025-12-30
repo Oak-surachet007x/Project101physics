@@ -58,7 +58,6 @@
             this.GBmotorport = new System.Windows.Forms.GroupBox();
             this.RB_rs232 = new System.Windows.Forms.RadioButton();
             this.RB_gpib = new System.Windows.Forms.RadioButton();
-            this.Btn_Reset = new System.Windows.Forms.Button();
             this.Btn_read = new System.Windows.Forms.Button();
             this.GBSource = new System.Windows.Forms.GroupBox();
             this.RBsource_AC = new System.Windows.Forms.RadioButton();
@@ -77,7 +76,6 @@
             this.RB_autoON = new System.Windows.Forms.RadioButton();
             this.RB_autoOFF = new System.Windows.Forms.RadioButton();
             this.totalAreaXTextBox = new System.Windows.Forms.TextBox();
-            this.InputValue_area = new System.Windows.Forms.BindingSource(this.components);
             this.totalAreaYTextBox = new System.Windows.Forms.TextBox();
             this.moveStepYTextBox = new System.Windows.Forms.TextBox();
             this.moveStepXTextBox = new System.Windows.Forms.TextBox();
@@ -100,6 +98,7 @@
             this.RB_Customrange = new System.Windows.Forms.RadioButton();
             this.RB_autorange = new System.Windows.Forms.RadioButton();
             this.Btn_SCPItest = new System.Windows.Forms.Button();
+            this.InputValue_area = new System.Windows.Forms.BindingSource(this.components);
             totalAreaXLabel = new System.Windows.Forms.Label();
             totalAreaYLabel = new System.Windows.Forms.Label();
             moveStepYLabel = new System.Windows.Forms.Label();
@@ -110,12 +109,12 @@
             this.GBSource.SuspendLayout();
             this.GBMeas.SuspendLayout();
             this.GBautozero.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Range)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Resolution)).BeginInit();
             this.GBResolution.SuspendLayout();
             this.GBrange.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).BeginInit();
             this.SuspendLayout();
             // 
             // totalAreaXLabel
@@ -463,29 +462,15 @@
             this.RB_gpib.UseVisualStyleBackColor = false;
             this.RB_gpib.CheckedChanged += new System.EventHandler(this.RB_gpib_CheckedChanged);
             // 
-            // Btn_Reset
-            // 
-            this.Btn_Reset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
-            this.Btn_Reset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_Reset.Font = new System.Drawing.Font("Cascadia Code", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Reset.ForeColor = System.Drawing.Color.White;
-            this.Btn_Reset.Location = new System.Drawing.Point(363, 631);
-            this.Btn_Reset.Name = "Btn_Reset";
-            this.Btn_Reset.Size = new System.Drawing.Size(142, 54);
-            this.Btn_Reset.TabIndex = 47;
-            this.Btn_Reset.Text = "Reset\r\nMeasurement\r\n";
-            this.Btn_Reset.UseVisualStyleBackColor = true;
-            this.Btn_Reset.Click += new System.EventHandler(this.Btn_Reset_Click);
-            // 
             // Btn_read
             // 
             this.Btn_read.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.Btn_read.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_read.Font = new System.Drawing.Font("Cascadia Code", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_read.ForeColor = System.Drawing.Color.White;
-            this.Btn_read.Location = new System.Drawing.Point(511, 631);
+            this.Btn_read.Location = new System.Drawing.Point(350, 534);
             this.Btn_read.Name = "Btn_read";
-            this.Btn_read.Size = new System.Drawing.Size(142, 54);
+            this.Btn_read.Size = new System.Drawing.Size(135, 34);
             this.Btn_read.TabIndex = 45;
             this.Btn_read.Text = "READ?";
             this.Btn_read.UseVisualStyleBackColor = true;
@@ -656,17 +641,18 @@
             this.GBautozero.Controls.Add(this.RB_autoOFF);
             this.GBautozero.Font = new System.Drawing.Font("Cascadia Code Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBautozero.ForeColor = System.Drawing.Color.White;
-            this.GBautozero.Location = new System.Drawing.Point(367, 544);
+            this.GBautozero.Location = new System.Drawing.Point(350, 682);
             this.GBautozero.Name = "GBautozero";
-            this.GBautozero.Size = new System.Drawing.Size(286, 63);
+            this.GBautozero.Size = new System.Drawing.Size(312, 63);
             this.GBautozero.TabIndex = 49;
             this.GBautozero.TabStop = false;
             this.GBautozero.Text = "Auto Zero";
+            this.GBautozero.Visible = false;
             // 
             // MessageWarning1
             // 
             this.MessageWarning1.AutoSize = true;
-            this.MessageWarning1.Location = new System.Drawing.Point(191, 19);
+            this.MessageWarning1.Location = new System.Drawing.Point(197, 19);
             this.MessageWarning1.Name = "MessageWarning1";
             this.MessageWarning1.Size = new System.Drawing.Size(80, 34);
             this.MessageWarning1.TabIndex = 3;
@@ -718,10 +704,6 @@
             this.totalAreaXTextBox.TabIndex = 50;
             this.totalAreaXTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.totalAreaXTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.totalAreaXTextBox_KeyPress);
-            // 
-            // InputValue_area
-            // 
-            this.InputValue_area.DataSource = typeof(CodingLabpro.CommandDevice.CalculateArea_Bind);
             // 
             // totalAreaYTextBox
             // 
@@ -1006,6 +988,10 @@
             this.Btn_SCPItest.UseVisualStyleBackColor = true;
             this.Btn_SCPItest.Click += new System.EventHandler(this.Btn_SCPItest_Click);
             // 
+            // InputValue_area
+            // 
+            this.InputValue_area.DataSource = typeof(CodingLabpro.CommandDevice.CalculateArea_Bind);
+            // 
             // AxisControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1031,7 +1017,6 @@
             this.Controls.Add(this.BtnCancel_scaning);
             this.Controls.Add(this.Btn_runscaning);
             this.Controls.Add(this.labeltitle);
-            this.Controls.Add(this.Btn_Reset);
             this.Controls.Add(this.GBmotorport);
             this.Controls.Add(this.Btn_read);
             this.Controls.Add(this.GBreport);
@@ -1068,13 +1053,13 @@
             this.GBMeas.ResumeLayout(false);
             this.GBautozero.ResumeLayout(false);
             this.GBautozero.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Range)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Resolution)).EndInit();
             this.GBResolution.ResumeLayout(false);
             this.GBrange.ResumeLayout(false);
             this.GBrange.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1105,7 +1090,6 @@
         private System.Windows.Forms.GroupBox GBmotorport;
         private System.Windows.Forms.RadioButton RB_gpib;
         private System.Windows.Forms.RadioButton RB_rs232;
-        private System.Windows.Forms.Button Btn_Reset;
         private System.Windows.Forms.Button Btn_read;
         private System.Windows.Forms.GroupBox GBSource;
         private System.Windows.Forms.RadioButton RBsource_AC;
