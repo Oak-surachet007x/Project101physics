@@ -159,11 +159,11 @@ namespace CodingLabpro
 
         private void FrmChild1_OnRunClicked()
         {
-            //Initialize DataGridview Measurement
-            Rows = GlobalMeasurementSettings.Instance.CountOfRows;
-            Columns = GlobalMeasurementSettings.Instance.CountOfColumns;
-            
-            ConvertArrayToTable(new int [Rows, Columns]);
+            ////Initialize DataGridview Measurement
+            Rows = GlobalMeasurementSettings.Instance.CountOfRows; // ดึงค่าจากตัวแปร  Global ได้เก็บค่าจากฟอร์ม AxisControl (Loop Y)
+            Columns = GlobalMeasurementSettings.Instance.CountOfColumns; // ดึงค่าจากตัวแปร  Global ได้เก็บค่าจากฟอร์ม AxisControl (Loop X)
+
+            ConvertArrayToTable(new int[Rows, Columns]); //เรียกใช้เมธอดสร้างตาราง ตามขนาดที่ป้อนค่าแบบ array 2D [Rows, Columns]
 
             //Start Stopwatch
             watch.Restart();
@@ -307,6 +307,7 @@ namespace CodingLabpro
 
         }
 
+        //เมธอดแปลง Array เป็น DataTable
         private DataTable ConvertArrayToTable(int[,] arr)
         {
             int rows = arr.GetLength(0); // จำนวนแถว
@@ -317,7 +318,8 @@ namespace CodingLabpro
 
             for (int i = 0; i < cols; i++)
             {
-                dataTable_measurement.Columns.Add($"Step{i + 1}" , typeof(double));
+                // เพิ่มคอลัมน์ใหม่
+                dataTable_measurement.Columns.Add($"Step{i + 1}" , typeof(double)); // กำหนดชนิดข้อมูลเป็น double
             }
 
             for (int i = 0; i < rows; i++)
@@ -332,6 +334,7 @@ namespace CodingLabpro
                 
 
             }
+            //ได้ตารางขนาด แถว*คอลัมน์ = เซลล์ทั้งหมดที่ใช้
             return dataTable_measurement;
 
         }
@@ -623,7 +626,7 @@ namespace CodingLabpro
                     return false;
                 }
             }
-            Debug.WriteLine("true");
+            Debug.WriteLine("ComboBox = true");
             return true;
             
         }
@@ -659,8 +662,7 @@ namespace CodingLabpro
                     {
                         //CONNECT driver DMM Port GP - IB
                         string addr = Cblistaddress.SelectedItem.ToString();
-                        MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 2000, null);
-                        MyDMM.IO.Timeout = 2000;
+                        MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 10000, null);
                         string command = "*IDN?";
                         MyDMM.WriteString(command);
 

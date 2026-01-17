@@ -58,7 +58,7 @@ namespace CodingLabpro.frmChild
             CblStepMotor.Items.AddRange(new string[] { "100", "200", "300", "400", "500", "1000" });
             unitXComboBox.Items.AddRange(new string[] { "cm", "mm", "μm" });
             unitYComboBox.Items.AddRange(new string[] { "cm", "mm", "μm" });
-            delaySteppingComboBox.Items.AddRange(new string[] {"1000", "2000", "3000" });
+            delaySteppingComboBox.Items.AddRange(new string[] {"1000", "2000", "3000", "100", "200" });
             CBtrigger.Items.AddRange(new string[] {"IMMediate", "BUS"});
 
             RB_resolution4digits.Text = "4\u00BD digits";
@@ -82,7 +82,6 @@ namespace CodingLabpro.frmChild
             Btn_QueryResolution.Enabled = !EnabledItem;
             CBtrigger.Enabled = !EnabledItem;
             BtnCancel_scaning.Enabled = !EnabledItem;
-            Btn_read.Enabled = !EnabledItem;
 
         }
         private void AxisControl_Load(object sender, EventArgs e)
@@ -238,38 +237,6 @@ namespace CodingLabpro.frmChild
 
         }
 
-        //สร้างคำสั่ง SCPI สำหรับการตั้งค่าความละเอียดการวัด และขอบเขตการวัด
-        private string BuildCommand(string suffix, object value)
-        {
-            var map = Measurement_SCPI_Command();
-            var key = (GlobalMeasurementSettings.Instance.MeasureMode, GlobalMeasurementSettings.Instance.SourceMode);
-
-            if (!map.TryGetValue(key, out string baseCommand))
-                 throw new InvalidOperationException("ไม่พบโหมดการวัดที่ระบุ");
-
-            string command = $"{baseCommand}:{suffix}";
-
-            if (value is string)
-            {
-                // กรณีเป็นสตริง เช่น "AUTO", "MIN", "MAX", ฯลฯ
-                return $"{command} {value}";
-            }
-            else if (value is double dVal)
-            {
-                // กรณีเป็นตัวเลขยกกำลัง เช่น 1E-6, 5E-5 ฯลฯ
-                if (Math.Abs(dVal) < 0.001) // เล็กกว่า 0.001 ให้ใช้ E-notation
-                    return $"{command} {dVal.ToString("0.###E-0")}";
-                else if (dVal < 1)
-                    return $"{command} {(decimal)dVal}";
-                else
-                    return $"{command} {(int)dVal}";
-            }
-            else
-            {
-                throw new InvalidOperationException("ค่าความละเอียดการวัดไม่ถูกต้อง");
-            }
-          
-        }
         private double GetDefaultRange()
         {
             if (GlobalMeasurementSettings.Instance.MeasureMode == "Voltage" && GlobalMeasurementSettings.Instance.SourceMode == "DC")
@@ -319,34 +286,6 @@ namespace CodingLabpro.frmChild
         }
 
 
-        //ส่งค่าความละเอียดการวัด
-        private string Resolution_Indicator()
-        {
-
-            switch (GlobalMeasurementSettings.Instance.ResolutionControl)
-            {
-                case "AUTO":
-                    Debug.WriteLine(BuildCommand("RESolution", "AUTO"));
-                    return BuildCommand("RESolution", "AUTO");
-                case "DIGITS_4":
-                    Debug.WriteLine(BuildCommand("RESolution", "0.0001"));
-                    return BuildCommand("RESolution", "0.0001");
-                case "MIN":
-                    Debug.WriteLine(BuildCommand("RESolution", "MIN"));
-                    return BuildCommand("RESolution", "MIN");
-                case "MAX":
-                    Debug.WriteLine(BuildCommand("RESolution", "MAX"));
-                    return BuildCommand("RESolution", "MAX");
-                case "CUSTOM":
-                    double Value = (double)Numeric_Resolution.Value;
-                    return BuildCommand("RESolution", Value);
-                default:
-                    throw new InvalidOperationException("กรุณาเลือกชนิดความละเอียดการวัด");
-            }
-
-
-        }
-
         #endregion
 
         #region Reange_Measurement
@@ -391,27 +330,6 @@ namespace CodingLabpro.frmChild
                 CBrange.SelectedItem = SelectUnitMeasure; // Set default selection
                 
             }
-        }
-
-
-        //ส่งค่าขอบเขตการวัด
-        private string Range_Indicator()
-        {
-            switch (GlobalMeasurementSettings.Instance.RangeControl)
-            {
-                case "AUTO":
-                    Debug.WriteLine(BuildCommand("RANGe", "AUTO ON"));
-                    return BuildCommand("RANGe", "AUTO ON"); 
-                case "CUSTOM":
-                    double Range_value = (double)Numeric_Range.Value;
-                    SelectUnitMeasure = CBrange.SelectedItem?.ToString();
-                    double ConvRange = ConvertValueOnUnit(Range_value, SelectUnitMeasure);
-                    Debug.WriteLine(BuildCommand("RANGe", ConvRange));
-                    return BuildCommand("RANGe", ConvRange);
-                default:
-                    throw new InvalidOperationException("กรุณาเลือกชนิดขอบเขตการวัด");
-            }
-           
         }
 
 
@@ -644,7 +562,7 @@ namespace CodingLabpro.frmChild
             else if (GlobalMeasurementSettings.Instance.TriggerMode == "IMMediate")
             {
                 myDMM.WriteString(Build_MeasureCommand()); //คำสั่งวัดทันที
-                //ReadMeasurementResult();
+                ReadMeasurementResult();
 
 
             }
@@ -653,10 +571,17 @@ namespace CodingLabpro.frmChild
 
         private void Measure_Trigger()
         {
-            myDMM.WriteString("INIT");
-            myDMM.WriteString("*TRG"); //if Select Trigger_Source == BUS will accept command IEEE-488
-            myDMM.WriteString("FETC?");
-      
+            if(GlobalMeasurementSettings.Instance.TriggerMode == "BUS")
+            {
+                myDMM.WriteString("INIT");
+                myDMM.WriteString("*TRG"); //if Select Trigger_Source == BUS will accept command IEEE-488
+                myDMM.WriteString("FETC?");
+
+            }
+            else if (GlobalMeasurementSettings.Instance.TriggerMode == "IMMediate")
+            {
+                //None command
+            }
         }
 
         //-----------------------------------------------Data Acquisition Measurement---------------------------------------------
@@ -672,7 +597,7 @@ namespace CodingLabpro.frmChild
             try
             {
                 //string value = myDMM.ReadString().Trim();
-                string value = "5.00197000E-07"; //ทดสอบค่า   
+                string value = "5.0022500E-05"; //ทดสอบค่า   
 
 
                 //Random random = new Random();
@@ -694,6 +619,7 @@ namespace CodingLabpro.frmChild
 
         }
 
+        #region Display Unit Conversion
         private double ConvertValueOnUnitDisplay(string measurement)
         {
             string Exponent = measurement.Substring(measurement.IndexOf("E")); //ดึงค่าเลขยกกำลังออก
@@ -831,11 +757,13 @@ namespace CodingLabpro.frmChild
         //    double roundedValue = Math.Round(ValueOnly, 5); //กำหนดตำแหน่งทศนิยม
         //    Debug.WriteLine($"Value After Round: {roundedValue}");
         //    return  roundedValue;
-       
+
         //}
-       
+
 
         //--------------------------------------------------Validator Error Provider------------------------------------------------
+
+        #endregion
 
         private void ShowValidatorError(Control parent, EntityValidator entityclass)
         {
@@ -1185,7 +1113,9 @@ namespace CodingLabpro.frmChild
                 InputValue_area.EndEdit();
                 //ErrorProvider
                 ShowValidatorError(this, calculate);
- 
+                ////Task Canellation
+                var tokenSource = new CancellationTokenSource();
+
                 if (calculate != null)
                 {
                     if (calculate.IsValid)
@@ -1231,7 +1161,10 @@ namespace CodingLabpro.frmChild
                 OnRunClicked?.Invoke();
                 //---------------------------------Loop Scaning Area---------------------------------------------
                 //Report Area Calculate
-                Reportdata.AppendText($"คำนวณผลลัพธ์ลูปที่สแกนของ X คือ {LoopAreaX} ลูป \n คำนวณผลลัพธ์ลูปที่สแกนของ Y คือ {LoopAreaY} ลูป" + Environment.NewLine); //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
+                Reportdata.AppendText($"คำนวณผลลัพธ์ลูปที่สแกนของ X คือ {LoopAreaX} ลูป " + Environment.NewLine +
+                                       $"คำนวณผลลัพธ์ลูปที่สแกนของ Y คือ {LoopAreaY} ลูป" + Environment.NewLine);
+                //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
+
 
                 for (int y = 0; y < LoopAreaY; y++)  // Loop แกน Y (สแกนพื้นที่ 10 แถว)
                 {
@@ -1242,6 +1175,7 @@ namespace CodingLabpro.frmChild
                             //myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
                             //myMMC.WriteString("G:");
                             await Task.Delay(2000); //หน่วงเวลา 2 วินาที เพื่อเก็บค่าการวัด
+
                             //Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
                             ReadMeasurementResult();
                             await Task.Delay(ValueTimer);
@@ -1254,6 +1188,7 @@ namespace CodingLabpro.frmChild
                             //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
                             //myMMC.WriteString("G:");
                             await Task.Delay(2000); //หน่วงเวลา 2 วินาที เพื่อเก็บค่าการวัด
+
                             //Measure_Trigger(); //ส่งคำสั่งวัดแบบ BUS
                             ReadMeasurementResult();
                             await Task.Delay(ValueTimer);
@@ -1276,19 +1211,19 @@ namespace CodingLabpro.frmChild
                     {
                         //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
                         //myMMC.WriteString("G:");
-                        await Task.Delay(ValueTimer);
+                        //await Task.Delay(ValueTimer);
 
                     }
                 }
 
                 OnCancelClicked?.Invoke();
                 ShowMessage("INFO", $"{ValueProcessX} {ValueProcessY} {ValueNegativeX}");
-                
+
             }
             catch (Exception Ex)
             { 
                 ShowMessage("ERROR", $"กรุณาตรวจการเชื่อมต่อ \n {Ex.Message}");
-            
+
             }
         }
 
@@ -1296,26 +1231,8 @@ namespace CodingLabpro.frmChild
 
         private void BtnCancel_scaning_Click(object sender, EventArgs e)
         {
-
-            string TriggerMode = GlobalMeasurementSettings.Instance.TriggerMode;
-            string MeasureMode = GlobalMeasurementSettings.Instance.MeasureMode;
-            string SourceMode = GlobalMeasurementSettings.Instance.SourceMode;
-            string AutoMode = GlobalMeasurementSettings.Instance.AutozeroMode;
-            MessageBox.Show($"{TriggerMode} \n {MeasureMode} \n {SourceMode} \n {AutoMode}", "สรุปผล");
+          
         }
-
-        private void Btn_read_Click(object sender, EventArgs e)
-        {
-            string Resolution_select = Resolution_Indicator();
-            string Range_select  = Range_Indicator();
-            string ConfigCommand = Build_ConfigCommand();
-            string MeasureCommand = Build_MeasureCommand();
-            //ReadMeasurementResult();
-
-
-            MessageBox.Show($"{Resolution_select} \n{Range_select} \n{ConfigCommand} \n{MeasureCommand}", "Output_Log");
-        }
-
 
         private void Btn_SCPItest_Click(object sender, EventArgs e)
         {
@@ -1343,12 +1260,12 @@ namespace CodingLabpro.frmChild
 
         private void moveStepXTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = !char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back;
+            e.Handled = !char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != '.';
         }
 
         private void moveStepYTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = !char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back;
+            e.Handled = !char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != '.';
         }
     }
 }
