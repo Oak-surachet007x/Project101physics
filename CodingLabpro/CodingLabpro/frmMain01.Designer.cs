@@ -80,6 +80,7 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.BindingSource_DataMeasure = new System.Windows.Forms.BindingSource(this.components);
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.LBStatusLoading = new System.Windows.Forms.ToolStripStatusLabel();
             this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.tableLayoutPanel1.SuspendLayout();
             this.GBdata.SuspendLayout();
@@ -128,6 +129,7 @@
             // 
             // DgvMeasurement
             // 
+            this.DgvMeasurement.AllowUserToAddRows = false;
             this.DgvMeasurement.BackgroundColor = System.Drawing.Color.White;
             this.DgvMeasurement.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -153,6 +155,7 @@
             this.DgvMeasurement.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DgvMeasurement.Size = new System.Drawing.Size(470, 419);
             this.DgvMeasurement.TabIndex = 0;
+            this.DgvMeasurement.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvMeasurement_RowPostPaint);
             // 
             // GBconnect
             // 
@@ -312,7 +315,8 @@
             this.StatusPort2,
             this.StatusMMC2,
             this.StatusPort3,
-            this.LBExportFile});
+            this.LBExportFile,
+            this.LBStatusLoading});
             this.MainStatus.Location = new System.Drawing.Point(0, 731);
             this.MainStatus.Name = "MainStatus";
             this.MainStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -387,7 +391,7 @@
             this.LBExportFile.Image = global::CodingLabpro.Properties.Resources.file_export_33dp_8C1AF6_FILL0_wght400_GRAD0_opsz40;
             this.LBExportFile.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.LBExportFile.Name = "LBExportFile";
-            this.LBExportFile.Size = new System.Drawing.Size(724, 25);
+            this.LBExportFile.Size = new System.Drawing.Size(664, 25);
             this.LBExportFile.Spring = true;
             this.LBExportFile.Text = "FilePath:";
             this.LBExportFile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -594,7 +598,17 @@
             this.backgroundWorker.WorkerReportsProgress = true;
             this.backgroundWorker.WorkerSupportsCancellation = true;
             this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
             this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            // 
+            // LBStatusLoading
+            // 
+            this.LBStatusLoading.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBStatusLoading.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.LBStatusLoading.Name = "LBStatusLoading";
+            this.LBStatusLoading.Size = new System.Drawing.Size(29, 25);
+            this.LBStatusLoading.Text = "0%";
+            this.LBStatusLoading.Visible = false;
             // 
             // barMenu1
             // 
@@ -700,5 +714,6 @@
         private System.Windows.Forms.ToolStripButton ToolBtnError;
         private System.Windows.Forms.ToolStripButton ToolBtnClear;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private System.Windows.Forms.ToolStripStatusLabel LBStatusLoading;
     }
 }

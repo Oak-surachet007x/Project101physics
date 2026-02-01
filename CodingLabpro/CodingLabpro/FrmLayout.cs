@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO.Ports;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -18,13 +17,10 @@ namespace CodingLabpro
 {
     public partial class FrmLayout : Form
     {
-        public Ivi.Visa.Interop.FormattedIO488 MyDMM;
-        public Ivi.Visa.Interop.FormattedIO488 MyMMC;
-        public SerialPort MySerialPort = new SerialPort();
         public List<ucMenu> menuButton;
         public class DwmApi
         {
-            // ค่า DWM_WINDOW_ATTRIBUTE ที่เราสนใจ
+            // ค่า DWM_WINDOW_ATTRIBUTE 
             public const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20; // เปิดใช้งาน Dark Mode
             public const int DWMWA_WINDOW_CORNER_PREFERENCE = 33; // ตั้งค่ามุมหน้าต่าง
             public const int DWMWA_CAPTION_COLOR = 34; // เปลี่ยนสี Title Bar
@@ -72,7 +68,7 @@ namespace CodingLabpro
             }
 
             //MenuButton
-            menuButton = new List<ucMenu>() { ucMenu1, ucMenu2 };
+            menuButton = new List<ucMenu>() { ucMenu1 };
             ClickMenu(menuButton);
         }
 
@@ -104,17 +100,9 @@ namespace CodingLabpro
             switch (_menuButton.Name)
             {
                 case "ucMenu1":
-                    ActivateMenu(ucMenu1, ucMenu2);
+                    ActivateMenu(ucMenu1);
                     AddFormControl(new FrmMain01());
                     break;
-
-                case "ucMenu2":
-                    ActivateMenu(ucMenu2, ucMenu1);
-                    AddFormControl(new frmMain(MyMMC, MySerialPort, MyDMM));
-                    break;
-
-
-
             }
         }
         private void ActivateMenu(ucMenu _active, params ucMenu[] _inactive)

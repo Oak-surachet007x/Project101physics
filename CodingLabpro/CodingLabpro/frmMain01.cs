@@ -53,14 +53,18 @@ namespace CodingLabpro
         public event EventHandler ActiveComboBox;
         public List<barMenu> barButton;
         private int Rows, Columns;
-        private int IndexPostionX = 0;
-        private int IndexPostionY = 0;
+        private int IndexPostionX, IndexPostionY;
+
+        //เมธอดเรียกคลาสสร้างตารางข้อมูล
+        private IDataTableBuilder builder;
+        private CalculateCellsDataTable cellsDataTable;
 
 
         public FrmMain01()
         {
             InitializeComponent();
-          
+            InitiallizeGridColumn();
+
             this.SetStyle(
                         ControlStyles.OptimizedDoubleBuffer |
                         ControlStyles.ResizeRedraw, true);
@@ -133,7 +137,8 @@ namespace CodingLabpro
 
         }
 
-      
+        
+
 
         #region Stopwatch Control
         public string GetTimeString(TimeSpan elapsed)
@@ -160,19 +165,39 @@ namespace CodingLabpro
         private void FrmChild1_OnRunClicked()
         {
             ////Initialize DataGridview Measurement
-            Rows = GlobalMeasurementSettings.Instance.CountOfRows; // ดึงค่าจากตัวแปร  Global ได้เก็บค่าจากฟอร์ม AxisControl (Loop Y)
-            Columns = GlobalMeasurementSettings.Instance.CountOfColumns; // ดึงค่าจากตัวแปร  Global ได้เก็บค่าจากฟอร์ม AxisControl (Loop X)
+            Rows = GlobalMeasurementSettings.Instance.CountOfRows;
+            Columns = GlobalMeasurementSettings.Instance.CountOfColumns;
 
-            ConvertArrayToTable(new int[Rows, Columns]); //เรียกใช้เมธอดสร้างตาราง ตามขนาดที่ป้อนค่าแบบ array 2D [Rows, Columns]
+            //สร้าง DataTable สำหรับการวัด จากคลาส CalculateCellsDataTable
+            builder = new CalculateCellsDataTable(Rows, Columns); //สร้างอินสแตนซ์ของ CalculateCellsDataTable
+            dataTable_measurement = builder.BuildTable(); // สร้าง DataTable โดยใช้เมธอด BuildTable
+            cellsDataTable = (CalculateCellsDataTable)builder; // <-- Assign the instance here
+            cellsDataTable.DebugReport();
+
+            //สร้าง DataTable และเชื่อมโยงกับ DataGridView
+            Main_datagrid.Tables.Add(dataTable_measurement);
+            BindingSource_DataMeasure.DataSource = dataTable_measurement;
+            DgvMeasurement.DataSource = BindingSource_DataMeasure;
+
+            //Reset Index Position
+            IndexPostionX = 0;
+            IndexPostionY = 0;
 
             //Start Stopwatch
             watch.Restart();
+
+            //label timer color change
+            LBtimer.BackColor = Color.Transparent;
+            
         }
 
         private void FrmChild1_OnCancelClicked()
         {
             //Stop Stopwatch
             watch.Stop();
+
+            //label timer color change
+            LBtimer.BackColor = Color.Red;
         }
 
         #endregion
@@ -263,7 +288,6 @@ namespace CodingLabpro
             Datetimenow.Start();
             ActiveComboBox += ComboBoxEnabled;
             GlobalMeasurementSettings.Instance.SettingsChanged += Instance_SettingsChanged;
-            InitiallizeGridColumn();
 
         }
 
@@ -280,18 +304,14 @@ namespace CodingLabpro
 
         #region Datagridview Measurement Control Result //จัดการตารางข้อมูล
 
-        //dataTable
+        //เก็บชุดข้อมูลหลักของ DataGridView
         private readonly DataSet main_datagrid = new DataSet();
         private DataTable dataTable_measurement = new DataTable();
         public DataSet Main_datagrid => main_datagrid;
 
+        //เมธอดตั้งค่าคอลัมน์ของ DataGridView
         public void InitiallizeGridColumn()
         {
-            //สร้าง DataTable และเชื่อมโยงกับ DataGridView
-            dataTable_measurement = new DataTable("MainGrid");
-            Main_datagrid.Tables.Add(dataTable_measurement);
-            BindingSource_DataMeasure.DataSource = dataTable_measurement;
-            DgvMeasurement.DataSource = BindingSource_DataMeasure;
 
             //ตั้งค่ารูปแบบของ DataGridView
             DgvMeasurement.DefaultCellStyle.ForeColor = Color.Black;
@@ -304,64 +324,33 @@ namespace CodingLabpro
             DgvMeasurement.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             DgvMeasurement.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
 
-
+        
         }
 
-        //เมธอดแปลง Array เป็น DataTable
-        private DataTable ConvertArrayToTable(int[,] arr)
+        //เมธอดแสดงหมายเลขแถวใน DataGridView
+        // Source - https://stackoverflow.com/a
+        // Posted by Gabriel Perez, modified by community. See post 'Timeline' for change history
+        // Retrieved 2026-01-28, License - CC BY-SA 3.0
+        private void DgvMeasurement_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            int rows = arr.GetLength(0); // จำนวนแถว
-            int cols = arr.GetLength(1); // จำนวนคอลัมน์
- 
-            dataTable_measurement.Clear(); // ล้างข้อมูลเก่า
-          
+            var grid = sender as DataGridView; // Cast sender to DataGridView
+            var rowIdx = (e.RowIndex + 1).ToString(); // Get the row number (1-based index)
 
-            for (int i = 0; i < cols; i++)
+            var centerFormat = new StringFormat() // สร้างรูปแบบการจัดตำแหน่งข้อความ
             {
-                // เพิ่มคอลัมน์ใหม่
-                dataTable_measurement.Columns.Add($"Step{i + 1}" , typeof(double)); // กำหนดชนิดข้อมูลเป็น double
-            }
+                // right alignment might actually make more sense for numbers
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
 
-            for (int i = 0; i < rows; i++)
-            {
-                DataRow row = dataTable_measurement.NewRow();
-                for (int j = 0; j < cols; j++)
-                {
-                    row[j] = DBNull.Value;
-                    
-                }
-                dataTable_measurement.Rows.Add(row);
-                
-
-            }
-            //ได้ตารางขนาด แถว*คอลัมน์ = เซลล์ทั้งหมดที่ใช้
-            return dataTable_measurement;
-
+            var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
+            e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
         }
-
-        private void UpdateCellColumn()
+      
+        //เมธอดรับค่าข้อมูลการวัดและอัปเดตตาราง
+        public void Received_Data_measurement(double Data_measure)
         {
-            for (int i = 0; i < Columns; i++)
-            {
-                dataTable_measurement.Columns[i].ColumnName = $"Step{i + 1} ({GlobalMeasurementSettings.Instance.MeasureMode})";
-            }
-
-        }
-
-        private void Received_Data_Display_measurement(double Data_Display)
-        {
-            LBvaluemeasurement.Text = Data_Display.ToString("F5") + GlobalMeasurementSettings.Instance.UnitPrefix;
-        }
-
-        private void Received_Data_measurement(double Data_measure)
-        {
-            UpdateCellColumn();
-
-            // ป้องกันเขียนเกินขนาดตาราง
-            if (IndexPostionY >= dataTable_measurement.Rows.Count)
-                return;
-
-            UpdateCell(IndexPostionY, IndexPostionX, Data_measure);
+            cellsDataTable.UpdateCell(IndexPostionY, IndexPostionX, Data_measure);
 
             IndexPostionX++;
 
@@ -370,20 +359,16 @@ namespace CodingLabpro
                 IndexPostionX = 0;
                 IndexPostionY++;
             }
+
         }
 
-        public void UpdateCell(int row, int col, double value)
+        private void Received_Data_Display_measurement(double Data_Display)
         {
-            if (dataTable_measurement == null) return;
-
-            if (row < 0 || row >= dataTable_measurement.Rows.Count) return;
-            if (col < 0 || col >= dataTable_measurement.Columns.Count) return;
-
-            dataTable_measurement.Rows[row][col] = value;
-            //DgvMeasurement.Rows[row].Cells[col].Value = value;
-
-
+            LBvaluemeasurement.Text = Data_Display.ToString() + GlobalMeasurementSettings.Instance.UnitPrefix;
         }
+
+      
+
 
         #endregion
 
@@ -464,9 +449,13 @@ namespace CodingLabpro
                     sheeti.AutoSizeColumn(columnIndex);
 
                 }
+
+                // รายงานความคืบหน้า
+                int progressPercentage = (int)((rowIndex + 1) / (double)dt.Rows.Count * 100);
+                backgroundWorker.ReportProgress(progressPercentage);
             }
 
-
+           
             //Add file data and export excel
             string filename = filePath;
             using (var fileData = new FileStream(filename, FileMode.Create, FileAccess.Write))
@@ -488,7 +477,8 @@ namespace CodingLabpro
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string fileSavePath = saveFileDialog1.FileName;
-                LBExportFile.Text = $"Preparing to save to: {fileSavePath}";
+                LBExportFile.Text = $"Preparing to save to: {fileSavePath}"; // อัปเดตข้อความสถานะ กำลังเตรียมบันทึกไฟล์
+                LBStatusLoading.Visible = true; // แสดงป้ายสถานะการโหลด
 
                 if (!backgroundWorker.IsBusy)
                 {
@@ -496,6 +486,12 @@ namespace CodingLabpro
                     backgroundWorker.RunWorkerAsync(new { FilePath = fileSavePath, DataTable = dataTable_measurement });
                 }
             }
+        }
+
+        // BackgroundWorker: อัปเดตความคืบหน้า (ถ้ามี)
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            LBStatusLoading.Text = $"Progress: {e.ProgressPercentage}%";
         }
 
         // BackgroundWorker: ทำงานในเธรดเบื้องหลัง
@@ -521,7 +517,8 @@ namespace CodingLabpro
             {
                 // แสดงข้อความเมื่อสำเร็จ
                 ShowMessage("OK", "Excel file exported successfully!");
-                LBExportFile.Text = "Export completed.";
+                LBStatusLoading.Visible = false; // ซ่อนป้ายสถานะการโหลด
+                LBExportFile.Text = "Export completed."; // อัปเดตข้อความสถานะ
             }
         }
 
@@ -622,11 +619,11 @@ namespace CodingLabpro
             {
                 if (CBox != null && CBox.SelectedItem != null)
                 {
-                    Debug.WriteLine("false");
+                    Debug.WriteLine("[ComboBox]: false");
                     return false;
                 }
             }
-            Debug.WriteLine("ComboBox = true");
+            Debug.WriteLine("[ComboBox]: true");
             return true;
             
         }
@@ -662,7 +659,8 @@ namespace CodingLabpro
                     {
                         //CONNECT driver DMM Port GP - IB
                         string addr = Cblistaddress.SelectedItem.ToString();
-                        MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 10000, null);
+                        MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 2000, null);
+                        MyDMM.IO.Timeout = 10000;
                         string command = "*IDN?";
                         MyDMM.WriteString(command);
 

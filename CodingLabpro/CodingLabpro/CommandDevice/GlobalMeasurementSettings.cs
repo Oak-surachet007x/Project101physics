@@ -20,8 +20,8 @@ namespace CodingLabpro.CommandDevice
         private string _SourceMode;
         private string _TriggerMode;
         private string _AutozeroMode = "ON";
-        private string _RangeControl = "AUTO";
-        private string _ResolutionControl = "AUTO";
+        private string _RangeControl;
+        private string _ResolutionControl;
         private string _UnitPrefix;
         private int _CountOfRows;
         private int _CountOfColumns;
