@@ -2,29 +2,37 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
+using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Ivi.Visa.Interop;
-using Ivi.Visa.FormattedIO;
-using Ivi.Visa;
 using System.IO;
 using System.IO.Ports;
+using System.Linq;
 using System.Runtime.InteropServices;
-using NPOI.SS.Formula.Eval;
-using CodingLabpro.CommandDevice;
-using System.Windows.Forms.DataVisualization.Charting;
-using CodingLabpro.Models;
 using System.Security.Cryptography.X509Certificates;
-using CodingLabpro.frmChild;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using NPOI.POIFS.Crypt.Dsig;
+using System.Text;
 using System.Threading;
-using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+using CodingLabpro.CommandDevice;
+using CodingLabpro.frmChild;
+using CodingLabpro.Models;
+using Ivi.Visa;
+using Ivi.Visa.FormattedIO;
+using Ivi.Visa.Interop;
+using MathNet.Numerics.RootFinding;
+using NPOI.HSSF.UserModel;
+using NPOI.POIFS.Crypt.Dsig;
+using NPOI.SS.Formula.Eval;
+using NPOI.SS.Formula.Functions;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.Streaming.Values;
+using NPOI.XSSF.UserModel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 
@@ -43,17 +51,20 @@ namespace CodingLabpro
         public static string Aread;
         public static bool isConnect;
         public event EventHandler ActiveComboBox;
-    
         public List<barMenu> barButton;
+        private int Rows, Columns;
+        private int IndexPostionX, IndexPostionY;
 
-        //dataTable
-        DataSet main_datagrid = new DataSet();
+        //เมธอดเรียกคลาสสร้างตารางข้อมูล
+        private IDataTableBuilder builder;
+        private CalculateCellsDataTable cellsDataTable;
 
 
         public FrmMain01()
         {
             InitializeComponent();
-          
+            InitiallizeGridColumn();
+
             this.SetStyle(
                         ControlStyles.OptimizedDoubleBuffer |
                         ControlStyles.ResizeRedraw, true);
@@ -88,6 +99,7 @@ namespace CodingLabpro
             frmChild1.OnRunClicked += FrmChild1_OnRunClicked; 
             frmChild1.OnCancelClicked += FrmChild1_OnCancelClicked;
             frmChild1.OnMeasurement += Received_Data_measurement;
+            frmChild1.OnMeasurementWithDisplay += Received_Data_Display_measurement;
 
 
             //First show Panel frmChild
@@ -114,19 +126,19 @@ namespace CodingLabpro
             };
             finder.FDevice(); // Find devices from Port GPIB
 
-            finder.OnDeviceFound1 += (device1) => { Cblistaddress3.Items.Add(device1); };
+            finder.OnDeviceFound1 += (device1) => { Cblistaddress3.Items.Add(device1); }; // Add devices to ComboBox for RS232
             finder.RSdevice(); // Find devices form Port RS232
 
 
-            //chart Data DC Measura
-            Chartmeasure();
-
-
+            //Update Label Measurement
+            ToolBtnError.Text = "Check Error\nDMM";
+            ToolBtnClear.Text = "Clear Error\nDMM";
 
 
         }
 
-       
+        
+
 
         #region Stopwatch Control
         public string GetTimeString(TimeSpan elapsed)
@@ -152,17 +164,45 @@ namespace CodingLabpro
 
         private void FrmChild1_OnRunClicked()
         {
+            ////Initialize DataGridview Measurement
+            Rows = GlobalMeasurementSettings.Instance.CountOfRows;
+            Columns = GlobalMeasurementSettings.Instance.CountOfColumns;
+
+            //สร้าง DataTable สำหรับการวัด จากคลาส CalculateCellsDataTable
+            builder = new CalculateCellsDataTable(Rows, Columns); //สร้างอินสแตนซ์ของ CalculateCellsDataTable
+            dataTable_measurement = builder.BuildTable(); // สร้าง DataTable โดยใช้เมธอด BuildTable
+            cellsDataTable = (CalculateCellsDataTable)builder; // <-- Assign the instance here
+            cellsDataTable.DebugReport();
+
+            //สร้าง DataTable และเชื่อมโยงกับ DataGridView
+            Main_datagrid.Tables.Add(dataTable_measurement);
+            BindingSource_DataMeasure.DataSource = dataTable_measurement;
+            DgvMeasurement.DataSource = BindingSource_DataMeasure;
+
+            //Reset Index Position
+            IndexPostionX = 0;
+            IndexPostionY = 0;
+
+            //Start Stopwatch
             watch.Restart();
+
+            //label timer color change
+            LBtimer.BackColor = Color.Transparent;
+            
         }
 
         private void FrmChild1_OnCancelClicked()
         {
+            //Stop Stopwatch
             watch.Stop();
+
+            //label timer color change
+            LBtimer.BackColor = Color.Red;
         }
 
         #endregion
 
-        private void UpdatelabelMeasurement()
+        private void UpdatelabelTypeMeasurement()
         {
             if (GlobalMeasurementSettings.Instance.SourceMode == "DC" && GlobalMeasurementSettings.Instance.MeasureMode == "Voltage")
             {
@@ -248,13 +288,12 @@ namespace CodingLabpro
             Datetimenow.Start();
             ActiveComboBox += ComboBoxEnabled;
             GlobalMeasurementSettings.Instance.SettingsChanged += Instance_SettingsChanged;
-            InitiallizeGridColumn();
 
         }
 
         private void Instance_SettingsChanged(object sender, EventArgs e)
         {
-            UpdatelabelMeasurement();
+            UpdatelabelTypeMeasurement();
             
         }
 
@@ -263,55 +302,225 @@ namespace CodingLabpro
             LBdatetime.Text = DateTime.Now.ToString("MM-dd-yyyy HH:mm:ss tt");
         }
 
-        #region Chart Control //การตั้งค่า Chart และการเพิ่มข้อมูล
-        public void Chartmeasure()
+        #region Datagridview Measurement Control Result //จัดการตารางข้อมูล
+
+        //เก็บชุดข้อมูลหลักของ DataGridView
+        private readonly DataSet main_datagrid = new DataSet();
+        private DataTable dataTable_measurement = new DataTable();
+        public DataSet Main_datagrid => main_datagrid;
+
+        //เมธอดตั้งค่าคอลัมน์ของ DataGridView
+        public void InitiallizeGridColumn()
         {
-            chart1.Series["Series1"].Points.AddXY(10, 2);
-            chart1.Series["Series1"].ChartType = SeriesChartType.Line;
 
-            chart1.ChartAreas["ChartArea1"].AxisY.Minimum = 0;
-            chart1.ChartAreas["ChartArea1"].AxisY.Maximum = 10;
-            chart1.ChartAreas["ChartArea1"].AxisX.Minimum = 0;
-            chart1.ChartAreas["ChartArea1"].AxisX.Maximum = 10;
+            //ตั้งค่ารูปแบบของ DataGridView
+            DgvMeasurement.DefaultCellStyle.ForeColor = Color.Black;
+            DgvMeasurement.DefaultCellStyle.BackColor = Color.White;
+            DgvMeasurement.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Regular);
+            DgvMeasurement.DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
+            DgvMeasurement.DefaultCellStyle.Format = "E5"; // รูปแบบวิทยาศาสตร์ (Scientific Notation
+            DgvMeasurement.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Bold);
+            DgvMeasurement.ColumnHeadersHeight = 50; // Set the desired height in pixels
+            DgvMeasurement.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            DgvMeasurement.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
 
-            chart1.ChartAreas["ChartArea1"].AxisX.Title = "Timer";
-            chart1.ChartAreas["ChartArea1"].AxisY.Title = "Voltage";
-            chart1.ChartAreas["ChartArea1"].AxisX.TitleForeColor = Color.White;
-            chart1.ChartAreas["ChartArea1"].AxisY.TitleForeColor = Color.White;
-            chart1.ChartAreas["ChartArea1"].AxisX.TitleFont = new Font("Cascadia Mono", 10, FontStyle.Regular);
-            chart1.ChartAreas["ChartArea1"].AxisY.TitleFont = new Font("Cascadia Mono", 10, FontStyle.Regular);
+        
+        }
 
+        //เมธอดแสดงหมายเลขแถวใน DataGridView
+        // Source - https://stackoverflow.com/a
+        // Posted by Gabriel Perez, modified by community. See post 'Timeline' for change history
+        // Retrieved 2026-01-28, License - CC BY-SA 3.0
+        private void DgvMeasurement_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var grid = sender as DataGridView; // Cast sender to DataGridView
+            var rowIdx = (e.RowIndex + 1).ToString(); // Get the row number (1-based index)
 
-            //chart1.ChartAreas["ChartArea1"].AxisX.IntervalType = DateTimeIntervalType.Minutes;
-            //chart1.ChartAreas["ChartArea1"].AxisX.LabelStyle.Format = "mm:ss";
+            var centerFormat = new StringFormat() // สร้างรูปแบบการจัดตำแหน่งข้อความ
+            {
+                // right alignment might actually make more sense for numbers
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+
+            var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
+            e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
+        }
+      
+        //เมธอดรับค่าข้อมูลการวัดและอัปเดตตาราง
+        public void Received_Data_measurement(double Data_measure)
+        {
+            cellsDataTable.UpdateCell(IndexPostionY, IndexPostionX, Data_measure);
+
+            IndexPostionX++;
+
+            if (IndexPostionX >= Columns)
+            {
+                IndexPostionX = 0;
+                IndexPostionY++;
+            }
 
         }
+
+        private void Received_Data_Display_measurement(double Data_Display)
+        {
+            LBvaluemeasurement.Text = Data_Display.ToString() + GlobalMeasurementSettings.Instance.UnitPrefix;
+        }
+
+      
+
 
         #endregion
 
-        #region Datagridview Measurement Control Result //จัดการตารางข้อมูล
-        
+        #region Export DataGridview to Excel Control
 
-        public void InitiallizeGridColumn()
+        private IWorkbook workbook { get; set; }
+
+        //เมธอดการสร้างชีทและส่วนหัวของตาราง
+        private ISheet createSheetAndHeader(DataTable dt, string sheetName, ICellStyle customStyle)
         {
-            DataTable myDataTable = new DataTable("MainGrid");
-            main_datagrid.Tables.Add(myDataTable);
-            //การเชื่อมต่อ datagridview
-            DgvMeasurement.DataSource = main_datagrid.Tables["MainGrid"];
-
-
+            ISheet sheeti = this.workbook.CreateSheet(sheetName);
+            //--- add 1 header row
+            int currentRow = 0;
+            IRow rowSheet = sheeti.CreateRow(currentRow);
+            for (int c = 0; c < dt.Columns.Count; c++)
+            {
+                var cellc = rowSheet.CreateCell(c);
+                cellc.SetCellValue(dt.Columns[c].ColumnName);
+                cellc.CellStyle = customStyle;
+                
+            }
+            return sheeti;
         }
 
-        private void Received_Data_measurement(double Data_measure)
+        //เมธอดการตั้งค่า Excel และบันทึกไฟล์
+        protected void DataExcelConfigure(string filePath, DataTable dt)
         {
-            //DataTable myDataTable = main_datagrid.Tables["MainGrid"];
-            //string Timeclock = DateTime.Now.ToString("HH:mm:ss.fff");
+            //Create Excel
+            this.workbook = new XSSFWorkbook();
 
-            //myDataTable.Rows.Add(Timeclock, Data_measure);
+            // Create the style object
+            ICellStyle customStyle = this.workbook.CreateCellStyle();
+            // Define a thin border for the top and bottom of the cell
+            customStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
+            customStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thin;
+            customStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
+            // Create a font object and make it bold
+            var customFont = this.workbook.CreateFont();
+            customFont.IsBold = true;
+            customFont.FontName = "Microsoft Sans Serif";
+            customFont.FontHeightInPoints = 10;
+            // Assign the font to the style
+            customStyle.SetFont(customFont);
 
-            LBvaluemeasurement.Text = Data_measure.ToString() + GlobalMeasurementSettings.Instance.UnitPrefix;
+            // Create sheet and add header
+            int sheetCount = 1;
+            string sheetName = "Sheet" + sheetCount++;
+            ISheet sheeti = createSheetAndHeader(dt, sheetName, customStyle);
+
+            // Add data rows
+            IDataFormat dataFormat = workbook.CreateDataFormat();
+            ICellStyle sciStyle = this.workbook.CreateCellStyle();
+            sciStyle.DataFormat = dataFormat.GetFormat("0.00000E+00");
+
+            for (int rowIndex = 0; rowIndex < dt.Rows.Count; rowIndex++)
+            {
+                IRow dataRow = sheeti.CreateRow(rowIndex + 1);
+                for (int columnIndex = 0; columnIndex < dt.Columns.Count; columnIndex++)
+                {
+
+                    var cell = dataRow.CreateCell(columnIndex);
+                    object value = dt.Rows[rowIndex][columnIndex]; // สร้างตัวแปรชนิด object เพื่อเก็บค่า 
+
+                    if (value != DBNull.Value)
+                    {
+                        if (double.TryParse(value.ToString(), out double numericValue))
+                        {
+                            cell.SetCellValue(numericValue);
+                            cell.CellStyle = sciStyle;
+                        }
+                    }
+                    else
+                    {
+                        cell.SetCellValue(string.Empty); // กรณีค่าเป็น DBNull ให้ใส่ค่าว่าง
+                    }
+
+                    //Auto Size Column
+                    sheeti.AutoSizeColumn(columnIndex);
+
+                }
+
+                // รายงานความคืบหน้า
+                int progressPercentage = (int)((rowIndex + 1) / (double)dt.Rows.Count * 100);
+                backgroundWorker.ReportProgress(progressPercentage);
+            }
+
+           
+            //Add file data and export excel
+            string filename = filePath;
+            using (var fileData = new FileStream(filename, FileMode.Create, FileAccess.Write))
+            {
+                this.workbook.Write(fileData);
+            }
         }
 
+        //เมธอดปุ่ม Export ข้อมูลไปยัง Excel
+        private void ToolBtnExport_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Filter = "Excel Files|*.xlsx;*.xls";
+            saveFileDialog1.Title = "Save a File";
+            saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog1.OverwritePrompt = true; // Warns if the file already exists
+            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            saveFileDialog1.FileName = $"MeasurementData_{timestamp}.xlsx";
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string fileSavePath = saveFileDialog1.FileName;
+                LBExportFile.Text = $"Preparing to save to: {fileSavePath}"; // อัปเดตข้อความสถานะ กำลังเตรียมบันทึกไฟล์
+                LBStatusLoading.Visible = true; // แสดงป้ายสถานะการโหลด
+
+                if (!backgroundWorker.IsBusy)
+                {
+                    // เริ่ม BackgroundWorker พร้อมส่งข้อมูลที่จำเป็น
+                    backgroundWorker.RunWorkerAsync(new { FilePath = fileSavePath, DataTable = dataTable_measurement });
+                }
+            }
+        }
+
+        // BackgroundWorker: อัปเดตความคืบหน้า (ถ้ามี)
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            LBStatusLoading.Text = $"Progress: {e.ProgressPercentage}%";
+        }
+
+        // BackgroundWorker: ทำงานในเธรดเบื้องหลัง
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            dynamic args = e.Argument;
+            string filePath = args.FilePath;
+            DataTable dataTable = args.DataTable;
+
+            // เรียกใช้เมธอด DataExcelConfigure ในเธรดเบื้องหลัง
+            DataExcelConfigure(filePath, dataTable);
+        }
+
+        // BackgroundWorker: อัปเดต UI เมื่อเสร็จสิ้น
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                // แสดงข้อความเมื่อเกิดข้อผิดพลาด
+                ShowMessage("ERROR", $"Failed to export Excel file: {e.Error.Message}");
+            }
+            else
+            {
+                // แสดงข้อความเมื่อสำเร็จ
+                ShowMessage("OK", "Excel file exported successfully!");
+                LBStatusLoading.Visible = false; // ซ่อนป้ายสถานะการโหลด
+                LBExportFile.Text = "Export completed."; // อัปเดตข้อความสถานะ
+            }
+        }
 
 
         #endregion
@@ -410,11 +619,11 @@ namespace CodingLabpro
             {
                 if (CBox != null && CBox.SelectedItem != null)
                 {
-                    Debug.WriteLine("false");
+                    Debug.WriteLine("[ComboBox]: false");
                     return false;
                 }
             }
-            Debug.WriteLine("true");
+            Debug.WriteLine("[ComboBox]: true");
             return true;
             
         }
@@ -451,7 +660,7 @@ namespace CodingLabpro
                         //CONNECT driver DMM Port GP - IB
                         string addr = Cblistaddress.SelectedItem.ToString();
                         MyDMM.IO = (IMessage)mgr1.Open(addr, AccessMode.NO_LOCK, 2000, null);
-                        MyDMM.IO.Timeout = 2000;
+                        MyDMM.IO.Timeout = 10000;
                         string command = "*IDN?";
                         MyDMM.WriteString(command);
 
@@ -509,7 +718,7 @@ namespace CodingLabpro
             }
                 
         }
-            
+
         private void BtnDiconnect_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Cursor.Current = Cursors.WaitCursor;
@@ -560,6 +769,35 @@ namespace CodingLabpro
             System.Windows.Forms.Cursor.Current = Cursors.Default;
         }
 
-        
+        private void ToolBtnClear_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MyDMM.WriteString("*CLS");  //Clear Error
+                ShowMessage("OK", "Clear Error DMM Successfully");
+            }
+            catch (Exception ex) 
+            {
+                ShowMessage("ERROR", $"Please Connect Device Agilent Multimeter \n {ex.Message}");
+            }
+
+        }
+
+        private void ToolBtnError_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MyDMM.WriteString("SYST:ERR?");  //Read Error
+                string ErrorDmm = MyDMM.ReadString();
+                ShowMessage("ERROR", ErrorDmm);
+
+            }
+            catch (Exception ex)
+            {
+                ShowMessage("ERROR", $"Please Connect Device Agilent Multimeter \n {ex.Message}");
+
+            }
+               
+        }
     }
 }
