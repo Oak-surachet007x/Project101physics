@@ -109,10 +109,12 @@ namespace CodingLabpro
         {
 
             _active.BorderColor = Color.FromArgb(140, 26, 246);
+            _active.Enabled = false;
 
             foreach (ucMenu inactive in _inactive)
             {
                 inactive.BorderColor = Color.Transparent;
+                inactive.Enabled = true;
             }
 
 
