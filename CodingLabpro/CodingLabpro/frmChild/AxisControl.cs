@@ -69,7 +69,7 @@ namespace CodingLabpro.frmChild
         
         private void UIControlDisabled(bool EnabledItem)
         {
-     
+         
             RB_resolution4digits.Enabled = !EnabledItem;
             RB_resolutionMIN.Enabled = !EnabledItem;
             RB_resolutionCustom.Enabled = !EnabledItem;
@@ -585,7 +585,7 @@ namespace CodingLabpro.frmChild
                 }
                 else if (GlobalMeasurementSettings.Instance.TriggerMode == "IMMediate")
                 {
-                    myDMM.WriteString(Build_MeasureCommand()); //คำสั่งวัดทันที
+                    //myDMM.WriteString(Build_MeasureCommand()); //คำสั่งวัดทันที
                
 
                 }
@@ -631,8 +631,8 @@ namespace CodingLabpro.frmChild
             {
                 return await Task.Run(() =>
                 {
-                    string Value_Masurement = myDMM.ReadString().Trim();
-                    //string Value_Masurement = "-1.38778E-04"; //Test Code
+                    //string Value_Masurement = myDMM.ReadString().Trim();
+                    string Value_Masurement = "-1.38778E-04"; //Test Code
                     return Value_Masurement;
 
 
@@ -1241,11 +1241,11 @@ namespace CodingLabpro.frmChild
                 }
 
                 //Run Setup Scaning
-                myMMC.WriteString("H:W");
-                await Task.Delay(5000);
-                myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y = 0 cm & X = 1 cm
-                myMMC.WriteString("G:");
-                await Task.Delay(5000);
+                //myMMC.WriteString("H:W");
+                //await Task.Delay(5000);
+                //myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y = 0 cm & X = 1 cm
+                //myMMC.WriteString("G:");
+                //await Task.Delay(5000);
                 //---------------------------------Setup Measurement-------------------------------------------- -
                 //Run Measurement
                 SetupMeasurementCommand();
@@ -1290,8 +1290,8 @@ namespace CodingLabpro.frmChild
                 {
                     for (int x = 0; x < LoopAreaX; x++)
                     {
-                        myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
-                        myMMC.WriteString("G:");
+                        //myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
+                        //myMMC.WriteString("G:");
                         await Task.Delay(ValueTimer, token); //หน่วงเวลา 2 วินาที เพื่อเก็บค่าการวัด
 
                         await Measure_Trigger(token); //ส่งคำสั่งวัดแบบ BUS
@@ -1307,8 +1307,8 @@ namespace CodingLabpro.frmChild
                 {
                     for (int x = 0; x < LoopAreaX; x++)
                     {
-                        myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
-                        myMMC.WriteString("G:");
+                        //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
+                        //myMMC.WriteString("G:");
                         await Task.Delay(ValueTimer, token); //หน่วงเวลา 2 วินาที เพื่อเก็บค่าการวัด
 
                         await Measure_Trigger(token); //ส่งคำสั่งวัดแบบ BUS
@@ -1322,8 +1322,8 @@ namespace CodingLabpro.frmChild
                 }
 
                 //เคลื่อนที่ไปยังแถวถัดไปตามแนว Y
-                myMMC.WriteString(ValueProcessY);
-                myMMC.WriteString("G:");
+                //myMMC.WriteString(ValueProcessY);
+                //myMMC.WriteString("G:");
                 await Task.Delay(ValueTimer, token);
 
 
@@ -1335,8 +1335,8 @@ namespace CodingLabpro.frmChild
 
                 for (int x = 0; x < LoopAreaX; x++)
                 {
-                    myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
-                    myMMC.WriteString("G:");
+                    //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
+                    //myMMC.WriteString("G:");
                     await Task.Delay(ValueTimer, token);
 
                 }

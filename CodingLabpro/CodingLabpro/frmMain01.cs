@@ -221,6 +221,10 @@ namespace CodingLabpro
             {
                 LBunitmeasurement.Text = "AAC";
             }
+            else if (GlobalMeasurementSettings.Instance.MeasureMode == "Frequency")
+            {
+                LBunitmeasurement.Text = "Hz";
+            }
             else
             {
                 LBunitmeasurement.Text = "Mode";
@@ -372,7 +376,7 @@ namespace CodingLabpro
 
         #endregion
 
-        #region Export DataGridview to Excel Control
+        #region Export DataGridview to file Data Control
 
         private IWorkbook workbook { get; set; }
 
@@ -477,7 +481,7 @@ namespace CodingLabpro
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string fileSavePath = saveFileDialog1.FileName;
-                LBExportFile.Text = $"Preparing to save to: {fileSavePath}"; // อัปเดตข้อความสถานะ กำลังเตรียมบันทึกไฟล์
+                LBExportFile.Text = $"Preparing to save : {fileSavePath}"; // อัปเดตข้อความสถานะ กำลังเตรียมบันทึกไฟล์
                 LBStatusLoading.Visible = true; // แสดงป้ายสถานะการโหลด
 
                 if (!backgroundWorker.IsBusy)
@@ -522,6 +526,53 @@ namespace CodingLabpro
             }
         }
 
+        //เมธอดปุ่ม Export ข้อมูลไปยัง CSV
+        private void ToolBtnExport_csv_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Filter = "CSV Files|*.csv";
+            saveFileDialog1.Title = "Save a File";
+            saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog1.OverwritePrompt = true; // Warns if the file already exists
+            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            saveFileDialog1.FileName = $"MeasurementData_{timestamp}.csv";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string fileSavePath = saveFileDialog1.FileName;
+                LBExportFile.Text = $"Saving to : {fileSavePath}"; // อัปเดตข้อความสถานะ กำลังบันทึกไฟล์
+                try
+                {
+                    using (StreamWriter writer = new StreamWriter(fileSavePath))
+                    {
+                        // เขียนส่วนหัวของคอลัมน์
+                        for (int i = 0; i < dataTable_measurement.Columns.Count; i++)
+                        {
+                            writer.Write(dataTable_measurement.Columns[i].ColumnName);
+                            if (i < dataTable_measurement.Columns.Count - 1)
+                                writer.Write(","); // คั่นด้วยเครื่องหมายจุลภาค
+                        }
+                        writer.WriteLine();
+                        // เขียนข้อมูลแต่ละแถว
+                        foreach (DataRow row in dataTable_measurement.Rows)
+                        {
+                            for (int i = 0; i < dataTable_measurement.Columns.Count; i++)
+                            {
+                                writer.Write(row[i].ToString());
+                                if (i < dataTable_measurement.Columns.Count - 1)
+                                    writer.Write(","); // คั่นด้วยเครื่องหมายจุลภาค
+                            }
+                            writer.WriteLine();
+                        }
+                    }
+                    ShowMessage("OK", "CSV file exported successfully!");
+                    LBExportFile.Text = "Export completed."; // อัปเดตข้อความสถานะ
+                }
+                catch (Exception ex)
+                {
+                    ShowMessage("ERROR", $"Failed to export CSV file: {ex.Message}");
+                }
+            }
+
+        }
 
         #endregion
 

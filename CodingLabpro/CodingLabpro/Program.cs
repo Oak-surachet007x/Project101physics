@@ -16,7 +16,7 @@ namespace CodingLabpro
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmSelectionModel());
+            Application.Run(new FrmLayout());
         }
     }
 }

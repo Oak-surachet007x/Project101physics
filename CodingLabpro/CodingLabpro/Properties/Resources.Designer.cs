@@ -103,6 +103,16 @@ namespace CodingLabpro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap File_csv_icon {
+            get {
+                object obj = ResourceManager.GetObject("File csv icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap File_excel_xlsx_icon {
             get {
                 object obj = ResourceManager.GetObject("File excel_xlsx icon", resourceCulture);

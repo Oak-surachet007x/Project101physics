@@ -67,6 +67,7 @@
             this.RB_autoON = new System.Windows.Forms.RadioButton();
             this.RB_autoOFF = new System.Windows.Forms.RadioButton();
             this.totalAreaXTextBox = new System.Windows.Forms.TextBox();
+            this.InputValue_area = new System.Windows.Forms.BindingSource(this.components);
             this.totalAreaYTextBox = new System.Windows.Forms.TextBox();
             this.moveStepYTextBox = new System.Windows.Forms.TextBox();
             this.moveStepXTextBox = new System.Windows.Forms.TextBox();
@@ -75,12 +76,11 @@
             this.delaySteppingComboBox = new System.Windows.Forms.ComboBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.Btn_SCPItest = new System.Windows.Forms.Button();
-            this.InputValue_area = new System.Windows.Forms.BindingSource(this.components);
             this.CBtrigger = new System.Windows.Forms.ComboBox();
             this.STriggerlabel = new System.Windows.Forms.Label();
             this.RBvoltage = new System.Windows.Forms.RadioButton();
             this.RBcurrent = new System.Windows.Forms.RadioButton();
-            this.RBfrep = new System.Windows.Forms.RadioButton();
+            this.RBfrequency = new System.Windows.Forms.RadioButton();
             this.GBMeas = new System.Windows.Forms.GroupBox();
             this.RBsource_DC = new System.Windows.Forms.RadioButton();
             this.RBsource_AC = new System.Windows.Forms.RadioButton();
@@ -107,8 +107,8 @@
             this.GBreport.SuspendLayout();
             this.GBmotorport.SuspendLayout();
             this.GBautozero.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.GBMeas.SuspendLayout();
             this.GBSource.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Resolution)).BeginInit();
@@ -574,6 +574,10 @@
             this.totalAreaXTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.totalAreaXTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.totalAreaXTextBox_KeyPress);
             // 
+            // InputValue_area
+            // 
+            this.InputValue_area.DataSource = typeof(CodingLabpro.CommandDevice.CalculateArea_Bind);
+            // 
             // totalAreaYTextBox
             // 
             this.totalAreaYTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "TotalAreaY", true));
@@ -656,10 +660,6 @@
             this.Btn_SCPItest.UseVisualStyleBackColor = true;
             this.Btn_SCPItest.Click += new System.EventHandler(this.Btn_SCPItest_Click);
             // 
-            // InputValue_area
-            // 
-            this.InputValue_area.DataSource = typeof(CodingLabpro.CommandDevice.CalculateArea_Bind);
-            // 
             // CBtrigger
             // 
             this.CBtrigger.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -718,27 +718,27 @@
             this.RBcurrent.UseVisualStyleBackColor = false;
             this.RBcurrent.CheckedChanged += new System.EventHandler(this.RBcurrent_CheckedChanged);
             // 
-            // RBfrep
+            // RBfrequency
             // 
-            this.RBfrep.Appearance = System.Windows.Forms.Appearance.Button;
-            this.RBfrep.BackColor = System.Drawing.Color.LightGray;
-            this.RBfrep.FlatAppearance.CheckedBackColor = System.Drawing.Color.Lime;
-            this.RBfrep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RBfrep.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RBfrep.ForeColor = System.Drawing.Color.Black;
-            this.RBfrep.Location = new System.Drawing.Point(148, 65);
-            this.RBfrep.Name = "RBfrep";
-            this.RBfrep.Size = new System.Drawing.Size(142, 44);
-            this.RBfrep.TabIndex = 14;
-            this.RBfrep.TabStop = true;
-            this.RBfrep.Text = "Frequency";
-            this.RBfrep.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.RBfrep.UseVisualStyleBackColor = false;
-            this.RBfrep.CheckedChanged += new System.EventHandler(this.RBfrep_CheckedChanged);
+            this.RBfrequency.Appearance = System.Windows.Forms.Appearance.Button;
+            this.RBfrequency.BackColor = System.Drawing.Color.LightGray;
+            this.RBfrequency.FlatAppearance.CheckedBackColor = System.Drawing.Color.Lime;
+            this.RBfrequency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RBfrequency.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RBfrequency.ForeColor = System.Drawing.Color.Black;
+            this.RBfrequency.Location = new System.Drawing.Point(148, 65);
+            this.RBfrequency.Name = "RBfrequency";
+            this.RBfrequency.Size = new System.Drawing.Size(142, 44);
+            this.RBfrequency.TabIndex = 14;
+            this.RBfrequency.TabStop = true;
+            this.RBfrequency.Text = "Frequency";
+            this.RBfrequency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.RBfrequency.UseVisualStyleBackColor = false;
+            this.RBfrequency.CheckedChanged += new System.EventHandler(this.RBfrep_CheckedChanged);
             // 
             // GBMeas
             // 
-            this.GBMeas.Controls.Add(this.RBfrep);
+            this.GBMeas.Controls.Add(this.RBfrequency);
             this.GBMeas.Controls.Add(this.RBcurrent);
             this.GBMeas.Controls.Add(this.RBvoltage);
             this.GBMeas.Font = new System.Drawing.Font("Cascadia Code Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1058,8 +1058,8 @@
             this.GBmotorport.ResumeLayout(false);
             this.GBautozero.ResumeLayout(false);
             this.GBautozero.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.GBMeas.ResumeLayout(false);
             this.GBSource.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Resolution)).EndInit();
@@ -1133,7 +1133,7 @@
         private System.Windows.Forms.RadioButton RBsource_AC;
         private System.Windows.Forms.RadioButton RBsource_DC;
         private System.Windows.Forms.GroupBox GBMeas;
-        private System.Windows.Forms.RadioButton RBfrep;
+        private System.Windows.Forms.RadioButton RBfrequency;
         private System.Windows.Forms.RadioButton RBcurrent;
         private System.Windows.Forms.RadioButton RBvoltage;
         private System.Windows.Forms.Label STriggerlabel;

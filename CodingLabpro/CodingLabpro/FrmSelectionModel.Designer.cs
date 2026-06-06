@@ -28,13 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(663, 399);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(112, 38);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Connect";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // FrmSelectionModel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
+            this.ClientSize = new System.Drawing.Size(808, 461);
+            this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmSelectionModel";
             this.Text = "FrmSelectionModel";
             this.ResumeLayout(false);
@@ -42,5 +57,7 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Button button1;
     }
 }

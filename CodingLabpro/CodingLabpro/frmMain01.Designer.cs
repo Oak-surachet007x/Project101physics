@@ -59,12 +59,14 @@
             this.StatusMMC2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusPort3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.LBExportFile = new System.Windows.Forms.ToolStripStatusLabel();
+            this.LBStatusLoading = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelTop = new System.Windows.Forms.Panel();
             this.LBdatetime = new System.Windows.Forms.Label();
             this.LBunitmeasurement = new System.Windows.Forms.Label();
             this.LBtimer = new System.Windows.Forms.Label();
             this.LBvaluemeasurement = new System.Windows.Forms.Label();
             this.flowLayoutBar = new System.Windows.Forms.FlowLayoutPanel();
+            this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.FormChildpanel = new System.Windows.Forms.Panel();
             this.Datetimenow = new System.Windows.Forms.Timer(this.components);
             this.Stoptimer1 = new System.Windows.Forms.Timer(this.components);
@@ -73,6 +75,7 @@
             this.TabPage_Tools = new System.Windows.Forms.TabPage();
             this.toolStripMenu = new System.Windows.Forms.ToolStrip();
             this.ToolBtnExport = new System.Windows.Forms.ToolStripButton();
+            this.ToolBtnExport_csv = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolBtnError = new System.Windows.Forms.ToolStripButton();
             this.ToolBtnClear = new System.Windows.Forms.ToolStripButton();
@@ -80,8 +83,6 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.BindingSource_DataMeasure = new System.Windows.Forms.BindingSource(this.components);
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.LBStatusLoading = new System.Windows.Forms.ToolStripStatusLabel();
-            this.barMenu1 = new CodingLabpro.Models.barMenu();
             this.tableLayoutPanel1.SuspendLayout();
             this.GBdata.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvMeasurement)).BeginInit();
@@ -391,10 +392,19 @@
             this.LBExportFile.Image = global::CodingLabpro.Properties.Resources.file_export_33dp_8C1AF6_FILL0_wght400_GRAD0_opsz40;
             this.LBExportFile.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.LBExportFile.Name = "LBExportFile";
-            this.LBExportFile.Size = new System.Drawing.Size(664, 25);
+            this.LBExportFile.Size = new System.Drawing.Size(724, 25);
             this.LBExportFile.Spring = true;
             this.LBExportFile.Text = "FilePath:";
             this.LBExportFile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // LBStatusLoading
+            // 
+            this.LBStatusLoading.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBStatusLoading.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.LBStatusLoading.Name = "LBStatusLoading";
+            this.LBStatusLoading.Size = new System.Drawing.Size(29, 25);
+            this.LBStatusLoading.Text = "0%";
+            this.LBStatusLoading.Visible = false;
             // 
             // panelTop
             // 
@@ -470,6 +480,17 @@
             this.flowLayoutBar.Size = new System.Drawing.Size(50, 587);
             this.flowLayoutBar.TabIndex = 0;
             // 
+            // barMenu1
+            // 
+            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
+            this.barMenu1.BarColor = System.Drawing.Color.White;
+            this.barMenu1.Location = new System.Drawing.Point(6, 12);
+            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
+            this.barMenu1.Name = "barMenu1";
+            this.barMenu1.Size = new System.Drawing.Size(50, 222);
+            this.barMenu1.TabIndex = 0;
+            this.barMenu1.textbar = "Axis Control & Measument";
+            // 
             // FormChildpanel
             // 
             this.FormChildpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
@@ -532,6 +553,7 @@
             this.toolStripMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStripMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolBtnExport,
+            this.ToolBtnExport_csv,
             this.toolStripSeparator1,
             this.ToolBtnError,
             this.ToolBtnClear});
@@ -552,6 +574,18 @@
             this.ToolBtnExport.Text = "Export to .xlsx";
             this.ToolBtnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ToolBtnExport.Click += new System.EventHandler(this.ToolBtnExport_Click);
+            // 
+            // ToolBtnExport_csv
+            // 
+            this.ToolBtnExport_csv.AutoSize = false;
+            this.ToolBtnExport_csv.Image = global::CodingLabpro.Properties.Resources.File_csv_icon;
+            this.ToolBtnExport_csv.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ToolBtnExport_csv.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolBtnExport_csv.Name = "ToolBtnExport_csv";
+            this.ToolBtnExport_csv.Size = new System.Drawing.Size(100, 96);
+            this.ToolBtnExport_csv.Text = "Export to .csv";
+            this.ToolBtnExport_csv.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ToolBtnExport_csv.Click += new System.EventHandler(this.ToolBtnExport_csv_Click);
             // 
             // toolStripSeparator1
             // 
@@ -600,26 +634,6 @@
             this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
             this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
             this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
-            // 
-            // LBStatusLoading
-            // 
-            this.LBStatusLoading.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBStatusLoading.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.LBStatusLoading.Name = "LBStatusLoading";
-            this.LBStatusLoading.Size = new System.Drawing.Size(29, 25);
-            this.LBStatusLoading.Text = "0%";
-            this.LBStatusLoading.Visible = false;
-            // 
-            // barMenu1
-            // 
-            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
-            this.barMenu1.BarColor = System.Drawing.Color.White;
-            this.barMenu1.Location = new System.Drawing.Point(6, 12);
-            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
-            this.barMenu1.Name = "barMenu1";
-            this.barMenu1.Size = new System.Drawing.Size(50, 222);
-            this.barMenu1.TabIndex = 0;
-            this.barMenu1.textbar = "Axis Control & Measument";
             // 
             // FrmMain01
             // 
@@ -715,5 +729,6 @@
         private System.Windows.Forms.ToolStripButton ToolBtnClear;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.ToolStripStatusLabel LBStatusLoading;
+        private System.Windows.Forms.ToolStripButton ToolBtnExport_csv;
     }
 }
