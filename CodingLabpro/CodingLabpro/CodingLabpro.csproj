@@ -178,6 +178,7 @@
     <Compile Include="CommandDevice\FindDevices.cs" />
     <Compile Include="CommandDevice\GlobalMeasurementSettings.cs" />
     <Compile Include="CommandDevice\IDataTableBuilder.cs" />
+    <Compile Include="CommandDevice\MeasurementEnums.cs" />
     <Compile Include="frmChild\VextaSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>

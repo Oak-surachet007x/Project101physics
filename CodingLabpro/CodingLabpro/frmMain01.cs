@@ -209,24 +209,24 @@ namespace CodingLabpro
 
         private void UpdatelabelTypeMeasurement()
         {
-            if (GlobalMeasurementSettings.Instance.SourceMode == "DC" && GlobalMeasurementSettings.Instance.MeasureMode == "Voltage")
+            if (GlobalMeasurementSettings.Instance.SourceMode == SourceMode.DC && GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Voltage)
             {
                 LBunitmeasurement.Text = "VDC";
                 
             }
-            else if(GlobalMeasurementSettings.Instance.SourceMode == "DC" && GlobalMeasurementSettings.Instance.MeasureMode == "Current")
+            else if(GlobalMeasurementSettings.Instance.SourceMode == SourceMode.DC && GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Current)
             {
                 LBunitmeasurement.Text = "ADC";
             }
-            else if (GlobalMeasurementSettings.Instance.SourceMode == "AC" && GlobalMeasurementSettings.Instance.MeasureMode == "Voltage")
+            else if (GlobalMeasurementSettings.Instance.SourceMode == SourceMode.AC && GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Voltage)
             {
                 LBunitmeasurement.Text = "VAC";
             }
-            else if (GlobalMeasurementSettings.Instance.SourceMode == "AC" && GlobalMeasurementSettings.Instance.MeasureMode == "Current")
+            else if (GlobalMeasurementSettings.Instance.SourceMode == SourceMode.AC && GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Current)
             {
                 LBunitmeasurement.Text = "AAC";
             }
-            else if (GlobalMeasurementSettings.Instance.MeasureMode == "Frequency")
+            else if (GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Frequency)
             {
                 LBunitmeasurement.Text = "Hz";
             }
