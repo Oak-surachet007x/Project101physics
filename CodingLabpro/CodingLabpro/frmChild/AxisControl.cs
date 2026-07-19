@@ -89,13 +89,15 @@ namespace CodingLabpro.frmChild
             unitXComboBox.Enabled = !EnabledItem;
             unitYComboBox.Enabled = !EnabledItem;
 
+
+
         }
 
         private void UIVisbleControl(bool VisibleItem)
         {
             GBSource.Visible = !VisibleItem;
-            STriggerlabel.Visible = !VisibleItem;
-            CBtrigger.Visible = !VisibleItem;
+            //STriggerlabel.Visible = !VisibleItem;
+            //CBtrigger.Visible = !VisibleItem;
         }
 
         private void AxisControl_Load(object sender, EventArgs e)
@@ -107,8 +109,40 @@ namespace CodingLabpro.frmChild
             Numeric_Range.Enabled = false;
             Numeric_Resolution.Enabled = false;
             CBtrigger.SelectedItem = GlobalMeasurementSettings.Instance.TriggerMode; //ค่าเริ่มต้น
+            GBreport_Axis.Visible = false;
+            GBreport_Data.Visible = false;
+            Report_positon.ForeColor = Color.BlueViolet;
+            Report_positon.Text = "Testing Position MMC2";
             Range_Control_Measurement();
 
+            GlobalMeasurementSettings.Instance.SettingsChanged += Instance_SettingsChanged;
+
+        }
+
+        private void Instance_SettingsChanged(object sender, EventArgs e)
+        {
+            UpdateControlUIreport();
+        }
+
+        private void UpdateControlUIreport()
+        {
+            if (GlobalMeasurementSettings.Instance.SelectedModel == "Chuoseiki")
+            {
+                GBreport_Data.Visible = true;
+                GBreport_Axis.Visible = false;
+                GBreport_Data.Size = new Size(302, 236);
+            }
+            else if (GlobalMeasurementSettings.Instance.SelectedModel == "Vexta")
+            {
+                GBreport_Data.Visible = true;
+                GBreport_Axis.Visible = true;
+                GBreport_Data.Size = new Size(302, 106);
+
+            }
+            else
+            {
+                GBreport_Axis.Visible = false;
+            }
         }
 
         private void RB_rs232_CheckedChanged(object sender, EventArgs e)
@@ -167,6 +201,7 @@ namespace CodingLabpro.frmChild
             UIVisbleControl(true);
             UIControlDisabled(false);
             GlobalMeasurementSettings.Instance.MeasureMode = "Frequency";
+            GlobalMeasurementSettings.Instance.SourceMode = "None";
         }
 
         private void RBvoltage_CheckedChanged(object sender, EventArgs e)
@@ -321,6 +356,7 @@ namespace CodingLabpro.frmChild
                 CBrange.Enabled = false;
                 Numeric_Range.Enabled = false;
                 GlobalMeasurementSettings.Instance.RangeControl = "AUTO";
+          
             }
             else if (RB_Customrange.Checked)
             {
@@ -382,38 +418,40 @@ namespace CodingLabpro.frmChild
                     {
                         return $"CONF:{baseCommand} DEF, DEF";
                     }
-
-
-                    // ตั้งค่าขอบเขตการวัดตามโหมด
-                    switch (GlobalMeasurementSettings.Instance.RangeControl)
+                    else
                     {
-                        case "AUTO":
-                            return $"CONF:{baseCommand} DEF, {Resolution}";
-                        case "CUSTOM":
-                            // แปลงค่าขอบเขตการวัดเป็นหน่วยมาตรฐาน
-                            double Range_value = (double)Numeric_Range.Value;
-                            SelectUnitMeasure = CBrange.SelectedItem.ToString();
-                            Range = ConvertValueOnUnit(Range_value, SelectUnitMeasure);
-                            break;
 
-                    }
+                        // ตั้งค่าขอบเขตการวัดตามโหมด
+                        switch (GlobalMeasurementSettings.Instance.RangeControl)
+                        {
+                            case "AUTO":
+                                return $"CONF:{baseCommand} DEF, {Resolution}";
+                            case "CUSTOM":
+                                // แปลงค่าขอบเขตการวัดเป็นหน่วยมาตรฐาน
+                                double Range_value = (double)Numeric_Range.Value;
+                                SelectUnitMeasure = CBrange.SelectedItem.ToString();
+                                Range = ConvertValueOnUnit(Range_value, SelectUnitMeasure);
+                                break;
 
-                    // ตั้งค่าความละเอียดตามโหมด
-                    switch (GlobalMeasurementSettings.Instance.ResolutionControl)
-                    {
-                        case "DIGITS_4":
-                            Resolution = 0.0001;
-                            break;
-                        case "MIN":
-                            return $"CONF:{baseCommand} {Range}, MIN";
-                        case "MAX":
-                            return $"CONF:{baseCommand} {Range}, MAX";
-                        case "AUTO":
-                            return $"CONF:{baseCommand} {Range}";
-                        case "CUSTOM":
-                            Resolution = (double)Numeric_Resolution.Value;
-                            break;
+                        }
 
+                        // ตั้งค่าความละเอียดตามโหมด
+                        switch (GlobalMeasurementSettings.Instance.ResolutionControl)
+                        {
+                            case "DIGITS_4":
+                                Resolution = 0.0001;
+                                break;
+                            case "MIN":
+                                return $"CONF:{baseCommand} {Range}, MIN";
+                            case "MAX":
+                                return $"CONF:{baseCommand} {Range}, MAX";
+                            case "AUTO":
+                                return $"CONF:{baseCommand} {Range}";
+                            case "CUSTOM":
+                                Resolution = (double)Numeric_Resolution.Value;
+                                break;
+
+                        }
                     }
 
 
@@ -461,40 +499,41 @@ namespace CodingLabpro.frmChild
                     {
                         return $"MEAS:{baseCommand}? DEF, DEF";
                     }
-
-
-                    // ตั้งค่าขอบเขตการวัดตามโหมด
-                    switch (GlobalMeasurementSettings.Instance.RangeControl)
+                    else
                     {
-                        case "AUTO":
-                            return $"MEAS:{baseCommand}? DEF, {Resolution}";
-                        case "CUSTOM":
-                            // แปลงค่าขอบเขตการวัดเป็นหน่วยมาตรฐาน
-                            double Range_value = (double)Numeric_Range.Value;
-                            SelectUnitMeasure = CBrange.SelectedItem.ToString();
-                            Range = ConvertValueOnUnit(Range_value, SelectUnitMeasure);
-                            break;
 
+                        // ตั้งค่าขอบเขตการวัดตามโหมด
+                        switch (GlobalMeasurementSettings.Instance.RangeControl)
+                        {
+                            case "AUTO":
+                                return $"MEAS:{baseCommand}? DEF, {Resolution}";
+                            case "CUSTOM":
+                                // แปลงค่าขอบเขตการวัดเป็นหน่วยมาตรฐาน
+                                double Range_value = (double)Numeric_Range.Value;
+                                SelectUnitMeasure = CBrange.SelectedItem.ToString();
+                                Range = ConvertValueOnUnit(Range_value, SelectUnitMeasure);
+                                break;
+
+                        }
+
+                        // ตั้งค่าความละเอียดตามโหมด
+                        switch (GlobalMeasurementSettings.Instance.ResolutionControl)
+                        {
+                            case "DIGITS_4":
+                                Resolution = 0.0001;
+                                break;
+                            case "MIN":
+                                return $"MEAS:{baseCommand}? {Range}, MIN";
+                            case "MAX":
+                                return $"MEAS:{baseCommand}? {Range}, MAX";
+                            case "AUTO":
+                                return $"MEAS:{baseCommand}? {Range}";
+                            case "CUSTOM":
+                                Resolution = (double)Numeric_Resolution.Value;
+                                break;
+
+                        }
                     }
-
-                    // ตั้งค่าความละเอียดตามโหมด
-                    switch (GlobalMeasurementSettings.Instance.ResolutionControl)
-                    {
-                        case "DIGITS_4":
-                            Resolution = 0.0001;
-                            break;
-                        case "MIN":
-                            return $"MEAS:{baseCommand}? {Range}, MIN";
-                        case "MAX":
-                            return $"MEAS:{baseCommand}? {Range}, MAX";
-                        case "AUTO":
-                            return $"MEAS:{baseCommand}? {Range}";
-                        case "CUSTOM":
-                            Resolution = (double)Numeric_Resolution.Value;
-                            break;
-
-                    }
-
 
                 }
 
@@ -504,6 +543,7 @@ namespace CodingLabpro.frmChild
 
                 // สร้างคำสั่ง SCPI
                 string command = $"MEAS:{baseCommand}? {formattedRange}, {formattedResolution}";
+
                 Debug.WriteLine(command);
                 return command;
             }
@@ -585,14 +625,18 @@ namespace CodingLabpro.frmChild
                 }
                 else if (GlobalMeasurementSettings.Instance.TriggerMode == "IMMediate")
                 {
-                    //myDMM.WriteString(Build_MeasureCommand()); //คำสั่งวัดทันที
-               
+                    Build_MeasureCommand();
+
 
                 }
             }
             else if(GlobalMeasurementSettings.Instance.MeasureMode == "Frequency")
             {
-                myDMM.WriteString("CONF:FREQ DEF, DEF");
+                if (GlobalMeasurementSettings.Instance.TriggerMode == "IMMediate")
+                {
+                    //myDMM.WriteString("CONF:FREQ DEF, DEF");
+                    Build_ConfigCommand(); //ตั้งค่าการวัดล่วงหน้า
+                }
             }
             
 

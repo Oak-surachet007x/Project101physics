@@ -42,7 +42,6 @@
             this.Btn_XLeft = new System.Windows.Forms.Button();
             this.Btn_YDown = new System.Windows.Forms.Button();
             this.Btn_YUp = new System.Windows.Forms.Button();
-            this.CblStepMotor = new System.Windows.Forms.ComboBox();
             this.labelstep = new System.Windows.Forms.Label();
             this.Btn_ResetHome = new System.Windows.Forms.Button();
             this.labelUnit2 = new System.Windows.Forms.Label();
@@ -54,7 +53,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Btn_runscaning = new System.Windows.Forms.Button();
             this.Reportdata = new System.Windows.Forms.TextBox();
-            this.GBreport = new System.Windows.Forms.GroupBox();
+            this.GBreport_Data = new System.Windows.Forms.GroupBox();
             this.GBmotorport = new System.Windows.Forms.GroupBox();
             this.RB_rs232 = new System.Windows.Forms.RadioButton();
             this.RB_gpib = new System.Windows.Forms.RadioButton();
@@ -67,7 +66,6 @@
             this.RB_autoON = new System.Windows.Forms.RadioButton();
             this.RB_autoOFF = new System.Windows.Forms.RadioButton();
             this.totalAreaXTextBox = new System.Windows.Forms.TextBox();
-            this.InputValue_area = new System.Windows.Forms.BindingSource(this.components);
             this.totalAreaYTextBox = new System.Windows.Forms.TextBox();
             this.moveStepYTextBox = new System.Windows.Forms.TextBox();
             this.moveStepXTextBox = new System.Windows.Forms.TextBox();
@@ -99,15 +97,19 @@
             this.CBrange = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.GBrange = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.CblStepMotor = new System.Windows.Forms.ComboBox();
+            this.GBreport_Axis = new System.Windows.Forms.GroupBox();
+            this.Report_positon = new System.Windows.Forms.TextBox();
+            this.InputValue_area = new System.Windows.Forms.BindingSource(this.components);
             totalAreaXLabel = new System.Windows.Forms.Label();
             totalAreaYLabel = new System.Windows.Forms.Label();
             moveStepYLabel = new System.Windows.Forms.Label();
             moveStepXLabel = new System.Windows.Forms.Label();
             delaySteppingLabel = new System.Windows.Forms.Label();
-            this.GBreport.SuspendLayout();
+            this.GBreport_Data.SuspendLayout();
             this.GBmotorport.SuspendLayout();
             this.GBautozero.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.GBMeas.SuspendLayout();
             this.GBSource.SuspendLayout();
@@ -115,6 +117,9 @@
             this.GBResolution.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Range)).BeginInit();
             this.GBrange.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.GBreport_Axis.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).BeginInit();
             this.SuspendLayout();
             // 
             // totalAreaXLabel
@@ -123,7 +128,7 @@
             totalAreaXLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
             totalAreaXLabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             totalAreaXLabel.ForeColor = System.Drawing.Color.White;
-            totalAreaXLabel.Location = new System.Drawing.Point(21, 396);
+            totalAreaXLabel.Location = new System.Drawing.Point(22, 376);
             totalAreaXLabel.Name = "totalAreaXLabel";
             totalAreaXLabel.Size = new System.Drawing.Size(73, 21);
             totalAreaXLabel.TabIndex = 49;
@@ -134,7 +139,7 @@
             totalAreaYLabel.AutoSize = true;
             totalAreaYLabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             totalAreaYLabel.ForeColor = System.Drawing.Color.White;
-            totalAreaYLabel.Location = new System.Drawing.Point(21, 430);
+            totalAreaYLabel.Location = new System.Drawing.Point(22, 410);
             totalAreaYLabel.Name = "totalAreaYLabel";
             totalAreaYLabel.Size = new System.Drawing.Size(73, 21);
             totalAreaYLabel.TabIndex = 50;
@@ -145,7 +150,7 @@
             moveStepYLabel.AutoSize = true;
             moveStepYLabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             moveStepYLabel.ForeColor = System.Drawing.Color.White;
-            moveStepYLabel.Location = new System.Drawing.Point(21, 534);
+            moveStepYLabel.Location = new System.Drawing.Point(22, 514);
             moveStepYLabel.Name = "moveStepYLabel";
             moveStepYLabel.Size = new System.Drawing.Size(73, 21);
             moveStepYLabel.TabIndex = 51;
@@ -156,7 +161,7 @@
             moveStepXLabel.AutoSize = true;
             moveStepXLabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             moveStepXLabel.ForeColor = System.Drawing.Color.White;
-            moveStepXLabel.Location = new System.Drawing.Point(21, 502);
+            moveStepXLabel.Location = new System.Drawing.Point(22, 482);
             moveStepXLabel.Name = "moveStepXLabel";
             moveStepXLabel.Size = new System.Drawing.Size(73, 21);
             moveStepXLabel.TabIndex = 52;
@@ -167,7 +172,7 @@
             delaySteppingLabel.AutoSize = true;
             delaySteppingLabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             delaySteppingLabel.ForeColor = System.Drawing.Color.White;
-            delaySteppingLabel.Location = new System.Drawing.Point(19, 567);
+            delaySteppingLabel.Location = new System.Drawing.Point(20, 547);
             delaySteppingLabel.Name = "delaySteppingLabel";
             delaySteppingLabel.Size = new System.Drawing.Size(109, 21);
             delaySteppingLabel.TabIndex = 55;
@@ -200,7 +205,7 @@
             this.Btn_stopmotor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_stopmotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_stopmotor.ForeColor = System.Drawing.Color.Red;
-            this.Btn_stopmotor.Location = new System.Drawing.Point(22, 281);
+            this.Btn_stopmotor.Location = new System.Drawing.Point(23, 291);
             this.Btn_stopmotor.Name = "Btn_stopmotor";
             this.Btn_stopmotor.Size = new System.Drawing.Size(86, 41);
             this.Btn_stopmotor.TabIndex = 9;
@@ -212,7 +217,7 @@
             // 
             this.Btn_XRight.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_XRight.ForeColor = System.Drawing.Color.Black;
-            this.Btn_XRight.Location = new System.Drawing.Point(215, 224);
+            this.Btn_XRight.Location = new System.Drawing.Point(216, 234);
             this.Btn_XRight.Name = "Btn_XRight";
             this.Btn_XRight.Size = new System.Drawing.Size(86, 51);
             this.Btn_XRight.TabIndex = 8;
@@ -224,7 +229,7 @@
             // 
             this.Btn_XLeft.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_XLeft.ForeColor = System.Drawing.Color.Black;
-            this.Btn_XLeft.Location = new System.Drawing.Point(22, 224);
+            this.Btn_XLeft.Location = new System.Drawing.Point(23, 234);
             this.Btn_XLeft.Name = "Btn_XLeft";
             this.Btn_XLeft.Size = new System.Drawing.Size(86, 51);
             this.Btn_XLeft.TabIndex = 7;
@@ -236,7 +241,7 @@
             // 
             this.Btn_YDown.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_YDown.ForeColor = System.Drawing.Color.Black;
-            this.Btn_YDown.Location = new System.Drawing.Point(113, 281);
+            this.Btn_YDown.Location = new System.Drawing.Point(114, 291);
             this.Btn_YDown.Name = "Btn_YDown";
             this.Btn_YDown.Size = new System.Drawing.Size(95, 41);
             this.Btn_YDown.TabIndex = 6;
@@ -248,22 +253,13 @@
             // 
             this.Btn_YUp.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_YUp.ForeColor = System.Drawing.Color.Black;
-            this.Btn_YUp.Location = new System.Drawing.Point(113, 177);
+            this.Btn_YUp.Location = new System.Drawing.Point(114, 187);
             this.Btn_YUp.Name = "Btn_YUp";
             this.Btn_YUp.Size = new System.Drawing.Size(96, 41);
             this.Btn_YUp.TabIndex = 5;
             this.Btn_YUp.Text = "Y +";
             this.Btn_YUp.UseVisualStyleBackColor = true;
             this.Btn_YUp.Click += new System.EventHandler(this.Btn_YUp_Click);
-            // 
-            // CblStepMotor
-            // 
-            this.CblStepMotor.Font = new System.Drawing.Font("Cascadia Mono", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CblStepMotor.FormattingEnabled = true;
-            this.CblStepMotor.Location = new System.Drawing.Point(204, 146);
-            this.CblStepMotor.Name = "CblStepMotor";
-            this.CblStepMotor.Size = new System.Drawing.Size(106, 28);
-            this.CblStepMotor.TabIndex = 4;
             // 
             // labelstep
             // 
@@ -280,7 +276,7 @@
             // 
             this.Btn_ResetHome.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_ResetHome.ForeColor = System.Drawing.Color.Black;
-            this.Btn_ResetHome.Location = new System.Drawing.Point(113, 224);
+            this.Btn_ResetHome.Location = new System.Drawing.Point(114, 234);
             this.Btn_ResetHome.Name = "Btn_ResetHome";
             this.Btn_ResetHome.Size = new System.Drawing.Size(96, 51);
             this.Btn_ResetHome.TabIndex = 2;
@@ -293,7 +289,7 @@
             this.labelUnit2.AutoSize = true;
             this.labelUnit2.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUnit2.ForeColor = System.Drawing.Color.White;
-            this.labelUnit2.Location = new System.Drawing.Point(242, 430);
+            this.labelUnit2.Location = new System.Drawing.Point(243, 410);
             this.labelUnit2.Name = "labelUnit2";
             this.labelUnit2.Size = new System.Drawing.Size(28, 21);
             this.labelUnit2.TabIndex = 21;
@@ -304,7 +300,7 @@
             this.labelUnit1.AutoSize = true;
             this.labelUnit1.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUnit1.ForeColor = System.Drawing.Color.White;
-            this.labelUnit1.Location = new System.Drawing.Point(242, 396);
+            this.labelUnit1.Location = new System.Drawing.Point(243, 376);
             this.labelUnit1.Name = "labelUnit1";
             this.labelUnit1.Size = new System.Drawing.Size(28, 21);
             this.labelUnit1.TabIndex = 20;
@@ -317,7 +313,7 @@
             this.Sublabel1.AutoSize = true;
             this.Sublabel1.Font = new System.Drawing.Font("Cascadia Mono Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Sublabel1.ForeColor = System.Drawing.Color.White;
-            this.Sublabel1.Location = new System.Drawing.Point(19, 365);
+            this.Sublabel1.Location = new System.Drawing.Point(20, 345);
             this.Sublabel1.Name = "Sublabel1";
             this.Sublabel1.Size = new System.Drawing.Size(181, 21);
             this.Sublabel1.TabIndex = 15;
@@ -328,7 +324,7 @@
             this.Sublabel2.AutoSize = true;
             this.Sublabel2.Font = new System.Drawing.Font("Cascadia Mono Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Sublabel2.ForeColor = System.Drawing.Color.White;
-            this.Sublabel2.Location = new System.Drawing.Point(19, 468);
+            this.Sublabel2.Location = new System.Drawing.Point(20, 448);
             this.Sublabel2.Name = "Sublabel2";
             this.Sublabel2.Size = new System.Drawing.Size(226, 21);
             this.Sublabel2.TabIndex = 14;
@@ -339,7 +335,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Cascadia Mono", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(281, 472);
+            this.label4.Location = new System.Drawing.Point(282, 452);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 17);
             this.label4.TabIndex = 12;
@@ -350,7 +346,7 @@
             this.label_timerunit.AutoSize = true;
             this.label_timerunit.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_timerunit.ForeColor = System.Drawing.Color.White;
-            this.label_timerunit.Location = new System.Drawing.Point(276, 567);
+            this.label_timerunit.Location = new System.Drawing.Point(277, 547);
             this.label_timerunit.Name = "label_timerunit";
             this.label_timerunit.Size = new System.Drawing.Size(28, 21);
             this.label_timerunit.TabIndex = 11;
@@ -364,7 +360,7 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(15, 323);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(311, 42);
+            this.label1.Size = new System.Drawing.Size(0, 42);
             this.label1.TabIndex = 2;
             this.label1.Text = "Scanning";
             // 
@@ -396,22 +392,22 @@
             this.Reportdata.Multiline = true;
             this.Reportdata.Name = "Reportdata";
             this.Reportdata.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Reportdata.Size = new System.Drawing.Size(296, 185);
+            this.Reportdata.Size = new System.Drawing.Size(296, 78);
             this.Reportdata.TabIndex = 24;
             // 
-            // GBreport
+            // GBreport_Data
             // 
-            this.GBreport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.GBreport_Data.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.GBreport.Controls.Add(this.Reportdata);
-            this.GBreport.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GBreport.ForeColor = System.Drawing.Color.White;
-            this.GBreport.Location = new System.Drawing.Point(22, 612);
-            this.GBreport.Name = "GBreport";
-            this.GBreport.Size = new System.Drawing.Size(302, 213);
-            this.GBreport.TabIndex = 26;
-            this.GBreport.TabStop = false;
-            this.GBreport.Text = "Report loop Count ";
+            this.GBreport_Data.Controls.Add(this.Reportdata);
+            this.GBreport_Data.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GBreport_Data.ForeColor = System.Drawing.Color.White;
+            this.GBreport_Data.Location = new System.Drawing.Point(22, 589);
+            this.GBreport_Data.Name = "GBreport_Data";
+            this.GBreport_Data.Size = new System.Drawing.Size(302, 106);
+            this.GBreport_Data.TabIndex = 26;
+            this.GBreport_Data.TabStop = false;
+            this.GBreport_Data.Text = "Report loop Count ";
             // 
             // GBmotorport
             // 
@@ -567,22 +563,18 @@
             // 
             this.totalAreaXTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "TotalAreaX", true));
             this.totalAreaXTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalAreaXTextBox.Location = new System.Drawing.Point(113, 397);
+            this.totalAreaXTextBox.Location = new System.Drawing.Point(114, 377);
             this.totalAreaXTextBox.Name = "totalAreaXTextBox";
             this.totalAreaXTextBox.Size = new System.Drawing.Size(123, 29);
             this.totalAreaXTextBox.TabIndex = 50;
             this.totalAreaXTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.totalAreaXTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.totalAreaXTextBox_KeyPress);
             // 
-            // InputValue_area
-            // 
-            this.InputValue_area.DataSource = typeof(CodingLabpro.CommandDevice.CalculateArea_Bind);
-            // 
             // totalAreaYTextBox
             // 
             this.totalAreaYTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "TotalAreaY", true));
             this.totalAreaYTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalAreaYTextBox.Location = new System.Drawing.Point(113, 433);
+            this.totalAreaYTextBox.Location = new System.Drawing.Point(114, 413);
             this.totalAreaYTextBox.Name = "totalAreaYTextBox";
             this.totalAreaYTextBox.Size = new System.Drawing.Size(123, 29);
             this.totalAreaYTextBox.TabIndex = 51;
@@ -593,7 +585,7 @@
             // 
             this.moveStepYTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "MoveStepY", true));
             this.moveStepYTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.moveStepYTextBox.Location = new System.Drawing.Point(113, 533);
+            this.moveStepYTextBox.Location = new System.Drawing.Point(114, 513);
             this.moveStepYTextBox.Name = "moveStepYTextBox";
             this.moveStepYTextBox.Size = new System.Drawing.Size(123, 26);
             this.moveStepYTextBox.TabIndex = 52;
@@ -604,7 +596,7 @@
             // 
             this.moveStepXTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "MoveStepX", true));
             this.moveStepXTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.moveStepXTextBox.Location = new System.Drawing.Point(113, 499);
+            this.moveStepXTextBox.Location = new System.Drawing.Point(114, 479);
             this.moveStepXTextBox.Name = "moveStepXTextBox";
             this.moveStepXTextBox.Size = new System.Drawing.Size(123, 26);
             this.moveStepXTextBox.TabIndex = 53;
@@ -616,7 +608,7 @@
             this.unitXComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "UnitX", true));
             this.unitXComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitXComboBox.FormattingEnabled = true;
-            this.unitXComboBox.Location = new System.Drawing.Point(246, 497);
+            this.unitXComboBox.Location = new System.Drawing.Point(247, 477);
             this.unitXComboBox.Name = "unitXComboBox";
             this.unitXComboBox.Size = new System.Drawing.Size(75, 28);
             this.unitXComboBox.TabIndex = 54;
@@ -626,7 +618,7 @@
             this.unitYComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "UnitY", true));
             this.unitYComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitYComboBox.FormattingEnabled = true;
-            this.unitYComboBox.Location = new System.Drawing.Point(246, 531);
+            this.unitYComboBox.Location = new System.Drawing.Point(247, 511);
             this.unitYComboBox.Name = "unitYComboBox";
             this.unitYComboBox.Size = new System.Drawing.Size(75, 28);
             this.unitYComboBox.TabIndex = 55;
@@ -636,7 +628,7 @@
             this.delaySteppingComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "DelayStepping", true));
             this.delaySteppingComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.delaySteppingComboBox.FormattingEnabled = true;
-            this.delaySteppingComboBox.Location = new System.Drawing.Point(138, 565);
+            this.delaySteppingComboBox.Location = new System.Drawing.Point(139, 545);
             this.delaySteppingComboBox.Name = "delaySteppingComboBox";
             this.delaySteppingComboBox.Size = new System.Drawing.Size(132, 28);
             this.delaySteppingComboBox.TabIndex = 56;
@@ -665,7 +657,7 @@
             this.CBtrigger.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBtrigger.Font = new System.Drawing.Font("Cascadia Code", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CBtrigger.FormattingEnabled = true;
-            this.CBtrigger.Location = new System.Drawing.Point(515, 535);
+            this.CBtrigger.Location = new System.Drawing.Point(182, 425);
             this.CBtrigger.Name = "CBtrigger";
             this.CBtrigger.Size = new System.Drawing.Size(138, 36);
             this.CBtrigger.TabIndex = 35;
@@ -676,7 +668,7 @@
             this.STriggerlabel.AutoSize = true;
             this.STriggerlabel.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.STriggerlabel.ForeColor = System.Drawing.Color.White;
-            this.STriggerlabel.Location = new System.Drawing.Point(356, 538);
+            this.STriggerlabel.Location = new System.Drawing.Point(22, 422);
             this.STriggerlabel.Name = "STriggerlabel";
             this.STriggerlabel.Size = new System.Drawing.Size(154, 21);
             this.STriggerlabel.TabIndex = 36;
@@ -743,7 +735,7 @@
             this.GBMeas.Controls.Add(this.RBvoltage);
             this.GBMeas.Font = new System.Drawing.Font("Cascadia Code Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBMeas.ForeColor = System.Drawing.Color.White;
-            this.GBMeas.Location = new System.Drawing.Point(357, 103);
+            this.GBMeas.Location = new System.Drawing.Point(24, 3);
             this.GBMeas.Name = "GBMeas";
             this.GBMeas.Size = new System.Drawing.Size(296, 115);
             this.GBMeas.TabIndex = 41;
@@ -792,7 +784,7 @@
             this.GBSource.Controls.Add(this.RBsource_DC);
             this.GBSource.Font = new System.Drawing.Font("Cascadia Code Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBSource.ForeColor = System.Drawing.Color.White;
-            this.GBSource.Location = new System.Drawing.Point(357, 223);
+            this.GBSource.Location = new System.Drawing.Point(24, 124);
             this.GBSource.Name = "GBSource";
             this.GBSource.Size = new System.Drawing.Size(296, 81);
             this.GBSource.TabIndex = 42;
@@ -825,7 +817,6 @@
             this.RB_resolutionAuto.Name = "RB_resolutionAuto";
             this.RB_resolutionAuto.Size = new System.Drawing.Size(65, 33);
             this.RB_resolutionAuto.TabIndex = 61;
-            this.RB_resolutionAuto.TabStop = true;
             this.RB_resolutionAuto.Text = "Auto";
             this.RB_resolutionAuto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RB_resolutionAuto.UseVisualStyleBackColor = false;
@@ -843,7 +834,6 @@
             this.RB_resolutionCustom.Name = "RB_resolutionCustom";
             this.RB_resolutionCustom.Size = new System.Drawing.Size(80, 33);
             this.RB_resolutionCustom.TabIndex = 63;
-            this.RB_resolutionCustom.TabStop = true;
             this.RB_resolutionCustom.Text = "Custom";
             this.RB_resolutionCustom.UseVisualStyleBackColor = false;
             this.RB_resolutionCustom.CheckedChanged += new System.EventHandler(this.RB_resolutionCustom_CheckedChanged);
@@ -872,7 +862,6 @@
             this.RB_resolution4digits.Name = "RB_resolution4digits";
             this.RB_resolution4digits.Size = new System.Drawing.Size(82, 33);
             this.RB_resolution4digits.TabIndex = 62;
-            this.RB_resolution4digits.TabStop = true;
             this.RB_resolution4digits.Text = "4 digits";
             this.RB_resolution4digits.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RB_resolution4digits.UseVisualStyleBackColor = false;
@@ -890,7 +879,6 @@
             this.RB_resolutionMAX.Name = "RB_resolutionMAX";
             this.RB_resolutionMAX.Size = new System.Drawing.Size(52, 33);
             this.RB_resolutionMAX.TabIndex = 66;
-            this.RB_resolutionMAX.TabStop = true;
             this.RB_resolutionMAX.Text = "MAX";
             this.RB_resolutionMAX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RB_resolutionMAX.UseVisualStyleBackColor = false;
@@ -908,7 +896,6 @@
             this.RB_resolutionMIN.Name = "RB_resolutionMIN";
             this.RB_resolutionMIN.Size = new System.Drawing.Size(57, 33);
             this.RB_resolutionMIN.TabIndex = 64;
-            this.RB_resolutionMIN.TabStop = true;
             this.RB_resolutionMIN.Text = "MIN";
             this.RB_resolutionMIN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RB_resolutionMIN.UseVisualStyleBackColor = false;
@@ -925,7 +912,7 @@
             this.GBResolution.Controls.Add(this.Numeric_Resolution);
             this.GBResolution.Font = new System.Drawing.Font("Cascadia Code Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBResolution.ForeColor = System.Drawing.Color.White;
-            this.GBResolution.Location = new System.Drawing.Point(336, 416);
+            this.GBResolution.Location = new System.Drawing.Point(3, 313);
             this.GBResolution.Name = "GBResolution";
             this.GBResolution.Size = new System.Drawing.Size(317, 106);
             this.GBResolution.TabIndex = 61;
@@ -948,7 +935,6 @@
             this.RB_autorange.Name = "RB_autorange";
             this.RB_autorange.Size = new System.Drawing.Size(58, 21);
             this.RB_autorange.TabIndex = 58;
-            this.RB_autorange.TabStop = true;
             this.RB_autorange.Text = "Auto";
             this.RB_autorange.UseVisualStyleBackColor = true;
             this.RB_autorange.CheckedChanged += new System.EventHandler(this.RB_autorange_CheckedChanged);
@@ -960,7 +946,6 @@
             this.RB_Customrange.Name = "RB_Customrange";
             this.RB_Customrange.Size = new System.Drawing.Size(74, 21);
             this.RB_Customrange.TabIndex = 65;
-            this.RB_Customrange.TabStop = true;
             this.RB_Customrange.Text = "Custom";
             this.RB_Customrange.UseVisualStyleBackColor = true;
             this.RB_Customrange.CheckedChanged += new System.EventHandler(this.RB_Customrange_CheckedChanged);
@@ -993,12 +978,65 @@
             this.GBrange.Controls.Add(this.Numeric_Range);
             this.GBrange.Font = new System.Drawing.Font("Cascadia Code Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBrange.ForeColor = System.Drawing.Color.White;
-            this.GBrange.Location = new System.Drawing.Point(356, 314);
+            this.GBrange.Location = new System.Drawing.Point(23, 211);
             this.GBrange.Name = "GBrange";
             this.GBrange.Size = new System.Drawing.Size(297, 96);
             this.GBrange.TabIndex = 62;
             this.GBrange.TabStop = false;
             this.GBrange.Text = "Range";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.GBMeas);
+            this.flowLayoutPanel1.Controls.Add(this.GBSource);
+            this.flowLayoutPanel1.Controls.Add(this.GBrange);
+            this.flowLayoutPanel1.Controls.Add(this.GBResolution);
+            this.flowLayoutPanel1.Controls.Add(this.CBtrigger);
+            this.flowLayoutPanel1.Controls.Add(this.STriggerlabel);
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(330, 100);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(323, 608);
+            this.flowLayoutPanel1.TabIndex = 64;
+            // 
+            // CblStepMotor
+            // 
+            this.CblStepMotor.Font = new System.Drawing.Font("Cascadia Mono", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CblStepMotor.FormattingEnabled = true;
+            this.CblStepMotor.Location = new System.Drawing.Point(204, 146);
+            this.CblStepMotor.Name = "CblStepMotor";
+            this.CblStepMotor.Size = new System.Drawing.Size(106, 28);
+            this.CblStepMotor.TabIndex = 4;
+            // 
+            // GBreport_Axis
+            // 
+            this.GBreport_Axis.Controls.Add(this.Report_positon);
+            this.GBreport_Axis.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GBreport_Axis.ForeColor = System.Drawing.Color.White;
+            this.GBreport_Axis.Location = new System.Drawing.Point(22, 708);
+            this.GBreport_Axis.Name = "GBreport_Axis";
+            this.GBreport_Axis.Size = new System.Drawing.Size(299, 117);
+            this.GBreport_Axis.TabIndex = 65;
+            this.GBreport_Axis.TabStop = false;
+            this.GBreport_Axis.Text = "Report Position Axis";
+            // 
+            // Report_positon
+            // 
+            this.Report_positon.BackColor = System.Drawing.Color.Black;
+            this.Report_positon.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Report_positon.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Report_positon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Report_positon.ForeColor = System.Drawing.Color.White;
+            this.Report_positon.Location = new System.Drawing.Point(3, 22);
+            this.Report_positon.Multiline = true;
+            this.Report_positon.Name = "Report_positon";
+            this.Report_positon.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.Report_positon.Size = new System.Drawing.Size(293, 92);
+            this.Report_positon.TabIndex = 25;
+            // 
+            // InputValue_area
+            // 
+            this.InputValue_area.DataSource = typeof(CodingLabpro.CommandDevice.CalculateArea_Bind);
             // 
             // AxisControl
             // 
@@ -1006,9 +1044,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
+            this.Controls.Add(this.GBreport_Axis);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.Btn_SCPItest);
-            this.Controls.Add(this.GBrange);
-            this.Controls.Add(this.GBResolution);
             this.Controls.Add(delaySteppingLabel);
             this.Controls.Add(this.delaySteppingComboBox);
             this.Controls.Add(this.unitYComboBox);
@@ -1026,15 +1064,11 @@
             this.Controls.Add(this.Btn_runscaning);
             this.Controls.Add(this.labeltitle);
             this.Controls.Add(this.GBmotorport);
-            this.Controls.Add(this.GBreport);
-            this.Controls.Add(this.GBSource);
-            this.Controls.Add(this.GBMeas);
+            this.Controls.Add(this.GBreport_Data);
             this.Controls.Add(this.label_timerunit);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.labelUnit2);
-            this.Controls.Add(this.STriggerlabel);
             this.Controls.Add(this.labelUnit1);
-            this.Controls.Add(this.CBtrigger);
             this.Controls.Add(this.Sublabel2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
@@ -1053,12 +1087,11 @@
             this.Name = "AxisControl";
             this.Size = new System.Drawing.Size(680, 835);
             this.Load += new System.EventHandler(this.AxisControl_Load);
-            this.GBreport.ResumeLayout(false);
-            this.GBreport.PerformLayout();
+            this.GBreport_Data.ResumeLayout(false);
+            this.GBreport_Data.PerformLayout();
             this.GBmotorport.ResumeLayout(false);
             this.GBautozero.ResumeLayout(false);
             this.GBautozero.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.GBMeas.ResumeLayout(false);
             this.GBSource.ResumeLayout(false);
@@ -1067,6 +1100,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.Numeric_Range)).EndInit();
             this.GBrange.ResumeLayout(false);
             this.GBrange.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            this.GBreport_Axis.ResumeLayout(false);
+            this.GBreport_Axis.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1078,7 +1116,6 @@
         private System.Windows.Forms.Label labeltitle;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button Btn_ResetHome;
-        private System.Windows.Forms.ComboBox CblStepMotor;
         private System.Windows.Forms.Label labelstep;
         private System.Windows.Forms.Button Btn_YUp;
         private System.Windows.Forms.Button Btn_XRight;
@@ -1093,7 +1130,7 @@
         private System.Windows.Forms.Label labelUnit1;
         private System.Windows.Forms.Label labelUnit2;
         private System.Windows.Forms.TextBox Reportdata;
-        private System.Windows.Forms.GroupBox GBreport;
+        private System.Windows.Forms.GroupBox GBreport_Data;
         private System.Windows.Forms.GroupBox GBmotorport;
         private System.Windows.Forms.RadioButton RB_gpib;
         private System.Windows.Forms.RadioButton RB_rs232;
@@ -1138,5 +1175,9 @@
         private System.Windows.Forms.RadioButton RBvoltage;
         private System.Windows.Forms.Label STriggerlabel;
         private System.Windows.Forms.ComboBox CBtrigger;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ComboBox CblStepMotor;
+        private System.Windows.Forms.GroupBox GBreport_Axis;
+        private System.Windows.Forms.TextBox Report_positon;
     }
 }

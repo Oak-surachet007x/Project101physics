@@ -33,6 +33,7 @@ using NPOI.SS.UserModel;
 using NPOI.XSSF.Streaming.Values;
 using NPOI.XSSF.UserModel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 
 
@@ -47,6 +48,8 @@ namespace CodingLabpro
         private TimeSpan ctimeSpan;
         public DateTime r = DateTime.Now;
         public AxisControl frmChild1;
+        public VextaSettings frmChild2;
+        public FrmSelectionModel frmModel;
         private string result_time;
         public static string Aread;
         public static bool isConnect;
@@ -54,6 +57,7 @@ namespace CodingLabpro
         public List<barMenu> barButton;
         private int Rows, Columns;
         private int IndexPostionX, IndexPostionY;
+        private string receivedData;
 
         //เมธอดเรียกคลาสสร้างตารางข้อมูล
         private IDataTableBuilder builder;
@@ -76,7 +80,7 @@ namespace CodingLabpro
       
 
             //BarMenuButton
-            barButton = new List<barMenu>() { barMenu1 };
+            barButton = new List<barMenu>() { barMenu1 , barMenu2};
             ClickBar(barButton);
 
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
@@ -91,6 +95,7 @@ namespace CodingLabpro
 
             //SetUp FormChild in UserControl
             frmChild1 = new AxisControl(MyMMC, MySerialPort, MyDMM);
+            frmChild2 = new VextaSettings();
 
             //Stopwatch
             Stoptimer1.Enabled = true;
@@ -265,8 +270,13 @@ namespace CodingLabpro
             switch (_barButton.Name)
             {
                 case "barMenu1":
-                    ActivateMenu1(barMenu1);
+                    ActivateMenu1(barMenu1, barMenu2); // ในวงเล็บใช้คำสั่ง แสดงสีเด่น (หน้าปัจจุบัน, หน้าอดีต)
                     AddUserControl(frmChild1);
+                    break;
+
+                case "barMenu2":
+                    ActivateMenu1(barMenu2, barMenu1);
+                    AddUserControl(frmChild2);
                     break;
 
             }
@@ -293,12 +303,20 @@ namespace CodingLabpro
             ActiveComboBox += ComboBoxEnabled;
             GlobalMeasurementSettings.Instance.SettingsChanged += Instance_SettingsChanged;
 
+            //Alert Message for Select Model Stepper Motor
+            label_Warning.Text = "Warning : Please Select Model Stepper Motor";
+            label_Warning.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Bold);
+            label_Warning.ForeColor = Color.Red;
+            label_Warning.Visible = true;
+
+           
+
+
         }
 
         private void Instance_SettingsChanged(object sender, EventArgs e)
         {
             UpdatelabelTypeMeasurement();
-            
         }
 
         private void DataTimeNow_Tick(object sender, EventArgs e)
@@ -670,11 +688,11 @@ namespace CodingLabpro
             {
                 if (CBox != null && CBox.SelectedItem != null)
                 {
-                    Debug.WriteLine("[ComboBox]: false");
+                    Debug.WriteLine("[ComboBox No Selection?]: false");
                     return false;
                 }
             }
-            Debug.WriteLine("[ComboBox]: true");
+            Debug.WriteLine("[ComboBox No Selection?]: true");
             return true;
             
         }
@@ -697,7 +715,7 @@ namespace CodingLabpro
                 //MessageBox.Show("you Should Select Port Device");
                 BtnConnect.BackColor = Color.Orange;
                 BtnConnect.Text = "Warning";
-                BtnConnect.ForeColor = Color.White;
+                BtnConnect.ForeColor = Color.Black;
 
                 ShowMessage("WARNING","you Should Port Device");
 
@@ -715,37 +733,65 @@ namespace CodingLabpro
                         string command = "*IDN?";
                         MyDMM.WriteString(command);
 
-                        Aread = MyDMM.ReadString(); 
+                        Aread = MyDMM.ReadString();
                         //MyDMM.WriteString("*CLS");
                     }
 
-                    if (Cblistaddress2.SelectedIndex >= 0)
+                
+
+                        if (Cblistaddress2.SelectedIndex >= 0)
+                        {
+                            //CONNECT driver MMC Port GP-IB
+                            string MMCaddr = Cblistaddress2.SelectedItem.ToString();
+                            MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
+                            MyMMC.IO.Timeout = 5000;
+                            string MSG = "H:W";
+                            MyMMC.WriteString(MSG);
+
+                        }
+
+                    if (GlobalMeasurementSettings.Instance.SelectedModel == "Chuoseiki")
                     {
-                        //CONNECT driver MMC Port GP-IB
-                        string MMCaddr = Cblistaddress2.SelectedItem.ToString();
-                        MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
-                        MyMMC.IO.Timeout = 5000;
-                        string MSG = "H:W";
-                        MyMMC.WriteString(MSG);
+                        if (Cblistaddress3.SelectedIndex >= 0)
+                        {
+                            //Port RS232 Setting
+                            MySerialPort.PortName = Cblistaddress3.SelectedItem.ToString();
+                            MySerialPort.BaudRate = 9600; // ตั้งค่า Baud Rate
+                            MySerialPort.Parity = Parity.None; // ตั้งค่า Parity
+                            MySerialPort.StopBits = StopBits.One; // ตั้งค่า Stop Bits
+                            MySerialPort.DataBits = 8; // ตั้งค่าจำนวน Data Bits
+                            MySerialPort.Handshake = Handshake.None; // ตั้งค่า Handshake
+
+
+                            ////CONNET driver MMC Port RS-232
+                            MySerialPort.Open();
+                            MySerialPort.WriteLine("H:X"); //ส่งคำสั่งไปยังอุปกรณ์ MMC ผ่านพอร์ต RS-232 เคลื่อนที่แกน Z ไปยังตำแหน่ง Home
+
+                        }
 
                     }
-
-                    if (Cblistaddress3.SelectedIndex >= 0)
+                    else if (GlobalMeasurementSettings.Instance.SelectedModel == "Vexta")
                     {
-                        //Port RS232 Setting
-                        MySerialPort.PortName = Cblistaddress3.SelectedItem.ToString();
-                        MySerialPort.BaudRate = 9600; // ตั้งค่า Baud Rate
-                        MySerialPort.Parity = Parity.None; // ตั้งค่า Parity
-                        MySerialPort.StopBits = StopBits.One; // ตั้งค่า Stop Bits
-                        MySerialPort.DataBits = 8; // ตั้งค่าจำนวน Data Bits
-                        MySerialPort.Handshake = Handshake.None; // ตั้งค่า Handshake
+                        if (Cblistaddress3.SelectedIndex >= 0)
+                        {
+                            //Port RS232 Setting
+                            MySerialPort.PortName = Cblistaddress3.SelectedItem.ToString();
+                            MySerialPort.BaudRate = 9600; // ตั้งค่า Baud Rate
+                            MySerialPort.Parity = Parity.None; // ตั้งค่า Parity
+                            MySerialPort.StopBits = StopBits.One; // ตั้งค่า Stop Bits
+                            MySerialPort.DataBits = 8; // ตั้งค่าจำนวน Data Bits
+                            MySerialPort.Handshake = Handshake.None; // ตั้งค่า Handshake
 
+                            ////CONNET driver MMC Port RS-232
+                            MySerialPort.Open();
 
-                        ////CONNET driver MMC Port RS-232
-                        MySerialPort.Open();
-                        MySerialPort.WriteLine("H:X");
-
+                        }
                     }
+                    else
+                    {
+                        // No action needed for other models
+                    }
+
 
                     List<string> listDevice = new List<string>{Cblistaddress.Text, Cblistaddress2.Text, Cblistaddress3.Text };
                     ShowMessage("OK", r.ToString("r") + $"\nPort Driver Connected\n{Aread}" + $"{string.Join("\n",listDevice)}");
@@ -818,6 +864,75 @@ namespace CodingLabpro
             }
 
             System.Windows.Forms.Cursor.Current = Cursors.Default;
+        }
+
+        private void BtnSelectionModel_Click(object sender, EventArgs e)
+        {
+            using (FrmSelectionModel frmModel = new FrmSelectionModel())
+            {
+                if (frmModel.ShowDialog() == DialogResult.OK)
+                {
+                    // ดึงค่าผ่าน Property
+                    receivedData = frmModel.ResultSelectedModel;
+                    ComboBoxVisble(receivedData);
+                    Debug.WriteLine($"Selected Stepping Motor Type: {receivedData}");
+
+                    
+                }
+            }
+        }
+        private void ComboBoxVisble(string Typemotor)
+        {
+            if (Typemotor == "Chuoseiki")
+            {
+                label_Warning.Visible = false; //ซ่อนข้อความเตือนเมื่อเลือก Chuoseiki
+                //เพิ่มตัวแปร SelectedModel ในคลาส GlobalMeasurementSettings เพื่อเก็บค่าที่เลือก
+                GlobalMeasurementSettings.Instance.SelectedModel = "Chuoseiki";
+
+                //Chuo seiki Stepper Motor GPIB Port
+                label_MMC1.Visible = true;
+                label_MMC1.Text = "GP-IB Port : XY-Axis Controller";
+                label_MMC1.Location = new Point(640, 24);
+                Cblistaddress2.Visible = true;
+                Cblistaddress2.Location = new Point(644, 43);
+                Cblistaddress2.Text = "";
+
+
+                //Chuo seiki Stepper Motor RS232 Port   
+                label_MMC2.Visible = true;
+                label_MMC2.Text = "RS-232 Port : Z-Axis Controller";
+                label_MMC2.Location = new Point(948, 24);
+                Cblistaddress3.Location = new Point(950, 43);
+                Cblistaddress3.Visible = true;
+                Cblistaddress3.Text = "";
+
+            }
+            else if (Typemotor == "Vexta")
+            {
+                label_Warning.Visible = false; //ซ่อนข้อความเตือนเมื่อเลือก Vexta
+                //เพิ่มตัวแปร SelectedModel ในคลาส GlobalMeasurementSettings เพื่อเก็บค่าที่เลือก
+                GlobalMeasurementSettings.Instance.SelectedModel = "Vexta";
+
+                //Vexta Stepper Motor GPIB Port
+                label_MMC1.Visible = false;
+                Cblistaddress2.Visible = false;
+
+                //Vexta Stepper Motor RS232 Port
+                label_MMC2.Location = new Point(640, 24);
+                label_MMC2.Visible = true;
+                label_MMC2.Text = "RS-232 Port : Vexta XY-Axis Controller";
+                Cblistaddress3.Location = new Point(644, 43);
+                Cblistaddress3.Visible = true;
+                Cblistaddress3.Text = "";
+
+            }
+            else 
+            {
+                label_MMC1.Visible = false;
+                label_MMC2.Visible = false;
+                Cblistaddress2.Visible = false;
+                Cblistaddress3.Visible = false;
+            }
         }
 
         private void ToolBtnClear_Click(object sender, EventArgs e)

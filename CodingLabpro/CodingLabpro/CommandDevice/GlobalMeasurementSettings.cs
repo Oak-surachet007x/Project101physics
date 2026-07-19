@@ -25,8 +25,19 @@ namespace CodingLabpro.CommandDevice
         private string _UnitPrefix;
         private int _CountOfRows;
         private int _CountOfColumns;
-        
+        private string _SelectedModel;
+
         public event EventHandler SettingsChanged;
+
+        public string SelectedModel
+        {
+            get => _SelectedModel;
+            set
+            {
+                SetProperty(ref _SelectedModel, value);
+                SettingsChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
 
         public string MeasureMode {
             get => _MeasureMode;

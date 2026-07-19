@@ -30,10 +30,10 @@
         {
             this.Menupanel = new System.Windows.Forms.Panel();
             this.LBversion = new System.Windows.Forms.Label();
-            this.ucMenu1 = new CodingLabpro.Models.ucMenu();
             this.panel_Logo = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.FormLayoutpanel = new System.Windows.Forms.Panel();
+            this.ucMenu1 = new CodingLabpro.Models.ucMenu();
             this.Menupanel.SuspendLayout();
             this.panel_Logo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -65,17 +65,6 @@
             this.LBversion.Text = "Version";
             this.LBversion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ucMenu1
-            // 
-            this.ucMenu1.BackColor = System.Drawing.Color.Transparent;
-            this.ucMenu1.BorderColor = System.Drawing.Color.Transparent;
-            this.ucMenu1.Icon = global::CodingLabpro.Properties.Resources.monitor_heart_70dp_8C1AF6_FILL0_wght400_GRAD0_opsz48;
-            this.ucMenu1.Location = new System.Drawing.Point(0, 191);
-            this.ucMenu1.Name = "ucMenu1";
-            this.ucMenu1.Size = new System.Drawing.Size(150, 52);
-            this.ucMenu1.TabIndex = 1;
-            this.ucMenu1.textlabel = "MainControl";
-            // 
             // panel_Logo
             // 
             this.panel_Logo.BackColor = System.Drawing.Color.White;
@@ -104,6 +93,17 @@
             this.FormLayoutpanel.Name = "FormLayoutpanel";
             this.FormLayoutpanel.Size = new System.Drawing.Size(1234, 761);
             this.FormLayoutpanel.TabIndex = 1;
+            // 
+            // ucMenu1
+            // 
+            this.ucMenu1.BackColor = System.Drawing.Color.Transparent;
+            this.ucMenu1.BorderColor = System.Drawing.Color.Transparent;
+            this.ucMenu1.Icon = global::CodingLabpro.Properties.Resources.monitor_heart_70dp_8C1AF6_FILL0_wght400_GRAD0_opsz48;
+            this.ucMenu1.Location = new System.Drawing.Point(0, 191);
+            this.ucMenu1.Name = "ucMenu1";
+            this.ucMenu1.Size = new System.Drawing.Size(150, 52);
+            this.ucMenu1.TabIndex = 1;
+            this.ucMenu1.textlabel = "MainControl";
             // 
             // FrmLayout
             // 
