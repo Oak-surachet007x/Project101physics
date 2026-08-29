@@ -16,19 +16,30 @@ namespace CodingLabpro.CommandDevice
 
         public static GlobalMeasurementSettings Instance => _instance.Value;
 
-        private string _MeasureMode;
-        private string _SourceMode;
-        private string _TriggerMode = "IMMediate";
+        private MeasureMode _MeasureMode;
+        private SourceMode _SourceMode;
+        private TriggerMode _TriggerMode;
         private string _AutozeroMode = "ON";
-        private string _RangeControl = "AUTO";
-        private string _ResolutionControl = "AUTO";
+        private RangeMode _RangeControl;
+        private ResolutionMode _ResolutionControl;
         private string _UnitPrefix;
         private int _CountOfRows;
         private int _CountOfColumns;
+        private string _SelectedModel;
 
         public event EventHandler SettingsChanged;
 
-        public string MeasureMode {
+        public string SelectedModel
+        {
+            get => _SelectedModel;
+            set
+            {
+                SetProperty(ref _SelectedModel, value);
+                SettingsChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        public MeasureMode MeasureMode {
             get => _MeasureMode;
             set
             {
@@ -37,7 +48,7 @@ namespace CodingLabpro.CommandDevice
             }
         }
 
-        public string SourceMode { 
+        public SourceMode SourceMode { 
             get => _SourceMode;
             set
             {
@@ -46,7 +57,7 @@ namespace CodingLabpro.CommandDevice
             }
         }
 
-        public string TriggerMode
+        public TriggerMode TriggerMode
         {
             get => _TriggerMode;
             set => SetProperty(ref _TriggerMode, value);
@@ -58,13 +69,13 @@ namespace CodingLabpro.CommandDevice
             set => SetProperty(ref _AutozeroMode, value);
         }
 
-        public string RangeControl
+        public RangeMode RangeControl
         {
             get => _RangeControl;
             set => SetProperty(ref _RangeControl, value);
         }
 
-        public string ResolutionControl
+        public ResolutionMode ResolutionControl
         {
             get => _ResolutionControl;
             set => SetProperty(ref _ResolutionControl, value);
@@ -91,7 +102,7 @@ namespace CodingLabpro.CommandDevice
 
         // INotifyPropertyChanged implementation
         public event PropertyChangedEventHandler PropertyChanged;
-
+        //Method to set property and raise PropertyChanged event    
         protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (Equals(field, value))
