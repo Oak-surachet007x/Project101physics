@@ -109,8 +109,8 @@ namespace CodingLabpro
 
             //First show Panel frmChild
             AddUserControl(frmChild1);
-          
 
+            //Check UserControl is add Panel Control
             if (this.FormChildpanel.Controls.Contains(frmChild1))
             {
                 ActivateMenu1(barMenu1);
@@ -781,6 +781,8 @@ namespace CodingLabpro
                             MySerialPort.StopBits = StopBits.One; // ตั้งค่า Stop Bits
                             MySerialPort.DataBits = 8; // ตั้งค่าจำนวน Data Bits
                             MySerialPort.Handshake = Handshake.None; // ตั้งค่า Handshake
+                            MySerialPort.ReadTimeout = 500; //ตั้งเวลาการอ่านค่า
+                            MySerialPort.WriteTimeout = 500;
 
                             ////CONNET driver MMC Port RS-232
                             MySerialPort.Open();

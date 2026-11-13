@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Globalization;
 using System.IO.Ports;
@@ -45,6 +46,13 @@ namespace CodingLabpro.frmChild
         public event Action OnCancelClicked;
         public event Action <double> OnMeasurement;
         public event Action<double> OnMeasurementWithDisplay;
+        private CancellationTokenSource Scan_cts; // CancellationTokenSource for scan operation
+        private readonly SemaphoreSlim SerialLock = new SemaphoreSlim(1, 1); // Semaphore to control access to the serial port
+        private CancellationTokenSource MonitorToken; // CancellationTokenSource for monitoring task
+        private Task MonitorTask;
+        public int PositionX { get; private set; }
+        public int PositionY { get; private set; }
+        public string MessageState { get; private set; }
 
 
         public AxisControl(Ivi.Visa.Interop.FormattedIO488 myMMC, SerialPort mySerialPort, Ivi.Visa.Interop.FormattedIO488 myDMM)
@@ -67,7 +75,113 @@ namespace CodingLabpro.frmChild
             
         }
 
-        
+        //เมทอดส่งคำสั่งไปยังมอเตอร์ Vexta ผ่าน Serial Port
+        private async Task SendCommandAsync(string command)
+        {
+            await SerialLock.WaitAsync();
+
+            try
+            {
+                if (mySerialPort.IsOpen)
+                {
+                    mySerialPort.WriteLine(command);
+                    Debug.WriteLine($"Send: {command}");
+                }
+            }
+            finally
+            {
+                SerialLock.Release();
+            }
+        }
+
+        private void StartPositionMonitor()
+        {
+            if (MonitorTask != null && !MonitorTask.IsCompleted)
+                return;
+
+            MonitorToken = new CancellationTokenSource();
+            MonitorTask = Task.Run(() => Monitoring_Position(MonitorToken.Token));
+        }
+
+        private async Task StopPositionMonitor()
+        {
+            if (MonitorToken == null)
+                return;
+
+            MonitorToken.Cancel();
+
+            if (MonitorTask != null)
+            {
+                await MonitorTask;
+            }
+
+            MonitorToken.Dispose();
+            MonitorToken = null;
+            MonitorTask = null;
+        }
+
+        private async Task Monitoring_Position(CancellationToken token)
+        {
+            while (!token.IsCancellationRequested)
+            {
+                try
+                {
+                    bool StatusRead = await ReadPositionStatus_Vexta();
+
+                    if (StatusRead)
+                    {
+                        Debug.WriteLine($"X: {PositionX}, Y: {PositionY}");
+                    }
+
+                    await Task.Delay(500, token); // Delay for 500ms before the next read
+                }
+                catch (OperationCanceledException) // Handle cancellation
+                {
+                    break;
+                }
+            }
+
+        }
+        //เมทอดอ่านสถานะปัจจุบันของมอเตอร์ Vexta
+        private async Task<bool> ReadPositionStatus_Vexta()
+        {
+            await SerialLock.WaitAsync();
+
+            try
+            {
+                if (!mySerialPort.IsOpen)
+                {
+                    return false;
+                }
+
+                mySerialPort.WriteLine("Q:");
+                string response = mySerialPort.ReadLine();
+                mySerialPort.ReadTimeout = 1000; // Set a timeout for reading the response
+                MessageState = response;
+                string[] parts = response.Split(',');
+
+                if (parts.Length >= 2 &&
+                   int.TryParse(parts[0].Trim(), out int state_x) &&
+                   int.TryParse(parts[1].Trim(), out int state_y))
+                {
+                    PositionX = state_x;
+                    PositionY = state_y;
+                }
+                return true;
+
+            }
+            catch (TimeoutException ex)
+            {
+                ShowMessage("ERROR", "Timeout Exception: " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                SerialLock.Release(); //คำส่ังนี้จะถูกเรียกใช้เพื่อปล่อยล็อกของ SemaphoreSlim หลังจากการอ่านเสร็จสิ้น ไม่ว่าจะสำเร็จหรือเกิดข้อผิดพลาด
+            }
+        }
+
+        //เมทอดควบคุมการแสดงผลของ UI เมื่อกดเข้าโหมดเครื่องมือวัด
         private void UIControlDisabled(bool EnabledItem)
         {
          
@@ -89,11 +203,21 @@ namespace CodingLabpro.frmChild
             delaySteppingComboBox.Enabled = !EnabledItem;
             unitXComboBox.Enabled = !EnabledItem;
             unitYComboBox.Enabled = !EnabledItem;
+            RB_gpib.Enabled = !EnabledItem;
+            RB_rs232.Enabled = !EnabledItem;
+            Btn_ResetHome.Enabled = !EnabledItem;
+            Btn_YDown.Enabled = !EnabledItem;
+            Btn_YUp.Enabled = !EnabledItem;
+            Btn_XLeft.Enabled = !EnabledItem;
+            Btn_XRight.Enabled = !EnabledItem;
+            Btn_stopmotor.Enabled = !EnabledItem;
+            CblStepMotor.Enabled = !EnabledItem;
 
 
 
         }
 
+        //เมทอดควบคุมการแสดงผลของ UI เมื่อเลือกโหมดการวัดความถี่
         private void UIVisbleControl(bool VisibleItem)
         {
             GBSource.Visible = !VisibleItem;
@@ -103,9 +227,12 @@ namespace CodingLabpro.frmChild
 
         private void AxisControl_Load(object sender, EventArgs e)
         {
-            InputValue_area.DataSource = new CalculateArea_Bind();
-            ButtonPortEnabled();
-            UIControlDisabled(true);
+            InputValue_area.DataSource = new CalculateArea_Bind(); //Bind DataSource to the CalculateArea_Bind class
+            UIButtonPortEnabled(); //Check the selected port and enable/disable the corresponding UI elements
+            UIControlDisabled(true); //Disable all controls initially
+
+            InitializeDefaultSettings();
+
             CBrange.Enabled = false;
             Numeric_Range.Enabled = false;
             Numeric_Resolution.Enabled = false;
@@ -120,11 +247,108 @@ namespace CodingLabpro.frmChild
 
         }
 
+
+        #region Setup Default Settings
+        private void InitializeDefaultSettings()
+        {
+            var settings = GlobalMeasurementSettings.Instance;
+
+            // ==========================================
+            // 1. Type Measurement
+            // ==========================================
+
+            settings.MeasureMode = MeasureMode.Voltage;
+            RBvoltage.Checked = true;
+
+
+            // ==========================================
+            // 2. Type Source
+            // ==========================================
+
+            settings.SourceMode = SourceMode.DC;
+            RBsource_DC.Checked = true;
+
+
+            // ==========================================
+            // 3. Range
+            // ==========================================
+
+            settings.RangeControl = RangeMode.AUTO;
+            RB_autorange.Checked = true;
+
+            Numeric_Range.Enabled = false;
+            CBrange.Enabled = false;
+
+
+            // ==========================================
+            // 4. Resolution
+            // ==========================================
+
+            settings.ResolutionControl = ResolutionMode.AUTO;
+            RB_resolutionAuto.Checked = true;
+
+            // ==========================================
+            // 5. Source Trigger
+            // ==========================================
+
+            settings.TriggerMode = TriggerMode.BUS;
+            CBtrigger.SelectedItem = "BUS";
+
+
+            // ==========================================
+            // 6. Total Scanning Area
+            // ==========================================
+
+            totalAreaXTextBox.Text = "10";
+            totalAreaYTextBox.Text = "10";
+
+
+            // ==========================================
+            // 7. Resolution Scanning Area
+            // ==========================================
+
+            moveStepXTextBox.Text = "1";
+            moveStepYTextBox.Text = "1";
+
+            // Step Unit
+            if (!unitXComboBox.Items.Contains("mm"))
+                unitXComboBox.Items.Add("mm");
+
+            if (!unitYComboBox.Items.Contains("mm"))
+                unitYComboBox.Items.Add("mm");
+
+            unitXComboBox.SelectedItem = "mm";
+            unitYComboBox.SelectedItem = "mm";
+
+
+            // ==========================================
+            // 8. Delay Step
+            // ==========================================
+
+            const string defaultDelay = "1000";
+
+            if (!delaySteppingComboBox.Items.Contains(defaultDelay))
+                delaySteppingComboBox.Items.Add(defaultDelay);
+
+            delaySteppingComboBox.SelectedItem = defaultDelay;
+
+
+            // ==========================================
+            // 9. Update UI
+            // ==========================================
+
+            UIVisbleControl(false); //ซ่อน UI ที่ไม่จำเป็นสำหรับโหมดการวัดความถี่
+
+            Range_Control_Measurement();
+        }
+
+        #endregion
         private void Instance_SettingsChanged(object sender, EventArgs e)
         {
             UpdateControlUIreport();
         }
 
+        //เมทอดควบคุมการแสดงผลของ UI เมื่อเลือกประเภทมอเตอร์
         private void UpdateControlUIreport()
         {
             if (GlobalMeasurementSettings.Instance.SelectedModel == "Chuoseiki")
@@ -132,13 +356,26 @@ namespace CodingLabpro.frmChild
                 GBreport_Data.Visible = true;
                 GBreport_Axis.Visible = false;
                 GBreport_Data.Size = new Size(302, 236);
+                RB_rs232.Visible = true;
+                RB_gpib.Visible = true;
+                
+
+                RB_gpib.Checked = true; //Set GPIB as default for Chuoseiki
+                UIControlDisabled(false); //Enable all controls when Chuoseiki is selected
+                UIButtonPortEnabled(); //Check the selected port and enable/disable the corresponding UI elements
             }
             else if (GlobalMeasurementSettings.Instance.SelectedModel == "Vexta")
             {
                 GBreport_Data.Visible = true;
                 GBreport_Axis.Visible = true;
                 GBreport_Data.Size = new Size(302, 106);
+                RB_gpib.Visible = false;
+                RB_rs232.Visible =true;
+              
 
+                RB_rs232.Checked = true; //Set RS232 as default for Vexta
+                UIControlDisabled(false); //Enable all controls when Vexta is selected
+                UIButtonPortEnabled(); //Check the selected port and enable/disable the corresponding UI elements
             }
             else
             {
@@ -148,12 +385,12 @@ namespace CodingLabpro.frmChild
 
         private void RB_rs232_CheckedChanged(object sender, EventArgs e)
         {
-            ButtonPortEnabled();
+            UIButtonPortEnabled(); //Check the selected port and enable/disable the corresponding UI elements
         }
 
         private void RB_gpib_CheckedChanged(object sender, EventArgs e)
         {
-            ButtonPortEnabled();
+            UIButtonPortEnabled(); //Check the selected port and enable/disable the corresponding UI elements   
         }
 
         private string ValueStepping()
@@ -169,55 +406,37 @@ namespace CodingLabpro.frmChild
             }
             
         }
-
         private void CBtrigger_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                // Safely get the selected text from the ComboBox
-                string selected = CBtrigger.SelectedItem?.ToString();
+            string selected = CBtrigger.SelectedItem?.ToString();
 
-                if (string.IsNullOrWhiteSpace(selected))
-                {
+            switch (selected)
+            {
+                case "IMMediate":
+                    GlobalMeasurementSettings.Instance.TriggerMode = TriggerMode.IMMediate;
+                    Debug.WriteLine("Trigger Select = " + GlobalMeasurementSettings.Instance.TriggerMode);
+                    break;
+                case "BUS":
+                    GlobalMeasurementSettings.Instance.TriggerMode = TriggerMode.BUS;
+                    Debug.WriteLine("Trigger Select = " + GlobalMeasurementSettings.Instance.TriggerMode);
+                    break;
+                //case "EXTernal": // kept for reference if needed in future
+                //    GlobalMeasurementSettings.Instance.TriggerMode = TriggerMode.EXTernal;
+                //    Debug.WriteLine("Trigger Select = " + GlobalMeasurementSettings.Instance.TriggerMode);
+                //    break;
+                default:
                     CBtrigger.SelectedIndex = -1;
                     GlobalMeasurementSettings.Instance.TriggerMode = TriggerMode.None;
-                    Debug.WriteLine("Trigger Select = None (no selection)");
-                    return;
-                }
+                    Debug.WriteLine("Not Found Trigger Measurement: " + selected);
+                    break;
+            }
 
-                switch (selected)
-                {
-                    case "IMMediate":
-                        GlobalMeasurementSettings.Instance.TriggerMode = TriggerMode.IMMediate;
-                        Debug.WriteLine("Trigger Select = " + GlobalMeasurementSettings.Instance.TriggerMode);
-                        break;
-                    case "BUS":
-                        GlobalMeasurementSettings.Instance.TriggerMode = TriggerMode.BUS;
-                        Debug.WriteLine("Trigger Select = " + GlobalMeasurementSettings.Instance.TriggerMode);
-                        break;
-                    //case "EXTernal": // kept for reference if needed in future
-                    //    GlobalMeasurementSettings.Instance.TriggerMode = TriggerMode.EXTernal;
-                    //    Debug.WriteLine("Trigger Select = " + GlobalMeasurementSettings.Instance.TriggerMode);
-                    //    break;
-                    default:
-                        CBtrigger.SelectedIndex = -1;
-                        GlobalMeasurementSettings.Instance.TriggerMode = TriggerMode.None;
-                        Debug.WriteLine("Not Found Trigger Measurement: " + selected);
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                // On error, ensure a safe default
-                CBtrigger.SelectedIndex = -1;
-                GlobalMeasurementSettings.Instance.TriggerMode = TriggerMode.None;
-                Debug.WriteLine("Error in CBtrigger_SelectedIndexChanged: " + ex.Message);
-            }
+
         }
         private void RBfrep_CheckedChanged(object sender, EventArgs e)
         {
             UIVisbleControl(true);
-            UIControlDisabled(false);
+
             GlobalMeasurementSettings.Instance.MeasureMode = MeasureMode.Frequency;
             GlobalMeasurementSettings.Instance.SourceMode = SourceMode.None;
         }
@@ -226,16 +445,14 @@ namespace CodingLabpro.frmChild
         {
             Range_Control_Measurement();
             UIVisbleControl(false);
-            UIControlDisabled(false);
+
             GlobalMeasurementSettings.Instance.MeasureMode = MeasureMode.Voltage;
-   
-            
         }
         private void RBcurrent_CheckedChanged(object sender, EventArgs e)
         {
             Range_Control_Measurement();
             UIVisbleControl(false);
-            UIControlDisabled(false);
+    
             GlobalMeasurementSettings.Instance.MeasureMode = MeasureMode.Current;
         }
         private void RBsource_DC_CheckedChanged(object sender, EventArgs e)
@@ -319,50 +536,67 @@ namespace CodingLabpro.frmChild
 
         private double GetDefaultRange()
         {
-            if (GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Voltage && GlobalMeasurementSettings.Instance.SourceMode == SourceMode.DC)
+            if (GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Voltage)
             {
-                return 10; // 10V default
+                switch (GlobalMeasurementSettings.Instance.SourceMode)
+                {
+                    case SourceMode.DC:
+                        return 10.0; // 10V
+                    case SourceMode.AC:
+                        return 10.0; // 10V
+                    default:
+                        return 1.0; // fallback
+                }
             }
-            else if (GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Voltage && GlobalMeasurementSettings.Instance.SourceMode == SourceMode.AC)
+            else if (GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Current)
             {
-                return 20; // 20V default
-            }
-            else if (GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Current&& GlobalMeasurementSettings.Instance.SourceMode == SourceMode.DC)
-            {
-                return 0.1; // 100mA
-            }
-            else if (GlobalMeasurementSettings.Instance.MeasureMode ==  MeasureMode.Current && GlobalMeasurementSettings.Instance.SourceMode == SourceMode.AC   )
-            {
-                return 0.1; // 100mA
+                switch (GlobalMeasurementSettings.Instance.SourceMode)
+                {
+                    case SourceMode.DC:
+                        return 0.1; // 100mA
+                    case SourceMode.AC:
+                        return 0.1; // 100mA
+                    default:
+                        return 1.0; // fallback
+                }
             }
             else
             {
-                return 1; // fallback
+                return 1.0; // fallback
             }
         }
 
         private double GetDefaultResolution()
         {
-            if (GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Voltage && GlobalMeasurementSettings.Instance.SourceMode == SourceMode.AC)
-            {
-                return 0.001; // 1mV
+            if(GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Voltage)
+    {
+                switch(GlobalMeasurementSettings.Instance.SourceMode) 
+                { 
+                    case SourceMode.DC:
+                        return 0.0001; // 100uV
+                    case SourceMode.AC:
+                        return 0.0001; // 100uV
+                    default:
+                        return 0.001; // fallback
+                }
             }
-            else if (GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Voltage && GlobalMeasurementSettings.Instance.SourceMode == SourceMode.AC)
+            else if (GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Current)
             {
-                return 0.001;
-            }
-            else if (GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Current && GlobalMeasurementSettings.Instance.SourceMode == SourceMode.DC)
-            {
-                return 0.0001; // 100µA
-            }
-            else if (GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Current && GlobalMeasurementSettings.Instance.SourceMode == SourceMode.AC)
-            {
-                return 0.0001;
+                switch(GlobalMeasurementSettings.Instance.SourceMode)
+                {
+                    case SourceMode.DC:
+                        return 0.0001; // 100uA
+                    case SourceMode.AC:
+                        return 0.0001; // 100uA
+                    default:
+                        return 0.001; // fallback
+                }
             }
             else
             {
-                return 0.001;
+                return 0.001; // fallback
             }
+           
         }
 
 
@@ -1003,32 +1237,47 @@ namespace CodingLabpro.frmChild
             }
         }
 
-        private void ButtonPortEnabled()
+        //เมธอดตรวจสอบเมื่อกด radio button ของพอร์ตการเชื่อมต่อ GPIB หรือ RS232 เพื่อเปิด/ปิดปุ่มควบคุมการขับมอเตอร์
+        private void UIButtonPortEnabled()
         {
-            if (RB_rs232.Checked)
-            {
-                Btn_YUp.BackColor = Color.Red;
-                Btn_YDown.BackColor = Color.Red;
-                Btn_YUp.Enabled = false;
-                Btn_YDown.Enabled = false;
-            
+            //ตรวจสอบว่าประเภทของมอเตอร์ที่เลือกเป็น Chuoseiki หรือ Vexta และเปิด/ปิดปุ่มควบคุมตามประเภทการเชื่อมต่อ
+            if (GlobalMeasurementSettings.Instance.SelectedModel == "Chuoseiki")
+            { 
+                //เปิด/ปิดปุ่มควบคุมตามประเภทการเชื่อมต่อ
+                if (RB_rs232.Checked)
+                {
+                    Btn_YUp.BackColor = Color.Red;
+                    Btn_YDown.BackColor = Color.Red;
+                    Btn_YUp.Enabled = false;
+                    Btn_YDown.Enabled = false;
 
+
+                }
+                else if (RB_gpib.Checked)
+                {
+                    Btn_YUp.BackColor = Color.White;
+                    Btn_YDown.BackColor = Color.White;
+                    Btn_YUp.Enabled = true;
+                    Btn_YDown.Enabled = true;
+                    Btn_runscaning.Enabled = true;
+
+                }
             }
-            else if (RB_gpib.Checked)
+            else if (GlobalMeasurementSettings.Instance.SelectedModel == "Vexta")
             {
-                Btn_YUp.BackColor = Color.White;
-                Btn_YDown.BackColor = Color.White;
-                Btn_YUp.Enabled = true;
-                Btn_YDown.Enabled = true; 
-                Btn_runscaning.Enabled = true;
-
+                if (RB_rs232.Checked)
+                {
+                    Btn_YUp.BackColor = Color.White;
+                    Btn_YDown.BackColor = Color.White;
+                    Btn_YUp.Enabled = true;
+                    Btn_YDown.Enabled = true;
+                    Btn_runscaning.Enabled = true;
+                }
             }
             else
             {
-                Debug.WriteLine("กรุณาเลือกพอร์ตการเชื่อมต่อในการควบคุม GPIB or RS232");
                 Btn_runscaning.Enabled = false;
                 BtnCancel_scaning.Enabled = false;
-      
             }
         }
 
@@ -1037,15 +1286,23 @@ namespace CodingLabpro.frmChild
         {
             try
             {
-                if (RB_gpib.Checked)
+                if(GlobalMeasurementSettings.Instance.SelectedModel == "Chuoseiki")
                 {
-                    myMMC.WriteString("H:W");
+                    if (RB_gpib.Checked)
+                    {
+                        myMMC.WriteString("H:W");
+                    }
+                    else if (RB_rs232.Checked)
+                    {
+                        mySerialPort.WriteLine("H:W");
+                    }
+
                 }
-                else if (RB_rs232.Checked)
+                else if(GlobalMeasurementSettings.Instance.SelectedModel == "Vexta")
                 {
-                    mySerialPort.WriteLine("H:W");
+                    
                 }
-                ShowMessage("INFO", "Reset Process Motor");
+
             }
             catch (Exception Ex)
             {
@@ -1074,7 +1331,6 @@ namespace CodingLabpro.frmChild
             }
         }
 
-        
         private void Btn_XLeft_Click(object sender, EventArgs e)
         {
             switch (ValueStepping()) {
@@ -1302,7 +1558,6 @@ namespace CodingLabpro.frmChild
 
         #region Methods ScaningArea
 
-        private CancellationTokenSource Scan_cts;
         private async void Btn_runscaning_Click(object sender, EventArgs e)
         {
             try
@@ -1310,44 +1565,93 @@ namespace CodingLabpro.frmChild
                 //clear Textbox
                 Reportdata.Clear();
 
-                //ตรวจสอบความถูกต้องข้อมูลการสแกนพื้นที่ ผ่านเมธอด IsValidScaningArea
-                if (!IsValidScaningArea()) 
+                if (GlobalMeasurementSettings.Instance.SelectedModel == "Chuoseiki")
                 {
-                    return; 
+                    //ตรวจสอบความถูกต้องข้อมูลการสแกนพื้นที่ ผ่านเมธอด IsValidScaningArea
+                    if (!IsValidScaningArea())
+                    {
+                        return;
+                    }
+                    ////ตรวจสอบการตั้งค่าการวัดผ่านคลาส GlobalMeasurementSettings ในเครื่องมือวัด
+                    //if (!ValidGlobalMeasurementSettings()) //ตรวจสอบการตั้งค่าการวัด
+                    //{
+                    //    return;
+                    //}
+
+                    //Run Setup Scaning
+                    //myMMC.WriteString("H:W");
+                    //await Task.Delay(5000);
+                    //myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y = 0 cm & X = 1 cm
+                    //myMMC.WriteString("G:");
+                    //await Task.Delay(5000);
+
+                    //---------------------------------Setup Measurement---------------------------------------------
+                    //Run Measurement
+                    //SetupMeasurementCommand();
+
+                    //Stopwatch จับเวลาในการสแกนพื้นที่
+                    OnRunClicked?.Invoke();
+                    BtnCancel_scaning.Enabled = true; //เปิดปุ่มยกเลิกสแกน
+                    Btn_runscaning.Enabled = false; //ปีดปุ่มรันสแกน
+                    UIControlDisabled(true); //ปิดการใช้งานปุ่มขณะรันสแกน
+
+                    //---------------------------------Loop Scaning Area---------------------------------------------
+                    //Report Area Calculate สรุปผลลัพธ์การคำนวณพื้นที่สแกนทั้งหมด
+                    Reportdata.AppendText($"คำนวณผลลัพธ์ลูปที่สแกนของ X คือ {LoopAreaX} ลูป " + Environment.NewLine +
+                                           $"คำนวณผลลัพธ์ลูปที่สแกนของ Y คือ {LoopAreaY} ลูป" + Environment.NewLine);
+                    //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
+
+                    //โทเค็นสำหรับยกเลิกการทำงานของ Task
+                    Scan_cts = new CancellationTokenSource();
+                    await Task.Run(() => ScanningAreaProcess(Scan_cts.Token), Scan_cts.Token);
+
+                    //เมื่อสแกนเสร็จสิ้นหรือยกเลิกการทำงานแล้ว ให้เรียกใช้งาน OnCancelClicked เพื่อแจ้งให้ผู้ใช้ทราบ
+                    Scan_cts.Cancel();
+                    OnCancelClicked?.Invoke();
+                    ShowMessage("INFO", $"[Process Completed]\t Value Stepping Motor: {ValueProcessX} {ValueProcessY} {ValueNegativeX}");
+
                 }
-                //if (!ValidGlobalMeasurementSettings()) //ตรวจสอบการตั้งค่าการวัด
-                //{
-                //    return;
-                //}
+                else if (GlobalMeasurementSettings.Instance.SelectedModel == "Vexta")
+                {
+                    //ตรวจสอบความถูกต้องข้อมูลการสแกนพื้นที่ ผ่านเมธอด IsValidScaningArea
+                    if (!IsValidScaningArea())
+                    {
+                        return;
+                    }
 
-                //Run Setup Scaning
-                //myMMC.WriteString("H:W");
-                //await Task.Delay(5000);
-                //myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y = 0 cm & X = 1 cm
-                //myMMC.WriteString("G:");
-                //await Task.Delay(5000);
-                //---------------------------------Setup Measurement-------------------------------------------- -
-                //Run Measurement
-                //SetupMeasurementCommand();
+                    //---------------------------------Setup Measurement---------------------------------------------
+                    //Run Measurement
+                    //SetupMeasurementCommand();
 
-                //Stopwatch
-                OnRunClicked?.Invoke();
-                BtnCancel_scaning.Enabled = true; //เปิดปุ่มยกเลิกสแกน
-                Btn_runscaning.Enabled = false; //ปีดปุ่มรันสแกน
-                UIControlDisabled(true); //ปิดการใช้งานปุ่มขณะรันสแกน
+                    //Stopwatch จับเวลาในการสแกนพื้นที่
+                    OnRunClicked?.Invoke();
+                    BtnCancel_scaning.Enabled = true; //เปิดปุ่มยกเลิกสแกน
+                    Btn_runscaning.Enabled = false; //ปีดปุ่มรันสแกน
+                    UIControlDisabled(true); //ปิดการใช้งานปุ่มขณะรันสแกน
 
-                //---------------------------------Loop Scaning Area---------------------------------------------
-                //Report Area Calculate
-                Reportdata.AppendText($"คำนวณผลลัพธ์ลูปที่สแกนของ X คือ {LoopAreaX} ลูป " + Environment.NewLine +
-                                       $"คำนวณผลลัพธ์ลูปที่สแกนของ Y คือ {LoopAreaY} ลูป" + Environment.NewLine);
-                //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
+                    //---------------------------------Loop Scaning Area---------------------------------------------
+                    //Report Area Calculate สรุปผลลัพธ์การคำนวณพื้นที่สแกนทั้งหมด
+                    Reportdata.AppendText($"คำนวณผลลัพธ์ลูปที่สแกนของ X คือ {LoopAreaX} ลูป " + Environment.NewLine +
+                                           $"คำนวณผลลัพธ์ลูปที่สแกนของ Y คือ {LoopAreaY} ลูป" + Environment.NewLine);
+                    //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
 
-                Scan_cts = new CancellationTokenSource();
-                await Task.Run(() => ScanningAreaProcess(Scan_cts.Token), Scan_cts.Token);
+                    //โทเค็นสำหรับยกเลิกการทำงานของ Task
+                    Scan_cts = new CancellationTokenSource();
+                    await Task.Run(() => ScanningAreaProcess(Scan_cts.Token), Scan_cts.Token);
 
-                Scan_cts.Cancel();
-                OnCancelClicked?.Invoke();
-                ShowMessage("INFO", $"[Process Completed]\t Value Stepping Motor: {ValueProcessX} {ValueProcessY} {ValueNegativeX}");
+                    //เมื่อสแกนเสร็จสิ้นหรือยกเลิกการทำงานแล้ว ให้เรียกใช้งาน OnCancelClicked เพื่อแจ้งให้ผู้ใช้ทราบ
+                    Scan_cts.Cancel();
+                    OnCancelClicked?.Invoke();
+                    ShowMessage("INFO", $"[Process Completed]\t Value Stepping Motor: {ValueProcessX} {ValueProcessY} {ValueNegativeX}");
+
+                }
+                else
+                {
+                    ShowMessage("ERROR", "กรุณาเลือก Model ของ Stepping Motor");
+                    return;
+                }
+
+               
 
             }
             catch(OperationCanceledException)
@@ -1361,6 +1665,7 @@ namespace CodingLabpro.frmChild
             }
         }
 
+        //เมธอดสำหรับการสแกนพื้นที่แบบ Loop ตามจำนวนแถวและคอลัมน์ที่กำหนด
         private async Task ScanningAreaProcess(CancellationToken token)
         {
             //โค้ดสำหรับการสแกนพื้นที่

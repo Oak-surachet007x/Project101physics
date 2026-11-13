@@ -52,6 +52,7 @@
             this.labelTop = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.MainStatus = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusicon = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusDMM = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusPort1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -59,6 +60,7 @@
             this.StatusPort2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusMMC2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusPort3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.LBExportFile = new System.Windows.Forms.ToolStripStatusLabel();
             this.LBStatusLoading = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelTop = new System.Windows.Forms.Panel();
             this.LBdatetime = new System.Windows.Forms.Label();
@@ -66,6 +68,8 @@
             this.LBtimer = new System.Windows.Forms.Label();
             this.LBvaluemeasurement = new System.Windows.Forms.Label();
             this.flowLayoutBar = new System.Windows.Forms.FlowLayoutPanel();
+            this.barMenu1 = new CodingLabpro.Models.barMenu();
+            this.barMenu2 = new CodingLabpro.Models.barMenu();
             this.FormChildpanel = new System.Windows.Forms.Panel();
             this.Datetimenow = new System.Windows.Forms.Timer(this.components);
             this.Stoptimer1 = new System.Windows.Forms.Timer(this.components);
@@ -73,18 +77,14 @@
             this.TabToolbar = new System.Windows.Forms.TabControl();
             this.TabPage_Tools = new System.Windows.Forms.TabPage();
             this.toolStripMenu = new System.Windows.Forms.ToolStrip();
+            this.ToolBtnExport = new System.Windows.Forms.ToolStripButton();
+            this.ToolBtnExport_csv = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolBtnError = new System.Windows.Forms.ToolStripButton();
+            this.ToolBtnClear = new System.Windows.Forms.ToolStripButton();
             this.TabPage_ConnectPort = new System.Windows.Forms.TabPage();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.barMenu1 = new CodingLabpro.Models.barMenu();
-            this.barMenu2 = new CodingLabpro.Models.barMenu();
-            this.ToolBtnExport = new System.Windows.Forms.ToolStripButton();
-            this.ToolBtnExport_csv = new System.Windows.Forms.ToolStripButton();
-            this.ToolBtnError = new System.Windows.Forms.ToolStripButton();
-            this.ToolBtnClear = new System.Windows.Forms.ToolStripButton();
-            this.toolStripStatusicon = new System.Windows.Forms.ToolStripStatusLabel();
-            this.LBExportFile = new System.Windows.Forms.ToolStripStatusLabel();
             this.BindingSource_DataMeasure = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.GBdata.SuspendLayout();
@@ -107,12 +107,14 @@
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.GBdata, 0, 0);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.GBdata, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 259);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.40886F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60.59114F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(504, 472);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -122,14 +124,14 @@
             this.GBdata.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GBdata.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBdata.ForeColor = System.Drawing.Color.White;
-            this.GBdata.Location = new System.Drawing.Point(10, 10);
+            this.GBdata.Location = new System.Drawing.Point(10, 196);
             this.GBdata.Margin = new System.Windows.Forms.Padding(10);
             this.GBdata.Name = "GBdata";
             this.GBdata.Padding = new System.Windows.Forms.Padding(7);
-            this.GBdata.Size = new System.Drawing.Size(484, 452);
+            this.GBdata.Size = new System.Drawing.Size(484, 266);
             this.GBdata.TabIndex = 1;
             this.GBdata.TabStop = false;
-            this.GBdata.Text = "Measurement";
+            this.GBdata.Text = "Measurement Result ";
             // 
             // DgvMeasurement
             // 
@@ -157,7 +159,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DgvMeasurement.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.DgvMeasurement.Size = new System.Drawing.Size(470, 419);
+            this.DgvMeasurement.Size = new System.Drawing.Size(470, 233);
             this.DgvMeasurement.TabIndex = 0;
             this.DgvMeasurement.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvMeasurement_RowPostPaint);
             // 
@@ -353,6 +355,12 @@
             this.MainStatus.TabIndex = 4;
             this.MainStatus.Text = "statusStrip1";
             // 
+            // toolStripStatusicon
+            // 
+            this.toolStripStatusicon.Image = ((System.Drawing.Image)(resources.GetObject("toolStripStatusicon.Image")));
+            this.toolStripStatusicon.Name = "toolStripStatusicon";
+            this.toolStripStatusicon.Size = new System.Drawing.Size(20, 25);
+            // 
             // StatusLabel
             // 
             this.StatusLabel.Font = new System.Drawing.Font("Cascadia Mono", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -404,6 +412,19 @@
             this.StatusPort3.Name = "StatusPort3";
             this.StatusPort3.Size = new System.Drawing.Size(70, 25);
             this.StatusPort3.Text = "DICONNECT";
+            // 
+            // LBExportFile
+            // 
+            this.LBExportFile.AutoSize = false;
+            this.LBExportFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBExportFile.ForeColor = System.Drawing.SystemColors.Control;
+            this.LBExportFile.Image = global::CodingLabpro.Properties.Resources.file_export_33dp_8C1AF6_FILL0_wght400_GRAD0_opsz40;
+            this.LBExportFile.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LBExportFile.Name = "LBExportFile";
+            this.LBExportFile.Size = new System.Drawing.Size(724, 25);
+            this.LBExportFile.Spring = true;
+            this.LBExportFile.Text = "FilePath:";
+            this.LBExportFile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // LBStatusLoading
             // 
@@ -489,6 +510,28 @@
             this.flowLayoutBar.Size = new System.Drawing.Size(50, 587);
             this.flowLayoutBar.TabIndex = 0;
             // 
+            // barMenu1
+            // 
+            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
+            this.barMenu1.BarColor = System.Drawing.Color.White;
+            this.barMenu1.Location = new System.Drawing.Point(6, 12);
+            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
+            this.barMenu1.Name = "barMenu1";
+            this.barMenu1.Size = new System.Drawing.Size(50, 222);
+            this.barMenu1.TabIndex = 0;
+            this.barMenu1.textbar = "Axis Control & Measument";
+            // 
+            // barMenu2
+            // 
+            this.barMenu2.BackColor = System.Drawing.Color.Transparent;
+            this.barMenu2.BarColor = System.Drawing.Color.White;
+            this.barMenu2.Location = new System.Drawing.Point(6, 252);
+            this.barMenu2.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
+            this.barMenu2.Name = "barMenu2";
+            this.barMenu2.Size = new System.Drawing.Size(50, 145);
+            this.barMenu2.TabIndex = 1;
+            this.barMenu2.textbar = "Vexta Settings";
+            // 
             // FormChildpanel
             // 
             this.FormChildpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(35)))), ((int)(((byte)(48)))));
@@ -561,52 +604,6 @@
             this.toolStripMenu.TabIndex = 0;
             this.toolStripMenu.Text = "toolStrip1";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 99);
-            // 
-            // TabPage_ConnectPort
-            // 
-            this.TabPage_ConnectPort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
-            this.TabPage_ConnectPort.Controls.Add(this.GBconnect);
-            this.TabPage_ConnectPort.Location = new System.Drawing.Point(4, 25);
-            this.TabPage_ConnectPort.Name = "TabPage_ConnectPort";
-            this.TabPage_ConnectPort.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_ConnectPort.Size = new System.Drawing.Size(1226, 105);
-            this.TabPage_ConnectPort.TabIndex = 1;
-            this.TabPage_ConnectPort.Text = "Connect";
-            // 
-            // backgroundWorker
-            // 
-            this.backgroundWorker.WorkerReportsProgress = true;
-            this.backgroundWorker.WorkerSupportsCancellation = true;
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
-            // 
-            // barMenu1
-            // 
-            this.barMenu1.BackColor = System.Drawing.Color.Transparent;
-            this.barMenu1.BarColor = System.Drawing.Color.White;
-            this.barMenu1.Location = new System.Drawing.Point(6, 12);
-            this.barMenu1.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
-            this.barMenu1.Name = "barMenu1";
-            this.barMenu1.Size = new System.Drawing.Size(50, 222);
-            this.barMenu1.TabIndex = 0;
-            this.barMenu1.textbar = "Axis Control & Measument";
-            // 
-            // barMenu2
-            // 
-            this.barMenu2.BackColor = System.Drawing.Color.Transparent;
-            this.barMenu2.BarColor = System.Drawing.Color.White;
-            this.barMenu2.Location = new System.Drawing.Point(6, 252);
-            this.barMenu2.Margin = new System.Windows.Forms.Padding(6, 12, 0, 6);
-            this.barMenu2.Name = "barMenu2";
-            this.barMenu2.Size = new System.Drawing.Size(50, 145);
-            this.barMenu2.TabIndex = 1;
-            this.barMenu2.textbar = "Vexta Settings";
-            // 
             // ToolBtnExport
             // 
             this.ToolBtnExport.AutoSize = false;
@@ -630,6 +627,11 @@
             this.ToolBtnExport_csv.Text = "Export to .csv";
             this.ToolBtnExport_csv.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ToolBtnExport_csv.Click += new System.EventHandler(this.ToolBtnExport_csv_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 99);
             // 
             // ToolBtnError
             // 
@@ -655,24 +657,24 @@
             this.ToolBtnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ToolBtnClear.Click += new System.EventHandler(this.ToolBtnClear_Click);
             // 
-            // toolStripStatusicon
+            // TabPage_ConnectPort
             // 
-            this.toolStripStatusicon.Image = ((System.Drawing.Image)(resources.GetObject("toolStripStatusicon.Image")));
-            this.toolStripStatusicon.Name = "toolStripStatusicon";
-            this.toolStripStatusicon.Size = new System.Drawing.Size(20, 20);
+            this.TabPage_ConnectPort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
+            this.TabPage_ConnectPort.Controls.Add(this.GBconnect);
+            this.TabPage_ConnectPort.Location = new System.Drawing.Point(4, 25);
+            this.TabPage_ConnectPort.Name = "TabPage_ConnectPort";
+            this.TabPage_ConnectPort.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage_ConnectPort.Size = new System.Drawing.Size(1226, 105);
+            this.TabPage_ConnectPort.TabIndex = 1;
+            this.TabPage_ConnectPort.Text = "Connect";
             // 
-            // LBExportFile
+            // backgroundWorker
             // 
-            this.LBExportFile.AutoSize = false;
-            this.LBExportFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBExportFile.ForeColor = System.Drawing.SystemColors.Control;
-            this.LBExportFile.Image = global::CodingLabpro.Properties.Resources.file_export_33dp_8C1AF6_FILL0_wght400_GRAD0_opsz40;
-            this.LBExportFile.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.LBExportFile.Name = "LBExportFile";
-            this.LBExportFile.Size = new System.Drawing.Size(724, 25);
-            this.LBExportFile.Spring = true;
-            this.LBExportFile.Text = "FilePath:";
-            this.LBExportFile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.backgroundWorker.WorkerReportsProgress = true;
+            this.backgroundWorker.WorkerSupportsCancellation = true;
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
             // FrmMain01
             // 

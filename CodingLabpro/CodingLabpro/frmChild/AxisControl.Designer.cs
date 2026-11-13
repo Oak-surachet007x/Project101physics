@@ -930,23 +930,29 @@
             // 
             // RB_autorange
             // 
-            this.RB_autorange.AutoSize = true;
+            this.RB_autorange.Appearance = System.Windows.Forms.Appearance.Button;
+            this.RB_autorange.FlatAppearance.CheckedBackColor = System.Drawing.Color.Blue;
+            this.RB_autorange.ForeColor = System.Drawing.Color.Black;
             this.RB_autorange.Location = new System.Drawing.Point(8, 23);
             this.RB_autorange.Name = "RB_autorange";
-            this.RB_autorange.Size = new System.Drawing.Size(58, 21);
+            this.RB_autorange.Size = new System.Drawing.Size(58, 27);
             this.RB_autorange.TabIndex = 58;
             this.RB_autorange.Text = "Auto";
+            this.RB_autorange.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RB_autorange.UseVisualStyleBackColor = true;
             this.RB_autorange.CheckedChanged += new System.EventHandler(this.RB_autorange_CheckedChanged);
             // 
             // RB_Customrange
             // 
-            this.RB_Customrange.AutoSize = true;
+            this.RB_Customrange.Appearance = System.Windows.Forms.Appearance.Button;
+            this.RB_Customrange.FlatAppearance.CheckedBackColor = System.Drawing.Color.Blue;
+            this.RB_Customrange.ForeColor = System.Drawing.Color.Black;
             this.RB_Customrange.Location = new System.Drawing.Point(72, 23);
             this.RB_Customrange.Name = "RB_Customrange";
-            this.RB_Customrange.Size = new System.Drawing.Size(74, 21);
+            this.RB_Customrange.Size = new System.Drawing.Size(74, 27);
             this.RB_Customrange.TabIndex = 65;
             this.RB_Customrange.Text = "Custom";
+            this.RB_Customrange.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.RB_Customrange.UseVisualStyleBackColor = true;
             this.RB_Customrange.CheckedChanged += new System.EventHandler(this.RB_Customrange_CheckedChanged);
             // 
