@@ -151,10 +151,10 @@
         <member name="F:NPOI.OpenXmlFormats.Dml.ST_SystemColorVal.btnHighlight">
             <remarks/>
         </member>
-        <member name="F:NPOI.OpenXmlFormats.Dml.ST_SystemColorVal.Item3dDkShadow">
+        <member name="F:NPOI.OpenXmlFormats.Dml.ST_SystemColorVal.x3dDkShadow">
             <remarks/>
         </member>
-        <member name="F:NPOI.OpenXmlFormats.Dml.ST_SystemColorVal.Item3dLight">
+        <member name="F:NPOI.OpenXmlFormats.Dml.ST_SystemColorVal.x3dLight">
             <remarks/>
         </member>
         <member name="F:NPOI.OpenXmlFormats.Dml.ST_SystemColorVal.infoText">
@@ -2814,16 +2814,6 @@
         <member name="M:NPOI.OpenXmlFormats.Shared.CT_MathPr.#ctor">
             <summary>
             CT_MathPr class constructor
-            </summary>
-        </member>
-        <member name="F:NPOI.OpenXmlFormats.Shared.ST_OnOff.Value0">
-            <summary>
-            False
-            </summary>
-        </member>
-        <member name="F:NPOI.OpenXmlFormats.Shared.ST_OnOff.Value1">
-            <summary>
-            True
             </summary>
         </member>
         <member name="M:NPOI.OpenXmlFormats.Shared.CT_RPR.#ctor">

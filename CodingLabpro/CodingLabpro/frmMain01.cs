@@ -142,10 +142,10 @@ namespace CodingLabpro
 
         }
 
-        
 
 
-        #region Stopwatch Control
+
+        #region Stopwatch Control & event Control
         public string GetTimeString(TimeSpan elapsed)
         {
             result_time = string.Empty;
@@ -610,6 +610,7 @@ namespace CodingLabpro
 
         }
 
+        #region Button Control
         public class COMException : System.Runtime.InteropServices.ExternalException
         {
 
@@ -787,6 +788,9 @@ namespace CodingLabpro
                             ////CONNET driver MMC Port RS-232
                             MySerialPort.Open();
 
+                            // แจ้งฟอร์มย่อยว่าเชื่อมต่อสำเร็จ
+                            frmChild1.StartPositionMonitor(MySerialPort.IsOpen);
+
                         }
                     }
                     else
@@ -818,7 +822,7 @@ namespace CodingLabpro
                 
         }
 
-        private void BtnDiconnect_Click(object sender, EventArgs e)
+        private async void BtnDiconnect_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Cursor.Current = Cursors.WaitCursor;
 
@@ -840,10 +844,29 @@ namespace CodingLabpro
 
                 if (Cblistaddress3.SelectedIndex >= 0)
                 {
-                    if (MySerialPort.IsOpen)
+                    if(GlobalMeasurementSettings.Instance.SelectedModel == "Chuoseiki")
                     {
-                        MySerialPort.Close();
+                        if(MySerialPort.IsOpen)
+                        {
+                            MySerialPort.Close();
+                        }
+
                     }
+                    else if(GlobalMeasurementSettings.Instance.SelectedModel == "Vexta")
+                    {
+                        if (MySerialPort.IsOpen)
+                        {
+                            MySerialPort.Close();
+                        }
+
+                        // แจ้งฟอร์มย่อยให้หยุด Monitor
+                        await frmChild1.StopPositionMonitor(true);
+
+                    }else
+                    {
+                        // No action needed for other models
+                    }
+
 
                     StatusPort3.BackColor = Color.Red;
                     StatusPort3.Text = "DiCONNECT";
@@ -967,5 +990,11 @@ namespace CodingLabpro
             }
                
         }
+
+        #endregion
+
+        //----------------------------------------------2D tracking scanning------------------------------------------------------------//
+
     }
+
 }

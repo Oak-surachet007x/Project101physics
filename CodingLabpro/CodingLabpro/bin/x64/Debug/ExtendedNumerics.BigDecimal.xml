@@ -94,12 +94,8 @@
         <member name="P:ExtendedNumerics.BigDecimal.DefaultRoundingStrategy">
             <summary>
             Default mid-point rounding strategy when calling <see cref="M:ExtendedNumerics.BigDecimal.Round(ExtendedNumerics.BigDecimal,System.Int32)"/>.
-            <para>The default value is <see cref="F:ExtendedNumerics.RoundingStrategy.ToEven"/>.</para>
+            <para>The default value is <see cref="F:ExtendedNumerics.RoundingStrategy.AwayFromZero"/>.</para>
             </summary>
-            <remarks>
-            This was introduced when the default rounding strategy changed (a breaking change) so those who relied upon it
-            can recover the old behavior by setting this to <see cref="F:ExtendedNumerics.RoundingStrategy.AwayFromZero"/>.
-            </remarks>
         </member>
         <member name="F:ExtendedNumerics.BigDecimal.Mantissa">
             <summary>The mantissa of the internal floating point number representation of this <see cref="T:ExtendedNumerics.BigDecimal" />.</summary>
@@ -226,6 +222,18 @@
             A return value of zero means  this instance occurs in the same position in the sort order as obj.
             A return value of greater than zero means this instance follows obj in the sort order.
             </returns>
+        </member>
+        <member name="M:ExtendedNumerics.BigDecimal.Equals(ExtendedNumerics.BigDecimal)">
+            <summary>
+            Determines if another <see cref="T:ExtendedNumerics.BigDecimal" /> instance is equal to this one. 
+            </summary>
+            <returns>True if the other<see cref="T:ExtendedNumerics.BigDecimal" /> instance is equal to this one.</returns>
+        </member>
+        <member name="M:ExtendedNumerics.BigDecimal.Equals(System.Nullable{ExtendedNumerics.BigDecimal})">
+            <summary>
+            Determines if another <see cref="T:ExtendedNumerics.BigDecimal" /> instance is equal to this one. 
+            </summary>
+            <returns>True if the other<see cref="T:ExtendedNumerics.BigDecimal" /> instance is equal to this one.</returns>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Equals(System.Nullable{ExtendedNumerics.BigDecimal},System.Nullable{ExtendedNumerics.BigDecimal})">
             <summary>

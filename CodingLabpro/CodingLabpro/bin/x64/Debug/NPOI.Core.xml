@@ -4,6 +4,323 @@
         <name>NPOI.Core</name>
     </assembly>
     <members>
+        <member name="T:NPOI.Common.UserModel.Fonts.FontCharset">
+            <summary>
+            Charset represents the basic Set of characters associated with a font (that it can display), and
+            corresponds to the ANSI codepage (8-bit or DBCS) of that character Set used by a given language.
+            </summary>
+            <remarks>
+            @since POI 3.17-beta2
+            </remarks>
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.ANSI">
+            Specifies the English character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.DEFAULT">
+            Specifies a character Set based on the current system locale;
+            for example, when the system locale is United States English,
+            the default character Set is ANSI_CHARSET.
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.SYMBOL">
+            Specifies a character Set of symbols. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.MAC">
+            Specifies the Apple Macintosh character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.SHIFTJIS">
+            Specifies the Japanese character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.HANGUL">
+            Also spelled "Hangeul". Specifies the Hangul Korean character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.JOHAB">
+            Also spelled "Johap". Specifies the Johab Korean character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.GB2312">
+            Specifies the "simplified" Chinese character Set for People's Republic of China. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.CHINESEBIG5">
+            Specifies the "traditional" Chinese character Set, used mostly in
+            Taiwan and in the Hong Kong and Macao Special Administrative Regions.
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.GREEK">
+            Specifies the Greek character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.TURKISH">
+            Specifies the Turkish character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.VIETNAMESE">
+            Specifies the Vietnamese character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.HEBREW">
+            Specifies the Hebrew character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.ARABIC">
+            Specifies the Arabic character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.BALTIC">
+            Specifies the Baltic (Northeastern European) character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.RUSSIAN">
+            Specifies the Russian Cyrillic character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.THAI_">
+            Specifies the Thai character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.EASTEUROPE">
+            Specifies a Eastern European character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharset.OEM">
+            Specifies a mapping to one of the OEM code pages,
+            according to the current system locale Setting.
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.ANSI">
+            Specifies the English character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.DEFAULT">
+            Specifies a character Set based on the current system locale;
+            for example, when the system locale is United States English,
+            the default character Set is ANSI_CHARSET.
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.SYMBOL">
+            Specifies a character Set of symbols. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.MAC">
+            Specifies the Apple Macintosh character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.SHIFTJIS">
+            Specifies the Japanese character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.HANGUL">
+            Also spelled "Hangeul". Specifies the Hangul Korean character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.JOHAB">
+            Also spelled "Johap". Specifies the Johab Korean character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.GB2312">
+            Specifies the "simplified" Chinese character Set for People's Republic of China. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.CHINESEBIG5">
+            Specifies the "traditional" Chinese character Set, used mostly in
+            Taiwan and in the Hong Kong and Macao Special Administrative Regions.
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.GREEK">
+            Specifies the Greek character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.TURKISH">
+            Specifies the Turkish character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.VIETNAMESE">
+            Specifies the Vietnamese character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.HEBREW">
+            Specifies the Hebrew character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.ARABIC">
+            Specifies the Arabic character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.BALTIC">
+            Specifies the Baltic (Northeastern European) character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.RUSSIAN">
+            Specifies the Russian Cyrillic character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.THAI_">
+            Specifies the Thai character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.EASTEUROPE">
+            Specifies a Eastern European character Set. 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontCharsetInfo.OEM">
+            Specifies a mapping to one of the OEM code pages,
+            according to the current system locale Setting.
+        </member>
+        <member name="T:NPOI.Common.UserModel.Fonts.FontFamily">
+            <summary>
+            A property of a font that describes its general appearance.
+            </summary>
+            <remarks>
+            @since POI 3.17-beta2
+            </remarks>
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontFamily.FF_DONTCARE">
+            The default font is specified, which is implementation-dependent.
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontFamily.FF_ROMAN">
+            Fonts with variable stroke widths, which are proportional to the actual widths of
+            the glyphs, and which have serifs. "MS Serif" is an example.
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontFamily.FF_SWISS">
+            Fonts with variable stroke widths, which are proportional to the actual widths of the
+            glyphs, and which do not have serifs. "MS Sans Serif" is an example.
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontFamily.FF_MODERN">
+            Fonts with constant stroke width, with or without serifs. Fixed-width fonts are
+            usually modern. "Pica", "Elite", and "Courier New" are examples.
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontFamily.FF_SCRIPT">
+            Fonts designed to look like handwriting. "Script" and "Cursive" are examples.
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontFamily.FF_DECORATIVE">
+            Novelty fonts. "Old English" is an example.
+        </member>
+        <member name="M:NPOI.Common.UserModel.Fonts.FontFamilyExtension.ValueOfPitchFamily(System.Byte)">
+             Get FontFamily from combined native id
+            
+             @param pitchAndFamily The PitchFamily to decode.
+            
+             @return The resulting FontFamily
+        </member>
+        <member name="T:NPOI.Common.UserModel.Fonts.FontGroup">
+            <summary>
+            Text runs can contain characters which will be handled (if configured) by a different font,
+            because the default font (latin) doesn't contain corresponding glyphs.
+            </summary>
+            
+            @see <a href="https://blogs.msdn.microsoft.com/officeinteroperability/2013/04/22/office-open-xml-themes-schemes-and-fonts/">Office Open XML Themes, Schemes, and Fonts</a>
+            <remarks>
+            @since POI 3.17-beta2
+            </remarks>
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontGroup.LATIN">
+            type for latin charset (default) - also used for unicode fonts like MS Arial Unicode 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontGroup.EAST_ASIAN">
+            type for east asian charsets - usually Set as fallback for the latin font, e.g. something like MS Gothic or MS Mincho 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontGroup.SYMBOL">
+            type for symbol fonts 
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontGroup.COMPLEX_SCRIPT">
+            type for complex scripts - see https://msdn.microsoft.com/en-us/library/windows/desktop/dd317698 
+        </member>
+        <member name="M:NPOI.Common.UserModel.Fonts.FontGroupExtension.GetFontGroupRanges(System.String)">
+             Try to guess the font group based on the codepoint
+            
+             @param runText the text which font groups are to be analyzed
+             @return the FontGroup
+        </member>
+        <member name="T:NPOI.Common.UserModel.Fonts.IFontInfo">
+            <summary>
+            <para>
+            A FontInfo object holds information about a font configuration.
+            It is roughly an equivalent to the LOGFONT structure in Windows GDI.
+            </para>
+            <para>
+            If an implementation doesn't provide a property, the Getter will return <c>null</c> -
+            if the value is unset, a default value will be returned.
+            </para>
+            <para>
+            Setting a unsupported property results in an <see cref="T:System.InvalidOperationException"/>.
+            </para>
+            </summary>
+            
+            @see <a href="https://msdn.microsoft.com/en-us/library/dd145037.aspx">LOGFONT structure</a>
+            <remarks>
+            @since POI 3.17-beta2
+            </remarks>
+        </member>
+        <member name="M:NPOI.Common.UserModel.Fonts.IFontInfo.GetIndex">
+            <summary>
+            Get the index within the collection of Font objects
+            </summary>
+            <returns>unique index number of the underlying record this Font represents
+            (probably you don't care unless you're comparing which one is which)
+            </returns>
+        </member>
+        <member name="M:NPOI.Common.UserModel.Fonts.IFontInfo.SetIndex(System.Int32)">
+            <summary>
+            Sets the index within the collection of Font objects
+            </summary>
+            <param name="index">the index within the collection of Font objects</param>
+            
+            <exception cref="T:System.InvalidOperationException">if unsupported</exception>
+        </member>
+        <member name="M:NPOI.Common.UserModel.Fonts.IFontInfo.GetTypeface">
+            <summary>
+            </summary>
+            <returns>the full name of the font, i.e. font family + type face</returns>
+        </member>
+        <member name="M:NPOI.Common.UserModel.Fonts.IFontInfo.SetTypeface(System.String)">
+            <summary>
+            Sets the font name
+            </summary>
+            <param name="typeface">the full name of the font, when <c>null</c> removes the font definition -
+            removal is implementation specific
+            </param>
+        </member>
+        <member name="M:NPOI.Common.UserModel.Fonts.IFontInfo.GetCharset">
+            <summary>
+            </summary>
+            <returns>the font charset</returns>
+        </member>
+        <member name="M:NPOI.Common.UserModel.Fonts.IFontInfo.SetCharset(NPOI.Common.UserModel.Fonts.FontCharset)">
+            <summary>
+            Sets the charset
+            </summary>
+            <param name="charset">the charset</param>
+        </member>
+        <member name="M:NPOI.Common.UserModel.Fonts.IFontInfo.GetFamily">
+            <summary>
+            </summary>
+            <returns>the family class</returns>
+        </member>
+        <member name="M:NPOI.Common.UserModel.Fonts.IFontInfo.SetFamily(NPOI.Common.UserModel.Fonts.FontFamily)">
+            <summary>
+            Sets the font family class
+            </summary>
+            <param name="family">the font family class</param>
+        </member>
+        <member name="M:NPOI.Common.UserModel.Fonts.IFontInfo.GetPitch">
+            <summary>
+            </summary>
+            <returns>the font pitch or <c>null</c> if unsupported</returns>
+        </member>
+        <member name="M:NPOI.Common.UserModel.Fonts.IFontInfo.SetPitch(NPOI.Common.UserModel.Fonts.FontPitch)">
+            <summary>
+            Set the font pitch
+            </summary>
+            <param name="pitch">the font pitch</param>
+            
+            <exception cref="T:System.InvalidOperationException">if unsupported</exception>
+        </member>
+        <member name="T:NPOI.Common.UserModel.Fonts.FontPitch">
+            <summary>
+            A property of a font that describes the pitch, of the characters.
+            </summary>
+            <remarks>
+            @since POI 3.17-beta2
+            </remarks>
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontPitch.DEFAULT">
+            The default pitch, which is implementation-dependent.
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontPitch.FIXED">
+            A fixed pitch, which means that all the characters in the font occupy the same
+            width when output in a string.
+        </member>
+        <member name="F:NPOI.Common.UserModel.Fonts.FontPitch.VARIABLE">
+            A variable pitch, which means that the characters in the font occupy widths
+            that are proportional to the actual widths of the glyphs when output in a string. For example,
+            the "i" and space characters usually have much smaller widths than a "W" or "O" character.
+        </member>
+        <member name="M:NPOI.Common.UserModel.Fonts.FontPitchExtension.GetNativeId(NPOI.Common.UserModel.Fonts.FontPitch,NPOI.Common.UserModel.Fonts.FontFamily)">
+             Combine pitch and family to native id
+             
+             @see <a href="https://msdn.microsoft.com/en-us/library/dd145037.aspx">LOGFONT structure</a>
+            
+             @param pitch The pitch-value, cannot be null
+             @param family The family-value, cannot be null
+            
+             @return The resulting combined byte-value with pitch and family encoded into one byte
+        </member>
+        <member name="M:NPOI.Common.UserModel.Fonts.FontPitchExtension.ValueOfPitchFamily(System.Byte)">
+             Get FontPitch from native id
+            
+             @param pitchAndFamily The combined byte value for pitch and family
+            
+             @return The resulting FontPitch enumeration value
+        </member>
         <member name="T:NPOI.DDF.AbstractEscherOptRecord">
             Common abstract class for {@link EscherOptRecord} and
             {@link EscherTertiaryOptRecord}
@@ -2700,7 +3017,36 @@
             does not contain a document summary information stream.
             </throws>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:NPOI.HPSF.DocumentSummaryInformation.#ctor(NPOI.Util.InputStream)" -->
+        <member name="M:NPOI.HPSF.DocumentSummaryInformation.#ctor(NPOI.Util.InputStream)">
+            <summary>
+            <para>
+            Creates a <see cref="T:NPOI.HPSF.DocumentSummaryInformation"/> instance from an <see cref="T:NPOI.Util.InputStream"/> in the Horrible Property Set Format.
+            </para>
+            <para>
+            The constructor reads the first few bytes from the stream
+            and determines whether it is really a property set stream. If
+            it is, it parses the rest of the stream. If it is not, it
+            resets the stream to its beginning in order to let other
+            components mess around with the data and throws an
+            exception.
+            </para>
+            </summary>
+            <param name="stream">Holds the data making out the property set
+            stream.
+            </param>
+            <exception cref="T:NPOI.HPSF.MarkUnsupportedException">
+            if the stream does not support the {@link InputStream.markSupported" /> method.
+            </exception>
+            <exception cref="!:IOException">
+            if the <see cref="T:NPOI.Util.InputStream"/> cannot be accessed as needed.
+            </exception>
+            <exception cref="T:NPOI.HPSF.NoPropertySetStreamException">
+            if the input stream does not contain a property set.
+            </exception>
+            <exception cref="T:NPOI.HPSF.UnsupportedEncodingException">
+            if a character encoding is not supported.
+            </exception>
+        </member>
         <member name="P:NPOI.HPSF.DocumentSummaryInformation.Category">
             <summary>
             get or set the category (or <c>null</c>).
@@ -4616,7 +4962,36 @@
             contain a summary information stream.
             </exception>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:NPOI.HPSF.SummaryInformation.#ctor(NPOI.Util.InputStream)" -->
+        <member name="M:NPOI.HPSF.SummaryInformation.#ctor(NPOI.Util.InputStream)">
+            <summary>
+            <para>
+            Creates a <see cref="T:NPOI.HPSF.SummaryInformation"/> instance from an InputStream in the Horrible Property Set Format.
+            </para>
+            <para>
+            The constructor reads the first few bytes from the stream
+            and determines whether it is really a property Set stream. If
+            it is, it parses the rest of the stream. If it is not, it
+            resets the stream to its beginning in order to let other
+            components mess around with the data and throws an
+            exception.
+            </para>
+            </summary>
+            <param name="stream">Holds the data making out the property Set
+            stream.
+            </param>
+            <exception cref="T:NPOI.HPSF.MarkUnsupportedException">
+            if the stream does not support the {@link InputStream.markSupported" /> method.
+            </exception>
+            <exception cref="!:IOException">
+            if the <see cref="T:NPOI.Util.InputStream"/> cannot be accessed as needed.
+            </exception>
+            <exception cref="T:NPOI.HPSF.NoPropertySetStreamException">
+            if the input stream does not contain a property Set.
+            </exception>
+            <exception cref="T:NPOI.HPSF.UnsupportedEncodingException">
+            if a character encoding is not supported.
+            </exception>
+        </member>
         <member name="P:NPOI.HPSF.SummaryInformation.Title">
             <summary>
             get or set the title.
@@ -5562,22 +5937,6 @@
             supported.
             </exception>
             @see Variant
-        </member>
-        <member name="M:NPOI.HPSF.VariantSupport.CodepageToEncoding(System.Int32)">
-            <summary>
-            Turns a codepage number into the equivalent character encoding's
-            name.
-            </summary>
-            <param name="codepage">The codepage number</param>
-            
-            <return>character encoding's name. If the codepage number is 65001,
-            the encoding name is "UTF-8". All other positive numbers are mapped to
-            "cp" followed by the number, e.g. if the codepage number is 1252 the
-            returned character encoding name will be "cp1252".
-            </return>
-            <exception cref="T:NPOI.HPSF.UnsupportedEncodingException">if the specified codepage is
-            less than zero.
-            </exception>
         </member>
         <member name="M:NPOI.HPSF.VariantSupport.Write(System.IO.Stream,System.Int64,System.Object,System.Int32)">
             <summary>
@@ -7733,6 +8092,13 @@
             Returns the StyleRecord for the given
              xfIndex, or null if that ExtendedFormat doesn't
              have a Style set.
+        </member>
+        <member name="M:NPOI.HSSF.Model.InternalWorkbook.UpdateStyleRecord(System.Int32,System.Int32)">
+             Update the StyleRecord to point to the new
+             given index.
+            
+             @param oldXf the extended format index that was previously associated with this StyleRecord
+             @param newXf the extended format index that is now associated with this StyleRecord
         </member>
         <member name="M:NPOI.HSSF.Model.InternalWorkbook.GetExFormatAt(System.Int32)">
              Gets the ExtendedFormatRecord at the given 0-based index
@@ -14407,33 +14773,6 @@
              ISFFACTOID    -> FeatSmartTag
         </member>
         <!-- Badly formed XML comment ignored for member "T:NPOI.HSSF.Record.FilePassRecord" -->
-        <member name="M:NPOI.HSSF.Record.FilePassRecord.Rc4KeyData.Clone">
-            <summary>
-            
-            </summary>
-            <returns>Rc4KeyData</returns>
-        </member>
-        <member name="F:NPOI.HSSF.Record.FilePassRecord.XorKeyData._key">
-            key (2 bytes): An unsigned integer that specifies the obfuscation key. 
-            See [MS-OFFCRYPTO], 2.3.6.2 section, the first step of Initializing XOR
-            array where it describes the generation of 16-bit XorKey value.
-        </member>
-        <member name="F:NPOI.HSSF.Record.FilePassRecord.XorKeyData._verifier">
-            verificationBytes (2 bytes): An unsigned integer that specifies
-            the password verification identifier.
-        </member>
-        <member name="M:NPOI.HSSF.Record.FilePassRecord.XorKeyData.Clone">
-            <summary>
-            
-            </summary>
-            <returns>XorKeyData</returns>
-        </member>
-        <member name="M:NPOI.HSSF.Record.FilePassRecord.Clone">
-            <summary>
-            
-            </summary>
-            <returns>FilePassRecord</returns>
-        </member>
         <member name="T:NPOI.HSSF.Record.FileSharingRecord">
             Title:        FILESHARING
             Description:  stores the encrypted Readonly for a workbook (Write protect) 
@@ -16275,7 +16614,7 @@
         <member name="M:NPOI.HSSF.Record.RecordFactory.SetCapacity(System.Int32)">
             Changes the default capacity (10000) to handle larger files
         </member>
-        <member name="M:NPOI.HSSF.Record.RecordFactory.CreateRecords(System.IO.Stream)">
+        <member name="M:NPOI.HSSF.Record.RecordFactory.CreateRecords(NPOI.Util.InputStream)">
              Create an array of records from an input stream
             
              @param in the InputStream from which the records will be
@@ -16341,7 +16680,7 @@
         <member name="F:NPOI.HSSF.Record.RecordFactoryInputStream._lastDrawingRecord">
             The most recent DrawingRecord seen
         </member>
-        <member name="M:NPOI.HSSF.Record.RecordFactoryInputStream.#ctor(System.IO.Stream,System.Boolean)">
+        <member name="M:NPOI.HSSF.Record.RecordFactoryInputStream.#ctor(NPOI.Util.InputStream,System.Boolean)">
             @param shouldIncludeContinueRecords caller can pass <c>false</c> if loose
             {@link ContinueRecord}s should be skipped (this is sometimes useful in event based
             processing).
@@ -16368,13 +16707,16 @@
         <member name="F:NPOI.HSSF.Record.RecordInputStream.MAX_RECORD_DATA_SIZE">
             Maximum size of a single record (minus the 4 byte header) without a continue
         </member>
+        <member name="F:NPOI.HSSF.Record.RecordInputStream._markedDataOffset">
+            index within the data section when mark() was called
+        </member>
         <member name="F:NPOI.HSSF.Record.RecordInputStream._bhi">
             Header {@link LittleEndianInput} facet of the wrapped {@link InputStream} 
         </member>
         <member name="F:NPOI.HSSF.Record.RecordInputStream._dataInput">
             Data {@link LittleEndianInput} facet of the wrapped {@link InputStream} 
         </member>
-        <member name="M:NPOI.HSSF.Record.RecordInputStream.#ctor(System.IO.Stream)">
+        <member name="M:NPOI.HSSF.Record.RecordInputStream.#ctor(NPOI.Util.InputStream)">
             the record identifier of the BIFF record currently being read 
         </member>
         <member name="M:NPOI.HSSF.Record.RecordInputStream.Read">
@@ -17638,7 +17980,7 @@
             
              @author Glen Stampoultzis (glens at apache.org)
         </member>
-        <member name="M:NPOI.HSSF.UserModel.EscherGraphics.#ctor(NPOI.HSSF.UserModel.HSSFShapeGroup,NPOI.HSSF.UserModel.HSSFWorkbook,SixLabors.ImageSharp.Color,System.Single)">
+        <member name="M:NPOI.HSSF.UserModel.EscherGraphics.#ctor(NPOI.HSSF.UserModel.HSSFShapeGroup,NPOI.HSSF.UserModel.HSSFWorkbook,SkiaSharp.SKColor,System.Single)">
              Construct an escher graphics object.
             
              @param escherGroup           The escher Group to Write the graphics calls into.
@@ -17646,7 +17988,7 @@
              @param forecolor             The foreground color to use as default.
              @param verticalPointsPerPixel    The font multiplier.  (See class description for information on how this works.).
         </member>
-        <member name="M:NPOI.HSSF.UserModel.EscherGraphics.#ctor(NPOI.HSSF.UserModel.HSSFShapeGroup,NPOI.HSSF.UserModel.HSSFWorkbook,SixLabors.ImageSharp.Color,SixLabors.Fonts.Font,System.Single)">
+        <member name="M:NPOI.HSSF.UserModel.EscherGraphics.#ctor(NPOI.HSSF.UserModel.HSSFShapeGroup,NPOI.HSSF.UserModel.HSSFWorkbook,SkiaSharp.SKColor,SkiaSharp.SKFont,System.Single)">
              Constructs an escher graphics object.
             
              @param escherGroup           The escher Group to Write the graphics calls into.
@@ -18238,6 +18580,15 @@
             will Change the cell to a numeric cell and Set its value.</param>
         </member>
         <member name="M:NPOI.HSSF.UserModel.HSSFCell.SetCellValue(System.DateTime)">
+            <summary>
+            Set a date value for the cell. Excel treats dates as numeric so you will need to format the cell as
+            a date.
+            </summary>
+            <param name="value">the date value to Set this cell to.  For formulas we'll Set the
+            precalculated value, for numerics we'll Set its value. For other types we
+            will Change the cell to a numeric cell and Set its value.</param>
+        </member>
+        <member name="M:NPOI.HSSF.UserModel.HSSFCell.SetCellValue(System.DateOnly)">
             <summary>
             Set a date value for the cell. Excel treats dates as numeric so you will need to format the cell as
             a date.
@@ -20423,7 +20774,7 @@
             </summary>
             <returns>HSSFClientAnchor with the preferred size for this image</returns>
         </member>
-        <member name="M:NPOI.HSSF.UserModel.HSSFPicture.GetResolution(SixLabors.ImageSharp.Image)">
+        <member name="M:NPOI.HSSF.UserModel.HSSFPicture.GetResolution(SkiaSharp.SKBitmap)">
             <summary>
             The metadata of PNG and JPEG can contain the width of a pixel in millimeters.
             Return the the "effective" dpi calculated as 
@@ -22301,17 +22652,8 @@
             </summary>
             <param name="column">the column index.</param>
         </member>
-        <member name="M:NPOI.HSSF.UserModel.HSSFSheet.AutoSizeColumn(System.Int32,System.Boolean)">
-            <summary>
-            Adjusts the column width to fit the contents.
-            This Process can be relatively slow on large sheets, so this should
-            normally only be called once per column, at the end of your
-            Processing.
-            You can specify whether the content of merged cells should be considered or ignored.
-            Default is to ignore merged cells.
-            </summary>
-            <param name="column">the column index</param>
-            <param name="useMergedCells">whether to use the contents of merged cells when calculating the width of the column</param>
+        <member name="M:NPOI.HSSF.UserModel.HSSFSheet.AutoSizeColumn(System.Int32,System.Int32)">
+            <inheritdoc />
         </member>
         <member name="M:NPOI.HSSF.UserModel.HSSFSheet.AutoSizeColumn(System.Int32,System.Boolean,System.Int32)">
             <summary>
@@ -23961,7 +24303,7 @@
             </summary>
             <param name="outFS">the POIFSFileSystem to Write the properties into</param>
         </member>
-        <member name="M:NPOI.POIDocument.WriteProperties(NPOI.POIFS.FileSystem.NPOIFSFileSystem,System.Collections.IList)">
+        <member name="M:NPOI.POIDocument.WriteProperties(NPOI.POIFS.FileSystem.NPOIFSFileSystem,System.Collections.Generic.List{System.String})">
             <summary>
             Writes out the standard Documment Information Properties (HPSF)
             </summary>
@@ -24035,6 +24377,9 @@
              @param newDirectory the new directory
              @return the old/previous directory
         </member>
+        <member name="M:NPOI.POIDocument.GetEncryptedPropertyStreamName">
+            @return the stream name of the property set collection, if the document is encrypted
+        </member>
         <member name="T:NPOI.POIFS.Common.POIFSBigBlockSize">
             <p>A class describing attributes of the Big Block Size</p>
         </member>
@@ -24094,53 +24439,49 @@
         <member name="F:NPOI.POIFS.Common.POIFSConstants.RAW_XML_FILE_HEADER">
             The first 5 bytes of a raw XML file, used in detection 
         </member>
-        <member name="M:NPOI.POIFS.Crypt.ChunkedCipherInputStream.RemainingBytes">
+        <member name="M:NPOI.POIFS.Crypt.ChunkedCipherInputStream.InitCipherForBlock(NPOI.POIFS.Crypt.Cipher,System.Int32)">
             <summary>
-            Helper method for forbidden available call - we know the size beforehand, so it's ok ...
+            Implement this in subclasses to (re)initialize the transform for a given block index.
+            Return <paramref name="existing"/> if you can re-use it, otherwise return a new transform.
             </summary>
-            <returns>the remaining byte until EOF</returns>
-        </member>
-        <member name="M:NPOI.POIFS.Crypt.ChunkedCipherInputStream.InvokeCipher(System.Int32,System.Boolean)">
-            <summary>
-            Helper function for overriding the cipher invocation, i.e. XOR doesn't use a cipher and uses its own implementation
-            </summary>
-            <param name="totalBytes">The total bytes.</param>
-            <param name="doFinal">The do final.</param>
-            <returns></returns>
         </member>
         <member name="M:NPOI.POIFS.Crypt.ChunkedCipherInputStream.ReadPlain(System.Byte[],System.Int32,System.Int32)">
             <summary>
-            Used when BIFF header fields (sid, size) are being read. The internal <see cref="T:NPOI.POIFS.Crypt.Cipher"/> instance must step even when unencrypted bytes are read
+            Used when BIFF header fields are being read. The internal transform must step
+            even when unencrypted bytes are read.
             </summary>
-            <param name="b">The buffet.</param>
-            <param name="off">The offset.</param>
-            <param name="len">The length.</param>
-            <exception cref="T:System.IO.EndOfStreamException">buffer underrun</exception>
-            <exception cref="T:NPOI.Util.RuntimeException"></exception>
         </member>
         <member name="M:NPOI.POIFS.Crypt.ChunkedCipherInputStream.SetNextRecordSize(System.Int32)">
             <summary>
-            Some ciphers (actually just XOR) are based on the record size, which needs to be set before decryption
+            Some ciphers (e.g., XOR) are based on the record size, which needs to be set before decryption.
+            Default no-op.
             </summary>
-            <param name="recordSize">The size of the next record.</param>
         </member>
         <member name="M:NPOI.POIFS.Crypt.ChunkedCipherInputStream.GetChunk">
-            <summary>
-            Gets the chunk bytes.
-            </summary>
-            <returns>the chunk bytes</returns>
+            <summary>Returns the internal chunk buffer (encrypted)</summary>
         </member>
         <member name="M:NPOI.POIFS.Crypt.ChunkedCipherInputStream.GetPlain">
-            <summary>
-            Gets the plain bytes.
-            </summary>
-            <returns>the plain bytes</returns>
+            <summary>Returns the internal plain buffer (pre-encryption copy)</summary>
         </member>
         <member name="M:NPOI.POIFS.Crypt.ChunkedCipherInputStream.GetPos">
+            <summary>Absolute position in the logical stream</summary>
+        </member>
+        <member name="M:NPOI.POIFS.Crypt.ChunkedCipherInputStream.InvokeCipher(System.Int32,System.Boolean)">
             <summary>
-            Gets the position.
+            Allows XOR-like schemes to override cipher invocation.
+            Default uses <see cref="T:NPOI.POIFS.Crypt.Cipher"/>.
             </summary>
-            <returns>the absolute position in the stream</returns>
+        </member>
+        <member name="M:NPOI.POIFS.Crypt.ChunkedCipherOutputStream.InvokeCipher(System.Int32,System.Boolean)">
+            <summary>
+            Allows XOR-like schemes to override cipher invocation.
+            Default uses <see cref="T:NPOI.POIFS.Crypt.Cipher"/>.
+            </summary>
+        </member>
+        <member name="M:NPOI.POIFS.Crypt.ChunkedCipherOutputStream.SetNextRecordSize(System.Int32,System.Boolean)">
+            <summary>
+            Some ciphers (e.g., XOR) are based on the record size, which needs to be set before encryption.
+            </summary>
         </member>
         <member name="M:NPOI.POIFS.Crypt.CryptoAPI.CryptoAPIDecryptor.InitCipherForBlock(NPOI.POIFS.Crypt.Cipher,System.Int32)">
              Initializes a cipher object for a given block index for decryption
@@ -24180,6 +24521,13 @@
             to stream-encrypt a whole file
             
             @see <a href="http://msdn.microsoft.com/en-us/library/dd943321(v=office.12).aspx">2.3.5.4 RC4 CryptoAPI Encrypted Summary Stream</a>
+        </member>
+        <member name="M:NPOI.POIFS.Crypt.CryptoAPI.CryptoAPIEncryptor.SetSummaryEntries(NPOI.POIFS.FileSystem.DirectoryNode,System.String,NPOI.POIFS.FileSystem.NPOIFSFileSystem)">
+             Encrypt the Document-/SummaryInformation and other optionally streams.
+             Opposed to other crypto modes, cryptoapi is record based and can't be used
+             to stream-encrypt a whole file
+            
+             @see <a href="http://msdn.microsoft.com/en-us/library/dd943321(v=office.12).aspx">2.3.5.4 RC4 CryptoAPI Encrypted Summary Stream</a>
         </member>
         <member name="T:NPOI.POIFS.Crypt.CryptoFunctions">
             Helper functions used for standard and agile encryption
@@ -24384,6 +24732,7 @@
              @param dir the node to read from
              @return decrypted stream
         </member>
+        <!-- Badly formed XML comment ignored for member "M:NPOI.POIFS.Crypt.Decryptor.GetDataStream(NPOI.Util.InputStream,System.Int32,System.Int32)" -->
         <member name="M:NPOI.POIFS.Crypt.Decryptor.GetLength">
              Returns the length of the encrypted data that can be safely read with
              {@link #getDataStream(NPOI.POIFS.FileSystem.DirectoryNode)}.
@@ -24399,12 +24748,22 @@
              @throws InvalidOperationException if {@link #getDataStream(NPOI.POIFS.FileSystem.DirectoryNode)}
              was not called
         </member>
+        <member name="M:NPOI.POIFS.Crypt.Decryptor.SetChunkSize(System.Int32)">
+             Sets the chunk size of the data stream.
+             Needs to be set before the data stream is requested.
+             When not set, the implementation uses method specific default values
+            
+             @param chunkSize the chunk size, i.e. the block size with the same encryption key
+        </member>
         <member name="T:NPOI.POIFS.Crypt.EncryptionHeader">
             Reads and Processes OOXML Encryption Headers
             The constants are largely based on ZIP constants.
         </member>
         <member name="M:NPOI.POIFS.Crypt.EncryptionHeader.GetCipherMode">
             @deprecated use GetChainingMode().ecmaId
+        </member>
+        <member name="F:NPOI.POIFS.Crypt.EncryptionInfo.ENCRYPTION_INFO_ENTRY">
+            Document entry name for encryption info xml descriptor
         </member>
         <member name="F:NPOI.POIFS.Crypt.EncryptionInfo.flagCryptoAPI">
             A flag that specifies whether CryptoAPI RC4 or ECMA-376 encryption
@@ -24471,6 +24830,10 @@
              @throws EncryptedDocumentException if the given parameters mismatch, e.g. only certain combinations
                of keyBits, blockSize are allowed for a given {@link CipherAlgorithm}
         </member>
+        <member name="M:NPOI.POIFS.Crypt.EncryptionInfo.IsDocPropsEncrypted">
+            @return true, if Document Summary / Summary are encrypted and stored in the {@code EncryptedStream} stream,
+            otherwise the Summaries aren't encrypted and located in their usual streams
+        </member>
         <member name="M:NPOI.POIFS.Crypt.IEncryptionInfoBuilder.Initialize(NPOI.POIFS.Crypt.EncryptionInfo,NPOI.Util.ILittleEndianInput)">
             Initialize the builder from a stream
         </member>
@@ -24488,6 +24851,9 @@
         </member>
         <member name="M:NPOI.POIFS.Crypt.IEncryptionInfoBuilder.GetEncryptor">
             @return the encryptor
+        </member>
+        <member name="M:NPOI.POIFS.Crypt.IEncryptionInfoBuilder.GetEncryptionInfo">
+            @return the EncryptionInfo
         </member>
         <member name="T:NPOI.POIFS.Crypt.EncryptionMode">
             Office supports various encryption modes.
@@ -24510,10 +24876,38 @@
             @deprecated use GetCipherAlgorithm().jceId
         </member>
         <member name="M:NPOI.POIFS.Crypt.Encryptor.GetDataStream(NPOI.POIFS.FileSystem.DirectoryNode)">
-             Return a output stream for encrypted data.
-            
-             @param dir the node to write to
-             @return encrypted stream
+            <summary>
+            Return an output stream for encrypted data (writes to the given POIFS directory node).
+            </summary>
+        </member>
+        <member name="M:NPOI.POIFS.Crypt.Encryptor.ConfirmPassword(System.String,System.Byte[],System.Byte[],System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            For tests / algorithm setup: write-side password confirmation and material setup.
+            </summary>
+        </member>
+        <member name="M:NPOI.POIFS.Crypt.Encryptor.GetInstance(NPOI.POIFS.Crypt.EncryptionInfo)">
+            <summary>
+            Factory: obtain encryptor from EncryptionInfo.
+            </summary>
+        </member>
+        <member name="M:NPOI.POIFS.Crypt.Encryptor.GetDataStream(NPOI.Util.OutputStream,System.Int32)">
+            <summary>
+            Optional: return a stream that writes encrypted bytes directly to the given stream.
+            Default: not supported (matches Java behavior).
+            </summary>
+        </member>
+        <member name="M:NPOI.POIFS.Crypt.Encryptor.SetChunkSize(System.Int32)">
+            <summary>
+            Sets the chunk size of the data stream.
+            Needs to be set before the data stream is requested.
+            Default: not supported (implementation-specific).
+            </summary>
+        </member>
+        <member name="M:NPOI.POIFS.Crypt.Encryptor.GetGenericProperties">
+            <summary>
+            Generic record-like properties for diagnostics/inspection.
+            Mirrors the Java GenericRecord return shape with secret key bytes.
+            </summary>
         </member>
         <member name="T:NPOI.POIFS.Crypt.Standard.StandardDecryptor">
         </member>
@@ -25746,6 +26140,9 @@
         <member name="F:NPOI.POIFS.FileSystem.FileMagicContainer.PDF">
             PDF document 
         </member>
+        <member name="F:NPOI.POIFS.FileSystem.FileMagicContainer.HTML">
+            Some different HTML documents 
+        </member>
         <member name="F:NPOI.POIFS.FileSystem.FileMagicContainer.UNKNOWN">
             UNKNOWN magic 
         </member>
@@ -26000,19 +26397,6 @@
         <member name="M:NPOI.POIFS.FileSystem.NPOIFSFileSystem.CloseInputStream(System.IO.Stream,System.Boolean)">
             @param stream the stream to be closed
             @param success <code>false</code> if an exception is currently being thrown in the calling method
-        </member>
-        <member name="M:NPOI.POIFS.FileSystem.NPOIFSFileSystem.HasPOIFSHeader(System.IO.Stream)">
-            Checks that the supplied InputStream (which MUST
-             support mark and reset, or be a PushbackInputStream)
-             has a POIFS (OLE2) header at the start of it.
-            If your InputStream does not support mark / reset,
-             then wrap it in a PushBackInputStream, then be
-             sure to always use that, and not the original!
-            @param inp An InputStream which supports either mark/reset, or is a PushbackInputStream
-        </member>
-        <member name="M:NPOI.POIFS.FileSystem.NPOIFSFileSystem.HasPOIFSHeader(System.Byte[])">
-            Checks if the supplied first 8 bytes of a stream / file
-             has a POIFS (OLE2) header.
         </member>
         <member name="M:NPOI.POIFS.FileSystem.NPOIFSFileSystem.ReadCoreContents">
             Read and process the PropertiesTable and the
@@ -26555,24 +26939,6 @@
         <member name="M:NPOI.POIFS.FileSystem.OPOIFSFileSystem.CloseInputStream(System.IO.Stream,System.Boolean)">
             @param stream the stream to be Closed
             @param success <c>false</c> if an exception is currently being thrown in the calling method
-        </member>
-        <member name="M:NPOI.POIFS.FileSystem.OPOIFSFileSystem.HasPOIFSHeader(NPOI.Util.InputStream)">
-            <summary>
-            Checks that the supplied Stream(which MUST
-            support mark and reset, or be a PushbackInputStream)
-            has a POIFS (OLE2) header at the start of it.
-            If your Streamdoes not support mark / reset,
-            then wrap it in a PushBackInputStream, then be
-            sure to always use that, and not the original!
-            </summary>
-            <param name="inp">An Streamwhich supports either mark/reset, or is a PushbackStream</param>
-            <returns>
-            	<c>true</c> if [has POIFS header] [the specified inp]; otherwise, <c>false</c>.
-            </returns>
-        </member>
-        <member name="M:NPOI.POIFS.FileSystem.OPOIFSFileSystem.HasPOIFSHeader(System.Byte[])">
-            Checks if the supplied first 8 bytes of a stream / file
-             has a POIFS (OLE2) header.
         </member>
         <member name="M:NPOI.POIFS.FileSystem.OPOIFSFileSystem.CreateDocument(System.IO.Stream,System.String)">
             <summary>
@@ -27178,24 +27544,6 @@
              @param file the File from which to read the data
             
              @exception IOException on errors reading, or on invalid data
-        </member>
-        <member name="M:NPOI.POIFS.FileSystem.POIFSFileSystem.HasPOIFSHeader(System.IO.Stream)">
-            <summary>
-            Checks that the supplied Stream(which MUST
-            support mark and reset, or be a PushbackInputStream)
-            has a POIFS (OLE2) header at the start of it.
-            If your Streamdoes not support mark / reset,
-            then wrap it in a PushBackInputStream, then be
-            sure to always use that, and not the original!
-            </summary>
-            <param name="inp">An Streamwhich supports either mark/reset, or is a PushbackStream</param>
-            <returns>
-            	<c>true</c> if [has POIFS header] [the specified inp]; otherwise, <c>false</c>.
-            </returns>
-        </member>
-        <member name="M:NPOI.POIFS.FileSystem.POIFSFileSystem.HasPOIFSHeader(System.Byte[])">
-            Checks if the supplied first 8 bytes of a stream / file
-             has a POIFS (OLE2) header.
         </member>
         <member name="M:NPOI.POIFS.FileSystem.POIFSFileSystem.Create(System.IO.FileInfo)">
              Creates a new {@link POIFSFileSystem} in a new {@link File}.
@@ -31389,13 +31737,6 @@
             </summary>
             <param name="list">the existing IntList</param>
         </member>
-        <member name="M:NPOI.Util.IntList.#ctor(System.Int32,System.Int32)">
-            <summary>
-            create an IntList with a predefined Initial size
-            </summary>
-            <param name="initialCapacity">the size for the internal array</param>
-            <param name="fillvalue"></param>
-        </member>
         <member name="M:NPOI.Util.IntList.Add(System.Int32,System.Int32)">
             <summary>
             add the specfied value at the specified index
@@ -31688,6 +32029,15 @@
             <summary>
             The default size of the bytearray used while reading input streams. This is meant to be pretty small.
             </summary>
+        </member>
+        <member name="M:NPOI.Util.IOUtils.SetByteArrayMaxOverride(System.Int32)">
+             If this value is set to > 0, {@link #safelyAllocate(long, int)} will ignore the
+             maximum record length parameter.  This is designed to allow users to bypass
+             the hard-coded maximum record lengths if they are willing to accept the risk
+             of an OutOfMemoryException.
+            
+             @param maxOverride
+             @since 4.0.0
         </member>
         <member name="M:NPOI.Util.IOUtils.PeekFirst8Bytes(NPOI.Util.InputStream)">
             <summary>
@@ -32219,6 +32569,14 @@
             
             @author Josh Micich
         </member>
+        <member name="M:NPOI.Util.ILittleEndianInput.ReadPlain(System.Byte[],System.Int32,System.Int32)">
+             Usually acts the same as {@link #readFully(byte[], int, int)}, but
+             for an encrypted stream the raw (unencrypted) data is filled 
+            
+             @param buf the byte array to receive the bytes
+             @param off the start offset into the byte array 
+             @param len the amount of bytes to fill
+        </member>
         <member name="T:NPOI.Util.LittleEndianInputStream">
             <summary>
             <para>Wraps an <see cref="T:System.IO.Stream"/> providing <see cref="T:NPOI.Util.ILittleEndianInput"/><p/></para>
@@ -32281,7 +32639,7 @@
         </member>
         <member name="T:NPOI.Util.LittleEndianOutputStream">
             <summary>
-            Wraps an <see cref="T:System.IO.Stream"/> providing <see cref="T:NPOI.Util.ILittleEndianOutput"/>
+            Wraps an <see cref="T:NPOI.Util.FilterOutputStream"/> providing <see cref="T:NPOI.Util.ILittleEndianOutput"/>
             </summary>
             <remarks>@author Josh Micich</remarks>
         </member>
@@ -34635,7 +34993,7 @@
             The color the format Sets, or <tt>null</tt> if the format Sets no color.
             This will always be <tt>null</tt> if {@link #applies} is <tt>false</tt>.
         </member>
-        <member name="M:NPOI.SS.Format.CellFormatResult.#ctor(System.Boolean,System.String,SixLabors.ImageSharp.PixelFormats.Rgb24)">
+        <member name="M:NPOI.SS.Format.CellFormatResult.#ctor(System.Boolean,System.String,SkiaSharp.SKColor)">
              Creates a new format result object.
             
              @param applies   The value for {@link #applies}.
@@ -35338,23 +35696,27 @@
             Be aware that your cell value will be Changed to hold the
              result of the formula. If you simply want the formula
              value computed for you, use {@link #EvaluateFormulaCellEnum(Cell)}}
-            @param cell
+            @param cell The {@code Cell} to evaluate and modify.
             @return the {@code cell} that was passed in, allowing for chained calls
         </member>
         <member name="M:NPOI.SS.Formula.BaseFormulaEvaluator.EvaluateFormulaCell(NPOI.SS.UserModel.ICell)">
-             If cell Contains formula, it Evaluates the formula, and saves the result of the formula. The
-             cell remains as a formula cell. If the cell does not contain formula, this method returns -1
-             and leaves the cell unChanged.
-            
-             Note that the type of the <em>formula result</em> is returned, so you know what kind of
-             cached formula result is also stored with  the formula.
-             <pre>
-             int EvaluatedCellType = Evaluator.EvaluateFormulaCell(cell);
-             </pre>
-             Be aware that your cell will hold both the formula, and the result. If you want the cell
-             Replaced with the result of the formula, use {@link #EvaluateInCell(NPOI.SS.UserModel.Cell)}
-             @param cell The cell to Evaluate
-             @return -1 for non-formula cells, or the type of the <em>formula result</em>
+            If cell contains formula, it evaluates the formula,
+             and saves the result of the formula. The cell
+             remains as a formula cell.
+            Else if cell does not contain formula, this method leaves
+             the cell unchanged.
+            Note that the type of the formula result is returned,
+             so you know what kind of value is also stored with
+             the formula.
+            <pre>
+            CellType evaluatedCellType = evaluator.evaluateFormulaCellEnum(cell);
+            </pre>
+            Be aware that your cell will hold both the formula,
+             and the result. If you want the cell replaced with
+             the result of the formula, use {@link #evaluate(org.apache.poi.ss.usermodel.Cell)} }
+            @param cell The cell to evaluate
+            @return The type of the formula result (the cell's type remains as CellType.FORMULA however)
+                    If cell is not a formula cell, returns {@link CellType#_NONE} rather than throwing an exception.
         </member>
         <member name="M:NPOI.SS.Formula.BaseFormulaEvaluator.EvaluateFormulaCellEnum(NPOI.SS.UserModel.ICell)">
             If cell Contains formula, it Evaluates the formula,
@@ -36478,6 +36840,10 @@
             @see WorkbookEvaluator#clearAllCachedResultValues()
             @see EvaluationWorkbook#clearAllCachedResultValues()
         </member>
+        <member name="P:NPOI.SS.Formula.IEvaluationSheet.LastRowNum">
+            @return last row index referenced on this sheet, for evaluation optimization
+            @since POI 4.0.0
+        </member>
         <member name="T:NPOI.SS.Formula.EvaluationTracker">
             <summary>
             Instances of this class keep track of multiple dependent cell evaluations due
@@ -37248,6 +37614,11 @@
             <b>Note</b> - Excel uses the error code <i>#NUM!</i> instead of IEEE <i>NaN</i>, so when
             numeric functions evaluate to <see cref="F:System.Double.NaN"/> be sure to translate the result to 
             <see cref="F:NPOI.SS.Formula.Eval.ErrorEval.NUM_ERROR"/>. </returns>
+        </member>
+        <member name="T:NPOI.SS.Formula.Functions.IArrayMode">
+            <summary>
+            Interface for those functions that evaluate arguments in array mode depending on context.
+            </summary>
         </member>
         <member name="T:NPOI.SS.Formula.Functions.AverageIf">
              Implementation for the Excel function SUMIF<p>
@@ -38420,8 +38791,8 @@
                 Syntax is IRR(values) or IRR(values,guess)
             </para>
             </summary>
-            <see cref="!:http://en.wikipedia.org/wiki/Internal_rate_of_return#Numerical_solution">Wikipedia on IRR</see>
-            <see cref="!:http://office.microsoft.com/en-us/excel-help/irr-HP005209146.aspx">Excel IRR</see>
+            <see href="http://en.wikipedia.org/wiki/Internal_rate_of_return#Numerical_solution">Wikipedia on IRR</see>
+            <see href="http://office.microsoft.com/en-us/excel-help/irr-HP005209146.aspx">Excel IRR</see>
         </member>
         <member name="M:NPOI.SS.Formula.Functions.Irr.irr(System.Double[])">
              Computes the internal rate of return using an estimated irr of 10 percent.
@@ -38589,7 +38960,7 @@
             	tableArray. For HLOOKUP this Is the first row of the tableArray. 
             @return zero based index into the vector, -1 if value cannot be found
         </member>
-        <member name="M:NPOI.SS.Formula.Functions.LookupUtils.lookupLastIndexOfValue(NPOI.SS.Formula.Functions.LookupValueComparer,NPOI.SS.Formula.Functions.ValueVector,NPOI.SS.Formula.Functions.LookupUtils.MatchMode)">
+        <member name="M:NPOI.SS.Formula.Functions.LookupUtils.LookupLastIndexOfValue(NPOI.SS.Formula.Functions.LookupValueComparer,NPOI.SS.Formula.Functions.ValueVector,NPOI.SS.Formula.Functions.LookupUtils.MatchMode)">
             Finds last (greatest index) matching occurrence of specified value.
             @param lookupComparer the value to be found in column or row vector
             @param vector the values to be searched. For VLOOKUP this is the first column of the
@@ -38601,7 +38972,7 @@
             Excel has funny behaviour when the some elements in the search vector are the wrong type.
             
         </member>
-        <member name="M:NPOI.SS.Formula.Functions.LookupUtils.HandleMidValueTypeMismatch(NPOI.SS.Formula.Functions.LookupValueComparer,NPOI.SS.Formula.Functions.ValueVector,NPOI.SS.Formula.Functions.BinarySearchIndexes,System.Int32)">
+        <member name="M:NPOI.SS.Formula.Functions.LookupUtils.HandleMidValueTypeMismatch(NPOI.SS.Formula.Functions.LookupValueComparer,NPOI.SS.Formula.Functions.ValueVector,NPOI.SS.Formula.Functions.BinarySearchIndexes,System.Int32,System.Boolean)">
             Excel seems to handle mismatched types initially by just stepping 'mid' ix forward to the 
             first compatible value.
             @param midIx 'mid' index (value which has the wrong type)
@@ -39295,6 +39666,11 @@
             Implementation for Excel ROWS function.
             
             @author Josh Micich
+        </member>
+        <member name="T:NPOI.SS.Formula.Functions.Sheet">
+            <summary>
+            Implementation for Excel SHEET() function.
+            </summary>
         </member>
         <member name="T:NPOI.SS.Formula.Functions.Slope">
              Implementation of Excel function SLOPE()<p/>
@@ -41303,9 +41679,6 @@
         <member name="F:NPOI.SS.UserModel.BuiltinFormats.FIRST_USER_DEFINED_FORMAT_INDEX">
             The first user-defined number format starts at 164.
         </member>
-        <member name="M:NPOI.SS.UserModel.BuiltinFormats.GetAll">
-            @return array of built-in data formats
-        </member>
         <member name="M:NPOI.SS.UserModel.BuiltinFormats.GetBuiltinFormat(System.Int32)">
              Get the format string that matches the given format index
             
@@ -41320,6 +41693,107 @@
             </p>
             @param pFmt string matching a built-in format
             @return index of format or -1 if undefined.
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.General">
+            <summary>General format (index 0) - "General"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Integer">
+            <summary>Integer with no decimal places (index 1) - "0"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Decimal2">
+            <summary>Decimal with two decimal places (index 2) - "0.00"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Thousands">
+            <summary>Integer with thousands separator (index 3) - "#,##0"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Currency">
+            <summary>Decimal with thousands separator (index 4) - "#,##0.00"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Accounting">
+            <summary>Currency with parentheses for negatives (index 5) - "$#,##0_);($#,##0)"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.AccountingRed">
+            <summary>Currency red (index 6) - "$#,##0_);[Red]($#,##0)"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.AccountingDecimal">
+            <summary>Currency decimal (index 7) - "$#,##0.00_);($#,##0.00)"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.AccountingDecimalRed">
+            <summary>Currency decimal red (index 8) - "$#,##0.00_);[Red]($#,##0.00)"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Percent">
+            <summary>Percentage no decimals (index 9) - "0%"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Percent2">
+            <summary>Percentage with two decimals (index 10) - "0.00%"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Scientific">
+            <summary>Scientific notation (index 11) - "0.00E+00"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Fraction1">
+            <summary>Fraction one digit (index 12) - "# ?/?"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Fraction2">
+            <summary>Fraction two digits (index 13) - "# ??/??"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.ShortDate">
+            <summary>Short date (index 14) - "m/d/yy"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.LongDate">
+            <summary>Long date (index 15) - "d-mmm-yy"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Date2">
+            <summary>Date (index 16) - "d-mmm"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.MonthYear">
+            <summary>Month year (index 17) - "mmm-yy"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Time12">
+            <summary>Time 12-hour (index 18) - "h:mm AM/PM"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Time12Sec">
+            <summary>Time 12-hour with seconds (index 19) - "h:mm:ss AM/PM"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Time24">
+            <summary>Time 24-hour (index 20) - "h:mm"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Time24Sec">
+            <summary>Time 24-hour with seconds (index 21) - "h:mm:ss"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.DateTime">
+            <summary>Date and time (index 22) - "m/d/yy h:mm"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.ThousandsParens">
+            <summary>Thousands with parentheses (index 37) - "#,##0_);(#,##0)"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.ThousandsParensRed">
+            <summary>Thousands red (index 38) - "#,##0_);[Red](#,##0)"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.DecimalThousandsParens">
+            <summary>Decimal thousands parentheses (index 39) - "#,##0.00_);(#,##0.00)"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.DecimalThousandsParensRed">
+            <summary>Decimal thousands red (index 40) - "#,##0.00_);[Red](#,##0.00)"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.MinutesSeconds">
+            <summary>Minutes seconds (index 41) - "mm:ss"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Hours">
+            <summary>Hours (index 42) - "[h]:mm:ss"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.MinutesSecondsTenths">
+            <summary>Minutes seconds tenths (index 43) - "mm:ss.0"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Scientific1">
+            <summary>Scientific (index 44) - "##0.0E+0"</summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.BuiltinFormats.Text">
+            <summary>Text format (index 45) - "@"</summary>
+        </member>
+        <member name="F:NPOI.SS.UserModel.CellType._None">
+            Unknown type, used to represent a state prior to initialization or the
+            lack of a concrete type.
+            For internal use only.
         </member>
         <member name="T:NPOI.SS.UserModel.ICell">
             High level representation of a cell in a row of a spreadsheet.
@@ -41404,6 +41878,15 @@
              the cell to a numerics cell and set its value.
             </param>
         </member>
+        <member name="M:NPOI.SS.UserModel.ICell.SetCellValue(System.DateOnly)">
+            <summary>
+            Converts the supplied date to its equivalent Excel numeric value and Sets that into the cell.
+            </summary>
+            <param name="value">the numeric value to set this cell to.  For formulas we'll set the
+             precalculated value, for numerics we'll set its value. For other types we will change 
+             the cell to a numerics cell and set its value.
+            </param>
+        </member>
         <member name="M:NPOI.SS.UserModel.ICell.SetCellValue(NPOI.SS.UserModel.IRichTextString)">
             <summary>
             Set a rich string value for the cell.
@@ -41466,6 +41949,16 @@
             <exception cref="T:System.InvalidOperationException">if the cell type returned by GetCellType() is CELL_TYPE_STRING</exception>
             <exception cref="T:System.FormatException">if the cell value isn't a parsable double</exception>
         </member>
+        <member name="P:NPOI.SS.UserModel.ICell.DateOnlyCellValue">
+            <summary>
+            Get DateOnly-type cell value
+            </summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.ICell.TimeOnlyCellValue">
+            <summary>
+            Get TimeOnly-type cell value
+            </summary>
+        </member>
         <member name="P:NPOI.SS.UserModel.ICell.RichStringCellValue">
             <summary>
             Get the value of the cell RichTextString
@@ -41500,9 +41993,9 @@
             use CellUtil#setCellStyleProperties
             </summary>
         </member>
-        <member name="M:NPOI.SS.UserModel.ICell.SetAsActiveCell">
+        <member name="P:NPOI.SS.UserModel.ICell.Style">
             <summary>
-            Sets this cell as the active cell for the worksheet
+            Gets or sets the cell style. Same as <see cref="P:NPOI.SS.UserModel.ICell.CellStyle"/>. Provided for API consistency with IronXL.
             </summary>
         </member>
         <member name="P:NPOI.SS.UserModel.ICell.Address">
@@ -41642,6 +42135,12 @@
             Get the format string
             </summary>
             <returns></returns>
+        </member>
+        <member name="P:NPOI.SS.UserModel.ICellStyle.FormatString">
+            <summary>
+            Gets or sets the number format string for this style.
+            Uses built-in formats like "Accounting0" or custom formats like "#,##0.00"
+            </summary>
         </member>
         <member name="M:NPOI.SS.UserModel.ICellStyle.SetFont(NPOI.SS.UserModel.IFont)">
             <summary>
@@ -41832,576 +42331,6 @@
         </member>
         <member name="P:NPOI.SS.UserModel.CellValue.ErrorValue">
             @return Returns the errorValue.
-        </member>
-        <member name="T:NPOI.SS.UserModel.IChart">
-             High level representation of a chart.
-            
-             @author Roman Kashitsyn
-        </member>
-        <member name="P:NPOI.SS.UserModel.IChart.ChartDataFactory">
-            @return an appropriate ChartDataFactory implementation
-        </member>
-        <member name="P:NPOI.SS.UserModel.IChart.ChartAxisFactory">
-            @return an appropriate ChartAxisFactory implementation
-        </member>
-        <member name="M:NPOI.SS.UserModel.IChart.GetOrCreateLegend">
-            @return chart legend instance
-        </member>
-        <member name="M:NPOI.SS.UserModel.IChart.DeleteLegend">
-            Delete current chart legend.
-        </member>
-        <member name="M:NPOI.SS.UserModel.IChart.GetAxis">
-            @return list of all chart axis
-        </member>
-        <member name="M:NPOI.SS.UserModel.IChart.Plot(NPOI.SS.UserModel.Charts.IChartData,NPOI.SS.UserModel.Charts.IChartAxis[])">
-             Plots specified data on the chart.
-            
-             @param data a data to plot
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.IAreaChartData`2">
-            <summary>
-            Data for an Area Chart
-            </summary>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IAreaChartData`2.AddSeries(NPOI.SS.UserModel.Charts.IChartDataSource{`0},NPOI.SS.UserModel.Charts.IChartDataSource{`1})">
-            <summary>
-            Adds the series.
-            </summary>
-            <param name="categories">The categories data source.</param>
-            <param name="values">The values data source.</param>
-            <returns>Created series.</returns>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IAreaChartData`2.GetSeries">
-            <summary>
-            Return list of all series.
-            </summary>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IAreaChartSeries`2.GetCategoryAxisData">
-            <summary>
-            Return data source used for category axis data.
-            </summary>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IAreaChartSeries`2.GetValues">
-            <summary>
-            Return data source used for value axis.
-            </summary>
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.AxisCrossBetween">
-              Specifies the possible crossing states of an axis.
-            
-             @author Roman Kashitsyn
-        </member>
-        <member name="F:NPOI.SS.UserModel.Charts.AxisCrossBetween.Between">
-            Specifies the value axis shall cross the category axis
-            between data markers.
-        </member>
-        <member name="F:NPOI.SS.UserModel.Charts.AxisCrossBetween.MidpointCategory">
-            Specifies the value axis shall cross the category axis at
-            the midpoint of a category.
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.AxisCrosses">
-             Specifies the possible crossing points for an axis.
-            
-             @author Roman Kashitsyn
-        </member>
-        <member name="F:NPOI.SS.UserModel.Charts.AxisCrosses.AutoZero">
-            The category axis crosses at the zero point of the value axis (if
-            possible), or the minimum value (if the minimum is greater than zero) or
-            the maximum (if the maximum is less than zero).
-        </member>
-        <member name="F:NPOI.SS.UserModel.Charts.AxisCrosses.Min">
-            The axis crosses at the maximum value.
-        </member>
-        <member name="F:NPOI.SS.UserModel.Charts.AxisCrosses.Max">
-            Axis crosses at the minimum value of the chart.
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.AxisOrientation">
-             Specifies the possible ways to place a picture on a data point, series, wall, or floor.
-            
-             @author Roman Kashitsyn
-        </member>
-        <member name="F:NPOI.SS.UserModel.Charts.AxisOrientation.MaxToMin">
-            Specifies that the values on the axis shall be reversed
-            so they go from maximum to minimum.
-        </member>
-        <member name="F:NPOI.SS.UserModel.Charts.AxisOrientation.MinToMax">
-            Specifies that the axis values shall be in the usual
-            order, minimum to maximum.
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.AxisPosition">
-             Enumeration of all possible axis positions.
-            
-             @author Roman Kashitsyn
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.IBarChartData`2">
-            <summary>
-            Data for a Bar Chart
-            </summary>
-            <typeparam name="Tx"></typeparam>
-            <typeparam name="Ty"></typeparam>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IBarChartData`2.AddSeries(NPOI.SS.UserModel.Charts.IChartDataSource{`0},NPOI.SS.UserModel.Charts.IChartDataSource{`1})">
-            <summary>
-            Adds the series.
-            </summary>
-            <param name="categories">The categories data source.</param>
-            <param name="values">The values data source.</param>
-            <returns>Created series.</returns>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IBarChartData`2.GetSeries">
-            @return list of all series.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IBarChartData`2.SetBarGrouping(NPOI.SS.UserModel.Charts.BarGrouping)">
-            <summary>
-            Sets bar grouping
-            </summary>
-            <param name="grouping">The type of bar grouping</param>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IBarChartSeries`2.GetCategoryAxisData">
-            @return data source used for category axis data.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IBarChartSeries`2.GetValues">
-            @return data source used for value axis.
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.IChartAxis">
-             High level representation of chart axis.
-            
-             @author Roman Kashitsyn
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartAxis.Id">
-            @return axis id
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartAxis.Position">
-            get or set axis position
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartAxis.NumberFormat">
-            get or set axis number format
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartAxis.IsSetLogBase">
-            @return true if log base is defined, false otherwise
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartAxis.LogBase">
-            @param logBase a number between 2 and 1000 (inclusive)
-            @return axis log base or 0.0 if not Set
-            @throws ArgumentException if log base not within allowed range
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartAxis.IsSetMinimum">
-            @return true if minimum value is defined, false otherwise
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartAxis.Minimum">
-            get or set axis minimum 
-            0.0 if not Set
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartAxis.IsSetMaximum">
-            @return true if maximum value is defined, false otherwise
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartAxis.Maximum">
-            get or set axis maximum 
-            0.0 if not Set
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartAxis.Orientation">
-            get or set axis orientation
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartAxis.Crosses">
-            get or set axis cross type
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IChartAxis.CrossAxis(NPOI.SS.UserModel.Charts.IChartAxis)">
-            Declare this axis cross another axis.
-            @param axis that this axis should cross
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartAxis.IsVisible">
-            @return visibility of the axis.
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartAxis.MajorTickMark">
-            @return major tick mark.
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartAxis.MinorTickMark">
-            @return minor tick mark.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IChartAxis.HasNumberFormat">
-            <summary>
-            Use this to check before retrieving a number format, as calling {@link #getNumberFormat()} may create a default one if none exists.
-            </summary>
-            <returns>return true if a number format element is defined, false if not</returns>
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.IChartAxisFactory">
-            <summary>
-            A factory for different chart axis.
-            </summary>
-            <remarks>@author Roman Kashitsyn</remarks>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IChartAxisFactory.CreateValueAxis(NPOI.SS.UserModel.Charts.AxisPosition)">
-            <summary>
-            create new value axis at the end of the list at the specified chart position.
-            </summary>
-            <param name="pos"></param>
-            <returns></returns>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IChartAxisFactory.CreateCategoryAxis(NPOI.SS.UserModel.Charts.AxisPosition)">
-            <summary>
-            create new category axis at the end of the list at the specified chart position.
-            </summary>
-            <param name="pos"></param>
-            <returns></returns>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IChartAxisFactory.CreateDateAxis(NPOI.SS.UserModel.Charts.AxisPosition)">
-            <summary>
-            create new date category axis at the end of the list at the specified chart position.
-            </summary>
-            <param name="pos"></param>
-            <returns></returns>
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.IChartData">
-            <summary>
-            A base for all chart data types.
-            </summary>
-            <remarks>
-            @author  Roman Kashitsyn
-            </remarks>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IChartData.FillChart(NPOI.SS.UserModel.IChart,NPOI.SS.UserModel.Charts.IChartAxis[])">
-            <summary>
-            Fills a chart with data specified by implementation.
-            </summary>
-            <param name="chart">a chart to fill in</param>
-            <param name="axis">chart axis to use</param>
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.IChartDataFactory">
-            <summary>
-            A factory for different chart data types.
-            </summary>
-            <remarks>
-            @author Roman Kashitsyn
-            </remarks>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IChartDataFactory.CreateScatterChartData``2">
-            <summary>
-            returns an appropriate ScatterChartData instance
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartDataSource`1.PointCount">
-             Return number of points contained by data source.
-            
-             @return number of points contained by data source
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IChartDataSource`1.GetPointAt(System.Int32)">
-             Returns point value at specified index.
-            
-             @param index index to value from
-             @return point value at specified index.
-             @throws {@code IndexOutOfBoundsException} if index
-                            parameter not in range {@code 0 &lt;= index &lt;= pointCount}
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartDataSource`1.IsReference">
-             Returns {@code true} if charts data source is valid cell range.
-            
-             @return {@code true} if charts data source is valid cell range
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartDataSource`1.IsNumeric">
-             Returns {@code true} if data source points should be treated as numbers.
-            
-             @return {@code true} if data source points should be treated as numbers
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartDataSource`1.FormulaString">
-             Returns formula representation of the data source. It is only applicable
-             for data source that is valid cell range.
-            
-             @return formula representation of the data source
-             @throws {@code UnsupportedOperationException} if the data source is not a
-                            reference.
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.IChartLegend">
-            <summary>
-            High level representation of chart legend.
-            </summary>
-            <remarks>@author Roman Kashitsyn</remarks>
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartLegend.Position">
-            <summary>
-            legend position
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:NPOI.SS.UserModel.Charts.IChartLegend.IsOverlay">
-            <summary>
-            If true the legend is positioned over the chart area otherwise
-            the legend is displayed next to it.
-            Default is no overlay.
-            </summary>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IChartSeries.SetTitle(System.String)">
-             Sets the title of the series as a string literal.
-            
-             @param title
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IChartSeries.SetTitle(NPOI.SS.Util.CellReference)">
-             Sets the title of the series as a cell reference.
-            
-             @param titleReference
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IChartSeries.GetTitleString">
-            @return title as string literal.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IChartSeries.GetTitleCellReference">
-            @return title as cell reference.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IChartSeries.GetTitleType">
-            @return title type.
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.IColumnChartData`2">
-            <summary>
-            Data for a Column Chart
-            </summary>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IColumnChartData`2.AddSeries(NPOI.SS.UserModel.Charts.IChartDataSource{`0},NPOI.SS.UserModel.Charts.IChartDataSource{`1})">
-            <summary>
-            Adds the series.
-            </summary>
-            <param name="categories">The categories data source.</param>
-            <param name="values">The values data source.</param>
-            <returns>Created series.</returns>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IColumnChartData`2.GetSeries">
-            <summary>
-            Returns list of all series.
-            </summary>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IColumnChartData`2.SetBarGrouping(NPOI.SS.UserModel.Charts.BarGrouping)">
-            <summary>
-            Sets bar grouping
-            </summary>
-            <param name="grouping">The type of bar grouping</param>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IColumnChartSeries`2.GetCategoryAxisData">
-            <summary>
-            Return data source used for category axis data.
-            </summary>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IColumnChartSeries`2.GetValues">
-            <summary>
-            Return data source used for value axis.
-            </summary>
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.LayoutMode">
-            <summary>
-            Specifies the possible ways to store a chart element's position.
-            </summary>
-            <remarks>
-            @author Roman Kashitsyn
-            </remarks>
-        </member>
-        <member name="F:NPOI.SS.UserModel.Charts.LayoutMode.Edge">
-            <summary>
-            Specifies that the Width or Height shall be interpreted as the Right or Bottom of the chart element.
-            </summary>
-        </member>
-        <member name="F:NPOI.SS.UserModel.Charts.LayoutMode.Factor">
-            <summary>
-            Specifies that the Width or Height shall be interpreted as the width or Height of the chart element.
-            </summary>
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.LayoutTarget">
-            <summary>
-            Specifies whether to layout the plot area by its inside (not including axis
-            and axis labels) or outside (including axis and axis labels).
-            </summary>
-            <remarks>
-            @author Roman Kashitsyn
-            </remarks>
-        </member>
-        <member name="F:NPOI.SS.UserModel.Charts.LayoutTarget.Inner">
-            <summary>
-            Specifies that the plot area size shall determine the size of the plot area, not including the tick marks and axis labels.
-            </summary>
-        </member>
-        <member name="F:NPOI.SS.UserModel.Charts.LayoutTarget.Outer">
-             <summary>
-            Specifies that the plot area size shall determine the
-            size of the plot area, the tick marks, and the axis
-            labels.
-             </summary>
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.LegendPosition">
-            <summary>
-            Enumeration of all possible chart legend positions.
-            </summary>
-             <remarks>
-             @author Roman Kashitsyn
-             </remarks>
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.ILineChartData`2">
-            <summary>
-            Data for a Line Chart
-            </summary>
-            <typeparam name="Tx"></typeparam>
-            <typeparam name="Ty"></typeparam>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.ILineChartData`2.GetSeries">
-            @return list of all series.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.ILineChartSeries`2.GetCategoryAxisData">
-            @return data source used for category axis data.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.ILineChartSeries`2.GetValues">
-            @return data source used for value axis.
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.IManualLayout">
-             High level representation of chart element manual layout.
-            
-             @author Roman Kashitsyn
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.SetTarget(NPOI.SS.UserModel.Charts.LayoutTarget)">
-            Sets the layout target.
-            @param target new layout target.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.GetTarget">
-            Returns current layout target.
-            @return current layout target
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.SetXMode(NPOI.SS.UserModel.Charts.LayoutMode)">
-            Sets the x-coordinate layout mode.
-            @param mode new x-coordinate layout mode.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.GetXMode">
-            Returns current x-coordinnate layout mode.
-            @return current x-coordinate layout mode.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.SetYMode(NPOI.SS.UserModel.Charts.LayoutMode)">
-            Sets the y-coordinate layout mode.
-            @param mode new y-coordinate layout mode.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.GetYMode">
-            Returns current y-coordinate layout mode.
-            @return current y-coordinate layout mode.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.GetX">
-            Returns the x location of the chart element.
-            @return the x location (left) of the chart element or 0.0 if
-                    not Set.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.SetX(System.Double)">
-            Specifies the x location (left) of the chart element as a
-            fraction of the width of the chart. If Left Mode is Factor,
-            then the position is relative to the default position for the
-            chart element.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.GetY">
-            Returns current y location of the chart element.
-            @return the y location (top) of the chart element or 0.0 if not
-                    Set.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.SetY(System.Double)">
-            Specifies the y location (top) of the chart element as a
-            fraction of the height of the chart. If Top Mode is Factor,
-            then the position is relative to the default position for the
-            chart element.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.SetWidthMode(NPOI.SS.UserModel.Charts.LayoutMode)">
-            Specifies how to interpret the Width element for this manual
-            layout.
-            @param mode new width layout mode of this manual layout.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.GetWidthMode">
-            Returns current width mode of this manual layout.
-            @return width mode of this manual layout.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.SetHeightMode(NPOI.SS.UserModel.Charts.LayoutMode)">
-            Specifies how to interpret the Height element for this manual
-            layout.
-            @param mode new height mode of this manual layout.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.GetHeightMode">
-            Returns current height mode of this 
-            @return height mode of this manual layout.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.SetWidthRatio(System.Double)">
-            Specifies the width (if Width Mode is Factor) or right (if
-            Width Mode is Edge) of the chart element as a fraction of the
-            width of the chart.
-            @param ratio a fraction of the width of the chart.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.GetWidthRatio">
-            Returns current fraction of the width of the chart.
-            @return fraction of the width of the chart or 0.0 if not Set.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.SetHeightRatio(System.Double)">
-            Specifies the height (if Height Mode is Factor) or bottom (if
-            Height Mode is edge) of the chart element as a fraction of the
-            height of the chart.
-            @param ratio a fraction of the height of the chart.
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IManualLayout.GetHeightRatio">
-            Returns current fraction of the height of the chart.
-            @return fraction of the height of the chart or 0.0 if not Set.
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.ManuallyPositionable">
-             Abstraction of chart element that can be positioned with manual
-             layout.
-            
-             @author Roman Kashitsyn
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.ManuallyPositionable.GetManualLayout">
-            Returns manual layout for the chart element.
-            @return manual layout for the chart element.
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.IPieChartData`2">
-            <summary>
-            Data for a Pie Chart
-            </summary>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IPieChartData`2.AddSeries(NPOI.SS.UserModel.Charts.IChartDataSource{`0},NPOI.SS.UserModel.Charts.IChartDataSource{`1})">
-            <summary>
-            Adds the series.
-            </summary>
-            <param name="categories">The categories data source.</param>
-            <param name="values">The values data source.</param>
-            <returns>Created series.</returns>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IPieChartData`2.GetSeries">
-            <summary>
-            Return list of all series.
-            </summary>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IPieChartSeries`2.GetCategoryAxisData">
-            <summary>
-            Return data source used for category axis data.
-            </summary>
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IPieChartSeries`2.GetValues">
-            <summary>
-            Return data source used for value axis.
-            </summary>
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.IScatterChartData`2">
-            Data for a Scatter Chart
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IScatterChartData`2.AddSeries(NPOI.SS.UserModel.Charts.IChartDataSource{`0},NPOI.SS.UserModel.Charts.IChartDataSource{`1})">
-            @param xs data source to be used for X axis values
-            @param ys data source to be used for Y axis values
-            @return a new scatter charts series
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IScatterChartData`2.GetSeries">
-            @return list of all series
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.IScatterChartSeries`2">
-            Represents scatter charts serie.
-            @author Roman Kashitsyn
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IScatterChartSeries`2.GetXValues">
-            @return data source used for X axis values
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IScatterChartSeries`2.GetYValues">
-            @return data source used for Y axis values
-        </member>
-        <member name="T:NPOI.SS.UserModel.Charts.IValueAxis">
-            @author Roman Kashitsyn
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IValueAxis.GetCrossBetween">
-            @return cross between type
-        </member>
-        <member name="M:NPOI.SS.UserModel.Charts.IValueAxis.SetCrossBetween(NPOI.SS.UserModel.Charts.AxisCrossBetween)">
-            @param crossBetween cross between type
         </member>
         <member name="F:NPOI.SS.UserModel.AnchorType.MoveAndResize">
             <summary>
@@ -43011,7 +42940,7 @@
             true if conditional formatting rule processing stops when this one is true, false if not
             </para>
             </summary>
-            <see cref="!:https://support.office.com/en-us/article/Manage-conditional-formatting-rule-precedence-063cde21-516e-45ca-83f5-8e8126076249" /> Microsoft Excel help
+            <see href="https://support.office.com/en-us/article/Manage-conditional-formatting-rule-precedence-063cde21-516e-45ca-83f5-8e8126076249">Microsoft Excel help</see>
         </member>
         <member name="P:NPOI.SS.UserModel.IConditionalFormattingRule.NumberFormat">
             <summary>
@@ -43674,6 +43603,15 @@
             <param name="use1904windowing">Should 1900 or 1904 date windowing be used?</param>
             <returns>Excel representation of Date (-1 if error - test for error by Checking for less than 0.1)</returns>
         </member>
+        <member name="M:NPOI.SS.UserModel.DateUtil.GetExcelDate(System.DateOnly,System.Boolean)">
+            <summary>
+            Given a Date, Converts it into a double representing its internal Excel representation,
+            which Is the number of days since 1/1/1900. Fractional days represent hours, minutes, and seconds.
+            </summary>
+            <param name="date">The date.</param>
+            <param name="use1904windowing">Should 1900 or 1904 date windowing be used?</param>
+            <returns>Excel representation of Date (-1 if error - test for error by Checking for less than 0.1)</returns>
+        </member>
         <member name="M:NPOI.SS.UserModel.DateUtil.GetJavaDate(System.Double)">
             <summary>
              Given an Excel date with using 1900 date windowing, and converts it to a java.util.Date.
@@ -43966,15 +43904,6 @@
             to the sheet.
             </param>
             <return>the newly created comment.</return>
-        </member>
-        <member name="M:NPOI.SS.UserModel.IDrawing`1.CreateChart(NPOI.SS.UserModel.IClientAnchor)">
-            <summary>
-            Creates a chart.
-            </summary>
-            <param name="anchor">the client anchor describes how this chart is attached to
-            the sheet.
-            </param>
-            <return>the newly created chart</return>
         </member>
         <member name="M:NPOI.SS.UserModel.IDrawing`1.CreateAnchor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
@@ -45152,6 +45081,12 @@
             
              @param value <c>true</c> indicates the name refers to a function.
         </member>
+        <member name="M:NPOI.SS.UserModel.NCellRange.SetActive">
+            <summary>
+            Set this cell range as active
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:NPOI.SS.UserModel.PageOrder">
              Specifies printed page order.
             
@@ -45960,12 +45895,6 @@
             if you care which one it is.
             </returns>
         </member>
-        <member name="M:NPOI.SS.UserModel.ISheet.GetEnumerator">
-            <summary>
-            Get the row enumerator
-            </summary>
-            <returns></returns>
-        </member>
         <member name="P:NPOI.SS.UserModel.ISheet.DisplayZeros">
             <summary>
             Gets the flag indicating whether the window should show 0 (zero) in cells Containing zero value.
@@ -46343,18 +46272,27 @@
             processing.
             </remarks>
         </member>
-        <member name="M:NPOI.SS.UserModel.ISheet.AutoSizeColumn(System.Int32,System.Boolean)">
+        <member name="M:NPOI.SS.UserModel.ISheet.AutoSizeColumn(System.Int32,System.Boolean,System.Int32)">
             <summary>
             Adjusts the column width to fit the contents.
-            </summary>
-            <param name="column">the column index.</param>
-            <param name="useMergedCells">whether to use the contents of merged cells when 
-            calculating the width of the column. Default is to ignore merged cells.</param>
-            <remarks>
             This process can be relatively slow on large sheets, so this should
             normally only be called once per column, at the end of your
-            processing.
-            </remarks>
+            Processing.
+            You can specify whether the content of merged cells should be considered or ignored.
+            Default is to ignore merged cells.
+            </summary>
+            <param name="column">the column index</param>
+            <param name="useMergedCells">whether to use the contents of merged cells when calculating the width of the column</param>
+            <param name="maxRows">limit the scope to maxRows rows to speed up the function, or leave 0 (optional)</param>
+        </member>
+        <member name="M:NPOI.SS.UserModel.ISheet.AutoSizeColumn(System.Int32,System.Int32)">
+            <summary>
+            Adjusts the column width to fit the contents, sampling only the first <paramref name="maxRows"/> rows.
+            This is significantly faster than scanning the entire sheet on large datasets.
+            Merged cells are ignored. Use <see cref="M:NPOI.SS.UserModel.ISheet.AutoSizeColumn(System.Int32,System.Boolean,System.Int32)"/> to include them.
+            </summary>
+            <param name="column">the column index</param>
+            <param name="maxRows">maximum number of rows to sample (0 = all rows)</param>
         </member>
         <member name="M:NPOI.SS.UserModel.ISheet.AutoSizeRow(System.Int32)">
             <summary>
@@ -46564,6 +46502,21 @@
             <summary>
             get or set location of the active cell, e.g. <code>A1</code>.
             </summary>
+        </member>
+        <member name="P:NPOI.SS.UserModel.ISheet.Item(System.String)">
+            <summary>
+            Gets a cell or range of cells by address string (e.g., "A1" or "A1:C10")
+            </summary>
+            <param name="address">Cell address (e.g., "A1" or "A1:C10")</param>
+            <returns>NCellRange containing the specified cell(s)</returns>
+        </member>
+        <member name="M:NPOI.SS.UserModel.ISheet.ToDataTable(System.Boolean,System.Boolean)">
+            <summary>
+             Convert a sheet to a DataTable. Note that merged cells are not supported
+            </summary>
+            <param name="firstRowAsHeader">whether first row is column header</param>
+            <param name="showCalculatedValue">whether to show evaluated value of a formula in the cell</param>
+            <returns></returns>
         </member>
         <member name="T:NPOI.SS.UserModel.ISheetConditionalFormatting">
              The 'Conditional Formatting' facet of <c>Sheet</c>
@@ -47380,6 +47333,13 @@
             <return>the index of the added ole object, i.e. the storage id</return>
             <exception cref="T:System.IO.IOException">if the object can't be embedded</exception>
         </member>
+        <member name="P:NPOI.SS.UserModel.IWorkbook.Item(System.String)">
+            <summary>
+            Gets a sheet by name
+            </summary>
+            <param name="name">The sheet name</param>
+            <returns>The sheet or null if not found</returns>
+        </member>
         <member name="F:NPOI.SS.Util.AreaReference.SHEET_NAME_DELIMITER">
             The Char (!) that Separates sheet names from cell references 
         </member>
@@ -47389,13 +47349,116 @@
         <member name="F:NPOI.SS.Util.AreaReference.SPECIAL_NAME_DELIMITER">
             The Char (') used to quote sheet names when they contain special Chars 
         </member>
+        <member name="F:NPOI.SS.Util.AreaReference.ROW_INDEX_NOT_SPECIFIED">
+            Sentinel row index meaning "the caller did not supply one". Structured references that
+            resolve relative to a row ([#This Row], @) reject this with an explicit error rather than
+            silently resolving against row 0.
+        </member>
         <member name="M:NPOI.SS.Util.AreaReference.#ctor(System.String,NPOI.SS.SpreadsheetVersion)">
             Create an area ref from a string representation.  Sheet names containing special Chars should be
-            delimited and escaped as per normal syntax rules for formulas.<br/> 
+            delimited and escaped as per normal syntax rules for formulas.<br/>
             The area reference must be contiguous (i.e. represent a single rectangle, not a Union of rectangles)
+        </member>
+        <member name="M:NPOI.SS.Util.AreaReference.#ctor(System.String,NPOI.SS.SpreadsheetVersion,NPOI.SS.Formula.IFormulaParsingWorkbook,System.Int32)">
+            <summary>
+            Creates an area reference from a string that may be either a standard cell reference
+            (e.g., <c>Sheet1!A1:B5</c>) or a structured table reference (e.g., <c>Table1[#Headers]</c>).
+            When <paramref name="workbook"/> is provided, structured table references are resolved
+            automatically against the workbook's table definitions.
+            </summary>
+            <remarks>
+            <para>
+            Structured reference resolution creates a <see cref="T:NPOI.SS.Formula.FormulaParser"/> instance internally.
+            This is fine for typical named-range resolution, but callers resolving thousands of
+            references in a tight loop may want to cache results.
+            </para>
+            <para>
+            <paramref name="version"/> is not consulted when resolving a structured reference — the
+            spreadsheet version is taken from <paramref name="workbook"/> in that case, and structured
+            references are only supported for <see cref="F:NPOI.SS.SpreadsheetVersion.EXCEL2007"/>. Callers that
+            know they are resolving a structured reference should prefer
+            <see cref="M:NPOI.SS.Util.AreaReference.FromStructuredReference(System.String,NPOI.SS.Formula.IFormulaParsingWorkbook,System.Int32)"/>, which derives
+            the version from the workbook and rejects non-structured input outright.
+            </para>
+            </remarks>
+            <param name="reference">The reference string to parse.</param>
+            <param name="version">
+            The spreadsheet version for cell reference validation. Ignored when
+            <paramref name="reference"/> is resolved as a structured table reference (see remarks).
+            </param>
+            <param name="workbook">
+            The formula parsing workbook used to resolve structured table references.
+            Use <c>XSSFEvaluationWorkbook.Create(workbook)</c> to obtain this from an <c>XSSFWorkbook</c>.
+            Pass <c>null</c> if structured references are not expected.
+            </param>
+            <param name="rowIndex">
+            The 0-based row index of the cell containing the reference. Required only for
+            <c>[#This Row]</c> or <c>@</c> specifiers, which resolve relative to it. Leave at the
+            default (<c>-1</c>, meaning "not specified") otherwise: a row-relative reference then
+            fails with an explicit <see cref="T:NPOI.SS.Formula.FormulaParseException"/> rather than silently
+            resolving against an unintended row.
+            </param>
+            <exception cref="T:NPOI.SS.Formula.FormulaParseException">
+            The structured reference syntax is malformed, names a table that does not exist in the
+            workbook, names a column the table does not have, uses <c>[#This Row]</c> or <c>@</c>
+            without a <paramref name="rowIndex"/>, or targets a workbook that is not
+            <see cref="F:NPOI.SS.SpreadsheetVersion.EXCEL2007"/>.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            The structured reference is syntactically valid but does not designate a single area, so
+            there is no range to return. In a formula this would evaluate to an Excel error value
+            instead. The common causes are <c>[#Totals]</c> on a table with no totals row (<c>#REF!</c>)
+            and <c>[#This Row]</c> or <c>@</c> with a <paramref name="rowIndex"/> outside the table's
+            row range (<c>#VALUE!</c>).
+            </exception>
         </member>
         <member name="M:NPOI.SS.Util.AreaReference.#ctor(NPOI.SS.Util.CellReference,NPOI.SS.Util.CellReference)">
             Creates an area ref from a pair of Cell References.
+        </member>
+        <member name="M:NPOI.SS.Util.AreaReference.FromStructuredReference(System.String,NPOI.SS.Formula.IFormulaParsingWorkbook,System.Int32)">
+            <summary>
+            Resolves an Excel structured table reference (e.g., <c>Table1[#Headers]</c>,
+            <c>Table1[[#Data],[Column1]]</c>) to a concrete cell range against the given workbook's
+            table definitions.
+            </summary>
+            <remarks>
+            This is the explicit counterpart to
+            <see cref="M:NPOI.SS.Util.AreaReference.#ctor(System.String,NPOI.SS.SpreadsheetVersion,NPOI.SS.Formula.IFormulaParsingWorkbook,System.Int32)"/>:
+            it derives the spreadsheet version from <paramref name="workbook"/> rather than taking a
+            version that would be ignored, and it rejects non-structured input instead of silently
+            falling back to A1-style parsing. Use the constructor when a reference may be either form
+            (e.g. resolving a named range whose <c>RefersToFormula</c> is not known in advance).
+            </remarks>
+            <param name="reference">The structured table reference to resolve.</param>
+            <param name="workbook">
+            The formula parsing workbook holding the table definitions. Obtain one from an
+            <c>XSSFWorkbook</c> via <c>XSSFEvaluationWorkbook.Create(workbook)</c>.
+            </param>
+            <param name="rowIndex">
+            The 0-based row index the reference appears on. Required only for <c>[#This Row]</c> or
+            <c>@</c> specifiers; leave at the default otherwise.
+            </param>
+            <returns>The resolved area.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="reference"/> or <paramref name="workbook"/> is <c>null</c>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            <paramref name="reference"/> is not a structured table reference.
+            </exception>
+            <exception cref="T:NPOI.SS.Formula.FormulaParseException">
+            As documented on <see cref="M:NPOI.SS.Util.AreaReference.#ctor(System.String,NPOI.SS.SpreadsheetVersion,NPOI.SS.Formula.IFormulaParsingWorkbook,System.Int32)"/>.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            As documented on <see cref="M:NPOI.SS.Util.AreaReference.#ctor(System.String,NPOI.SS.SpreadsheetVersion,NPOI.SS.Formula.IFormulaParsingWorkbook,System.Int32)"/>.
+            </exception>
+        </member>
+        <member name="M:NPOI.SS.Util.AreaReference.IsStructuredReference(System.String)">
+            <summary>
+            Returns <c>true</c> if the given reference string uses Excel structured table reference
+            syntax (e.g., <c>Table1[#Headers]</c>, <c>Table1[[#Data],[Column1]]</c>).
+            </summary>
+            <param name="reference">The reference string to test.</param>
+            <returns><c>true</c> if the reference is a structured table reference; otherwise <c>false</c>.</returns>
         </member>
         <member name="M:NPOI.SS.Util.AreaReference.IsContiguous(System.String)">
             is the reference for a contiguous (i.e.
@@ -47561,6 +47624,61 @@
             Runs a bounds check for column numbers
             @param column
         </member>
+        <member name="M:NPOI.SS.Util.CellRangeAddressBase.IsInRange(System.Int32,System.Int32)">
+            <summary>
+            Determines if the given coordinates lie within the bounds
+            of this range.
+            </summary>
+            <param name="rowInd">The row, 0-based.</param>
+            <param name="colInd">The column, 0-based.</param>
+            <returns>True if the coordinates lie within the bounds, false otherwise.</returns>
+            @see #intersects(CellRangeAddressBase) for checking if two ranges overlap
+        </member>
+        <member name="M:NPOI.SS.Util.CellRangeAddressBase.IsInRange(NPOI.SS.Util.CellReference)">
+            <summary>
+            <para>
+            Determines if the given <see cref="T:NPOI.SS.Util.CellReference"/> lies within the bounds
+            of this range.
+            </para>
+            <para>
+            NOTE: It is up to the caller to ensure the reference is
+            for the correct sheet, since this instance doesn't have a sheet reference.
+            </para>
+            </summary>
+            <param name="reference">the CellReference to check</param>
+            <returns>True if the reference lies within the bounds, false otherwise.</returns>
+            @see #intersects(CellRangeAddressBase) for checking if two ranges overlap
+        </member>
+        <member name="M:NPOI.SS.Util.CellRangeAddressBase.IsInRange(NPOI.SS.Util.CellAddress)">
+            <summary>
+            <para>
+            Determines if the given <see cref="T:NPOI.SS.Util.CellAddress"/> lies within the bounds
+            of this range.
+            </para>
+            <para>
+            NOTE: It is up to the caller to ensure the reference is
+            for the correct sheet, since this instance doesn't have a sheet reference.
+            </para>
+            </summary>
+            <param name="ref">the CellAddress to check</param>
+            <returns>True if the reference lies within the bounds, false otherwise.</returns>
+            @see #intersects(CellRangeAddressBase) for checking if two ranges overlap
+        </member>
+        <member name="M:NPOI.SS.Util.CellRangeAddressBase.IsInRange(NPOI.SS.UserModel.ICell)">
+            <summary>
+            <para>
+            Determines if the given <see cref="!:Cell"/> lies within the bounds
+            of this range.
+            </para>
+            <para>
+            NOTE: It is up to the caller to ensure the reference is
+            for the correct sheet, since this instance doesn't have a sheet reference.
+            </para>
+            </summary>
+            <param name="cell">the Cell to check</param>
+            <returns>True if the cell lies within the bounds, false otherwise.</returns>
+            @see #intersects(CellRangeAddressBase) for checking if two ranges overlap
+        </member>
         <member name="M:NPOI.SS.Util.CellRangeAddressBase.ContainsRow(System.Int32)">
              Check if the row is in the specified cell range
             
@@ -47605,6 +47723,12 @@
         </member>
         <member name="P:NPOI.SS.Util.CellRangeAddressBase.NumberOfCells">
             @return the size of the range (number of cells in the area).
+        </member>
+        <member name="M:NPOI.SS.Util.CellRangeAddressBase.GetEnumerator">
+            <summary>
+            Returns an enumerator over the CellAddresses in this cell range in row-major order.
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:NPOI.SS.Util.CellPosition">
             <summary>
@@ -47883,6 +48007,13 @@
             
             @author Eric Pugh epugh@upstate.com
             @author (secondary) Avinash Kewalramani akewalramani@accelrys.com
+        </member>
+        <member name="P:NPOI.SS.Util.CellUtil.UseStyleCache">
+            <summary>
+            Controls whether the per-workbook style cache is used in
+            <see cref="M:NPOI.SS.Util.CellUtil.SetCellStyleProperties(NPOI.SS.UserModel.ICell,System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean)"/>.  Defaults to <c>true</c>.
+            Set to <c>false</c> for benchmarking or diagnostic purposes only.
+            </summary>
         </member>
         <member name="M:NPOI.SS.Util.CellUtil.GetRow(System.Int32,NPOI.SS.UserModel.ISheet)">
              Get a row from the spreadsheet, and create it if it doesn't exist.
@@ -48257,13 +48388,15 @@
             
              @return image dimension in pixels
         </member>
-        <member name="M:NPOI.SS.Util.ImageUtils.GetResolution(SixLabors.ImageSharp.Image)">
-             The metadata of PNG and JPEG can contain the width of a pixel in millimeters.
-             Return the the "effective" dpi calculated as <code>25.4/HorizontalPixelSize</code>
-             and <code>25.4/VerticalPixelSize</code>.  Where 25.4 is the number of mm in inch.
+        <member name="M:NPOI.SS.Util.ImageUtils.GetResolutionFromBytes(System.Byte[])">
+             Extract the DPI resolution from raw image bytes.
+             Supports JPEG (JFIF) and PNG (pHYs chunk).
             
-             @return array of two elements: <code>{horisontalPdi, verticalDpi}</code>.
-             {96, 96} is the default.
+             @return array of two elements: <code>{horizontalDpi, verticalDpi}</code>.
+             {0, 0} is returned when DPI cannot be determined.
+        </member>
+        <member name="M:NPOI.SS.Util.ImageUtils.GetResolution(SkiaSharp.SKBitmap)">
+            @deprecated Use {@link #GetResolutionFromBytes(byte[])} instead.
         </member>
         <member name="M:NPOI.SS.Util.ImageUtils.SetPreferredSize(NPOI.SS.UserModel.IPicture,System.Double,System.Double)">
              Calculate and Set the preferred size (anchor) for this picture.
@@ -48404,6 +48537,12 @@
             Note - the results from this method differ slightly from those of <c>Double.ToString()</c>
             In some special cases Excel behaves quite differently.  This function attempts to reproduce
             those results.
+        </member>
+        <member name="M:NPOI.SS.Util.NumberToTextConverter.ToText(System.Double,System.Globalization.CultureInfo)">
+            <summary>
+            Converts the supplied <c>value</c> to the text representation that Excel would give if
+            the value were to appear in an unformatted cell, using the supplied locale for the decimal separator.
+            </summary>
         </member>
         <member name="T:NPOI.SS.Util.PaneInformation">
              Holds information regarding a split plane or freeze plane for a sheet.
@@ -48931,6 +49070,13 @@
              @param useMergedCells    whether to use merged cells
              @return  the width in pixels or -1 if cell is empty
         </member>
+        <member name="M:NPOI.SS.Util.SheetUtil.MeasureCellWidth(NPOI.SS.UserModel.ICell,System.Int32,NPOI.SS.UserModel.DataFormatter,System.Int32,SkiaSharp.SKFont)">
+            <summary>
+            Shared cell measurement logic used by both the public GetCellWidth and the
+            optimized internal overload. Handles cell type resolution, text extraction,
+            and width calculation via the provided SKFont.
+            </summary>
+        </member>
         <member name="M:NPOI.SS.Util.SheetUtil.GetColumnWidth(NPOI.SS.UserModel.ISheet,System.Int32,System.Boolean,System.Int32)">
              Compute width of a column and return the result
             
@@ -48968,6 +49114,18 @@
              @param useMergedCells    whether to use merged cells
              @return  the width in pixels or -1 if cell is empty
         </member>
+        <member name="M:NPOI.SS.Util.SheetUtil.GetColumnWidthForRow(NPOI.SS.UserModel.IRow,System.Int32,System.Int32,NPOI.SS.UserModel.DataFormatter,System.Boolean,System.Collections.Generic.Dictionary{System.Int32,NPOI.SS.Util.CellRangeAddress},System.Collections.Generic.Dictionary{System.Int32,SkiaSharp.SKFont})">
+            <summary>
+            Optimized overload that uses a merged region spatial index and font cache
+            to avoid per-cell overhead when iterating many rows.
+            </summary>
+        </member>
+        <member name="M:NPOI.SS.Util.SheetUtil.GetCellWidth(NPOI.SS.UserModel.ICell,System.Int32,NPOI.SS.UserModel.DataFormatter,System.Boolean,System.Collections.Generic.Dictionary{System.Int32,NPOI.SS.Util.CellRangeAddress},System.Collections.Generic.Dictionary{System.Int32,SkiaSharp.SKFont})">
+            <summary>
+            Optimized overload that uses a spatial index for O(1) merged region lookup
+            and cached SKFont objects. Called from GetColumnWidth to avoid per-cell overhead.
+            </summary>
+        </member>
         <member name="M:NPOI.SS.Util.SheetUtil.CanComputeColumnWidth(NPOI.SS.UserModel.IFont)">
              Check if the Fonts are installed correctly so that Java can compute the size of
              columns. 
@@ -48983,12 +49141,12 @@
         <!-- Badly formed XML comment ignored for member "M:NPOI.SS.Util.SheetUtil.GetCell(NPOI.SS.UserModel.ISheet,System.Int32,System.Int32)" -->
         <member name="M:NPOI.SS.Util.SheetUtil.IFont2Font(NPOI.SS.UserModel.IFont)">
             <summary>
-            Convert HSSFFont to Font.
+            Convert an NPOI IFont to an SkiaSharp SKFont for text measurement.
+            The returned SKFont has its size set in pixels at 96 DPI (i.e. pointSize * 96 / 72).
+            Callers are responsible for disposing the returned SKFont.
             </summary>
-            <param name="font1">The font.</param>
-            <returns></returns>
-            <exception cref="T:SixLabors.Fonts.FontException">Will throw this if no font are 
-            found by SixLabors in the current environment.</exception>
+            <param name="font1">The NPOI font descriptor.</param>
+            <returns>An <see cref="T:SkiaSharp.SKFont"/> ready for text measurement.</returns>
         </member>
         <member name="M:NPOI.SS.Util.SheetUtil.ContainsCell(NPOI.SS.Util.CellRangeAddress,System.Int32,System.Int32)">
             <summary>
@@ -49016,10 +49174,93 @@
             <p>If there is no cell defined at the given co-ordinates, will return
              null.</p>
         </member>
+        <member name="M:NPOI.SS.Util.SheetUtil.ToDataTable(NPOI.SS.UserModel.ISheet,System.Boolean,System.Boolean)">
+            <summary>
+            Convert a sheet to a DataTable. Note that merged cells are not supported
+            </summary>
+            <param name="sheet">original sheet</param>
+            <param name="firstRowAsHeader">whether first row is column header</param>
+            <param name="showCalculatedFormulaValue">whether to show evaluated value of a formula in the cell</param>
+            <returns></returns>
+        </member>
         <member name="T:NPOI.SS.Util.SSCellRange`1">
              For POI internal use only
             
              @author Josh Micich
+        </member>
+        <member name="T:NPOI.SS.Util.StyleCache">
+            <summary>
+            Per-workbook O(1) style lookup table backed by a
+            <see cref="T:System.Runtime.CompilerServices.ConditionalWeakTable`2"/> so each workbook
+            automatically gets its own cache that is GC'd with the workbook.
+            </summary>
+        </member>
+        <member name="M:NPOI.SS.Util.StyleCache.ForWorkbook(NPOI.SS.UserModel.IWorkbook)">
+            <summary>
+            Returns the <see cref="T:NPOI.SS.Util.StyleCache"/> for the given workbook,
+            creating it on first access.
+            </summary>
+        </member>
+        <member name="M:NPOI.SS.Util.StyleCache.TryGet(NPOI.SS.Util.StyleKey@,NPOI.SS.UserModel.ICellStyle@)">
+            <summary>
+            Looks up a style by key.
+            </summary>
+        </member>
+        <member name="M:NPOI.SS.Util.StyleCache.Register(NPOI.SS.Util.StyleKey@,NPOI.SS.UserModel.ICellStyle)">
+            <summary>
+            Registers a newly created style in the cache.
+            </summary>
+        </member>
+        <member name="M:NPOI.SS.Util.StyleCache.Warm(NPOI.SS.UserModel.IWorkbook)">
+            <summary>
+            Seeds the cache from all styles already present in the workbook.
+            The first style encountered for a given key wins (no overwrite).
+            Call this optionally after opening an existing workbook to allow
+            the cache to reuse pre-existing styles immediately.
+            </summary>
+        </member>
+        <member name="M:NPOI.SS.Util.StyleCache.Invalidate(NPOI.SS.Util.StyleKey@)">
+            <summary>
+            Removes a single entry from the cache (e.g. after an
+            <c>HSSFOptimiser</c> pass that may have changed style indices).
+            </summary>
+        </member>
+        <member name="M:NPOI.SS.Util.StyleCache.Clear">
+            <summary>
+            Clears all entries from the cache.
+            </summary>
+        </member>
+        <member name="T:NPOI.SS.Util.StyleKey">
+            <summary>
+            Immutable value-type key capturing every comparable attribute of an
+            <see cref="T:NPOI.SS.UserModel.ICellStyle"/>.  Used as the dictionary key in
+            <see cref="T:NPOI.SS.Util.StyleCache"/> to provide O(1) style lookup.
+            </summary>
+        </member>
+        <member name="M:NPOI.SS.Util.StyleKey.From(NPOI.SS.UserModel.ICellStyle)">
+            <summary>
+            Creates a <see cref="T:NPOI.SS.Util.StyleKey"/> by reading all properties directly
+            from a live <see cref="T:NPOI.SS.UserModel.ICellStyle"/> instance.
+            </summary>
+        </member>
+        <member name="M:NPOI.SS.Util.StyleKey.FromPropertyMap(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Creates a <see cref="T:NPOI.SS.Util.StyleKey"/> directly from the property map
+            produced by <c>GetFormatProperties</c> + <c>PutAll</c>, avoiding
+            any temporary <see cref="T:NPOI.SS.UserModel.ICellStyle"/> allocation on the hot path.
+            Properties not tracked in the map (e.g. BorderDiagonal, ReadingOrder)
+            default to zero/false, matching the values set by
+            <c>SetFormatProperties</c> on a freshly created style.
+            </summary>
+        </member>
+        <member name="M:NPOI.SS.Util.StyleKey.Equals(NPOI.SS.Util.StyleKey)">
+            <inheritdoc/>
+        </member>
+        <member name="M:NPOI.SS.Util.StyleKey.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:NPOI.SS.Util.StyleKey.GetHashCode">
+            <inheritdoc/>
         </member>
         <member name="T:NPOI.SS.Util.WorkbookUtil">
             Helper methods for when working with Usermodel Workbooks

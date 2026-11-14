@@ -866,6 +866,11 @@
             InputStream class is reading only 8192 bytes per read call (default value
             set by sun)
         </member>
+        <member name="F:NPOI.OpenXml4Net.OPC.Internal.ZipHelper.ZipEntryTimestamp">
+            Fixed timestamp used for all zip entries, matching Excel's behavior.
+            Excel sets all zip entry timestamps to the DOS epoch minimum (1980-01-01 00:00:00),
+            which makes output deterministic for identical content.
+        </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.ZipHelper.#ctor">
             Prevent this class to be instancied.
         </member>
@@ -3076,10 +3081,18 @@
              done, to free up that memory!
         </member>
         <member name="M:NPOI.OpenXml4Net.Util.ZipInputStreamZipEntrySource.#ctor(ICSharpCode.SharpZipLib.Zip.ZipInputStream)">
-            Reads all the entries from the ZipInputStream 
+            Reads all the entries from the ZipInputStream
              into memory, and closes the source stream.
             We'll then eat lots of memory, but be able to
              work with the entries at-will.
+        </member>
+        <member name="M:NPOI.OpenXml4Net.Util.ZipInputStreamZipEntrySource.#ctor(ICSharpCode.SharpZipLib.Zip.ZipInputStream,NPOI.OpenXml4Net.Util.CountingStream)">
+            As {@link #ZipInputStreamZipEntrySource(ZipInputStream)}, but additionally
+            passes a counter over the raw (compressed) source stream so that each entry
+            can be checked for a decompression-bomb ratio while it is buffered. This is
+            required because streamed / data-descriptor entries report Size == -1, so the
+            uncompressed size is not known up-front and the ratio must be derived from the
+            compressed bytes actually consumed.
         </member>
         <member name="T:NPOI.OpenXml4Net.Util.ZipInputStreamZipEntrySource.EntryEnumerator">
             Why oh why oh why are Iterator and Enumeration
@@ -3147,7 +3160,54 @@
             </summary>
             <returns>The max accepted text size.</returns>
         </member>
+        <member name="M:NPOI.OpenXml4Net.Util.ZipSecureFile.CheckThreshold(System.Int64,System.Int64)">
+            <summary>
+            Validates the running decompressed byte count of a single zip entry against
+            the configured zip-bomb thresholds. Call this incrementally while a zip entry
+            is being decompressed.
+            </summary>
+            <param name="decompressedCounter">
+            Total number of decompressed bytes produced so far for the current entry.
+            </param>
+            <param name="compressedCounter">
+            Number of raw compressed bytes consumed so far for the current entry. Pass a
+            value &lt;= 0 when the compressed size is unknown (e.g. streamed / data-descriptor
+            entries); in that case only the absolute <see cref="M:NPOI.OpenXml4Net.Util.ZipSecureFile.GetMaxEntrySize"/> limit is
+            enforced.
+            </param>
+            <exception cref="T:System.IO.IOException">Thrown when a zip-bomb is detected.</exception>
+        </member>
         <!-- Badly formed XML comment ignored for member "M:NPOI.OpenXml4Net.Util.ZipSecureFile.GetInputStream(ICSharpCode.SharpZipLib.Zip.ZipEntry)" -->
+        <member name="T:NPOI.OpenXml4Net.Util.CountingStream">
+            <summary>
+            A read-only pass-through stream that counts the number of raw (compressed)
+            bytes consumed from the underlying stream.
+            <para>
+            This is used together with <see cref="M:NPOI.OpenXml4Net.Util.ZipSecureFile.CheckThreshold(System.Int64,System.Int64)"/> to detect
+            decompression bombs by comparing the amount of compressed data actually read
+            against the amount of decompressed data produced. It works even when a ZIP
+            entry's local header omits the sizes (streamed / data-descriptor entries, where
+            <c>ZipEntry.Size == -1</c>), because the ratio is computed from bytes observed
+            on the wire rather than from a possibly-absent header field.
+            </para>
+            </summary>
+        </member>
+        <member name="P:NPOI.OpenXml4Net.Util.CountingStream.BytesRead">
+            <summary>Total number of bytes read from the underlying stream so far.</summary>
+        </member>
+        <member name="T:NPOI.OpenXml4Net.Util.ZipEntrySizeGuardStream">
+            <summary>
+            A read-only, forward-only wrapper around the <em>decompressed</em> stream of a
+            single ZIP entry. As bytes are read it accumulates the decompressed size and
+            validates it against the zip-bomb thresholds via
+            <see cref="M:NPOI.OpenXml4Net.Util.ZipSecureFile.CheckThreshold(System.Int64,System.Int64)"/>, using the entry's known compressed
+            size for the inflate-ratio check.
+            <para>
+            Used on the seekable (<see cref="T:NPOI.OpenXml4Net.Util.ZipFileZipEntrySource"/>) read path, where the
+            central-directory compressed size is reliable.
+            </para>
+            </summary>
+        </member>
         <member name="T:NPOI.Openxml4Net.Exceptions.NotOfficeXmlFileException">
             This exception is thrown when we try to open a file that doesn't
              seem to actually be an OOXML (Office Open XML) file After all

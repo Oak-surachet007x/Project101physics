@@ -856,6 +856,11 @@
             
              @author Yegor Kozlov
         </member>
+        <member name="P:NPOI.POIXMLDocumentPart.Committed">
+            <summary>
+            Get or set embedded part is committed
+            </summary>
+        </member>
         <member name="T:NPOI.POIXMLDocumentPart.RelationPart">
             The RelationPart is a cached relationship between the document, which contains the RelationPart,
             and one of its referenced child document parts.
@@ -1473,7 +1478,7 @@
             <param name="fs"></param>
             <returns></returns>
         </member>
-        <member name="M:NPOI.SS.UserModel.WorkbookFactory.Create(NPOI.POIFS.FileSystem.NPOIFSFileSystem,System.String)">
+        <member name="M:NPOI.SS.UserModel.WorkbookFactory.Create(NPOI.POIFS.FileSystem.POIFSFileSystem,System.String)">
             <summary>
             Creates a Workbook from the given NPOIFSFileSystem, which may be password protected
             </summary>
@@ -1647,6 +1652,1014 @@
              @param src source properties
              @param tgt target properties
         </member>
+        <member name="T:NPOI.XDDF.UserModel.Chart.XDDFCategoryDataSource">
+            <summary>
+            should use default interface
+            </summary>
+        </member>
+        <member name="F:NPOI.XDDF.UserModel.Chart.XDDFChart.DEFAULT_WIDTH">
+            default width of chart in emu
+        </member>
+        <member name="F:NPOI.XDDF.UserModel.Chart.XDDFChart.DEFAULT_HEIGHT">
+            default height of chart in emu
+        </member>
+        <member name="F:NPOI.XDDF.UserModel.Chart.XDDFChart.DEFAULT_X">
+            default x-coordinate  of chart in emu
+        </member>
+        <member name="F:NPOI.XDDF.UserModel.Chart.XDDFChart.DEFAULT_Y">
+            default y-coordinate value of chart in emu
+        </member>
+        <member name="F:NPOI.XDDF.UserModel.Chart.XDDFChart.workbook">
+            <summary>
+            Underlying workbook
+            </summary>
+        </member>
+        <member name="F:NPOI.XDDF.UserModel.Chart.XDDFChart.chartSpace">
+            <summary>
+            Root element of the Chart part
+            </summary>
+        </member>
+        <member name="F:NPOI.XDDF.UserModel.Chart.XDDFChart.chart">
+            <summary>
+            Chart element in the chart space
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.#ctor">
+            <summary>
+            Construct a chart.
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.#ctor(NPOI.OpenXml4Net.OPC.PackagePart)">
+            <summary>
+            Construct a DrawingML chart from a package part.
+            </summary>
+            <param name="part">
+            the package part holding the chart data, the content type must
+            be
+            <c>application/vnd.Openxmlformats-officedocument.Drawingml.Chart+xml</c>
+            </param>
+            <remarks>
+            @since POI 3.14-Beta1
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.GetCTChartSpace">
+            <summary>
+            Return the underlying CTChartSpace bean, the root element of the Chart
+            part.
+            </summary>
+            <returns>the underlying CTChartSpace bean</returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.GetCTChart">
+            <summary>
+            Return the underlying CTChart bean, within the Chart Space
+            </summary>
+            <returns>the underlying CTChart bean</returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.GetCTPlotArea">
+            <summary>
+            Return the underlying CTPlotArea bean, within the Chart
+            </summary>
+            <returns>the underlying CTPlotArea bean</returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.IsPlotOnlyVisibleCells">
+            <summary>
+            </summary>
+            <returns>true if only visible cells will be present on the chart, false
+            otherwise
+            </returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.SetPlotOnlyVisibleCells(System.Boolean)">
+            <summary>
+            </summary>
+            <param name="only">
+            a flag specifying if only visible cells should be present on
+            the chart
+            </param>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.RemoveTitle">
+            <summary>
+            Remove the chart title.
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.DisplayBlanksAs(System.Nullable{NPOI.XDDF.UserModel.Chart.DisplayBlanks})">
+             <summary>
+             </summary>
+            
+             <remarks>
+             @since 4.0.1
+             </remarks>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Chart.XDDFChart.TitleOverlay">
+            <summary>
+            </summary>
+            <remarks>
+            @since 4.0.1
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.SetTitleText(System.String)">
+            <summary>
+            Sets the title text as a static string.
+            </summary>
+            <param name="text">
+            to use as new title
+            </param>
+            <remarks>
+            @since 4.0.1
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.GetTitle">
+            <summary>
+            </summary>
+            <remarks>
+            @since 4.0.1
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.GetFormattedTitle">
+            <summary>
+            Get the chart title body if there is one, i.e. title is Set and is not a
+            formula.
+            </summary>
+            <returns>text body or null, if title is a formula or no title is Set.</returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.SetValueRange(System.Int32,System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Double})">
+            <summary>
+            Set value range (basic Axis Options)
+            </summary>
+            <param name="axisIndex">
+            0 - primary axis, 1 - secondary axis
+            </param>
+            <param name="minimum">
+            minimum value; Double.NaN - automatic; null - no change
+            </param>
+            <param name="maximum">
+            maximum value; Double.NaN - automatic; null - no change
+            </param>
+            <param name="majorUnit">
+            major unit value; Double.NaN - automatic; null - no change
+            </param>
+            <param name="minorUnit">
+            minor unit value; Double.NaN - automatic; null - no change
+            </param>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.CreateRelationshipInChart(NPOI.POIXMLRelation,NPOI.POIXMLFactory,System.Int32)">
+            <summary>
+            method to create relationship with embedded part for example writing xlsx
+            file stream into output stream
+            </summary>
+            <param name="chartRelation">
+            relationship object
+            </param>
+            <param name="chartFactory">
+            ChartFactory object
+            </param>
+            <param name="chartIndex">
+            index used to suffix on file
+            </param>
+            <returns>return relation part which used to write relation in .rels file
+            and Get relation id
+            </returns>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.CreateWorksheetPart(NPOI.POIXMLRelation,NPOI.POIXMLFactory)">
+            <summary>
+            if embedded part was null then create new part
+            </summary>
+            <param name="chartRelation">
+            chart relation object
+            </param>
+            <param name="chartWorkbookRelation">
+            chart workbook relation object
+            </param>
+            <param name="chartFactory">
+            factory object of POIXMLFactory (XWPFFactory/XSLFFactory)
+            </param>
+            <returns>return the new package part</returns>
+            <exception cref="T:NPOI.OpenXml4Net.Exceptions.InvalidFormatException"></exception>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.SaveWorkbook(NPOI.XSSF.UserModel.XSSFWorkbook)">
+            <summary>
+            this method write the XSSFWorkbook object data into embedded excel file
+            </summary>
+            <param name="workbook">
+            XSSFworkbook object
+            </param>
+            <exception cref="T:System.IO.IOException"></exception>
+            <exception cref="T:NPOI.OpenXml4Net.Exceptions.InvalidFormatException"></exception>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.GetChartRelation">
+            <summary>
+            </summary>
+            <returns>the chart relation in the implementing subclass.</returns>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.GetChartWorkbookRelation">
+            <summary>
+            </summary>
+            <returns>the chart workbook relation in the implementing subclass.</returns>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.GetChartFactory">
+            <summary>
+            </summary>
+            <returns>the chart factory in the implementing subclass.</returns>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.FillSheet``2(NPOI.XSSF.UserModel.XSSFSheet,NPOI.XDDF.UserModel.Chart.IXDDFDataSource{``0},NPOI.XDDF.UserModel.Chart.IXDDFNumericalDataSource{``1})">
+            <summary>
+            this method writes the data into sheet
+            </summary>
+            <param name="sheet">
+            sheet of embedded excel
+            </param>
+            <param name="categoryData">
+            category values
+            </param>
+            <param name="valuesData">
+            data values
+            </param>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.GetRow(NPOI.XSSF.UserModel.XSSFSheet,System.Int32)">
+            <summary>
+            this method return row on given index if row is null then create new row
+            </summary>
+            <param name="sheet">
+            current sheet object
+            </param>
+            <param name="index">
+            index of current row
+            </param>
+            <returns>this method return sheet row on given index</returns>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.GetCell(NPOI.XSSF.UserModel.XSSFRow,System.Int32)">
+            <summary>
+            this method return cell on given index if cell is null then create new
+            cell
+            </summary>
+            <param name="row">
+            current row object
+            </param>
+            <param name="index">
+            index of current cell
+            </param>
+            <returns>this method return sheet cell on given index</returns>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.ImportContent(NPOI.XDDF.UserModel.Chart.XDDFChart)">
+            <summary>
+            import content from other chart to created chart
+            </summary>
+            <param name="other">
+            chart object
+            </param>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.Commit">
+            <summary>
+            save chart xml
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.SetSheetTitle(System.String,System.Int32)">
+            <summary>
+            Set sheet title in excel file
+            </summary>
+            <param name="title">
+            title of sheet
+            </param>
+            <param name="column">
+            column index
+            </param>
+            <returns>return cell reference</returns>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.UpdateSheetTable(NPOI.OpenXmlFormats.Spreadsheet.CT_Table,System.String,System.Int32)">
+            <summary>
+            this method update column header of sheet into table
+            </summary>
+            <param name="ctTable">
+            xssf table object
+            </param>
+            <param name="title">
+            title of column
+            </param>
+            <param name="index">
+            index of column
+            </param>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.FormatRange(NPOI.SS.Util.CellRangeAddress)">
+            <summary>
+            </summary>
+            <param name="range"></param>
+            <returns></returns>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.GetSheet">
+            <summary>
+            Get sheet object of embedded excel file
+            </summary>
+            <returns>excel sheet object</returns>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.GetWorksheetPart">
+            <summary>
+            this method is used to Get worksheet part if call is from saveworkbook
+            method then check isCommitted isCommitted variable shows that we are
+            writing xssfworkbook object into output stream of embedded part
+            </summary>
+            <returns>returns the packagepart of embedded file</returns>
+            <exception cref="T:NPOI.OpenXml4Net.Exceptions.InvalidFormatException"></exception>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.GetWorkbook">
+            <summary>
+            </summary>
+            <returns>returns the workbook object of embedded excel file</returns>
+            <exception cref="T:System.IO.IOException"></exception>
+            <exception cref="T:NPOI.OpenXml4Net.Exceptions.InvalidFormatException"></exception>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.SetWorkbook(NPOI.XSSF.UserModel.XSSFWorkbook)">
+            <summary>
+            while reading chart from template file then we need to parse and store
+            embedded excel file in chart object show that we can modify value
+            according to use
+            </summary>
+            <param name="workbook">
+            workbook object which we read from chart embedded part
+            </param>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.SetExternalId(System.String)">
+            <summary>
+            Set the relation id of embedded excel relation id into external data
+            relation tag
+            </summary>
+            <param name="id">
+            relation id of embedded excel relation id into external data
+            relation tag
+            </param>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.GetChartIndex">
+            <summary>
+            </summary>
+            <returns>method return chart index</returns>
+            <remarks>
+            @since POI 4.0.0
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChart.SetChartIndex(System.Int32)">
+            <summary>
+            Set chart index which can be use for relation part
+            </summary>
+            <param name="chartIndex">
+            chart index which can be use for relation part
+            </param>
+        </member>
+        <member name="T:NPOI.XDDF.UserModel.Chart.XDDFChartAxis">
+            <summary>
+            Base class for all axis types.
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.IsSetMinorUnit">
+            <summary>
+            </summary>
+            <returns>true if minor unit value is defined, false otherwise</returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.SetMinorUnit(System.Double)">
+            <summary>
+            </summary>
+            <param name="minor">
+            axis minor unit
+            </param>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.GetMinorUnit">
+            <summary>
+            </summary>
+            <returns>axis minor unit or NaN if not Set</returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.IsSetMajorUnit">
+            <summary>
+            </summary>
+            <returns>true if major unit value is defined, false otherwise</returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.SetMajorUnit(System.Double)">
+            <summary>
+            </summary>
+            <param name="major">
+            axis major unit
+            </param>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.GetMajorUnit">
+            <summary>
+            </summary>
+            <returns>axis major unit or NaN if not Set</returns>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.Id">
+            <summary>
+            </summary>
+            <returns>axis id</returns>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.Position">
+            <summary>
+            axis position
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.HasNumberFormat">
+            <summary>
+            Use this to check before retrieving a number format, as calling
+            <see cref="!:getNumberFormat()" /> may create a default one if none exists.
+            </summary>
+            <returns>true if a number format element is defined, false if not</returns>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.NumberFormat">
+            <summary>
+            axis number format
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.IsSetLogBase">
+            <summary>
+            </summary>
+            <returns>true if log base is defined, false otherwise</returns>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.LogBase">
+            <summary>
+            axis log base or Double.NaN if not set,  a number between 2 and 1000 (inclusive)
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.IsSetMinimum">
+            <summary>
+            </summary>
+            <returns>true if minimum value is defined, false otherwise</returns>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.Minimum">
+            <summary>
+            axis minimum or NaN if not set
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.IsSetMaximum">
+            <summary>
+            </summary>
+            <returns>true if maximum value is defined, false otherwise</returns>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.Maximum">
+            <summary>
+            axis maximum or double.NaN if not set
+            </summary>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.Orientation">
+            <summary>
+            axis orientation
+            </summary>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.Crosses">
+            <summary>
+            axis cross type
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.CrossAxis(NPOI.XDDF.UserModel.Chart.XDDFChartAxis)">
+            <summary>
+            Declare this axis cross another axis.
+            </summary>
+            <param name="axis">
+            that this axis should cross
+            </param>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.IsVisible">
+            <summary>
+            visibility of the axis.
+            </summary>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.MajorTickMark">
+            <summary>
+            major tick mark.
+            </summary>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Chart.XDDFChartAxis.MinorTickMark">
+            <summary>
+            </summary>
+            <returns>minor tick mark.</returns>
+        </member>
+        <member name="T:NPOI.XDDF.UserModel.Chart.XDDFChartData`2">
+            <summary>
+            Base of all XDDF Chart Data
+            </summary>
+        </member>
+        <member name="T:NPOI.XDDF.UserModel.Chart.XDDFChartLegend">
+            <summary>
+            Represents a DrawingML chart legend
+            </summary>
+        </member>
+        <member name="F:NPOI.XDDF.UserModel.Chart.XDDFChartLegend.legend">
+            <summary>
+            Underlying CTLegend bean
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChartLegend.#ctor(NPOI.OpenXmlFormats.Dml.Chart.CT_Chart)">
+            <summary>
+            Create a new DrawingML chart legend
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChartLegend.SetDefaults">
+            <summary>
+            Set sensible default styling.
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFChartLegend.GetCTLegend">
+            <summary>
+            Return the underlying CTLegend bean.
+            </summary>
+            <returns>the underlying CTLegend bean</returns>
+        </member>
+        <member name="T:NPOI.XDDF.UserModel.Chart.XDDFDataSourcesFactory">
+            <summary>
+            Class <c>XDDFDataSourcesFactory</c> is a factory for <see cref="!:XDDFDataSource"/> instances.
+            </summary>
+        </member>
+        <member name="T:NPOI.XDDF.UserModel.Chart.XDDFDateAxis">
+            <summary>
+            Date axis type. Currently only : the same values as
+            <see cref="T:NPOI.XDDF.UserModel.Chart.XDDFCategoryAxis"/>, since the two are nearly identical.
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFLineChartData`2.Series.GetSmooth">
+            <summary>
+            </summary>
+            <remarks>
+            @since 4.0.1
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFLineChartData`2.Series.SetSmooth(System.Nullable{System.Boolean})">
+            <summary>
+            </summary>
+            <param name="smooth">
+            whether or not to smooth lines, if <c>null</c> then reverts to default.
+            </param>
+            <remarks>
+            @since 4.0.1
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFLineChartData`2.Series.SetMarkerSize(System.Int16)">
+            <summary>
+            </summary>
+            <param name="size">
+            <dl><dt>Minimum inclusive:</dt><dd>2</dd><dt>Maximum inclusive:</dt><dd>72</dd></dl>
+            </param>
+        </member>
+        <member name="T:NPOI.XDDF.UserModel.Chart.XDDFManualLayout">
+            <summary>
+            Represents a DrawingML manual layout.
+            </summary>
+        </member>
+        <member name="F:NPOI.XDDF.UserModel.Chart.XDDFManualLayout.layout">
+            <summary>
+            Underlaying CTManualLayout bean.
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFManualLayout.#ctor(NPOI.OpenXmlFormats.Dml.Chart.CT_Layout)">
+            <summary>
+            Create a new DrawingML manual layout.
+            </summary>
+            <param name="ctLayout">
+            a DrawingML layout that should be used as base.
+            </param>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFManualLayout.#ctor(NPOI.OpenXmlFormats.Dml.Chart.CT_PlotArea)">
+            <summary>
+            Create a new DrawingML manual layout for chart.
+            </summary>
+            <param name="ctPlotArea">
+            a chart's plot area to create layout for.
+            </param>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFManualLayout.GetXmlObject">
+            <summary>
+            Return the underlying CTManualLayout bean.
+            </summary>
+            <returns>the underlying CTManualLayout bean.</returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFScatterChartData`2.Series.GetSmooth">
+            <summary>
+            </summary>
+            <remarks>
+            @since 4.0.1
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFScatterChartData`2.Series.SetSmooth(System.Nullable{System.Boolean})">
+            <summary>
+            </summary>
+            <param name="smooth">
+            whether or not to smooth lines, if <c>null</c> then reverts to default.
+            </param>
+            <remarks>
+            @since 4.0.1
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFScatterChartData`2.Series.SetMarkerSize(System.Int16)">
+            <summary>
+            </summary>
+            <param name="size">
+            <dl><dt>Minimum inclusive:</dt><dd>2</dd><dt>Maximum inclusive:</dt><dd>72</dd></dl>
+            </param>
+            <remarks>
+            @since 4.0.1
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Chart.XDDFScatterChartData`2.Series.SetMarkerStyle(NPOI.XDDF.UserModel.Chart.MarkerStyle)">
+            <summary>
+            </summary>
+            <remarks>
+            @since 4.0.1
+            </remarks>
+        </member>
+        <member name="T:NPOI.XDDF.UserModel.Chart.XDDFTitle">
+            <summary>
+            </summary>
+            <remarks>
+            @since 4.0.1
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFParagraphProperties.AddDefaultRunProperties">
+            <summary>
+            </summary>
+            <remarks>
+            @since 4.0.1
+            </remarks>
+        </member>
+        <member name="T:NPOI.XDDF.UserModel.Text.XDDFTextParagraph">
+            <summary>
+            Represents a paragraph of text within the containing text body. The paragraph
+            is the highest level text separation mechanism.
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.AppendLineBreak">
+            <summary>
+            Append a line break.
+            </summary>
+            <returns>text run representing this line break ('\n').</returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.AppendField(System.String,System.String,System.String)">
+            <summary>
+            Append a new text field.
+            </summary>
+            <returns>the new text field.</returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.AppendRegularRun(System.String)">
+            <summary>
+            Append a new run of text.
+            </summary>
+            <returns>the new run of text.</returns>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.TextAlignment">
+            <summary>
+            <para>
+            Get or set the alignment that is applied to the paragraph.Possible
+            values for this include left, right, centered, justified and distributed,
+            </para>
+            <para>
+            If this attribute is omitted, then a value of left is implied.
+            </para>
+            </summary>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.FontAlignment">
+            <summary>
+            Determines where vertically on a line of text the actual words are
+            positioned. This deals with vertical placement of the characters with
+            respect to the baselines. For instance having text anchored to the top
+            baseline, anchored to the bottom baseline, centered in between, etc.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.Indentation" -->
+        <!-- Badly formed XML comment ignored for member "P:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.MarginLeft" -->
+        <!-- Badly formed XML comment ignored for member "P:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.MarginRight" -->
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.DefaultTabSize">
+            <summary>
+            <para>
+            Get or set the default size for a tab character within this paragraph.
+            </para>
+            <para>
+            the default tab size in points. The value <c>null</c>
+            unsets the default tab size for this paragraph.
+            </para>
+            </summary>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.LineSpacing">
+            <summary>
+            <para>
+            This element specifies the vertical line spacing that is to be used
+            within a paragraph. This may be specified in two different ways,
+            percentage spacing or font points spacing:
+            </para>
+            <para>
+            If spacing is instance of XDDFSpacingPercent, then line spacing is a
+            percentage of normal line height. If spacing is instance of
+            XDDFSpacingPoints, then line spacing is expressed in points.
+            </para>
+            <para>
+            Examples:
+            </para>
+            <para>
+            <code>
+                 // spacing will be 120% of the size of the largest text on each line
+                 paragraph.SetLineSpacing(new XDDFSpacingPercent(120));
+                 // spacing will be 200% of the size of the largest text on each line
+                 paragraph.SetLineSpacing(new XDDFSpacingPercent(200));
+                 // spacing will be 48 points
+                 paragraph.SetLineSpacing(new XDDFSpacingPoints(48.0));
+            </code>
+            </para>
+            </summary>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.SpaceBefore">
+            <summary>
+            <para>
+            Set the amount of vertical white space that will be present before the
+            paragraph. This may be specified in two different ways, percentage
+            spacing or font points spacing:
+            </para>
+            <para>
+            If spacing is instance of XDDFSpacingPercent, then spacing is a
+            percentage of normal line height. If spacing is instance of
+            XDDFSpacingPoints, then spacing is expressed in points.
+            </para>
+            <para>
+            Examples:
+            </para>
+            <para>
+            <code>
+                 // The paragraph will be formatted to have a spacing before the paragraph text.
+                 // The spacing will be 200% of the size of the largest text on each line
+                 paragraph.SetSpaceBefore(new XDDFSpacingPercent(200));
+                 // The spacing will be a size of 48 points
+                 paragraph.SetSpaceBefore(new XDDFSpacingPoints(48.0));
+            </code>
+            </para>
+            </summary>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.SpaceAfter">
+            <summary>
+            <para>
+            Set the amount of vertical white space that will be present After the
+            paragraph. This may be specified in two different ways, percentage
+            spacing or font points spacing:
+            </para>
+            <para>
+            If spacing is instance of XDDFSpacingPercent, then spacing is a
+            percentage of normal line height. If spacing is instance of
+            XDDFSpacingPoints, then spacing is expressed in points.
+            </para>
+            <para>
+            Examples:
+            </para>
+            <para>
+            <code>
+                 // The paragraph will be formatted to have a spacing After the paragraph text.
+                 // The spacing will be 200% of the size of the largest text on each line
+                 paragraph.SetSpaceAfter(new XDDFSpacingPercent(200));
+                 // The spacing will be a size of 48 points
+                 paragraph.SetSpaceAfter(new XDDFSpacingPoints(48.0));
+            </code>
+            </para>
+            </summary>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.BulletColor">
+            <summary>
+            Get or set the color to be used on bullet characters within a given paragraph.
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.SetBulletColorFollowText">
+            <summary>
+            Specifies the color to be used on bullet characters has to follow text
+            color within a given paragraph.
+            </summary>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.BulletFont">
+            <summary>
+            Get or set the font to be used on bullet characters within a given paragraph.
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.SetBulletFontFollowText">
+            <summary>
+            Specifies the font to be used on bullet characters has to follow text
+            font within a given paragraph.
+            </summary>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.BulletSize">
+            <summary>
+            <para>
+            Get or set the bullet size that is to be used within a paragraph. This may be
+            specified in three different ways, follows text size, percentage size and
+            font points size:
+            </para>
+            <para>
+            If value is instance of XDDFBulletSizeFollowText, then bullet size
+            is text size; If given value is instance of XDDFBulletSizePercent, then
+            bullet size is a percentage of the font size; If given value is instance
+            of XDDFBulletSizePoints, then bullet size is specified in points.
+            </para>
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextParagraph.AddDefaultRunProperties">
+            <summary>
+            </summary>
+            <remarks>
+            @since 4.0.1
+            </remarks>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextRun.SetBold(System.Boolean)">
+            <summary>
+            Specifies whether this run of text will be formatted as bold text.
+            </summary>
+            <param name="bold">
+            whether this run of text will be formatted as bold text.
+            </param>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextRun.IsBold">
+            <summary>
+            </summary>
+            <returns>whether this run of text is formatted as bold text.</returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextRun.SetItalic(System.Boolean)">
+            <summary>
+            </summary>
+            <param name="italic">
+            whether this run of text is formatted as italic text.
+            </param>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextRun.IsItalic">
+            <summary>
+            </summary>
+            <returns>whether this run of text is formatted as italic text.</returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextRun.SetStrikeThrough(System.Nullable{NPOI.XDDF.UserModel.Text.StrikeType})">
+            <summary>
+            </summary>
+            <param name="strike">
+            which strike style this run of text is formatted with.
+            </param>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextRun.IsStrikeThrough">
+            <summary>
+            </summary>
+            <returns>whether this run of text is formatted as striked text.</returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextRun.GetStrikeThrough">
+            <summary>
+            </summary>
+            <returns>which strike style this run of text is formatted with.</returns>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextRun.Underline">
+            <summary>
+            which underline style this run of text is formatted with.
+            </summary>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextRun.SetUnderline(System.Nullable{NPOI.XDDF.UserModel.Text.UnderlineType})">
+            <summary>
+            </summary>
+            <param name="underline">
+            which underline style this run of text is formatted with.
+            </param>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextRun.IsUnderline">
+            <summary>
+            </summary>
+            <returns>whether this run of text is formatted as underlined text.</returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextRun.GetUnderline">
+            <summary>
+            </summary>
+            <returns>which underline style this run of text is formatted with.</returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextRun.SetCapitals(System.Nullable{NPOI.XDDF.UserModel.Text.CapsType})">
+            <summary>
+            </summary>
+            <param name="caps">
+            which caps style this run of text is formatted with.
+            </param>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextRun.IsCapitals">
+            <summary>
+            </summary>
+            <returns>whether this run of text is formatted as capitalized text.</returns>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextRun.Capitals">
+            <summary>
+            </summary>
+            <returns>which caps style this run of text is formatted with.</returns>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextRun.IsSubscript">
+            <summary>
+            </summary>
+            <returns>whether a run of text will be formatted as a subscript text.
+            Default is false.
+            </returns>
+        </member>
+        <member name="P:NPOI.XDDF.UserModel.Text.XDDFTextRun.IsSuperscript">
+            <summary>
+            </summary>
+            <returns>whether a run of text will be formatted as a superscript text.
+            Default is false.
+            </returns>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextRun.SetBaseline(System.Nullable{System.Double})">
+            <summary>
+            <para>
+             Set the baseline for both the superscript and subscript fonts.
+            </para>
+            <para>
+                The size is specified using a percentage.
+                Positive values indicate superscript, negative values indicate subscript.
+            </para>
+            </summary>
+            <param name="offset"></param>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextRun.SetSuperscript(System.Nullable{System.Double})">
+            <summary>
+            <para>
+            Set whether the text in this run is formatted as superscript.
+            </para>
+            <para>
+            The size is specified using a percentage.
+            </para>
+            </summary>
+            <param name="offset"></param>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextRun.SetSubscript(System.Nullable{System.Double})">
+            <summary>
+            <para>
+            Set whether the text in this run is formatted as subscript.
+            </para>
+            <para>
+            The size is specified using a percentage.
+            </para>
+            </summary>
+            <param name="offset"></param>
+        </member>
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextRun.SetFonts(NPOI.XDDF.UserModel.Text.XDDFFont[])">
+            <summary>
+            <em>Note</em>: In order to Get fonts to unset the property for a given font family use
+            <see cref="!:XDDFFont.unsetFontForGroup(FontGroup)" />
+            </summary>
+            <param name="fonts">
+            to Set or unset on the run.
+            </param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:NPOI.XDDF.UserModel.Text.XDDFTextRun.FontSize" -->
+        <!-- Badly formed XML comment ignored for member "M:NPOI.XDDF.UserModel.Text.XDDFTextRun.SetCharacterKerning(System.Nullable{System.Double})" -->
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextRun.GetCharacterKerning">
+            <summary>
+            </summary>
+            <returns>the kerning of characters within a text run,
+            If this attribute is omitted then returns <c>null</c>.
+            </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:NPOI.XDDF.UserModel.Text.XDDFTextRun.CharacterKerning" -->
+        <!-- Badly formed XML comment ignored for member "M:NPOI.XDDF.UserModel.Text.XDDFTextRun.SetCharacterSpacing(System.Nullable{System.Double})" -->
+        <member name="M:NPOI.XDDF.UserModel.Text.XDDFTextRun.GetCharacterSpacing">
+            <summary>
+            </summary>
+            <returns>the spacing between characters within a text run,
+            If this attribute is omitted then returns <c>null</c>.
+            </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:NPOI.XDDF.UserModel.Text.XDDFTextRun.CharacterSpacing" -->
         <member name="T:NPOI.XSSF.Binary.XSSFBCellHeader">
             <summary>
             This class encapsulates what the spec calls a "Cell" object.
@@ -1965,7 +2978,6 @@
             </summary>
             <param name="pkg">The <see cref="T:NPOI.OpenXml4Net.OPC.OPCPackage"/> to use as basis for the shared-strings table.</param>
             <exception cref="T:System.IO.IOException"> If reading the data from the package fails.</exception>
-            <exception cref="T:NSAX.SAXException"> if parsing the XML data fails.</exception>
         </member>
         <member name="M:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.#ctor(NPOI.OpenXml4Net.OPC.OPCPackage,System.Boolean)">
             <summary>
@@ -1973,8 +2985,6 @@
             <param name="pkg">The <see cref="T:NPOI.OpenXml4Net.OPC.OPCPackage"/> to use as basis for the shared-strings table.</param>
             <param name="includePhoneticRuns">whether or not to concatenate phoneticRuns onto the shared string</param>
             <exception cref="T:System.IO.IOException">IOException If reading the data from the package fails.</exception>
-            <exception cref="T:NSAX.SAXException">SAXException if parsing the XML data fails.</exception>
-            @since POI 3.14-Beta3
         </member>
         <member name="M:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.#ctor(NPOI.OpenXml4Net.OPC.PackagePart)">
             <summary>
@@ -1994,7 +3004,13 @@
             </summary>
             @since POI 3.14-Beta3
         </member>
-        <!-- Badly formed XML comment ignored for member "M:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.ReadFrom(System.IO.Stream)" -->
+        <member name="M:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.ReadFrom(System.IO.Stream)">
+            <summary>
+            Read this shared strings table from an XML file.
+            </summary>
+            <param name="is1">The input stream containing the XML document.</param>
+            <exception cref="T:System.IO.IOException"> if an error occurs while reading.</exception>
+        </member>
         <member name="P:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.Count">
             <summary>
             Return an integer representing the total count of strings in the workbook. This count does not
@@ -2017,11 +3033,6 @@
             </summary>
             <param name="idx">index of item to return.</param>
             <return>the item at the specified position in this Shared String table.</return>
-        </member>
-        <member name="M:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.Characters(System.Char[],System.Int32,System.Int32)">
-            <summary>
-            Captures characters only if a t(ext) element is open.
-            </summary>
         </member>
         <member name="T:NPOI.XSSF.EventUserModel.XSSFBReader">
             <summary>
@@ -2260,12 +3271,6 @@
             </summary>
             <param name="styles"> Table of styles</param>
             <param name="strings">Table of shared strings</param>
-        </member>
-        <member name="M:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.Characters(System.Char[],System.Int32,System.Int32)">
-            <summary>
-            Captures characters only if a suitable element is open.
-            Originally was just "v"; extended for inlineStr also.
-            </summary>
         </member>
         <member name="M:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.CheckForEmptyCellComments(NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.EmptyCellCommentsCheckType)">
             <summary>
@@ -2721,7 +3726,8 @@
             Array of individual string items in the Shared String table.
         </member>
         <member name="F:NPOI.XSSF.Model.SharedStringsTable.stmap">
-            Maps strings and their indexes in the <code>strings</code> arrays
+            Maps strings and their indexes in the <code>strings</code> arrays.
+            Built lazily on the first call to AddEntry().
         </member>
         <member name="F:NPOI.XSSF.Model.SharedStringsTable.count">
             An integer representing the total count of strings in the workbook. This count does not
@@ -2732,11 +3738,46 @@
             A string is unique even if it is a copy of another string, but has different formatting applied
             at the character level.
         </member>
+        <member name="M:NPOI.XSSF.Model.SharedStringsTable.ValidateSstSecurity(NPOI.OpenXml4Net.OPC.PackagePart)">
+            <summary>
+            Performs a lightweight security scan of the SST part to reject files that
+            contain DOCTYPE entity declarations (e.g. "billion laughs" / XML bomb attacks).
+            This is a fast, forward-only scan that does not build any object model.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Model.SharedStringsTable.EnsureStmapBuilt">
+            <summary>
+            Ensures stmap is consistent with the strings list. Called lazily before AddEntry.
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.Model.SharedStringsTable.TextReadBufferSize">
+            <summary>
+            Streaming XmlReader-based parser for sharedStrings.xml. Replaces the
+            DOM-based ConvertStreamToXml + SstDocument.Parse approach to reduce
+            allocations. Uses ArrayPool&lt;char&gt; for text buffering.
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.Model.SharedStringsTable.UseDirectWrite">
+            <summary>
+            When <c>true</c> (default), <see cref="M:NPOI.XSSF.Model.SharedStringsTable.WriteTo(System.IO.Stream)"/> streams XML directly from the
+            <c>strings</c> list, bypassing <c>_sstDoc.Save()</c>.
+            Set to <c>false</c> to exercise the legacy write path (rebuild <c>sst.si</c> from
+            <c>strings</c> and delegate to <c>_sstDoc.Save()</c>) for performance comparison.
+            </summary>
+        </member>
         <member name="M:NPOI.XSSF.Model.SharedStringsTable.GetEntryAt(System.Int32)">
-             Return a string item by index
-            
-             @param idx index of item to return.
-             @return the item at the specified position in this Shared String table.
+            <summary>
+            Return a string item by index
+            </summary>
+            <param name="idx">index of item to return.</param>
+            <returns>the item at the specified position in this Shared String table.</returns>
+        </member>
+        <member name="M:NPOI.XSSF.Model.SharedStringsTable.GetItemAt(System.Int32)">
+            <summary>
+            Return a string item by index
+            </summary>
+            <param name="idx">index of item to return.</param>
+            <returns>the item at the specified position in this Shared String table.</returns>
         </member>
         <member name="P:NPOI.XSSF.Model.SharedStringsTable.Count">
              Return an integer representing the total count of strings in the workbook. This count does not
@@ -2752,20 +3793,37 @@
              @return the total count of unique strings in the workbook
         </member>
         <member name="M:NPOI.XSSF.Model.SharedStringsTable.AddEntry(NPOI.OpenXmlFormats.Spreadsheet.CT_Rst)">
-             Add an entry to this Shared String table (a new value is appened to the end).
+             Add an entry to this Shared String table (a new value is appended to the end).
             
              <p>
              If the Shared String table already Contains this <code>CT_Rst</code> bean, its index is returned.
-             Otherwise a new entry is aded.
+             Otherwise a new entry is added.
              </p>
             
              @param st the entry to add
              @return index the index of Added entry
         </member>
+        <member name="M:NPOI.XSSF.Model.SharedStringsTable.AddSharedStringItem(NPOI.SS.UserModel.IRichTextString)">
+             Add an entry to this Shared String table (a new value is appended to the end).
+            
+             <p>
+             If the Shared String table already contains this string entry, its index is returned.
+             Otherwise a new entry is added.
+             </p>
+            
+             @param string the entry to add
+             @since POI 4.0.0
+             @return index the index of added entry
+        </member>
         <member name="P:NPOI.XSSF.Model.SharedStringsTable.Items">
              Provide low-level access to the underlying array of CT_Rst beans
             
              @return array of CT_Rst beans
+        </member>
+        <member name="P:NPOI.XSSF.Model.SharedStringsTable.SharedStringItems">
+             Provide access to the strings in the SharedStringsTable
+            
+             @return list of shared string instances
         </member>
         <member name="M:NPOI.XSSF.Model.SharedStringsTable.WriteTo(System.IO.Stream)">
             
@@ -2773,6 +3831,24 @@
             
             @param out The stream to write to.
             @throws IOException if an error occurs while writing.
+        </member>
+        <member name="P:NPOI.XSSF.Model.SharedStringsTable.IsLoaded">
+            <summary>
+            Returns true if the SST has been parsed from its backing part.
+            Used in tests to verify lazy-load behaviour.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Model.SharedStringsTable.PrepareForCommit">
+            <summary>
+            Prepares the part for commit. No-op when SST has not been modified,
+            preserving the original part bytes.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Model.SharedStringsTable.Commit">
+            <summary>
+            Commits the SST to the package. No-op when SST has not been modified,
+            so the original sharedStrings.xml bytes are preserved without parsing.
+            </summary>
         </member>
         <member name="T:NPOI.XSSF.Model.SingleXmlCells">
              
@@ -2808,6 +3884,29 @@
         </member>
         <member name="M:NPOI.XSSF.Model.StylesTable.#ctor">
             Create a new, empty StylesTable
+        </member>
+        <member name="M:NPOI.XSSF.Model.StylesTable.SetTheme(NPOI.XSSF.Model.ThemesTable)">
+            <summary>
+            Assigns the theme to this workbook's styles table, mirroring
+            <see cref="P:NPOI.XSSF.Model.StylesTable.Theme"/>. If the given theme belongs to a different workbook
+            it is copied into this workbook so it is written out on save.
+            </summary>
+            <param name="theme">the theme to assign</param>
+        </member>
+        <member name="M:NPOI.XSSF.Model.StylesTable.GetTheme">
+            <summary>
+            Gets the theme of the current workbook, or null if the workbook
+            has no theme.
+            </summary>
+            <returns>the theme table, or null</returns>
+        </member>
+        <member name="M:NPOI.XSSF.Model.StylesTable.EnsureLoaded">
+            Ensure the in-memory model has been populated from the package part.
+            This is a no-op for newly created (non-package) tables.
+        </member>
+        <member name="M:NPOI.XSSF.Model.StylesTable.MarkTouched">
+            Mark this styles table as having been modified so that it will be
+            committed (written out) when the workbook is saved.
         </member>
         <member name="M:NPOI.XSSF.Model.StylesTable.GetTableStyle(System.String)">
              <summary>
@@ -2958,6 +4057,12 @@
         <member name="M:NPOI.XSSF.Model.StylesTable.FindFont(System.Boolean,System.Int16,System.Int16,System.String,System.Boolean,System.Boolean,NPOI.SS.UserModel.FontSuperScript,NPOI.SS.UserModel.FontUnderlineType)">
             Finds a font that matches the one with the supplied attributes
         </member>
+        <member name="M:NPOI.XSSF.Model.StylesTable.FindFont(System.Boolean,NPOI.SS.UserModel.IColor,System.Int16,System.String,System.Boolean,System.Boolean,NPOI.SS.UserModel.FontSuperScript,NPOI.SS.UserModel.FontUnderlineType)">
+            <summary>
+            Finds a font that matches the one with the supplied attributes,
+            where color is the actual Color-value, not the indexed color
+            </summary>
+        </member>
         <member name="P:NPOI.XSSF.Model.StylesTable.IndexedColors">
             <summary>
             default or custom indexed color to RGB mapping
@@ -2984,6 +4089,16 @@
             called from <see cref="T:NPOI.XSSF.Model.StylesTable"/> when setting theme, used to adjust colors if a custom indexed mapping is defined
             </summary>
             <param name="colorMap"></param>
+        </member>
+        <member name="M:NPOI.XSSF.Model.ThemesTable.CopyThemeFrom(NPOI.XSSF.Model.ThemesTable)">
+            <summary>
+            Copies the theme content from another ThemesTable into this one.
+            Used when a theme belonging to a different workbook/package is set on this
+            workbook, so the theme is actually written out when this workbook is saved.
+            The theme is deep-copied through XML so the two workbooks never share
+            mutable theme state.
+            </summary>
+            <param name="source">the ThemesTable to copy from</param>
         </member>
         <member name="M:NPOI.XSSF.Model.ThemesTable.GetThemeColor(System.Int32)">
             Convert a theme "index" into a color.
@@ -3446,7 +4561,10 @@
             
              @param column the column index to auto-size
         </member>
-        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.AutoSizeColumn(System.Int32,System.Boolean)">
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.AutoSizeColumn(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.AutoSizeColumn(System.Int32,System.Boolean,System.Int32)">
              Adjusts the column width to fit the contents.
              <p>
              This process can be relatively slow on large sheets, so this should
@@ -3929,10 +5047,22 @@
             
              @return the font with the matched attributes or <code>null</code>
         </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFWorkbook.Close">
+            <summary>
+            Closes the workbook, flushing and closing all sheet data writers, and
+            disposes of all temporary files backing this workbook on disk.
+            After this call the workbook should no longer be used.
+            </summary>
+        </member>
         <member name="M:NPOI.XSSF.Streaming.SXSSFWorkbook.Dispose">
+            <summary>
             Dispose of temporary files backing this workbook on disk.
             Calling this method will render the workbook unusable.
-            @return true if all temporary files were deleted successfully.
+            Note: <see cref="M:NPOI.XSSF.Streaming.SXSSFWorkbook.Close"/> now automatically calls this method, so explicit
+            calls to <see cref="M:NPOI.XSSF.Streaming.SXSSFWorkbook.Dispose"/> are no longer necessary when using a
+            <c>using</c> statement or calling <see cref="M:NPOI.XSSF.Streaming.SXSSFWorkbook.Close"/>.
+            </summary>
+            <returns>true if all temporary files were deleted successfully.</returns>
         </member>
         <member name="M:NPOI.XSSF.Streaming.SXSSFWorkbook.GetNames(System.String)">
              Returns all defined names with the given name.
@@ -4016,152 +5146,6 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.BaseXSSFFormulaEvaluator.EvaluateFormulaCellValue(NPOI.SS.UserModel.ICell)">
             Returns a CellValue wrapper around the supplied ValueEval instance.
-        </member>
-        <member name="T:NPOI.XSSF.UserModel.Charts.XSSFAreaChartData`2">
-            <summary>
-            Holds data for a XSSF Area Chart
-            </summary>
-            <typeparam name="Tx"></typeparam>
-            <typeparam name="Ty"></typeparam>
-        </member>
-        <member name="F:NPOI.XSSF.UserModel.Charts.XSSFAreaChartData`2.series">
-            List of all data series.
-        </member>
-        <member name="T:NPOI.XSSF.UserModel.Charts.XSSFBarChartData`2">
-            <summary>
-            Holds data for a XSSF Bar Chart
-            </summary>
-            <typeparam name="Tx"></typeparam>
-            <typeparam name="Ty"></typeparam>
-        </member>
-        <member name="F:NPOI.XSSF.UserModel.Charts.XSSFBarChartData`2.series">
-            List of all data series.
-        </member>
-        <member name="T:NPOI.XSSF.UserModel.Charts.XSSFChartAxis">
-             Base class for all axis types.
-            
-             @author Roman Kashitsyn
-        </member>
-        <member name="T:NPOI.XSSF.UserModel.Charts.XSSFChartDataFactory">
-            @author Roman Kashitsyn
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.Charts.XSSFChartDataFactory.CreateScatterChartData``2">
-            @return new scatter chart data instance
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.Charts.XSSFChartDataFactory.GetInstance">
-            @return factory instance
-        </member>
-        <member name="T:NPOI.XSSF.UserModel.Charts.XSSFChartLegend">
-            Represents a SpreadsheetML chart legend
-            @author Roman Kashitsyn
-        </member>
-        <member name="F:NPOI.XSSF.UserModel.Charts.XSSFChartLegend.legend">
-            Underlaying CTLagend bean
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.Charts.XSSFChartLegend.#ctor(NPOI.XSSF.UserModel.XSSFChart)">
-            Create a new SpreadsheetML chart legend
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.Charts.XSSFChartLegend.SetDefaults">
-            Set sensible default styling.
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.Charts.XSSFChartLegend.GetCTLegend">
-             Return the underlying CTLegend bean.
-            
-             @return the underlying CTLegend bean
-        </member>
-        <member name="T:NPOI.XSSF.UserModel.Charts.XSSFChartUtil">
-             Package private class with utility methods.
-            
-             @author Roman Kashitsyn
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.Charts.XSSFChartUtil.BuildAxDataSource``1(NPOI.OpenXmlFormats.Dml.Chart.CT_AxDataSource,NPOI.SS.UserModel.Charts.IChartDataSource{``0})">
-            Builds CTAxDataSource object content from POI ChartDataSource.
-            @param ctAxDataSource OOXML data source to build
-            @param dataSource POI data source to use
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.Charts.XSSFChartUtil.BuildNumDataSource``1(NPOI.OpenXmlFormats.Dml.Chart.CT_NumDataSource,NPOI.SS.UserModel.Charts.IChartDataSource{``0})">
-            Builds CTNumDataSource object content from POI ChartDataSource
-            @param ctNumDataSource OOXML data source to build
-            @param dataSource POI data source to use
-        </member>
-        <member name="T:NPOI.XSSF.UserModel.Charts.XSSFColumnChartData`2">
-            <summary>
-            Holds data for a XSSF Column Chart
-            </summary>
-            <typeparam name="Tx"></typeparam>
-            <typeparam name="Ty"></typeparam>
-        </member>
-        <member name="F:NPOI.XSSF.UserModel.Charts.XSSFColumnChartData`2.series">
-            List of all data series.
-        </member>
-        <member name="T:NPOI.XSSF.UserModel.Charts.XSSFLineChartData`2">
-            <summary>
-            Holds data for a XSSF Line Chart
-            </summary>
-            <typeparam name="Tx"></typeparam>
-            <typeparam name="Ty"></typeparam>
-        </member>
-        <member name="F:NPOI.XSSF.UserModel.Charts.XSSFLineChartData`2.series">
-            List of all data series.
-        </member>
-        <member name="T:NPOI.XSSF.UserModel.Charts.XSSFManualLayout">
-            Represents a SpreadsheetML manual layout.
-            @author Roman Kashitsyn
-        </member>
-        <member name="F:NPOI.XSSF.UserModel.Charts.XSSFManualLayout.layout">
-            Underlaying CTManualLayout bean.
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.Charts.XSSFManualLayout.#ctor(NPOI.OpenXmlFormats.Dml.Chart.CT_Layout)">
-            Create a new SpreadsheetML manual layout.
-            @param layout a Spreadsheet ML layout that should be used as base.
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.Charts.XSSFManualLayout.#ctor(NPOI.XSSF.UserModel.XSSFChart)">
-            Create a new SpreadsheetML manual layout for chart.
-            @param chart a chart to create layout for.
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.Charts.XSSFManualLayout.GetCTManualLayout">
-             Return the underlying CTManualLayout bean.
-            
-             @return the underlying CTManualLayout bean.
-        </member>
-        <member name="T:NPOI.XSSF.UserModel.Charts.XSSFPieChartData`2">
-            <summary>
-            Holds data for a XSSF Pie Chart
-            </summary>
-            <typeparam name="Tx"></typeparam>
-            <typeparam name="Ty"></typeparam>
-        </member>
-        <member name="F:NPOI.XSSF.UserModel.Charts.XSSFPieChartData`2.series">
-            <summary>
-            List of all data series.
-            </summary>
-        </member>
-        <member name="T:NPOI.XSSF.UserModel.Charts.XSSFScatterChartData`2">
-             Represents DrawingML scatter chart.
-            
-             @author Roman Kashitsyn
-        </member>
-        <member name="F:NPOI.XSSF.UserModel.Charts.XSSFScatterChartData`2.series">
-            List of all data series.
-        </member>
-        <member name="T:NPOI.XSSF.UserModel.Charts.XSSFScatterChartData`2.Series">
-            Package private ScatterChartSerie implementation.
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.Charts.XSSFScatterChartData`2.Series.GetXValues">
-            Returns data source used for X axis values.
-            @return data source used for X axis values
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.Charts.XSSFScatterChartData`2.Series.GetYValues">
-            Returns data source used for Y axis values.
-            @return data source used for Y axis values
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.Charts.XSSFScatterChartData`2.Series.SetUseCache(System.Boolean)">
-            @param useCache if true, cached results will be Added on plot
-        </member>
-        <member name="T:NPOI.XSSF.UserModel.Charts.XSSFValueAxis">
-             Value axis type.
-            
-             @author Roman Kashitsyn
         </member>
         <member name="T:NPOI.XSSF.UserModel.Extensions.XSSFCellAlignment">
             Cell Settings avaiable in the Format/Alignment tab
@@ -4818,7 +5802,7 @@
             @return table of strings shared across this workbook
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFCell.GetStylesSource">
-            @return table of cell styles shared across this workbook
+            @return table of cell styles shared across all cells in a workbook.
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFCell.Sheet">
              Returns the sheet this cell belongs to
@@ -4953,7 +5937,11 @@
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFCell.CellStyle">
             <summary>
-            Return the cell's style.
+            Get the cell style. This is a reference to a cell style contained in the workbook
+            object. If there is no explicit cell style, the default style is returned.
+            cell has no style of its own. If no column default style is set, the row default style is checked.
+            This method has always fallen back to return the default style
+            if there is no other style to return.
             </summary>
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFCell.IsFormulaCell">
@@ -5462,12 +6450,6 @@
         <member name="F:NPOI.XSSF.UserModel.XSSFChart.frame">
             Parent graphic frame.
         </member>
-        <member name="F:NPOI.XSSF.UserModel.XSSFChart.chartSpaceDocument">
-            Root element of the SpreadsheetML Chart part
-        </member>
-        <member name="F:NPOI.XSSF.UserModel.XSSFChart.chart">
-            The Chart within that
-        </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFChart.#ctor">
             Create a new SpreadsheetML chart
         </member>
@@ -5487,18 +6469,6 @@
             
              @return a new CTChartSpace bean
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFChart.GetCTChartSpace">
-            <summary>
-            Return the underlying CTChartSpace bean, the root element of the SpreadsheetML Chart part.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFChart.GetCTChart">
-            <summary>
-            Return the underlying CTChart bean, within the Chart Space
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFChart.GetGraphicFrame">
             <summary>
             Returns the parent graphic frame.
@@ -5508,19 +6478,21 @@
         <member name="M:NPOI.XSSF.UserModel.XSSFChart.SetGraphicFrame(NPOI.XSSF.UserModel.XSSFGraphicFrame)">
             Sets the parent graphic frame.
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFChart.IsPlotOnlyVisibleCells">
-            @return true if only visible cells will be present on the chart,
-                    false otherwise
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFChart.SetPlotOnlyVisibleCells(System.Boolean)">
-            @param plotVisOnly a flag specifying if only visible cells should be
-                   present on the chart
-        </member>
-        <member name="P:NPOI.XSSF.UserModel.XSSFChart.Title">
+        <member name="P:NPOI.XSSF.UserModel.XSSFChart.TitleText">
+            <summary>
             Returns the title, or null if none is Set
+            </summary>
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFChart.SetTitle(System.String)">
-            Sets the title text.
+        <member name="P:NPOI.XSSF.UserModel.XSSFChart.TitleFormula">
+            <summary>
+            Get the chart title formula expression if there is one
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFChart.SetTitleFormula(System.String)">
+            <summary>
+            Set the formula expression to use for the chart title
+            </summary>
+            <param name="formula"></param>
         </member>
         <member name="T:NPOI.XSSF.UserModel.XSSFChartSheet">
              High level representation of Sheet Parts that are of type 'chartsheet'.
@@ -5689,8 +6661,10 @@
         <member name="T:NPOI.XSSF.UserModel.XSSFColor">
             Represents a color in SpreadsheetML
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFColor.#ctor(NPOI.OpenXmlFormats.Spreadsheet.CT_Color)">
-            Create an instance of XSSFColor from the supplied XML bean
+        <member name="M:NPOI.XSSF.UserModel.XSSFColor.From(NPOI.OpenXmlFormats.Spreadsheet.CT_Color,NPOI.OOXML.XSSF.UserModel.IIndexedColorMap)">
+            @param color
+            @param map
+            @return null if color is null, new instance otherwise
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFColor.#ctor">
             Create an new instance of XSSFColor
@@ -6849,6 +7823,66 @@
             Gets the frame id.
         </member>
         <!-- Badly formed XML comment ignored for member "M:NPOI.XSSF.UserModel.XSSFGraphicFrame.AppendChartElement(NPOI.OpenXmlFormats.Dml.CT_GraphicalObjectData,System.String)" -->
+        <member name="T:NPOI.XSSF.UserModel.XSSFHeaderFooterProperties">
+            <summary>
+            All Header/Footer properties for a sheet are scoped to the sheet. This includes Different First Page,
+            and Different Even/Odd. These properties can be Set or unset explicitly in this class. Note that while
+            Scale With Document and Align With Margins default to unset, Different First, and Different Even/Odd
+            are updated automatically as headers and footers are added and removed.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFHeaderFooterProperties.#ctor(NPOI.OpenXmlFormats.Spreadsheet.CT_HeaderFooter)">
+            <summary>
+            Create an instance of XSSFHeaderFooterProperties from the supplied XML bean
+            </summary>
+            <param name="headerFooter"></param>
+        </member>
+        <member name="P:NPOI.XSSF.UserModel.XSSFHeaderFooterProperties.HeaderFooter">
+            <summary>
+            Returns the underlying CTHeaderFooter xml bean
+            </summary>
+            <returns>the underlying CTHeaderFooter xml bean</returns>
+        </member>
+        <member name="P:NPOI.XSSF.UserModel.XSSFHeaderFooterProperties.AlignWithMargins">
+            <summary>
+            get or set alignWithMargins attribute
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.UserModel.XSSFHeaderFooterProperties.DifferentFirst">
+            <summary>
+            get or set differentFirst attribute
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.UserModel.XSSFHeaderFooterProperties.DifferentOddEven">
+            <summary>
+            get or set differentOddEven attribute
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.UserModel.XSSFHeaderFooterProperties.ScaleWithDoc">
+            <summary>
+            get or set scaleWithDoc attribute
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFHeaderFooterProperties.RemoveAlignWithMargins">
+            <summary>
+            remove alignWithMargins attribute
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFHeaderFooterProperties.RemoveDifferentFirst">
+            <summary>
+            remove differentFirst attribute
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFHeaderFooterProperties.RemoveDifferentOddEven">
+            <summary>
+            remove differentOddEven attribute
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFHeaderFooterProperties.RemoveScaleWithDoc">
+            <summary>
+            remove scaleWithDoc attribute
+            </summary>
+        </member>
         <member name="T:NPOI.XSSF.UserModel.XSSFHyperlink">
             XSSF Implementation of a Hyperlink.
             Note - unlike with HSSF, many kinds of hyperlink
@@ -7369,13 +8403,43 @@
             Add a row label using data from the given column.
             @param columnIndex the index of the column to be used as row label.
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddColumnLabel(NPOI.SS.UserModel.DataConsolidateFunction,System.Int32,System.String)">
+        <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddColLabel(System.Int32,System.String)">
+            <summary>
+            Add a col label using data from the given column.
+            </summary>
+            <param name="columnIndex">the index of the source column to be used as row label.
+            <c>columnIndex</c> is 0-based indexed and relative to the first column in the source.
+            </param>
+            <param name="valueFormat">format of column value (e.g. for date: "DD.MM.YYYY")</param>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddColLabel(System.Int32)">
+            <summary>
+            Add a col label using data from the given column.
+            </summary>
+            <param name="columnIndex">the index of the source column to be used as row label.
+            <c>columnIndex</c> is 0-based indexed and relative to the first column in the source.
+            </param>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddColumnLabel(NPOI.SS.UserModel.DataConsolidateFunction,System.Int32,System.String,System.String)">
             Add a column label using data from the given column and specified function
             @param columnIndex the index of the column to be used as column label.
             @param function the function to be used on the data
             The following functions exists:
             Sum, Count, Average, Max, Min, Product, Count numbers, StdDev, StdDevp, Var, Varp
             @param valueFieldName the name of pivot table value field
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddColumnLabel(NPOI.SS.UserModel.DataConsolidateFunction,System.Int32,System.String)">
+            <summary>
+            Add a column label using data from the given column and specified function
+            </summary>
+            <param name="columnIndex">the index of the source column to be used as column label.
+            <c>columnIndex</c> is 0-based indexed and relative to the first column in the source.
+            </param>
+            <param name="function">the function to be used on the data
+            The following functions exists:
+            Sum, Count, Average, Max, Min, Product, Count numbers, StdDev, StdDevp, Var, Varp
+            </param>
+            <param name="valueFieldName">the name of pivot table value field</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddColumnLabel(NPOI.SS.UserModel.DataConsolidateFunction,System.Int32)">
             Add a column label using data from the given column and specified function
@@ -7384,7 +8448,7 @@
             The following functions exists:
             Sum, Count, Average, Max, Min, Product, Count numbers, StdDev, StdDevp, Var, Varp
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddDataField(NPOI.SS.UserModel.DataConsolidateFunction,System.Int32,System.String)">
+        <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddDataField(NPOI.SS.UserModel.DataConsolidateFunction,System.Int32,System.String,System.String)">
             Add data field with data from the given column and specified function.
             @param function the function to be used on the data
                  The following functions exists:
@@ -7753,12 +8817,29 @@
         <member name="F:NPOI.XSSF.UserModel.XSSFRow._cells">
             <summary>
             Cells of this row keyed by their column indexes.
-            The SortedDictionary ensures that the cells are ordered by columnIndex in the ascending order.
             </summary>
         </member>
         <member name="F:NPOI.XSSF.UserModel.XSSFRow._sheet">
             <summary>
             the parent sheet
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.UserModel.XSSFRow._cachedFirstCellNum">
+            <summary>
+            Cached first (minimum) column index, or -1 if unknown/dirty.
+            Avoids O(n) LINQ Min() scan on every FirstCellNum access.
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.UserModel.XSSFRow._cachedLastCellNum">
+            <summary>
+            Cached last (maximum) column index, or -1 if unknown/dirty.
+            Avoids O(n) LINQ Max() scan on every LastCellNum access.
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.UserModel.XSSFRow._sortedCellCache">
+            <summary>
+            Lazily-built list of cells sorted by column index.
+            Null when invalidated; rebuilt on first read access.
             </summary>
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFRow.Sheet">
@@ -7768,7 +8849,7 @@
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFRow.FirstCellNum">
             <summary>
-            Get the number of the first cell Contained in this row.
+            Get the 0-based number of the first cell contained in this row.
             </summary>
             <returns>short representing the first logical cell in the row,
             or -1 if the row does not contain any cells.</returns>
@@ -7919,15 +9000,15 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFRow.CellIterator">
             <summary>
-            Cell iterator over the physically defined cell
+            Cell iterator over the physically defined cells, sorted by column index.
             </summary>
-            <returns>an iterator over cells in this row.</returns>
+            <returns>an iterator over cells in this row in ascending column order.</returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFRow.GetEnumerator">
             <summary>
             Alias for <see cref="M:NPOI.XSSF.UserModel.XSSFRow.CellIterator"/> to allow  foreach loops
             </summary>
-            <returns>an iterator over cells in this row.</returns>
+            <returns>an iterator over cells in this row in ascending column order.</returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFRow.CompareTo(NPOI.XSSF.UserModel.XSSFRow)">
             <summary>
@@ -7960,6 +9041,23 @@
             </summary>
             <param name="cellnum">0 based column number</param>
             <returns>Cell representing that column or null if Undefined.</returns>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFRow.GetSortedCells">
+            <summary>
+            Returns cells sorted by column index, using a lazily-built cache.
+            The cache is invalidated on any cell mutation (add/remove/rebuild).
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFRow.UpdateCacheOnAdd(System.Int32)">
+            <summary>
+            Update cached min/max on cell addition. O(1) — just compare with current bounds.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFRow.InvalidateCacheOnRemove(System.Int32)">
+            <summary>
+            Invalidate cached min/max when a cell at a boundary is removed.
+            Only forces re-scan when the removed cell was at an edge.
+            </summary>
         </member>
         <member name="T:NPOI.XSSF.UserModel.XSSFShape">
              Represents a shape in a SpreadsheetML Drawing.
@@ -8480,8 +9578,6 @@
             <summary>
             Get VML drawing for this sheet (aka 'legacy' drawig)
             </summary>
-            <param name="autoCreate">if true, then a new VML drawing part
-            is Created</param>
             <returns>the VML drawing of null if the drawing was not found and
             autoCreate=false</returns>
         </member>
@@ -8555,16 +9651,21 @@
             </summary>
             <param name="column">the column index</param>
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFSheet.AutoSizeColumn(System.Int32,System.Boolean)">
+        <member name="M:NPOI.XSSF.UserModel.XSSFSheet.AutoSizeColumn(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFSheet.AutoSizeColumn(System.Int32,System.Boolean,System.Int32)">
             <summary>
             Adjusts the column width to fit the contents.
-            This process can be relatively slow on large sheets, so this should
+            This Process can be relatively slow on large sheets, so this should
             normally only be called once per column, at the end of your
             Processing.
+            You can specify whether the content of merged cells should be considered or ignored.
+            Default is to ignore merged cells.
             </summary>
             <param name="column">the column index</param>
-            <param name="useMergedCells">whether to use the contents of merged cells
-            when calculating the width of the column</param>
+            <param name="useMergedCells">whether to use the contents of merged cells when calculating the width of the column</param>
+            <param name="maxRows">limit the scope to maxRows rows to speed up the function, or leave 0 (optional)</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.AutoSizeRow(System.Int32)">
             <summary>
@@ -9622,6 +10723,11 @@
         <member name="T:NPOI.XSSF.UserModel.XSSFSimpleShape">
             Represents a shape with a predefined geometry in a SpreadsheetML Drawing.
             Possible shape types are defined in {@link NPOI.SS.UserModel.ShapeTypes}
+        </member>
+        <member name="F:NPOI.XSSF.UserModel.XSSFSimpleShape._textBody">
+            <summary>
+            The text body containing the paragraphs for this shape.
+            </summary>
         </member>
         <member name="F:NPOI.XSSF.UserModel.XSSFSimpleShape._paragraphs">
             List of the paragraphs that make up the text in this shape
@@ -11483,6 +12589,9 @@
         <member name="F:NPOI.XWPF.UserModel.PictureType.WPG">
             WordPerfect graphics (.wpg)
         </member>
+        <member name="F:NPOI.XWPF.UserModel.PictureType.WDP">
+            Microsoft Windows Media Photo image (.wdp) 
+        </member>
         <member name="F:NPOI.XWPF.UserModel.PictureType.SVG">
             Scalable Vector Graphics (.svg)
         </member>
@@ -11607,6 +12716,42 @@
             Specifies that the height of the line shall be at least the value
             specified, but may be expanded to fit its content as needed.
         </member>
+        <member name="M:NPOI.XWPF.UserModel.MathContainer.CreateAcc">
+            <summary>
+            Create Accent
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.MathContainer.CreateNary">
+            <summary>
+            Create n-ary Operator Object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.MathContainer.CreateSSub">
+            <summary>
+            Subscript Object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.MathContainer.CreateSSup">
+            <summary>
+            Superscript Object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.MathContainer.CreateF">
+            <summary>
+            Fraction Object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.MathContainer.CreateRad">
+            <summary>
+            Radical Object
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:NPOI.XWPF.UserModel.ParagraphAlignment">
              Specifies all types of alignment which are available to be applied to objects in a
              WordProcessingML document
@@ -11624,6 +12769,12 @@
         <member name="T:NPOI.XWPF.UserModel.TableRowAlign">
             <summary>
             Sets alignment values allowed for Tables and Table Rows
+            </summary>
+        </member>
+        <member name="T:NPOI.XWPF.UserModel.TableWidthType">
+            <summary>
+            The width types for tables and table cells. Table width can be specified as "auto" (AUTO),
+            an absolute value in 20ths of a point (DXA), or as a percentage (PCT).
             </summary>
         </member>
         <member name="T:NPOI.XWPF.UserModel.TextAlignment">
@@ -12114,6 +13265,116 @@
             Thai Counting System
             </summary>
         </member>
+        <member name="T:NPOI.XWPF.UserModel.XWPFAcc">
+            <summary>
+            Accent
+            This element specifies the accent function, consisting of a base 
+            and a combining diacritical mark. If accPr is
+            omitted, the default accent is U+0302 (COMBINING CIRCUMFLEX ACCENT). 
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFAcc.AccPr">
+            <summary>
+            Single char or UTF, like: &#771;
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFAcc.Element">
+            <summary>
+            This tag, which is an abbreviation for “element”, serves several functions (18 total) including that of the base
+            argument of a mathematical object or function, the elements in an array, and the elements in boxes.If all
+            subelements are omitted, this element specifies the presence of an empty argument.
+            </summary>
+        </member>
+        <member name="F:NPOI.XWPF.UserModel.XWPFChart.ctInline">
+            this object is used to modify drawing properties
+        </member>
+        <member name="F:NPOI.XWPF.UserModel.XWPFChart.sheet">
+            this object is used to write embedded part of chart i.e. xlsx file in docx
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFChart.#ctor">
+            <summary>
+            constructor to create a new chart in document
+            </summary>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFChart.#ctor(NPOI.OpenXml4Net.OPC.PackagePart)">
+            <summary>
+            Construct a chart from a namespace part.
+            </summary>
+            <param name="part">the package part holding the chart data</param>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFChart.CreateRelationship(NPOI.XWPF.UserModel.XWPFRelation,System.Int32)">
+            method to create relationship with embedded part
+            for example writing xlsx file stream into output stream
+            @param chartSheet
+            @return return relation part which used to write relation in .rels file and get relation id
+            @since POI 4.0
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFChart.AddEmbeddedWorkSheet(System.IO.Stream)">
+            protected method which used to initialization of sheet output stream 
+            @param sheet
+            @since POI 4.0
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFChart.WriteEmbeddedWorkSheet(NPOI.SS.UserModel.IWorkbook)">
+            this method is used to write workbook object in embedded part of chart
+            return's true in case of successfully write work book in embedded part or return's false
+            @param wb
+            @return return's true in case of successfully write work book in embedded part or return's false
+            @throws IOException
+            @since POI 4.0
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFChart.SetInLine(NPOI.OpenXmlFormats.Dml.WordProcessing.CT_Inline)">
+            initialize in line object
+            @param inline
+            @since POI 4.0
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFChart.ChartWidth">
+            <summary>
+            set chart width
+            </summary>
+            <param name="width"></param>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFChart.ChartHeight">
+            <summary>
+            Set chart height
+            </summary>
+            <param name="height"></param>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFChart.SetChartBoundingBox(System.Int64,System.Int64)">
+            <summary>
+             set chart height and width
+            </summary>
+            <param name="width"></param>
+            <param name="height"></param>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFChart.SetChartMargin(System.UInt32,System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            set chart margin
+            </summary>
+            <param name="top"></param>
+            <param name="right"></param>
+            <param name="bottom"></param>
+            <param name="left"></param>
+        </member>
+        <member name="T:NPOI.XWPF.UserModel.XWPFChartData">
+            Raw picture data, normally attached to a WordprocessingML Drawing.
+            As a rule, embedded xlsx are stored in the /word/embedded/ part of a WordprocessingML package.
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFChartData.#ctor">
+            Create a new XWPFChartData node
+            @since POI 4.0
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFChartData.#ctor(NPOI.OpenXml4Net.OPC.PackagePart)">
+             Construct XWPFChartData from a package part
+            
+             @param part the package part holding the drawing data,
+             
+             @since POI 4.0
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:NPOI.XWPF.UserModel.XWPFChartData.GetData" -->
+        <member name="M:NPOI.XWPF.UserModel.XWPFChartData.PrepareForCommit">
+            chartData objects store the actual content in the part directly without keeping a
+            copy like all others therefore we need to handle them differently.
+        </member>
         <member name="T:NPOI.XWPF.UserModel.XWPFComment">
             Sketch of XWPF comment class
         </member>
@@ -12294,6 +13555,12 @@
         </member>
         <member name="F:NPOI.XWPF.UserModel.XWPFDocument.headerFooterPolicy">
             Handles the joy of different headers/footers for different pages 
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFDocument.GetCharts">
+            <summary>
+            list of XWPFCharts in this document
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:NPOI.XWPF.UserModel.XWPFDocument.NewPackage">
             Create a new WordProcessingML package and Setup the default minimal content
@@ -12732,8 +13999,16 @@
             @return numbering
         </member>
         <member name="M:NPOI.XWPF.UserModel.XWPFDocument.GetStyles">
-            Get Styles
-            @return styles for this document
+            <summary>
+            return styles for this document
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFDocument.GetTheme">
+            <summary>
+             Theme document (can be null)
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:NPOI.XWPF.UserModel.XWPFDocument.GetParagraph(NPOI.OpenXmlFormats.Wordprocessing.CT_P)">
             Get the paragraph with the CTP class p
@@ -12773,6 +14048,42 @@
         <member name="M:NPOI.XWPF.UserModel.XWPFDocument.GetTableCell(NPOI.OpenXmlFormats.Wordprocessing.CT_Tc)">
             Get the TableCell which belongs to the TableCell
             @param cell
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFDocument.CreateChart(NPOI.XWPF.UserModel.XWPFRun,System.Int32,System.Int32)">
+            This method is used to create template for chart XML
+            no need to read MS-Word file and modify charts
+            @param width
+            @param height
+            @return This method return object of XWPFChart
+            @throws InvalidFormatException
+            @throws IOException
+            @since POI 4.0
+        </member>
+        <member name="T:NPOI.XWPF.UserModel.XWPFF">
+            <summary>
+            Fraction Object
+            This element specifies the fraction object, consisting of a numerator and denominator separated by a fraction
+            bar.The fraction bar can be horizontal or diagonal, depending on the fraction properties.The fraction object is
+            also used to represent the stack function, which places one element above another, with no fraction bar.
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFF.FractionType">
+            <summary>
+            This element specifies the properties of the fraction object f. Properties of the Fraction object include the type
+            or style of the fraction.The fraction bar can be horizontal or diagonal, depending on the fraction properties.The
+            fraction object is also used to represent the stack function, which places one element above another, with no
+            fraction bar.
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFF.Numerator">
+            <summary>
+            This element specifies the numerator of the Fraction object f
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFF.Denominator">
+            <summary>
+            This element specifies the denominator of a fraction
+            </summary>
         </member>
         <member name="T:NPOI.XWPF.UserModel.XWPFFactory">
             @author Yegor Kozlov
@@ -13118,6 +14429,55 @@
         </member>
         <member name="M:NPOI.XWPF.UserModel.XWPFLatentStyles.IsLatentStyle(System.String)">
             checks whether specific LatentStyleID is a latentStyle
+        </member>
+        <member name="T:NPOI.XWPF.UserModel.XWPFNary">
+            <summary>
+            n-ary Operator Object
+            This element specifies an n-ary object, consisting of an n-ary object, a base (or operand), and optional upper and
+            lower limits
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFNary.Element">
+            <summary>
+            This tag, which is an abbreviation for “element”, serves several functions (18 total) including that of the base
+            argument of a mathematical object or function, the elements in an array, and the elements in boxes.If all
+            subelements are omitted, this element specifies the presence of an empty argument.
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFNary.Subscript">
+            <summary>
+            This element specifies the subscript of the Pre-Sub-Superscript object sPre
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFNary.Superscript">
+            <summary>
+            This element specifies the superscript of the superscript object sSup. 
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFNary.NaryPr">
+            <summary>
+            Get Nary symbol
+            </summary>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFNary.SetSumm">
+            <summary>
+            Sets ∑ char
+            </summary>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFNary.SetUnion">
+            <summary>
+            Sets ⋃ char
+            </summary>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFNary.SetIntegral">
+            <summary>
+            Sets ∫ char
+            </summary>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFNary.SetAnd">
+            <summary>
+            Sets ⋀ char
+            </summary>
         </member>
         <member name="T:NPOI.XWPF.UserModel.XWPFNum">
             TODO Bring more of the logic over from XWPFParagraph
@@ -13517,7 +14877,7 @@
             Get a <b>copy</b> of the currently used CTPInd, if none is used, return
             a new instance.
         </member>
-        <member name="M:NPOI.XWPF.UserModel.XWPFParagraph.GetCTPPr">
+        <member name="M:NPOI.XWPF.UserModel.XWPFParagraph.GetCTPPr(System.Boolean)">
             Get a <b>copy</b> of the currently used CTPPr, if none is used, return
             a new instance.
         </member>
@@ -13612,6 +14972,18 @@
             </summary>
             <param name="footnote">Footnote to which to add a reference.</param>
         </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFParagraph.IsAlignmentSet">
+            <summary>
+            Returns true if the paragraph has a paragraph alignment value of its own
+            or false in case it should fall back to the alignment value set by the paragraph style.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFParagraph.IsKeepNext">
+            <summary>
+            Indicates whether this paragraph should be kept on the same page as the next one.
+            </summary>
+        </member>
         <member name="T:NPOI.XWPF.UserModel.XWPFPicture">
             @author Philipp Epp
         </member>
@@ -13695,6 +15067,24 @@
         <member name="M:NPOI.XWPF.UserModel.XWPFPictureData.PrepareForCommit">
             *PictureData objects store the actual content in the part directly without keeping a 
             copy like all others therefore we need to handle them differently.
+        </member>
+        <member name="T:NPOI.XWPF.UserModel.XWPFRad">
+            <summary>
+            Radical Object
+            This element specifies the radical object, consisting of a radical, a base e, and an optional degree deg. [Example:
+            Example of rad are √𝑥
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFRad.Degree">
+            <summary>
+            This element specifies the degree in the mathematical radical. This element is optional. When omitted, the
+            square root function, as in √𝑥, is assumed.
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFRad.Element">
+            <summary>
+            Radical expression element.
+            </summary>
         </member>
         <member name="T:NPOI.XWPF.UserModel.XWPFRelation">
             @author Yegor Kozlov
@@ -13824,6 +15214,11 @@
             <param name="text">insert text</param>
             <param name="startIndex">start index of the insertion in the run text</param>
         </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFRun.NumberOfTexts">
+            <summary>
+            Returns number of text element
+            </summary>
+        </member>
         <member name="M:NPOI.XWPF.UserModel.XWPFRun.ToString">
             <summary>
             Returns the string version of the text and the phonetic string
@@ -13891,6 +15286,26 @@
             
              @return VerticalAlign
              @see VerticalAlign all possible value that could be Applyed to this run
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFRun.IsVanish">
+            <summary>
+            Get the vanish (hidden text) value
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFRun.IsRtl">
+            <summary>
+            Gets or sets whether this run contains right-to-left text (OOXML §17.3.2.30).
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFRun.VerticalAlignment">
+            <summary>
+            Get or set the vertical alignment of the run.
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFRun.TextHightlightColor">
+            <summary>
+            Set or get the highlight color for the run
+            </summary>
         </member>
         <member name="P:NPOI.XWPF.UserModel.XWPFRun.FontFamily">
              Specifies the fonts which shall be used to display the text contents of
@@ -14159,6 +15574,87 @@
         <member name="P:NPOI.XWPF.UserModel.XWPFSettings.IsTrackRevisions">
             get or set revision tracking
         </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFSharedRun.IsCTOnOff(NPOI.OpenXmlFormats.Wordprocessing.CT_OnOff)">
+            For isBold, isItalic etc
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFSharedRun.SetFontFamily(System.String,NPOI.XWPF.UserModel.FontCharRange)">
+            <summary>
+            Specifies the fonts which shall be used to display the text contents of
+            this run.The default handling for fcr == null is to overwrite the
+            ascii font char range with the given font family and also set all not
+            specified font ranges
+            </summary>
+            <param name="fontFamily">fontFamily</param>
+            <param name="fcr">FontCharRange or null for default handling</param>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFSharedRun.GetFontFamily(NPOI.XWPF.UserModel.FontCharRange)">
+            <summary>
+            Gets the font family for the specified font char range.
+            If fcr is null, the font char range "ascii" is used
+            Please use "Cambria Math"(set as default) font otherwise MS Word 
+            don't open file, LibreOffice Writer open it normaly.
+            I think this is MS Word bug, because this is not standart.
+            </summary>
+            <param name="fcr">the font char range, defaults to "ansi"</param>
+            <returns>a string representing the font famil</returns>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFSharedRun.SetText(System.String)">
+             <summary>
+            Sets the text of this text run
+             </summary>
+             <param name="value">the literal text which shall be displayed in the document</param>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFSharedRun.SetText(System.String,System.Int32)">
+            <summary>
+            Sets the text of this text run.in the 
+            </summary>
+            <param name="value">the literal text which shall be displayed in the document</param>
+            <param name="pos">position in the text array (NB: 0 based)</param>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFSharedRun.preserveSpaces(NPOI.OpenXmlFormats.Shared.CT_Text1)">
+            <summary>
+            Add the xml:spaces="preserve" attribute if the string has leading or trailing white spaces
+            </summary>
+            <param name="xs">the string to check</param>
+        </member>
+        <member name="T:NPOI.XWPF.UserModel.XWPFSSub">
+            <summary>
+            Subscript Object
+            his element specifies the subscript object sSub, which consists of a base e and a reduced-size scr placed below
+            and to the right, as in Xn
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFSSub.Element">
+            <summary>
+            This tag, which is an abbreviation for “element”, serves several functions (18 total) including that of the base
+            argument of a mathematical object or function, the elements in an array, and the elements in boxes.If all
+            subelements are omitted, this element specifies the presence of an empty argument.
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFSSub.Subscript">
+            <summary>
+            This element specifies the subscript of the Pre-Sub-Superscript object sPre
+            </summary>
+        </member>
+        <member name="T:NPOI.XWPF.UserModel.XWPFSSup">
+            <summary>
+            Subscript Object
+            his element specifies the subscript object sSub, which consists of a base e and a reduced-size scr placed below
+            and to the right, as in Xn
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFSSup.Element">
+            <summary>
+            This tag, which is an abbreviation for “element”, serves several functions (18 total) including that of the base
+            argument of a mathematical object or function, the elements in an array, and the elements in boxes.If all
+            subelements are omitted, this element specifies the presence of an empty argument.
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFSSup.Superscript">
+            <summary>
+            This element specifies the Superscript of the Pre-Sub-Superscript object sPre
+            </summary>
+        </member>
         <member name="T:NPOI.XWPF.UserModel.XWPFStyle">
              @author Philipp Epp
             
@@ -14223,6 +15719,13 @@
         <member name="M:NPOI.XWPF.UserModel.XWPFStyles.SetStyles(NPOI.OpenXmlFormats.Wordprocessing.CT_Styles)">
             Sets the ctStyles
             @param styles
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFStyles.RemoveStyle(System.Int32)">
+            <summary>
+            remove the specified style if present
+            </summary>
+            <param name="pos"></param>
+            <returns></returns>
         </member>
         <member name="M:NPOI.XWPF.UserModel.XWPFStyles.StyleExist(System.String)">
             Checks whether style with styleID exist
@@ -14584,234 +16087,29 @@
              @param repeat - if TRUE, repeat header row at the top of each page of table;
                            if FALSE, don't repeat header row.
         </member>
-        <member name="M:NPOI.XWPF.Usermodel.MathContainer.CreateAcc">
+        <member name="T:NPOI.XWPF.UserModel.XWPFTheme">
             <summary>
-            Create Accent
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:NPOI.XWPF.Usermodel.MathContainer.CreateNary">
-            <summary>
-            Create n-ary Operator Object
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:NPOI.XWPF.Usermodel.MathContainer.CreateSSub">
-            <summary>
-            Subscript Object
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:NPOI.XWPF.Usermodel.MathContainer.CreateSSup">
-            <summary>
-            Superscript Object
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:NPOI.XWPF.Usermodel.MathContainer.CreateF">
-            <summary>
-            Fraction Object
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:NPOI.XWPF.Usermodel.MathContainer.CreateRad">
-            <summary>
-            Radical Object
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:NPOI.XWPF.Usermodel.XWPFAcc">
-            <summary>
-            Accent
-            This element specifies the accent function, consisting of a base 
-            and a combining diacritical mark. If accPr is
-            omitted, the default accent is U+0302 (COMBINING CIRCUMFLEX ACCENT). 
+             A shared style sheet in a .docx document
             </summary>
         </member>
-        <member name="P:NPOI.XWPF.Usermodel.XWPFAcc.AccPr">
+        <member name="P:NPOI.XWPF.UserModel.XWPFTheme.Name">
             <summary>
-            Single char or UTF, like: &#771;
+            name of this theme, e.g. "Office Theme"
             </summary>
         </member>
-        <member name="P:NPOI.XWPF.Usermodel.XWPFAcc.Element">
+        <member name="M:NPOI.XWPF.UserModel.XWPFTheme.GetCTTheme">
             <summary>
-            This tag, which is an abbreviation for “element”, serves several functions (18 total) including that of the base
-            argument of a mathematical object or function, the elements in an array, and the elements in boxes.If all
-            subelements are omitted, this element specifies the presence of an empty argument.
+            CT_OfficeStyleSheet（drawingml theme）
             </summary>
         </member>
-        <member name="T:NPOI.XWPF.Usermodel.XWPFF">
+        <member name="P:NPOI.XWPF.UserModel.XWPFTheme.MajorFont">
             <summary>
-            Fraction Object
-            This element specifies the fraction object, consisting of a numerator and denominator separated by a fraction
-            bar.The fraction bar can be horizontal or diagonal, depending on the fraction properties.The fraction object is
-            also used to represent the stack function, which places one element above another, with no fraction bar.
+            Typically the major font is used for heading areas of a document.
             </summary>
         </member>
-        <member name="P:NPOI.XWPF.Usermodel.XWPFF.FractionType">
+        <member name="P:NPOI.XWPF.UserModel.XWPFTheme.MinorFont">
             <summary>
-            This element specifies the properties of the fraction object f. Properties of the Fraction object include the type
-            or style of the fraction.The fraction bar can be horizontal or diagonal, depending on the fraction properties.The
-            fraction object is also used to represent the stack function, which places one element above another, with no
-            fraction bar.
-            </summary>
-        </member>
-        <member name="P:NPOI.XWPF.Usermodel.XWPFF.Numerator">
-            <summary>
-            This element specifies the numerator of the Fraction object f
-            </summary>
-        </member>
-        <member name="P:NPOI.XWPF.Usermodel.XWPFF.Denominator">
-            <summary>
-            This element specifies the denominator of a fraction
-            </summary>
-        </member>
-        <member name="T:NPOI.XWPF.Usermodel.XWPFNary">
-            <summary>
-            n-ary Operator Object
-            This element specifies an n-ary object, consisting of an n-ary object, a base (or operand), and optional upper and
-            lower limits
-            </summary>
-        </member>
-        <member name="P:NPOI.XWPF.Usermodel.XWPFNary.Element">
-            <summary>
-            This tag, which is an abbreviation for “element”, serves several functions (18 total) including that of the base
-            argument of a mathematical object or function, the elements in an array, and the elements in boxes.If all
-            subelements are omitted, this element specifies the presence of an empty argument.
-            </summary>
-        </member>
-        <member name="P:NPOI.XWPF.Usermodel.XWPFNary.Subscript">
-            <summary>
-            This element specifies the subscript of the Pre-Sub-Superscript object sPre
-            </summary>
-        </member>
-        <member name="P:NPOI.XWPF.Usermodel.XWPFNary.Superscript">
-            <summary>
-            This element specifies the superscript of the superscript object sSup. 
-            </summary>
-        </member>
-        <member name="P:NPOI.XWPF.Usermodel.XWPFNary.NaryPr">
-            <summary>
-            Get Nary symbol
-            </summary>
-        </member>
-        <member name="M:NPOI.XWPF.Usermodel.XWPFNary.SetSumm">
-            <summary>
-            Sets ∑ char
-            </summary>
-        </member>
-        <member name="M:NPOI.XWPF.Usermodel.XWPFNary.SetUnion">
-            <summary>
-            Sets ⋃ char
-            </summary>
-        </member>
-        <member name="M:NPOI.XWPF.Usermodel.XWPFNary.SetIntegral">
-            <summary>
-            Sets ∫ char
-            </summary>
-        </member>
-        <member name="M:NPOI.XWPF.Usermodel.XWPFNary.SetAnd">
-            <summary>
-            Sets ⋀ char
-            </summary>
-        </member>
-        <member name="T:NPOI.XWPF.Usermodel.XWPFRad">
-            <summary>
-            Radical Object
-            This element specifies the radical object, consisting of a radical, a base e, and an optional degree deg. [Example:
-            Example of rad are √𝑥
-            </summary>
-        </member>
-        <member name="P:NPOI.XWPF.Usermodel.XWPFRad.Degree">
-            <summary>
-            This element specifies the degree in the mathematical radical. This element is optional. When omitted, the
-            square root function, as in √𝑥, is assumed.
-            </summary>
-        </member>
-        <member name="P:NPOI.XWPF.Usermodel.XWPFRad.Element">
-            <summary>
-            Radical expression element.
-            </summary>
-        </member>
-        <member name="M:NPOI.XWPF.Usermodel.XWPFSharedRun.IsCTOnOff(NPOI.OpenXmlFormats.Wordprocessing.CT_OnOff)">
-            For isBold, isItalic etc
-        </member>
-        <member name="M:NPOI.XWPF.Usermodel.XWPFSharedRun.SetFontFamily(System.String,NPOI.XWPF.UserModel.FontCharRange)">
-            <summary>
-            Specifies the fonts which shall be used to display the text contents of
-            this run.The default handling for fcr == null is to overwrite the
-            ascii font char range with the given font family and also set all not
-            specified font ranges
-            </summary>
-            <param name="fontFamily">fontFamily</param>
-            <param name="fcr">FontCharRange or null for default handling</param>
-        </member>
-        <member name="M:NPOI.XWPF.Usermodel.XWPFSharedRun.GetFontFamily(NPOI.XWPF.UserModel.FontCharRange)">
-            <summary>
-            Gets the font family for the specified font char range.
-            If fcr is null, the font char range "ascii" is used
-            Please use "Cambria Math"(set as default) font otherwise MS Word 
-            don't open file, LibreOffice Writer open it normaly.
-            I think this is MS Word bug, because this is not standart.
-            </summary>
-            <param name="fcr">the font char range, defaults to "ansi"</param>
-            <returns>a string representing the font famil</returns>
-        </member>
-        <member name="M:NPOI.XWPF.Usermodel.XWPFSharedRun.SetText(System.String)">
-             <summary>
-            Sets the text of this text run
-             </summary>
-             <param name="value">the literal text which shall be displayed in the document</param>
-        </member>
-        <member name="M:NPOI.XWPF.Usermodel.XWPFSharedRun.SetText(System.String,System.Int32)">
-            <summary>
-            Sets the text of this text run.in the 
-            </summary>
-            <param name="value">the literal text which shall be displayed in the document</param>
-            <param name="pos">position in the text array (NB: 0 based)</param>
-        </member>
-        <member name="M:NPOI.XWPF.Usermodel.XWPFSharedRun.preserveSpaces(NPOI.OpenXmlFormats.Shared.CT_Text1)">
-            <summary>
-            Add the xml:spaces="preserve" attribute if the string has leading or trailing white spaces
-            </summary>
-            <param name="xs">the string to check</param>
-        </member>
-        <member name="T:NPOI.XWPF.Usermodel.XWPFSSub">
-            <summary>
-            Subscript Object
-            his element specifies the subscript object sSub, which consists of a base e and a reduced-size scr placed below
-            and to the right, as in Xn
-            </summary>
-        </member>
-        <member name="P:NPOI.XWPF.Usermodel.XWPFSSub.Element">
-            <summary>
-            This tag, which is an abbreviation for “element”, serves several functions (18 total) including that of the base
-            argument of a mathematical object or function, the elements in an array, and the elements in boxes.If all
-            subelements are omitted, this element specifies the presence of an empty argument.
-            </summary>
-        </member>
-        <member name="P:NPOI.XWPF.Usermodel.XWPFSSub.Subscript">
-            <summary>
-            This element specifies the subscript of the Pre-Sub-Superscript object sPre
-            </summary>
-        </member>
-        <member name="T:NPOI.XWPF.Usermodel.XWPFSSup">
-            <summary>
-            Subscript Object
-            his element specifies the subscript object sSub, which consists of a base e and a reduced-size scr placed below
-            and to the right, as in Xn
-            </summary>
-        </member>
-        <member name="P:NPOI.XWPF.Usermodel.XWPFSSup.Element">
-            <summary>
-            This tag, which is an abbreviation for “element”, serves several functions (18 total) including that of the base
-            argument of a mathematical object or function, the elements in an array, and the elements in boxes.If all
-            subelements are omitted, this element specifies the presence of an empty argument.
-            </summary>
-        </member>
-        <member name="P:NPOI.XWPF.Usermodel.XWPFSSup.Superscript">
-            <summary>
-            This element specifies the Superscript of the Pre-Sub-Superscript object sPre
+            Typically the monor font is used for normal text or paragraph areas.
             </summary>
         </member>
     </members>

@@ -22,7 +22,7 @@ using NPOI.POIFS.Crypt.Dsig;
 using NPOI.SS.Formula.Eval;
 using NPOI.SS.Formula.Functions;
 using NPOI.Util;
-using Org.BouncyCastle.Tsp;
+
 
 namespace CodingLabpro.frmChild
 {
@@ -75,49 +75,59 @@ namespace CodingLabpro.frmChild
             
         }
 
-        //เมทอดส่งคำสั่งไปยังมอเตอร์ Vexta ผ่าน Serial Port
-        private async Task SendCommandAsync(string command)
+        public void StartPositionMonitor(bool StatusPort)
         {
-            await SerialLock.WaitAsync();
+            if (this.IsDisposed || !this.IsHandleCreated)
+                return;
 
-            try
+            if (this.InvokeRequired)
             {
-                if (mySerialPort.IsOpen)
+                this.BeginInvoke(new Action(() =>
+                    StartPositionMonitor(StatusPort)));
+                return;
+            }
+
+            if (StatusPort)
+            {
+                // ป้องกันการเปิด Monitor ซ้ำ
+                if (MonitorTask != null && !MonitorTask.IsCompleted)
+                    return;
+
+                MonitorToken?.Dispose();
+
+                MonitorToken = new CancellationTokenSource();
+
+                CancellationToken token = MonitorToken.Token;
+
+                MonitorTask = Task.Run(
+                    () => Monitoring_Position(token));
+            }
+            else
+            {
+                // ยกเลิก Background Monitor
+                MonitorToken?.Cancel();
+            }
+        }
+
+        public async Task StopPositionMonitor(bool StatusPort)
+        {
+            if (!StatusPort)
+            {
+                if (MonitorToken == null)
+                    return;
+
+                MonitorToken.Cancel();
+
+                if (MonitorTask != null)
                 {
-                    mySerialPort.WriteLine(command);
-                    Debug.WriteLine($"Send: {command}");
+                    await MonitorTask;
                 }
-            }
-            finally
-            {
-                SerialLock.Release();
-            }
-        }
 
-        private void StartPositionMonitor()
-        {
-            if (MonitorTask != null && !MonitorTask.IsCompleted)
-                return;
-
-            MonitorToken = new CancellationTokenSource();
-            MonitorTask = Task.Run(() => Monitoring_Position(MonitorToken.Token));
-        }
-
-        private async Task StopPositionMonitor()
-        {
-            if (MonitorToken == null)
-                return;
-
-            MonitorToken.Cancel();
-
-            if (MonitorTask != null)
-            {
-                await MonitorTask;
+                MonitorToken.Dispose();
+                MonitorToken = null;
+                MonitorTask = null;
             }
 
-            MonitorToken.Dispose();
-            MonitorToken = null;
-            MonitorTask = null;
         }
 
         private async Task Monitoring_Position(CancellationToken token)
@@ -131,6 +141,7 @@ namespace CodingLabpro.frmChild
                     if (StatusRead)
                     {
                         Debug.WriteLine($"X: {PositionX}, Y: {PositionY}");
+                        Report_positon.Invoke((MethodInvoker)(() => Report_positon.Text = $"X: {PositionX}, Y: {PositionY}"));
                     }
 
                     await Task.Delay(500, token); // Delay for 500ms before the next read
@@ -156,7 +167,7 @@ namespace CodingLabpro.frmChild
 
                 mySerialPort.WriteLine("Q:");
                 string response = mySerialPort.ReadLine();
-                mySerialPort.ReadTimeout = 1000; // Set a timeout for reading the response
+                mySerialPort.ReadTimeout = 500; // Set a timeout for reading the response
                 MessageState = response;
                 string[] parts = response.Split(',');
 
@@ -212,6 +223,11 @@ namespace CodingLabpro.frmChild
             Btn_XRight.Enabled = !EnabledItem;
             Btn_stopmotor.Enabled = !EnabledItem;
             CblStepMotor.Enabled = !EnabledItem;
+            RBcurrent.Enabled = !EnabledItem;
+            RBvoltage.Enabled = !EnabledItem;
+            RBfrequency.Enabled = !EnabledItem;
+            RBsource_AC.Enabled = !EnabledItem;
+            RBsource_DC.Enabled = !EnabledItem;
 
 
 
