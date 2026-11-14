@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\SixLabors.ImageSharp.4.1.3\build\SixLabors.ImageSharp.props" Condition="Exists('..\packages\SixLabors.ImageSharp.4.1.3\build\SixLabors.ImageSharp.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -97,23 +96,26 @@
     <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.4.0.1\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
     </Reference>
-    <Reference Include="NPOI.Core, Version=2.8.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.8.1\lib\net472\NPOI.Core.dll</HintPath>
+    <Reference Include="NPOI.Core, Version=2.7.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.7.6\lib\net472\NPOI.Core.dll</HintPath>
     </Reference>
-    <Reference Include="NPOI.OOXML, Version=2.8.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.8.1\lib\net472\NPOI.OOXML.dll</HintPath>
+    <Reference Include="NPOI.OOXML, Version=2.7.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.7.6\lib\net472\NPOI.OOXML.dll</HintPath>
     </Reference>
-    <Reference Include="NPOI.OpenXml4Net, Version=2.8.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.8.1\lib\net472\NPOI.OpenXml4Net.dll</HintPath>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.7.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.7.6\lib\net472\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
-    <Reference Include="NPOI.OpenXmlFormats, Version=2.8.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.8.1\lib\net472\NPOI.OpenXmlFormats.dll</HintPath>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.7.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.7.6\lib\net472\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="NSax, Version=1.0.2.0, Culture=neutral, PublicKeyToken=0b3d9671cbd3c8d0, processorArchitecture=MSIL">
       <HintPath>..\packages\NSax.1.0.2\lib\net472\NSax.dll</HintPath>
     </Reference>
-    <Reference Include="SkiaSharp, Version=4.156.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkiaSharp.4.156.0\lib\net462\SkiaSharp.dll</HintPath>
+    <Reference Include="SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
+      <HintPath>..\packages\SixLabors.Fonts.1.0.1\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.ImageSharp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
+      <HintPath>..\packages\SixLabors.ImageSharp.2.1.11\lib\net472\SixLabors.ImageSharp.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
@@ -397,19 +399,6 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets'))" />
-    <Error Condition="!Exists('..\packages\SixLabors.Fonts.3.2.0\build\SixLabors.Fonts.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SixLabors.Fonts.3.2.0\build\SixLabors.Fonts.targets'))" />
-    <Error Condition="!Exists('..\packages\SixLabors.ImageSharp.4.1.3\build\SixLabors.ImageSharp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SixLabors.ImageSharp.4.1.3\build\SixLabors.ImageSharp.props'))" />
-    <Error Condition="!Exists('..\packages\SixLabors.ImageSharp.4.1.3\build\SixLabors.ImageSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SixLabors.ImageSharp.4.1.3\build\SixLabors.ImageSharp.targets'))" />
-    <Error Condition="!Exists('..\packages\NPOI.2.8.1\build\NPOI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NPOI.2.8.1\build\NPOI.targets'))" />
-    <Error Condition="!Exists('..\packages\SkiaSharp.NativeAssets.Linux.NoDependencies.4.156.0\build\net462\SkiaSharp.NativeAssets.Linux.NoDependencies.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.NativeAssets.Linux.NoDependencies.4.156.0\build\net462\SkiaSharp.NativeAssets.Linux.NoDependencies.targets'))" />
-    <Error Condition="!Exists('..\packages\SkiaSharp.NativeAssets.macOS.4.156.0\build\net462\SkiaSharp.NativeAssets.macOS.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.NativeAssets.macOS.4.156.0\build\net462\SkiaSharp.NativeAssets.macOS.targets'))" />
-    <Error Condition="!Exists('..\packages\SkiaSharp.NativeAssets.Win32.4.156.0\build\net462\SkiaSharp.NativeAssets.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.NativeAssets.Win32.4.156.0\build\net462\SkiaSharp.NativeAssets.Win32.targets'))" />
   </Target>
   <Import Project="..\packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets" Condition="Exists('..\packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets')" />
-  <Import Project="..\packages\SixLabors.Fonts.3.2.0\build\SixLabors.Fonts.targets" Condition="Exists('..\packages\SixLabors.Fonts.3.2.0\build\SixLabors.Fonts.targets')" />
-  <Import Project="..\packages\SixLabors.ImageSharp.4.1.3\build\SixLabors.ImageSharp.targets" Condition="Exists('..\packages\SixLabors.ImageSharp.4.1.3\build\SixLabors.ImageSharp.targets')" />
-  <Import Project="..\packages\NPOI.2.8.1\build\NPOI.targets" Condition="Exists('..\packages\NPOI.2.8.1\build\NPOI.targets')" />
-  <Import Project="..\packages\SkiaSharp.NativeAssets.Linux.NoDependencies.4.156.0\build\net462\SkiaSharp.NativeAssets.Linux.NoDependencies.targets" Condition="Exists('..\packages\SkiaSharp.NativeAssets.Linux.NoDependencies.4.156.0\build\net462\SkiaSharp.NativeAssets.Linux.NoDependencies.targets')" />
-  <Import Project="..\packages\SkiaSharp.NativeAssets.macOS.4.156.0\build\net462\SkiaSharp.NativeAssets.macOS.targets" Condition="Exists('..\packages\SkiaSharp.NativeAssets.macOS.4.156.0\build\net462\SkiaSharp.NativeAssets.macOS.targets')" />
-  <Import Project="..\packages\SkiaSharp.NativeAssets.Win32.4.156.0\build\net462\SkiaSharp.NativeAssets.Win32.targets" Condition="Exists('..\packages\SkiaSharp.NativeAssets.Win32.4.156.0\build\net462\SkiaSharp.NativeAssets.Win32.targets')" />
 </Project>

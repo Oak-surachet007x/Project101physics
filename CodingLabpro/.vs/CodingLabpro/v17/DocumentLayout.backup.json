@@ -1,32 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|c:\\users\\surac\\desktop\\phy101\\codinglabpro\\codinglabpro\\tracking_scan\\scancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\tracking_scan\\scancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|c:\\users\\surac\\desktop\\phy101\\codinglabpro\\codinglabpro\\tracking_scan\\scansettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\tracking_scan\\scansettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|c:\\users\\surac\\desktop\\phy101\\codinglabpro\\codinglabpro\\tracking_scan\\scangridview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\tracking_scan\\scangridview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|c:\\users\\surac\\desktop\\phy101\\codinglabpro\\codinglabpro\\frmchild\\axiscontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmchild\\axiscontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE734757-B64B-47B3-BEC5-0E355BC66140}|CodingLabpro\\CodingLabpro.csproj|solutionrelative:codinglabpro\\frmmain01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -34,61 +9,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 323,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AxisControl.cs",
-              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmChild\\AxisControl.cs",
-              "RelativeDocumentMoniker": "CodingLabpro\\frmChild\\AxisControl.cs",
-              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmChild\\AxisControl.cs",
-              "RelativeToolTip": "CodingLabpro\\frmChild\\AxisControl.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAnwP4GAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T17:47:50.323Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Scangridview.cs",
-              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\Tracking_scan\\Scangridview.cs",
-              "RelativeDocumentMoniker": "CodingLabpro\\Tracking_scan\\Scangridview.cs",
-              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\Tracking_scan\\Scangridview.cs*",
-              "RelativeToolTip": "CodingLabpro\\Tracking_scan\\Scangridview.cs*",
-              "ViewState": "AgIAADIAAAAAAAAAAAAIwFcAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-14T12:34:18.205Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ScanSettings.cs",
-              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\Tracking_scan\\ScanSettings.cs",
-              "RelativeDocumentMoniker": "CodingLabpro\\Tracking_scan\\ScanSettings.cs",
-              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\Tracking_scan\\ScanSettings.cs*",
-              "RelativeToolTip": "CodingLabpro\\Tracking_scan\\ScanSettings.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBIAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-14T11:12:35.128Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ScanController.cs",
-              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\Tracking_scan\\ScanController.cs",
-              "RelativeDocumentMoniker": "CodingLabpro\\Tracking_scan\\ScanController.cs",
-              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\Tracking_scan\\ScanController.cs*",
-              "RelativeToolTip": "CodingLabpro\\Tracking_scan\\ScanController.cs*",
-              "ViewState": "AgIAACMAAAAAAAAAAAAnwEsAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-14T11:07:45.464Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -124,29 +46,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "FrmMain01.cs",
-              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain01.cs",
-              "RelativeDocumentMoniker": "CodingLabpro\\frmMain01.cs",
-              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain01.cs",
-              "RelativeToolTip": "CodingLabpro\\frmMain01.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-04T09:57:01.646Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "FrmMain01.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain01.cs",
-              "RelativeDocumentMoniker": "CodingLabpro\\frmMain01.cs",
-              "ToolTip": "C:\\Users\\Surac\\Desktop\\Phy101\\CodingLabpro\\CodingLabpro\\frmMain01.cs [Design]",
-              "RelativeToolTip": "CodingLabpro\\frmMain01.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T17:42:29.505Z"
             }
           ]
         }
