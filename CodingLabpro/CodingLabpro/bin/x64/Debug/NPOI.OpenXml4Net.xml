@@ -592,186 +592,186 @@
             @return A string representation of the created date.
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.GetCreatorProperty">
-            Get creator.
+             Get creator.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getCreatorProperty()
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getCreatorProperty()
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.GetDescriptionProperty">
-            Get description.
+             Get description.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getDescriptionProperty()
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getDescriptionProperty()
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.GetIdentifierProperty">
-            Get identifier.
+             Get identifier.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getIdentifierProperty()
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getIdentifierProperty()
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.GetKeywordsProperty">
-            Get keywords.
+             Get keywords.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getKeywordsProperty()
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getKeywordsProperty()
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.GetLanguageProperty">
-            Get the language.
+             Get the language.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getLanguageProperty()
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getLanguageProperty()
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.GetLastModifiedByProperty">
-            Get the author of last modifications.
+             Get the author of last modifications.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getLastModifiedByProperty()
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getLastModifiedByProperty()
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.GetLastPrintedProperty">
-            Get last printed date.
+             Get last printed date.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getLastPrintedProperty()
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getLastPrintedProperty()
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.GetLastPrintedPropertyString">
-            Get last printed date formated into a String.
+             Get last printed date formated into a String.
             
-            @return A string representation of the last printed date.
+             @return A string representation of the last printed date.
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.GetModifiedProperty">
-            Get modified date.
+             Get modified date.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getModifiedProperty()
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getModifiedProperty()
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.GetModifiedPropertyString">
-            Get modified date formated into a String.
+             Get modified date formated into a String.
             
-            @return A string representation of the modified date.
+             @return A string representation of the modified date.
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.GetRevisionProperty">
-            Get revision.
+             Get revision.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getRevisionProperty()
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getRevisionProperty()
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.GetSubjectProperty">
-            Get subject.
+             Get subject.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getSubjectProperty()
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getSubjectProperty()
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.GetTitleProperty">
-            Get title.
+             Get title.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getTitleProperty()
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getTitleProperty()
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.GetVersionProperty">
-            Get version.
+             Get version.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getVersionProperty()
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#getVersionProperty()
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetCategoryProperty(System.String)">
-            Set the category.
+             Set the category.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setCategoryProperty(java.lang.String)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setCategoryProperty(java.lang.String)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetContentStatusProperty(System.String)">
-            Set the content status.
+             Set the content status.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setContentStatusProperty(java.lang.String)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setContentStatusProperty(java.lang.String)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetContentTypeProperty(System.String)">
-            Set the content type.
+             Set the content type.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setContentTypeProperty(java.lang.String)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setContentTypeProperty(java.lang.String)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetCreatedProperty(System.String)">
-            Set the created date.
+             Set the created date.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setCreatedProperty(org.apache.poi.OpenXml4Net.util.Nullable)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setCreatedProperty(org.apache.poi.OpenXml4Net.util.Nullable)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetCreatedProperty(System.Nullable{System.DateTime})">
-            Set the created date.
+             Set the created date.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setCreatedProperty(org.apache.poi.OpenXml4Net.util.Nullable)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setCreatedProperty(org.apache.poi.OpenXml4Net.util.Nullable)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetCreatorProperty(System.String)">
-            Set the creator.
+             Set the creator.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setCreatorProperty(java.lang.String)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setCreatorProperty(java.lang.String)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetDescriptionProperty(System.String)">
-            Set the description.
+             Set the description.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setDescriptionProperty(java.lang.String)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setDescriptionProperty(java.lang.String)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetIdentifierProperty(System.String)">
-            Set identifier.
+             Set identifier.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setIdentifierProperty(java.lang.String)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setIdentifierProperty(java.lang.String)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetKeywordsProperty(System.String)">
-            Set keywords.
+             Set keywords.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setKeywordsProperty(java.lang.String)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setKeywordsProperty(java.lang.String)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetLanguageProperty(System.String)">
-            Set language.
+             Set language.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setLanguageProperty(java.lang.String)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setLanguageProperty(java.lang.String)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetLastModifiedByProperty(System.String)">
-            Set last modifications author.
+             Set last modifications author.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setLastModifiedByProperty(java.lang.String)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setLastModifiedByProperty(java.lang.String)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetLastPrintedProperty(System.String)">
-            Set last printed date.
+             Set last printed date.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setLastPrintedProperty(org.apache.poi.OpenXml4Net.util.Nullable)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setLastPrintedProperty(org.apache.poi.OpenXml4Net.util.Nullable)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetLastPrintedProperty(System.Nullable{System.DateTime})">
-            Set last printed date.
+             Set last printed date.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setLastPrintedProperty(org.apache.poi.OpenXml4Net.util.Nullable)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setLastPrintedProperty(org.apache.poi.OpenXml4Net.util.Nullable)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetModifiedProperty(System.String)">
-            Set last modification date.
+             Set last modification date.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setModifiedProperty(org.apache.poi.OpenXml4Net.util.Nullable)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setModifiedProperty(org.apache.poi.OpenXml4Net.util.Nullable)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetModifiedProperty(System.Nullable{System.DateTime})">
-            Set last modification date.
+             Set last modification date.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setModifiedProperty(org.apache.poi.OpenXml4Net.util.Nullable)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setModifiedProperty(org.apache.poi.OpenXml4Net.util.Nullable)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetRevisionProperty(System.String)">
-            Set revision.
+             Set revision.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setRevisionProperty(java.lang.String)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setRevisionProperty(java.lang.String)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetSubjectProperty(System.String)">
-            Set subject.
+             Set subject.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setSubjectProperty(java.lang.String)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setSubjectProperty(java.lang.String)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetTitleProperty(System.String)">
-            Set title.
+             Set title.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setTitleProperty(java.lang.String)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setTitleProperty(java.lang.String)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetVersionProperty(System.String)">
-            Set version.
+             Set version.
             
-            @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setVersionProperty(java.lang.String)
+             @see org.apache.poi.OpenXml4Net.opc.PackageProperties#setVersionProperty(java.lang.String)
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetStringValue(System.String)">
             Convert a strig value into a String
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.SetDateValue(System.String)">
-            Convert a string value represented a date into a DateTime?.
+             Convert a string value represented a date into a DateTime?.
             
-            @throws InvalidFormatException
-                        Throws if the date format isnot valid.
+             @throws InvalidFormatException
+                         Throws if the date format isnot valid.
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.PackagePropertiesPart.GetDateValue(System.Nullable{System.DateTime})">
-            Convert a DateTime? into a String.
+             Convert a DateTime? into a String.
             
-            @param d
-                       The Date to convert.
-            @return The formated date or null.
-            @see java.util.SimpleDateFormat
+             @param d
+                        The Date to convert.
+             @return The formated date or null.
+             @see java.util.SimpleDateFormat
         </member>
         <member name="T:NPOI.OpenXml4Net.OPC.Internal.PartMarshaller">
              Object implemented this interface are considered as part marshaller. A part
@@ -842,20 +842,20 @@
             @return the zipEntry
         </member>
         <member name="T:NPOI.OpenXml4Net.OPC.Internal.ZipContentTypeManager">
-            Zip implementation of the ContentTypeManager.
+             Zip implementation of the ContentTypeManager.
             
-            @author Julien Chable
-            @version 1.0
-            @see ContentTypeManager
+             @author Julien Chable
+             @version 1.0
+             @see ContentTypeManager
         </member>
         <member name="M:NPOI.OpenXml4Net.OPC.Internal.ZipContentTypeManager.#ctor(System.IO.Stream,NPOI.OpenXml4Net.OPC.OPCPackage)">
-            Delegate constructor to the super constructor.
+             Delegate constructor to the super constructor.
             
-            @param in
-                       The input stream to parse to fill internal content type
-                       collections.
-            @throws InvalidFormatException
-                        If the content types part content is not valid.
+             @param in
+                        The input stream to parse to fill internal content type
+                        collections.
+             @throws InvalidFormatException
+                         If the content types part content is not valid.
         </member>
         <member name="F:NPOI.OpenXml4Net.OPC.Internal.ZipHelper.FORWARD_SLASH">
             Forward slash use to convert part name between OPC and zip item naming
@@ -2118,125 +2118,131 @@
         </member>
         <!-- Badly formed XML comment ignored for member "M:NPOI.OpenXml4Net.OPC.PackagePartName.Compare(NPOI.OpenXml4Net.OPC.PackagePartName,NPOI.OpenXml4Net.OPC.PackagePartName)" -->
         <!-- Badly formed XML comment ignored for member "M:NPOI.OpenXml4Net.OPC.PackagePartName.Compare(System.String,System.String)" -->
-        <member name="T:NPOI.OpenXml4Net.OPC.PackageProperties">
+        <member name="T:NPOI.OpenXml4Net.OPC.IPackageProperties">
             Represents the core properties of an OPC package.
             
             @author Julien Chable
             @version 1.0
             @see org.apache.poi.OpenXml4Net.opc.OPCPackage
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetCategoryProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetCategoryProperty">
             Set the category of the content of this package.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetCategoryProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetCategoryProperty(System.String)">
             Set the category of the content of this package.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetContentStatusProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetContentStatusProperty">
             Set the status of the content.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetContentStatusProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetContentStatusProperty(System.String)">
             Get the status of the content.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetContentTypeProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetContentTypeProperty">
             Get the type of content represented, generally defined by a specific use
             and intended audience.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetContentTypeProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetContentTypeProperty(System.String)">
             Set the type of content represented, generally defined by a specific use
             and intended audience.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetCreatedProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetCreatedProperty">
             Get the date of creation of the resource.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetCreatedProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetCreatedProperty(System.String)">
             Set the date of creation of the resource.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetCreatedProperty(System.Nullable{System.DateTime})">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetCreatedProperty(System.Nullable{System.DateTime})">
             Set the date of creation of the resource.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetCreatorProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetCreatorProperty">
             Get the entity primarily responsible for making the content of the
             resource.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetCreatorProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetCreatorProperty(System.String)">
             Set the entity primarily responsible for making the content of the
             resource.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetDescriptionProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetDescriptionProperty">
             Get the explanation of the content of the resource.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetDescriptionProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetDescriptionProperty(System.String)">
             Set the explanation of the content of the resource.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetIdentifierProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetIdentifierProperty">
             Get an unambiguous reference to the resource within a given context.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetIdentifierProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetIdentifierProperty(System.String)">
             Set an unambiguous reference to the resource within a given context.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetKeywordsProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetKeywordsProperty">
             Get a delimited Set of keywords to support searching and indexing. This
             is typically a list of terms that are not available elsewhere in the
             properties
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetKeywordsProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetKeywordsProperty(System.String)">
             Set a delimited Set of keywords to support searching and indexing. This
             is typically a list of terms that are not available elsewhere in the
             properties
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetLanguageProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetLanguageProperty">
             Get the language of the intellectual content of the resource.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetLanguageProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetLanguageProperty(System.String)">
             Set the language of the intellectual content of the resource.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetLastModifiedByProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetLastModifiedByProperty">
             Get the user who performed the last modification.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetLastModifiedByProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetLastModifiedByProperty(System.String)">
             Set the user who performed the last modification.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetLastPrintedProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetLastPrintedProperty">
             Get the date and time of the last printing.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetLastPrintedProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetLastPrintedProperty(System.String)">
             Set the date and time of the last printing.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetLastPrintedProperty(System.Nullable{System.DateTime})">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetLastPrintedProperty(System.Nullable{System.DateTime})">
             Set the date and time of the last printing.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetModifiedProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetModifiedProperty">
             Get the date on which the resource was changed.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetModifiedProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetModifiedProperty(System.String)">
             Set the date on which the resource was changed.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetModifiedProperty(System.Nullable{System.DateTime})">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetModifiedProperty(System.Nullable{System.DateTime})">
             Set the date on which the resource was changed.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetRevisionProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetRevisionProperty">
             Get the revision number.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetRevisionProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetRevisionProperty(System.String)">
             Set the revision number.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetSubjectProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetSubjectProperty">
             Get the topic of the content of the resource.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetSubjectProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetSubjectProperty(System.String)">
             Set the topic of the content of the resource.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetTitleProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetTitleProperty">
             Get the name given to the resource.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetTitleProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetTitleProperty(System.String)">
             Set the name given to the resource.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.GetVersionProperty">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.GetVersionProperty">
             Get the version number.
         </member>
-        <member name="M:NPOI.OpenXml4Net.OPC.PackageProperties.SetVersionProperty(System.String)">
+        <member name="M:NPOI.OpenXml4Net.OPC.IPackageProperties.SetVersionProperty(System.String)">
             Set the version number.
+        </member>
+        <member name="F:NPOI.OpenXml4Net.OPC.PackageProperties.NAMESPACE_DCTERMS">
+            Dublin Core Terms URI.
+        </member>
+        <member name="F:NPOI.OpenXml4Net.OPC.PackageProperties.NAMESPACE_DC">
+            Dublin Core namespace URI.
         </member>
         <member name="T:NPOI.OpenXml4Net.OPC.PackageRelationship">
             A part relationship.
@@ -2475,6 +2481,9 @@
         </member>
         <member name="F:NPOI.OpenXml4Net.OPC.PackageRelationshipTypes.CORE_PROPERTIES_ECMA376">
             Core properties relationship type as defiend in ECMA 376.
+        </member>
+        <member name="F:NPOI.OpenXml4Net.OPC.PackageRelationshipTypes.CORE_PROPERTIES_ECMA376_NS">
+            Namespace of Core properties relationship type as defiend in ECMA 376
         </member>
         <member name="F:NPOI.OpenXml4Net.OPC.PackageRelationshipTypes.DIGITAL_SIGNATURE">
             Digital signature relationship type.
@@ -3112,6 +3121,31 @@
              See setMaxEntrySize() for details.
             
              @return The max accepted uncompressed file size. 
+        </member>
+        <member name="M:NPOI.OpenXml4Net.Util.ZipSecureFile.SetMaxTextSize(System.Int64)">
+            <summary>
+            <para>
+            Sets the maximum number of characters of text that are
+            extracted before an exception is thrown during extracting
+            text from documents.
+            </para>
+            <para>
+            This can be used to limit memory consumption and protect against
+            security vulnerabilities when documents are provided by users.
+            </para>
+            </summary>
+            <param name="maxTextSize">the max. file size of a single zip entry</param>
+        </member>
+        <member name="M:NPOI.OpenXml4Net.Util.ZipSecureFile.GetMaxTextSize">
+            <summary>
+            <para>
+            Returns the current maximum allowed text size.
+            </para>
+            <para>
+            See SetMaxTextSize() for details.
+            </para>
+            </summary>
+            <returns>The max accepted text size.</returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:NPOI.OpenXml4Net.Util.ZipSecureFile.GetInputStream(ICSharpCode.SharpZipLib.Zip.ZipEntry)" -->
         <member name="T:NPOI.Openxml4Net.Exceptions.NotOfficeXmlFileException">

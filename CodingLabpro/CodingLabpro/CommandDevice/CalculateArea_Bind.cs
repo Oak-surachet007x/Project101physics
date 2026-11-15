@@ -32,13 +32,10 @@ namespace CodingLabpro.CommandDevice
             switch (UnitX)
             {
                 case "cm":
-                    Debug.WriteLine(1E-2f + UnitX);
                     return 1E-2f;
                 case "mm":
-                    Debug.WriteLine(1E-3f + UnitX);
                     return 1E-3f;
                 case "μm":
-                    Debug.WriteLine(1E-6f + UnitX);
                     return 1E-6f;
                 default:
                     return 0;
@@ -52,13 +49,10 @@ namespace CodingLabpro.CommandDevice
             switch (UnitY)
             {
                 case "cm":
-                    Debug.WriteLine(1E-2f + UnitY);
                     return 1E-2f;
                 case "mm":
-                    Debug.WriteLine(1E-3f + UnitY);
                     return 1E-3f;
                 case "μm":
-                    Debug.WriteLine(1E-6f + UnitY);
                     return 1E-6f;
                 default:
                     return 0;
@@ -69,7 +63,7 @@ namespace CodingLabpro.CommandDevice
         public int ReturnTimer()
         {
             int Timer = (int)DelayStepping;
-            Debug.WriteLine($"timer = {Timer} ms");
+            Debug.WriteLine($"[timer Motor] = {Timer} ms");
             return Timer;
         }
      
@@ -78,7 +72,7 @@ namespace CodingLabpro.CommandDevice
         {
             float CoVunitX = UnitXForCal(UnitX);
             int LoopAreaX = (int)((TotalAreaX * 1E-3f) / (float.Parse(MoveStepX) * CoVunitX));
-            Debug.WriteLine("X loop " + LoopAreaX.ToString() + "\t" + MoveStepX + "\t" + CoVunitX.ToString());
+            Debug.WriteLine($"[X loop] {LoopAreaX.ToString()}, [Total Area X:] {TotalAreaX}, [Movement Step X:] {MoveStepX}, [Unit X:] {CoVunitX.ToString()}");
             return LoopAreaX;
         }
 
@@ -86,7 +80,7 @@ namespace CodingLabpro.CommandDevice
         {
             float CoVunitY = UnitYForCal(UnitY);
             int LoopAreaY = (int)((TotalAreaY * 1E-3f) / (float.Parse(MoveStepY) * CoVunitY));
-            Debug.WriteLine("Y loop " + LoopAreaY.ToString() + "\t" + MoveStepY + "\t" + CoVunitY.ToString());
+            Debug.WriteLine($"[Y loop] {LoopAreaY.ToString()}, [Total Area Y:] {TotalAreaY}, [Movement Step Y:] {MoveStepY}, [Unit Y:] {CoVunitY.ToString()}");
             return LoopAreaY;
 
         }

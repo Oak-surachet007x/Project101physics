@@ -9,12 +9,12 @@
     </member>
     <member name="M:System.Text.CodePagesEncodingProvider.GetEncoding(System.Int32)">
       <summary>Returns the encoding associated with the specified code page identifier.</summary>
-      <param name="codepage">The code page identifier of the preferred encoding which the encoding provider may support.</param>
+      <param name="codepage">The code page identifier of the preferred encoding that the encoding provider might support.</param>
       <returns>The encoding associated with the specified code page identifier, or <see langword="null" /> if the provider does not support the requested codepage encoding.</returns>
     </member>
     <member name="M:System.Text.CodePagesEncodingProvider.GetEncoding(System.String)">
       <summary>Returns the encoding associated with the specified code page name.</summary>
-      <param name="name">The code page name of the preferred encoding which the encoding provider may support.</param>
+      <param name="name">The code page name of the preferred encoding that the encoding provider might support.</param>
       <returns>The encoding associated with the specified code page, or <see langword="null" /> if the provider does not support the requested encoding.</returns>
     </member>
     <member name="M:System.Text.CodePagesEncodingProvider.GetEncodings">

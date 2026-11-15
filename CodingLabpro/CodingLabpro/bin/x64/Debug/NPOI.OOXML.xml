@@ -820,15 +820,6 @@
              relationships of the base document with the
              specified content type.
         </member>
-        <member name="M:NPOI.POIXMLDocument.HasOOXMLHeader(System.IO.Stream)">
-            Checks that the supplied Stream (which MUST
-             support mark and reSet, or be a PushbackStream)
-             has a OOXML (zip) header at the start of it.
-            If your Stream does not support mark / reSet,
-             then wrap it in a PushBackStream, then be
-             sure to always use that, and not the original!
-            @param inp An Stream which supports either mark/reSet, or is a PushbackStream
-        </member>
         <member name="M:NPOI.POIXMLDocument.GetProperties">
             Get the document properties. This gives you access to the
              core ooxml properties, and the extended ooxml properties.
@@ -1405,6 +1396,24 @@
             在跨列的单元格使用DIV标记
             </summary>
         </member>
+        <member name="M:NPOI.SS.Converter.ExcelToHtmlConverter.Process(NPOI.Util.InputStream)">
+             Converts Excel file (97-2007) into HTML file.
+            
+             @param xlsFile
+                        workbook stream to process
+             @return DOM representation of result HTML
+             @throws IOException
+             @throws ParserConfigurationException
+        </member>
+        <member name="M:NPOI.SS.Converter.ExcelToHtmlConverter.Process(NPOI.HSSF.UserModel.HSSFWorkbook)">
+             Converts Excel file (97-2007) into HTML file.
+            
+             @param xlsFile
+                        workbook instance to process
+             @return DOM representation of result HTML
+             @throws IOException
+             @throws ParserConfigurationException
+        </member>
         <member name="M:NPOI.SS.Converter.ExcelToHtmlConverter.ProcessRow(NPOI.SS.Util.CellRangeAddress[][],NPOI.SS.UserModel.IRow,System.Xml.XmlElement)">
             @return maximum 1-base index of column that were rendered, zero if none
         </member>
@@ -1464,7 +1473,7 @@
             <param name="fs"></param>
             <returns></returns>
         </member>
-        <member name="M:NPOI.SS.UserModel.WorkbookFactory.Create(NPOI.POIFS.FileSystem.NPOIFSFileSystem,System.String)">
+        <member name="M:NPOI.SS.UserModel.WorkbookFactory.Create(NPOI.POIFS.FileSystem.POIFSFileSystem,System.String)">
             <summary>
             Creates a Workbook from the given NPOIFSFileSystem, which may be password protected
             </summary>
@@ -1477,7 +1486,7 @@
             Creates an XSSFWorkbook from the given OOXML Package
             </summary>
         </member>
-        <member name="M:NPOI.SS.UserModel.WorkbookFactory.Create(System.IO.Stream,System.Boolean)">
+        <member name="M:NPOI.SS.UserModel.WorkbookFactory.Create(System.IO.Stream,System.String)">
             <summary>
             Creates the appropriate HSSFWorkbook / XSSFWorkbook from
             the given InputStream. The Stream is wraped inside a PushbackInputStream.
@@ -1521,6 +1530,66 @@
             Works only for XSSF. For HSSF workbooks this option is ignored.
             </summary>
             <param name="importOption">Customize the elements that are processed on the next import</param>
+        </member>
+        <member name="T:NPOI.SS.Extractor.EmbeddedData">
+            <summary>
+            A collection of embedded object informations and content
+            </summary>
+        </member>
+        <member name="P:NPOI.SS.Extractor.EmbeddedData.Filename">
+            <summary>
+            </summary>
+            <return>filename </return>
+        </member>
+        <member name="M:NPOI.SS.Extractor.EmbeddedData.GetEmbeddedData">
+            <summary>
+            </summary>
+            <return>embedded object byte array </return>
+        </member>
+        <member name="M:NPOI.SS.Extractor.EmbeddedData.SetEmbeddedData(System.Byte[])">
+            <summary>
+            Sets the embedded object as byte array
+            </summary>
+            <param name="embeddedData">the embedded object byte array</param>
+        </member>
+        <member name="P:NPOI.SS.Extractor.EmbeddedData.ContentType">
+            <summary>
+            content-/mime-type of the embedded object, the default (if unknown) is {@code binary/octet-stream}
+            </summary>
+        </member>
+        <member name="T:NPOI.SS.Extractor.EmbeddedExtractor">
+            <summary>
+            This extractor class tries to identify various embedded documents within Excel files
+            and provide them via a common interface, i.e. the EmbeddedData instances
+            </summary>
+        </member>
+        <member name="M:NPOI.SS.Extractor.EmbeddedExtractor.GetEnumerator">
+            <summary>
+            </summary>
+            <return>list of known extractors, if you provide custom extractors, override this method/// </return>
+        </member>
+        <member name="M:NPOI.SS.Extractor.EmbeddedExtractor.PdfExtractor.Extract(NPOI.SS.UserModel.IPicture)">
+            <summary>
+            <para>
+            Mac Office encodes embedded objects inside the picture, e.g. PDF is part of an EMF.
+            If an embedded stream is inside an EMF picture, this method extracts the payload.
+            </para>
+            <para>
+            </para>
+            </summary>
+            <return>embedded data in an EMF picture or null if none is found/// </return>
+        </member>
+        <member name="M:NPOI.SS.Extractor.EmbeddedExtractor.IndexOf(System.Byte[],System.Int32,System.Byte[])">
+            <summary>
+            Knuth-Morris-Pratt Algorithm for Pattern Matching
+            Finds the first occurrence of the pattern in the text.
+            </summary>
+        </member>
+        <member name="M:NPOI.SS.Extractor.EmbeddedExtractor.computeFailure(System.Byte[])">
+            <summary>
+            Computes the failure function using a boot-strapping Process,
+            where the pattern is matched against itself.
+            </summary>
         </member>
         <member name="T:NPOI.Util.IdentifierManager">
             <summary>
@@ -1572,16 +1641,816 @@
         <member name="M:NPOI.Util.PackageHelper.Copy(NPOI.OpenXml4Net.OPC.OPCPackage,NPOI.OpenXml4Net.OPC.PackagePart,NPOI.OpenXml4Net.OPC.OPCPackage,NPOI.OpenXml4Net.OPC.PackagePart)">
             Recursively copy namespace parts to the destination namespace
         </member>
-        <member name="M:NPOI.Util.PackageHelper.CopyProperties(NPOI.OpenXml4Net.OPC.PackageProperties,NPOI.OpenXml4Net.OPC.PackageProperties)">
+        <member name="M:NPOI.Util.PackageHelper.CopyProperties(NPOI.OpenXml4Net.OPC.IPackageProperties,NPOI.OpenXml4Net.OPC.IPackageProperties)">
              Copy core namespace properties
             
              @param src source properties
              @param tgt target properties
         </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBCellHeader">
+            <summary>
+            This class encapsulates what the spec calls a "Cell" object.
+            I added "Header" to clarify that this does not contain the contents
+            of the cell, only the column number, the style id and the phonetic bool
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="M:NPOI.XSSF.Binary.XSSFBCellHeader.Parse(System.Byte[],System.Int32,System.Int32,NPOI.XSSF.Binary.XSSFBCellHeader)">
+            <summary>
+            </summary>
+            <param name="data">raw data</param>
+            <param name="offset">offset at which to start reading the record</param>
+            <param name="currentRow">0-based current row count</param>
+            <param name="cell">cell buffer to update</param>
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBCellRange">
+            <summary>
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="M:NPOI.XSSF.Binary.XSSFBCellRange.parse(System.Byte[],System.Int32,NPOI.XSSF.Binary.XSSFBCellRange)">
+            <summary>
+            Parses an RfX cell range from the data starting at the offset.
+            This performs no range checking.
+            </summary>
+            <param name="data">raw bytes</param>
+            <param name="offset">offset at which to start reading from data</param>
+            <param name="cellRange">to overwrite. If null, a new cellRange will be created.</param>
+            <return>a mutable cell range.</return>
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBComment">
+            <summary>
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBCommentsTable">
+            <summary>
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBHeaderFooter">
+            <summary>
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBHeaderFooters">
+            <summary>
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBHyperlinksTable">
+            <summary>
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="M:NPOI.XSSF.Binary.XSSFBHyperlinksTable.GetHyperLinks">
+            <summary>
+            </summary>
+            <return>a map of the hyperlinks. The key is the top left cell address in their CellRange</return>
+        </member>
+        <member name="M:NPOI.XSSF.Binary.XSSFBHyperlinksTable.findHyperlinkRecord(NPOI.SS.Util.CellAddress)">
+            <summary>
+            </summary>
+            <param name="cellAddress">cell address to find</param>
+            <return>null if not a hyperlink</return>
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBParseException">
+            <summary>
+            Parse exception while reading an xssfb.
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBParser">
+            <summary>
+            Experimental parser for Microsoft's ooxml xlsb format.
+            Not thread safe, obviously.  Need to create a new one
+            for each thread.
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="M:NPOI.XSSF.Binary.XSSFBParser.#ctor(System.IO.Stream,System.Collections.BitArray)">
+            <summary>
+            </summary>
+            <param name="is1">inputStream</param>
+            <param name="bitSet">call <see cref="M:NPOI.XSSF.Binary.XSSFBParser.HandleRecord(System.Int32,System.Byte[])" /> only on those records in this bitSet</param>
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBRecordType">
+            <summary>
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBRelation">
+            <summary>
+            <para>
+            Need to have this mirror class of <see cref="T:NPOI.XSSF.UserModel.XSSFRelation" />
+            because of conflicts with regular ooxml relations.
+            If we Assert.Failed to break this into a separate class, in the cases of SharedStrings and Styles,
+            2 parts would exist, and &quot;Packages shall not contain equivalent part names...&quot;
+            </para>
+            <para>
+            
+            Also, we need to avoid the possibility of breaking the marshalling process for xml.
+            </para>
+            </summary>
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBRichStr">
+            <summary>
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBRichTextString">
+            <summary>
+            Wrapper class around String so that we can use it in Comment.
+            Nothing has been implemented yet except for <see cref="!:getString()" />.
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBSharedStringsTable">
+            <summary>
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="F:NPOI.XSSF.Binary.XSSFBSharedStringsTable.count">
+            <summary>
+            An integer representing the total count of strings in the workbook. This count does not
+            include any numbers, it counts only the total of text strings in the workbook.
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.Binary.XSSFBSharedStringsTable.uniqueCount">
+            <summary>
+            An integer representing the total count of unique strings in the Shared String Table.
+            A string is unique even if it is a copy of another string, but has different formatting applied
+            at the character level.
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.Binary.XSSFBSharedStringsTable.strings">
+            <summary>
+            The shared strings table.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Binary.XSSFBSharedStringsTable.#ctor(NPOI.OpenXml4Net.OPC.OPCPackage)">
+            <summary>
+            </summary>
+            <param name="pkg">The <see cref="T:NPOI.OpenXml4Net.OPC.OPCPackage"/> to use as basis for the shared-strings table.</param>
+            <exception cref="T:System.IO.IOException">If reading the data from the package Assert.Fails.</exception>
+            <exception cref="!:SAXException">if parsing the XML data Assert.Fails.</exception>
+        </member>
+        <member name="M:NPOI.XSSF.Binary.XSSFBSharedStringsTable.#ctor(NPOI.OpenXml4Net.OPC.PackagePart)">
+            <summary>
+            Like POIXMLDocumentPart constructor
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Binary.XSSFBSharedStringsTable.GetItems">
+            <summary>
+            </summary>
+            <return>a defensive copy of strings</return>
+        </member>
+        <member name="M:NPOI.XSSF.Binary.XSSFBSharedStringsTable.GetCount">
+            <summary>
+            Return an integer representing the total count of strings in the workbook. This count does not
+            include any numbers, it counts only the total of text strings in the workbook.
+            </summary>
+            <return>the total count of strings in the workbook</return>
+        </member>
+        <member name="M:NPOI.XSSF.Binary.XSSFBSharedStringsTable.GetUniqueCount">
+            <summary>
+            Returns an integer representing the total count of unique strings in the Shared String Table.
+            A string is unique even if it is a copy of another string, but has different formatting applied
+            at the character level.
+            </summary>
+            <return>the total count of unique strings in the workbook</return>
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBSheetHandler">
+            <summary>
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBSheetHandler.ISheetContentsHandler">
+            <summary>
+            You need to implement this to handle the results
+             of the sheet parsing.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Binary.XSSFBSheetHandler.ISheetContentsHandler.HyperlinkCell(System.String,System.String,System.String,System.String,NPOI.XSSF.UserModel.XSSFComment)">
+            <summary>
+            A cell, with the given formatted value (may be null),
+            a url (may be null), a toolTip (may be null)
+             and possibly a comment (may be null), was encountered */
+            </summary>
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBStylesTable">
+            <summary>
+            This is a very thin shim to gather number formats from styles.bin
+            files.
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFBUtils">
+            <summary>
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="M:NPOI.XSSF.Binary.XSSFBUtils.ReadXLNullableWideString(System.Byte[],System.Int32,System.Text.StringBuilder)">
+            <summary>
+            Reads an XLNullableWideString.
+            </summary>
+            <param name="data">data from which to read</param>
+            <param name="offset">in data from which to start</param>
+            <param name="sb">buffer to which to write.  You must SetLength(0) before calling!</param>
+            <return>number of bytes read</return>
+            <exception cref="T:NPOI.XSSF.Binary.XSSFBParseException">if there was an exception during reading</exception>
+        </member>
+        <member name="M:NPOI.XSSF.Binary.XSSFBUtils.ReadXLWideString(System.Byte[],System.Int32,System.Text.StringBuilder)">
+            <summary>
+            Reads an XLNullableWideString.
+            </summary>
+            <param name="data">data from which to read</param>
+            <param name="offset">in data from which to start</param>
+            <param name="sb">buffer to which to write.  You must SetLength(0) before calling!</param>
+            <return>number of bytes read</return>
+            <exception cref="T:NPOI.XSSF.Binary.XSSFBParseException">if there was an exception while trying to read the string</exception>
+        </member>
+        <member name="T:NPOI.XSSF.Binary.XSSFHyperlinkRecord">
+            <summary>
+            <para>
+            This is a read only record that maintains information about
+            a hyperlink.  In OOXML land, this information has to be merged
+            from 1) the sheet's .rels to Get the url and 2) from After the
+            sheet data in they hyperlink section.
+            </para>
+            <para>
+            The <see cref="P:NPOI.XSSF.Binary.XSSFHyperlinkRecord.Display"/> is often empty and should be filled from
+            the contents of the anchor cell.
+            </para>
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="T:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable">
+            <summary>
+            <para>
+            </para>
+            <para>
+            This is a lightweight way to process the Shared Strings
+            table. Most of the text cells will reference something
+            from in here.
+            </para>
+            <para>
+            Note that each SI entry can have multiple T elements, if the
+            string is made up of bits with different formatting.
+            </para>
+            <para>
+            Example input:
+            <code>
+            &lt;?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+            &lt;sst xmlns="http://schemas.Openxmlformats.org/spreadsheetml/2006/main" count="2" uniqueCount="2">
+              &lt;si>
+                &lt;r>
+                  &lt;rPr>
+                    &lt;b />
+                    &lt;sz val="11" />
+                    &lt;color theme="1" />
+                    &lt;rFont val="Calibri" />
+                    &lt;family val="2" />
+                    &lt;scheme val="minor" />
+                  &lt;/rPr>
+                  &lt;t>This:&lt;/t>
+                &lt;/r>
+                &lt;r>
+                  &lt;rPr>
+                    &lt;sz val="11" />
+                    &lt;color theme="1" />
+                    &lt;rFont val="Calibri" />
+                    &lt;family val="2" />
+                    &lt;scheme val="minor" />
+                  &lt;/rPr>
+                  &lt;t xml:space="preserve">Causes Problems&lt;/t>
+                &lt;/r>
+              &lt;/si>
+              &lt;si>
+                &lt;t>This does not&lt;/t>
+              &lt;/si>
+            &lt;/sst>
+            </code>
+            </para>
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.count">
+            <summary>
+            An integer representing the total count of strings in the workbook. This count does not
+            include any numbers, it counts only the total of text strings in the workbook.
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.uniqueCount">
+            <summary>
+            An integer representing the total count of unique strings in the Shared String Table.
+            A string is unique even if it is a copy of another string, but has different formatting applied
+            at the character level.
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.strings">
+            <summary>
+            The shared strings table.
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.phoneticStrings">
+            <summary>
+            Map of phonetic strings (if they exist) indexed
+            with the integer matching the index in strings
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.#ctor(NPOI.OpenXml4Net.OPC.OPCPackage)">
+            <summary>
+            Calls <see cref="M:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.#ctor(NPOI.OpenXml4Net.OPC.OPCPackage,System.Boolean)" /> with
+            a value of <c>true</c> for including phonetic runs
+            </summary>
+            <param name="pkg">The <see cref="T:NPOI.OpenXml4Net.OPC.OPCPackage"/> to use as basis for the shared-strings table.</param>
+            <exception cref="T:System.IO.IOException"> If reading the data from the package fails.</exception>
+            <exception cref="T:NSAX.SAXException"> if parsing the XML data fails.</exception>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.#ctor(NPOI.OpenXml4Net.OPC.OPCPackage,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="pkg">The <see cref="T:NPOI.OpenXml4Net.OPC.OPCPackage"/> to use as basis for the shared-strings table.</param>
+            <param name="includePhoneticRuns">whether or not to concatenate phoneticRuns onto the shared string</param>
+            <exception cref="T:System.IO.IOException">IOException If reading the data from the package fails.</exception>
+            <exception cref="T:NSAX.SAXException">SAXException if parsing the XML data fails.</exception>
+            @since POI 3.14-Beta3
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.#ctor(NPOI.OpenXml4Net.OPC.PackagePart)">
+            <summary>
+            <para>
+            Like POIXMLDocumentPart constructor
+            </para>
+            <para>
+            Calls <see cref="M:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.#ctor(NPOI.OpenXml4Net.OPC.PackagePart,System.Boolean)" />, with a
+            value of <c>true</c> to include phonetic runs.
+            </para>
+            </summary>
+            @since POI 3.14-Beta1
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.#ctor(NPOI.OpenXml4Net.OPC.PackagePart,System.Boolean)">
+            <summary>
+            Like POIXMLDocumentPart constructor
+            </summary>
+            @since POI 3.14-Beta3
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.ReadFrom(System.IO.Stream)">
+            <summary>
+            Read this shared strings table from an XML file.
+            </summary>
+            <param name="is1">The input stream containing the XML document.</param>
+            <exception cref="T:System.IO.IOException"> if an error occurs while reading.</exception>
+            <exception cref="T:NSAX.SAXException"> if parsing the XML data fails.</exception>
+        </member>
+        <member name="P:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.Count">
+            <summary>
+            Return an integer representing the total count of strings in the workbook. This count does not
+            include any numbers, it counts only the total of text strings in the workbook.
+            </summary>
+            <return>the total count of strings in the workbook</return>
+        </member>
+        <member name="P:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.UniqueCount">
+            <summary>
+            Returns an integer representing the total count of unique strings in the Shared String Table.
+            A string is unique even if it is a copy of another string, but has different formatting applied
+            at the character level.
+            </summary>
+            <return>the total count of unique strings in the workbook</return>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.GetEntryAt(System.Int32)">
+            <summary>
+            Return the string at a given index.
+            Formatting is ignored.
+            </summary>
+            <param name="idx">index of item to return.</param>
+            <return>the item at the specified position in this Shared String table.</return>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable.Characters(System.Char[],System.Int32,System.Int32)">
+            <summary>
+            Captures characters only if a t(ext) element is open.
+            </summary>
+        </member>
+        <member name="T:NPOI.XSSF.EventUserModel.XSSFBReader">
+            <summary>
+            Reader for xlsb files.
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFBReader.#ctor(NPOI.OpenXml4Net.OPC.OPCPackage)">
+            <summary>
+            Creates a new XSSFReader, for the given package
+            </summary>
+            <param name="pkg">opc package</param>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFBReader.GetAbsPathMetadata">
+            <summary>
+            In Excel 2013, the absolute path where the file was last saved may be stored in
+            the <see cref="F:NPOI.XSSF.Binary.XSSFBRecordType.BrtAbsPath15" /> record.  The equivalent in ooxml is
+            &lt;x15ac:absPath&gt;.
+            </summary>
+            <return>absolute path or <c>null</c> if it could not be found.</return>
+            <exception cref="T:System.IO.IOException">when there's a problem with the workbook part's stream</exception>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFBReader.GetSheetsData">
+            <summary>
+            Returns an Iterator which will let you Get at all the
+             different Sheets in turn.
+            Each sheet's InputStream is only opened when fetched
+             from the Iterator. It's up to you to close the
+             InputStreams when done with each one.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFBReader.SheetIterator.#ctor(NPOI.OpenXml4Net.OPC.PackagePart)">
+            <summary>
+            Construct a new SheetIterator
+            </summary>
+            <param name="wb">package part holding workbook.xml</param>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFBReader.SheetIterator.GetSheetComments">
+            <summary>
+            Not supported by XSSFBReader's SheetIterator.
+            Please use <see cref="!:getXSSFBSheetComments()" /> instead.
+            </summary>
+            <return>nothing, always throws ArgumentException!</return>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFBReader.PathExtractor.GetPath">
+            <summary>
+            </summary>
+            <return>the path if found, otherwise <c>null</c></return>
+        </member>
+        <member name="T:NPOI.XSSF.EventUserModel.XSSFReader">
+            <summary>
+            This class makes it easy to Get at individual parts
+             of an OOXML .xlsx file, suitable for low memory sax
+             parsing or similar.
+            It makes up the core part of the EventUserModel support
+             for XSSF.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFReader.#ctor(NPOI.OpenXml4Net.OPC.OPCPackage)">
+            <summary>
+            Creates a new XSSFReader, for the given package
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.EventUserModel.XSSFReader.SharedStringsTable">
+            <summary>
+            Opens up the Shared Strings Table, parses it, and
+             returns a handy object for working with
+             shared strings.
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.EventUserModel.XSSFReader.StylesTable">
+            <summary>
+            Opens up the Styles Table, parses it, and
+             returns a handy object for working with cell styles
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.EventUserModel.XSSFReader.SharedStringsData">
+            <summary>
+            Returns an InputStream to read the contents of the
+             shared strings table.
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.EventUserModel.XSSFReader.StylesData">
+            <summary>
+            Returns an InputStream to read the contents of the
+             styles table.
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.EventUserModel.XSSFReader.ThemesData">
+            <summary>
+            Returns an InputStream to read the contents of the
+             themes table.
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.EventUserModel.XSSFReader.WorkbookData">
+            <summary>
+            Returns an InputStream to read the contents of the
+             main Workbook, which contains key overall data for
+             the file, including sheet definitions.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFReader.GetSheet(System.String)">
+            <summary>
+            Returns an InputStream to read the contents of the
+             specified Sheet.
+            </summary>
+            <param name="relId">The relationId of the sheet, from a r:id on the workbook</param>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFReader.GetSheetsData">
+            <summary>
+            Returns an Iterator which will let you Get at all the
+             different Sheets in turn.
+            Each sheet's InputStream is only opened when fetched
+             from the Iterator. It's up to you to close the
+             InputStreams when done with each one.
+            </summary>
+        </member>
+        <member name="T:NPOI.XSSF.EventUserModel.XSSFReader.SheetIterator">
+            <summary>
+            Iterator over sheet data.
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.EventUserModel.XSSFReader.SheetIterator.sheetMap">
+            <summary>
+             Maps relId and the corresponding PackagePart
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.EventUserModel.XSSFReader.SheetIterator.xssfSheetRef">
+            <summary>
+            Current sheet reference
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.EventUserModel.XSSFReader.SheetIterator.sheetIterator">
+            <summary>
+            Iterator over CTSheet objects, returns sheets in <tt>logical</tt> order.
+            We can't rely on the Ooxml4J's relationship iterator because it returns objects in physical order,
+            i.e. as they are stored in the underlying package
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFReader.SheetIterator.#ctor(NPOI.OpenXml4Net.OPC.PackagePart)">
+            <summary>
+            Construct a new SheetIterator
+            </summary>
+            <param name="wb">package part holding workbook.xml</param>
+        </member>
+        <member name="P:NPOI.XSSF.EventUserModel.XSSFReader.SheetIterator.SheetRelationships">
+            <summary>
+            Gets string representations of relationships
+            that are sheet-like.  Added to allow subclassing
+            by XSSFBReader.  This is used to decide what
+            relationships to load into the sheetRefs
+            </summary>
+            <return>all relationships that are sheet-like</return>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFReader.SheetIterator.Next">
+            <summary>
+            Returns input stream of the next sheet in the iteration
+            </summary>
+            <return>input stream of the next sheet in the iteration</return>
+        </member>
+        <member name="P:NPOI.XSSF.EventUserModel.XSSFReader.SheetIterator.SheetName">
+            <summary>
+            Returns name of the current sheet
+            </summary>
+            <return>name of the current sheet</return>
+        </member>
+        <member name="P:NPOI.XSSF.EventUserModel.XSSFReader.SheetIterator.SheetComments">
+            <summary>
+            Returns the comments associated with this sheet,
+             or null if there aren't any
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.EventUserModel.XSSFReader.SheetIterator.Shapes">
+            <summary>
+            Returns the shapes associated with this sheet,
+            an empty list or null if there is an exception
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFReader.SheetIterator.Remove">
+            <summary>
+            We're read only, so remove isn't supported
+            </summary>
+        </member>
+        <member name="T:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler">
+            <summary>
+            This class handles the processing of a sheet#.xml
+             sheet part of a XSSF .xlsx file, and generates
+             row and cell events for it.
+            </summary>
+        </member>
+        <member name="T:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.XSSFDataType">
+            <summary>
+            These are the different kinds of cells we support.
+            We keep track of the current one between
+             the start and end.
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.stylesTable">
+            <summary>
+            Table with the styles used for formatting
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.commentsTable">
+            <summary>
+            Table with cell comments
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.sharedStringsTable">
+            <summary>
+            Read only access to the shared strings table, for looking
+             up (most) string cell's contents
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.output">
+            <summary>
+            Where our text is going
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.#ctor(NPOI.XSSF.Model.StylesTable,NPOI.XSSF.Model.CommentsTable,NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable,NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.ISheetContentsHandler,NPOI.SS.UserModel.DataFormatter,System.Boolean)">
+            <summary>
+            Accepts objects needed while parsing.
+            </summary>
+            <param name="styles"> Table of styles</param>
+            <param name="strings">Table of shared strings</param>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.#ctor(NPOI.XSSF.Model.StylesTable,NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable,NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.ISheetContentsHandler,NPOI.SS.UserModel.DataFormatter,System.Boolean)">
+            <summary>
+            Accepts objects needed while parsing.
+            </summary>
+            <param name="styles"> Table of styles</param>
+            <param name="strings">Table of shared strings</param>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.#ctor(NPOI.XSSF.Model.StylesTable,NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable,NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.ISheetContentsHandler,System.Boolean)">
+            <summary>
+            Accepts objects needed while parsing.
+            </summary>
+            <param name="styles"> Table of styles</param>
+            <param name="strings">Table of shared strings</param>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.Characters(System.Char[],System.Int32,System.Int32)">
+            <summary>
+            Captures characters only if a suitable element is open.
+            Originally was just "v"; extended for inlineStr also.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.CheckForEmptyCellComments(NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.EmptyCellCommentsCheckType)">
+            <summary>
+            Do a check for, and output, comments in otherwise empty cells.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.OutputEmptyCellComment(NPOI.SS.Util.CellAddress)">
+            <summary>
+            Output an empty-cell comment.
+            </summary>
+        </member>
+        <member name="T:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.ISheetContentsHandler">
+            <summary>
+            You need to implement this to handle the results
+             of the sheet parsing.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.ISheetContentsHandler.StartRow(System.Int32)">
+            <summary>
+            A row with the (zero based) row number has started */
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.ISheetContentsHandler.EndRow(System.Int32)">
+            <summary>
+            A row with the (zero based) row number has ended */
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.ISheetContentsHandler.Cell(System.String,System.String,NPOI.XSSF.UserModel.XSSFComment)">
+            <summary>
+            A cell, with the given formatted value (may be null),
+             and possibly a comment (may be null), was encountered */
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.ISheetContentsHandler.HeaderFooter(System.String,System.Boolean,System.String)">
+            <summary>
+            A header or footer has been encountered */
+            </summary>
+        </member>
+        <member name="T:NPOI.XSSF.Extractor.XSSFBEventBasedExcelExtractor">
+            <summary>
+            Implementation of a text extractor or xlsb Excel
+            files that uses SAX-like binary parsing.
+            </summary>
+            @since 3.16-beta3
+        </member>
+        <member name="M:NPOI.XSSF.Extractor.XSSFBEventBasedExcelExtractor.SetFormulasNotResults(System.Boolean)">
+            <summary>
+            Should we return the formula itself, and not
+            the result it produces? Default is false
+            This is currently unsupported for xssfb
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Extractor.XSSFBEventBasedExcelExtractor.ProcessSheet(NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.ISheetContentsHandler,NPOI.XSSF.Binary.XSSFBStylesTable,NPOI.XSSF.Binary.XSSFBCommentsTable,NPOI.XSSF.Binary.XSSFBSharedStringsTable,System.IO.Stream)">
+            <summary>
+            Processes the given sheet
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Extractor.XSSFBEventBasedExcelExtractor.GetText">
+            <summary>
+            Processes the file and returns the text
+            </summary>
+        </member>
+        <member name="T:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor">
+            <summary>
+            Implementation of a text extractor from OOXML Excel
+             files that uses SAX event based parsing.
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.IncludeSheetNames">
+            <summary>
+            Get or Set should sheet names be included? Default is true
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.FormulasNotResults">
+            <summary>
+            Should we return the formula itself, and not
+            the result it produces? Default is false
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.IncludeHeadersFooters">
+            <summary>
+            Should headers and footers be included? Default is true
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.IncludeTextBoxes">
+            <summary>
+            Should text from textboxes be included? Default is true
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.IncludeCellComments">
+             <summary>
+             </summary>
+             <return>whether cell comments should be included</return>
+            
+             @since 3.16-beta3
+        </member>
+        <member name="M:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.SetConcatenatePhoneticRuns(System.Boolean)">
+            <summary>
+            Concatenate text from &lt;rPh&gt; text elements in SharedStringsTable
+            Default is true;
+            </summary>
+            <param name="concatenatePhoneticRuns">concatenatePhoneticRuns</param>
+        </member>
+        <member name="P:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.Locale">
+            <summary>CultureInfo
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.GetPackage">
+            <summary>
+            Returns the opened OPCPackage container.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.GetCoreProperties">
+            <summary>
+            Returns the core document properties
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.GetExtendedProperties">
+            <summary>
+            Returns the extended document properties
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.GetCustomProperties">
+            <summary>
+            Returns the custom document properties
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.ProcessSheet(NPOI.XSSF.EventUserModel.XSSFSheetXMLHandler.ISheetContentsHandler,NPOI.XSSF.Model.StylesTable,NPOI.XSSF.Model.CommentsTable,NPOI.XSSF.EventUserModel.ReadOnlySharedStringsTable,System.IO.Stream)">
+            <summary>
+            Processes the given sheet
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.Text">
+            <summary>
+            Processes the file and returns the text
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.SheetTextExtractor.AppendHeaderFooterText(System.Text.StringBuilder,System.String)">
+            <summary>
+            Append the text for the named header or footer if found.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.SheetTextExtractor.HandleHeaderFooterDelimiter(System.String,System.String)">
+            <summary>
+            Remove the delimiter if its found at the beginning of the text,
+            or replace it with a tab if its in the middle.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.SheetTextExtractor.AppendHeaderText(System.Text.StringBuilder)">
+            <summary>
+            Append the text for each header type in the same order
+            they are appended in XSSFExcelExtractor.
+            </summary>
+            <see cref="P:NPOI.XSSF.Extractor.XSSFExcelExtractor.Text" />
+            <see cref="!:NPOI.HSSF.extractor.ExcelExtractor._extractHeaderFooter(NPOI.SS.UserModel.HeaderFooter)" />
+        </member>
+        <member name="M:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.SheetTextExtractor.AppendFooterText(System.Text.StringBuilder)">
+            <summary>
+            Append the text for each footer type in the same order
+            they are appended in XSSFExcelExtractor.
+            </summary>
+            <see cref="P:NPOI.XSSF.Extractor.XSSFExcelExtractor.Text" />
+            <see cref="!:NPOI.HSSF.extractor.ExcelExtractor._extractHeaderFooter(NPOI.SS.UserModel.HeaderFooter)" />
+        </member>
+        <member name="M:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.SheetTextExtractor.AppendCellText(System.Text.StringBuilder)">
+            <summary>
+            Append the cell contents we have collected.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Extractor.XSSFEventBasedExcelExtractor.SheetTextExtractor.Reset">
+            <summary>
+            Reset this <c>SheetTextExtractor</c> for the next sheet.
+            </summary>
+        </member>
         <member name="T:NPOI.XSSF.Extractor.XSSFExcelExtractor">
             Helper class to extract text from an OOXML Excel file
         </member>
-        <member name="P:NPOI.XSSF.Extractor.XSSFExcelExtractor.IncludeHeaderFooter">
+        <member name="P:NPOI.XSSF.Extractor.XSSFExcelExtractor.IncludeHeadersFooters">
             <summary>
              Should header and footer be included? Default is true
             </summary>
@@ -1947,6 +2816,23 @@
         <member name="M:NPOI.XSSF.Model.StylesTable.#ctor">
             Create a new, empty StylesTable
         </member>
+        <member name="M:NPOI.XSSF.Model.StylesTable.GetTableStyle(System.String)">
+             <summary>
+             </summary>
+             <param name="name">of the table style</param>
+             <return>defined style, either explicit or built-in, or null if not found</return>
+            
+             @since 3.17 beta 1
+        </member>
+        <member name="M:NPOI.XSSF.Model.StylesTable.GetExplicitTableStyle(System.String)">
+             <summary>
+             NOTE: this only returns explicitly defined styles
+             </summary>
+             <param name="name">of the table style</param>
+             <return>defined style, or null if not explicitly defined</return>
+            
+             @since 3.17 beta 1
+        </member>
         <member name="M:NPOI.XSSF.Model.StylesTable.EnsureThemesTable">
             If there isn't currently a {@link ThemesTable} for the
              current Workbook, then creates one and sets it up.
@@ -2076,11 +2962,19 @@
             Note - End users probably want to call {@link XSSFWorkbook#createCellStyle()}
             rather than working with the styles table directly.
         </member>
-        <member name="M:NPOI.XSSF.Model.StylesTable.FindFont(System.Int16,System.Int16,System.Int16,System.String,System.Boolean,System.Boolean,NPOI.SS.UserModel.FontSuperScript,NPOI.SS.UserModel.FontUnderlineType)">
-            Finds a font that matches the one with the supplied attributes
-        </member>
         <member name="M:NPOI.XSSF.Model.StylesTable.FindFont(System.Boolean,System.Int16,System.Int16,System.String,System.Boolean,System.Boolean,NPOI.SS.UserModel.FontSuperScript,NPOI.SS.UserModel.FontUnderlineType)">
             Finds a font that matches the one with the supplied attributes
+        </member>
+        <member name="M:NPOI.XSSF.Model.StylesTable.FindFont(System.Boolean,NPOI.SS.UserModel.IColor,System.Int16,System.String,System.Boolean,System.Boolean,NPOI.SS.UserModel.FontSuperScript,NPOI.SS.UserModel.FontUnderlineType)">
+            <summary>
+            Finds a font that matches the one with the supplied attributes,
+            where color is the actual Color-value, not the indexed color
+            </summary>
+        </member>
+        <member name="P:NPOI.XSSF.Model.StylesTable.IndexedColors">
+            <summary>
+            default or custom indexed color to RGB mapping
+            </summary>
         </member>
         <member name="T:NPOI.XSSF.Model.ThemesTable">
             Class that represents theme of XLSX document. The theme includes specific
@@ -2098,6 +2992,12 @@
             Construct a ThemesTable from an existing ThemeDocument.
             @param theme A ThemeDocument.
         </member>
+        <member name="M:NPOI.XSSF.Model.ThemesTable.SetColorMap(NPOI.OOXML.XSSF.UserModel.IIndexedColorMap)">
+            <summary>
+            called from <see cref="T:NPOI.XSSF.Model.StylesTable"/> when setting theme, used to adjust colors if a custom indexed mapping is defined
+            </summary>
+            <param name="colorMap"></param>
+        </member>
         <member name="M:NPOI.XSSF.Model.ThemesTable.GetThemeColor(System.Int32)">
             Convert a theme "index" into a color.
             @param idx A theme "index"
@@ -2108,7 +3008,7 @@
              information (currently just colours) from it as
              required.
         </member>
-        <member name="M:NPOI.XSSF.Model.ThemesTable.writeTo(System.IO.Stream)">
+        <member name="M:NPOI.XSSF.Model.ThemesTable.WriteTo(System.IO.Stream)">
             Write this table out as XML.
             
             @param out The stream to write to.
@@ -2317,6 +3217,12 @@
         </member>
         <member name="M:NPOI.XSSF.Streaming.SXSSFCell.typeMismatch(NPOI.SS.UserModel.CellType,NPOI.SS.UserModel.CellType,System.Boolean)">
             Used to help format error messages
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFCreationHelper.CreateAreaReference(System.String)">
+            {@inheritDoc}
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFCreationHelper.CreateAreaReference(NPOI.SS.Util.CellReference,NPOI.SS.Util.CellReference)">
+            {@inheritDoc}
         </member>
         <member name="T:NPOI.XSSF.Streaming.SXSSFDrawing">
             <summary>
@@ -2603,14 +3509,6 @@
             
              @return Hyperlinks for the sheet
         </member>
-        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.GetCellComment(System.Int32,System.Int32)">
-            <summary>
-            Returns cell comment for the specified row and column
-            </summary>
-            <param name="row">The row.</param>
-            <param name="column">The column.</param>
-            <returns>cell comment or <code>null</code> if not found</returns>
-        </member>
         <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.GetCellComment(NPOI.SS.Util.CellAddress)">
             <summary>
             Returns cell comment for the specified location
@@ -2719,6 +3617,127 @@
         </member>
         <member name="P:NPOI.XSSF.Streaming.SXSSFSheet.LastFlushedRowNumber">
             @return Last row number to be flushed to disk, or -1 if none flushed yet
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking">
+            <summary>
+            Enable sheet protection
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking">
+            <summary>
+            Disable sheet protection
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.LockAutoFilter(System.Boolean)">
+            <summary>
+            Enable or disable Autofilters locking.
+            This does not modify sheet protection status.
+            To enforce this un-/locking, call <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking" /> or <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking" />
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.LockDeleteColumns(System.Boolean)">
+            <summary>
+            Enable or disable Deleting columns locking.
+            This does not modify sheet protection status.
+            To enforce this un-/locking, call <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking" /> or <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking" />
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.LockDeleteRows(System.Boolean)">
+            <summary>
+            Enable or disable Deleting rows locking.
+            This does not modify sheet protection status.
+            To enforce this un-/locking, call <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking" /> or <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking" />
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.LockFormatCells(System.Boolean)">
+            <summary>
+            Enable or disable Formatting cells locking.
+            This does not modify sheet protection status.
+            To enforce this un-/locking, call <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking" /> or <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking" />
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.LockFormatColumns(System.Boolean)">
+            <summary>
+            Enable or disable Formatting columns locking.
+            This does not modify sheet protection status.
+            To enforce this un-/locking, call <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking" /> or <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking" />
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.LockFormatRows(System.Boolean)">
+            <summary>
+            Enable or disable Formatting rows locking.
+            This does not modify sheet protection status.
+            To enforce this un-/locking, call <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking" /> or <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking" />
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.LockInsertColumns(System.Boolean)">
+            <summary>
+            Enable or disable Inserting columns locking.
+            This does not modify sheet protection status.
+            To enforce this un-/locking, call <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking" /> or <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking" />
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.LockInsertHyperlinks(System.Boolean)">
+            <summary>
+            Enable or disable Inserting hyperlinks locking.
+            This does not modify sheet protection status.
+            To enforce this un-/locking, call <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking" /> or <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking" />
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.LockInsertRows(System.Boolean)">
+            <summary>
+            Enable or disable Inserting rows locking.
+            This does not modify sheet protection status.
+            To enforce this un-/locking, call <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking" /> or <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking" />
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.LockPivotTables(System.Boolean)">
+            <summary>
+            Enable or disable Pivot Tables locking.
+            This does not modify sheet protection status.
+            To enforce this un-/locking, call <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking" /> or <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking" />
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.LockSort(System.Boolean)">
+            <summary>
+            Enable or disable Sort locking.
+            This does not modify sheet protection status.
+            To enforce this un-/locking, call <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking" /> or <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking" />
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.LockObjects(System.Boolean)">
+            <summary>
+            Enable or disable Objects locking.
+            This does not modify sheet protection status.
+            To enforce this un-/locking, call <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking" /> or <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking" />
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.LockScenarios(System.Boolean)">
+            <summary>
+            Enable or disable Scenarios locking.
+            This does not modify sheet protection status.
+            To enforce this un-/locking, call <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking" /> or <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking" />
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.LockSelectLockedCells(System.Boolean)">
+            <summary>
+            Enable or disable Selection of locked cells locking.
+            This does not modify sheet protection status.
+            To enforce this un-/locking, call <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking" /> or <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking" />
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.LockSelectUnlockedCells(System.Boolean)">
+            <summary>
+            Enable or disable Selection of unlocked cells locking.
+            This does not modify sheet protection status.
+            To enforce this un-/locking, call <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.DisableLocking" /> or <see cref="M:NPOI.XSSF.Streaming.SXSSFSheet.EnableLocking" />
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.Streaming.SXSSFSheet.SetTabColor(System.Int32)">
+            <summary>
+            Set background color of the sheet tab
+            </summary>
+            <param name="colorIndex"> the indexed color to Set, must be a constant from <see cref="T:NPOI.SS.UserModel.IndexedColors"/></param>
         </member>
         <member name="T:NPOI.XSSF.Streaming.SXSSFWorkbook">
              Streaming version of XSSFWorkbook implementing the "BigGridDemo" strategy.
@@ -2911,6 +3930,10 @@
             </p>
             <p>
                 Please note the the "compress" option may cause performance penalty.
+            </p>
+            <p>
+                Setting this option only affects compression for subsequent <code>createSheet()</code> 
+                calls.
             </p>
             @param compress whether to compress temp files
         </member>
@@ -3195,15 +4218,20 @@
             for cells in the workbook.
             Color is optional.
         </member>
-        <member name="M:NPOI.XSSF.UserModel.Extensions.XSSFCellBorder.#ctor(NPOI.OpenXmlFormats.Spreadsheet.CT_Border,NPOI.XSSF.Model.ThemesTable)">
+        <member name="M:NPOI.XSSF.UserModel.Extensions.XSSFCellBorder.#ctor(NPOI.OpenXmlFormats.Spreadsheet.CT_Border,NPOI.XSSF.Model.ThemesTable,NPOI.OOXML.XSSF.UserModel.IIndexedColorMap)">
             Creates a Cell Border from the supplied XML defInition
         </member>
         <member name="M:NPOI.XSSF.UserModel.Extensions.XSSFCellBorder.#ctor(NPOI.OpenXmlFormats.Spreadsheet.CT_Border)">
-            Creates a Cell Border from the supplied XML defInition
+            <summary>
+            Creates a Cell Border from the supplied XML definition
+            </summary>
+            <param name="border"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.Extensions.XSSFCellBorder.#ctor">
+            <summary>
             Creates a new, empty Cell Border.
             You need to attach this to the Styles Table
+            </summary>
         </member>
         <member name="M:NPOI.XSSF.UserModel.Extensions.XSSFCellBorder.SetThemesTable(NPOI.XSSF.Model.ThemesTable)">
             Records the Themes Table that is associated with
@@ -3245,7 +4273,7 @@
             This element specifies fill formatting.
             A cell fill consists of a background color, foreground color, and pattern to be applied across the cell.
         </member>
-        <member name="M:NPOI.XSSF.UserModel.Extensions.XSSFCellFill.#ctor(NPOI.OpenXmlFormats.Spreadsheet.CT_Fill)">
+        <member name="M:NPOI.XSSF.UserModel.Extensions.XSSFCellFill.#ctor(NPOI.OpenXmlFormats.Spreadsheet.CT_Fill,NPOI.OOXML.XSSF.UserModel.IIndexedColorMap)">
              Creates a CellFill from the supplied parts
             
              @param fill - fill
@@ -3737,6 +4765,16 @@
         <member name="T:NPOI.XSSF.UserModel.XSSFBorderFormatting">
             @author Yegor Kozlov
         </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFBorderFormatting.GetBorderStyle(NPOI.OpenXmlFormats.Spreadsheet.CT_BorderPr)">
+            @param borderPr
+            @return BorderStyle from the given element's style, or NONE if border is null
+        </member>
+        <member name="T:NPOI.XSSF.UserModel.XSSFBuiltinTableStyleEnum">
+            <summary>
+            Table style names defined in the OOXML spec.
+            The actual styling is defined in presetTableStyles.xml
+            </summary>
+        </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFBuiltinTableStyle.XSSFBuiltinTypeStyleStyle.#ctor(NPOI.XSSF.UserModel.XSSFBuiltinTableStyleEnum,NPOI.SS.UserModel.ITableStyle)">
             @param builtIn
             @param style
@@ -3931,9 +4969,27 @@
             Return the cell's style.
             </summary>
         </member>
+        <member name="P:NPOI.XSSF.UserModel.XSSFCell.IsFormulaCell">
+            <summary>
+            POI currently supports these formula types:
+            <list type="bullet">
+            <item><description> <see cref="F:NPOI.OpenXmlFormats.Spreadsheet.ST_CellFormulaType.normal" /></description></item>
+            <item><description> <see cref="F:NPOI.OpenXmlFormats.Spreadsheet.ST_CellFormulaType.shared" /></description></item>
+            <item><description> <see cref="F:NPOI.OpenXmlFormats.Spreadsheet.ST_CellFormulaType.array" /></description></item>
+            </list>
+            POI does not support <see cref="F:NPOI.OpenXmlFormats.Spreadsheet.ST_CellFormulaType.dataTable" /> formulas.
+            </summary>
+            <return>true if the cell is of a formula type POI can handle
+            </return>
+        </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFCell.CellType">
             <summary>
-            Return the cell type.
+            Return the cell type.  Tables in an array formula return
+            <see cref="!:CellType.FORMULA" /> for all cells, even though the formula is only defined
+            in the OOXML file for the top left cell of the array.
+            <para>
+            NOTE: POI does not support data table formulas.
+            Cells in a data table appear to POI as plain cells typed from their cached value.</para>
             </summary>
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFCell.CachedFormulaResultType">
@@ -4496,32 +5552,99 @@
              @return the CTChartsheet bean holding this sheet's data
         </member>
         <member name="T:NPOI.XSSF.UserModel.XSSFClientAnchor">
-             A client anchor is attached to an excel worksheet.  It anchors against
-             top-left and bottom-right cells.
-            
-             @author Yegor Kozlov
+            <summary>
+            <para>
+            A client anchor is attached to an excel worksheet.  It anchors against:
+            <list type="number">
+            <item><description>A fixed position and fixed size</description></item>
+            <item><description>A position relative to a cell (top-left) and a fixed size</description></item>
+            <item><description>A position relative to a cell (top-left) and sized relative to another cell (bottom right)</description></item>
+            </list>
+            </para>
+            <para>
+            which method is used is determined by the <see cref="P:NPOI.XSSF.UserModel.XSSFClientAnchor.AnchorType"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.UserModel.XSSFClientAnchor.EMPTY_MARKER">
+            <summary>
+            placeholder for zeros when needed for dynamic position calculations
+            </summary>
         </member>
         <member name="F:NPOI.XSSF.UserModel.XSSFClientAnchor.cell1">
-            Starting anchor point
+            <summary>
+            Starting anchor point (top-left cell + relative offset)
+            if left null recalculate as needed from point
+            </summary>
         </member>
         <member name="F:NPOI.XSSF.UserModel.XSSFClientAnchor.cell2">
-            Ending anchor point
+            <summary>
+            Ending anchor point (bottom-right cell + relative offset)
+            if left null, re-calculate as needed from size and cell1
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.UserModel.XSSFClientAnchor.size">
+            <summary>
+            if present, fixed size of the object to use instead of cell2, which is inferred instead
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.UserModel.XSSFClientAnchor.position">
+            <summary>
+            if present, fixed top-left position to use instead of cell1, which is inferred instead
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.UserModel.XSSFClientAnchor.sheet">
+            <summary>
+            sheet to base dynamic calculations on, if needed.  Required if size and/or position or Set.
+            Not needed if cell1/2 are Set explicitly (dynamic sizing and position relative to cells).
+            </summary>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFClientAnchor.#ctor">
+            <summary>
             Creates a new client anchor and defaults all the anchor positions to 0.
+            Sets the type to <see cref="F:NPOI.SS.UserModel.AnchorType.MoveAndResize" /> relative to cell range A1:A1.
+            </summary>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFClientAnchor.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
-             Creates a new client anchor and Sets the top-left and bottom-right
-             coordinates of the anchor.
-            
-             @param dx1  the x coordinate within the first cell.
-             @param dy1  the y coordinate within the first cell.
-             @param dx2  the x coordinate within the second cell.
-             @param dy2  the y coordinate within the second cell.
-             @param col1 the column (0 based) of the first cell.
-             @param row1 the row (0 based) of the first cell.
-             @param col2 the column (0 based) of the second cell.
-             @param row2 the row (0 based) of the second cell.
+            <summary>
+            Creates a new client anchor and Sets the top-left and bottom-right
+            coordinates of the anchor by cell references and offsets.
+            Sets the type to <see cref="!:AnchorType.MOVE_AND_RESIZE" />.
+            </summary>
+            <param name="dx1"> the x coordinate within the first cell.</param>
+            <param name="dy1"> the y coordinate within the first cell.</param>
+            <param name="dx2"> the x coordinate within the second cell.</param>
+            <param name="dy2"> the y coordinate within the second cell.</param>
+            <param name="col1">the column (0 based) of the first cell.</param>
+            <param name="row1">the row (0 based) of the first cell.</param>
+            <param name="col2">the column (0 based) of the second cell.</param>
+            <param name="row2">the row (0 based) of the second cell.</param>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFClientAnchor.#ctor(NPOI.OpenXmlFormats.Dml.Spreadsheet.CT_Marker,NPOI.OpenXmlFormats.Dml.Spreadsheet.CT_Marker)">
+            <summary>
+            Create XSSFClientAnchor from existing xml beans, sized and positioned relative to a pair of cells.
+            Sets the type to <see cref="!:AnchorType.MOVE_AND_RESIZE" />.
+            </summary>
+            <param name="cell1">starting anchor point</param>
+            <param name="cell2">ending anchor point</param>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFClientAnchor.#ctor(NPOI.XSSF.UserModel.XSSFSheet,NPOI.OpenXmlFormats.Dml.Spreadsheet.CT_Marker,NPOI.OpenXmlFormats.Dml.CT_PositiveSize2D)">
+            <summary>
+            Create XSSFClientAnchor from existing xml beans, sized and positioned relative to a pair of cells.
+            Sets the type to <see cref="F:NPOI.SS.UserModel.AnchorType.MoveDontResize" />.
+            </summary>
+            <param name="sheet">needed to calculate ending point based on column/row sizes</param>
+            <param name="cell1">starting anchor point</param>
+            <param name="size">object size, to calculate ending anchor point</param>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFClientAnchor.#ctor(NPOI.XSSF.UserModel.XSSFSheet,NPOI.OpenXmlFormats.Dml.CT_Point2D,NPOI.OpenXmlFormats.Dml.CT_PositiveSize2D)">
+            <summary>
+            Create XSSFClientAnchor from existing xml beans, sized and positioned relative to a pair of cells.
+            Sets the type to <see cref="F:NPOI.SS.UserModel.AnchorType.DontMoveAndResize" />.
+            </summary>
+            <param name="sheet">needed to calculate starting and ending points based on column/row sizes</param>
+            <param name="position">starting absolute position</param>
+            <param name="size">object size, to calculate ending position</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFClientAnchor.#ctor(NPOI.SS.UserModel.ISheet,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
@@ -4533,17 +5656,25 @@
             <param name="dx2"></param>
             <param name="dy2"></param>
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFClientAnchor.#ctor(NPOI.OpenXmlFormats.Dml.Spreadsheet.CT_Marker,NPOI.OpenXmlFormats.Dml.Spreadsheet.CT_Marker)">
-             Create XSSFClientAnchor from existing xml beans
-            
-             @param cell1 starting anchor point
-             @param cell2 ending anchor point
-        </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFClientAnchor.#ctor(NPOI.OpenXmlFormats.Dml.Spreadsheet.CT_Marker,NPOI.OpenXmlFormats.Dml.Spreadsheet.CT_Marker,System.Int32,System.Int32,System.Int32,System.Int32)">
              Create XSSFClientAnchor from existing xml beans
             
              @param cell1 starting anchor point
              @param cell2 ending anchor point
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFClientAnchor.calcCell(NPOI.OpenXmlFormats.Dml.Spreadsheet.CT_Marker,System.Int64,System.Int64)">
+            <summary>
+            </summary>
+            <param name="sheet">sheet</param>
+            <param name="cell">starting point and offsets (may be zeros)</param>
+            <param name="size">dimensions to calculate relative to starting point</param>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFClientAnchor.GetRowHeight(NPOI.XSSF.UserModel.XSSFSheet,System.Int32)">
+            <summary>
+            </summary>
+            <param name="sheet">sheet</param>
+            <param name="row">row</param>
+            <return>height in twips (1/20th of point) for row or default</return>
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFClientAnchor.From">
              Return starting anchor point
@@ -4554,6 +5685,19 @@
              Return ending anchor point
             
              @return ending anchor point
+        </member>
+        <member name="P:NPOI.XSSF.UserModel.XSSFClientAnchor.Position">
+            <summary>absolute top-left position, or null if position is determined from the "from" cell
+            To use this, "from" must be Set to null.
+            </summary>
+            <return></return>
+            @since POI 3.17 beta 1
+        </member>
+        <member name="P:NPOI.XSSF.UserModel.XSSFClientAnchor.Size">
+            <summary>size or null, if size is determined from the to and from cells
+            To use this, "to" must be Set to null.
+            </summary>
+            @since POI 3.17 beta 1
         </member>
         <member name="T:NPOI.XSSF.UserModel.XSSFColor">
             Represents a color in SpreadsheetML
@@ -4991,6 +6135,11 @@
             
              @return  the second formula
         </member>
+        <member name="P:NPOI.XSSF.UserModel.XSSFConditionalFormattingRule.StripeSize">
+            <summary>
+            Conditional format rules don't define stripes, so always 0
+            </summary>
+        </member>
         <member name="T:NPOI.XSSF.UserModel.XSSFConditionalFormattingThreshold">
             High level representation for Icon / Multi-State / Databar /
              Colour Scale change thresholds
@@ -5031,6 +6180,12 @@
             
              @return a XSSFClientAnchor instance
              @see NPOI.ss.usermodel.Drawing
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFCreationHelper.CreateAreaReference(System.String)">
+            {@inheritDoc}
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFCreationHelper.CreateAreaReference(NPOI.SS.Util.CellReference,NPOI.SS.Util.CellReference)">
+            {@inheritDoc}
         </member>
         <member name="T:NPOI.XSSF.UserModel.XSSFDataBarFormatting">
             High level representation for DataBar / Data Bar Formatting 
@@ -5234,6 +6389,13 @@
             
              @return a new CT_TwoCellAnchor
         </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFDrawing.GetShapes(NPOI.XSSF.UserModel.XSSFShapeGroup)">
+            <summary>
+            get shapes in this shape group
+            </summary>
+            <param name="groupshape"></param>
+            <returns>list of shapes in this shape group</returns>
+        </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFDrawing.GetShapes">
             
              @return list of shapes in this drawing
@@ -5351,6 +6513,14 @@
             
              @param font the underlying CT_Font bean
         </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFFont.#ctor(NPOI.OpenXmlFormats.Spreadsheet.CT_Font,System.Int32,NPOI.OOXML.XSSF.UserModel.IIndexedColorMap)">
+            <summary>
+            Called from parsing styles.xml
+            </summary>
+            <param name="font"></param>
+            <param name="index">font index</param>
+            <param name="colorMap">colorMap for default or custom indexed colors</param>
+        </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFFont.#ctor">
             Create a new XSSFont. This method is protected to be used only by XSSFWorkbook
         </member>
@@ -5425,12 +6595,6 @@
             
              @return byte - underlining type
              @see NPOI.SS.usermodel.FontUnderline
-        </member>
-        <member name="P:NPOI.XSSF.UserModel.XSSFFont.Boldweight">
-            get the boldness to use
-            @return boldweight
-            @see #BOLDWEIGHT_NORMAL
-            @see #BOLDWEIGHT_BOLD
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFFont.SetCharSet(System.Byte)">
              set character-set to use.
@@ -5946,6 +7110,39 @@
             
              @param name
         </member>
+        <member name="T:NPOI.XSSF.UserModel.XSSFObjectData">
+            <summary>
+            Represents binary object (i.e. OLE) data stored in the file.  Eg. A GIF, JPEG etc...
+            </summary>
+        </member>
+        <member name="F:NPOI.XSSF.UserModel.XSSFObjectData.prototype">
+            <summary>
+            A default instance of CTShape used for creating new shapes.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFObjectData.Prototype">
+            <summary>
+            Prototype with the default structure of a new auto-shape.
+            </summary>
+            <summary>
+            Prototype with the default structure of a new auto-shape.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFObjectData.GetOleObject">
+            <summary>
+            </summary>
+            <return>CTOleObject associated with the shape/// </return>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFObjectData.GetObjectPart">
+            <summary>
+            </summary>
+            <return>package part of the object data/// </return>
+        </member>
+        <member name="P:NPOI.XSSF.UserModel.XSSFObjectData.FileName">
+            <summary>
+            The filename of the embedded image
+            </summary>
+        </member>
         <member name="T:NPOI.XSSF.UserModel.XSSFOddFooter">
              Odd page footer value. Corresponds to odd printed pages.
              Odd page(s) in the sheet may not be printed, for example, if the print area is specified to be 
@@ -6185,13 +7382,43 @@
             Add a row label using data from the given column.
             @param columnIndex the index of the column to be used as row label.
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddColumnLabel(NPOI.SS.UserModel.DataConsolidateFunction,System.Int32,System.String)">
+        <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddColLabel(System.Int32,System.String)">
+            <summary>
+            Add a col label using data from the given column.
+            </summary>
+            <param name="columnIndex">the index of the source column to be used as row label.
+            <c>columnIndex</c> is 0-based indexed and relative to the first column in the source.
+            </param>
+            <param name="valueFormat">format of column value (e.g. for date: "DD.MM.YYYY")</param>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddColLabel(System.Int32)">
+            <summary>
+            Add a col label using data from the given column.
+            </summary>
+            <param name="columnIndex">the index of the source column to be used as row label.
+            <c>columnIndex</c> is 0-based indexed and relative to the first column in the source.
+            </param>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddColumnLabel(NPOI.SS.UserModel.DataConsolidateFunction,System.Int32,System.String,System.String)">
             Add a column label using data from the given column and specified function
             @param columnIndex the index of the column to be used as column label.
             @param function the function to be used on the data
             The following functions exists:
             Sum, Count, Average, Max, Min, Product, Count numbers, StdDev, StdDevp, Var, Varp
             @param valueFieldName the name of pivot table value field
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddColumnLabel(NPOI.SS.UserModel.DataConsolidateFunction,System.Int32,System.String)">
+            <summary>
+            Add a column label using data from the given column and specified function
+            </summary>
+            <param name="columnIndex">the index of the source column to be used as column label.
+            <c>columnIndex</c> is 0-based indexed and relative to the first column in the source.
+            </param>
+            <param name="function">the function to be used on the data
+            The following functions exists:
+            Sum, Count, Average, Max, Min, Product, Count numbers, StdDev, StdDevp, Var, Varp
+            </param>
+            <param name="valueFieldName">the name of pivot table value field</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddColumnLabel(NPOI.SS.UserModel.DataConsolidateFunction,System.Int32)">
             Add a column label using data from the given column and specified function
@@ -6200,7 +7427,7 @@
             The following functions exists:
             Sum, Count, Average, Max, Min, Product, Count numbers, StdDev, StdDevp, Var, Varp
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddDataField(NPOI.SS.UserModel.DataConsolidateFunction,System.Int32,System.String)">
+        <member name="M:NPOI.XSSF.UserModel.XSSFPivotTable.AddDataField(NPOI.SS.UserModel.DataConsolidateFunction,System.Int32,System.String,System.String)">
             Add data field with data from the given column and specified function.
             @param function the function to be used on the data
                  The following functions exists:
@@ -7028,7 +8255,7 @@
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.MergedRegions">
             <summary>
-            Returns the list of merged regions. If you want multiple regions, 
+            Returns the list of merged regions. If you want multiple regions,
             this is faster than calling {@link #getMergedRegion(int)} each time.
             </summary>
         </member>
@@ -7039,19 +8266,19 @@
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.PaneInformation">
             <summary>
-            Returns the information regarding the currently configured pane 
+            Returns the information regarding the currently configured pane
             (split or freeze).
             </summary>
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.PhysicalNumberOfRows">
             <summary>
-            Returns the number of phsyically defined rows (NOT the number of 
+            Returns the number of phsyically defined rows (NOT the number of
             rows in the sheet)
             </summary>
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.PhysicalNumberOfColumns">
             <summary>
-            Returns the number of phsyically defined columns (NOT the number of 
+            Returns the number of phsyically defined columns (NOT the number of
             columns in the sheet)
             </summary>
         </member>
@@ -7067,17 +8294,17 @@
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.RowBreaks">
             <summary>
-            Horizontal page break information used for print layout view, page 
-            layout view, drawing print breaks in normal view, and for printing 
+            Horizontal page break information used for print layout view, page
+            layout view, drawing print breaks in normal view, and for printing
             the worksheet.
             </summary>
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.RowSumsBelow">
             <summary>
-            Flag indicating whether summary rows appear below detail in an 
-            outline, when Applying an outline. When true a summary row is 
+            Flag indicating whether summary rows appear below detail in an
+            outline, when Applying an outline. When true a summary row is
             inserted below the detailed data being summarized and a new outline
-            level is established on that row. When false a summary row is 
+            level is established on that row. When false a summary row is
             inserted above the detailed data being summarized and a new outline
             level is established on that row.
             </summary>
@@ -7085,27 +8312,27 @@
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.RowSumsRight">
             <summary>
             When true a summary column is inserted to the right of the detailed
-            data being summarized and a new outline level is established on 
+            data being summarized and a new outline level is established on
             that column. When false a summary column is inserted to the left of
-            the detailed data being summarized and a new outline level is 
+            the detailed data being summarized and a new outline level is
             established on that column.
             </summary>
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.ScenarioProtect">
             <summary>
-            A flag indicating whether scenarios are locked when the sheet 
+            A flag indicating whether scenarios are locked when the sheet
             is protected.
             </summary>
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.TopRow">
             <summary>
-            The top row in the visible view when the sheet is first viewed 
+            The top row in the visible view when the sheet is first viewed
             after opening it in a viewer
             </summary>
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.VerticallyCenter">
             <summary>
-            Determine whether printed output for this sheet will be vertically 
+            Determine whether printed output for this sheet will be vertically
             centered.
             </summary>
         </member>
@@ -7116,15 +8343,15 @@
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.DisplayGridlines">
             <summary>
-            Gets the flag indicating whether this sheet displays the lines 
+            Gets the flag indicating whether this sheet displays the lines
             between rows and columns to make editing and Reading easier.
             </summary>
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.DisplayRowColHeadings">
             <summary>
-            Gets the flag indicating whether this sheet should display row and 
+            Gets the flag indicating whether this sheet should display row and
             column headings. Row heading are the row numbers to the side of the
-            sheet Column heading are the letters or numbers that appear above 
+            sheet Column heading are the letters or numbers that appear above
             the columns of the sheet
             </summary>
         </member>
@@ -7140,7 +8367,7 @@
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.ForceFormulaRecalculation">
             <summary>
-            Whether Excel will be asked to recalculate all formulas when the 
+            Whether Excel will be asked to recalculate all formulas when the
             workbook is opened.
             </summary>
         </member>
@@ -7153,11 +8380,11 @@
             <summary>
             Returns a flag indicating whether this sheet is selected.
             <para>
-            When only 1 sheet is selected and active, this value should be in 
-            synch with the activeTab value. In case of a conflict, the Start 
+            When only 1 sheet is selected and active, this value should be in
+            synch with the activeTab value. In case of a conflict, the Start
             Part Setting wins and Sets the active sheet tab.
             </para>
-            Note: multiple sheets can be selected, but only one sheet can be 
+            Note: multiple sheets can be selected, but only one sheet can be
             active at one time.
             </summary>
         </member>
@@ -7239,13 +8466,13 @@
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.IsSelectLockedCellsLocked">
             <summary>
-            true when Selection of locked cells is locked and the sheet is 
+            true when Selection of locked cells is locked and the sheet is
             protected.
             </summary>
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.IsSelectUnlockedCellsLocked">
             <summary>
-            true when Selection of unlocked cells is locked and the sheet is 
+            true when Selection of unlocked cells is locked and the sheet is
             protected.
             </summary>
         </member>
@@ -7254,25 +8481,31 @@
             true when Sheet is Protected.
             </summary>
         </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFSheet.RemoveTable(NPOI.XSSF.UserModel.XSSFTable)">
+            <summary>
+            Remove table references and relations
+            </summary>
+            <param name="t">table to remove</param>
+        </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFSheet.TabColor">
             <summary>
-            Get or set background color of the sheet tab. The value is null 
+            Get or set background color of the sheet tab. The value is null
             if no sheet tab color is set.
             </summary>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.#ctor">
             <summary>
-            Creates new XSSFSheet   - called by XSSFWorkbook to create a sheet 
+            Creates new XSSFSheet   - called by XSSFWorkbook to create a sheet
             from scratch. See <see cref="M:NPOI.XSSF.UserModel.XSSFWorkbook.CreateSheet"/>
             </summary>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.#ctor(NPOI.OpenXml4Net.OPC.PackagePart)">
             <summary>
-            Creates an XSSFSheet representing the given namespace part and 
+            Creates an XSSFSheet representing the given namespace part and
             relationship. Should only be called by XSSFWorkbook when Reading in
             an exisiting file.
             </summary>
-            <param name="part">The namespace part that holds xml data 
+            <param name="part">The namespace part that holds xml data
             represenring this sheet.</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.OnDocumentRead">
@@ -7290,16 +8523,16 @@
             <summary>
             Get VML drawing for this sheet (aka 'legacy' drawig)
             </summary>
-            <param name="autoCreate">if true, then a new VML drawing part 
+            <param name="autoCreate">if true, then a new VML drawing part
             is Created</param>
-            <returns>the VML drawing of null if the drawing was not found and 
+            <returns>the VML drawing of null if the drawing was not found and
             autoCreate=false</returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.GetCommentsTable(System.Boolean)">
             <summary>
             Returns the sheet's comments object if there is one, or null if not
             </summary>
-            <param name="create">create a new comments table if it does not 
+            <param name="create">create a new comments table if it does not
             exist</param>
             <returns></returns>
         </member>
@@ -7308,7 +8541,7 @@
             Return a master shared formula by index
             </summary>
             <param name="sid">shared group index</param>
-            <returns>a CT_CellFormula bean holding shared formula or 
+            <returns>a CT_CellFormula bean holding shared formula or
             <code>null</code> if not found</returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.OnDeleteFormula(NPOI.XSSF.UserModel.XSSFCell,NPOI.XSSF.UserModel.XSSFEvaluationWorkbook)">
@@ -7331,10 +8564,10 @@
             </summary>
             <param name="region">region to merge</param>
             <returns>index of this region</returns>
-            <exception cref="T:System.ArgumentException">if region contains fewer 
+            <exception cref="T:System.ArgumentException">if region contains fewer
             than 2 cells</exception>
-            <exception cref="T:System.InvalidOperationException">if region intersects 
-            with an existing merged region or multi-cell array formula on 
+            <exception cref="T:System.InvalidOperationException">if region intersects
+            with an existing merged region or multi-cell array formula on
             this sheet</exception>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.AddMergedRegionUnsafe(NPOI.SS.Util.CellRangeAddress)">
@@ -7346,13 +8579,13 @@
             </summary>
             <param name="region">region to merge</param>
             <returns>index of this region</returns>
-            <exception cref="T:System.ArgumentException">if region contains fewer 
+            <exception cref="T:System.ArgumentException">if region contains fewer
             than 2 cells</exception>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.ValidateMergedRegions">
             <summary>
-            Verify that merged regions do not intersect multi-cell array 
-            formulas and no merged regions intersect another merged region 
+            Verify that merged regions do not intersect multi-cell array
+            formulas and no merged regions intersect another merged region
             in this sheet.
             </summary>
         </member>
@@ -7373,7 +8606,7 @@
             Processing.
             </summary>
             <param name="column">the column index</param>
-            <param name="useMergedCells">whether to use the contents of merged cells 
+            <param name="useMergedCells">whether to use the contents of merged cells
             when calculating the width of the column</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.AutoSizeRow(System.Int32)">
@@ -7387,14 +8620,14 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.AutoSizeRow(System.Int32,System.Boolean)">
             <summary>
-            Adjusts the row height to fit the contents. This process can be 
-            relatively slow on large sheets, so this should normally only be 
+            Adjusts the row height to fit the contents. This process can be
+            relatively slow on large sheets, so this should normally only be
             called once per row, at the end of your Processing. You can specify
-            whether the content of merged cells should be considered or 
+            whether the content of merged cells should be considered or
             ignored. Default is to ignore merged cells.
             </summary>
             <param name="row">the row index</param>
-            <param name="useMergedCells">whether to use the contents of merged 
+            <param name="useMergedCells">whether to use the contents of merged
             cells when  calculating the height of the row</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.GetDrawingPatriarch">
@@ -7406,14 +8639,14 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CreateDrawingPatriarch">
             <summary>
-            Create a new SpreadsheetML Drawing. If this sheet already 
+            Create a new SpreadsheetML Drawing. If this sheet already
             Contains a Drawing - return that.
             </summary>
             <returns>a SpreadsheetML Drawing</returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CreateFreezePane(System.Int32,System.Int32)">
             <summary>
-            Creates a split (freezepane). Any existing freezepane or split 
+            Creates a split (freezepane). Any existing freezepane or split
             pane is overwritten.
             </summary>
             <param name="colSplit">Horizonatal position of split.</param>
@@ -7422,7 +8655,7 @@
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CreateFreezePane(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Creates a split (freezepane). Any existing freezepane or split pane
-            is overwritten. If both colSplit and rowSplit are zero then the 
+            is overwritten. If both colSplit and rowSplit are zero then the
             existing freeze pane is Removed
             </summary>
             <param name="colSplit">Horizonatal position of split.</param>
@@ -7432,43 +8665,35 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CreateRow(System.Int32)">
             <summary>
-            Create a new row within the sheet and return the high level 
+            Create a new row within the sheet and return the high level
             representation. See <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.RemoveRow(NPOI.SS.UserModel.IRow)"/>
             </summary>
             <param name="rownum">row number</param>
-            <returns>High level <see cref="T:NPOI.XSSF.UserModel.XSSFRow"/> object representing a 
+            <returns>High level <see cref="T:NPOI.XSSF.UserModel.XSSFRow"/> object representing a
             row in the sheet</returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CreateColumn(System.Int32)">
             <summary>
-            Create a new column within the sheet and return the high level 
+            Create a new column within the sheet and return the high level
             representation. See <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.RemoveColumn(NPOI.SS.UserModel.IColumn)"/>
             </summary>
             <param name="columnnum">column number</param>
-            <returns>High level <see cref="T:NPOI.XSSF.UserModel.XSSFColumn"/> object representing a 
+            <returns>High level <see cref="T:NPOI.XSSF.UserModel.XSSFColumn"/> object representing a
             column in the sheet</returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CreateSplitPane(System.Int32,System.Int32,System.Int32,System.Int32,NPOI.SS.UserModel.PanePosition)">
             <summary>
-            Creates a split pane. Any existing freezepane or split pane is 
+            Creates a split pane. Any existing freezepane or split pane is
             overwritten.
             </summary>
-            <param name="xSplitPos">Horizonatal position of split (in 1/20th 
+            <param name="xSplitPos">Horizonatal position of split (in 1/20th
             of a point).</param>
-            <param name="ySplitPos">Vertical position of split (in 1/20th of 
+            <param name="ySplitPos">Vertical position of split (in 1/20th of
             a point).</param>
             <param name="leftmostColumn">Left column visible in right pane.</param>
             <param name="topRow">Top row visible in bottom pane</param>
-            <param name="activePane">Active pane.  One of: PANE_LOWER_RIGHT, 
+            <param name="activePane">Active pane.  One of: PANE_LOWER_RIGHT,
             PANE_UPPER_RIGHT, PANE_LOWER_LEFT, PANE_UPPER_LEFT</param>
-        </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFSheet.GetCellComment(System.Int32,System.Int32)">
-            <summary>
-            Returns cell comment for the specified row and column
-            </summary>
-            <param name="row">The row.</param>
-            <param name="column">The column.</param>
-            <returns>cell comment or <code>null</code> if not found</returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.GetCellComment(NPOI.SS.Util.CellAddress)">
             <summary>
@@ -7490,17 +8715,17 @@
             </summary>
             <param name="row"></param>
             <param name="column"></param>
-            <returns>return hyperlink if there is a hyperlink anchored at row, 
+            <returns>return hyperlink if there is a hyperlink anchored at row,
             column; otherwise returns null</returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.GetHyperlink(NPOI.SS.Util.CellAddress)">
             <summary>
-            Get a Hyperlink in this sheet located in a cell specified 
+            Get a Hyperlink in this sheet located in a cell specified
             by {code addr}
             </summary>
-            <param name="addr">The address of the cell containing the 
+            <param name="addr">The address of the cell containing the
             hyperlink</param>
-            <returns>return hyperlink if there is a hyperlink anchored at 
+            <returns>return hyperlink if there is a hyperlink anchored at
             {@code addr}; otherwise returns {@code null}</returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.GetHyperlinkList">
@@ -7542,59 +8767,59 @@
             <exception cref="T:System.InvalidOperationException"></exception>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.GetMergedRegion(System.Int32)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="index"></param>
-            <returns>the merged region at the specified index</returns>
-            <exception cref="T:System.InvalidOperationException">if this worksheet 
-            does not contain merged regions</exception>
+             </summary>
+             <param name="index"></param>
+             <returns>the merged region at the specified index</returns>
+             <exception cref="T:System.InvalidOperationException">if this worksheet
+             does not contain merged regions</exception>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.ProtectSheet(System.String)">
             <summary>
-            Enables sheet protection and Sets the password for the sheet. 
-            Also Sets some attributes on the { @link CT_SheetProtection } 
+            Enables sheet protection and Sets the password for the sheet.
+            Also Sets some attributes on the { @link CT_SheetProtection }
             that correspond to the default values used by Excel
             </summary>
-            <param name="password">password to set for protection. Pass null 
+            <param name="password">password to set for protection. Pass null
             to remove protection</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.SetSheetPassword(System.String,NPOI.POIFS.Crypt.HashAlgorithm)">
             <summary>
-            Sets the sheet password. 
+            Sets the sheet password.
             </summary>
             <param name="password"> if null, the password will be removed</param>
-            <param name="hashAlgo">if null, the password will be set as XOR 
-            password (Excel 2010 and earlier)otherwise the given algorithm is 
+            <param name="hashAlgo">if null, the password will be set as XOR
+            password (Excel 2010 and earlier)otherwise the given algorithm is
             used for calculating the hash password (Excel 2013)</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.ValidateSheetPassword(System.String)">
             <summary>
-            Validate the password against the stored hash, the hashing method 
+            Validate the password against the stored hash, the hashing method
             will be determined by the existing password attributes
             </summary>
             <param name="password"></param>
-            <returns>true, if the hashes match (... though original password 
+            <returns>true, if the hashes match (... though original password
             may differ ...)</returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.GetRow(System.Int32)">
             <summary>
-            Returns the logical row ( 0-based).  If you ask for a row that is 
-            not defined you get a null.  This is to say row 4 represents the 
+            Returns the logical row ( 0-based).  If you ask for a row that is
+            not defined you get a null.  This is to say row 4 represents the
             fifth row on a sheet.
             </summary>
             <param name="rownum">row to get</param>
-            <returns><see cref="T:NPOI.XSSF.UserModel.XSSFRow"/> representing the rownumber or null 
+            <returns><see cref="T:NPOI.XSSF.UserModel.XSSFRow"/> representing the rownumber or null
             if its not defined on the sheet</returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.GetColumn(System.Int32,System.Boolean)">
             <summary>
-            Returns the logical column ( 0-based).  If you ask for a column that is 
-            not defined you get a null.  This is to say column 4 represents the 
+            Returns the logical column ( 0-based).  If you ask for a column that is
+            not defined you get a null.  This is to say column 4 represents the
             fifth column on a sheet.
             </summary>
             <param name="columnnum">column to get</param>
-            <returns><see cref="T:NPOI.XSSF.UserModel.XSSFColumn"/> representing the columnnumber or null 
+            <returns><see cref="T:NPOI.XSSF.UserModel.XSSFColumn"/> representing the columnnumber or null
             if its not defined on the sheet</returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.GroupColumn(System.Int32,System.Int32)">
@@ -7627,12 +8852,12 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.SetRowBreak(System.Int32)">
             <summary>
-            Sets a page break at the indicated row Breaks occur above the 
-            specified row and left of the specified column inclusive. For 
-            example, sheet.SetColumnBreak(2); breaks the sheet into two parts 
-            with columns A,B,C in the first and D,E,... in the second. 
-            Simuilar, sheet.SetRowBreak(2); breaks the sheet into two parts 
-            with first three rows (rownum=1...3) in the first part and rows 
+            Sets a page break at the indicated row Breaks occur above the
+            specified row and left of the specified column inclusive. For
+            example, sheet.SetColumnBreak(2); breaks the sheet into two parts
+            with columns A,B,C in the first and D,E,... in the second.
+            Simuilar, sheet.SetRowBreak(2); breaks the sheet into two parts
+            with first three rows (rownum=1...3) in the first part and rows
             starting with rownum=4 in the second.
             </summary>
             <param name="row">the row to break, inclusive</param>
@@ -7651,16 +8876,16 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.RemoveMergedRegions(System.Collections.Generic.IList{System.Int32})">
             <summary>
-            Removes a number of merged regions of cells (hence letting them 
-            free) This method can be used to bulk-remove merged regions in a 
-            way much faster than calling RemoveMergedRegion() for every single 
+            Removes a number of merged regions of cells (hence letting them
+            free) This method can be used to bulk-remove merged regions in a
+            way much faster than calling RemoveMergedRegion() for every single
             merged region.
             </summary>
             <param name="indices">A Set of the regions to unmerge</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.RemoveRow(NPOI.SS.UserModel.IRow)">
             <summary>
-            Remove a row from this sheet.  All cells Contained in the row are 
+            Remove a row from this sheet.  All cells Contained in the row are
             Removed as well
             </summary>
             <param name="row">the row to Remove.</param>
@@ -7668,7 +8893,7 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.RemoveColumn(NPOI.SS.UserModel.IColumn)">
             <summary>
-            Remove a column from this sheet.  All cells Contained in the column are 
+            Remove a column from this sheet.  All cells Contained in the column are
             Removed as well
             </summary>
             <param name="column">the column to Remove.</param>
@@ -7682,12 +8907,12 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.SetColumnBreak(System.Int32)">
             <summary>
-            Sets a page break at the indicated column. Breaks occur above the 
-            specified row and left of the specified column inclusive. For 
-            example, sheet.SetColumnBreak(2); breaks the sheet into two parts 
-            with columns A,B,C in the first and D,E,... in the second. 
-            Simuilar, sheet.SetRowBreak(2); breaks the sheet into two parts 
-            with first three rows (rownum=1...3) in the first part and rows 
+            Sets a page break at the indicated column. Breaks occur above the
+            specified row and left of the specified column inclusive. For
+            example, sheet.SetColumnBreak(2); breaks the sheet into two parts
+            with columns A,B,C in the first and D,E,... in the second.
+            Simuilar, sheet.SetRowBreak(2); breaks the sheet into two parts
+            with first three rows (rownum=1...3) in the first part and rows
             starting with rownum=4 in the second.
             </summary>
             <param name="column">the column to break, inclusive</param>
@@ -7703,89 +8928,78 @@
             <summary>
             Set the width (in units of 1/256th of a character width)
             <para>
-            The maximum column width for an individual cell is 255 
+            The maximum column width for an individual cell is 255
             characters. This value represents the number of characters that can
-            be displayed in a cell that is formatted with the standard font 
+            be displayed in a cell that is formatted with the standard font
             (first font in the workbook).
             </para>
             <para>
-            Character width is defined as the maximum digit width of the 
-            numbers 
+            Character width is defined as the maximum digit width of the
+            numbers
             <code>
             0, 1, 2, ... 9
             </code>
-            as rendered using the default 
-            font (first font in the workbook). Unless you are using a very 
+            as rendered using the default
+            font (first font in the workbook). Unless you are using a very
             special font, the default character is '0' (zero), this is true for
-            Arial (default font font in HSSF) and Calibri (default font in 
+            Arial (default font font in HSSF) and Calibri (default font in
             XSSF)
             </para>
             <para>
-            Please note, that the width set by this method includes 4 
-            pixels of margin pAdding (two on each side), plus 1 pixel pAdding 
-            for the gridlines (Section 3.3.1.12 of the OOXML spec). This 
-            results is a slightly less value of visible characters than passed 
+            Please note, that the width set by this method includes 4
+            pixels of margin pAdding (two on each side), plus 1 pixel pAdding
+            for the gridlines (Section 3.3.1.12 of the OOXML spec). This
+            results is a slightly less value of visible characters than passed
             to this method (approx. 1/2 of a character).
             </para>
             <para>
             To compute
-            the actual number of visible characters, Excel uses the following 
+            the actual number of visible characters, Excel uses the following
             formula (Section 3.3.1.12 of the OOXML spec):
             </para>
             <code>
-            width = TRuncate([{Number of Visible Characters} * 
+            width = TRuncate([{Number of Visible Characters} *
             {Maximum Digit Width} + {5 pixel pAdding}]/{Maximum Digit Width}*256)/256
             </code>
             <para>
             Using the Calibri font as an example, the maximum digit width
-            of 11 point font size is 7 pixels (at 96 dpi). If you set a column 
-            width to be eight characters wide, e.g. 
+            of 11 point font size is 7 pixels (at 96 dpi). If you set a column
+            width to be eight characters wide, e.g.
             <code>
             SetColumnWidth(columnIndex, 8*256)
             </code>
-            , then the actual value of visible characters (the value Shown in 
-            Excel) is derived from the following equation: 
+            , then the actual value of visible characters (the value Shown in
+            Excel) is derived from the following equation:
             <code>
             TRuncate([numChars*7+5]/7*256)/256 = 8;
             </code>
-            which gives 
+            which gives
             <code>
             7.29
             </code>.
             </para>
             </summary>
             <param name="columnIndex">the column to set (0-based)</param>
-            <param name="width">the width in units of 1/256th of a character 
+            <param name="width">the width in units of 1/256th of a character
             width</param>
             <exception cref="T:System.ArgumentException">if width more than 255*256 (the
             maximum column width in Excel is 255 characters)</exception>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.SetRowGroupCollapsed(System.Int32,System.Boolean)">
             <summary>
-            group the row It is possible for collapsed to be false and yet 
-            still have the rows in question hidden. This can be achieved by 
-            having a lower outline level collapsed, thus hiding all the child 
-            rows. Note that in this case, if the lowest level were expanded, 
+            group the row It is possible for collapsed to be false and yet
+            still have the rows in question hidden. This can be achieved by
+            having a lower outline level collapsed, thus hiding all the child
+            rows. Note that in this case, if the lowest level were expanded,
             the middle level would remain collapsed.
             </summary>
             <param name="rowIndex">the row involved, 0 based</param>
             <param name="collapse">bool value for collapse</param>
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFSheet.SetZoom(System.Int32,System.Int32)">
-            <summary>
-            Sets the zoom magnification for the sheet.  The zoom is expressed 
-            as a fraction.  For example to express a zoom of 75% use 3 for the 
-            numerator and 4 for the denominator.
-            </summary>
-            <param name="numerator">The numerator for the zoom 
-            magnification.</param>
-            <param name="denominator">The denominator for the zoom 
-            magnification.</param>
-        </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.SetZoom(System.Int32)">
             <summary>
-            Window zoom magnification for current view representing percent 
-            values. Valid values range from 10 to 400. Horizontal &amp; 
+            Window zoom magnification for current view representing percent
+            values. Valid values range from 10 to 400. Horizontal &amp;
             Vertical scale toGether. For example:
             <code>
             10 - 10%
@@ -7802,45 +9016,45 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CopyRows(System.Collections.Generic.List{NPOI.XSSF.UserModel.XSSFRow},System.Int32,NPOI.SS.UserModel.CellCopyPolicy)">
             <summary>
-            copyRows rows from srcRows to this sheet starting at destStartRow 
-            Additionally copies merged regions that are completely defined in 
+            copyRows rows from srcRows to this sheet starting at destStartRow
+            Additionally copies merged regions that are completely defined in
             these rows (ie. merged 2 cells on a row to be shifted).
             </summary>
-            <param name="srcRows">the rows to copy. Formulas will be offset by 
-            the difference in the row number of the first row in srcRows and 
+            <param name="srcRows">the rows to copy. Formulas will be offset by
+            the difference in the row number of the first row in srcRows and
             destStartRow (even if srcRows are from a different sheet).</param>
             <param name="destStartRow">the row in this sheet to paste the first
-            row of srcRows the remainder of srcRows will be pasted below 
+            row of srcRows the remainder of srcRows will be pasted below
             destStartRow per the cell copy policy</param>
-            <param name="policy">is the cell copy policy, which can be used to 
-            merge the source and destination when the source is blank, copy 
+            <param name="policy">is the cell copy policy, which can be used to
+            merge the source and destination when the source is blank, copy
             styles only, paste as value, etc</param>
             <exception cref="T:System.ArgumentException"></exception>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CopyRows(System.Int32,System.Int32,System.Int32,NPOI.SS.UserModel.CellCopyPolicy)">
             <summary>
-            Copies rows between srcStartRow and srcEndRow to the same sheet, 
-            starting at destStartRow Convenience function for 
-            <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.CopyRows(System.Collections.Generic.List{NPOI.XSSF.UserModel.XSSFRow},System.Int32,NPOI.SS.UserModel.CellCopyPolicy)"/> Equivalent to 
+            Copies rows between srcStartRow and srcEndRow to the same sheet,
+            starting at destStartRow Convenience function for
+            <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.CopyRows(System.Collections.Generic.List{NPOI.XSSF.UserModel.XSSFRow},System.Int32,NPOI.SS.UserModel.CellCopyPolicy)"/> Equivalent to
             copyRows(getRows(srcStartRow, srcEndRow, false), destStartRow, cellCopyPolicy)
             </summary>
-            <param name="srcStartRow">the index of the first row to copy the 
+            <param name="srcStartRow">the index of the first row to copy the
             cells from in this sheet</param>
             <param name="srcEndRow">the index of the last row to copy the cells
             from in this sheet</param>
-            <param name="destStartRow">the index of the first row to copy the 
+            <param name="destStartRow">the index of the first row to copy the
             cells to in this sheet</param>
-            <param name="cellCopyPolicy">the policy to use to determine how 
+            <param name="cellCopyPolicy">the policy to use to determine how
             cells are copied</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.ShiftRows(System.Int32,System.Int32,System.Int32)">
             <summary>
-            Shifts rows between startRow and endRow n number of rows. If you 
-            use a negative number, it will shift rows up. Code ensures that 
-            rows don't wrap around. 
+            Shifts rows between startRow and endRow n number of rows. If you
+            use a negative number, it will shift rows up. Code ensures that
+            rows don't wrap around.
             Calls ShiftRows(startRow, endRow, n, false, false);
             <para>
-            Additionally Shifts merged regions that are completely defined in 
+            Additionally Shifts merged regions that are completely defined in
             these rows (ie. merged 2 cells on a row to be Shifted).
             </para>
             </summary>
@@ -7850,12 +9064,12 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.ShiftColumns(System.Int32,System.Int32,System.Int32)">
             <summary>
-            Shifts columns between startColumn and endColumn n number of columns. If you 
-            use a negative number, it will shift columns left. Code ensures that 
-            columns don't wrap around. 
+            Shifts columns between startColumn and endColumn n number of columns. If you
+            use a negative number, it will shift columns left. Code ensures that
+            columns don't wrap around.
             Calls ShiftColumns(startColumn, endColumn, n, false, false);
             <para>
-            Additionally Shifts merged regions that are completely defined in 
+            Additionally Shifts merged regions that are completely defined in
             these columns (ie. merged 2 cells on a column to be Shifted).
             </para>
             </summary>
@@ -7865,43 +9079,43 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.ShiftRows(System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean)">
             <summary>
-            Shifts rows between startRow and endRow n number of rows. If you 
-            use a negative number, it will shift rows up. Code ensures that 
+            Shifts rows between startRow and endRow n number of rows. If you
+            use a negative number, it will shift rows up. Code ensures that
             rows don't wrap around
             <para>
-            Additionally Shifts merged regions thatare completely defined in 
+            Additionally Shifts merged regions thatare completely defined in
             these rows (ie. merged 2 cells on a row to be Shifted).
             </para>
             </summary>
             <param name="startRow">the row to start Shifting</param>
             <param name="endRow">the row to end Shifting</param>
             <param name="n">the number of rows to shift</param>
-            <param name="copyRowHeight">whether to copy the row height during 
+            <param name="copyRowHeight">whether to copy the row height during
             the shift</param>
-            <param name="resetOriginalRowHeight">whether to set the original 
+            <param name="resetOriginalRowHeight">whether to set the original
             row's height to the default</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.ShiftColumns(System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean)">
             <summary>
-            Shifts columns between startColumn and endColumn n number of columns. If you 
-            use a negative number, it will shift columns left. Code ensures that 
+            Shifts columns between startColumn and endColumn n number of columns. If you
+            use a negative number, it will shift columns left. Code ensures that
             columns don't wrap around
             <para>
-            Additionally Shifts merged regions thatare completely defined in 
+            Additionally Shifts merged regions thatare completely defined in
             these columns (ie. merged 2 cells on a column to be Shifted).
             </para>
             </summary>
             <param name="startColumn">the column to start Shifting</param>
             <param name="endColumn">the column to end Shifting</param>
             <param name="n">the number of columns to shift</param>
-            <param name="copyColumnWidth">whether to copy the column width during 
+            <param name="copyColumnWidth">whether to copy the column width during
             the shift</param>
-            <param name="resetOriginalColumnWidth">whether to set the original 
+            <param name="resetOriginalColumnWidth">whether to set the original
             column's width to the default</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.GetColumnStyle(System.Int32)">
             <summary>
-            Returns the CellStyle that applies to the given (0 based) column, 
+            Returns the CellStyle that applies to the given (0 based) column,
             or null if no style has been set for that column
             </summary>
             <param name="column"></param>
@@ -7909,18 +9123,18 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.GroupRow(System.Int32,System.Int32)">
             <summary>
-            Tie a range of cell toGether so that they can be collapsed 
+            Tie a range of cell toGether so that they can be collapsed
             or expanded
             </summary>
             <param name="fromRow">start row (0-based)</param>
             <param name="toRow">end row (0-based)</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.FindEndOfRowOutlineGroup(System.Int32)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="row">the zero based row index to find from</param>
-            <returns></returns>
+             </summary>
+             <param name="row">the zero based row index to find from</param>
+             <returns></returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.UngroupRow(System.Int32,System.Int32)">
             <summary>
@@ -7954,120 +9168,120 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.LockAutoFilter(System.Boolean)">
             <summary>
-            Enable or disable Autofilters locking. This does not modify sheet 
-            protection status. To enforce this un-/locking, call 
+            Enable or disable Autofilters locking. This does not modify sheet
+            protection status. To enforce this un-/locking, call
             <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.DisableLocking"/> or <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.EnableLocking"/>
             </summary>
             <param name="enabled"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.LockDeleteColumns(System.Boolean)">
             <summary>
-            Enable or disable Deleting columns locking. This does not modify 
-            sheet protection status. To enforce this un-/locking, call 
+            Enable or disable Deleting columns locking. This does not modify
+            sheet protection status. To enforce this un-/locking, call
             <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.DisableLocking"/> or <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.EnableLocking"/>
             </summary>
             <param name="enabled"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.LockDeleteRows(System.Boolean)">
-            <summary>
-            Enable or disable Deleting rows locking. This does not modify 
-            sheet protection status. To enforce this un-/locking, call 
+             <summary>
+             Enable or disable Deleting rows locking. This does not modify
+             sheet protection status. To enforce this un-/locking, call
             
-            </summary>
-            <param name="enabled"></param>
+             </summary>
+             <param name="enabled"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.LockFormatCells(System.Boolean)">
             <summary>
-            Enable or disable Formatting cells locking. This does not modify 
-            sheet protection status. To enforce this un-/locking, call 
+            Enable or disable Formatting cells locking. This does not modify
+            sheet protection status. To enforce this un-/locking, call
             <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.DisableLocking"/> or <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.EnableLocking"/>
             </summary>
             <param name="enabled"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.LockFormatColumns(System.Boolean)">
             <summary>
-            Enable or disable Formatting columns locking. This does not modify 
-            sheet protection status. To enforce this un-/locking, call 
+            Enable or disable Formatting columns locking. This does not modify
+            sheet protection status. To enforce this un-/locking, call
             <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.DisableLocking"/> or <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.EnableLocking"/>
             </summary>
             <param name="enabled"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.LockFormatRows(System.Boolean)">
             <summary>
-            Enable or disable Formatting rows locking. This does not modify 
-            sheet protection status. To enforce this un-/locking, call 
+            Enable or disable Formatting rows locking. This does not modify
+            sheet protection status. To enforce this un-/locking, call
             <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.DisableLocking"/> or <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.EnableLocking"/>
             </summary>
             <param name="enabled"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.LockInsertColumns(System.Boolean)">
             <summary>
-            Enable or disable Inserting columns locking. This does not modify 
-            sheet protection status. To enforce this un-/locking, call 
+            Enable or disable Inserting columns locking. This does not modify
+            sheet protection status. To enforce this un-/locking, call
             <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.DisableLocking"/> or <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.EnableLocking"/>
             </summary>
             <param name="enabled"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.LockInsertHyperlinks(System.Boolean)">
             <summary>
-            Enable or disable Inserting hyperlinks locking. This does not 
-            modify sheet protection status. To enforce this un-/locking, call 
+            Enable or disable Inserting hyperlinks locking. This does not
+            modify sheet protection status. To enforce this un-/locking, call
             <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.DisableLocking"/> or <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.EnableLocking"/>
             </summary>
             <param name="enabled"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.LockInsertRows(System.Boolean)">
             <summary>
-            Enable or disable Inserting rows locking. This does not modify 
-            sheet protection status. To enforce this un-/locking, call 
+            Enable or disable Inserting rows locking. This does not modify
+            sheet protection status. To enforce this un-/locking, call
             <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.DisableLocking"/> or <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.EnableLocking"/>
             </summary>
             <param name="enabled"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.LockPivotTables(System.Boolean)">
             <summary>
-            Enable or disable Pivot Tables locking. This does not modify sheet 
-            protection status. To enforce this un-/locking, call 
+            Enable or disable Pivot Tables locking. This does not modify sheet
+            protection status. To enforce this un-/locking, call
             <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.DisableLocking"/> or <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.EnableLocking"/>
             </summary>
             <param name="enabled"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.LockSort(System.Boolean)">
             <summary>
-            Enable or disable Sort locking. This does not modify sheet 
-            protection status. To enforce this un-/locking, call 
+            Enable or disable Sort locking. This does not modify sheet
+            protection status. To enforce this un-/locking, call
             <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.DisableLocking"/> or <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.EnableLocking"/>
             </summary>
             <param name="enabled"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.LockObjects(System.Boolean)">
             <summary>
-            Enable or disable Objects locking. This does not modify sheet 
-            protection status. To enforce this un-/locking, call 
+            Enable or disable Objects locking. This does not modify sheet
+            protection status. To enforce this un-/locking, call
             <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.DisableLocking"/> or <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.EnableLocking"/>
             </summary>
             <param name="enabled"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.LockScenarios(System.Boolean)">
             <summary>
-            Enable or disable Scenarios locking. This does not modify sheet 
-            protection status. To enforce this un-/locking, call 
+            Enable or disable Scenarios locking. This does not modify sheet
+            protection status. To enforce this un-/locking, call
             <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.DisableLocking"/> or <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.EnableLocking"/>
             </summary>
             <param name="enabled"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.LockSelectLockedCells(System.Boolean)">
-            <summary>
-            Enable or disable Selection of locked cells locking. This does not 
-            modify sheet protection status. To enforce this un-/locking, call 
+             <summary>
+             Enable or disable Selection of locked cells locking. This does not
+             modify sheet protection status. To enforce this un-/locking, call
             
-            </summary>
-            <param name="enabled"></param>
+             </summary>
+             <param name="enabled"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.LockSelectUnlockedCells(System.Boolean)">
             <summary>
-            Enable or disable Selection of unlocked cells locking. This does 
-            not modify sheet protection status. To enforce this un-/locking, 
+            Enable or disable Selection of unlocked cells locking. This does
+            not modify sheet protection status. To enforce this un-/locking,
             call <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.DisableLocking"/> or <see cref="M:NPOI.XSSF.UserModel.XSSFSheet.EnableLocking"/>
             </summary>
             <param name="enabled"></param>
@@ -8084,17 +9298,10 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFSheet.SetTabColor(System.Int32)">
-            <summary>
-            Set background color of the sheet tab
-            </summary>
-            <param name="colorIndex">the indexed color to set, must be a 
-            constant from <see cref="T:NPOI.SS.UserModel.IndexedColors"/></param>
-        </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CopyColumn(System.Int32,System.Int32)">
             <summary>
-            Copy the source column to the target column. If the target column 
-            exists, the new copied column will be inserted before the 
+            Copy the source column to the target column. If the target column
+            exists, the new copied column will be inserted before the
             existing one
             </summary>
             <param name="sourceIndex">source index</param>
@@ -8126,63 +9333,63 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CreatePivotTable(NPOI.SS.Util.AreaReference,NPOI.SS.Util.CellReference,NPOI.SS.UserModel.ISheet)">
             <summary>
-            Create a pivot table using the AreaReference range on sourceSheet, 
-            at the given position. If the source reference contains a sheet 
+            Create a pivot table using the AreaReference range on sourceSheet,
+            at the given position. If the source reference contains a sheet
             name, it must match the sourceSheet
             </summary>
             <param name="source">location of pivot data</param>
-            <param name="position">A reference to the top left cell where the 
+            <param name="position">A reference to the top left cell where the
             pivot table will start</param>
-            <param name="sourceSheet">The sheet containing the source data, if 
+            <param name="sourceSheet">The sheet containing the source data, if
             the source reference doesn't contain a sheet name</param>
             <returns>The pivot table</returns>
-            <exception cref="T:System.ArgumentException">if source references a sheet 
+            <exception cref="T:System.ArgumentException">if source references a sheet
             different than sourceSheet</exception>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CreatePivotTable(NPOI.SS.Util.AreaReference,NPOI.SS.Util.CellReference)">
             <summary>
-            Create a pivot table using the AreaReference range, at the given 
+            Create a pivot table using the AreaReference range, at the given
             position. If the source reference contains a sheet name, that sheet
             is used, otherwise this sheet is assumed as the source sheet.
             </summary>
             <param name="source">location of pivot data</param>
-            <param name="position">A reference to the top left cell where the 
+            <param name="position">A reference to the top left cell where the
             pivot table will start</param>
             <returns>The pivot table</returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CreatePivotTable(NPOI.SS.UserModel.IName,NPOI.SS.Util.CellReference,NPOI.SS.UserModel.ISheet)">
             <summary>
             Create a pivot table using the Name range reference on sourceSheet,
-            at the given position. If the source reference contains a sheet 
+            at the given position. If the source reference contains a sheet
             name, it must match the sourceSheet
             </summary>
             <param name="source">location of pivot data</param>
-            <param name="position">A reference to the top left cell where the 
+            <param name="position">A reference to the top left cell where the
             pivot table will start</param>
-            <param name="sourceSheet">The sheet containing the source data, 
+            <param name="sourceSheet">The sheet containing the source data,
             if the source reference doesn't contain a sheet name</param>
             <returns>The pivot table</returns>
             <exception cref="T:System.ArgumentException"></exception>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CreatePivotTable(NPOI.SS.UserModel.IName,NPOI.SS.Util.CellReference)">
             <summary>
-            Create a pivot table using the Name range, at the given position. 
-            If the source reference contains a sheet name, that sheet is used, 
+            Create a pivot table using the Name range, at the given position.
+            If the source reference contains a sheet name, that sheet is used,
             otherwise this sheet is assumed as the source sheet.
             </summary>
             <param name="source">location of pivot data</param>
-            <param name="position">A reference to the top left cell where the 
+            <param name="position">A reference to the top left cell where the
             pivot table will start</param>
             <returns>The pivot table</returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CreatePivotTable(NPOI.SS.UserModel.ITable,NPOI.SS.Util.CellReference)">
             <summary>
             Create a pivot table using the Table, at the given position. Tables
-            are required to have a sheet reference, so no additional logic 
+            are required to have a sheet reference, so no additional logic
             around reference sheet is needed.
             </summary>
             <param name="source">location of pivot data</param>
-            <param name="position">A reference to the top left cell where the 
+            <param name="position">A reference to the top left cell where the
             pivot table will start</param>
             <returns>The pivot table</returns>
         </member>
@@ -8194,7 +9401,7 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.AddIgnoredErrors(NPOI.SS.Util.CellReference,NPOI.SS.UserModel.IgnoredErrorType[])">
             <summary>
-            Add ignored errors (usually to suppress them in the UI of a 
+            Add ignored errors (usually to suppress them in the UI of a
             consuming application).
             </summary>
             <param name="cell">Cell</param>
@@ -8209,7 +9416,7 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.GetIgnoredErrors">
             <summary>
-            Returns the errors currently being ignored and the ranges where 
+            Returns the errors currently being ignored and the ranges where
             they are ignored.
             </summary>
             <returns>Map of error type to the range(s) where they are ignored.</returns>
@@ -8242,19 +9449,19 @@
             <param name="region">region (rowfrom/colfrom-rowto/colto) to merge</param>
             <param name="validate">whether to validate merged region</param>
             <returns>index of this region</returns>
-            <exception cref="T:System.InvalidOperationException">if region intersects 
-            with a multi-cell array formula or if region intersects with an 
+            <exception cref="T:System.InvalidOperationException">if region intersects
+            with a multi-cell array formula or if region intersects with an
             existing region on this sheet</exception>
-            <exception cref="T:System.ArgumentException">if region contains fewer 
+            <exception cref="T:System.ArgumentException">if region contains fewer
             than 2 cells</exception>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.ValidateArrayFormulas(NPOI.SS.Util.CellRangeAddress)">
             <summary>
-            Verify that the candidate region does not intersect with an 
+            Verify that the candidate region does not intersect with an
             existing multi-cell array formula in this sheet
             </summary>
             <param name="region"></param>
-            <exception cref="T:System.InvalidOperationException">if candidate region 
+            <exception cref="T:System.InvalidOperationException">if candidate region
             intersects an existing array formula in this sheet</exception>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CheckForMergedRegionsIntersectingArrayFormulas">
@@ -8265,34 +9472,34 @@
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.ValidateMergedRegions(NPOI.SS.Util.CellRangeAddress)">
             <summary>
-            Verify that candidate region does not intersect with an existing 
+            Verify that candidate region does not intersect with an existing
             merged region in this sheet
             </summary>
             <param name="candidateRegion"></param>
-            <exception cref="T:System.InvalidOperationException">if candidate region 
+            <exception cref="T:System.InvalidOperationException">if candidate region
             intersects an existing merged region in this sheet</exception>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CheckForIntersectingMergedRegions">
             <summary>
-            Verify that no merged regions intersect another merged 
+            Verify that no merged regions intersect another merged
             region in this sheet.
             </summary>
-            <exception cref="T:System.InvalidOperationException">if at least one region 
+            <exception cref="T:System.InvalidOperationException">if at least one region
             intersects with another merged region in this sheet</exception>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.GetRows(System.Int32,System.Int32,System.Boolean)">
             <summary>
-            returns all rows between startRow and endRow, inclusive. Rows 
-            between startRow and endRow that haven't been created are not 
+            returns all rows between startRow and endRow, inclusive. Rows
+            between startRow and endRow that haven't been created are not
             included in result unless createRowIfMissing is true
             </summary>
-            <param name="startRowNum">the first row number in this 
+            <param name="startRowNum">the first row number in this
             sheet to return</param>
-            <param name="endRowNum">the last row number in this 
+            <param name="endRowNum">the last row number in this
             sheet to return</param>
             <param name="createRowIfMissing"></param>
             <returns></returns>
-            <exception cref="T:System.ArgumentException">if startRowNum and endRowNum 
+            <exception cref="T:System.ArgumentException">if startRowNum and endRowNum
             are not in ascending order</exception>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.EnsureOutlinePr">
@@ -8308,37 +9515,37 @@
             <param name="ctCols"></param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.CollapseRow(System.Int32)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="rowIndex">the zero based row index to collapse</param>
+             </summary>
+             <param name="rowIndex">the zero based row index to collapse</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.FindStartOfRowOutlineGroup(System.Int32)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="rowIndex">the zero based row index to find from</param>
-            <returns></returns>
+             </summary>
+             <param name="rowIndex">the zero based row index to find from</param>
+             <returns></returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.ExpandRow(System.Int32)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="rowNumber">the zero based row index to expand</param>
+             </summary>
+             <param name="rowNumber">the zero based row index to expand</param>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.IsRowGroupHiddenByParent(System.Int32)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="row">the zero based row index to find from</param>
-            <returns></returns>
+             </summary>
+             <param name="row">the zero based row index to find from</param>
+             <returns></returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.IsRowGroupCollapsed(System.Int32)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="row">the zero based row index to find from</param>
-            <returns></returns>
+             </summary>
+             <param name="row">the zero based row index to find from</param>
+             <returns></returns>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.GetDefaultSheetView">
             <summary>
@@ -8382,11 +9589,22 @@
             <param name="refConfig"></param>
             <returns>The pivot table</returns>
         </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFSheet.ReadOleObject(System.Int64)">
+             Determine the OleObject which links shapes with embedded resources
+            
+             @param shapeId the shape id
+             @return the CTOleObject of the shape
+        </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFSheet.SetDefaultColWidth(System.Int32)">
             <summary>
             
             </summary>
             <param name="Width">In EMU</param>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFSheet.OnSheetDelete">
+            <summary>
+            called when a sheet is being deleted/removed from a workbook, to clean up relations and other document pieces tied to the sheet
+            </summary>
         </member>
         <member name="T:NPOI.XSSF.UserModel.XSSFSheetConditionalFormatting">
             XSSF Conditional Formattings
@@ -8598,6 +9816,36 @@
             
              @author Roberto Manicardi
         </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFTable.#ctor">
+            <summary>
+            empty implementation, not attached to a workbook/worksheet yet
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFTable.ReadFrom(System.Xml.XmlDocument)">
+            <summary>
+            read table XML
+            </summary>
+            <param name="xmlDoc"></param>
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFTable.GetXSSFSheet">
+            <summary>
+            
+            </summary>
+            <returns>owning sheet</returns>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFTable.WriteTo(System.IO.Stream)">
+            <summary>
+            write table XML to stream
+            </summary>
+            <param name="out1"></param>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFTable.GetCTTable">
+            <summary>
+            get the underlying CTTable
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFTable.MapsTo(System.Int64)">
             Checks if this Table element Contains even a single mapping to the map identified by id
             @param id the XSSFMap ID
@@ -8617,28 +9865,30 @@
         <member name="P:NPOI.XSSF.UserModel.XSSFTable.Name">
             @return the name of the Table, if set
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFTable.GetCellReferences">
-             Get the area reference for the cells which this table covers. The area
-             includes header rows and totals rows.
-            
-             Does not track updates to underlying changes to CTTable To synchronize
-             with changes to the underlying CTTable, call {@link #updateReferences()}.
-             
-             @return the area of the table
-             @see "Open Office XML Part 4: chapter 3.5.1.2, attribute ref"
+        <member name="P:NPOI.XSSF.UserModel.XSSFTable.StyleName">
+            <summary>
+            Get or set the name of the Table
+            </summary>
+            <remarks>
+            @since 3.17 beta 1
+            </remarks>
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFTable.SetCellReferences(NPOI.SS.Util.AreaReference)">
-            Set the area reference for the cells which this table covers. The area
-            includes includes header rows and totals rows. Automatically synchronizes
-            any changes by calling {@link #updateHeaders()}.
-            
-            Note: The area's width should be identical to the amount of columns in
+        <member name="P:NPOI.XSSF.UserModel.XSSFTable.CellReferences">
+            <summary>
+            <para>
+            Get or set the area reference for the cells which this table covers.
+            The area includes header rows and totals rows.</para>
+            <para>Does not track updates to underlying changes to CTTable To synchronize
+            with changes to the underlying CTTable, call <see cref="M:NPOI.XSSF.UserModel.XSSFTable.UpdateReferences"/></para>
+            </summary>
+            <remarks>
+            The area's width should be identical to the amount of columns in
             the table or the table may be invalid. All header rows, totals rows and
             at least one data row must fit inside the area. Updating the area with
             this method does not create or remove any columns and does not change any
             cell values.
-            
             @see "Open Office XML Part 4: chapter 3.5.1.2, attribute ref"
+            </remarks>
         </member>
         <member name="P:NPOI.XSSF.UserModel.XSSFTable.DisplayName">
             @return the display name of the Table, if set
@@ -8695,13 +9945,23 @@
             call {@link #updateReferences()}.
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFTable.UpdateHeaders">
+            <summary>
+            <para>
             Synchronize table headers with cell values in the parent sheet.
             Headers <em>must</em> be in sync, otherwise Excel will display a
             "Found unreadable content" message on startup.
-            
-            If calling both {@link #updateReferences()} and
-            {@link #updateHeaders()}, {@link #updateReferences()}
+            </para>
+            <para>
+            If calling both <see cref="M:NPOI.XSSF.UserModel.XSSFTable.UpdateReferences" /> and
+            <see cref="M:NPOI.XSSF.UserModel.XSSFTable.UpdateHeaders" />, <see cref="M:NPOI.XSSF.UserModel.XSSFTable.UpdateReferences" />
             should be called first.
+            </para>
+            <para>
+            Note that a Table <em>must</em> have a header. To reproduce
+             the equivalent of inserting a table in Excel without Headers,
+             manually add cells with values of "Column1", "Column2" etc first.
+            </para>
+            </summary>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFTable.FindColumnIndex(System.String)">
              Gets the relative column index of a column in this table having the header name <code>column</code>.
@@ -8725,6 +9985,19 @@
             <summary>
             This is misleading.  The Spec indicates this is true if the totals row
             has<b><i>ever</i></b> been shown, not whether or not it is currently displayed.
+            </summary>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFTable.Contains(NPOI.SS.UserModel.ICell)">
+            <summary>
+            <see cref="!:NPOI.SS.UserModel.Table.Contains(ICell)" />
+            </summary>
+            <remarks>
+            @since 3.17 beta 1
+            </remarks>
+        </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFTable.OnTableDelete">
+            <summary>
+            Remove relations
             </summary>
         </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFTableColumn.GetTable">
@@ -9234,9 +10507,6 @@
               or workbook already contains a sheet with this name
              @see org.apache.poi.ss.util.WorkbookUtil#createSafeSheetName(String nameProposal)
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFWorkbook.FindFont(System.Int16,System.Int16,System.Int16,System.String,System.Boolean,System.Boolean,NPOI.SS.UserModel.FontSuperScript,NPOI.SS.UserModel.FontUnderlineType)">
-            Finds a font that matches the one with the supplied attributes
-        </member>
         <member name="M:NPOI.XSSF.UserModel.XSSFWorkbook.FindFont(System.Boolean,System.Int16,System.Int16,System.String,System.Boolean,System.Boolean,NPOI.SS.UserModel.FontSuperScript,NPOI.SS.UserModel.FontUnderlineType)">
             Finds a font that matches the one with the supplied attributes
         </member>
@@ -9529,7 +10799,7 @@
              @param hidden whether this sheet is hidden
              @see #setSheetHidden(int, int)
         </member>
-        <member name="M:NPOI.XSSF.UserModel.XSSFWorkbook.SetSheetHidden(System.Int32,NPOI.SS.UserModel.SheetState)">
+        <member name="M:NPOI.XSSF.UserModel.XSSFWorkbook.SetSheetHidden(System.Int32,NPOI.SS.UserModel.SheetVisibility)">
              Hide or unhide a sheet.
             
              <ul>
@@ -9702,6 +10972,17 @@
             @throws IOException
             @throws InvalidFormatException
         </member>
+        <member name="M:NPOI.XSSF.UserModel.XSSFWorkbook.AddOlePackage(System.Byte[],System.String,System.String,System.String)">
+            <summary>
+            Adds an OLE package manager object with the given content to the sheet
+            </summary>
+            <param name="oleData">the payload</param>
+            <param name="label">the label of the payload</param>
+            <param name="fileName">the original filename</param>
+            <param name="command">the command to open the payload</param>
+            <return>the index of the added ole object, i.e. the storage id</return>
+            <exception cref="T:System.IO.IOException">if the object can't be embedded</exception>
+        </member>
         <member name="T:NPOI.XSSF.Util.EvilUnclosedBRFixingInputStream">
             This is a seriously sick fix for the fact that some .xlsx
              files contain raw bits of HTML, without being escaped
@@ -9714,14 +10995,49 @@
             It should only be used where experience Shows the problem
              can occur...
         </member>
-        <member name="M:NPOI.XSSF.Util.EvilUnclosedBRFixingInputStream.Read">
-            Warning - doesn't fix!
-        </member>
-        <member name="M:NPOI.XSSF.Util.EvilUnclosedBRFixingInputStream.ReadFromSpare(System.Byte[],System.Int32,System.Int32)">
-            Reads into the buffer from the spare bytes
-        </member>
         <member name="T:NPOI.XSSF.XLSBUnsupportedException">
             We don't support .xlsb files, sorry
+        </member>
+        <member name="T:NPOI.OOXML.XSSF.UserModel.CustomIndexedColorMap">
+            <summary>
+            custom index color map, i.e. from the styles.xml definition
+            </summary>
+        </member>
+        <member name="M:NPOI.OOXML.XSSF.UserModel.CustomIndexedColorMap.#ctor(System.Byte[][])">
+            <summary>
+            </summary>
+            <param name="colors">array of RGB triplets indexed by color index</param>
+        </member>
+        <member name="M:NPOI.OOXML.XSSF.UserModel.CustomIndexedColorMap.FromColors(NPOI.OpenXmlFormats.Spreadsheet.CT_Colors)">
+            <summary>
+            <para>
+            OOXML spec says if this exists it must have all indexes.
+            </para>
+            <para>
+            From the OOXML Spec, Part 1, section 18.8.27:
+            </para>
+            <para>
+            <i>
+            This element contains a sequence of RGB color values that correspond to color indexes (zero-based). When
+            using the default indexed color palette, the values are not written out, but instead are implied. When the color
+            palette has been modified from default, then the entire color palette is written out.
+            </i>
+            </para>
+            </summary>
+            <param name="colors">CTColors from styles.xml possibly defining a custom color indexing scheme</param>
+            <returns>custom indexed color map or null if none defined in the document</returns>
+        </member>
+        <member name="T:NPOI.OOXML.XSSF.UserModel.DefaultIndexedColorMap">
+            <summary>
+            Uses the legacy colors defined in HSSF for index lookups
+            </summary>
+        </member>
+        <member name="M:NPOI.OOXML.XSSF.UserModel.DefaultIndexedColorMap.GetDefaultRGB(System.Int32)">
+            <summary>
+            RGB bytes from HSSF default color by index
+            </summary>
+            <param name="index"></param>
+            <returns>RGB bytes from HSSF default color by index</returns>
         </member>
         <member name="M:NPOI.OOXML.XSSF.UserModel.Helpers.XSSFRowColShifter.UpdateNamedRanges(NPOI.SS.UserModel.ISheet,NPOI.SS.Formula.FormulaShifter)">
             <summary>
@@ -9796,6 +11112,10 @@
             Should we also fetch the hyperlinks, when fetching 
              the text content? Default is to only output the
              hyperlink label, and not the contents
+        </member>
+        <member name="M:NPOI.XWPF.Extractor.XWPFWordExtractor.SetConcatenatePhoneticRuns(System.Boolean)">
+            Should we concatenate phonetic runs in extraction.  Default is <code>true</code>
+            @param concatenatePhoneticRuns
         </member>
         <member name="T:NPOI.XWPF.Model.XMLParagraph">
             Base class for XWPF paragraphs
@@ -10206,6 +11526,9 @@
         <member name="F:NPOI.XWPF.UserModel.PictureType.WPG">
             WordPerfect graphics (.wpg)
         </member>
+        <member name="F:NPOI.XWPF.UserModel.PictureType.WDP">
+            Microsoft Windows Media Photo image (.wdp) 
+        </member>
         <member name="F:NPOI.XWPF.UserModel.PictureType.SVG">
             Scalable Vector Graphics (.svg)
         </member>
@@ -10343,6 +11666,11 @@
                 * 3rd CharacterPosition 
                 * 
                 *
+        </member>
+        <member name="T:NPOI.XWPF.UserModel.TableRowAlign">
+            <summary>
+            Sets alignment values allowed for Tables and Table Rows
+            </summary>
         </member>
         <member name="T:NPOI.XWPF.UserModel.TextAlignment">
             Specifies all types of vertical alignment which are available to be applied to of all text 
@@ -11450,8 +12778,16 @@
             @return numbering
         </member>
         <member name="M:NPOI.XWPF.UserModel.XWPFDocument.GetStyles">
-            Get Styles
-            @return styles for this document
+            <summary>
+            return styles for this document
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFDocument.GetTheme">
+            <summary>
+             Theme document (can be null)
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:NPOI.XWPF.UserModel.XWPFDocument.GetParagraph(NPOI.OpenXmlFormats.Wordprocessing.CT_P)">
             Get the paragraph with the CTP class p
@@ -12235,7 +13571,7 @@
             Get a <b>copy</b> of the currently used CTPInd, if none is used, return
             a new instance.
         </member>
-        <member name="M:NPOI.XWPF.UserModel.XWPFParagraph.GetCTPPr">
+        <member name="M:NPOI.XWPF.UserModel.XWPFParagraph.GetCTPPr(System.Boolean)">
             Get a <b>copy</b> of the currently used CTPPr, if none is used, return
             a new instance.
         </member>
@@ -12313,14 +13649,34 @@
             <summary>
             Appends a new hyperlink run to this paragraph
             </summary>
-            <param name="rId">a new hyperlink run</param>
+            <param name="uri">hyperlink uri</param>
             <returns></returns>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFParagraph.InsertNewHyperlinkRun(System.Int32,System.String)">
+            <summary>
+            insert a new hyperlink run in RunArray
+            </summary>
+            <param name="pos">The position at which the new run should be added.</param>
+            <param name="uri">hyperlink uri</param>
+            <returns>the inserted hyperlink run or null if the given pos is out of bounds.</returns>
         </member>
         <member name="M:NPOI.XWPF.UserModel.XWPFParagraph.AddFootnoteReference(NPOI.XWPF.UserModel.XWPFFootnote)">
             <summary>
             Add a new run with a reference to the specified footnote. The footnote reference run will have the style name "FootnoteReference".
             </summary>
             <param name="footnote">Footnote to which to add a reference.</param>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFParagraph.IsAlignmentSet">
+            <summary>
+            Returns true if the paragraph has a paragraph alignment value of its own
+            or false in case it should fall back to the alignment value set by the paragraph style.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFParagraph.IsKeepNext">
+            <summary>
+            Indicates whether this paragraph should be kept on the same page as the next one.
+            </summary>
         </member>
         <member name="T:NPOI.XWPF.UserModel.XWPFPicture">
             @author Philipp Epp
@@ -12534,6 +13890,34 @@
             <param name="text">insert text</param>
             <param name="startIndex">start index of the insertion in the run text</param>
         </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFRun.NumberOfTexts">
+            <summary>
+            Returns number of text element
+            </summary>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFRun.ToString">
+            <summary>
+            Returns the string version of the text and the phonetic string
+            </summary>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFRun.HandleRun(NPOI.OpenXmlFormats.Wordprocessing.CT_R,System.Text.StringBuilder)">
+            <summary>
+            Returns the string version of the text, with tabs and
+            carriage returns in place of their xml equivalents.
+            </summary>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFRun.GetPhonetic">
+            <summary>
+            </summary>
+            <returns>the phonetic (ruby) string associated with this run or an empty string if none exists</returns>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFRun.HandleRuby(NPOI.OpenXmlFormats.Wordprocessing.CT_Ruby,System.Text.StringBuilder,System.Boolean,NPOI.OpenXmlFormats.Wordprocessing.RunItemsChoiceType)">
+            <summary>
+            </summary>
+            <param name="rubyObj">rubyobject</param>
+            <param name="text">buffer to which to append the content</param>
+            <param name="extractPhonetic">extract the phonetic (rt) component or the base component</param>
+        </member>
         <member name="P:NPOI.XWPF.UserModel.XWPFRun.IsStrikeThrough">
              Specifies that the contents of this run.shall be displayed with a single
              horizontal line through the center of the line.
@@ -12713,10 +14097,6 @@
              Add the xml:spaces="preserve" attribute if the string has leading or trailing white spaces
             
              @param xs    the string to check
-        </member>
-        <member name="M:NPOI.XWPF.UserModel.XWPFRun.ToString">
-            Returns the string version of the text, with tabs and
-             carriage returns in place of their xml equivalents.
         </member>
         <member name="T:NPOI.XWPF.UserModel.XWPFSDT">
              Experimental class to offer rudimentary Read-only Processing of 
@@ -12915,6 +14295,13 @@
             Sets the ctStyles
             @param styles
         </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFStyles.RemoveStyle(System.Int32)">
+            <summary>
+            remove the specified style if present
+            </summary>
+            <param name="pos"></param>
+            <returns></returns>
+        </member>
         <member name="M:NPOI.XWPF.UserModel.XWPFStyles.StyleExist(System.String)">
             Checks whether style with styleID exist
             @param styleID		styleID of the Style in the style-Document
@@ -12998,6 +14385,30 @@
         </member>
         <member name="P:NPOI.XWPF.UserModel.XWPFTable.NumberOfRows">
             @return number of rows in table
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFTable.GetTblPr">
+            <summary>
+            Returns CTTblPr object for table. Creates it if it does not exist.
+            </summary>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFTable.GetTblPr(System.Boolean)">
+            <summary>
+            Returns CTTblPr object for table. If force parameter is true, will
+            create the element if necessary. If force parameter is false, returns
+            null when CTTblPr element is missing.
+            </summary>
+            <param name="force">- force creation of CTTblPr element if necessary</param>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFTable.TableAlignment">
+            <summary>
+            Get or set the current table alignment or NULL
+            </summary>
+            <returns>Table Alignment as a <see cref="T:NPOI.XWPF.UserModel.TableRowAlign"/> enum</returns>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFTable.RemoveTableAlignment">
+            <summary>
+            Removes the table alignment attribute from a table
+            </summary>
         </member>
         <member name="P:NPOI.XWPF.UserModel.XWPFTable.StyleID">
             Get the StyleID of the table
@@ -13186,6 +14597,9 @@
         <member name="M:NPOI.XWPF.UserModel.XWPFTableRow.AddNewTableCell">
             Adds a new TableCell at the end of this tableRow
         </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFTableRow.CloneRow(System.Int32)">
+            Clones a table row and inserts it at the specified position in the table
+        </member>
         <member name="P:NPOI.XWPF.UserModel.XWPFTableRow.Height">
              This element specifies the height of the current table row within the
              current table. This height shall be used to determine the resulting
@@ -13247,6 +14661,31 @@
             
              @param repeat - if TRUE, repeat header row at the top of each page of table;
                            if FALSE, don't repeat header row.
+        </member>
+        <member name="T:NPOI.XWPF.UserModel.XWPFTheme">
+            <summary>
+             A shared style sheet in a .docx document
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFTheme.Name">
+            <summary>
+            name of this theme, e.g. "Office Theme"
+            </summary>
+        </member>
+        <member name="M:NPOI.XWPF.UserModel.XWPFTheme.GetCTTheme">
+            <summary>
+            CT_OfficeStyleSheet（drawingml theme）
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFTheme.MajorFont">
+            <summary>
+            Typically the major font is used for heading areas of a document.
+            </summary>
+        </member>
+        <member name="P:NPOI.XWPF.UserModel.XWPFTheme.MinorFont">
+            <summary>
+            Typically the monor font is used for normal text or paragraph areas.
+            </summary>
         </member>
         <member name="M:NPOI.XWPF.Usermodel.MathContainer.CreateAcc">
             <summary>
