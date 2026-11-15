@@ -21,6 +21,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 using CodingLabpro.CommandDevice;
 using CodingLabpro.frmChild;
 using CodingLabpro.Models;
+using CodingLabpro.Tracking_scan;
 using Ivi.Visa;
 using Ivi.Visa.FormattedIO;
 using Ivi.Visa.Interop;
@@ -63,11 +64,15 @@ namespace CodingLabpro
         private IDataTableBuilder builder;
         private CalculateCellsDataTable cellsDataTable;
 
+        //เมธอดสร้าง DataGridView สำหรับแสดงผลการสแกน
+        private Scangridview scanGrid;
+
 
         public FrmMain01()
         {
             InitializeComponent();
             InitiallizeGridColumn();
+       
 
             this.SetStyle(
                         ControlStyles.OptimizedDoubleBuffer |
@@ -97,6 +102,9 @@ namespace CodingLabpro
             frmChild1 = new AxisControl(MyMMC, MySerialPort, MyDMM);
             frmChild2 = new VextaSettings();
 
+            scanGrid = new Scangridview(DgvScan);
+
+         
             //Stopwatch
             Stoptimer1.Enabled = true;
             Stoptimer1.Interval = 100;
@@ -106,6 +114,8 @@ namespace CodingLabpro
             frmChild1.OnMeasurement += Received_Data_measurement;
             frmChild1.OnMeasurementWithDisplay += Received_Data_Display_measurement;
 
+            frmChild1.ScanGridInitializeRequested += scanGrid.InitializeGrid;
+            frmChild1.ScanStatusChanged += scanGrid.UpdateCellStatus;
 
             //First show Panel frmChild
             AddUserControl(frmChild1);
@@ -309,10 +319,9 @@ namespace CodingLabpro
             label_Warning.ForeColor = Color.Red;
             label_Warning.Visible = true;
 
-           
-
-
         }
+
+        
 
         private void Instance_SettingsChanged(object sender, EventArgs e)
         {
@@ -372,14 +381,33 @@ namespace CodingLabpro
         //เมธอดรับค่าข้อมูลการวัดและอัปเดตตาราง
         public void Received_Data_measurement(double Data_measure)
         {
+            // ครบทุกแถวแล้ว ไม่รับค่าเพิ่ม
+            if (IndexPostionY >= Rows)
+                return;
+
             cellsDataTable.UpdateCell(IndexPostionY, IndexPostionX, Data_measure);
 
-            IndexPostionX++;
-
-            if (IndexPostionX >= Columns)
+            if (IndexPostionY % 2 == 0)
             {
-                IndexPostionX = 0;
-                IndexPostionY++;
+                // แถวคู่: ซ้าย -> ขวา
+                IndexPostionX++;
+
+                if (IndexPostionX >= Columns)
+                {
+                    IndexPostionX = Columns - 1;   // ขึ้นแถวใหม่ที่คอลัมน์ท้ายสุด
+                    IndexPostionY++;
+                }
+            }
+            else
+            {
+                // แถวคี่: ขวา -> ซ้าย
+                IndexPostionX--;
+
+                if (IndexPostionX < 0)
+                {
+                    IndexPostionX = 0;             // ขึ้นแถวใหม่ที่คอลัมน์แรก
+                    IndexPostionY++;
+                }
             }
 
         }
@@ -389,7 +417,7 @@ namespace CodingLabpro
             LBvaluemeasurement.Text = Data_Display.ToString() + GlobalMeasurementSettings.Instance.UnitPrefix;
         }
 
-      
+        
 
 
         #endregion
@@ -994,6 +1022,9 @@ namespace CodingLabpro
         #endregion
 
         //----------------------------------------------2D tracking scanning------------------------------------------------------------//
+       
+
+
 
     }
 

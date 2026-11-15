@@ -66,6 +66,7 @@
             this.RB_autoON = new System.Windows.Forms.RadioButton();
             this.RB_autoOFF = new System.Windows.Forms.RadioButton();
             this.totalAreaXTextBox = new System.Windows.Forms.TextBox();
+            this.InputValue_area = new System.Windows.Forms.BindingSource(this.components);
             this.totalAreaYTextBox = new System.Windows.Forms.TextBox();
             this.moveStepYTextBox = new System.Windows.Forms.TextBox();
             this.moveStepXTextBox = new System.Windows.Forms.TextBox();
@@ -101,7 +102,7 @@
             this.CblStepMotor = new System.Windows.Forms.ComboBox();
             this.GBreport_Axis = new System.Windows.Forms.GroupBox();
             this.Report_positon = new System.Windows.Forms.TextBox();
-            this.InputValue_area = new System.Windows.Forms.BindingSource(this.components);
+            this.Btn_testStatus = new System.Windows.Forms.Button();
             totalAreaXLabel = new System.Windows.Forms.Label();
             totalAreaYLabel = new System.Windows.Forms.Label();
             moveStepYLabel = new System.Windows.Forms.Label();
@@ -110,6 +111,7 @@
             this.GBreport_Data.SuspendLayout();
             this.GBmotorport.SuspendLayout();
             this.GBautozero.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.GBMeas.SuspendLayout();
             this.GBSource.SuspendLayout();
@@ -119,7 +121,6 @@
             this.GBrange.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.GBreport_Axis.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).BeginInit();
             this.SuspendLayout();
             // 
             // totalAreaXLabel
@@ -570,6 +571,10 @@
             this.totalAreaXTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.totalAreaXTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.totalAreaXTextBox_KeyPress);
             // 
+            // InputValue_area
+            // 
+            this.InputValue_area.DataSource = typeof(CodingLabpro.CommandDevice.CalculateArea_Bind);
+            // 
             // totalAreaYTextBox
             // 
             this.totalAreaYTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.InputValue_area, "TotalAreaY", true));
@@ -999,6 +1004,7 @@
             this.flowLayoutPanel1.Controls.Add(this.GBResolution);
             this.flowLayoutPanel1.Controls.Add(this.CBtrigger);
             this.flowLayoutPanel1.Controls.Add(this.STriggerlabel);
+            this.flowLayoutPanel1.Controls.Add(this.Btn_testStatus);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(330, 100);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -1040,9 +1046,7 @@
             this.Report_positon.Size = new System.Drawing.Size(293, 92);
             this.Report_positon.TabIndex = 25;
             // 
-            // InputValue_area
-            // 
-            this.InputValue_area.DataSource = typeof(CodingLabpro.CommandDevice.CalculateArea_Bind);
+            
             // 
             // AxisControl
             // 
@@ -1098,6 +1102,7 @@
             this.GBmotorport.ResumeLayout(false);
             this.GBautozero.ResumeLayout(false);
             this.GBautozero.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.GBMeas.ResumeLayout(false);
             this.GBSource.ResumeLayout(false);
@@ -1110,7 +1115,6 @@
             this.flowLayoutPanel1.PerformLayout();
             this.GBreport_Axis.ResumeLayout(false);
             this.GBreport_Axis.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InputValue_area)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1185,5 +1189,6 @@
         private System.Windows.Forms.ComboBox CblStepMotor;
         private System.Windows.Forms.GroupBox GBreport_Axis;
         private System.Windows.Forms.TextBox Report_positon;
+        private System.Windows.Forms.Button Btn_testStatus;
     }
 }

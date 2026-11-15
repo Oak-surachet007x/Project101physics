@@ -17,11 +17,13 @@ using System.Windows.Forms;
 using CodingLabpro.CommandDevice;
 using CodingLabpro.Models;
 using CodingLabpro.Properties;
+using CodingLabpro.Tracking_scan;
 using Ivi.Visa;
 using NPOI.POIFS.Crypt.Dsig;
 using NPOI.SS.Formula.Eval;
 using NPOI.SS.Formula.Functions;
 using NPOI.Util;
+using static CodingLabpro.Tracking_scan.ScanSettings;
 
 
 namespace CodingLabpro.frmChild
@@ -75,6 +77,7 @@ namespace CodingLabpro.frmChild
             
         }
 
+        #region Vexta Position Monitor
         public void StartPositionMonitor(bool StatusPort)
         {
             if (this.IsDisposed || !this.IsHandleCreated)
@@ -192,6 +195,8 @@ namespace CodingLabpro.frmChild
             }
         }
 
+        #endregion
+
         //เมทอดควบคุมการแสดงผลของ UI เมื่อกดเข้าโหมดเครื่องมือวัด
         private void UIControlDisabled(bool EnabledItem)
         {
@@ -263,6 +268,9 @@ namespace CodingLabpro.frmChild
 
         }
 
+        public event Action<int, int> ScanGridInitializeRequested;
+        public event Action<int, int, ScanCellStatus> ScanStatusChanged;   // row, column, status
+ 
 
         #region Setup Default Settings
         private void InitializeDefaultSettings()
@@ -359,6 +367,8 @@ namespace CodingLabpro.frmChild
         }
 
         #endregion
+
+        #region Event Handlers for GlobalMeasurementSettings Changes
         private void Instance_SettingsChanged(object sender, EventArgs e)
         {
             UpdateControlUIreport();
@@ -527,6 +537,8 @@ namespace CodingLabpro.frmChild
             Numeric_Resolution.Enabled = true;
             Numeric_Resolution.Value = (decimal)GetDefaultResolution();
         }
+
+        #endregion
 
         #region Resolution_Measurement
 
@@ -1158,8 +1170,9 @@ namespace CodingLabpro.frmChild
         }
 
         //เมทอดตรวจสอบความถูกต้องของข้อมูลการสแกนพื้นที่ จากคลาส CalculateArea_Bind ที่ป้อนบนฟอร์ม
-        public bool IsValidScaningArea()
+        public bool IsValidScaningArea(out ScanSettings settings)
         {
+            settings = null;
 
             // Requitment Class
             CalculateArea_Bind calculate = InputValue_area.Current as CalculateArea_Bind;
@@ -1185,6 +1198,15 @@ namespace CodingLabpro.frmChild
                     GlobalMeasurementSettings.Instance.CountOfRows = LoopAreaY;
                     GlobalMeasurementSettings.Instance.CountOfColumns = LoopAreaX;
 
+                    settings = new ScanSettings
+                    {
+                        AreaX = (int)calculate.TotalAreaX,
+                        AreaY = (int)calculate.TotalAreaY,
+                        StepX = (double)calculate.MoveStepX,
+                        StepY = (double)calculate.MoveStepY,
+                        StartX = 0,
+                        StartY = 0
+                    };
 
                     return true;
 
@@ -1486,26 +1508,26 @@ namespace CodingLabpro.frmChild
         #endregion
 
         #region CalculateMovement 
-        private static string MovementPositiveX(string MovestepX, string Unit)
+        private static string MovementPositiveX(double MovestepX, string Unit)
         {
             if (Unit == "cm")
             {
-                int MathValueX = (int)(((float.Parse(MovestepX) * Math.Pow(10, -2)) * 1) / (2 * Math.Pow(10, -6)));
+                int MathValueX = (int)(((MovestepX * Math.Pow(10, -2)) * 1) / (2 * Math.Pow(10, -6)));
                 Debug.WriteLine($"[Positive X Movement Value: ] {MathValueX} Step");
                 return $"M:XP{MathValueX}";
             }
             else if (Unit == "mm")
             {
-                int MathValueX = (int)(((float.Parse(MovestepX) * Math.Pow(10, -3)) * 1) / (2 * Math.Pow(10, -6)));
+                int MathValueX = (int)(((MovestepX * Math.Pow(10, -3)) * 1) / (2 * Math.Pow(10, -6)));
                 Debug.WriteLine($"[Positive X Movement Value: ] {MathValueX} Step");
                 return $"M:XP{MathValueX}";
 
             }
             else if (Unit == "μm")
             {
-                if ((float.Parse(MovestepX) >= 2))
+                if ((MovestepX >= 2))
                 {
-                    int MathValueX = (int)(((float.Parse(MovestepX) * Math.Pow(10, -6)) * 1) / (2 * Math.Pow(10, -6)));
+                    int MathValueX = (int)(((MovestepX * Math.Pow(10, -6)) * 1) / (2 * Math.Pow(10, -6)));
                     Debug.WriteLine($"[Positive X Movement Value: ] {MathValueX} Step");
                     return $"M:XP{MathValueX}";
                 }
@@ -1514,25 +1536,25 @@ namespace CodingLabpro.frmChild
             return "ERROR: Value Begin 2 μm";
         }
 
-        private static string MovementPositiveY(string MovestepY, string Unit)
+        private static string MovementPositiveY(double MovestepY, string Unit)
         {
             if (Unit == "cm")
             {
-                int MathValueY = (int)(((float.Parse(MovestepY) * Math.Pow(10, -2)) * 1) / (2 * Math.Pow(10, -6))); 
+                int MathValueY = (int)(((MovestepY * Math.Pow(10, -2)) * 1) / (2 * Math.Pow(10, -6))); 
                 Debug.WriteLine($"[Positive Y Movement Value: ] {MathValueY} Step");
                 return $"M:YP{MathValueY}";
             }
             else if (Unit == "mm")
             {
-                int MathValueY = (int)(((float.Parse(MovestepY) * Math.Pow(10, -3)) * 1) / (2 * Math.Pow(10, -6)));
+                int MathValueY = (int)(((MovestepY * Math.Pow(10, -3)) * 1) / (2 * Math.Pow(10, -6)));
                 Debug.WriteLine($"[Positive Y Movement Value: ] {MathValueY} Step");
                 return $"M:YP{MathValueY}";
                 
             }else if (Unit == "μm")
             {
-                if ((float.Parse(MovestepY) >= 2))
+                if ((MovestepY >= 2))
                 {
-                    int MathValueY = (int)(((float.Parse(MovestepY) * Math.Pow(10, -6)) * 1) / (2 * Math.Pow(10, -6)));
+                    int MathValueY = (int)(((MovestepY * Math.Pow(10, -6)) * 1) / (2 * Math.Pow(10, -6)));
                     Debug.WriteLine($"[Positive Y Movement Value: ] {MathValueY} Step");
                     return $"M:YP{MathValueY}";
                 }
@@ -1541,26 +1563,26 @@ namespace CodingLabpro.frmChild
             return "ERROR: Value Begin 2 μm"; 
         }
 
-        private static string MovementNegativeX(string MovestepX, string Unit)
+        private static string MovementNegativeX(double MovestepX, string Unit)
         {
             if (Unit == "cm")
             {
-                int MathValueX = (int)(((float.Parse(MovestepX) * Math.Pow(10, -2)) * 1) / (2 * Math.Pow(10, -6)));
+                int MathValueX = (int)(((MovestepX * Math.Pow(10, -2)) * 1) / (2 * Math.Pow(10, -6)));
                 Debug.WriteLine($"[Negative X Movement Value: ] {MathValueX} Step");
                 return $"M:XP-{MathValueX}";
             }
             else if (Unit == "mm")
             {
-                int MathValueX = (int)(((float.Parse(MovestepX) * Math.Pow(10, -3)) * 1) / (2 * Math.Pow(10, -6)));
+                int MathValueX = (int)(((MovestepX   * Math.Pow(10, -3)) * 1) / (2 * Math.Pow(10, -6)));
                 Debug.WriteLine($"[Negative X Movement Value: ] {MathValueX} Step");
                 return $"M:XP-{MathValueX}";
 
             }
             else if (Unit == "μm")
             {
-                if ((float.Parse(MovestepX) >= 2))
+                if ((MovestepX >= 2))
                 {
-                    int MathValueX = (int)(((float.Parse(MovestepX) * Math.Pow(10, -6)) * 1) / (2 * Math.Pow(10, -6)));
+                    int MathValueX = (int)(((MovestepX * Math.Pow(10, -6)) * 1) / (2 * Math.Pow(10, -6)));
                     Debug.WriteLine($"[Negative X Movement Value: ] {MathValueX} Step");
                     return $"M:XP-{MathValueX}";
                 }
@@ -1584,7 +1606,7 @@ namespace CodingLabpro.frmChild
                 if (GlobalMeasurementSettings.Instance.SelectedModel == "Chuoseiki")
                 {
                     //ตรวจสอบความถูกต้องข้อมูลการสแกนพื้นที่ ผ่านเมธอด IsValidScaningArea
-                    if (!IsValidScaningArea())
+                    if (!IsValidScaningArea(out ScanSettings settings))
                     {
                         return;
                     }
@@ -1594,7 +1616,7 @@ namespace CodingLabpro.frmChild
                     //    return;
                     //}
 
-                    //Run Setup Scaning
+                    //Run Setup Scaning สำหรับมอเตอร์ Chuoseiki
                     //myMMC.WriteString("H:W");
                     //await Task.Delay(5000);
                     //myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y = 0 cm & X = 1 cm
@@ -1616,10 +1638,16 @@ namespace CodingLabpro.frmChild
                     Reportdata.AppendText($"คำนวณผลลัพธ์ลูปที่สแกนของ X คือ {LoopAreaX} ลูป " + Environment.NewLine +
                                            $"คำนวณผลลัพธ์ลูปที่สแกนของ Y คือ {LoopAreaY} ลูป" + Environment.NewLine);
                     //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
+                    // สร้างตารางตามค่าที่ผู้ใช้กำหนด
+                    ScanGridInitializeRequested?.Invoke(settings.Rows, settings.Columns);
+
 
                     //โทเค็นสำหรับยกเลิกการทำงานของ Task
+                    Scan_cts?.Dispose();
                     Scan_cts = new CancellationTokenSource();
-                    await Task.Run(() => ScanningAreaProcess(Scan_cts.Token), Scan_cts.Token);
+
+                    //เริ่มต้นการเคลื่อนที่
+                    await Task.Run(() => ScanningAreaProcess(settings, Scan_cts.Token), Scan_cts.Token);
 
                     //เมื่อสแกนเสร็จสิ้นหรือยกเลิกการทำงานแล้ว ให้เรียกใช้งาน OnCancelClicked เพื่อแจ้งให้ผู้ใช้ทราบ
                     Scan_cts.Cancel();
@@ -1630,7 +1658,7 @@ namespace CodingLabpro.frmChild
                 else if (GlobalMeasurementSettings.Instance.SelectedModel == "Vexta")
                 {
                     //ตรวจสอบความถูกต้องข้อมูลการสแกนพื้นที่ ผ่านเมธอด IsValidScaningArea
-                    if (!IsValidScaningArea())
+                    if (!IsValidScaningArea(out ScanSettings settings))
                     {
                         return;
                     }
@@ -1650,10 +1678,18 @@ namespace CodingLabpro.frmChild
                     Reportdata.AppendText($"คำนวณผลลัพธ์ลูปที่สแกนของ X คือ {LoopAreaX} ลูป " + Environment.NewLine +
                                            $"คำนวณผลลัพธ์ลูปที่สแกนของ Y คือ {LoopAreaY} ลูป" + Environment.NewLine);
                     //<--สรุปผลลัพธ์สแกนทั้งหมดจากคำนวณ
+                    // สร้างตารางตามค่าที่ผู้ใช้กำหนด
+                    ScanGridInitializeRequested?.Invoke(settings.Rows, settings.Columns);
+
 
                     //โทเค็นสำหรับยกเลิกการทำงานของ Task
+                    Scan_cts?.Dispose();
                     Scan_cts = new CancellationTokenSource();
-                    await Task.Run(() => ScanningAreaProcess(Scan_cts.Token), Scan_cts.Token);
+
+                    //เริ่มต้นการเคลื่อนที่
+                    await Task.Run(() => ScanningAreaProcess(settings, Scan_cts.Token), Scan_cts.Token);
+
+                   
 
                     //เมื่อสแกนเสร็จสิ้นหรือยกเลิกการทำงานแล้ว ให้เรียกใช้งาน OnCancelClicked เพื่อแจ้งให้ผู้ใช้ทราบ
                     Scan_cts.Cancel();
@@ -1682,65 +1718,53 @@ namespace CodingLabpro.frmChild
         }
 
         //เมธอดสำหรับการสแกนพื้นที่แบบ Loop ตามจำนวนแถวและคอลัมน์ที่กำหนด
-        private async Task ScanningAreaProcess(CancellationToken token)
+        public async Task ScanningAreaProcess(ScanSettings scanSettings,CancellationToken token)
         {
-            //โค้ดสำหรับการสแกนพื้นที่
-            for (int y = 0; y < LoopAreaY; y++)  // Loop แกน Y (สแกนพื้นที่ 10 แถว)
+            for (int y = 0; y < scanSettings.Rows; y++)
             {
-                if (y % 2 == 0)  // ถ้าเป็นแถวคู่ (0,2,4..) เคลื่อนที่ไปทางขวา
-                {
-                    for (int x = 0; x < LoopAreaX; x++)
-                    {
-                        //myMMC.WriteString(ValueNegativeX);  // เคลื่อนที่ถอยหลังแนว X-
-                        //myMMC.WriteString("G:");
-                        await Task.Delay(ValueTimer, token); //หน่วงเวลา 2 วินาที เพื่อเก็บค่าการวัด
+                bool leftToRight = (y % 2 == 0);
 
-                        await Measure_Trigger(token); //ส่งคำสั่งวัดแบบ BUS
-                        string result = await ReadMeasurementasync(token);
-                        BeginInvoke(new Action(() =>
+                for (int i = 0; i < scanSettings.Columns; i++)
+                {
+                    int x = leftToRight ? i : scanSettings.Columns - 1 - i;
+
+                    ScanStatusChanged?.Invoke(y, x, ScanCellStatus.Scanning);       // เหลือง
+
+                    try
+                    {
+                        if(leftToRight)
                         {
-                            UpdateMeasurementUI(result);
-                        }));
+                            //myMMC.WriteString(ValueProcessX);
+                            //myMMC.WriteString("G:");
+                        }
+                        else
+                        {
+                            //myMMC.WriteString(ValueNegativeX);
+                            //myMMC.WriteString("G:");
+                        }
+                        await Task.Delay(ValueTimer, token);
+
+                        string result = await ReadMeasurementasync(token);
+                        BeginInvoke(new Action(() => UpdateMeasurementUI(result)));
                         await Task.Delay(2000, token);
+
+                        ScanStatusChanged?.Invoke(y, x, ScanCellStatus.Completed);  // เขียว
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        ScanStatusChanged?.Invoke(y, x, ScanCellStatus.Cancelled);  // ส้ม
+                        throw;
+                    }
+                    catch
+                    {
+                        ScanStatusChanged?.Invoke(y, x, ScanCellStatus.Error);      // แดง
+                        throw;
                     }
                 }
-                else  // ถ้าเป็นแถวคี่ (1,3,5..) เคลื่อนที่ย้อนกลับทางซ้าย
-                {
-                    for (int x = 0; x < LoopAreaX; x++)
-                    {
-                        //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
-                        //myMMC.WriteString("G:");
-                        await Task.Delay(ValueTimer, token); //หน่วงเวลา 2 วินาที เพื่อเก็บค่าการวัด
 
-                        await Measure_Trigger(token); //ส่งคำสั่งวัดแบบ BUS
-                        string result = await ReadMeasurementasync(token);
-                        BeginInvoke(new Action(() =>
-                        {
-                            UpdateMeasurementUI(result);
-                        }));
-                        await Task.Delay(2000, token);
-                    }
-                }
-
-                //เคลื่อนที่ไปยังแถวถัดไปตามแนว Y
                 //myMMC.WriteString(ValueProcessY);
                 //myMMC.WriteString("G:");
                 await Task.Delay(ValueTimer, token);
-
-
-                //this.Invoke(new Action(() => Reportdata.AppendText($"{y + 1} loop " + Environment.NewLine)));
-            }
-
-            if (LoopAreaY % 2 != 0)
-            {
-
-                for (int x = 0; x < LoopAreaX; x++)
-                {
-                    //myMMC.WriteString(ValueProcessX);  // เคลื่อนที่กลับแนว X+
-                    //myMMC.WriteString("G:");
-                    await Task.Delay(ValueTimer, token);
-
-                }
             }
 
         }
@@ -1799,6 +1823,5 @@ namespace CodingLabpro.frmChild
             e.Handled = !char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != '.';
         }
 
-        
     }
 }

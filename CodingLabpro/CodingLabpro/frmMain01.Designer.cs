@@ -35,10 +35,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain01));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.GBdata = new System.Windows.Forms.GroupBox();
-            this.DgvMeasurement = new System.Windows.Forms.DataGridView();
             this.GBtracking = new System.Windows.Forms.GroupBox();
             this.DgvScan = new System.Windows.Forms.DataGridView();
+            this.GBdata = new System.Windows.Forms.GroupBox();
+            this.DgvMeasurement = new System.Windows.Forms.DataGridView();
             this.GBconnect = new System.Windows.Forms.GroupBox();
             this.label_Warning = new System.Windows.Forms.Label();
             this.ButtonLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -89,10 +89,10 @@
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.BindingSource_DataMeasure = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1.SuspendLayout();
-            this.GBdata.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvMeasurement)).BeginInit();
             this.GBtracking.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvScan)).BeginInit();
+            this.GBdata.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvMeasurement)).BeginInit();
             this.GBconnect.SuspendLayout();
             this.ButtonLayoutPanel1.SuspendLayout();
             this.MainStatus.SuspendLayout();
@@ -112,16 +112,40 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.GBdata, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.GBtracking, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.GBdata, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 259);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.40886F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60.59114F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.82353F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.17647F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(504, 472);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // GBtracking
+            // 
+            this.GBtracking.Controls.Add(this.DgvScan);
+            this.GBtracking.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GBtracking.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GBtracking.ForeColor = System.Drawing.Color.White;
+            this.GBtracking.Location = new System.Drawing.Point(10, 10);
+            this.GBtracking.Margin = new System.Windows.Forms.Padding(10);
+            this.GBtracking.Name = "GBtracking";
+            this.GBtracking.Padding = new System.Windows.Forms.Padding(7);
+            this.GBtracking.Size = new System.Drawing.Size(484, 257);
+            this.GBtracking.TabIndex = 2;
+            this.GBtracking.TabStop = false;
+            this.GBtracking.Text = "Tracking Scanning";
+            // 
+            // DgvScan
+            // 
+            this.DgvScan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvScan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgvScan.Location = new System.Drawing.Point(7, 26);
+            this.DgvScan.Name = "DgvScan";
+            this.DgvScan.Size = new System.Drawing.Size(470, 224);
+            this.DgvScan.TabIndex = 0;
             // 
             // GBdata
             // 
@@ -129,11 +153,11 @@
             this.GBdata.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GBdata.Font = new System.Drawing.Font("Cascadia Mono", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GBdata.ForeColor = System.Drawing.Color.White;
-            this.GBdata.Location = new System.Drawing.Point(10, 196);
+            this.GBdata.Location = new System.Drawing.Point(10, 287);
             this.GBdata.Margin = new System.Windows.Forms.Padding(10);
             this.GBdata.Name = "GBdata";
             this.GBdata.Padding = new System.Windows.Forms.Padding(7);
-            this.GBdata.Size = new System.Drawing.Size(484, 266);
+            this.GBdata.Size = new System.Drawing.Size(484, 175);
             this.GBdata.TabIndex = 1;
             this.GBdata.TabStop = false;
             this.GBdata.Text = "Measurement Result ";
@@ -164,33 +188,9 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DgvMeasurement.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.DgvMeasurement.Size = new System.Drawing.Size(470, 233);
+            this.DgvMeasurement.Size = new System.Drawing.Size(470, 142);
             this.DgvMeasurement.TabIndex = 0;
             this.DgvMeasurement.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvMeasurement_RowPostPaint);
-            // 
-            // GBtracking
-            // 
-            this.GBtracking.Controls.Add(this.DgvScan);
-            this.GBtracking.Dock = System.Windows.Forms.DockStyle.Left;
-            this.GBtracking.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GBtracking.ForeColor = System.Drawing.Color.White;
-            this.GBtracking.Location = new System.Drawing.Point(10, 10);
-            this.GBtracking.Margin = new System.Windows.Forms.Padding(10);
-            this.GBtracking.Name = "GBtracking";
-            this.GBtracking.Padding = new System.Windows.Forms.Padding(7);
-            this.GBtracking.Size = new System.Drawing.Size(341, 166);
-            this.GBtracking.TabIndex = 2;
-            this.GBtracking.TabStop = false;
-            this.GBtracking.Text = "Tracking Scanning";
-            // 
-            // DgvScan
-            // 
-            this.DgvScan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvScan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DgvScan.Location = new System.Drawing.Point(7, 26);
-            this.DgvScan.Name = "DgvScan";
-            this.DgvScan.Size = new System.Drawing.Size(327, 133);
-            this.DgvScan.TabIndex = 0;
             // 
             // GBconnect
             // 
@@ -726,10 +726,10 @@
             this.Load += new System.EventHandler(this.FrmMain01_Load);
             this.SizeChanged += new System.EventHandler(this.FrmMain01_SizeChanged);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.GBdata.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DgvMeasurement)).EndInit();
             this.GBtracking.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DgvScan)).EndInit();
+            this.GBdata.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DgvMeasurement)).EndInit();
             this.GBconnect.ResumeLayout(false);
             this.GBconnect.PerformLayout();
             this.ButtonLayoutPanel1.ResumeLayout(false);

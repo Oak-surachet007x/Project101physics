@@ -11,9 +11,9 @@ namespace CodingLabpro.CommandDevice
     public class CalculateArea_Bind : EntityValidator
     {
         [Required]
-        public string MoveStepX { get; set; }
+        public double MoveStepX { get; set; }
         [Required]
-        public string MoveStepY { get; set; }
+        public double MoveStepY { get; set; }
         [Required]
         [Range(10, 25, ErrorMessage = "กรุณาเลือกค่าขอบเขตพื้นที่ช่วง 10-25mm")]
         public int? TotalAreaX { get; set; }
@@ -70,16 +70,16 @@ namespace CodingLabpro.CommandDevice
       
         public int CalareaScanningX()
         {
-            float CoVunitX = UnitXForCal(UnitX);
-            int LoopAreaX = (int)((TotalAreaX * 1E-3f) / (float.Parse(MoveStepX) * CoVunitX));
+            double CoVunitX = UnitXForCal(UnitX);
+            int LoopAreaX = (int)Math.Round((double)(TotalAreaX * 1E-3f) / (MoveStepX * CoVunitX));
             Debug.WriteLine($"[X loop] {LoopAreaX.ToString()}, [Total Area X:] {TotalAreaX}, [Movement Step X:] {MoveStepX}, [Unit X:] {CoVunitX.ToString()}");
             return LoopAreaX;
         }
 
         public int CalareaScanningY()
         {
-            float CoVunitY = UnitYForCal(UnitY);
-            int LoopAreaY = (int)((TotalAreaY * 1E-3f) / (float.Parse(MoveStepY) * CoVunitY));
+            double CoVunitY = UnitYForCal(UnitY);
+            int LoopAreaY = (int)Math.Round((double)(TotalAreaY * 1E-3f) / (MoveStepY * CoVunitY));
             Debug.WriteLine($"[Y loop] {LoopAreaY.ToString()}, [Total Area Y:] {TotalAreaY}, [Movement Step Y:] {MoveStepY}, [Unit Y:] {CoVunitY.ToString()}");
             return LoopAreaY;
 
