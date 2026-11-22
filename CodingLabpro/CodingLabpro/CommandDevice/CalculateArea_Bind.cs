@@ -70,17 +70,17 @@ namespace CodingLabpro.CommandDevice
       
         public int CalareaScanningX()
         {
-            double CoVunitX = UnitXForCal(UnitX);
-            int LoopAreaX = (int)Math.Round((double)(TotalAreaX * 1E-3f) / (MoveStepX * CoVunitX));
-            Debug.WriteLine($"[X loop] {LoopAreaX.ToString()}, [Total Area X:] {TotalAreaX}, [Movement Step X:] {MoveStepX}, [Unit X:] {CoVunitX.ToString()}");
+            float CoVunitX = UnitXForCal(UnitX);
+            int LoopAreaX = (int)Math.Round((float)(TotalAreaX * 1E-3f) / (MoveStepX * CoVunitX));
+            Debug.WriteLine($"[X loop] {LoopAreaX.ToString()}, [Total Area X:] {TotalAreaX}, [Movement Step X:] {MoveStepX}, [Unit X:] {CoVunitX}");
             return LoopAreaX;
         }
 
         public int CalareaScanningY()
         {
-            double CoVunitY = UnitYForCal(UnitY);
-            int LoopAreaY = (int)Math.Round((double)(TotalAreaY * 1E-3f) / (MoveStepY * CoVunitY));
-            Debug.WriteLine($"[Y loop] {LoopAreaY.ToString()}, [Total Area Y:] {TotalAreaY}, [Movement Step Y:] {MoveStepY}, [Unit Y:] {CoVunitY.ToString()}");
+            float CoVunitY = UnitYForCal(UnitY);
+            int LoopAreaY = (int)Math.Round((float)(TotalAreaY * 1E-3f) / (MoveStepY * CoVunitY));
+            Debug.WriteLine($"[Y loop] {LoopAreaY.ToString()}, [Total Area Y:] {TotalAreaY}, [Movement Step Y:] {MoveStepY}, [Unit Y:] {CoVunitY}");
             return LoopAreaY;
 
         }

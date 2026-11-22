@@ -1652,6 +1652,8 @@ namespace CodingLabpro.frmChild
                     //เมื่อสแกนเสร็จสิ้นหรือยกเลิกการทำงานแล้ว ให้เรียกใช้งาน OnCancelClicked เพื่อแจ้งให้ผู้ใช้ทราบ
                     Scan_cts.Cancel();
                     OnCancelClicked?.Invoke();
+                    BtnCancel_scaning.Enabled = false; //ปิดปุ่มยกเลิกสแกน
+                    Btn_runscaning.Enabled = true; //เปิดปุ่มรันสแกน
                     ShowMessage("INFO", $"[Process Completed]\t Value Stepping Motor: {ValueProcessX} {ValueProcessY} {ValueNegativeX}");
 
                 }

@@ -102,7 +102,6 @@
             this.CblStepMotor = new System.Windows.Forms.ComboBox();
             this.GBreport_Axis = new System.Windows.Forms.GroupBox();
             this.Report_positon = new System.Windows.Forms.TextBox();
-            this.Btn_testStatus = new System.Windows.Forms.Button();
             totalAreaXLabel = new System.Windows.Forms.Label();
             totalAreaYLabel = new System.Windows.Forms.Label();
             moveStepYLabel = new System.Windows.Forms.Label();
@@ -1004,7 +1003,6 @@
             this.flowLayoutPanel1.Controls.Add(this.GBResolution);
             this.flowLayoutPanel1.Controls.Add(this.CBtrigger);
             this.flowLayoutPanel1.Controls.Add(this.STriggerlabel);
-            this.flowLayoutPanel1.Controls.Add(this.Btn_testStatus);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(330, 100);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -1045,8 +1043,6 @@
             this.Report_positon.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.Report_positon.Size = new System.Drawing.Size(293, 92);
             this.Report_positon.TabIndex = 25;
-            // 
-            
             // 
             // AxisControl
             // 
@@ -1189,6 +1185,5 @@
         private System.Windows.Forms.ComboBox CblStepMotor;
         private System.Windows.Forms.GroupBox GBreport_Axis;
         private System.Windows.Forms.TextBox Report_positon;
-        private System.Windows.Forms.Button Btn_testStatus;
     }
 }

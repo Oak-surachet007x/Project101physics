@@ -2,39 +2,21 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Common;
 using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.IO;
 using System.IO.Ports;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 using CodingLabpro.CommandDevice;
 using CodingLabpro.frmChild;
 using CodingLabpro.Models;
 using CodingLabpro.Tracking_scan;
 using Ivi.Visa;
-using Ivi.Visa.FormattedIO;
 using Ivi.Visa.Interop;
-using MathNet.Numerics.RootFinding;
-using NPOI.HSSF.UserModel;
-using NPOI.POIFS.Crypt.Dsig;
-using NPOI.SS.Formula.Eval;
-using NPOI.SS.Formula.Functions;
 using NPOI.SS.UserModel;
-using NPOI.XSSF.Streaming.Values;
 using NPOI.XSSF.UserModel;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 
 
@@ -72,7 +54,7 @@ namespace CodingLabpro
         {
             InitializeComponent();
             InitiallizeGridColumn();
-       
+
 
             this.SetStyle(
                         ControlStyles.OptimizedDoubleBuffer |
@@ -82,10 +64,10 @@ namespace CodingLabpro
             //Control Panel 
             BtnDiconnect.Enabled = false;
             BtnConnect.Enabled = true;
-      
+
 
             //BarMenuButton
-            barButton = new List<barMenu>() { barMenu1 , barMenu2};
+            barButton = new List<barMenu>() { barMenu1, barMenu2 };
             ClickBar(barButton);
 
             Ivi.Visa.Interop.ResourceManager rm = new Ivi.Visa.Interop.ResourceManager();
@@ -104,12 +86,12 @@ namespace CodingLabpro
 
             scanGrid = new Scangridview(DgvScan);
 
-         
+
             //Stopwatch
             Stoptimer1.Enabled = true;
             Stoptimer1.Interval = 100;
             Stoptimer1.Tick += Stoptimer1_Tick;
-            frmChild1.OnRunClicked += FrmChild1_OnRunClicked; 
+            frmChild1.OnRunClicked += FrmChild1_OnRunClicked;
             frmChild1.OnCancelClicked += FrmChild1_OnCancelClicked;
             frmChild1.OnMeasurement += Received_Data_measurement;
             frmChild1.OnMeasurementWithDisplay += Received_Data_Display_measurement;
@@ -131,7 +113,7 @@ namespace CodingLabpro
                 Console.WriteLine("UserControl is not add Panel Control");
             }
 
-           
+
             //Find Device
             FindDevices finder = new FindDevices();
             finder.OnDeviceFound += (device) =>
@@ -203,7 +185,7 @@ namespace CodingLabpro
 
             //label timer color change
             LBtimer.BackColor = Color.Transparent;
-            
+
         }
 
         private void FrmChild1_OnCancelClicked()
@@ -222,9 +204,9 @@ namespace CodingLabpro
             if (GlobalMeasurementSettings.Instance.SourceMode == SourceMode.DC && GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Voltage)
             {
                 LBunitmeasurement.Text = "VDC";
-                
+
             }
-            else if(GlobalMeasurementSettings.Instance.SourceMode == SourceMode.DC && GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Current)
+            else if (GlobalMeasurementSettings.Instance.SourceMode == SourceMode.DC && GlobalMeasurementSettings.Instance.MeasureMode == MeasureMode.Current)
             {
                 LBunitmeasurement.Text = "ADC";
             }
@@ -304,7 +286,7 @@ namespace CodingLabpro
         }
         #endregion
 
-        
+
 
         //----------------------------------------------FrmMain event UI------------------------------------------------------------//
         private void FrmMain01_Load(object sender, EventArgs e)
@@ -321,7 +303,7 @@ namespace CodingLabpro
 
         }
 
-        
+
 
         private void Instance_SettingsChanged(object sender, EventArgs e)
         {
@@ -355,7 +337,7 @@ namespace CodingLabpro
             DgvMeasurement.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             DgvMeasurement.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
 
-        
+
         }
 
         //เมธอดแสดงหมายเลขแถวใน DataGridView
@@ -377,7 +359,7 @@ namespace CodingLabpro
             var headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
             e.Graphics.DrawString(rowIdx, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
         }
-      
+
         //เมธอดรับค่าข้อมูลการวัดและอัปเดตตาราง
         public void Received_Data_measurement(double Data_measure)
         {
@@ -417,7 +399,7 @@ namespace CodingLabpro
             LBvaluemeasurement.Text = Data_Display.ToString() + GlobalMeasurementSettings.Instance.UnitPrefix;
         }
 
-        
+
 
 
         #endregion
@@ -438,7 +420,7 @@ namespace CodingLabpro
                 var cellc = rowSheet.CreateCell(c);
                 cellc.SetCellValue(dt.Columns[c].ColumnName);
                 cellc.CellStyle = customStyle;
-                
+
             }
             return sheeti;
         }
@@ -505,7 +487,7 @@ namespace CodingLabpro
                 backgroundWorker.ReportProgress(progressPercentage);
             }
 
-           
+
             //Add file data and export excel
             string filename = filePath;
             using (var fileData = new FileStream(filename, FileMode.Create, FileAccess.Write))
@@ -675,7 +657,7 @@ namespace CodingLabpro
                 Cblistaddress2.Enabled = false;
                 Cblistaddress3.Enabled = false;
 
-                if(Cblistaddress.SelectedIndex >= 0)
+                if (Cblistaddress.SelectedIndex >= 0)
                 {
                     StatusPort1.BackColor = Color.LightGreen;
                     StatusPort1.Text = "CONNECT";
@@ -697,19 +679,19 @@ namespace CodingLabpro
                 }
 
             }
-            else  
+            else
             {
                 BtnConnect.Enabled = true;
                 BtnDiconnect.Enabled = false;
 
-                Cblistaddress.Enabled = true; 
+                Cblistaddress.Enabled = true;
                 Cblistaddress2.Enabled = true;
-                Cblistaddress3.Enabled= true;
+                Cblistaddress3.Enabled = true;
 
-                
+
             }
         }
-        
+
         public static bool CheckPort(params System.Windows.Forms.ComboBox[] comboBoxes)
         {
 
@@ -723,7 +705,7 @@ namespace CodingLabpro
             }
             Debug.WriteLine("[ComboBox No Selection?]: true");
             return true;
-            
+
         }
 
         private void BtnConnect_Click(object sender, EventArgs e)
@@ -739,14 +721,14 @@ namespace CodingLabpro
             System.Windows.Forms.Cursor.Current = Cursors.WaitCursor;
 
             //ตรวจสอบว่ามีการเลือกไอเทมใน ComboBox ทั้ง 3 ช่องไหม
-            if (CheckPort(Cblistaddress,Cblistaddress2,Cblistaddress3))
+            if (CheckPort(Cblistaddress, Cblistaddress2, Cblistaddress3))
             {
                 //MessageBox.Show("you Should Select Port Device");
                 BtnConnect.BackColor = Color.Orange;
                 BtnConnect.Text = "Warning";
                 BtnConnect.ForeColor = Color.Black;
 
-                ShowMessage("WARNING","you Should Port Device");
+                ShowMessage("WARNING", "you Should Port Device");
 
             }
             else
@@ -766,18 +748,18 @@ namespace CodingLabpro
                         //MyDMM.WriteString("*CLS");
                     }
 
-                
 
-                        if (Cblistaddress2.SelectedIndex >= 0)
-                        {
-                            //CONNECT driver MMC Port GP-IB
-                            string MMCaddr = Cblistaddress2.SelectedItem.ToString();
-                            MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
-                            MyMMC.IO.Timeout = 5000;
-                            string MSG = "H:W";
-                            MyMMC.WriteString(MSG);
 
-                        }
+                    if (Cblistaddress2.SelectedIndex >= 0)
+                    {
+                        //CONNECT driver MMC Port GP-IB
+                        string MMCaddr = Cblistaddress2.SelectedItem.ToString();
+                        MyMMC.IO = (IMessage)mgr2.Open(MMCaddr);
+                        MyMMC.IO.Timeout = 5000;
+                        string MSG = "H:W";
+                        MyMMC.WriteString(MSG);
+
+                    }
 
                     if (GlobalMeasurementSettings.Instance.SelectedModel == "Chuoseiki")
                     {
@@ -827,8 +809,8 @@ namespace CodingLabpro
                     }
 
 
-                    List<string> listDevice = new List<string>{Cblistaddress.Text, Cblistaddress2.Text, Cblistaddress3.Text };
-                    ShowMessage("OK", r.ToString("r") + $"\nPort Driver Connected\n{Aread}" + $"{string.Join("\n",listDevice)}");
+                    List<string> listDevice = new List<string> { Cblistaddress.Text, Cblistaddress2.Text, Cblistaddress3.Text };
+                    ShowMessage("OK", r.ToString("r") + $"\nPort Driver Connected\n{Aread}" + $"{string.Join("\n", listDevice)}");
 
                     ActiveComboBox?.Invoke(this, EventArgs.Empty);
                     isConnect = true;
@@ -841,13 +823,13 @@ namespace CodingLabpro
                     BtnConnect.BackColor = Color.Red;
                     BtnConnect.Text = "Unconnect";
                     BtnConnect.ForeColor = Color.White;
-                   
+
                     ShowMessage("ERROR", r.ToString("r") + "\nCannot Find driver Agilent Muitimeter and MMC Step motor!" + Environment.NewLine + ex.Message);
-                  
+
                 }
 
             }
-                
+
         }
 
         private async void BtnDiconnect_Click(object sender, EventArgs e)
@@ -872,15 +854,15 @@ namespace CodingLabpro
 
                 if (Cblistaddress3.SelectedIndex >= 0)
                 {
-                    if(GlobalMeasurementSettings.Instance.SelectedModel == "Chuoseiki")
+                    if (GlobalMeasurementSettings.Instance.SelectedModel == "Chuoseiki")
                     {
-                        if(MySerialPort.IsOpen)
+                        if (MySerialPort.IsOpen)
                         {
                             MySerialPort.Close();
                         }
 
                     }
-                    else if(GlobalMeasurementSettings.Instance.SelectedModel == "Vexta")
+                    else if (GlobalMeasurementSettings.Instance.SelectedModel == "Vexta")
                     {
                         if (MySerialPort.IsOpen)
                         {
@@ -890,7 +872,8 @@ namespace CodingLabpro
                         // แจ้งฟอร์มย่อยให้หยุด Monitor
                         await frmChild1.StopPositionMonitor(true);
 
-                    }else
+                    }
+                    else
                     {
                         // No action needed for other models
                     }
@@ -908,7 +891,7 @@ namespace CodingLabpro
                 BtnConnect.Text = "CONNECT";
                 BtnConnect.ForeColor = Color.Black;
 
-                
+
 
             }
             catch (VisaException ex)
@@ -930,7 +913,7 @@ namespace CodingLabpro
                     ComboBoxVisble(receivedData);
                     Debug.WriteLine($"Selected Stepping Motor Type: {receivedData}");
 
-                    
+
                 }
             }
         }
@@ -979,7 +962,7 @@ namespace CodingLabpro
                 Cblistaddress3.Text = "";
 
             }
-            else 
+            else
             {
                 label_MMC1.Visible = false;
                 label_MMC2.Visible = false;
@@ -995,7 +978,7 @@ namespace CodingLabpro
                 MyDMM.WriteString("*CLS");  //Clear Error
                 ShowMessage("OK", "Clear Error DMM Successfully");
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 ShowMessage("ERROR", $"Please Connect Device Agilent Multimeter \n {ex.Message}");
             }
@@ -1016,13 +999,12 @@ namespace CodingLabpro
                 ShowMessage("ERROR", $"Please Connect Device Agilent Multimeter \n {ex.Message}");
 
             }
-               
+
         }
 
         #endregion
 
-        //----------------------------------------------2D tracking scanning------------------------------------------------------------//
-       
+
 
 
 

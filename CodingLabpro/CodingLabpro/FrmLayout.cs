@@ -47,7 +47,7 @@ namespace CodingLabpro
         {
             InitializeComponent();
             this.Text = "Aglient 34401A And MMC-2 Axis Controller";
-            LBversion.Text = "Version \n1.0.3"; //แสดงผลเวอร์ชันโปรแกรม
+            LBversion.Text = "Version \n1.0.5"; //แสดงผลเวอร์ชันโปรแกรม
 
             this.SetStyle(
                         ControlStyles.OptimizedDoubleBuffer |
