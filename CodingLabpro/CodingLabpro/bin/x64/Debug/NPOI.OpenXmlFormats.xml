@@ -2404,6 +2404,11 @@
         <member name="F:NPOI.OpenXmlFormats.Dml.ST_PenAlignment.in">
             <remarks/>
         </member>
+        <member name="T:NPOI.OpenXmlFormats.Dml.Spreadsheet.XmlObject">
+            <summary>
+            Hold xml data
+            </summary>
+        </member>
         <member name="F:NPOI.OpenXmlFormats.Dml.ST_OnOffStyleType.on">
             <remarks/>
         </member>
@@ -3435,16 +3440,6 @@
         <member name="F:NPOI.OpenXmlFormats.Spreadsheet.ST_PivotFilterType.M12">
             <remarks/>
         </member>
-        <member name="T:NPOI.OpenXmlFormats.Spreadsheet.CT_PhoneticRun">
-            <summary>
-            Rich Text Phonetic Run
-            </summary>
-        </member>
-        <member name="T:NPOI.OpenXmlFormats.Spreadsheet.CT_PhoneticPr">
-            <summary>
-            Properties of the Rich Text Phonetic Run
-            </summary>
-        </member>
         <member name="T:NPOI.OpenXmlFormats.Spreadsheet.CT_RElt">
             <summary>
             Rich Text Run container.
@@ -3478,6 +3473,26 @@
         <member name="P:NPOI.OpenXmlFormats.Spreadsheet.CT_Rst.phoneticPr">
             <summary>
             Phonetic Properties
+            </summary>
+        </member>
+        <member name="T:NPOI.OpenXmlFormats.Spreadsheet.CT_PhoneticRun">
+            <summary>
+            Rich Text Phonetic Run
+            </summary>
+        </member>
+        <member name="T:NPOI.OpenXmlFormats.Spreadsheet.CT_PhoneticPr">
+            <summary>
+            Properties of the Rich Text Phonetic Run
+            </summary>
+        </member>
+        <member name="M:NPOI.OpenXmlFormats.Spreadsheet.CT_ObjectPr.Clone">
+            <summary>
+            Create a clone of this CT_ObjectPr object
+            </summary>
+        </member>
+        <member name="M:NPOI.OpenXmlFormats.Spreadsheet.CT_ObjectAnchor.Clone">
+            <summary>
+            Create a clone of this CT_ObjectAnchor object
             </summary>
         </member>
         <member name="T:NPOI.OpenXmlFormats.Spreadsheet.CT_Col">

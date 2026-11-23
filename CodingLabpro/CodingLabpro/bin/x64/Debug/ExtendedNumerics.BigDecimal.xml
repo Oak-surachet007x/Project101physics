@@ -6,12 +6,15 @@
     <members>
         <member name="T:ExtendedNumerics.BigDecimal">
             <summary>
+            An arbitrary precision floating point number type.
+            </summary>
+            <remarks> 
             <para>Arbitrary precision decimal. All operations are exact, except for division.</para>
             <para>Division never determines more digits than the given precision.</para>
             <para>Based on code by Jan Christoph Bernack (https://gist.github.com/JcBernack/0b4eef59ca97ee931a2f45542b9ff06d)</para>
             <para>Modified, extended and maintained by Adam White (https://github.com/AdamWhiteHat or adamwhitehat 𝚊𝚝 outlook 𝖽𝗈𝗍 com)</para>
-            <para>Contributions by Rick Harker (Rick.Rick.Harker 𝖺𝗍 gmail 𝚍𝚘𝚝 com) and Protiguous (https://github.com/Protiguous)</para>
-            </summary>
+            <para>Contributions by Rick Harker (Rick.Rick.Harker 𝖺𝗍 gmail 𝚍𝚘𝚝 com) and Protiguous (https://github.com/Protiguous)</para> 
+            </remarks>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.#ctor(System.Tuple{System.Numerics.BigInteger,System.Int32})">
             <summary>Private Constructor. This one bypasses <see cref="P:ExtendedNumerics.BigDecimal.AlwaysTruncate"/> and <see cref="P:ExtendedNumerics.BigDecimal.AlwaysNormalize"/> check and behavior.</summary>
@@ -24,19 +27,19 @@
             <summary>Initializes a new instance of <see cref="T:ExtendedNumerics.BigDecimal" /> from a mantissa and an exponent.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.#ctor(System.Int32)">
-            <summary>Initializes a new instance of <see cref="T:ExtendedNumerics.BigDecimal" /> from a Int32.</summary>
+            <summary>Initializes a new instance of <see cref="T:ExtendedNumerics.BigDecimal" /> from an <see cref="T:System.Int32"/>.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.#ctor(System.Numerics.BigInteger)">
-            <summary>Initializes a new instance of <see cref="T:ExtendedNumerics.BigDecimal" /> from a BigInteger.</summary>
+            <summary>Initializes a new instance of <see cref="T:ExtendedNumerics.BigDecimal" /> from a <see cref="T:System.Numerics.BigInteger"/>.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.#ctor(System.Single)">
-            <summary>Initializes a new instance of <see cref="T:ExtendedNumerics.BigDecimal" /> from a Single.</summary>
+            <summary>Initializes a new instance of <see cref="T:ExtendedNumerics.BigDecimal" /> from a <see cref="T:System.Single"/>.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.#ctor(System.Double)">
-            <summary>Initializes a new instance of <see cref="T:ExtendedNumerics.BigDecimal" /> from a Double.</summary>
+            <summary>Initializes a new instance of <see cref="T:ExtendedNumerics.BigDecimal" /> from a <see cref="T:System.Double"/>.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.#ctor(System.Decimal)">
-            <summary>Initializes a new instance of <see cref="T:ExtendedNumerics.BigDecimal" /> from a Decimal.</summary>
+            <summary>Initializes a new instance of <see cref="T:ExtendedNumerics.BigDecimal" /> from a <see cref="T:System.Decimal"/>.</summary>
         </member>
         <member name="P:ExtendedNumerics.BigDecimal.Ten">
             <summary>Gets a value that represents the number 10 (ten).</summary>
@@ -64,57 +67,70 @@
         </member>
         <member name="P:ExtendedNumerics.BigDecimal.Precision">
             <summary>
-            Sets the desired precision of all BigDecimal instances, in terms of the number of digits to the right of the decimal.
-            If AlwaysTruncate is set to true all operations are affected.
+            Sets the desired precision of all <see cref="T:ExtendedNumerics.BigDecimal" /> instances, in terms of the number of digits to the right of the decimal.
+            <para>The default value is <c>100</c>.</para> 
             </summary>
+            <remarks>If <see cref="P:ExtendedNumerics.BigDecimal.AlwaysTruncate"/> is set to <see langword="true"/> all operations are affected.</remarks>
         </member>
         <member name="P:ExtendedNumerics.BigDecimal.AlwaysTruncate">
             <summary>
             Specifies whether the significant digits should be truncated to the given precision after each operation.
+            <para>The default value is <see langword="false"/>.</para>
+            </summary>
+            <remarks>
             Setting this to true will tend to accumulate errors at the precision boundary after several arithmetic operations.
             Therefore, you should prefer using <see cref="M:ExtendedNumerics.BigDecimal.Round(ExtendedNumerics.BigDecimal,System.Int32)"/> explicitly when you need it instead, 
             such st at the end of a series of operations, especially if you are expecting the result to be truncated at the precision length.
             This should generally be left disabled by default.
             This setting may be useful if you are running into memory or performance issues, as could conceivably be brought on by many operations on irrational numbers.
-            </summary>
+            </remarks>
         </member>
         <member name="P:ExtendedNumerics.BigDecimal.AlwaysNormalize">
-            <summary>Specifies whether a call to Normalize is made after every operation and during constructor invocation. The default value is true.</summary>
+            <summary>
+            Specifies whether a call to Normalize is made after every operation and during constructor invocation.
+            <para>The default value is <see langword="true"/>.</para>
+            </summary>
+        </member>
+        <member name="P:ExtendedNumerics.BigDecimal.DefaultRoundingStrategy">
+            <summary>
+            Default mid-point rounding strategy when calling <see cref="M:ExtendedNumerics.BigDecimal.Round(ExtendedNumerics.BigDecimal,System.Int32)"/>.
+            <para>The default value is <see cref="F:ExtendedNumerics.RoundingStrategy.AwayFromZero"/>.</para>
+            </summary>
         </member>
         <member name="F:ExtendedNumerics.BigDecimal.Mantissa">
-            <summary>The mantissa of the internal floating point number representation of this BigDecimal.</summary>
+            <summary>The mantissa of the internal floating point number representation of this <see cref="T:ExtendedNumerics.BigDecimal" />.</summary>
         </member>
         <member name="F:ExtendedNumerics.BigDecimal.Exponent">
-            <summary>The exponent of the internal floating point number representation of this BigDecimal.</summary>
+            <summary>The exponent of the internal floating point number representation of this <see cref="T:ExtendedNumerics.BigDecimal" />.</summary>
         </member>
         <member name="P:ExtendedNumerics.BigDecimal.Sign">
             <summary>Gets a number that indicates the sign (negative, positive, or zero) of the current <see cref="T:ExtendedNumerics.BigDecimal" /> object. </summary>
             <returns>-1 if the value of this object is negative, 0 if the value of this object is zero or 1 if the value of this object is positive.</returns>
         </member>
         <member name="P:ExtendedNumerics.BigDecimal.SignificantDigits">
-             <summary>Gets the number of significant digits in <see cref="T:ExtendedNumerics.BigDecimal"/>.
+             <summary>Gets the number of significant digits in <see cref="T:ExtendedNumerics.BigDecimal" />.
             Essentially tells you the number of digits in the mantissa.</summary>
         </member>
         <member name="P:ExtendedNumerics.BigDecimal.Length">
-            <summary>The length of the BigDecimal value (Equivalent to <see cref="P:ExtendedNumerics.BigDecimal.SignificantDigits"/>).</summary>
+            <summary>The length of the <see cref="T:ExtendedNumerics.BigDecimal" /> value (Equivalent to <see cref="P:ExtendedNumerics.BigDecimal.SignificantDigits"/>).</summary>
         </member>
         <member name="P:ExtendedNumerics.BigDecimal.DecimalPlaces">
-            <summary> Returns the number of digits to the right of the decimal point. Same thing as the output of <see cref="M:ExtendedNumerics.BigDecimal.PlacesRightOfDecimal(ExtendedNumerics.BigDecimal)"/></summary>
+            <summary>Returns the number of digits to the right of the decimal point. Same thing as the output of <see cref="M:ExtendedNumerics.BigDecimal.PlacesRightOfDecimal(ExtendedNumerics.BigDecimal)"/></summary>
         </member>
         <member name="P:ExtendedNumerics.BigDecimal.WholeValue">
             <summary>
-            Gets the whole-number integer (positive or negative) value of this BigDecimal, so everything to the left of the decimal place.
-            Equivalent to the Truncate function for a float.
+            Gets the whole-number integer (positive or negative) value of this <see cref="T:ExtendedNumerics.BigDecimal" />, so everything to the left of the decimal place.
+            Equivalent to the Truncate function for a <see langword="float"/>.
             </summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.IsZero">
-            <summary>This method returns true if the BigDecimal is equal to zero, false otherwise.</summary>
+            <summary>This method returns <see langword="true"/> if the <see cref="T:ExtendedNumerics.BigDecimal" /> is equal to zero, <see langword="false"/> otherwise.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.IsPositive">
-            <summary>This method returns true if the BigDecimal is greater than zero, false otherwise.</summary>
+            <summary>This method returns <see langword="true"/> if the <see cref="T:ExtendedNumerics.BigDecimal" /> is greater than zero, <see langword="false"/> otherwise.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.IsNegative">
-            <summary>This method returns true if the BigDecimal is less than zero, false otherwise.</summary>
+            <summary>This method returns <see langword="true"/> if the <see cref="T:ExtendedNumerics.BigDecimal" /> is less than zero, <see langword="false"/> otherwise.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.CompareTo(ExtendedNumerics.BigDecimal)">
             <summary>
@@ -207,9 +223,21 @@
             A return value of greater than zero means this instance follows obj in the sort order.
             </returns>
         </member>
+        <member name="M:ExtendedNumerics.BigDecimal.Equals(ExtendedNumerics.BigDecimal)">
+            <summary>
+            Determines if another <see cref="T:ExtendedNumerics.BigDecimal" /> instance is equal to this one. 
+            </summary>
+            <returns>True if the other<see cref="T:ExtendedNumerics.BigDecimal" /> instance is equal to this one.</returns>
+        </member>
+        <member name="M:ExtendedNumerics.BigDecimal.Equals(System.Nullable{ExtendedNumerics.BigDecimal})">
+            <summary>
+            Determines if another <see cref="T:ExtendedNumerics.BigDecimal" /> instance is equal to this one. 
+            </summary>
+            <returns>True if the other<see cref="T:ExtendedNumerics.BigDecimal" /> instance is equal to this one.</returns>
+        </member>
         <member name="M:ExtendedNumerics.BigDecimal.Equals(System.Nullable{ExtendedNumerics.BigDecimal},System.Nullable{ExtendedNumerics.BigDecimal})">
             <summary>
-            Determines if two instances of BigDecimal are equal. 
+            Determines if two instances of <see cref="T:ExtendedNumerics.BigDecimal" /> are equal. 
             The precise behavior of this method depends on the values of the static members <see cref="P:ExtendedNumerics.BigDecimal.AlwaysTruncate"/> and <see cref="P:ExtendedNumerics.BigDecimal.AlwaysNormalize"/>.
             If <see cref="P:ExtendedNumerics.BigDecimal.AlwaysTruncate"/> or <see cref="P:ExtendedNumerics.BigDecimal.AlwaysNormalize"/> is true, then both values are rounded at <see cref="P:ExtendedNumerics.BigDecimal.Precision"/> 
             or normalized with <see cref="M:ExtendedNumerics.BigDecimal.Normalize(ExtendedNumerics.BigDecimal)"/>, respectively.
@@ -224,7 +252,7 @@
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Equals(System.Nullable{ExtendedNumerics.BigDecimal},System.Nullable{ExtendedNumerics.BigDecimal},System.Int32)">
             <summary>
-            Determines if two instances of BigDecimal are equal, up to <paramref name="precision"/> digits.
+            Determines if two instances of <see cref="T:ExtendedNumerics.BigDecimal" /> are equal, up to <paramref name="precision"/> digits.
             The precise behavior of this method depends on the value of <see cref="P:ExtendedNumerics.BigDecimal.AlwaysTruncate"/>.
             If <see cref="P:ExtendedNumerics.BigDecimal.AlwaysTruncate"/> is true, then both arguments will first be rounded to <paramref name="precision"/> or <see cref="P:ExtendedNumerics.BigDecimal.Precision"/> decimal places, 
             which ever is smaller. Then they will be checked for equivalency. 
@@ -238,16 +266,16 @@
             <returns>True if the two numbers are equal, up to <paramref name="precision"/>.</returns>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Parse(System.Single)">
-            <summary>Converts the string representation of a float to the BigDecimal equivalent.</summary>
+            <summary>Converts the string representation of a <see langword="float"/> to the <see cref="T:ExtendedNumerics.BigDecimal" /> equivalent.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Parse(System.Double)">
-            <summary>Converts the string representation of a double to the BigDecimal equivalent.</summary>
+            <summary>Converts the string representation of a <see langword="double"/> to the <see cref="T:ExtendedNumerics.BigDecimal" /> equivalent.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Parse(System.Decimal)">
-            <summary>Converts the string representation of a decimal to the BigDecimal equivalent.</summary>
+            <summary>Converts the string representation of a <see langword="decimal"/> to the <see cref="T:ExtendedNumerics.BigDecimal" /> equivalent.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Parse(System.String)">
-            <summary>Converts the string representation of a decimal to the BigDecimal equivalent.</summary>
+            <summary>Converts the string representation of a <see langword="decimal"/> to the <see cref="T:ExtendedNumerics.BigDecimal" /> equivalent.</summary>
             <param name="input">A string that contains a number to convert.</param>
             <returns>
             A BigDecimal equivalent of the supplied string representation of a decimal number,
@@ -256,7 +284,7 @@
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Parse(System.String,System.IFormatProvider)">
             <summary>
-            Converts the string representation of a decimal in a specified culture-specific format to its BigDecimal equivalent.
+            Converts the <see langword="string"/> representation of a decimal in a specified culture-specific format to its BigDecimal equivalent.
             </summary>
             <param name="input">A string that contains a number to convert.</param>
             <param name="provider">An object that provides culture-specific formatting information about value.</param>
@@ -267,7 +295,7 @@
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.TryParse(System.String,ExtendedNumerics.BigDecimal@)">
             <summary>
-            Tries to convert the string representation of a number to its BigDecimal equivalent, and returns a value that indicates whether the conversion succeeded.
+            Tries to convert the <see langword="string"/> representation of a number to its BigDecimal equivalent, and returns a value that indicates whether the conversion succeeded.
             </summary>
             <param name="input">The string representation of a number.</param>
             <param name="result">When this method returns, this out parameter contains the BigDecimal equivalent
@@ -281,7 +309,7 @@
         <member name="M:ExtendedNumerics.BigDecimal.TryParse(System.String,System.IFormatProvider,ExtendedNumerics.BigDecimal@)">
             <summary>
             Tries to convert the string representation of a number in a specified style and culture-specific format
-            to its BigDecimal equivalent and passing the result to the out parameter if successful.
+            to its <see cref="T:ExtendedNumerics.BigDecimal" /> equivalent and passing the result to the out parameter if successful.
             Returns a boolean value that indicates whether the conversion was successful.
             </summary>
             <param name="input">The string representation of a number.</param>
@@ -302,16 +330,15 @@
             <param name="value"></param>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.GetDecimalIndex">
-            <summary>Returns the zero-based index of the decimal point, if the BigDecimal were rendered as a string.</summary>
+            <summary>Returns the zero-based index of the decimal point, if the <see cref="T:ExtendedNumerics.BigDecimal" /> were rendered as a string.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.GetWholePart">
-            <summary>
-            Returns the whole number integer part of the BigDecimal, dropping anything right of the decimal point. Essentially behaves like Math.Truncate(). For
-            example, GetWholePart() would return 3 for Math.PI.
-            </summary>
+            <summary>Returns the whole number integer part of the BigDecimal, dropping anything right of the decimal point.</summary>
+            <remarks>Essentially behaves like Math.Truncate().</remarks>
+            <example>BigDecimal.PI.GetWholePart() == 3</example>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.GetFractionalPart">
-            <summary>Gets the fractional part of the BigDecimal, setting everything left of the decimal point to zero.</summary>
+            <summary>Gets the fractional part of the <see cref="T:ExtendedNumerics.BigDecimal" />, setting everything left of the decimal point to zero.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.op_Implicit(System.Numerics.BigInteger)~ExtendedNumerics.BigDecimal">
             <summary>Performs an implicit conversion of a <see cref="T:System.Numerics.BigInteger"/> value to a <see cref="T:ExtendedNumerics.BigDecimal"/> value.</summary>
@@ -414,34 +441,34 @@
             <summary>Returns a value that indicates whether a <see cref="T:ExtendedNumerics.BigDecimal"/> value is greater than or equal to another <see cref="T:ExtendedNumerics.BigDecimal"/> value.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Abs(ExtendedNumerics.BigDecimal)">
-            <summary>Returns the absolute value of the BigDecimal</summary>
+            <summary>Returns the absolute value of the <see cref="T:ExtendedNumerics.BigDecimal" /></summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Min(ExtendedNumerics.BigDecimal,ExtendedNumerics.BigDecimal)">
-            <summary>Returns the smaller of two BigDecimal values.</summary>
+            <summary>Returns the smaller of two <see cref="T:ExtendedNumerics.BigDecimal" /> values.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Max(ExtendedNumerics.BigDecimal,ExtendedNumerics.BigDecimal)">
-            <summary>Returns the larger of two BigDecimal values.</summary>	
+            <summary>Returns the larger of two <see cref="T:ExtendedNumerics.BigDecimal" /> values.</summary>	
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Negate(ExtendedNumerics.BigDecimal)">
-            <summary>Returns the result of multiplying a BigDecimal by negative one.</summary>
+            <summary>Returns the result of multiplying a <see cref="T:ExtendedNumerics.BigDecimal" /> by negative one.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Add(ExtendedNumerics.BigDecimal,ExtendedNumerics.BigDecimal)">
-            <summary>Adds two BigDecimal values.</summary>
+            <summary>Adds two <see cref="T:ExtendedNumerics.BigDecimal" /> values.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Subtract(ExtendedNumerics.BigDecimal,ExtendedNumerics.BigDecimal)">
-            <summary>Subtracts two BigDecimal values.</summary>
+            <summary>Subtracts two <see cref="T:ExtendedNumerics.BigDecimal" /> values.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Multiply(ExtendedNumerics.BigDecimal,ExtendedNumerics.BigDecimal)">
-            <summary>Multiplies two BigDecimal values.</summary>
+            <summary>Multiplies two <see cref="T:ExtendedNumerics.BigDecimal" /> values.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Mod(ExtendedNumerics.BigDecimal,ExtendedNumerics.BigDecimal)">
-            <summary>Divides two BigDecimal values, returning the remainder and discarding the quotient.</summary>
+            <summary>Divides two <see cref="T:ExtendedNumerics.BigDecimal" /> values, returning the remainder and discarding the quotient.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Divide(ExtendedNumerics.BigDecimal,ExtendedNumerics.BigDecimal)">
-            <summary>Divides two BigDecimal values.</summary>
+            <summary>Divides two <see cref="T:ExtendedNumerics.BigDecimal" /> values.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Divide(ExtendedNumerics.BigDecimal,ExtendedNumerics.BigDecimal,System.Int32)">
-            <summary>Divides two BigDecimal values.</summary>
+            <summary>Divides two <see cref="T:ExtendedNumerics.BigDecimal" /> values.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Pow(ExtendedNumerics.BigDecimal,ExtendedNumerics.BigDecimal,System.Int32)">
             <summary>
@@ -494,28 +521,40 @@
             <summary>Returns the mantissa of value, aligned to the exponent of reference. Assumes the exponent of value is larger than of reference.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Truncate(ExtendedNumerics.BigDecimal)">
-            <summary>Truncates the BigDecimal at the decimal point. Equivalent to using Floor.</summary>
+            <summary>Truncates the <see cref="T:ExtendedNumerics.BigDecimal" /> at the decimal point. Equivalent to using Floor.</summary>
+        </member>
+        <member name="M:ExtendedNumerics.BigDecimal.Truncate(ExtendedNumerics.BigDecimal,System.Int32)">
+            <summary>Truncates the <see cref="T:ExtendedNumerics.BigDecimal" /> at the specified precision (number of digits to the right).</summary>
+            <remarks>
+            Accepts negative precision values, which zeros out digits to the left of the decimal point, with the absolute value of precision equaling the number of places to zero.
+            A precision value of zero truncates the BigDecimal at the decimal point, returning the integer part only.
+            This method is functionally identical to Excel's ROUNDDOWN function.
+            </remarks>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Round(ExtendedNumerics.BigDecimal)">
-            <summary>Rounds a BigDecimal value to the nearest integral value.</summary>
+            <summary>Rounds a <see cref="T:ExtendedNumerics.BigDecimal" /> value to the nearest integral value.</summary>
         </member>
-        <member name="M:ExtendedNumerics.BigDecimal.Round(ExtendedNumerics.BigDecimal,System.MidpointRounding)">
-            <summary>Rounds a BigDecimal value to the nearest integral value. A parameter specifies how to round the value if it is midway between two numbers.</summary>
+        <member name="M:ExtendedNumerics.BigDecimal.Round(ExtendedNumerics.BigDecimal,ExtendedNumerics.RoundingStrategy)">
+            <summary>Rounds a <see cref="T:ExtendedNumerics.BigDecimal" /> value to the nearest integral value. A parameter specifies how to round the value if it is midway between two numbers.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Round(ExtendedNumerics.BigDecimal,System.Int32,ExtendedNumerics.RoundingStrategy)">
-            <summary>Rounds a BigDecimal value off at the specified level of precision. A parameter specifies how to round the value if it is midway between two values.</summary>
+            <summary>Rounds a <see cref="T:ExtendedNumerics.BigDecimal" /> value off at the specified level of precision. A parameter specifies how to round the value if it is midway between two values.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Round(ExtendedNumerics.BigDecimal,System.Int32)">
             <summary>
-            Rounds a BigDecimal to the given number of digits to the right of the decimal point.
-            Pass a negative precision value to round (zero) digits to the left of the decimal point in a manner that mimics Excel's ROUNDDOWN function.
+            Rounds a <see cref="T:ExtendedNumerics.BigDecimal" /> to the given number of digits to the right of the decimal point.
             </summary>
+            <remarks>
+            Pass a negative precision value to zero out <c>abs(precision)</c> many digits to the left of the decimal point, in a manner that mimics Excel's ROUNDDOWN function.<br />
+            A zero or greater precision value performs rounding in the standard way.<br />
+            Call <see cref="M:ExtendedNumerics.BigDecimal.Truncate(ExtendedNumerics.BigDecimal,System.Int32)"/> for a method that is functionally identical to Excel's ROUNDDOWN function.
+            </remarks>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Ceiling(ExtendedNumerics.BigDecimal)">
-            <summary>Rounds a BigDecimal up to the next largest integer value, even if the fractional part is less than one half. Equivalent to obtaining the floor and then adding one.</summary>
+            <summary>Rounds a <see cref="T:ExtendedNumerics.BigDecimal" /> up to the next largest integer value, even if the fractional part is less than one half. Equivalent to obtaining the floor and then adding one.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.Floor(ExtendedNumerics.BigDecimal)">
-            <summary>Rounds a BigDecimal down to the next smallest integer value, even if the fractional part is greater than one half. Equivalent to discarding everything right of the decimal point.</summary>
+            <summary>Rounds a <see cref="T:ExtendedNumerics.BigDecimal" /> down to the next smallest integer value, even if the fractional part is greater than one half. Equivalent to discarding everything right of the decimal point.</summary>
         </member>
         <member name="M:ExtendedNumerics.BigDecimal.GetHashCode">
             <summary>Returns the hash code for the current <see cref="T:ExtendedNumerics.BigDecimal"/> object.</summary>
