@@ -30,14 +30,14 @@ namespace CodingLabpro.CommandDevice
             // สร้างคอลัมน์ตามจำนวน Columns ที่กำหนด
             for (int c = 0; c < Columns; c++)
             {
-                MeasurementTable.Columns.Add($"Step{c + 1} ({GlobalMeasurementSettings.Instance.MeasureMode})", typeof(double));
+                MeasurementTable.Columns.Add($"Step{c + 1}\n({GlobalMeasurementSettings.Instance.MeasureMode})", typeof(double));
             }
 
             // สร้างแถวตามจำนวน Rows ที่กำหนด
             for (int r = 0; r < Rows; r++)
             {
                 DataRow row = MeasurementTable.NewRow();
-                row[r] = DBNull.Value;
+                //row[r] = DBNull.Value;
                 MeasurementTable.Rows.Add(row);
             }
 

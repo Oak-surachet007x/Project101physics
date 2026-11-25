@@ -166,12 +166,13 @@ namespace CodingLabpro
             Columns = GlobalMeasurementSettings.Instance.CountOfColumns;
 
             //สร้าง DataTable สำหรับการวัด จากคลาส CalculateCellsDataTable
-            builder = new CalculateCellsDataTable(Rows, Columns); //สร้างอินสแตนซ์ของ CalculateCellsDataTable
+            builder = new CalculateCellsDataTable(Rows, Columns); //สร้างอินสแตนซ์ของ CalculateCellsDataTable จาก global settings
             dataTable_measurement = builder.BuildTable(); // สร้าง DataTable โดยใช้เมธอด BuildTable
             cellsDataTable = (CalculateCellsDataTable)builder; // <-- Assign the instance here
             cellsDataTable.DebugReport();
 
             //สร้าง DataTable และเชื่อมโยงกับ DataGridView
+            Main_datagrid.Tables.Clear();
             Main_datagrid.Tables.Add(dataTable_measurement);
             BindingSource_DataMeasure.DataSource = dataTable_measurement;
             DgvMeasurement.DataSource = BindingSource_DataMeasure;
@@ -330,12 +331,12 @@ namespace CodingLabpro
             DgvMeasurement.DefaultCellStyle.ForeColor = Color.Black;
             DgvMeasurement.DefaultCellStyle.BackColor = Color.White;
             DgvMeasurement.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Regular);
-            DgvMeasurement.DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
+            DgvMeasurement.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             DgvMeasurement.DefaultCellStyle.Format = "E5"; // รูปแบบวิทยาศาสตร์ (Scientific Notation
-            DgvMeasurement.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Bold);
+            DgvMeasurement.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular);
             DgvMeasurement.ColumnHeadersHeight = 50; // Set the desired height in pixels
             DgvMeasurement.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            DgvMeasurement.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            //DgvMeasurement.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
 
 
         }
@@ -636,12 +637,16 @@ namespace CodingLabpro
                 Cblistaddress2.Size = new Size(290, 29);
                 Cblistaddress3.Size = new Size(263, 29);
 
+                //GBtracking.Size = new Size(484, 257);
+
             }
             else if (this.WindowState == FormWindowState.Maximized)
             {
                 tableLayoutPanel1.ColumnStyles.Clear();
                 tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F)); // คอลัมน์แรกกว้าง 100%
                 tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // คอลัมน์ที่สองปรับอัตโนมัติ
+
+                //GBtracking.Size = new Size(1000, 500);
             }
 
         }

@@ -272,7 +272,7 @@ namespace CodingLabpro.frmChild
         public event Action<int, int, ScanCellStatus> ScanStatusChanged;   // row, column, status
  
 
-        #region Setup Default Settings
+        #region Setup Default Value Settings
         private void InitializeDefaultSettings()
         {
             var settings = GlobalMeasurementSettings.Instance;
@@ -323,8 +323,8 @@ namespace CodingLabpro.frmChild
             // 6. Total Scanning Area
             // ==========================================
 
-            totalAreaXTextBox.Text = "10";
-            totalAreaYTextBox.Text = "10";
+            totalAreaXTextBox.Text = "25";
+            totalAreaYTextBox.Text = "25";
 
 
             // ==========================================
@@ -1617,15 +1617,14 @@ namespace CodingLabpro.frmChild
                     //}
 
                     //Run Setup Scaning สำหรับมอเตอร์ Chuoseiki
-                    //myMMC.WriteString("H:W");
-                    //await Task.Delay(5000);
-                    //myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y = 0 cm & X = 1 cm
-                    //myMMC.WriteString("G:");
-                    //await Task.Delay(5000);
+                    myMMC.WriteString("H:W");
+                    await Task.Delay(5000);
+                    myMMC.WriteString("M:WP5000  P-5000");  //<<--- ถอยหลังไปเริ่มต้นที่ชิดกำแพง Y = 0 cm & X = 1 cm
+                    myMMC.WriteString("G:");
+                    await Task.Delay(5000);
 
                     //---------------------------------Setup Measurement---------------------------------------------
-                    //Run Measurement
-                    //SetupMeasurementCommand();
+                    SetupMeasurementCommand();
 
                     //Stopwatch จับเวลาในการสแกนพื้นที่
                     OnRunClicked?.Invoke();

@@ -50,11 +50,7 @@ public class ScanController
         }
     }
 
-    private async Task ScanPointAsync(
-        ScanSettings settings,
-        int row,
-        int column,
-        CancellationToken token)
+    private async Task ScanPointAsync(ScanSettings settings, int row, int column, CancellationToken token)
     {
         var point = new ScanPoint
         {
